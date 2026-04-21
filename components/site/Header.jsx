@@ -129,10 +129,15 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main nav — WHITE BACKGROUND */}
+      {/* Main nav — DARK GLASSMORPHISM BACKGROUND */}
       <nav
-        className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-[0_4px_20px_-6px_rgba(8,20,52,0.18)]' : ''}`}
-        style={{ background: '#ffffff', borderBottom: '1px solid rgba(15,36,95,0.08)' }}
+        className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-[0_4px_20px_-6px_rgba(8,20,52,0.35)]' : ''}`}
+        style={{
+          background: scrolled ? 'rgba(4, 10, 24, 0.95)' : 'rgba(7, 16, 42, 0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)'
+        }}
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" aria-label="IP Care Technologies home" className="flex items-center overflow-hidden">
