@@ -3,12 +3,12 @@ import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
 
 export const metadata = {
-  title: 'Cybersecurity Advisory Canada & UAE — Zero Trust, SASE, Palo Alto | The Cyber Adviser',
-  description: 'Premium cybersecurity advisory across Canada and UAE. Zero Trust architecture, SASE transformation, cloud security and Palo Alto Networks consulting from 15+ year experts.',
+  title: 'Cybersecurity Advisory UAE & Canada | Attique & Tanveer Bhatti | IP Care Technologies',
+  description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Bhatti. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP for enterprises in UAE & Canada. PCNSE certified consultants.',
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
-    title: 'Cybersecurity Advisory — The Cyber Adviser × IP Care Technologies',
-    description: 'Enterprise cybersecurity advisory: Zero Trust, SASE, cloud security, security automation. Canada & UAE.',
+    title: 'Cybersecurity Advisory UAE & Canada | Attique & Tanveer Bhatti',
+    description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Bhatti. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP.',
     url: '/cybersecurity-advisory',
     type: 'website',
   },
