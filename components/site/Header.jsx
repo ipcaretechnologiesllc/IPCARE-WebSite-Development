@@ -9,7 +9,6 @@ import {
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { serviceCategories } from '@/lib/services-data'
-import CartButton from '@/components/rental/CartButton'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
@@ -23,6 +22,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [eventITOpen, setEventITOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -35,10 +35,18 @@ export default function Header() {
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services', mega: true },
     { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
-    { label: 'Event IT', href: '/event-it' },
+    { label: 'Event IT', href: '/event-it', dropdown: true },
     { label: 'Rental Hub', href: '/rental' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
+  ]
+
+  const eventITLinks = [
+    { label: 'Major Events Portfolio', href: '/event-it/portfolio' },
+    { label: 'High-Density Event WiFi', href: '/event-it/event-wifi' },
+    { label: 'Temporary Data Centres', href: '/event-it/temporary-data-centres' },
+    { label: 'Event CCTV & Security', href: '/event-it/event-cctv' },
+    { label: 'Plan Your Event IT', href: '/contact', accent: true },
   ]
 
   const categories = Object.entries(serviceCategories)
@@ -68,12 +76,25 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" aria-label="IP Care Technologies home" className="flex items-center">
-            <Logo size={36} />
+            <Logo size={160} className="hidden md:block" />
+            <Logo size={120} className="hidden sm:block md:hidden" />
+            <Logo size={100} className="block sm:hidden" />
           </Link>
 
           <ul className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((l) => (
-              <li key={l.label} className="relative" onMouseEnter={() => l.mega && setServicesOpen(true)} onMouseLeave={() => l.mega && setServicesOpen(false)}>
+              <li 
+                key={l.label} 
+                className="relative" 
+                onMouseEnter={() => {
+                  if (l.mega) setServicesOpen(true)
+                  if (l.dropdown) setEventITOpen(true)
+                }} 
+                onMouseLeave={() => {
+                  if (l.mega) setServicesOpen(false)
+                  if (l.dropdown) setEventITOpen(false)
+                }}
+              >
                 <Link 
                   href={l.href} 
                   className={`px-3.5 py-2 text-[14px] font-medium transition-colors flex items-center gap-1 ${
@@ -83,8 +104,10 @@ export default function Header() {
                   }`}
                 >
                   {l.label}
-                  {l.mega && <ChevronDown size={12} className="opacity-60" />}
+                  {(l.mega || l.dropdown) && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
+                
+                {/* Services Mega Menu */}
                 {l.mega && servicesOpen && (
                   <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[1100px] p-7 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)', maxHeight: '85vh', overflowY: 'auto' }}>
                     <div className="grid grid-cols-3 gap-6">
@@ -122,17 +145,37 @@ export default function Header() {
                     </Link>
                   </div>
                 )}
+                
+                {/* Event IT Dropdown */}
+                {l.dropdown && eventITOpen && (
+                  <div className="absolute left-0 top-full mt-2 w-[280px] p-4 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)' }}>
+                    <ul className="space-y-1">
+                      {eventITLinks.map((item) => (
+                        <li key={item.label}>
+                          <Link 
+                            href={item.href} 
+                            className={`block px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+                              item.accent 
+                                ? 'text-[#F97316] hover:bg-[#F97316]/10 font-semibold' 
+                                : 'text-[#0F245F] hover:bg-[#F97316]/8'
+                            }`}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
-            <CartButton onLight />
             <Link href="/contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-3">
-            <CartButton onLight />
             <button className="text-[#0F245F]" onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <Menu size={26} />
             </button>
@@ -143,7 +186,7 @@ export default function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: '#ffffff' }}>
           <div className="flex items-center justify-between px-6 h-[72px] border-b" style={{ borderColor: 'rgba(15,36,95,0.1)' }}>
-            <Logo size={32}/>
+            <Logo size={100}/>
             <button onClick={() => setMobileOpen(false)} className="text-[#0F245F]" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">
