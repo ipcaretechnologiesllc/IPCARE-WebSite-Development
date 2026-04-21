@@ -173,15 +173,24 @@ function Hero() {
 function TrustMarquee() {
   const logos = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY', 'FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
   return (
-    <section className="relative py-10 border-y border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-      <div className="max-w-[1400px] mx-auto px-6 text-center">
-        <h3 className="text-white/85 text-sm md:text-base uppercase tracking-[0.22em] mb-6">Trusted by the World's Biggest Events</h3>
+    <section className="relative overflow-hidden" style={{ background: 'rgba(232,119,34,0.08)', borderTop: '1px solid rgba(232,119,34,0.25)', borderBottom: '1px solid rgba(232,119,34,0.25)', height: '56px' }}>
+      <div className="max-w-[1400px] mx-auto px-6 py-2 text-center">
+        <p className="text-[#E87722] text-[11px] font-bold uppercase tracking-[3px] mb-2">TRUSTED BY THE WORLD'S BIGGEST EVENTS</p>
       </div>
-      <div className="overflow-hidden">
+      <div className="relative overflow-hidden">
+        {/* Left fade gradient */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 pointer-events-none z-10" style={{ background: 'linear-gradient(to right, rgba(232,119,34,0.08), transparent)' }}/>
+        {/* Right fade gradient */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 pointer-events-none z-10" style={{ background: 'linear-gradient(to left, rgba(232,119,34,0.08), transparent)' }}/>
+        
         <div className="marquee-track">
           {[...logos, ...logos].map((logo, i) => (
-            <div key={i} className="flex-shrink-0 px-14 py-4 flex items-center justify-center">
-              <span className="text-white/70 font-bold tracking-[0.15em] text-lg md:text-2xl whitespace-nowrap" style={{ filter: 'grayscale(100%) brightness(1.4)' }}>{logo}</span>
+            <div key={i} className="flex-shrink-0 px-8 flex items-center justify-center gap-6">
+              <div className="flex items-center gap-3">
+                <svg width="10" height="10" viewBox="0 0 10 10" className="text-[#E87722] opacity-90"><circle cx="5" cy="5" r="2" fill="currentColor"/></svg>
+                <span className="text-white text-[15px] font-bold uppercase tracking-[2px] whitespace-nowrap">{logo}</span>
+              </div>
+              <span className="text-[#E87722] opacity-70 text-lg">◆</span>
             </div>
           ))}
         </div>
