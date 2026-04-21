@@ -21,12 +21,12 @@ export default function AboutClient() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-20 overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-20 overflow-hidden" style={{ position: 'relative', zIndex: 0 }}>
+        <div className="absolute inset-0" style={{ zIndex: 0 }}>
           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=85" alt="IP Care Technologies team and office" className="absolute inset-0 w-full h-full object-cover opacity-30"/>
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(4,10,24,0.7) 0%, rgba(4,10,24,0.95) 100%)' }}/>
         </div>
-        <div className="relative hero-glass max-w-[900px] w-full px-8 md:px-12 py-12 text-center reveal">
+        <div className="relative hero-glass max-w-[900px] w-full px-8 md:px-12 py-12 text-center reveal" style={{ zIndex: 1 }}>
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4">About Us</div>
           <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08]">About IP Care Technologies</h1>
           <p className="body-text mt-5 text-lg max-w-2xl mx-auto">Two decades of enterprise IT excellence across UAE and Canada. 200+ clients, 500+ projects, 100M+ users protected.</p>
