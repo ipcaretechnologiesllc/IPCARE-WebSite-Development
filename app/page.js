@@ -52,6 +52,74 @@ function Counter({ end, suffix = '', duration = 1600 }) {
 }
 
 /* ---------------- Hero (wide, no back card) ---------------- */
+const HERO_HEADLINES = [
+  { main: 'Enterprise IT Solutions.', accent: 'Trusted Since 2003.' },
+  { main: "Powering UAE's Biggest Events &", accent: 'Leading Businesses.' },
+  { main: 'Expert Cybersecurity.', accent: 'Zero Trust. SASE. Cloud.' },
+]
+
+function RotatingHeadline() {
+  const [idx, setIdx] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    const ADVANCE = 4000
+    const FADE = reduced ? 0 : 500
+
+    const tick = setInterval(() => {
+      setVisible(false)
+      setTimeout(() => {
+        setIdx((i) => (i + 1) % HERO_HEADLINES.length)
+        setVisible(true)
+      }, FADE)
+    }, ADVANCE)
+    return () => clearInterval(tick)
+  }, [])
+
+  const jumpTo = (next) => {
+    if (next === idx) return
+    setVisible(false)
+    setTimeout(() => { setIdx(next); setVisible(true) }, 500)
+  }
+
+  const h = HERO_HEADLINES[idx]
+
+  return (
+    <>
+      <h1
+        aria-live="polite"
+        className="text-white font-bold tracking-tight leading-[1.04] text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px] transition-opacity duration-500"
+        style={{ opacity: visible ? 1 : 0 }}
+      >
+        <span>{h.main}</span>
+        <br/>
+        <span className="orange-gradient-text">{h.accent}</span>
+      </h1>
+
+      {/* Dot indicators */}
+      <div className="mt-6 flex items-center justify-center gap-2.5" role="tablist" aria-label="Headline slide">
+        {HERO_HEADLINES.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            role="tab"
+            aria-selected={i === idx}
+            aria-label={`Show headline ${i + 1}`}
+            onClick={() => jumpTo(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === idx ? 22 : 8,
+              height: 8,
+              background: i === idx ? '#E87722' : 'rgba(255,255,255,0.3)',
+            }}
+          />
+        ))}
+      </div>
+    </>
+  )
+}
+
 function Hero() {
   return (
     <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20 md:py-24 overflow-hidden">
@@ -67,12 +135,8 @@ function Hero() {
           <ShieldCheck size={30} className="text-white" strokeWidth={2.2}/>
         </div>
 
-        {/* Headline — wider, bigger */}
-        <h1 className="text-white font-bold tracking-tight leading-[1.04] text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px]">
-          <span>Enterprise IT Solutions.</span>
-          <br/>
-          <span className="orange-gradient-text">Trusted Since 2003.</span>
-        </h1>
+        {/* Rotating headline + dot indicators */}
+        <RotatingHeadline />
 
         {/* Subheading */}
         <p className="mt-7 text-white/85 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
