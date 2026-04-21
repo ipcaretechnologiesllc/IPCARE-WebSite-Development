@@ -7,19 +7,19 @@ const LOGO_URL = 'https://customer-assets.emergentagent.com/job_ipcare-enterpris
  *  - tile: boolean     -> wrap in a white rounded tile so original-color logo reads
  *                         cleanly on any background (recommended for header/footer)
  */
-export default function Logo({ size = 40, variant = 'color', tile = false, className = '' }) {
+export default function Logo({ size = 36, variant = 'color', tile = false, className = '' }) {
   const filterStyle = variant === 'white' ? { filter: 'brightness(0) invert(1)' } : {}
 
   const img = (
     <img
       src={LOGO_URL}
       alt="IP Care Technologies"
-      style={{ maxHeight: size, height: size, width: 'auto', ...filterStyle }}
+      style={{ height: size, maxHeight: size, width: 'auto', ...filterStyle }}
       className="object-contain block"
     />
   )
 
-  if (!tile) return <span className={`inline-flex items-center ${className}`} style={{ overflow: 'hidden', maxHeight: size }}>{img}</span>
+  if (!tile) return <span className={`inline-flex items-center ${className}`} style={{ overflow: 'hidden', maxHeight: size, height: size }}>{img}</span>
 
   // White rounded tile — gives original-color logo clean contrast on any bg
   return (

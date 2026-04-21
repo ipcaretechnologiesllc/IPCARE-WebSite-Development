@@ -12,6 +12,66 @@ import { serviceCategories } from '@/lib/services-data'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
+// Custom display labels for navigation mega-menu (shorter, no location suffix)
+const navLabels = {
+  'it-consulting': {
+    'technology-strategy': 'Technology Strategy',
+    'it-assessment': 'IT Assessment & Planning',
+    'digital-transformation': 'Digital Transformation',
+  },
+  'infrastructure': {
+    'data-centre-management': 'Data Centre Management',
+    'virtualization': 'Virtualization Solutions',
+    'hardware-procurement': 'Hardware Procurement',
+  },
+  'elv': {
+    _category: 'ELV Services',
+    'cctv-systems': 'CCTV Systems',
+    'access-control': 'Access Control',
+    'gate-barriers': 'Gate Barrier Systems',
+    'public-address-systems': 'PA Systems',
+    'intercom-systems': 'Intercom Systems',
+    'structured-cabling': 'Structured Cabling',
+  },
+  'managed-it': {
+    'network-management': 'Network Management',
+    'server-management': 'Server Management',
+    'it-support-helpdesk': 'IT Support & Help Desk',
+    'sla': 'Service Level Agreements',
+  },
+  'cloud': {
+    'migration': 'Cloud Migration',
+    'microsoft-365': 'Microsoft 365',
+    'backup-recovery': 'Data Backup & Recovery',
+    'microsoft-entra-id': 'Microsoft Entra ID',
+  },
+  'cybersecurity': {
+    'security-assessment': 'Security Assessment',
+    'incident-response': 'Incident Response',
+    'compliance': 'Compliance Solutions',
+    'endpoint-protection': 'Endpoint Protection',
+    'pam': 'Privileged Access Management',
+    'email-security': 'Email Security & DLP',
+    'microsoft-entra-id': 'Microsoft Entra ID',
+  },
+  'web-development': {
+    'custom-websites': 'Custom Websites',
+    'ecommerce': 'E-Commerce Solutions',
+    'app-development': 'Web & Mobile Apps',
+  },
+  'digital-marketing': {
+    'seo': 'SEO Services',
+    'sem': 'SEM / PPC',
+    'social-media': 'Social Media Marketing',
+  },
+  'email-solutions': {
+    'google-workspace': 'Google Workspace',
+    'microsoft-365': 'Microsoft 365 / Exchange',
+    'email-hosting': 'Email Hosting',
+    'hybrid': 'Hybrid Cloud Mail',
+  },
+}
+
 const SOCIAL = {
   facebook: 'https://www.facebook.com/ipcareuae',
   linkedin: 'https://www.linkedin.com/company/ip-care-technologies',
@@ -76,7 +136,7 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" aria-label="IP Care Technologies home" className="flex items-center overflow-hidden">
-            <Logo size={40} />
+            <Logo size={36} />
           </Link>
 
           <ul className="hidden lg:flex items-center gap-0.5">
@@ -111,27 +171,31 @@ export default function Header() {
                     <div className="grid grid-cols-3 gap-6">
                       {categories.map(([slug, cat]) => {
                         const Ic = iconMap[cat.icon] || Server
+                        const categoryLabel = navLabels[slug]?._category || cat.name
                         return (
                           <div key={slug} className="space-y-2">
                             <Link href={`/services/${slug}`} className="flex gap-2.5 p-2.5 rounded-lg hover:bg-[#F97316]/8 transition-colors group">
                               <Ic className="text-[#F97316] mt-0.5 flex-shrink-0" size={18}/>
                               <div>
-                                <div className="text-[#0F245F] text-[13.5px] font-bold group-hover:text-[#F97316] transition-colors">{cat.name}</div>
+                                <div className="text-[#0F245F] text-[13.5px] font-bold group-hover:text-[#F97316] transition-colors">{categoryLabel}</div>
                                 <div className="text-[#0F245F]/60 text-[11.5px]">{cat.short}</div>
                               </div>
                             </Link>
                             {cat.subpages && Object.keys(cat.subpages).length > 0 && (
                               <ul className="ml-7 space-y-1.5 border-l border-[#F97316]/20 pl-3">
-                                {Object.entries(cat.subpages).map(([subSlug, sub]) => (
-                                  <li key={subSlug}>
-                                    <Link 
-                                      href={`/services/${slug}/${subSlug}`} 
-                                      className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
-                                    >
-                                      {sub.h1}
-                                    </Link>
-                                  </li>
-                                ))}
+                                {Object.entries(cat.subpages).map(([subSlug, sub]) => {
+                                  const displayLabel = navLabels[slug]?.[subSlug] || sub.h1
+                                  return (
+                                    <li key={subSlug}>
+                                      <Link 
+                                        href={`/services/${slug}/${subSlug}`} 
+                                        className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
+                                      >
+                                        {displayLabel}
+                                      </Link>
+                                    </li>
+                                  )
+                                })}
                               </ul>
                             )}
                           </div>
@@ -144,25 +208,55 @@ export default function Header() {
                   </div>
                 )}
                 
-                {/* Event IT Dropdown */}
+                {/* Event IT Dropdown - Matching Services Mega Menu Style */}
                 {l.dropdown && eventITOpen && (
-                  <div className="absolute left-0 top-full mt-2 w-[280px] p-4 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)' }}>
-                    <ul className="space-y-1">
-                      {eventITLinks.map((item) => (
-                        <li key={item.label}>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[420px] p-7 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)' }}>
+                    <div className="space-y-2">
+                      <div className="flex gap-2.5 p-2.5 rounded-lg">
+                        <Calendar className="text-[#F97316] mt-0.5 flex-shrink-0" size={18}/>
+                        <div>
+                          <div className="text-[#E87722] text-[13.5px] font-bold">Event IT Infrastructure</div>
+                          <div className="text-[#0F245F]/60 text-[11.5px]">Mission-critical IT infrastructure for world-class events</div>
+                        </div>
+                      </div>
+                      <ul className="ml-7 space-y-1.5 border-l border-[#F97316]/20 pl-3">
+                        <li>
                           <Link 
-                            href={item.href} 
-                            className={`block px-3 py-2 rounded-lg text-[13px] font-medium transition-colors ${
-                              item.accent 
-                                ? 'text-[#F97316] hover:bg-[#F97316]/10 font-semibold' 
-                                : 'text-[#0F245F] hover:bg-[#F97316]/8'
-                            }`}
+                            href="/event-it/portfolio" 
+                            className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
                           >
-                            {item.label}
+                            Major Events Portfolio
                           </Link>
                         </li>
-                      ))}
-                    </ul>
+                        <li>
+                          <Link 
+                            href="/event-it/event-wifi" 
+                            className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
+                          >
+                            High-Density Event WiFi
+                          </Link>
+                        </li>
+                        <li>
+                          <Link 
+                            href="/event-it/temporary-data-centres" 
+                            className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
+                          >
+                            Temporary Data Centres
+                          </Link>
+                        </li>
+                        <li>
+                          <Link 
+                            href="/event-it/event-cctv" 
+                            className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
+                          >
+                            Event CCTV & Security
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <Link href="/contact" className="flex gap-2 p-3 rounded-lg hover:bg-[#F97316]/10 text-center justify-center items-center border border-[#F97316]/30 mt-5">
+                      <span className="text-[#F97316] font-semibold text-sm">Plan Your Event IT <ArrowRight size={14} className="inline"/></span>
+                    </Link>
                   </div>
                 )}
               </li>
@@ -184,7 +278,7 @@ export default function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: '#ffffff' }}>
           <div className="flex items-center justify-between px-6 h-[72px] border-b overflow-hidden" style={{ borderColor: 'rgba(15,36,95,0.1)' }}>
-            <Logo size={40}/>
+            <Logo size={36}/>
             <button onClick={() => setMobileOpen(false)} className="text-[#0F245F]" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">
