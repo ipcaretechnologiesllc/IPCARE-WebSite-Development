@@ -89,18 +89,32 @@ function RotatingHeadline() {
     <>
       <h1
         aria-live="polite"
-        className="font-extrabold tracking-tight leading-[1.1] transition-opacity duration-500"
+        className="transition-opacity duration-500"
         style={{
           opacity: visible ? 1 : 0,
-          fontSize: 'clamp(36px, 5vw, 56px)',
+          fontSize: '56px',
           fontWeight: 800,
-          color: '#FFFFFF',
+          lineHeight: '1.15',
         }}
       >
         <span style={{ color: '#FFFFFF' }}>{h.main}</span>
         <br/>
         <span style={{ color: '#E87722' }}>{h.accent}</span>
       </h1>
+      
+      {/* Responsive font sizes via media queries in style tag */}
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          h1 {
+            font-size: 38px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          h1 {
+            font-size: 32px !important;
+          }
+        }
+      `}</style>
 
       {/* Dot indicators */}
       <div className="mt-6 flex items-center justify-center gap-2.5" role="tablist" aria-label="Headline slide">
@@ -290,11 +304,11 @@ function Services() {
 /* ---------------- Stats / Why choose us ---------------- */
 function Stats() {
   const stats = [
-    { end: 20, suffix: '+', label: 'Years Experience', icon: Award },
-    { end: 500, suffix: '+', label: 'Projects Delivered', icon: CheckCircle2 },
-    { end: 200, suffix: '+', label: 'Enterprise Clients', icon: Users },
-    { end: 99, suffix: '.9%', label: 'Uptime SLA', icon: Activity },
-    { end: 24, suffix: '/7', label: 'Support', icon: Headphones },
+    { display: '20+', label: 'Years Experience', icon: Award },
+    { display: '500+', label: 'Projects Delivered', icon: CheckCircle2 },
+    { display: '200+', label: 'Enterprise Clients', icon: Users },
+    { display: '99.9%', label: 'Uptime SLA', icon: Activity },
+    { display: '24/7', label: 'Support', icon: Headphones },
   ]
   return (
     <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
@@ -307,7 +321,7 @@ function Stats() {
           {stats.map((s, i) => (
             <div key={s.label} className="glass-card p-6 text-center reveal" style={{ transitionDelay: `${i * 80}ms` }}>
               <s.icon className="mx-auto mb-3 text-[#E87722] opacity-90" size={22}/>
-              <div><Counter end={s.end} suffix={s.suffix}/></div>
+              <div className="text-[#E87722] text-3xl md:text-4xl font-bold mb-2">{s.display}</div>
               <div className="text-white/60 text-xs md:text-sm mt-2 uppercase tracking-wider">{s.label}</div>
             </div>
           ))}
