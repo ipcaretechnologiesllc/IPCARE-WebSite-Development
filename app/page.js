@@ -171,26 +171,78 @@ function Hero() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const logos = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY', 'FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
+  const events = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
   return (
-    <section className="relative overflow-hidden" style={{ background: 'rgba(232,119,34,0.08)', borderTop: '1px solid rgba(232,119,34,0.25)', borderBottom: '1px solid rgba(232,119,34,0.25)', height: '56px' }}>
-      <div className="max-w-[1400px] mx-auto px-6 py-2 text-center">
-        <p className="text-[#E87722] text-[11px] font-bold uppercase tracking-[3px] mb-2">TRUSTED BY THE WORLD'S BIGGEST EVENTS</p>
+    <section 
+      className="relative overflow-hidden" 
+      style={{ 
+        minHeight: '80px',
+        background: 'rgba(13, 27, 61, 0.95)', 
+        borderTop: '1px solid rgba(232, 119, 34, 0.30)', 
+        borderBottom: '1px solid rgba(232, 119, 34, 0.30)',
+        paddingTop: '16px',
+        paddingBottom: '16px'
+      }}
+    >
+      {/* Label */}
+      <div className="text-center mb-[10px]">
+        <p 
+          className="uppercase" 
+          style={{ 
+            fontSize: '11px', 
+            fontWeight: 700, 
+            color: '#E87722', 
+            letterSpacing: '3px' 
+          }}
+        >
+          TRUSTED BY THE WORLD'S BIGGEST EVENTS
+        </p>
       </div>
+      
+      {/* Scrolling Strip with Fade Edges */}
       <div className="relative overflow-hidden">
         {/* Left fade gradient */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 pointer-events-none z-10" style={{ background: 'linear-gradient(to right, rgba(232,119,34,0.08), transparent)' }}/>
-        {/* Right fade gradient */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 pointer-events-none z-10" style={{ background: 'linear-gradient(to left, rgba(232,119,34,0.08), transparent)' }}/>
+        <div 
+          className="absolute left-0 top-0 bottom-0 pointer-events-none z-10" 
+          style={{ 
+            width: '80px',
+            background: 'linear-gradient(to right, #0d1b3d, transparent)' 
+          }}
+        />
         
+        {/* Right fade gradient */}
+        <div 
+          className="absolute right-0 top-0 bottom-0 pointer-events-none z-10" 
+          style={{ 
+            width: '80px',
+            background: 'linear-gradient(to left, #0d1b3d, transparent)' 
+          }}
+        />
+        
+        {/* Marquee Track */}
         <div className="marquee-track">
-          {[...logos, ...logos].map((logo, i) => (
-            <div key={i} className="flex-shrink-0 px-8 flex items-center justify-center gap-6">
-              <div className="flex items-center gap-3">
-                <svg width="10" height="10" viewBox="0 0 10 10" className="text-[#E87722] opacity-90"><circle cx="5" cy="5" r="2" fill="currentColor"/></svg>
-                <span className="text-white text-[15px] font-bold uppercase tracking-[2px] whitespace-nowrap">{logo}</span>
-              </div>
-              <span className="text-[#E87722] opacity-70 text-lg">◆</span>
+          {[...events, ...events, ...events, ...events].map((event, i) => (
+            <div key={i} className="flex-shrink-0 flex items-center">
+              <span 
+                className="whitespace-nowrap uppercase"
+                style={{ 
+                  fontSize: '16px', 
+                  fontWeight: 700, 
+                  color: '#FFFFFF', 
+                  letterSpacing: '2px' 
+                }}
+              >
+                {event}
+              </span>
+              <span 
+                style={{ 
+                  color: '#E87722', 
+                  margin: '0 24px',
+                  fontSize: '16px'
+                }}
+              >
+                ◆
+              </span>
             </div>
           ))}
         </div>
