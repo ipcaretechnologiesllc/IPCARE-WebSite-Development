@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand + offices */}
           <div>
-            <Logo size={32} tile/>
+            <Logo size={56} variant="white"/>
             <p className="text-white/70 text-sm leading-relaxed mt-5">Enterprise IT solutions, cybersecurity advisory, event infrastructure and equipment rental — trusted since 2003.</p>
 
             <div className="mt-6 space-y-4 text-white/80 text-xs">
@@ -31,8 +31,12 @@ export default function Footer() {
             </div>
 
             <div className="flex gap-3 mt-6">
-              {[Facebook, Linkedin, Instagram].map((Ic, i) => (
-                <a key={i} href="#" aria-label="social" className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E87722] transition-all" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }}><Ic size={15}/></a>
+              {[
+                { Ic: Facebook, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook' },
+                { Ic: Linkedin, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn' },
+                { Ic: Instagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram' },
+              ].map(({ Ic, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E87722] transition-all" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }}><Ic size={15}/></a>
               ))}
             </div>
           </div>

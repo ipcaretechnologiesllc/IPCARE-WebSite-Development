@@ -12,6 +12,12 @@ import CartButton from '@/components/rental/CartButton'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
+const SOCIAL = {
+  facebook: 'https://www.facebook.com/ipcareuae',
+  linkedin: 'https://www.linkedin.com/company/ip-care-technologies',
+  instagram: 'https://www.instagram.com/ipcaretechnologies/',
+}
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -38,7 +44,8 @@ export default function Header() {
 
   return (
     <>
-      <div className="hidden md:block w-full text-[12.5px] text-white/80 border-b border-white/10" style={{ background: 'rgba(21,47,127,0.55)', backdropFilter: 'blur(10px)' }}>
+      {/* Top info strip — slim blue band */}
+      <div className="hidden md:block w-full text-[12.5px] text-white/85 border-b border-white/10" style={{ background: 'rgba(21,47,127,0.55)', backdropFilter: 'blur(10px)' }}>
         <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-1.5"><UAEFlag /><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
@@ -46,40 +53,46 @@ export default function Header() {
             <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
           </div>
           <div className="flex items-center gap-3">
-            <a href="#" aria-label="Facebook" className="hover:text-[#E87722]"><Facebook size={14}/></a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-[#E87722]"><Linkedin size={14}/></a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#E87722]"><Instagram size={14}/></a>
+            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#F97316]"><Facebook size={14}/></a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[#F97316]"><Linkedin size={14}/></a>
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#F97316]"><Instagram size={14}/></a>
           </div>
         </div>
       </div>
 
-      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : ''}`}>
+      {/* Main nav — WHITE BACKGROUND */}
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-[0_4px_20px_-6px_rgba(8,20,52,0.18)]' : ''}`}
+        style={{ background: '#ffffff', borderBottom: '1px solid rgba(15,36,95,0.08)' }}
+      >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          <Link href="/" aria-label="IP Care Technologies home"><Logo size={30} tile /></Link>
+          <Link href="/" aria-label="IP Care Technologies home" className="flex items-center">
+            <Logo size={36} />
+          </Link>
 
-          <ul className="hidden lg:flex items-center gap-1">
+          <ul className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((l) => (
               <li key={l.label} className="relative" onMouseEnter={() => l.mega && setServicesOpen(true)} onMouseLeave={() => l.mega && setServicesOpen(false)}>
-                <Link href={l.href} className="px-4 py-2 text-[14px] text-white/85 hover:text-white transition-colors flex items-center gap-1">
+                <Link href={l.href} className="px-3.5 py-2 text-[14px] font-medium text-[#0F245F] hover:text-[#F97316] transition-colors flex items-center gap-1">
                   {l.label}
                   {l.mega && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
                 {l.mega && servicesOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[820px] p-6 rounded-xl grid grid-cols-3 gap-3" style={{ background: 'rgba(15,36,95,0.95)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(20px) saturate(140%)' }}>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[820px] p-6 rounded-xl grid grid-cols-3 gap-3" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)' }}>
                     {categories.map(([slug, cat]) => {
                       const Ic = iconMap[cat.icon] || Server
                       return (
-                        <Link key={slug} href={`/services/${slug}`} className="flex gap-3 p-3 rounded-lg hover:bg-white/5">
-                          <Ic className="text-[#E87722] mt-0.5 flex-shrink-0" size={20}/>
+                        <Link key={slug} href={`/services/${slug}`} className="flex gap-3 p-3 rounded-lg hover:bg-[#F97316]/8 transition-colors">
+                          <Ic className="text-[#F97316] mt-0.5 flex-shrink-0" size={20}/>
                           <div>
-                            <div className="text-white text-[13.5px] font-semibold">{cat.name}</div>
-                            <div className="text-white/60 text-[12px]">{cat.short}</div>
+                            <div className="text-[#0F245F] text-[13.5px] font-semibold">{cat.name}</div>
+                            <div className="text-[#0F245F]/65 text-[12px]">{cat.short}</div>
                           </div>
                         </Link>
                       )
                     })}
-                    <Link href="/services" className="flex gap-3 p-3 rounded-lg hover:bg-[#E87722]/20 col-span-3 text-center justify-center items-center border border-[#E87722]/30 mt-2">
-                      <span className="text-[#E87722] font-semibold text-sm">View all services <ArrowRight size={14} className="inline"/></span>
+                    <Link href="/services" className="flex gap-3 p-3 rounded-lg hover:bg-[#F97316]/10 col-span-3 text-center justify-center items-center border border-[#F97316]/30 mt-2">
+                      <span className="text-[#F97316] font-semibold text-sm">View all services <ArrowRight size={14} className="inline"/></span>
                     </Link>
                   </div>
                 )}
@@ -88,13 +101,13 @@ export default function Header() {
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
-            <CartButton />
+            <CartButton onLight />
             <Link href="/contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-3">
-            <CartButton />
-            <button className="text-white" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <CartButton onLight />
+            <button className="text-[#0F245F]" onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <Menu size={26} />
             </button>
           </div>
@@ -102,16 +115,21 @@ export default function Header() {
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'rgba(15,36,95,0.98)', backdropFilter: 'blur(20px)' }}>
-          <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
-            <Logo size={30} tile/>
-            <button onClick={() => setMobileOpen(false)} className="text-white" aria-label="Close menu"><X size={26}/></button>
+        <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: '#ffffff' }}>
+          <div className="flex items-center justify-between px-6 h-[72px] border-b" style={{ borderColor: 'rgba(15,36,95,0.1)' }}>
+            <Logo size={32}/>
+            <button onClick={() => setMobileOpen(false)} className="text-[#0F245F]" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">
             {navLinks.map((l) => (
-              <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-white text-2xl font-semibold hover:text-[#E87722]">{l.label}</Link></li>
+              <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0F245F] text-2xl font-semibold hover:text-[#F97316]">{l.label}</Link></li>
             ))}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
+            <div className="flex items-center gap-4 mt-6">
+              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0F245F] hover:text-[#F97316]"><Facebook size={22}/></a>
+              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0F245F] hover:text-[#F97316]"><Linkedin size={22}/></a>
+              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0F245F] hover:text-[#F97316]"><Instagram size={22}/></a>
+            </div>
           </ul>
         </div>
       )}
