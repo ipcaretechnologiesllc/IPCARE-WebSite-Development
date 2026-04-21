@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-orange: #E87722;
+  --brand-orange-hover: #D06010;
+  --brand-navy: #0D2B55;
+  --brand-blue: #1B6CA8;
+  --bg-dark-1: #162347;
+  --bg-dark-2: #0d1b3d;
+  --bg-dark-3: #07102a;
+  --bg-dark-4: #040a18;
+}
+
+html, body { background-color: #040a18; color: #ffffff; }
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(ellipse at 50% 15%, #162347 0%, #0d1b3d 35%, #07102a 65%, #040a18 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.body-text { color: rgba(255,255,255,0.75); }
+
+.glass-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  transition: transform .35s ease, border-color .35s ease, background .35s ease;
+}
+.glass-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,119,34,0.45);
+}
+
+.hero-glass {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+}
+
+.btn-primary {
+  background: #E87722;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  border: 1px solid transparent;
+}
+.btn-primary:hover {
+  background: #D06010;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -10px rgba(232,119,34,0.6);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s ease, border-color .2s ease;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.9); }
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(232,119,34,0.15);
+  border: 1px solid rgba(232,119,34,0.5);
+  color: #ffd7b8;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+.glass-pill.active, .glass-pill:hover { background: #E87722; border-color: #E87722; color: #ffffff; }
+
+/* Animation: fade-in-up via IntersectionObserver */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* Marquee */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { display: flex; width: max-content; animation: marquee-scroll 30s linear infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #07102a; }
+::-webkit-scrollbar-thumb { background: rgba(232,119,34,0.5); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #E87722; }
+
+/* Heading gradient accent */
+.heading-accent::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: #E87722;
+  margin: 14px auto 0;
+  border-radius: 3px;
+}
+
+/* Nav scroll state */
+.nav-scrolled { background: rgba(7,16,42,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+/* Stat number */
+.stat-num { color: #E87722; font-weight: 800; font-feature-settings: 'tnum'; }
