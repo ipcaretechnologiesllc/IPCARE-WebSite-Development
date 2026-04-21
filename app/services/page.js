@@ -38,8 +38,8 @@ export default function ServicesHub() {
             <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Enterprise IT Solutions &amp; Services — UAE &amp; Canada</h1>
             <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">Nine service pillars, one accountable partner. Explore the full IP Care portfolio below.</p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/#contact" className="btn-primary">Get a Free Consultation <Icons.ArrowRight size={16}/></Link>
-              <Link href="/#about" className="btn-ghost">About IP Care</Link>
+              <Link href="/contact" className="btn-primary">Get a Free Consultation <Icons.ArrowRight size={16}/></Link>
+              <Link href="/about" className="btn-ghost">About IP Care</Link>
             </div>
           </div>
         </section>
@@ -78,7 +78,7 @@ export default function ServicesHub() {
             <div className="rounded-2xl p-10 md:p-14 text-center" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
               <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Not sure where to start?</h2>
               <p className="body-text max-w-xl mx-auto mb-8">Book a 30-minute discovery call with an IP Care solution architect. Free, no obligation.</p>
-              <Link href="/#contact" className="btn-primary">Book a Discovery Call <Icons.ArrowRight size={16}/></Link>
+              <Link href="/contact" className="btn-primary">Book a Discovery Call <Icons.ArrowRight size={16}/></Link>
             </div>
           </div>
         </section>
