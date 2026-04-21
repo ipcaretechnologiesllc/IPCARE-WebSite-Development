@@ -3,12 +3,12 @@ import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
 
 export const metadata = {
-  title: 'Cybersecurity Advisory UAE & Canada | Attique & Tanveer Bhatti | IP Care Technologies',
-  description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Bhatti. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP for enterprises in UAE & Canada. PCNSE certified consultants.',
+  title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed | IP Care Technologies',
+  description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Ahmed. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP for enterprises in UAE & Canada. PCNSE certified consultants.',
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
-    title: 'Cybersecurity Advisory UAE & Canada | Attique & Tanveer Bhatti',
-    description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Bhatti. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP.',
+    title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed',
+    description: 'Expert cybersecurity advisory from Attique Bhatti and Tanveer Ahmed. Zero Trust, SASE, Prisma Access, ZTNA, CASB and DLP.',
     url: '/cybersecurity-advisory',
     type: 'website',
   },

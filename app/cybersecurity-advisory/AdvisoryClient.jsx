@@ -94,17 +94,17 @@ function Hero() {
             </div>
           </div>
 
-          {/* Tanveer Bhatti Card */}
+          {/* Tanveer Ahmed Card */}
           <div className="glass-premium p-8">
             <div className="flex flex-col gap-6 items-center text-center">
               <AdvisorAvatar initials="TB"/>
               <div className="flex-1">
                 <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Network Security Consultant</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">Tanveer Bhatti</h2>
+                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">Tanveer Ahmed</h2>
                 <div className="text-white/70 text-base mt-1">Independent Network Security Consultant</div>
                 <div className="text-[#E87722] text-sm">Prisma Access & SASE Specialist</div>
                 <div className="text-white/60 text-xs mt-1">Milton, Ontario, Canada</div>
-                <p className="body-text text-sm mt-4 leading-relaxed">With over 25 years of experience in network security and enterprise IT, Tanveer Bhatti is a CCIE-certified independent network security consultant specialising in Palo Alto Networks Prisma Access and SASE architecture. He brings deep hands-on expertise in Zero Trust Network Access, CASB, DLP, Secure Web Gateway, Remote Browser Isolation, and SD-WAN transformation — delivering complex enterprise security programmes across Canada and globally.</p>
+                <p className="body-text text-sm mt-4 leading-relaxed">With over 25 years of experience in network security and enterprise IT, Tanveer Ahmed is a CCIE-certified independent network security consultant specialising in Palo Alto Networks Prisma Access and SASE architecture. He brings deep hands-on expertise in Zero Trust Network Access, CASB, DLP, Secure Web Gateway, Remote Browser Isolation, and SD-WAN transformation — delivering complex enterprise security programmes across Canada and globally.</p>
                 
                 {/* Credential badges */}
                 <div className="flex flex-wrap justify-center gap-2 mt-5">
