@@ -47,7 +47,7 @@ export default function RentalHubClient() {
       <section id="categories" className="py-16 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12 reveal">
-            <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Shop by Category</h2>
+            <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Browse Equipment Categories</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {cats.map(([slug, c], i) => (
