@@ -1,34 +1,16 @@
 import Link from 'next/link'
-import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react'
-import Logo, { UAEFlag, CanadaFlag } from './Logo'
+import { Facebook, Linkedin, Instagram } from 'lucide-react'
+import Logo from './Logo'
 
 export default function Footer() {
   return (
     <footer className="pt-16 pb-8 px-6" style={{ background: 'linear-gradient(180deg, rgba(11,26,70,0.6) 0%, rgba(8,20,52,0.95) 100%)', borderTop: '1px solid rgba(255,255,255,0.10)', backdropFilter: 'blur(14px)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand + offices */}
+          {/* Brand + social */}
           <div>
             <Logo size={56} variant="white"/>
             <p className="text-white/70 text-sm leading-relaxed mt-5">Enterprise IT solutions, cybersecurity advisory, event infrastructure and equipment rental — trusted since 2003.</p>
-
-            <div className="mt-6 space-y-4 text-white/80 text-xs">
-              <div>
-                <div className="flex items-center gap-2 text-[#F97316] font-semibold text-[11px] uppercase tracking-wider mb-2">
-                  <UAEFlag/><span>United Arab Emirates</span>
-                </div>
-                <div className="flex items-start gap-2"><MapPin size={12} className="text-white/60 mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
-                <div className="flex items-center gap-2 mt-1.5"><Phone size={12} className="text-white/60 flex-shrink-0"/><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></div>
-                <div className="flex items-center gap-2 mt-1.5"><Mail size={12} className="text-white/60 flex-shrink-0"/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 text-[#F97316] font-semibold text-[11px] uppercase tracking-wider mb-2">
-                  <CanadaFlag/><span>Canada</span>
-                </div>
-                <div className="flex items-start gap-2"><MapPin size={12} className="text-white/60 mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
-                <div className="flex items-center gap-2 mt-1.5"><Phone size={12} className="text-white/60 flex-shrink-0"/><a href="tel:+14167860782" className="hover:text-white">+1 416 786 0782</a></div>
-              </div>
-            </div>
 
             <div className="flex gap-3 mt-6">
               {[
