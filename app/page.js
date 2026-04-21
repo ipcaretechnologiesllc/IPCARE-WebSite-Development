@@ -209,7 +209,7 @@ function CyberAdvisory() {
             ))}
           </div>
 
-          <a href="#contact" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
+          <a href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
