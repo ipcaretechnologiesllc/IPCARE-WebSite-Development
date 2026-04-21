@@ -1,17 +1,40 @@
 const LOGO_URL = 'https://customer-assets.emergentagent.com/job_ipcare-enterprise/artifacts/4c6j1azv_ipcare%20logo.png.png'
 
-export default function Logo({ size = 36, variant = 'white' }) {
-  // variant 'white' = forced white on dark bg via CSS filter; 'color' = original artwork
-  const filterStyle = variant === 'white'
-    ? { filter: 'brightness(0) invert(1)' }
-    : {}
-  return (
+/**
+ * Logo component
+ *  - variant: 'color'  -> original artwork (default)
+ *             'white'  -> forced-white via CSS filter (for tight dark surfaces only)
+ *  - tile: boolean     -> wrap in a white rounded tile so original-color logo reads
+ *                         cleanly on any background (recommended for header/footer)
+ */
+export default function Logo({ size = 36, variant = 'color', tile = false, className = '' }) {
+  const filterStyle = variant === 'white' ? { filter: 'brightness(0) invert(1)' } : {}
+
+  const img = (
     <img
       src={LOGO_URL}
       alt="IP Care Technologies"
       style={{ height: size, width: 'auto', ...filterStyle }}
-      className="object-contain"
+      className="object-contain block"
     />
+  )
+
+  if (!tile) return <span className={className}>{img}</span>
+
+  // White rounded tile — gives original-color logo clean contrast on any bg
+  return (
+    <span
+      className={`inline-flex items-center justify-center ${className}`}
+      style={{
+        background: '#ffffff',
+        padding: '6px 14px',
+        borderRadius: '10px',
+        boxShadow: '0 2px 10px -2px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.6) inset',
+        lineHeight: 0,
+      }}
+    >
+      {img}
+    </span>
   )
 }
 

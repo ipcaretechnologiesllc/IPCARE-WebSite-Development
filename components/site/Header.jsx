@@ -55,7 +55,7 @@ export default function Header() {
 
       <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : ''}`}>
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          <Link href="/" aria-label="IP Care Technologies home"><Logo size={30} /></Link>
+          <Link href="/" aria-label="IP Care Technologies home"><Logo size={30} tile /></Link>
 
           <ul className="hidden lg:flex items-center gap-1">
             {navLinks.map((l) => (
@@ -104,7 +104,7 @@ export default function Header() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'rgba(15,36,95,0.98)', backdropFilter: 'blur(20px)' }}>
           <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
-            <Logo size={30}/>
+            <Logo size={30} tile/>
             <button onClick={() => setMobileOpen(false)} className="text-white" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">

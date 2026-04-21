@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand + offices */}
           <div>
-            <Logo size={32}/>
+            <Logo size={32} tile/>
             <p className="text-white/70 text-sm leading-relaxed mt-5">Enterprise IT solutions, cybersecurity advisory, event infrastructure and equipment rental — trusted since 2003.</p>
 
             <div className="mt-6 space-y-4 text-white/80 text-xs">
