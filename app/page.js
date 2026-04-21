@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react'
 import {
-  Shield, ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
-  Laptop, Tablet, Wifi, Printer, ArrowRight, Menu, X, Phone, Mail,
-  Facebook, Linkedin, Instagram, MapPin, Clock, CheckCircle2, Building2,
-  HeartHandshake, Award, Users, Activity, Headphones, ChevronRight
+  ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
+  Laptop, Tablet, Wifi, Printer, ArrowRight, Phone, Mail,
+  MapPin, Clock, CheckCircle2, Building2,
+  HeartHandshake, Award, Users, Activity, Headphones
 } from 'lucide-react'
+import Header from '@/components/site/Header'
+import Footer from '@/components/site/Footer'
+import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 
 /* ---------------- IntersectionObserver reveal hook ---------------- */
 function useReveal() {
@@ -46,140 +49,6 @@ function Counter({ end, suffix = '', duration = 1600 }) {
     return () => io.disconnect()
   }, [end, duration])
   return <span ref={ref} className="stat-num text-4xl md:text-5xl">{val.toLocaleString()}{suffix}</span>
-}
-
-/* ---------------- Shield logo (wordmark) ---------------- */
-function Logo({ size = 28 }) {
-  return (
-    <div className="flex items-center gap-2.5">
-      <div className="relative" style={{ width: size, height: size }}>
-        <Shield className="text-[#E87722]" style={{ width: size, height: size }} strokeWidth={2} />
-        <ShieldCheck className="absolute inset-0 text-white" style={{ width: size, height: size, padding: size * 0.22 }} strokeWidth={2.4} />
-      </div>
-      <div className="leading-none">
-        <div className="text-white font-bold tracking-tight text-[15px]">IP Care</div>
-        <div className="text-[10px] tracking-[0.18em] text-white/60 uppercase">Technologies</div>
-      </div>
-    </div>
-  )
-}
-
-/* ---------------- Flag icons (simple SVG) ---------------- */
-const UAEFlag = () => (
-  <svg width="18" height="12" viewBox="0 0 18 12" aria-label="UAE flag"><rect width="4" height="12" fill="#FF0000"/><rect x="4" width="14" height="4" fill="#00732F"/><rect x="4" y="4" width="14" height="4" fill="#FFFFFF"/><rect x="4" y="8" width="14" height="4" fill="#000000"/></svg>
-)
-const CanadaFlag = () => (
-  <svg width="18" height="12" viewBox="0 0 18 12" aria-label="Canada flag"><rect width="4" height="12" fill="#FF0000"/><rect x="4" width="10" height="12" fill="#FFFFFF"/><rect x="14" width="4" height="12" fill="#FF0000"/><path d="M9 3 L9.5 4.5 L11 4 L10 5.5 L11.5 6.5 L10 6.5 L10 8 L9 7.3 L8 8 L8 6.5 L6.5 6.5 L8 5.5 L7 4 L8.5 4.5 Z" fill="#FF0000"/></svg>
-)
-
-/* ---------------- Top Utility Bar + Sticky Nav ---------------- */
-function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
-    onScroll(); window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Services', href: '#services', mega: true },
-    { label: 'Event IT', href: '#events' },
-    { label: 'Rental Hub', href: '#rental' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contact', href: '#contact' },
-  ]
-
-  return (
-    <>
-      {/* Top utility bar */}
-      <div className="hidden md:block w-full text-[12.5px] text-white/70 border-b border-white/5" style={{ background: 'rgba(7,16,42,0.6)', backdropFilter: 'blur(10px)' }}>
-        <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><UAEFlag /> <a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
-            <span className="flex items-center gap-1.5"><CanadaFlag /> <a href="tel:+14165550199" className="hover:text-white">+1 416 555 0199</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/> <a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
-          </div>
-          <div className="flex items-center gap-3">
-            <a href="#" aria-label="Facebook" className="hover:text-[#E87722]"><Facebook size={14}/></a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-[#E87722]"><Linkedin size={14}/></a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#E87722]"><Instagram size={14}/></a>
-          </div>
-        </div>
-      </div>
-
-      {/* Sticky Nav */}
-      <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled' : ''}`}>
-        <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          <a href="#home" aria-label="IP Care Technologies home"><Logo size={30} /></a>
-
-          <ul className="hidden lg:flex items-center gap-1">
-            {navLinks.map((l) => (
-              <li key={l.label} className="relative" onMouseEnter={() => l.mega && setServicesOpen(true)} onMouseLeave={() => l.mega && setServicesOpen(false)}>
-                <a href={l.href} className="px-4 py-2 text-[14px] text-white/85 hover:text-white transition-colors flex items-center gap-1">
-                  {l.label}
-                  {l.mega && <ChevronRight size={12} className="rotate-90 opacity-60" />}
-                </a>
-                {l.mega && servicesOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[720px] p-6 rounded-xl grid grid-cols-3 gap-4" style={{ background: 'rgba(7,16,42,0.97)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(16px)' }}>
-                    {[
-                      { icon: Server, name: 'Managed IT Services', d: '24/7 monitoring & SLA' },
-                      { icon: Lock, name: 'Cybersecurity', d: 'SOC, Zero Trust, Firewalls' },
-                      { icon: Cable, name: 'ELV & Physical Security', d: 'CCTV, Access Control' },
-                      { icon: Calendar, name: 'Event IT Infrastructure', d: 'Turnkey event tech' },
-                      { icon: Network, name: 'Equipment Rental', d: 'Laptops, WiFi, Networking' },
-                      { icon: Cloud, name: 'Cloud Services', d: 'AWS, Azure, Private Cloud' },
-                    ].map((s) => (
-                      <a key={s.name} href="#services" className="flex gap-3 p-3 rounded-lg hover:bg-white/5">
-                        <s.icon className="text-[#E87722] mt-0.5 flex-shrink-0" size={20}/>
-                        <div>
-                          <div className="text-white text-[13.5px] font-semibold">{s.name}</div>
-                          <div className="text-white/60 text-[12px]">{s.d}</div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden lg:block">
-            <a href="#contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></a>
-          </div>
-
-          <button className="lg:hidden text-white" onClick={() => setMobileOpen(true)} aria-label="Open menu">
-            <Menu size={26} />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'rgba(4,10,24,0.98)', backdropFilter: 'blur(20px)' }}>
-          <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
-            <Logo size={30}/>
-            <button onClick={() => setMobileOpen(false)} className="text-white" aria-label="Close menu"><X size={26}/></button>
-          </div>
-          <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
-            {navLinks.map((l) => (
-              <li key={l.label}><a href={l.href} onClick={() => setMobileOpen(false)} className="text-white text-2xl font-semibold hover:text-[#E87722]">{l.label}</a></li>
-            ))}
-            <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></a>
-            <div className="flex flex-col items-center gap-2 text-white/70 text-sm mt-6">
-              <span className="flex items-center gap-2"><UAEFlag/> +971 2 676 6935</span>
-              <span className="flex items-center gap-2"><CanadaFlag/> +1 416 555 0199</span>
-              <span className="flex items-center gap-2"><Mail size={14}/> info@ipcare.ae</span>
-            </div>
-          </ul>
-        </div>
-      )}
-    </>
-  )
 }
 
 /* ---------------- Hero ---------------- */
@@ -589,66 +458,6 @@ function OfficesCTA() {
         </div>
       </div>
     </section>
-  )
-}
-
-/* ---------------- Footer ---------------- */
-function Footer() {
-  return (
-    <footer className="pt-16 pb-8 px-6" style={{ background: '#020614', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          <div>
-            <Logo size={32}/>
-            <p className="text-white/60 text-sm leading-relaxed mt-5">Enterprise IT solutions, cybersecurity advisory, event infrastructure and equipment rental — trusted since 2003.</p>
-            <div className="mt-5 space-y-2 text-white/60 text-xs">
-              <div className="flex items-start gap-2"><UAEFlag/><span>Abu Dhabi, United Arab Emirates</span></div>
-              <div className="flex items-start gap-2"><CanadaFlag/><span>Toronto, Ontario, Canada</span></div>
-            </div>
-            <div className="flex gap-3 mt-5">
-              {[Facebook, Linkedin, Instagram].map((Ic, i) => (
-                <a key={i} href="#" aria-label="social" className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E87722] transition-all" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}><Ic size={15}/></a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Enterprise Services</h4>
-            <ul className="space-y-2.5 text-white/60 text-sm">
-              {['Managed IT Services','Cybersecurity','ELV & Physical Security','Event IT Infrastructure','Cloud Services','Advisory'].map(l => (
-                <li key={l}><a href="#services" className="hover:text-[#E87722] transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Rental Hub</h4>
-            <ul className="space-y-2.5 text-white/60 text-sm">
-              {['Laptops','iPads & Tablets','Event WiFi','Networking Gear','Printers & MFPs','Servers'].map(l => (
-                <li key={l}><a href="#rental" className="hover:text-[#E87722] transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Quick Links</h4>
-            <ul className="space-y-2.5 text-white/60 text-sm">
-              {['About','Blog','Careers','Partners','Privacy Policy','Terms of Service'].map(l => (
-                <li key={l}><a href="#" className="hover:text-[#E87722] transition-colors">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 text-white/50 text-xs">
-          <div>© {new Date().getFullYear()} IP Care Technologies L.L.C. All rights reserved.</div>
-          <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">Cookies</a>
-          </div>
-        </div>
-      </div>
-    </footer>
   )
 }
 
