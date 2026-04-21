@@ -41,7 +41,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl my-8 glass-card" style={{ background: 'rgba(7,16,42,0.97)' }}>
+      <div className="relative w-full max-w-2xl my-8 glass-card" style={{ background: 'rgba(11,26,70,0.97)' }}>
         <header className="flex items-center justify-between px-6 py-5 border-b border-white/10">
           <div>
             <div className="mono text-[#E87722] text-[10px] uppercase tracking-[0.25em] mb-1">Request a Quote</div>

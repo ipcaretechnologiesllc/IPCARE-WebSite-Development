@@ -51,32 +51,49 @@ function Counter({ end, suffix = '', duration = 1600 }) {
   return <span ref={ref} className="stat-num text-4xl md:text-5xl">{val.toLocaleString()}{suffix}</span>
 }
 
-/* ---------------- Hero ---------------- */
+/* ---------------- Hero (wide, no back card) ---------------- */
 function Hero() {
   return (
-    <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20">
+    <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20 md:py-24">
       {/* subtle ambient orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full blur-3xl opacity-30" style={{ background: 'radial-gradient(circle, #1B6CA8 0%, transparent 70%)' }}/>
-        <div className="absolute -bottom-40 -right-24 w-[520px] h-[520px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
+        <div className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-35" style={{ background: 'radial-gradient(circle, #3B7BFF 0%, transparent 70%)' }}/>
+        <div className="absolute -bottom-44 -right-32 w-[620px] h-[620px] rounded-full blur-3xl opacity-25" style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)' }}/>
       </div>
 
-      <div className="hero-glass relative w-full max-w-[680px] px-8 md:px-12 py-14 md:py-16 text-center reveal">
-        <div className="mx-auto mb-6 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)' }}>
-          <ShieldCheck size={34} className="text-white" strokeWidth={2}/>
+      <div className="relative w-full max-w-[1100px] mx-auto text-center reveal">
+        {/* Shield icon */}
+        <div className="mx-auto mb-7 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(10px)' }}>
+          <ShieldCheck size={30} className="text-white" strokeWidth={2.2}/>
         </div>
-        <h1 className="text-white text-[34px] md:text-[44px] lg:text-[52px] font-bold leading-[1.1] tracking-tight">
-          Enterprise IT Solutions.<br/><span className="text-[#E87722]">Trusted Since 2003.</span>
+
+        {/* Headline — wider, bigger */}
+        <h1 className="text-white font-bold tracking-tight leading-[1.04] text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px]">
+          <span>Enterprise IT Solutions.</span>
+          <br/>
+          <span className="orange-gradient-text">Trusted Since 2003.</span>
         </h1>
-        <p className="mt-5 body-text text-base md:text-lg max-w-[560px] mx-auto">
+
+        {/* Subheading */}
+        <p className="mt-7 text-white/85 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
           Managed IT, Cybersecurity, Event Infrastructure &amp; Equipment Rental — UAE &amp; Canada
         </p>
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
-          {['20+ Years','UAE & Canada','24/7 SLA','100M+ Users Protected'].map((b) => <span key={b} className="pill-badge">{b}</span>)}
+
+        {/* Trust pills */}
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          {['20+ Years','UAE & Canada','24/7 SLA','100M+ Users Protected'].map((b) => (
+            <span key={b} className="pill-badge">{b}</span>
+          ))}
         </div>
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="#contact" className="btn-primary w-full sm:w-auto justify-center">Get a Free Consultation <ArrowRight size={16}/></a>
-          <a href="#services" className="btn-ghost w-full sm:w-auto justify-center">View Our Services</a>
+
+        {/* CTAs */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact" className="btn-primary w-full sm:w-auto justify-center" style={{ padding: '16px 34px', fontSize: '15px' }}>
+            Get a Free Consultation <ArrowRight size={18}/>
+          </a>
+          <a href="/services" className="btn-ghost w-full sm:w-auto justify-center" style={{ padding: '15px 30px', fontSize: '15px' }}>
+            View Our Services
+          </a>
         </div>
       </div>
     </section>
@@ -87,7 +104,7 @@ function Hero() {
 function TrustMarquee() {
   const logos = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY', 'FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
   return (
-    <section className="relative py-10 border-y border-white/5" style={{ background: 'rgba(7,16,42,0.55)' }}>
+    <section className="relative py-10 border-y border-white/10" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto px-6 text-center">
         <h3 className="text-white/85 text-sm md:text-base uppercase tracking-[0.22em] mb-6">Trusted by the World's Biggest Events</h3>
       </div>
@@ -150,7 +167,7 @@ function Stats() {
     { end: 24, suffix: '/7', label: 'Global Support', icon: Headphones },
   ]
   return (
-    <section className="py-20 px-6" style={{ background: 'rgba(7,16,42,0.55)' }}>
+    <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
           <h2 className="text-white text-3xl md:text-4xl font-bold">Why Choose IP Care</h2>
@@ -362,7 +379,7 @@ function Testimonials() {
     { q: '24/7 managed IT that actually responds in minutes. Best SLA partner we have worked with in over a decade.', who: 'VP Technology', type: 'Managed IT Services', loc: 'Dubai, UAE' },
   ]
   return (
-    <section className="py-24 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+    <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
           <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">What Clients Say</h2>
@@ -428,30 +445,30 @@ function OfficesCTA() {
   return (
     <section id="contact" className="py-16 px-6">
       <div className="max-w-[1300px] mx-auto">
-        <div className="rounded-2xl p-10 md:p-14 reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)', backdropFilter: 'blur(12px)' }}>
+        <div className="rounded-2xl p-10 md:p-14 reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)', backdropFilter: 'blur(14px)' }}>
           <div className="grid md:grid-cols-3 gap-10 items-center">
             <div className="md:col-span-2 grid sm:grid-cols-2 gap-8">
               <div>
                 <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><UAEFlag/> UNITED ARAB EMIRATES</div>
                 <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi Headquarters</h3>
-                <div className="space-y-1.5 text-white/80 text-sm">
-                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722]"/> +971 2 676 6935</div>
-                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722]"/> info@ipcare.ae</div>
-                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5"/> Abu Dhabi, UAE</div>
+                <div className="space-y-1.5 text-white/85 text-sm">
+                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+971 2 676 6935</span></div>
+                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><CanadaFlag/> CANADA</div>
                 <h3 className="text-white text-xl font-bold mb-2">Toronto Operations</h3>
-                <div className="space-y-1.5 text-white/80 text-sm">
-                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722]"/> +1 416 555 0199</div>
-                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722]"/> canada@ipcare.ae</div>
-                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5"/> Toronto, ON</div>
+                <div className="space-y-1.5 text-white/85 text-sm">
+                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+1 416 786 0782</span></div>
+                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
                 </div>
               </div>
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-white text-2xl font-bold mb-2">Let's build something<br/>enterprise-grade.</h3>
+              <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s build something<br/>enterprise-grade.</h3>
               <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
             </div>
           </div>

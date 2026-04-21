@@ -38,12 +38,12 @@ export default function Header() {
 
   return (
     <>
-      <div className="hidden md:block w-full text-[12.5px] text-white/70 border-b border-white/5" style={{ background: 'rgba(7,16,42,0.6)', backdropFilter: 'blur(10px)' }}>
+      <div className="hidden md:block w-full text-[12.5px] text-white/80 border-b border-white/10" style={{ background: 'rgba(21,47,127,0.55)', backdropFilter: 'blur(10px)' }}>
         <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><UAEFlag /> <a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
-            <span className="flex items-center gap-1.5"><CanadaFlag /> <a href="tel:+14165550199" className="hover:text-white">+1 416 555 0199</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/> <a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
+            <span className="flex items-center gap-1.5"><UAEFlag /><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
+            <span className="flex items-center gap-1.5"><CanadaFlag /><a href="tel:+14167860782" className="hover:text-white">+1 416 786 0782</a></span>
+            <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
           </div>
           <div className="flex items-center gap-3">
             <a href="#" aria-label="Facebook" className="hover:text-[#E87722]"><Facebook size={14}/></a>
@@ -65,7 +65,7 @@ export default function Header() {
                   {l.mega && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
                 {l.mega && servicesOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[820px] p-6 rounded-xl grid grid-cols-3 gap-3" style={{ background: 'rgba(7,16,42,0.97)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(16px)' }}>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[820px] p-6 rounded-xl grid grid-cols-3 gap-3" style={{ background: 'rgba(15,36,95,0.95)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(20px) saturate(140%)' }}>
                     {categories.map(([slug, cat]) => {
                       const Ic = iconMap[cat.icon] || Server
                       return (
@@ -102,7 +102,7 @@ export default function Header() {
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'rgba(4,10,24,0.98)', backdropFilter: 'blur(20px)' }}>
+        <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: 'rgba(15,36,95,0.98)', backdropFilter: 'blur(20px)' }}>
           <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
             <Logo size={30}/>
             <button onClick={() => setMobileOpen(false)} className="text-white" aria-label="Close menu"><X size={26}/></button>

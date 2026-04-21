@@ -78,7 +78,7 @@ export default function ProductDetailPage({ params }) {
         <ProductDetailClient product={product} categorySlug={params.category}/>
 
         {/* Related products */}
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="mb-10">
               <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Frequently Rented Together</div>

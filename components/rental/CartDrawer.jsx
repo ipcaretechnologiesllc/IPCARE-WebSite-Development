@@ -18,7 +18,7 @@ export default function CartDrawer() {
   return (
     <>
       <div className="fixed inset-0 z-[90] bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)}/>
-      <aside className="fixed top-0 right-0 bottom-0 w-full sm:w-[440px] z-[95] flex flex-col" style={{ background: 'rgba(7,16,42,0.98)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+      <aside className="fixed top-0 right-0 bottom-0 w-full sm:w-[440px] z-[95] flex flex-col" style={{ background: 'rgba(11,26,70,0.98)', backdropFilter: 'blur(20px)', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
         <header className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.15)' }}>

@@ -23,7 +23,7 @@ export const metadata = {
   robots: { index: true, follow: true },
 }
 
-export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#07102a' }
+export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#0F245F' }
 
 export default function RootLayout({ children }) {
   const orgSchema = {
@@ -36,11 +36,11 @@ export default function RootLayout({ children }) {
     description: 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.',
     contactPoint: [
       { '@type': 'ContactPoint', telephone: '+971-2-676-6935', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'AE', availableLanguage: ['English','Arabic'] },
-      { '@type': 'ContactPoint', contactType: 'customer service', areaServed: 'CA', availableLanguage: 'English' },
+      { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'CA', availableLanguage: 'English' },
     ],
     address: [
-      { '@type': 'PostalAddress', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
-      { '@type': 'PostalAddress', addressCountry: 'CA' },
+      { '@type': 'PostalAddress', streetAddress: 'Salaam Street, Behind Fabrix', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
+      { '@type': 'PostalAddress', streetAddress: '1 Concorde Gate', addressLocality: 'North York', addressRegion: 'ON', addressCountry: 'CA' },
     ],
     sameAs: [
       'https://www.facebook.com/ipcaretech',

@@ -59,7 +59,7 @@ export default function AboutClient() {
       </section>
 
       {/* Timeline */}
-      <section className="py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-14 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Journey</div><h2 className="text-white text-3xl md:text-5xl font-bold">From 2003 to 2026</h2></div>
           <div className="overflow-x-auto pb-4">
@@ -133,12 +133,12 @@ export default function AboutClient() {
               <div className="p-6 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="mono text-[#E87722] text-xs uppercase tracking-widest mb-2">UAE HQ</div>
                 <h3 className="text-white text-xl font-bold mb-3">Abu Dhabi</h3>
-                <div className="space-y-2 text-white/80 text-sm"><div>+971 2 676 6935</div><div>info@ipcare.ae</div><div>Sun \u2013 Thu, 9am \u2013 6pm GST</div></div>
+                <div className="space-y-2 text-white/80 text-sm"><div>Salaam Street, Behind Fabrix, P.O. Box 53209</div><div>+971 2 676 6935</div><div>info@ipcare.ae</div><div>Sun \u2013 Thu, 9am \u2013 6pm GST</div></div>
               </div>
               <div className="p-6 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="mono text-[#E87722] text-xs uppercase tracking-widest mb-2">North America</div>
                 <h3 className="text-white text-xl font-bold mb-3">Toronto</h3>
-                <div className="space-y-2 text-white/80 text-sm"><div>+1 416 555 0199</div><div>canada@ipcare.ae</div><div>Mon \u2013 Fri, 9am \u2013 5pm EST</div></div>
+                <div className="space-y-2 text-white/80 text-sm"><div>1 Concorde Gate, North York, ON</div><div>+1 416 786 0782</div><div>info@ipcare.ae</div><div>Mon \u2013 Fri, 9am \u2013 5pm EST</div></div>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function AboutClient() {
       </section>
 
       {/* Leadership */}
-      <section className="py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1300px] mx-auto">
           <div className="text-center mb-12 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Leadership</div><h2 className="text-white text-3xl md:text-5xl font-bold">The Team</h2></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -179,7 +179,7 @@ export default function AboutClient() {
       </section>
 
       {/* Values */}
-      <section className="py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1300px] mx-auto">
           <div className="text-center mb-12 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">What Drives Us</div><h2 className="text-white text-3xl md:text-5xl font-bold">Our Values</h2></div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

@@ -54,7 +54,7 @@ export default function CareersClient() {
         </div>
       </section>
 
-      <section className="py-16 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-16 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1300px] mx-auto">
           <div className="text-center mb-10 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Our Culture</div><h2 className="text-white text-3xl md:text-4xl font-bold">What drives us</h2></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -91,7 +91,7 @@ export default function CareersClient() {
         </div>
       </section>
 
-      <section id="apply" className="py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section id="apply" className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[800px] mx-auto">
           <div className="text-center mb-10 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Apply Now</div><h2 className="text-white text-3xl md:text-4xl font-bold">Send us your application</h2></div>
           {submitted ? (

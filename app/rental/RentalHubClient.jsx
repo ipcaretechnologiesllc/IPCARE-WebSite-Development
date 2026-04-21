@@ -64,7 +64,7 @@ export default function RentalHubClient() {
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12 reveal">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Popular Rentals</div>
@@ -108,7 +108,7 @@ export default function RentalHubClient() {
       </section>
 
       {/* ADVANTAGE STRIP */}
-      <section className="py-16 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+      <section className="py-16 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1300px] mx-auto">
           <div className="text-center mb-10 reveal">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">The IP Care Advantage</div>

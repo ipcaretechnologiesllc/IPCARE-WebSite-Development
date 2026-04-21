@@ -99,7 +99,7 @@ export default function ArticlePage({ params }) {
         </section>
 
         {/* Newsletter */}
-        <section className="py-16 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+        <section className="py-16 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
           <div className="max-w-[800px] mx-auto rounded-2xl p-10 text-center" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Newsletter</div>
             <h2 className="text-white text-2xl md:text-3xl font-bold mb-3">Monthly insights, zero spam.</h2>

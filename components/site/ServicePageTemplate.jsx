@@ -98,7 +98,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
 
       {/* 4. Benefits */}
       {benefits?.length > 0 && (
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(7,16,42,0.45)' }}>
+        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-12 reveal">
               <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Business Benefits</h2>
@@ -185,7 +185,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
 
       {/* 8. FAQ */}
       {faqs?.length > 0 && (
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(7,16,42,0.45)' }}>
+        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
           <div className="max-w-[900px] mx-auto">
             <div className="text-center mb-10 reveal">
               <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Frequently Asked Questions</h2>

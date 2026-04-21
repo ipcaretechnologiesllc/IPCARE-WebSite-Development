@@ -18,7 +18,7 @@ export default function CookieConsent() {
 
   if (!show) return null
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-md z-[120] glass-card p-5" style={{ background: 'rgba(7,16,42,0.97)', border: '1px solid rgba(232,119,34,0.3)' }}>
+    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-md z-[120] glass-card p-5" style={{ background: 'rgba(11,26,70,0.97)', border: '1px solid rgba(232,119,34,0.3)' }}>
       <div className="flex items-start gap-3 mb-3">
         <Icons.Cookie size={22} className="text-[#E87722] flex-shrink-0 mt-0.5"/>
         <div>

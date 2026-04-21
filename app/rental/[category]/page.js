@@ -77,7 +77,7 @@ export default function CategoryPage({ params }) {
         </section>
 
         {/* Related categories */}
-        <section className="py-12 px-6" style={{ background: 'rgba(7,16,42,0.5)' }}>
+        <section className="py-12 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
           <div className="max-w-[1300px] mx-auto text-center">
             <h2 className="text-white text-2xl font-bold mb-6">Explore Other Categories</h2>
             <div className="flex flex-wrap justify-center gap-2">

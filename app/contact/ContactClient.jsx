@@ -77,8 +77,8 @@ export default function ContactClient() {
 
             {/* Office cards */}
             <div className="space-y-5">
-              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" hours="Sun \u2013 Thu, 9am \u2013 6pm GST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.0!2d54.36!3d24.46!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sae"/>
-              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 555 0199" email="canada@ipcare.ae" hours="Mon \u2013 Fri, 9am \u2013 5pm EST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
+              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Sun \u2013 Thu, 9am \u2013 6pm GST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.0!2d54.36!3d24.46!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sae"/>
+              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Mon \u2013 Fri, 9am \u2013 5pm EST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
             </div>
           </div>
         </div>
@@ -91,16 +91,17 @@ const iS = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,2
 const L = ({ children }) => <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">{children}</label>
 function F({ label, v, on, type = 'text' }) { return <div><L>{label}</L><input type={type} value={v} onChange={e => on(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}/></div> }
 
-function OfficeCard({ flag, region, city, phone, email, hours, mapUrl }) {
+function OfficeCard({ flag, region, city, phone, email, address, hours, mapUrl }) {
   return (
     <div className="glass-card overflow-hidden">
       <div className="p-6 md:p-7">
         <div className="flex items-center gap-2 mb-3">{flag}<span className="mono text-[10px] uppercase tracking-widest text-[#E87722]">{region}</span></div>
         <h3 className="text-white text-2xl font-bold mb-4">{city}</h3>
         <div className="space-y-2.5 text-sm text-white/80">
-          <div className="flex items-center gap-2"><Icons.Phone size={14} className="text-[#E87722]"/>{phone}</div>
-          <div className="flex items-center gap-2"><Icons.Mail size={14} className="text-[#E87722]"/>{email}</div>
-          <div className="flex items-center gap-2"><Icons.Clock size={14} className="text-[#E87722]"/>{hours}</div>
+          {address && <div className="flex items-start gap-2"><Icons.MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>{address}</span></div>}
+          <div className="flex items-center gap-2"><Icons.Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>{phone}</span></div>
+          <div className="flex items-center gap-2"><Icons.Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>{email}</span></div>
+          <div className="flex items-center gap-2"><Icons.Clock size={14} className="text-[#E87722] flex-shrink-0"/><span>{hours}</span></div>
         </div>
       </div>
       <div className="relative h-48 overflow-hidden border-t border-white/10" style={{ filter: 'invert(90%) hue-rotate(180deg) contrast(0.9)' }}>
