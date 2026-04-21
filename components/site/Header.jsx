@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, Menu, X, Mail, Facebook, Linkedin, Instagram,
+  ArrowRight, Menu, X, Mail,
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
 } from 'lucide-react'
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { serviceCategories } from '@/lib/services-data'
 import CartButton from '@/components/rental/CartButton'
@@ -53,9 +54,9 @@ export default function Header() {
             <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
           </div>
           <div className="flex items-center gap-3">
-            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#F97316]"><Facebook size={14}/></a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[#F97316]"><Linkedin size={14}/></a>
-            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#F97316]"><Instagram size={14}/></a>
+            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/75 hover:text-white transition-colors"><FaFacebookF size={20}/></a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/75 hover:text-white transition-colors"><FaLinkedinIn size={20}/></a>
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white/75 hover:text-white transition-colors"><FaInstagram size={20}/></a>
           </div>
         </div>
       </div>
@@ -126,9 +127,9 @@ export default function Header() {
             ))}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
             <div className="flex items-center gap-4 mt-6">
-              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0F245F] hover:text-[#F97316]"><Facebook size={22}/></a>
-              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0F245F] hover:text-[#F97316]"><Linkedin size={22}/></a>
-              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0F245F] hover:text-[#F97316]"><Instagram size={22}/></a>
+              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0F245F] hover:text-[#F97316]"><FaFacebookF size={22}/></a>
+              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0F245F] hover:text-[#F97316]"><FaLinkedinIn size={22}/></a>
+              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0F245F] hover:text-[#F97316]"><FaInstagram size={22}/></a>
             </div>
           </ul>
         </div>

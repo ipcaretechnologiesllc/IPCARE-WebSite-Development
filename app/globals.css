@@ -229,5 +229,11 @@ body {
   color: transparent;
 }
 
+.social-icon-footer:hover {
+  background: rgba(232,119,34,0.30) !important;
+  border-color: #E87722 !important;
+  color: #ffffff !important;
+}
+
 /* Stat number */
 .stat-num { color: #E87722; font-weight: 800; font-feature-settings: 'tnum'; }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Facebook, Linkedin, Instagram } from 'lucide-react'
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo from './Logo'
 
 export default function Footer() {
@@ -12,13 +12,30 @@ export default function Footer() {
             <Logo size={56} variant="white"/>
             <p className="text-white/70 text-sm leading-relaxed mt-5">Enterprise IT solutions, cybersecurity advisory, event infrastructure and equipment rental — trusted since 2003.</p>
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex items-center mt-6" style={{ gap: '12px' }}>
               {[
-                { Ic: Facebook, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook' },
-                { Ic: Linkedin, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn' },
-                { Ic: Instagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram' },
+                { Ic: FaFacebookF, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook' },
+                { Ic: FaLinkedinIn, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn' },
+                { Ic: FaInstagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram' },
               ].map(({ Ic, href, label }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E87722] transition-all" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }}><Ic size={15}/></a>
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="social-icon-footer inline-flex items-center justify-center text-white transition-all"
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    background: 'rgba(255,255,255,0.10)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                  }}
+                >
+                  <Ic size={20}/>
+                </a>
               ))}
             </div>
           </div>
