@@ -295,7 +295,7 @@ function EventsPortfolio() {
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="#contact" className="btn-ghost">View Full Portfolio <ArrowRight size={16}/></a>
+          <a href="/event-it/portfolio" className="btn-ghost">View Full Portfolio <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
