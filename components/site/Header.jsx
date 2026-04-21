@@ -25,12 +25,13 @@ export default function Header() {
 
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/#about' },
+    { label: 'About', href: '/about' },
     { label: 'Services', href: '/services', mega: true },
     { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
     { label: 'Event IT', href: '/event-it' },
     { label: 'Rental Hub', href: '/rental' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   const categories = Object.entries(serviceCategories)
@@ -88,7 +89,7 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center gap-3">
             <CartButton />
-            <Link href="/#contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
+            <Link href="/contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-3">
@@ -110,7 +111,7 @@ export default function Header() {
             {navLinks.map((l) => (
               <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-white text-2xl font-semibold hover:text-[#E87722]">{l.label}</Link></li>
             ))}
-            <Link href="/#contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
+            <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
           </ul>
         </div>
       )}

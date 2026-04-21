@@ -40,9 +40,10 @@ export async function POST(request, { params }) {
   const path = (params?.path || []).join('/')
   try {
     const body = await request.json().catch(() => ({}))
-    if (path === 'contact' || path === 'quote' || path === 'rental/quote') {
+    if (path === 'contact' || path === 'quote' || path === 'rental/quote' || path === 'careers/apply' || path === 'newsletter') {
       const db = await getDb()
-      const type = path === 'rental/quote' ? 'rental-quote' : path
+      const typeMap = { 'rental/quote': 'rental-quote', 'careers/apply': 'career-application', 'newsletter': 'newsletter' }
+      const type = typeMap[path] || path
       const doc = {
         id: uuidv4(),
         type,

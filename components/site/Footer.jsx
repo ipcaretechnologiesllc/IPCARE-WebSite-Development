@@ -45,21 +45,23 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2.5 text-white/60 text-sm">
-              <li><Link href="/#about" className="hover:text-[#E87722]">About</Link></li>
-              <li><Link href="/#blog" className="hover:text-[#E87722]">Blog</Link></li>
+              <li><Link href="/about" className="hover:text-[#E87722]">About</Link></li>
+              <li><Link href="/blog" className="hover:text-[#E87722]">Blog</Link></li>
+              <li><Link href="/careers" className="hover:text-[#E87722]">Careers</Link></li>
+              <li><Link href="/partners" className="hover:text-[#E87722]">Partners</Link></li>
               <li><Link href="/services" className="hover:text-[#E87722]">All Services</Link></li>
-              <li><Link href="/#contact" className="hover:text-[#E87722]">Contact</Link></li>
-              <li><Link href="#" className="hover:text-[#E87722]">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-[#E87722]">Terms of Service</Link></li>
+              <li><Link href="/contact" className="hover:text-[#E87722]">Contact</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-[#E87722]">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-[#E87722]">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
         <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 text-white/50 text-xs">
           <div>© {new Date().getFullYear()} IP Care Technologies L.L.C. All rights reserved.</div>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">Cookies</a>
+            <Link href="/privacy-policy" className="hover:text-white">Privacy</Link>
+            <Link href="/terms" className="hover:text-white">Terms</Link>
+            <Link href="/cookie-policy" className="hover:text-white">Cookies</Link>
           </div>
         </div>
       </div>
