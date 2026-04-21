@@ -22,21 +22,21 @@ function useReveal() {
 }
 
 // Advisor avatar (stylized SVG since we don't have a photo)
-const AdvisorAvatar = () => (
+const AdvisorAvatar = ({ initials = "AB" }) => (
   <div className="relative w-32 h-32 md:w-36 md:h-36 mx-auto md:mx-0 flex-shrink-0">
     <div className="absolute inset-0 rounded-full orange-glow"/>
     <div className="absolute inset-1.5 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1a2847 0%, #0a1028 100%)' }}>
       <svg viewBox="0 0 128 128" className="w-full h-full">
         <defs>
-          <radialGradient id="av-bg" cx="50%" cy="40%" r="60%">
+          <radialGradient id={`av-bg-${initials}`} cx="50%" cy="40%" r="60%">
             <stop offset="0%" stopColor="#1B6CA8" stopOpacity="0.6"/>
             <stop offset="100%" stopColor="#0a1028" stopOpacity="0"/>
           </radialGradient>
         </defs>
-        <rect width="128" height="128" fill="url(#av-bg)"/>
+        <rect width="128" height="128" fill={`url(#av-bg-${initials})`}/>
         <circle cx="64" cy="50" r="20" fill="#E87722" opacity="0.9"/>
         <path d="M24 120 Q24 80 64 80 Q104 80 104 120 Z" fill="#E87722" opacity="0.9"/>
-        <text x="64" y="58" textAnchor="middle" fontSize="22" fontWeight="700" fill="#ffffff" fontFamily="Inter">AB</text>
+        <text x="64" y="58" textAnchor="middle" fontSize="22" fontWeight="700" fill="#ffffff" fontFamily="Inter">{initials}</text>
       </svg>
     </div>
   </div>
@@ -65,28 +65,74 @@ function Hero() {
           </p>
         </div>
 
-        {/* Advisor profile card */}
-        <div className="glass-premium p-8 md:p-10 max-w-[1000px] mx-auto reveal">
-          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            <AdvisorAvatar/>
-            <div className="flex-1 text-center md:text-left">
-              <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Lead Advisor</div>
-              <h2 className="text-white text-3xl md:text-4xl font-bold tracking-tight">{advisor.name}</h2>
-              <div className="text-white/70 text-base md:text-lg mt-1">{advisor.title}</div>
-              <p className="body-text text-sm md:text-base mt-4 leading-relaxed">{advisor.bio}</p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-5">
-                {advisor.credentials.map((c) => (
-                  <span key={c.label} className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>{c.label}</span>
-                ))}
+        {/* Advisor profile cards */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-[1200px] mx-auto reveal">
+          {/* Attique Bhatti Card */}
+          <div className="glass-premium p-8">
+            <div className="flex flex-col gap-6 items-center text-center">
+              <AdvisorAvatar initials="AB"/>
+              <div className="flex-1">
+                <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Lead Advisor</div>
+                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">{advisor.name}</h2>
+                <div className="text-white/70 text-base mt-1">{advisor.title}</div>
+                <p className="body-text text-sm mt-4 leading-relaxed">{advisor.bio}</p>
+                <div className="flex flex-wrap justify-center gap-2 mt-5">
+                  {advisor.credentials.map((c) => (
+                    <span key={c.label} className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>{c.label}</span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+                  {advisor.certifications.map((c) => (
+                    <span key={c} className="mono text-[11px] px-2 py-0.5 rounded text-white/60" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>{c}</span>
+                  ))}
+                </div>
+                <div className="mt-6 flex flex-col gap-2">
+                  <Link href="/#contact" className="btn-primary text-sm">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
+                  <a href="https://thecyberadviser.com" target="_blank" rel="noopener" className="btn-ghost text-sm">Visit thecyberadviser.com <Icons.ExternalLink size={12}/></a>
+                </div>
               </div>
-              <div className="flex flex-wrap justify-center md:justify-start gap-1.5 mt-3">
-                {advisor.certifications.map((c) => (
-                  <span key={c} className="mono text-[11px] px-2 py-0.5 rounded text-white/60" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>{c}</span>
-                ))}
-              </div>
-              <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                <Link href="/#contact" className="btn-primary">Schedule Consultation <Icons.ArrowRight size={16}/></Link>
-                <a href="https://thecyberadviser.com" target="_blank" rel="noopener" className="btn-ghost">Visit thecyberadviser.com <Icons.ExternalLink size={14}/></a>
+            </div>
+          </div>
+
+          {/* Tanveer Bhatti Card */}
+          <div className="glass-premium p-8">
+            <div className="flex flex-col gap-6 items-center text-center">
+              <AdvisorAvatar initials="TB"/>
+              <div className="flex-1">
+                <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Network Security Consultant</div>
+                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">Tanveer Bhatti</h2>
+                <div className="text-white/70 text-base mt-1">Independent Network Security Consultant</div>
+                <div className="text-[#E87722] text-sm">Prisma Access & SASE Specialist</div>
+                <div className="text-white/60 text-xs mt-1">Milton, Ontario, Canada</div>
+                <p className="body-text text-sm mt-4 leading-relaxed">With over 25 years of experience in network security and enterprise IT, Tanveer Bhatti is a CCIE-certified independent network security consultant specialising in Palo Alto Networks Prisma Access and SASE architecture. He brings deep hands-on expertise in Zero Trust Network Access, CASB, DLP, Secure Web Gateway, Remote Browser Isolation, and SD-WAN transformation — delivering complex enterprise security programmes across Canada and globally.</p>
+                
+                {/* Credential badges */}
+                <div className="flex flex-wrap justify-center gap-2 mt-5">
+                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>25+ Years Experience</span>
+                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>CCIE Certified</span>
+                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>Prisma Access SME</span>
+                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>PAN OS Expert</span>
+                </div>
+
+                {/* Specialisation badges - orange */}
+                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+                  {['SASE', 'ZTNA', 'CASB', 'DLP', 'SWG', 'RBI', 'PAB', 'Prisma Access', 'Prisma SD-WAN', 'PAN OS'].map((s) => (
+                    <span key={s} className="px-2.5 py-1 rounded-full text-xs font-semibold" style={{ background: 'rgba(232,119,34,0.15)', border: '1px solid rgba(232,119,34,0.40)', color: '#E87722' }}>{s}</span>
+                  ))}
+                </div>
+
+                {/* Certification badges - blue */}
+                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+                  {['PCNSE', 'PCCSA', 'Prisma Access SASE', 'CNSS', 'Palo Alto Certified Network Security Consultant', 'AlgoSec AppViz', 'AlgoSec ASMS'].map((c) => (
+                    <span key={c} className="mono text-[11px] px-2 py-0.5 rounded font-medium" style={{ background: 'rgba(27,108,168,0.20)', border: '1px solid rgba(27,108,168,0.40)', color: '#1B6CA8' }}>{c}</span>
+                  ))}
+                </div>
+
+                <div className="mt-6">
+                  <a href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/" target="_blank" rel="noopener" className="btn-ghost text-sm inline-flex items-center gap-2">
+                    <Icons.Linkedin size={16}/> Connect on LinkedIn <Icons.ExternalLink size={12}/>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -361,7 +407,7 @@ function BottomCTA() {
 export default function AdvisoryClient() {
   useReveal()
   return (
-    <main className="bg-premium-dark">
+    <main style={{ background: 'radial-gradient(ellipse at 50% 15%, #162347 0%, #0d1b3d 35%, #07102a 65%, #040a18 100%)' }}>
       <Hero />
       <Platforms />
       <ServicesGrid />
