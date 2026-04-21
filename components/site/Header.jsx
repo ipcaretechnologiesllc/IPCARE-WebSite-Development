@@ -74,7 +74,14 @@ export default function Header() {
           <ul className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((l) => (
               <li key={l.label} className="relative" onMouseEnter={() => l.mega && setServicesOpen(true)} onMouseLeave={() => l.mega && setServicesOpen(false)}>
-                <Link href={l.href} className="px-3.5 py-2 text-[14px] font-medium text-[#0F245F] hover:text-[#F97316] transition-colors flex items-center gap-1">
+                <Link 
+                  href={l.href} 
+                  className={`px-3.5 py-2 text-[14px] font-medium transition-colors flex items-center gap-1 ${
+                    l.label === 'Cyber Advisory' 
+                      ? 'text-[#F97316] hover:text-[#E87722] font-semibold' 
+                      : 'text-[#0F245F] hover:text-[#F97316]'
+                  }`}
+                >
                   {l.label}
                   {l.mega && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
