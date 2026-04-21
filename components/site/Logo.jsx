@@ -1,17 +1,17 @@
-import { Shield, ShieldCheck } from 'lucide-react'
+const LOGO_URL = 'https://customer-assets.emergentagent.com/job_ipcare-enterprise/artifacts/4c6j1azv_ipcare%20logo.png.png'
 
-export default function Logo({ size = 30 }) {
+export default function Logo({ size = 36, variant = 'white' }) {
+  // variant 'white' = forced white on dark bg via CSS filter; 'color' = original artwork
+  const filterStyle = variant === 'white'
+    ? { filter: 'brightness(0) invert(1)' }
+    : {}
   return (
-    <div className="flex items-center gap-2.5">
-      <div className="relative" style={{ width: size, height: size }}>
-        <Shield className="text-[#E87722]" style={{ width: size, height: size }} strokeWidth={2} />
-        <ShieldCheck className="absolute inset-0 text-white" style={{ width: size, height: size, padding: size * 0.22 }} strokeWidth={2.4} />
-      </div>
-      <div className="leading-none">
-        <div className="text-white font-bold tracking-tight text-[15px]">IP Care</div>
-        <div className="text-[10px] tracking-[0.18em] text-white/60 uppercase">Technologies</div>
-      </div>
-    </div>
+    <img
+      src={LOGO_URL}
+      alt="IP Care Technologies"
+      style={{ height: size, width: 'auto', ...filterStyle }}
+      className="object-contain"
+    />
   )
 }
 
