@@ -5,13 +5,14 @@ import Footer from '@/components/site/Footer'
 import { serviceCategories } from '@/lib/services-data'
 
 export const metadata = {
-  title: 'Enterprise IT Services UAE — Managed IT, Cybersecurity, Cloud | IP Care Technologies',
-  description: 'Full portfolio of enterprise IT services in UAE & Canada: managed IT, cybersecurity, ELV, cloud, infrastructure, web, digital marketing and email.',
+  title: 'Enterprise IT Solutions & Services — UAE & Canada | IP Care Technologies',
+  description: 'Comprehensive IT services in UAE and Canada. IT consulting, infrastructure, ELV, managed IT, cloud, cybersecurity, web development, digital marketing and email solutions.',
   alternates: { canonical: '/services' },
   openGraph: {
-    title: 'Enterprise IT Services UAE — IP Care Technologies',
-    description: 'Managed IT, cybersecurity, ELV, cloud, infrastructure and more across UAE & Canada.',
+    title: 'Enterprise IT Solutions & Services — UAE & Canada | IP Care Technologies',
+    description: 'Comprehensive IT services in UAE and Canada. IT consulting, infrastructure, ELV, managed IT, cloud, cybersecurity, web development, digital marketing and email solutions.',
     url: '/services',
+    type: 'website',
   },
 }
 
@@ -22,10 +23,30 @@ const Ic = ({ name, ...rest }) => {
 
 export default function ServicesHub() {
   const cats = Object.entries(serviceCategories)
+  
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: process.env.NEXT_PUBLIC_BASE_URL + '/services' },
+    ],
+  }
+  
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Header />
       <main>
+        {/* Breadcrumb */}
+        <div className="max-w-[1400px] mx-auto px-6 pt-6">
+          <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-white">Home</Link>
+            <Icons.ChevronRight size={12}/>
+            <span className="text-white/80">Services</span>
+          </nav>
+        </div>
+
         <section className="relative py-20 md:py-28 px-6">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
@@ -35,8 +56,8 @@ export default function ServicesHub() {
               <Icons.Sparkles size={14} className="text-[#E87722]"/>
               <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">Our Services</span>
             </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Enterprise IT Solutions &amp; Services — UAE &amp; Canada</h1>
-            <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">Nine service pillars, one accountable partner. Explore the full IP Care portfolio below.</p>
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Enterprise IT Solutions & Services — UAE & Canada</h1>
+            <p className="body-text mt-6 text-base md:text-lg max-w-3xl mx-auto">From strategy to implementation to 24×7 operations — IP Care delivers the complete IT stack for enterprise, government and fast-growth organisations across the UAE and Canada.</p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/contact" className="btn-primary">Get a Free Consultation <Icons.ArrowRight size={16}/></Link>
               <Link href="/about" className="btn-ghost">About IP Care</Link>
@@ -48,26 +69,41 @@ export default function ServicesHub() {
           <div className="max-w-[1400px] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {cats.map(([slug, c]) => (
-                <Link key={slug} href={`/services/${slug}`} className="glass-card p-7 block group">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
-                    <Ic name={c.icon} size={26} className="text-[#E87722]"/>
-                  </div>
-                  <h2 className="text-white text-xl font-semibold mb-2">{c.name}</h2>
-                  <p className="body-text text-sm mb-4 leading-relaxed">{c.short}</p>
-                  {c.subpages && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {Object.entries(c.subpages).slice(0, 3).map(([s, sub]) => (
-                        <span key={s} className="text-[11px] px-2 py-1 rounded-full" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
-                          {sub.h1?.replace(' in UAE','').replace(' Services','').slice(0,28)}
-                        </span>
-                      ))}
-                      {Object.keys(c.subpages).length > 3 && (
-                        <span className="text-[11px] px-2 py-1 text-white/50">+{Object.keys(c.subpages).length - 3} more</span>
-                      )}
+                <div key={slug} className="glass-card p-7 group">
+                  <Link href={`/services/${slug}`}>
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
+                      <Ic name={c.icon} size={26} className="text-[#E87722]"/>
+                    </div>
+                    <h2 className="text-white text-xl font-semibold mb-2 group-hover:text-[#E87722] transition-colors">{c.name}</h2>
+                    <p className="body-text text-sm mb-4 leading-relaxed">{c.short}</p>
+                  </Link>
+                  
+                  {/* Sub-services list */}
+                  {c.subpages && Object.keys(c.subpages).length > 0 && (
+                    <div className="mt-5 pt-5 border-t border-white/10">
+                      <ul className="space-y-2">
+                        {Object.entries(c.subpages).slice(0, 5).map(([subSlug, sub]) => (
+                          <li key={subSlug}>
+                            <Link 
+                              href={`/services/${slug}/${subSlug}`} 
+                              className="flex items-start gap-2 text-white/70 text-xs hover:text-[#E87722] transition-colors"
+                            >
+                              <Icons.ArrowRight size={12} className="text-[#E87722] mt-0.5 flex-shrink-0"/>
+                              <span className="leading-relaxed">{sub.h1}</span>
+                            </Link>
+                          </li>
+                        ))}
+                        {Object.keys(c.subpages).length > 5 && (
+                          <li className="text-xs text-white/50 mt-2 pl-5">+ {Object.keys(c.subpages).length - 5} more services...</li>
+                        )}
+                      </ul>
                     </div>
                   )}
-                  <span className="inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm group-hover:gap-2.5 transition-all">Explore <Icons.ArrowRight size={14}/></span>
-                </Link>
+                  
+                  <Link href={`/services/${slug}`} className="mt-6 inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm group-hover:gap-2.5 transition-all">
+                    View All {c.name} <Icons.ArrowRight size={14}/>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>

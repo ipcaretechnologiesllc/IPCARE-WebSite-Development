@@ -79,21 +79,39 @@ export default function Header() {
                   {l.mega && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
                 {l.mega && servicesOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[820px] p-6 rounded-xl grid grid-cols-3 gap-3" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)' }}>
-                    {categories.map(([slug, cat]) => {
-                      const Ic = iconMap[cat.icon] || Server
-                      return (
-                        <Link key={slug} href={`/services/${slug}`} className="flex gap-3 p-3 rounded-lg hover:bg-[#F97316]/8 transition-colors">
-                          <Ic className="text-[#F97316] mt-0.5 flex-shrink-0" size={20}/>
-                          <div>
-                            <div className="text-[#0F245F] text-[13.5px] font-semibold">{cat.name}</div>
-                            <div className="text-[#0F245F]/65 text-[12px]">{cat.short}</div>
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[1100px] p-7 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(15,36,95,0.1)', boxShadow: '0 20px 50px -15px rgba(8,20,52,0.25)', maxHeight: '85vh', overflowY: 'auto' }}>
+                    <div className="grid grid-cols-3 gap-6">
+                      {categories.map(([slug, cat]) => {
+                        const Ic = iconMap[cat.icon] || Server
+                        return (
+                          <div key={slug} className="space-y-2">
+                            <Link href={`/services/${slug}`} className="flex gap-2.5 p-2.5 rounded-lg hover:bg-[#F97316]/8 transition-colors group">
+                              <Ic className="text-[#F97316] mt-0.5 flex-shrink-0" size={18}/>
+                              <div>
+                                <div className="text-[#0F245F] text-[13.5px] font-bold group-hover:text-[#F97316] transition-colors">{cat.name}</div>
+                                <div className="text-[#0F245F]/60 text-[11.5px]">{cat.short}</div>
+                              </div>
+                            </Link>
+                            {cat.subpages && Object.keys(cat.subpages).length > 0 && (
+                              <ul className="ml-7 space-y-1.5 border-l border-[#F97316]/20 pl-3">
+                                {Object.entries(cat.subpages).map(([subSlug, sub]) => (
+                                  <li key={subSlug}>
+                                    <Link 
+                                      href={`/services/${slug}/${subSlug}`} 
+                                      className="text-[#0F245F]/70 text-[12px] hover:text-[#F97316] hover:underline transition-colors block"
+                                    >
+                                      {sub.h1}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
-                        </Link>
-                      )
-                    })}
-                    <Link href="/services" className="flex gap-3 p-3 rounded-lg hover:bg-[#F97316]/10 col-span-3 text-center justify-center items-center border border-[#F97316]/30 mt-2">
-                      <span className="text-[#F97316] font-semibold text-sm">View all services <ArrowRight size={14} className="inline"/></span>
+                        )
+                      })}
+                    </div>
+                    <Link href="/services" className="flex gap-2 p-3 rounded-lg hover:bg-[#F97316]/10 text-center justify-center items-center border border-[#F97316]/30 mt-5">
+                      <span className="text-[#F97316] font-semibold text-sm">View All Services <ArrowRight size={14} className="inline"/></span>
                     </Link>
                   </div>
                 )}
