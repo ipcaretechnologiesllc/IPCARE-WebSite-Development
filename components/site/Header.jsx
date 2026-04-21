@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { serviceCategories } from '@/lib/services-data'
+import CartButton from '@/components/rental/CartButton'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
@@ -28,7 +29,7 @@ export default function Header() {
     { label: 'Services', href: '/services', mega: true },
     { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
     { label: 'Event IT', href: '/event-it' },
-    { label: 'Rental Hub', href: '/#rental' },
+    { label: 'Rental Hub', href: '/rental' },
     { label: 'Contact', href: '/#contact' },
   ]
 
@@ -85,13 +86,17 @@ export default function Header() {
             ))}
           </ul>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <CartButton />
             <Link href="/#contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
           </div>
 
-          <button className="lg:hidden text-white" onClick={() => setMobileOpen(true)} aria-label="Open menu">
-            <Menu size={26} />
-          </button>
+          <div className="lg:hidden flex items-center gap-3">
+            <CartButton />
+            <button className="text-white" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+              <Menu size={26} />
+            </button>
+          </div>
         </div>
       </nav>
 

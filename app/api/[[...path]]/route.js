@@ -24,6 +24,15 @@ export async function GET(request, { params }) {
   if (path === '' || path === 'health') {
     return NextResponse.json({ status: 'ok', service: 'IP Care Technologies API', time: new Date().toISOString() }, { headers: cors })
   }
+  if (path === 'rental/quotes') {
+    try {
+      const db = await getDb()
+      const docs = await db.collection('leads').find({ type: { $in: ['rental-quote', 'quote', 'contact'] } }).sort({ createdAt: -1 }).limit(100).toArray()
+      return NextResponse.json({ count: docs.length, leads: docs.map(d => ({ ...d, _id: undefined })) }, { headers: cors })
+    } catch (e) {
+      return NextResponse.json({ error: e.message }, { status: 500, headers: cors })
+    }
+  }
   return NextResponse.json({ error: 'Not found' }, { status: 404, headers: cors })
 }
 
@@ -31,11 +40,18 @@ export async function POST(request, { params }) {
   const path = (params?.path || []).join('/')
   try {
     const body = await request.json().catch(() => ({}))
-    if (path === 'contact' || path === 'quote') {
+    if (path === 'contact' || path === 'quote' || path === 'rental/quote') {
       const db = await getDb()
-      const doc = { id: uuidv4(), type: path, ...body, createdAt: new Date().toISOString() }
+      const type = path === 'rental/quote' ? 'rental-quote' : path
+      const doc = {
+        id: uuidv4(),
+        type,
+        ...body,
+        createdAt: new Date().toISOString(),
+        source: body.source || 'website',
+      }
       await db.collection('leads').insertOne(doc)
-      return NextResponse.json({ ok: true, id: doc.id }, { headers: cors })
+      return NextResponse.json({ ok: true, id: doc.id, reference: `IPC-${Date.now().toString().slice(-8)}` }, { headers: cors })
     }
     return NextResponse.json({ error: 'Not found' }, { status: 404, headers: cors })
   } catch (e) {

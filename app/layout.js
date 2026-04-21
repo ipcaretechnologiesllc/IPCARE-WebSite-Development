@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import RentalShell from '@/components/rental/RentalShell'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
 
@@ -50,7 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-        {children}
+        <RentalShell>{children}</RentalShell>
       </body>
     </html>
   )
