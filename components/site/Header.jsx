@@ -75,10 +75,8 @@ export default function Header() {
         style={{ background: '#ffffff', borderBottom: '1px solid rgba(15,36,95,0.08)' }}
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          <Link href="/" aria-label="IP Care Technologies home" className="flex items-center">
-            <Logo size={160} className="hidden md:block" />
-            <Logo size={120} className="hidden sm:block md:hidden" />
-            <Logo size={100} className="block sm:hidden" />
+          <Link href="/" aria-label="IP Care Technologies home" className="flex items-center overflow-hidden">
+            <Logo size={40} />
           </Link>
 
           <ul className="hidden lg:flex items-center gap-0.5">
@@ -185,8 +183,8 @@ export default function Header() {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: '#ffffff' }}>
-          <div className="flex items-center justify-between px-6 h-[72px] border-b" style={{ borderColor: 'rgba(15,36,95,0.1)' }}>
-            <Logo size={100}/>
+          <div className="flex items-center justify-between px-6 h-[72px] border-b overflow-hidden" style={{ borderColor: 'rgba(15,36,95,0.1)' }}>
+            <Logo size={40}/>
             <button onClick={() => setMobileOpen(false)} className="text-[#0F245F]" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">
