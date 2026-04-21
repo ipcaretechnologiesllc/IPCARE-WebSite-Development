@@ -89,12 +89,17 @@ function RotatingHeadline() {
     <>
       <h1
         aria-live="polite"
-        className="text-white font-bold tracking-tight leading-[1.04] text-[44px] sm:text-[60px] md:text-[76px] lg:text-[88px] transition-opacity duration-500"
-        style={{ opacity: visible ? 1 : 0 }}
+        className="font-extrabold tracking-tight leading-[1.1] transition-opacity duration-500"
+        style={{
+          opacity: visible ? 1 : 0,
+          fontSize: 'clamp(36px, 5vw, 56px)',
+          fontWeight: 800,
+          color: '#FFFFFF',
+        }}
       >
-        <span>{h.main}</span>
+        <span style={{ color: '#FFFFFF' }}>{h.main}</span>
         <br/>
-        <span className="orange-gradient-text">{h.accent}</span>
+        <span style={{ color: '#E87722' }}>{h.accent}</span>
       </h1>
 
       {/* Dot indicators */}
@@ -228,7 +233,7 @@ function Stats() {
     { end: 500, suffix: '+', label: 'Projects Delivered', icon: CheckCircle2 },
     { end: 200, suffix: '+', label: 'Enterprise Clients', icon: Users },
     { end: 99, suffix: '.9%', label: 'Uptime SLA', icon: Activity },
-    { end: 24, suffix: '/7', label: 'Global Support', icon: Headphones },
+    { end: 24, suffix: '/7', label: 'Support', icon: Headphones },
   ]
   return (
     <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
