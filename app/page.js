@@ -54,7 +54,7 @@ function Counter({ end, suffix = '', duration = 1600 }) {
 /* ---------------- Hero (wide, no back card) ---------------- */
 function Hero() {
   return (
-    <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20 md:py-24">
+    <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20 md:py-24 overflow-hidden">
       {/* subtle ambient orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-35" style={{ background: 'radial-gradient(circle, #3B7BFF 0%, transparent 70%)' }}/>
@@ -104,7 +104,7 @@ function Hero() {
 function TrustMarquee() {
   const logos = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY', 'FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
   return (
-    <section className="relative py-10 border-y border-white/10" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+    <section className="relative py-10 border-y border-white/10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto px-6 text-center">
         <h3 className="text-white/85 text-sm md:text-base uppercase tracking-[0.22em] mb-6">Trusted by the World's Biggest Events</h3>
       </div>
