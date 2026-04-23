@@ -10,9 +10,9 @@ export default function FloatingCartButton() {
     <button
       onClick={() => setOpen(true)}
       aria-label={`Open quote cart, ${count} item${count === 1 ? '' : 's'}`}
-      className="group fixed transition-all"
+      className="group fixed transition-all floating-btn"
       style={{
-        bottom: '24px',
+        bottom: 'calc(24px + var(--cookie-offset, 0px))',
         right: '24px',
         zIndex: 9999,
         width: '56px',

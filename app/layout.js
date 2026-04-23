@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import RentalShell from '@/components/rental/RentalShell'
-import CookieConsent from '@/components/site/CookieConsent'
+import CookieBanner from '@/components/global/CookieBanner'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
 
@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <RentalShell>{children}</RentalShell>
-        <CookieConsent />
+        <CookieBanner />
       </body>
     </html>
   )

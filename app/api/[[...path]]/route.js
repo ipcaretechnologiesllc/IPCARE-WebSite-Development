@@ -40,6 +40,62 @@ export async function POST(request, { params }) {
   const path = (params?.path || []).join('/')
   try {
     const body = await request.json().catch(() => ({}))
+
+    if (path === 'newsletter/subscribe') {
+      const email = (body.email || '').toString().trim().toLowerCase()
+      const source = (body.source || 'website').toString()
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        return NextResponse.json({ error: 'Invalid email' }, { status: 400, headers: cors })
+      }
+      const db = await getDb()
+      const coll = db.collection('newsletter_subscribers')
+      const existing = await coll.findOne({ email })
+      if (existing) {
+        // Idempotent: return success but don't resend welcome
+        return NextResponse.json({ success: true, duplicate: true }, { headers: cors })
+      }
+      const randomToken = Array.from({ length: 32 }, () => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.charAt(Math.floor(Math.random() * 62))).join('')
+      const userAgent = request.headers.get('user-agent') || ''
+      const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || ''
+      const doc = {
+        id: uuidv4(),
+        email,
+        source,
+        subscribedAt: new Date().toISOString(),
+        ipAddress,
+        userAgent,
+        unsubscribeToken: randomToken,
+      }
+      await coll.insertOne(doc)
+
+      // Send welcome email via SendGrid if configured (otherwise skip silently — MOCKED)
+      if (process.env.SENDGRID_API_KEY) {
+        try {
+          const unsubLink = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'}/unsubscribe?token=${randomToken}`
+          const htmlBody = `<div style="font-family: Arial, sans-serif; color: #0F245F; max-width: 560px; margin: 0 auto;"><h2 style="color:#E87722;">Welcome to the IP Care Knowledge Base</h2><p>Thanks for subscribing. Once a month we'll send you our best articles on cybersecurity, cloud infrastructure and enterprise IT — straight from our engineers.</p><p>No spam. No promotions. Just insights.</p><p style="color:#666; font-size:13px; margin-top:28px;">If you didn't subscribe, you can <a href="${unsubLink}">unsubscribe here</a>.</p><p style="color:#666; font-size:13px;">— The IP Care Technologies Team</p></div>`
+          await fetch('https://api.sendgrid.com/v3/mail/send', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              personalizations: [{ to: [{ email }] }],
+              from: { email: 'newsletter@ipcare.ae', name: 'IP Care Technologies' },
+              subject: 'Welcome to the IP Care Knowledge Base',
+              content: [{ type: 'text/html', value: htmlBody }],
+            }),
+          })
+        } catch (emailErr) {
+          console.error('[newsletter/subscribe] SendGrid error:', emailErr.message)
+        }
+      } else {
+        console.log('[newsletter/subscribe] MOCKED email (set SENDGRID_API_KEY to enable) — subscribed:', email)
+      }
+
+      return NextResponse.json({ success: true }, { headers: cors })
+    }
+
     if (path === 'contact' || path === 'quote' || path === 'rental/quote' || path === 'careers/apply' || path === 'newsletter') {
       const db = await getDb()
       const typeMap = { 'rental/quote': 'rental-quote', 'careers/apply': 'career-application', 'newsletter': 'newsletter' }
