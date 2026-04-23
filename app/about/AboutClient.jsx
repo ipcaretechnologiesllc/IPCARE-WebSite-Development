@@ -34,15 +34,15 @@ export default function AboutClient() {
       </section>
 
       {/* Company Story */}
-      <section className="py-20 px-6">
+      <section className="px-6" style={{ background: '#FFFFFF', paddingTop: '100px', paddingBottom: '80px' }}>
         <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="reveal">
-            <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Our Story</div>
-            <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight mb-6">Powering Business Since 2003</h2>
-            <div className="space-y-5 body-text text-base md:text-lg leading-relaxed">
-              <p>IP Care Technologies L.L.C. was founded in Abu Dhabi in 2003 with a simple mission: deliver enterprise IT the right way \u2014 competent, honest, on time.</p>
+            <div className="mono text-xs uppercase mb-3" style={{ color: '#E87722', letterSpacing: '2px' }}>Our Story</div>
+            <h2 className="text-3xl md:text-5xl leading-tight mb-6" style={{ color: '#0D2B55', fontWeight: 700 }}>Powering Business Since 2003</h2>
+            <div className="space-y-5 text-base md:text-lg leading-relaxed" style={{ color: '#333F50' }}>
+              <p>IP Care Technologies L.L.C. was founded in Abu Dhabi in 2003 with a simple mission: deliver enterprise IT the right way — competent, honest, on time.</p>
               <p>Over two decades we have built deep expertise across managed IT, cybersecurity, event infrastructure, ELV and equipment rental. Our UAE headquarters and Canadian operations deliver 24&times;7 support to enterprise and government clients worldwide.</p>
-              <p>Today we are certified partners of Microsoft, HPE, Palo Alto Networks, Cisco, Fortinet and more \u2014 with a team of engineers, architects and advisors who take pride in craft.</p>
+              <p>Today we are certified partners of Microsoft, HPE, Palo Alto Networks, Cisco, Fortinet and more — with a team of engineers, architects and advisors who take pride in craft.</p>
             </div>
           </div>
           <div className="reveal">
@@ -86,7 +86,7 @@ export default function AboutClient() {
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: 'rgba(232,119,34,0.15)' }}><Icons.Target size={22} className="text-[#E87722]"/></div>
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.2em] mb-2">Mission</div>
             <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 leading-tight">Enable business through better technology.</h3>
-            <p className="body-text leading-relaxed">We design, deploy and operate mission-critical IT so our clients can focus on what they do best \u2014 running and growing their business.</p>
+            <p className="body-text leading-relaxed">We design, deploy and operate mission-critical IT so our clients can focus on what they do best — running and growing their business.</p>
           </div>
           <div className="glass-card p-10 reveal" style={{ transitionDelay: '100ms' }}>
             <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: 'rgba(232,119,34,0.15)' }}><Icons.Eye size={22} className="text-[#E87722]"/></div>
@@ -101,11 +101,14 @@ export default function AboutClient() {
       <section className="py-20 px-6" style={{ background: '#FFFFFF' }}>
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-12 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">By the Numbers</div><h2 className="text-[32px] md:text-5xl font-bold" style={{ color: '#0D2B55' }}>Two Decades of Delivery</h2></div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[{n:'20+',l:'Years'},{n:'500+',l:'Projects'},{n:'200+',l:'Clients'},{n:'99.9%',l:'Uptime'},{n:'24/7',l:'Support'}].map((s,i)=>(
-              <div key={s.l} className="p-6 text-center reveal" style={{ background: '#F7F9FC', borderRadius: '12px', transitionDelay: `${i*60}ms` }}>
-                <div className="text-4xl md:text-5xl font-bold" style={{ color: '#0D2B55' }}>{s.n}</div>
-                <div className="text-xs md:text-sm mono uppercase tracking-wider mt-2" style={{ color: '#333F50' }}>{s.l}</div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-0">
+            {[{n:'20+',l:'Years'},{n:'500+',l:'Projects'},{n:'200+',l:'Clients'},{n:'99.9%',l:'Uptime'},{n:'24/7',l:'Support'}].map((s,i,arr)=>(
+              <div key={s.l} className="relative px-4 py-6 text-center reveal flex flex-col items-center justify-center" style={{ transitionDelay: `${i*60}ms` }}>
+                <div className="font-extrabold leading-none" style={{ color: '#E87722', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 48px)' }}>{s.n}</div>
+                <div className="mono uppercase mt-3" style={{ color: '#333F50', fontWeight: 500, fontSize: '13px', letterSpacing: '1.5px' }}>{s.l}</div>
+                {i < arr.length - 1 && (
+                  <span aria-hidden="true" className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2" style={{ width: '1px', height: '60%', background: 'rgba(232,119,34,0.25)' }} />
+                )}
               </div>
             ))}
           </div>
@@ -133,12 +136,12 @@ export default function AboutClient() {
               <div className="p-6 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="mono text-[#E87722] text-xs uppercase tracking-widest mb-2">UAE HQ</div>
                 <h3 className="text-white text-xl font-bold mb-3">Abu Dhabi</h3>
-                <div className="space-y-2 text-white/80 text-sm"><div>Salaam Street, Behind Fabrix, P.O. Box 53209</div><div>+971 2 676 6935</div><div>info@ipcare.ae</div><div>Sun \u2013 Thu, 9am \u2013 6pm GST</div></div>
+                <div className="space-y-2 text-white/80 text-sm"><div>Salaam Street, Behind Fabrix, P.O. Box 53209</div><div>+971 2 676 6935</div><div>info@ipcare.ae</div><div>Monday – Friday, 9:00 AM – 6:00 PM (GST)</div></div>
               </div>
               <div className="p-6 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="mono text-[#E87722] text-xs uppercase tracking-widest mb-2">North America</div>
                 <h3 className="text-white text-xl font-bold mb-3">Toronto</h3>
-                <div className="space-y-2 text-white/80 text-sm"><div>1 Concorde Gate, North York, ON</div><div>+1 416 786 0782</div><div>info@ipcare.ae</div><div>Mon \u2013 Fri, 9am \u2013 5pm EST</div></div>
+                <div className="space-y-2 text-white/80 text-sm"><div>1 Concorde Gate, North York, ON</div><div>+1 416 786 0782</div><div>info@ipcare.ae</div><div>Monday – Friday, 9:00 AM – 6:00 PM (EST)</div></div>
               </div>
             </div>
           </div>
@@ -276,7 +279,7 @@ export default function AboutClient() {
       <section className="py-16 px-6">
         <div className="max-w-[1100px] mx-auto rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
           <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Ready to work with us?</h2>
-          <p className="body-text mb-8">Let\u2019s talk about your next IT project.</p>
+          <p className="body-text mb-8">Let’s talk about your next IT project.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/contact" className="btn-primary">Contact Us <Icons.ArrowRight size={16}/></Link>
             <Link href="/careers" className="btn-ghost">Join the Team</Link>

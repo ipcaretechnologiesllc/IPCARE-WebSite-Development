@@ -27,7 +27,7 @@ export default function PartnersClient() {
         <div className="max-w-[1200px] mx-auto text-center">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Partnerships</div>
           <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">Technology &amp; Channel Partners</h1>
-          <p className="body-text mt-5 text-lg max-w-2xl mx-auto reveal">Certified partnerships with the world\u2019s leading technology vendors \u2014 the foundation of every IP Care solution.</p>
+          <p className="body-text mt-5 text-lg max-w-2xl mx-auto reveal">Certified partnerships with the world’s leading technology vendors — the foundation of every IP Care solution.</p>
         </div>
       </section>
 

@@ -49,7 +49,7 @@ export default function ContactClient() {
                 <div className="text-center py-10">
                   <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.5)' }}><Icons.Check size={28} className="text-green-400"/></div>
                   <h3 className="text-white text-2xl font-bold mb-2">Message sent!</h3>
-                  <p className="body-text">We\u2019ll reply within 4 business hours.</p>
+                  <p className="body-text">We’ll reply within 4 business hours.</p>
                 </div>
               ) : (
                 <form onSubmit={submit} className="space-y-4">
@@ -61,12 +61,12 @@ export default function ContactClient() {
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div><L>Country</L><select value={form.country} onChange={e => setForm(f => ({...f, country:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}><option>UAE</option><option>Canada</option><option>KSA</option><option>Qatar</option><option>Other</option></select></div>
-                    <div><L>{tab === 'rental' ? 'Equipment Needed' : 'Service Interest'}</L><select value={form.service} onChange={e => setForm(f => ({...f, service:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}><option value="">\u2014 Select \u2014</option>{SERVICES.map(s => <option key={s}>{s}</option>)}</select></div>
+                    <div><L>{tab === 'rental' ? 'Equipment Needed' : 'Service Interest'}</L><select value={form.service} onChange={e => setForm(f => ({...f, service:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}><option value="">— Select —</option>{SERVICES.map(s => <option key={s}>{s}</option>)}</select></div>
                   </div>
                   <div><L>Message</L><textarea value={form.message} onChange={e => setForm(f => ({...f, message:e.target.value}))} rows={4} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}/></div>
                   <div className="flex items-center gap-3 p-3 rounded" style={iS}>
                     <input type="checkbox" checked={form.recaptcha} onChange={e => setForm(f => ({...f, recaptcha:e.target.checked}))} className="accent-[#E87722]"/>
-                    <span className="text-white/80 text-sm flex-1">I\u2019m not a robot</span>
+                    <span className="text-white/80 text-sm flex-1">I’m not a robot</span>
                     <div className="mono text-[10px] text-white/40 uppercase tracking-wider">reCAPTCHA</div>
                   </div>
                   {err && <div className="text-red-400 text-sm p-3 rounded" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)' }}>{err}</div>}
@@ -77,8 +77,8 @@ export default function ContactClient() {
 
             {/* Office cards */}
             <div className="space-y-5">
-              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Sun \u2013 Thu, 9am \u2013 6pm GST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.0!2d54.36!3d24.46!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sae"/>
-              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Mon \u2013 Fri, 9am \u2013 5pm EST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
+              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.0!2d54.36!3d24.46!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sae"/>
+              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
             </div>
           </div>
 
