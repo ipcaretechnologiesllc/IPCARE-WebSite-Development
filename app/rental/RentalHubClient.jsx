@@ -51,12 +51,24 @@ export default function RentalHubClient() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {cats.map(([slug, c], i) => (
-              <Link key={slug} href={`/rental/${slug}`} className="glass-card p-6 text-center group reveal" style={{ transitionDelay: `${i * 40}ms` }}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
+              <Link
+                key={slug}
+                href={`/rental/${slug}`}
+                className="glass-card text-center group reveal flex flex-col items-center justify-between"
+                style={{
+                  paddingTop: '32px',
+                  paddingBottom: '24px',
+                  paddingLeft: '20px',
+                  paddingRight: '20px',
+                  minHeight: '180px',
+                  transitionDelay: `${i * 40}ms`,
+                }}
+              >
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform flex-shrink-0" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
                   <Ic name={c.icon} size={24} className="text-[#E87722]"/>
                 </div>
-                <h3 className="text-white font-semibold text-sm leading-tight mb-1">{c.name}</h3>
-                <p className="mono text-[10px] text-white/50 uppercase tracking-wider">{c.products.length} items</p>
+                <h3 className="text-white font-semibold text-sm leading-tight flex-1 flex items-center justify-center">{c.name}</h3>
+                <p className="mono text-[10px] text-white/50 uppercase tracking-wider" style={{ marginTop: '12px' }}>{c.products.length} items</p>
               </Link>
             ))}
           </div>

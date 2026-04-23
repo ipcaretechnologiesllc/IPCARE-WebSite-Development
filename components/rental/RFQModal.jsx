@@ -67,14 +67,28 @@ export default function RFQModal({ onClose, onSuccess, items }) {
               <Field label="Email *" type="email" value={form.email} onChange={v => set('email', v)} />
               <div>
                 <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Phone *</label>
-                <div className="flex gap-2">
-                  <select value={form.phoneCountry} onChange={e => set('phoneCountry', e.target.value)} className="px-3 py-2.5 rounded-lg text-white text-sm focus:outline-none focus:border-[#E87722]" style={inputStyle}>
-                    <option value="+971">+971 UAE</option>
-                    <option value="+1">+1 Canada</option>
-                    <option value="+44">+44 UK</option>
-                    <option value="+966">+966 KSA</option>
+                <div className="flex items-stretch" style={{ gap: '8px' }}>
+                  <select
+                    value={form.phoneCountry}
+                    onChange={e => set('phoneCountry', e.target.value)}
+                    className="px-3 text-white text-sm focus:outline-none focus:border-[#E87722]"
+                    style={{ ...inputStyle, width: '120px', flexShrink: 0, height: '44px', borderRadius: '8px' }}
+                  >
+                    <option value="+971" style={{ color: '#0F245F', background: '#FFFFFF' }}>+971 UAE</option>
+                    <option value="+1" style={{ color: '#0F245F', background: '#FFFFFF' }}>+1 Canada</option>
+                    <option value="+44" style={{ color: '#0F245F', background: '#FFFFFF' }}>+44 UK</option>
+                    <option value="+966" style={{ color: '#0F245F', background: '#FFFFFF' }}>+966 KSA</option>
                   </select>
-                  <input value={form.phone} onChange={e => set('phone', e.target.value)} className="flex-1 px-3 py-2.5 rounded-lg text-white text-sm focus:outline-none focus:border-[#E87722]" style={inputStyle}/>
+                  <input
+                    value={form.phone}
+                    onChange={e => set('phone', e.target.value)}
+                    type="tel"
+                    inputMode="tel"
+                    pattern="[0-9\s\-]+"
+                    placeholder="Phone number (digits only)"
+                    className="flex-1 px-3 text-white text-sm focus:outline-none focus:border-[#E87722]"
+                    style={{ ...inputStyle, height: '44px', borderRadius: '8px', minWidth: 0 }}
+                  />
                 </div>
               </div>
               <div>
