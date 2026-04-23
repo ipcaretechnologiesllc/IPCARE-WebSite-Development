@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the complete Equipment Rental Hub quote-cart user flow on https://ipcare-branding-v2.preview.emergentagent.com"
+user_problem_statement: "Test the complete Equipment Rental Hub quote-cart user flow on https://about-cards-update.preview.emergentagent.com"
 
 frontend:
   - task: "Rental Hub Main Page"

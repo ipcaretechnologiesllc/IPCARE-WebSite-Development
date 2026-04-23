@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { timeline, leadership, values, certifications } from '@/lib/about-data'
+import { timeline, values, certifications } from '@/lib/about-data'
 
 const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Award; return <C {...rest}/> }
 
@@ -147,18 +147,78 @@ export default function AboutClient() {
 
       {/* Leadership */}
       <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-        <div className="max-w-[1300px] mx-auto">
+        <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-12 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Leadership</div><h2 className="text-white text-3xl md:text-5xl font-bold">The Team</h2></div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {leadership.map((p, i) => (
-              <div key={p.name} className="glass-card p-6 text-center reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: 'linear-gradient(135deg, #E87722 0%, #0D2B55 100%)' }}>{p.initials}</div>
-                <h3 className="text-white font-semibold text-base mb-1">{p.name}</h3>
-                <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-3">{p.title}</div>
-                <p className="body-text text-xs leading-relaxed mb-4">{p.bio}</p>
-                <a href="#" className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#0A66C2] text-xs"><Icons.Linkedin size={14}/> LinkedIn</a>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
+            {/* Card 1 - Attique Bhatti */}
+            <Link href="/cybersecurity-advisory" className="glass-card p-8 text-center reveal block group hover:border-[#E87722]/40 transition-all" style={{ transitionDelay: '0ms' }}>
+              <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>AB</div>
+              <h3 className="text-white font-semibold text-xl mb-1">Attique Bhatti</h3>
+              <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Enterprise Security Consultant</div>
+              <div className="text-white/60 text-sm mb-5">The Cyber Adviser</div>
+              <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                <div>
+                  <div className="text-white font-bold text-lg">15+</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
+                </div>
+                <div>
+                  <div className="text-white font-bold text-lg">100M+</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Users Protected</div>
+                </div>
+                <div>
+                  <div className="text-white font-bold text-lg">50+</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Enterprise Engagements</div>
+                </div>
               </div>
-            ))}
+              <div className="inline-flex items-center gap-1.5 text-[#E87722] text-sm mono uppercase tracking-wider group-hover:gap-2.5 transition-all">
+                View Profile <Icons.ArrowRight size={14}/>
+              </div>
+            </Link>
+
+            {/* Card 2 - Tanveer Bhatti */}
+            <div className="glass-card p-8 text-center reveal" style={{ transitionDelay: '80ms' }}>
+              <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>TB</div>
+              <h3 className="text-white font-semibold text-xl mb-1">Tanveer Bhatti</h3>
+              <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Independent Network Security Consultant</div>
+              <div className="text-white/60 text-sm mb-5">Prisma Access & SASE Specialist &mdash; Milton, Ontario, Canada</div>
+
+              <div className="mb-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Specialisations</div>
+                <div className="flex flex-wrap gap-1.5 justify-center">
+                  {['SASE','ZTNA','CASB','DLP','SWG','Prisma Access'].map((s) => (
+                    <span key={s} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(232,119,34,0.12)', color: '#E87722', border: '1px solid rgba(232,119,34,0.25)' }}>{s}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-5">
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Certifications</div>
+                <div className="flex flex-wrap gap-1.5 justify-center">
+                  {['PCNSE','PCCSA','CNSS','AlgoSec'].map((c) => (
+                    <span key={c} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.8)', border: '1px solid rgba(255,255,255,0.12)' }}>{c}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                <div>
+                  <div className="text-white font-bold text-lg">25+</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
+                </div>
+                <div>
+                  <div className="text-white font-bold text-lg">CCIE</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Certified</div>
+                </div>
+                <div>
+                  <div className="text-white font-bold text-lg">Prisma</div>
+                  <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Access SME</div>
+                </div>
+              </div>
+
+              <a href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#0A66C2] text-sm transition-colors">
+                <Icons.Linkedin size={16}/> LinkedIn
+              </a>
+            </div>
           </div>
         </div>
       </section>
