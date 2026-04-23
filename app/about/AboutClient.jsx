@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { timeline, values, certifications } from '@/lib/about-data'
+import { timeline, values } from '@/lib/about-data'
 
 const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Award; return <C {...rest}/> }
 
@@ -227,13 +227,31 @@ export default function AboutClient() {
       <section className="py-16 px-6">
         <div className="max-w-[1300px] mx-auto">
           <div className="text-center mb-10 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Certifications & Partners</div><h2 className="text-white text-2xl md:text-3xl font-bold">Certified Across the Industry\u2019s Best</h2></div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-            {certifications.map((c, i) => (
-              <div key={c.name} className="glass-card p-5 text-center reveal" style={{ transitionDelay: `${i * 40}ms` }}>
-                <div className="mono text-base md:text-lg font-bold" style={{ color: c.color }}>{c.name}</div>
-                <div className="text-[10px] text-white/40 mono uppercase tracking-wider mt-1">Certified</div>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            {[
+              { name: 'Microsoft', tier: 'Gold' },
+              { name: 'HPE', tier: 'Gold' },
+              { name: 'Palo Alto Networks', tier: 'Gold' },
+              { name: 'Cisco', tier: 'Gold' },
+              { name: 'Fortinet', tier: 'Gold' },
+              { name: 'CrowdStrike', tier: 'Silver' },
+              { name: 'Check Point', tier: 'Gold' },
+              { name: 'Zscaler', tier: 'Authorised' },
+              { name: 'Veeam', tier: 'Gold' },
+              { name: 'Acronis', tier: 'Silver' },
+            ].map((p, i) => {
+              const tierStyle = p.tier === 'Gold'
+                ? { background: 'rgba(232,119,34,0.15)', color: '#E87722', border: '1px solid rgba(232,119,34,0.4)' }
+                : p.tier === 'Silver'
+                  ? { background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.85)', border: '1px solid rgba(255,255,255,0.3)' }
+                  : { background: 'rgba(27,108,168,0.18)', color: '#6FB5E8', border: '1px solid rgba(27,108,168,0.5)' }
+              return (
+                <div key={p.name} className="p-5 text-center reveal flex flex-col items-center justify-center gap-2" style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: '12px', transitionDelay: `${i * 40}ms` }}>
+                  <div className="text-white text-sm md:text-base font-bold leading-tight">{p.name}</div>
+                  <span className="mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full" style={tierStyle}>{p.tier}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
