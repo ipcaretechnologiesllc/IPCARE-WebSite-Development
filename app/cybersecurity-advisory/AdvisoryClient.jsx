@@ -65,76 +65,74 @@ function Hero() {
           </p>
         </div>
 
-        {/* Advisor profile cards */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-[1200px] mx-auto reveal">
-          {/* Attique Bhatti Card */}
-          <div className="glass-premium p-8">
-            <div className="flex flex-col gap-6 items-center text-center">
-              <AdvisorAvatar initials="AB"/>
-              <div className="flex-1">
-                <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Lead Advisor</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">{advisor.name}</h2>
-                <div className="text-white/70 text-base mt-1">{advisor.title}</div>
-                <p className="body-text text-sm mt-4 leading-relaxed">{advisor.bio}</p>
-                <div className="flex flex-wrap justify-center gap-2 mt-5">
-                  {advisor.credentials.map((c) => (
-                    <span key={c.label} className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>{c.label}</span>
-                  ))}
-                </div>
-                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                  {advisor.certifications.map((c) => (
-                    <span key={c} className="mono text-[11px] px-2 py-0.5 rounded text-white/60" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>{c}</span>
-                  ))}
-                </div>
-                <div className="mt-6 flex flex-col gap-2">
-                  <Link href="/#contact" className="btn-primary text-sm">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
-                  <a href="https://thecyberadviser.com" target="_blank" rel="noopener" className="btn-ghost text-sm">Visit thecyberadviser.com <Icons.ExternalLink size={12}/></a>
-                </div>
+        {/* Advisor profile cards - matches /about Leadership design */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1100px] mx-auto justify-center reveal">
+          {/* Card 1 - Attique Bhatti */}
+          <div className="glass-card p-8 text-center">
+            <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>AB</div>
+            <h3 className="text-white font-semibold text-xl mb-1">Attique Bhatti</h3>
+            <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Enterprise Security Consultant</div>
+            <div className="text-white/60 text-sm mb-5">The Cyber Adviser</div>
+            <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <div>
+                <div className="text-white font-bold text-lg">15+</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
+              </div>
+              <div>
+                <div className="text-white font-bold text-lg">100M+</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Users Protected</div>
+              </div>
+              <div>
+                <div className="text-white font-bold text-lg">50+</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Enterprise Engagements</div>
               </div>
             </div>
+            <Link href="/#contact" className="btn-primary text-sm inline-flex items-center gap-2">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
           </div>
 
-          {/* Tanveer Ahmed Card */}
-          <div className="glass-premium p-8">
-            <div className="flex flex-col gap-6 items-center text-center">
-              <AdvisorAvatar initials="TB"/>
-              <div className="flex-1">
-                <div className="mono text-xs text-[#E87722] uppercase tracking-[0.2em] mb-2">Network Security Consultant</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">Tanveer Ahmed</h2>
-                <div className="text-white/70 text-base mt-1">Independent Network Security Consultant</div>
-                <div className="text-[#E87722] text-sm">Prisma Access & SASE Specialist</div>
-                <div className="text-white/60 text-xs mt-1">Milton, Ontario, Canada</div>
-                <p className="body-text text-sm mt-4 leading-relaxed">With over 25 years of experience in network security and enterprise IT, Tanveer Ahmed is a CCIE-certified independent network security consultant specialising in Palo Alto Networks Prisma Access and SASE architecture. He brings deep hands-on expertise in Zero Trust Network Access, CASB, DLP, Secure Web Gateway, Remote Browser Isolation, and SD-WAN transformation — delivering complex enterprise security programmes across Canada and globally.</p>
-                
-                {/* Credential badges */}
-                <div className="flex flex-wrap justify-center gap-2 mt-5">
-                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>25+ Years Experience</span>
-                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>CCIE Certified</span>
-                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>Prisma Access SME</span>
-                  <span className="px-3.5 py-1.5 rounded-full text-sm font-medium" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>PAN OS Expert</span>
-                </div>
+          {/* Card 2 - Tanveer Bhatti */}
+          <div className="glass-card p-8 text-center">
+            <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>TB</div>
+            <h3 className="text-white font-semibold text-xl mb-1">Tanveer Bhatti</h3>
+            <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Independent Network Security Consultant</div>
+            <div className="text-white/60 text-sm mb-5">Prisma Access & SASE Specialist &mdash; Milton, Ontario, Canada</div>
 
-                {/* Specialisation badges - orange */}
-                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                  {['SASE', 'ZTNA', 'CASB', 'DLP', 'SWG', 'RBI', 'PAB', 'Prisma Access', 'Prisma SD-WAN', 'PAN OS'].map((s) => (
-                    <span key={s} className="px-2.5 py-1 rounded-full text-xs font-semibold" style={{ background: 'rgba(232,119,34,0.15)', border: '1px solid rgba(232,119,34,0.40)', color: '#E87722' }}>{s}</span>
-                  ))}
-                </div>
-
-                {/* Certification badges - blue */}
-                <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-                  {['PCNSE', 'PCCSA', 'Prisma Access SASE', 'CNSS', 'Palo Alto Certified Network Security Consultant', 'AlgoSec AppViz', 'AlgoSec ASMS'].map((c) => (
-                    <span key={c} className="mono text-[11px] px-2 py-0.5 rounded font-medium" style={{ background: 'rgba(27,108,168,0.20)', border: '1px solid rgba(27,108,168,0.40)', color: '#1B6CA8' }}>{c}</span>
-                  ))}
-                </div>
-
-                <div className="mt-6">
-                  <a href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/" target="_blank" rel="noopener" className="btn-ghost text-sm inline-flex items-center gap-2">
-                    <Icons.Linkedin size={16}/> Connect on LinkedIn <Icons.ExternalLink size={12}/>
-                  </a>
-                </div>
+            <div className="mb-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Specialisations</div>
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {['SASE','ZTNA','CASB','DLP','SWG','Prisma Access'].map((s) => (
+                  <span key={s} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(232,119,34,0.12)', color: '#E87722', border: '1px solid rgba(232,119,34,0.25)' }}>{s}</span>
+                ))}
               </div>
             </div>
+
+            <div className="mb-5">
+              <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Certifications</div>
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {['PCNSE','PCCSA','CNSS','AlgoSec'].map((c) => (
+                  <span key={c} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.8)', border: '1px solid rgba(255,255,255,0.12)' }}>{c}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <div>
+                <div className="text-white font-bold text-lg">25+</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
+              </div>
+              <div>
+                <div className="text-white font-bold text-lg">CCIE</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Certified</div>
+              </div>
+              <div>
+                <div className="text-white font-bold text-lg">Prisma</div>
+                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Access SME</div>
+              </div>
+            </div>
+
+            <a href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#0A66C2] text-sm transition-colors">
+              <Icons.Linkedin size={16}/> LinkedIn
+            </a>
           </div>
         </div>
       </div>
