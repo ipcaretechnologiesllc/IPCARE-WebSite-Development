@@ -77,31 +77,33 @@ export default function ContactClient() {
 
             {/* Office cards */}
             <div className="space-y-5">
-              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14480.0!2d54.36!3d24.46!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sae"/>
-              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
+              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)" mapUrl="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"/>
+              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)" mapUrl="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"/>
             </div>
           </div>
 
           {/* Google Maps embeds */}
-          <div className="grid md:grid-cols-2 gap-8 mt-10">
+          <div className="grid md:grid-cols-2 mt-10" style={{ gap: '40px' }}>
             <div>
-              <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>Abu Dhabi, UAE</div>
+              <div className="uppercase" style={{ color: 'rgba(255,255,255,0.7)', letterSpacing: '1.5px', fontSize: '12px', marginBottom: '12px' }}>Abu Dhabi, UAE</div>
               <iframe
                 src="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"
                 title="IP Care Technologies Abu Dhabi office map"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                style={{ width: '100%', height: '280px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)' }}
+                frameBorder="0"
+                style={{ width: '100%', height: '320px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)', display: 'block' }}
               />
             </div>
             <div>
-              <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>Toronto, Canada</div>
+              <div className="uppercase" style={{ color: 'rgba(255,255,255,0.7)', letterSpacing: '1.5px', fontSize: '12px', marginBottom: '12px' }}>Toronto, Canada</div>
               <iframe
                 src="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"
                 title="IP Care Technologies Toronto office map"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                style={{ width: '100%', height: '280px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)' }}
+                frameBorder="0"
+                style={{ width: '100%', height: '320px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)', display: 'block' }}
               />
             </div>
           </div>
