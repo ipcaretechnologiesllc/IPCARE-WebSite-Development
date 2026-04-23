@@ -226,7 +226,7 @@ export default function AboutClient() {
       {/* Certifications */}
       <section className="py-16 px-6">
         <div className="max-w-[1300px] mx-auto">
-          <div className="text-center mb-10 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Certifications & Partners</div><h2 className="text-white text-2xl md:text-3xl font-bold">Certified Across the Industry\u2019s Best</h2></div>
+          <div className="text-center mb-10 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Certifications & Partners</div><h2 className="text-white text-2xl md:text-3xl font-bold">Certified Across the Industry</h2></div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {[
               { name: 'Microsoft', tier: 'Gold' },
