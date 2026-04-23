@@ -81,6 +81,30 @@ export default function ContactClient() {
               <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Mon \u2013 Fri, 9am \u2013 5pm EST" mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92640.0!2d-79.38!3d43.65!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca"/>
             </div>
           </div>
+
+          {/* Google Maps embeds */}
+          <div className="grid md:grid-cols-2 gap-8 mt-10">
+            <div>
+              <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>Abu Dhabi, UAE</div>
+              <iframe
+                src="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"
+                title="IP Care Technologies Abu Dhabi office map"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={{ width: '100%', height: '280px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)' }}
+              />
+            </div>
+            <div>
+              <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>Toronto, Canada</div>
+              <iframe
+                src="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"
+                title="IP Care Technologies Toronto office map"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={{ width: '100%', height: '280px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.10)' }}
+              />
+            </div>
+          </div>
         </div>
       </section>
     </main>
