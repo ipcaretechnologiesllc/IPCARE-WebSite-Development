@@ -34,11 +34,11 @@ export default function AboutClient() {
       </section>
 
       {/* Company Story */}
-      <section className="px-6" style={{ background: '#FFFFFF', paddingTop: '100px', paddingBottom: '80px' }}>
+      <section className="px-6" style={{ background: '#FFFFFF', paddingTop: '120px', paddingBottom: '80px' }}>
         <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="reveal">
             <div className="mono text-xs uppercase mb-3" style={{ color: '#E87722', letterSpacing: '2px' }}>Our Story</div>
-            <h2 className="text-3xl md:text-5xl leading-tight mb-6" style={{ color: '#0D2B55', fontWeight: 700 }}>Powering Business Since 2003</h2>
+            <h2 className="text-3xl md:text-5xl mb-6" style={{ color: '#0D2B55', fontWeight: 700, lineHeight: 1.3, paddingTop: '20px' }}>Powering Business Since 2003</h2>
             <div className="space-y-5 text-base md:text-lg leading-relaxed" style={{ color: '#333F50' }}>
               <p>IP Care Technologies L.L.C. was founded in Abu Dhabi in 2003 with a simple mission: deliver enterprise IT the right way — competent, honest, on time.</p>
               <p>Over two decades we have built deep expertise across managed IT, cybersecurity, event infrastructure, ELV and equipment rental. Our UAE headquarters and Canadian operations deliver 24&times;7 support to enterprise and government clients worldwide.</p>
