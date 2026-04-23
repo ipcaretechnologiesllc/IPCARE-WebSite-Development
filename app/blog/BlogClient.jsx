@@ -63,6 +63,86 @@ export default function BlogClient() {
           </div>
         </div>
       </section>
+
+      {/* Newsletter Strip */}
+      <NewsletterStrip />
     </main>
+  )
+}
+
+function NewsletterStrip() {
+  const [email, setEmail] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [err, setErr] = useState('')
+
+  async function onSubmit(e) {
+    e.preventDefault()
+    setErr('')
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) { setErr('Please enter a valid email address.'); return }
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'blog-newsletter-strip' }),
+      })
+      if (!res.ok) throw new Error('failed')
+      setSubmitted(true)
+    } catch {
+      setErr('Subscription failed, please try again.')
+    }
+    setSubmitting(false)
+  }
+
+  return (
+    <section
+      className="w-full px-6 reveal"
+      style={{
+        background: 'rgba(255,255,255,0.05)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        borderTop: '1px solid rgba(255,255,255,0.10)',
+        borderBottom: '1px solid rgba(255,255,255,0.10)',
+        paddingTop: '60px',
+        paddingBottom: '60px',
+      }}
+    >
+      <div className="max-w-[720px] mx-auto text-center">
+        <h2 className="text-white font-bold mb-3" style={{ fontSize: '28px', lineHeight: 1.2 }}>Stay Ahead of the Curve</h2>
+        <p className="mb-7" style={{ color: 'rgba(255,255,255,0.7)' }}>Monthly insights from IP Care engineers. No spam. Unsubscribe anytime.</p>
+
+        {submitted ? (
+          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-lg mx-auto" style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.4)', color: '#4ade80' }}>
+            <Icons.Check size={18}/>
+            <span className="text-sm font-medium">You&apos;re subscribed &mdash; welcome aboard.</span>
+          </div>
+        ) : (
+          <>
+            <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 mx-auto" style={{ maxWidth: '480px' }}>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@company.com"
+                required
+                disabled={submitting}
+                className="flex-1 px-4 py-3 rounded-lg text-white text-sm"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.15)' }}
+              />
+              <button
+                type="submit"
+                disabled={submitting}
+                className="px-6 py-3 rounded-lg text-white text-sm font-semibold inline-flex items-center justify-center gap-2 disabled:opacity-60 transition-opacity"
+                style={{ background: '#E87722' }}
+              >
+                {submitting ? 'Subscribing...' : <>Subscribe <Icons.ArrowRight size={14}/></>}
+              </button>
+            </form>
+            {err && <div className="text-red-400 text-xs mt-3">{err}</div>}
+          </>
+        )}
+      </div>
+    </section>
   )
 }
