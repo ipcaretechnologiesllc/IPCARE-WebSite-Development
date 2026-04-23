@@ -117,9 +117,14 @@ export default function RFQModal({ onClose, onSuccess, items }) {
             <div>
               <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">How did you hear about us?</label>
               <select value={form.source} onChange={e => set('source', e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-white text-sm focus:outline-none focus:border-[#E87722]" style={inputStyle}>
-                <option value="">— Select —</option>
-                <option>Google Search</option><option>Referral</option><option>LinkedIn</option>
-                <option>Existing Customer</option><option>Industry Event</option><option>Other</option>
+                <option value="" disabled style={{ color: '#0F245F', background: '#FFFFFF' }}>— Select —</option>
+                <option value="Google Search" style={{ color: '#0F245F', background: '#FFFFFF' }}>Google Search</option>
+                <option value="LinkedIn" style={{ color: '#0F245F', background: '#FFFFFF' }}>LinkedIn</option>
+                <option value="Referral from a colleague" style={{ color: '#0F245F', background: '#FFFFFF' }}>Referral from a colleague</option>
+                <option value="Event / Tradeshow" style={{ color: '#0F245F', background: '#FFFFFF' }}>Event / Tradeshow</option>
+                <option value="Existing customer" style={{ color: '#0F245F', background: '#FFFFFF' }}>Existing customer</option>
+                <option value="Social media" style={{ color: '#0F245F', background: '#FFFFFF' }}>Social media</option>
+                <option value="Other" style={{ color: '#0F245F', background: '#FFFFFF' }}>Other</option>
               </select>
             </div>
 

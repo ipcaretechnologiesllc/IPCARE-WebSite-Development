@@ -22,7 +22,7 @@ export default function CartDrawer() {
         <header className="flex items-center justify-between px-6 h-[72px] border-b border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.15)' }}>
-              <Icons.ShoppingCart size={16} className="text-[#E87722]"/>
+              <Icons.Briefcase size={16} className="text-[#E87722]"/>
             </div>
             <div>
               <div className="text-white font-semibold">Your Quote Cart</div>
@@ -36,7 +36,7 @@ export default function CartDrawer() {
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center px-6">
               <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(255,255,255,0.05)' }}>
-                <Icons.Package size={26} className="text-white/60"/>
+                <Icons.Briefcase size={26} className="text-white/60"/>
               </div>
               <h3 className="text-white font-semibold text-lg mb-2">Your cart is empty</h3>
               <p className="body-text text-sm mb-6">Browse our catalogue and add items to build a tailored quote.</p>

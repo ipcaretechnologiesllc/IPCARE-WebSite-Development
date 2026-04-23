@@ -27,7 +27,7 @@ export default function CartButton({ onLight = false }) {
       style={onLight ? lightStyle : darkStyle}
       aria-label={`Quote cart, ${count} items`}
     >
-      <Icons.ShoppingCart size={18}/>
+      <Icons.Briefcase size={18}/>
       {hydrated && count > 0 && (
         <span
           className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center text-[10px] font-bold text-white"

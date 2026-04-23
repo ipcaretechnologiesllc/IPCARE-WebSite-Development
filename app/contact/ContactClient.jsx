@@ -77,8 +77,8 @@ export default function ContactClient() {
 
             {/* Office cards */}
             <div className="space-y-5">
-              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)" mapUrl="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"/>
-              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)" mapUrl="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"/>
+              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)"/>
+              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)"/>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ const iS = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,2
 const L = ({ children }) => <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">{children}</label>
 function F({ label, v, on, type = 'text' }) { return <div><L>{label}</L><input type={type} value={v} onChange={e => on(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}/></div> }
 
-function OfficeCard({ flag, region, city, phone, email, address, hours, mapUrl }) {
+function OfficeCard({ flag, region, city, phone, email, address, hours }) {
   return (
     <div className="glass-card overflow-hidden">
       <div className="p-6 md:p-7">
@@ -129,9 +129,6 @@ function OfficeCard({ flag, region, city, phone, email, address, hours, mapUrl }
           <div className="flex items-center gap-2"><Icons.Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>{email}</span></div>
           <div className="flex items-center gap-2"><Icons.Clock size={14} className="text-[#E87722] flex-shrink-0"/><span>{hours}</span></div>
         </div>
-      </div>
-      <div className="relative h-48 overflow-hidden border-t border-white/10" style={{ filter: 'invert(90%) hue-rotate(180deg) contrast(0.9)' }}>
-        <iframe src={mapUrl} className="w-full h-full" loading="lazy" referrerPolicy="no-referrer-when-downgrade" title={`${city} office map`}/>
       </div>
     </div>
   )
