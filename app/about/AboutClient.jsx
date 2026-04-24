@@ -178,10 +178,10 @@ export default function AboutClient() {
               </div>
             </Link>
 
-            {/* Card 2 - Tanveer Bhatti */}
+            {/* Card 2 - Tanveer Ahmed */}
             <div className="glass-card p-8 text-center reveal" style={{ transitionDelay: '80ms' }}>
               <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>TB</div>
-              <h3 className="text-white font-semibold text-xl mb-1">Tanveer Bhatti</h3>
+              <h3 className="text-white font-semibold text-xl mb-1">Tanveer Ahmed</h3>
               <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Independent Network Security Consultant</div>
               <div className="text-white/60 text-sm mb-5">Prisma Access & SASE Specialist &mdash; Milton, Ontario, Canada</div>
 

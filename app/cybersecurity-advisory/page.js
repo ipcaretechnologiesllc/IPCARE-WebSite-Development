@@ -4,11 +4,11 @@ import AdvisoryClient from './AdvisoryClient'
 
 export const metadata = {
   title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed | IP Care Technologies',
-  description: 'Attique Bhatti (15+ years) and Tanveer Bhatti (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+  description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
     title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed',
-    description: 'Attique Bhatti (15+ years) and Tanveer Bhatti (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+    description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
     url: '/cybersecurity-advisory',
     type: 'website',
   },

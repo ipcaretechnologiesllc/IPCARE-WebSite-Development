@@ -268,12 +268,12 @@ function TrustMarquee() {
 /* ---------------- Services ---------------- */
 function Services() {
   const services = [
-    { icon: Server, name: 'Managed IT Services', d: 'End-to-end IT operations, 24/7 monitoring, proactive maintenance and SLA-backed support.' },
-    { icon: Lock, name: 'Cybersecurity', d: 'SOC, Zero Trust, firewall management and compliance aligned to NESA, PCI, ISO 27001.' },
-    { icon: Cable, name: 'ELV & Physical Security', d: 'CCTV, access control, structured cabling and intrusion detection for modern facilities.' },
-    { icon: Calendar, name: 'Event IT Infrastructure', d: 'Turnkey event networks, temporary WiFi, broadcast connectivity and production LANs.' },
-    { icon: Network, name: 'Equipment Rental', d: 'Laptops, iPads, routers, switches & printers — short & long-term with logistics.' },
-    { icon: Cloud, name: 'Cloud Services', d: 'AWS, Azure, private cloud design, migration, cost optimisation and FinOps.' },
+    { icon: Server, name: 'Managed IT Services', d: 'End-to-end IT operations, 24/7 monitoring, proactive maintenance and SLA-backed support.', link: '/services/managed-it' },
+    { icon: Lock, name: 'Cybersecurity', d: 'SOC, Zero Trust, firewall management and compliance aligned to NESA, PCI, ISO 27001.', link: '/services/cybersecurity' },
+    { icon: Cable, name: 'ELV & Physical Security', d: 'CCTV, access control, structured cabling and intrusion detection for modern facilities.', link: '/services/elv' },
+    { icon: Calendar, name: 'Event IT Infrastructure', d: 'Turnkey event networks, temporary WiFi, broadcast connectivity and production LANs.', link: '/event-it' },
+    { icon: Network, name: 'Equipment Rental', d: 'Laptops, iPads, routers, switches & printers — short & long-term with logistics.', link: '/rental' },
+    { icon: Cloud, name: 'Cloud Services', d: 'AWS, Azure, private cloud design, migration, cost optimisation and FinOps.', link: '/services/cloud' },
   ]
   return (
     <section id="services" className="py-24 md:py-28 px-6">
@@ -290,7 +290,7 @@ function Services() {
               </div>
               <h3 className="text-white text-xl font-semibold mb-2">{s.name}</h3>
               <p className="body-text text-sm leading-relaxed mb-5">{s.d}</p>
-              <a href="#contact" className="inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm hover:gap-2.5 transition-all">
+              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm hover:gap-2.5 transition-all">
                 Learn More <ArrowRight size={14}/>
               </a>
             </div>
@@ -412,7 +412,7 @@ function RentalTeaser() {
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="#contact" className="btn-ghost">Browse Full Rental Catalogue <ArrowRight size={16}/></a>
+          <a href="/rental" className="btn-ghost">Browse Full Rental Catalogue <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
@@ -577,7 +577,7 @@ function BlogTeaser() {
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="#blog" className="btn-ghost">Visit Our Knowledge Base <ArrowRight size={16}/></a>
+          <a href="/blog" className="btn-ghost">Visit Our Knowledge Base <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
