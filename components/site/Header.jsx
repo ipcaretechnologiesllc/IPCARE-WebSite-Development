@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   ArrowRight, Menu, X, Mail,
@@ -72,12 +72,37 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [eventITOpen, setEventITOpen] = useState(false)
+  const navRef = useRef(null)
+  const [navBottom, setNavBottom] = useState(108)
+  const servicesCloseTimer = useRef(null)
+  const eventITCloseTimer = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    const measure = () => {
+      if (navRef.current) {
+        const rect = navRef.current.getBoundingClientRect()
+        setNavBottom(Math.max(0, rect.bottom))
+      }
+    }
+    measure()
+    window.addEventListener('scroll', measure, { passive: true })
+    window.addEventListener('resize', measure)
+    return () => {
+      window.removeEventListener('scroll', measure)
+      window.removeEventListener('resize', measure)
+    }
+  }, [])
+
+  const openServices = () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); setServicesOpen(true) }
+  const scheduleCloseServices = () => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current); servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 140) }
+  const openEventIT = () => { if (eventITCloseTimer.current) clearTimeout(eventITCloseTimer.current); setEventITOpen(true) }
+  const scheduleCloseEventIT = () => { if (eventITCloseTimer.current) clearTimeout(eventITCloseTimer.current); eventITCloseTimer.current = setTimeout(() => setEventITOpen(false), 140) }
 
   const navLinks = [
     { label: 'Home', href: '/' },
@@ -97,6 +122,9 @@ export default function Header() {
     { label: 'Event CCTV & Security', href: '/event-it/event-cctv' },
     { label: 'Plan Your Event IT', href: '/contact', accent: true },
   ]
+
+  // Ordered list for mega-menu grid (Row 1: IT/Infra/Managed/Cyber → Row 2: Cloud/ELV/Email → CTA slot fills 8th cell)
+  const servicesOrder = ['it-consulting', 'infrastructure', 'managed-it', 'cybersecurity', 'cloud', 'elv', 'email-solutions']
 
   const categories = Object.entries(serviceCategories)
 
@@ -120,6 +148,7 @@ export default function Header() {
 
       {/* Main nav — WHITE BACKGROUND */}
       <nav
+        ref={navRef}
         className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-[0_4px_20px_-6px_rgba(8,20,52,0.18)]' : ''}`}
         style={{ background: '#ffffff', borderBottom: '1px solid rgba(15,36,95,0.08)' }}
       >
@@ -134,12 +163,12 @@ export default function Header() {
                 key={l.label} 
                 className="relative" 
                 onMouseEnter={() => {
-                  if (l.mega) setServicesOpen(true)
-                  if (l.dropdown) setEventITOpen(true)
+                  if (l.mega) openServices()
+                  if (l.dropdown) openEventIT()
                 }} 
                 onMouseLeave={() => {
-                  if (l.mega) setServicesOpen(false)
-                  if (l.dropdown) setEventITOpen(false)
+                  if (l.mega) scheduleCloseServices()
+                  if (l.dropdown) scheduleCloseEventIT()
                 }}
               >
                 <Link 
@@ -153,101 +182,6 @@ export default function Header() {
                   {l.label}
                   {(l.mega || l.dropdown) && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
-                
-                {/* Services Mega Menu — SOLID WHITE */}
-                {l.mega && servicesOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[1100px] p-7 rounded-xl" style={{ background: '#ffffff', border: '1px solid #E5E7EB', boxShadow: '0 25px 60px -15px rgba(8,20,52,0.28)', maxHeight: '85vh', overflowY: 'auto' }}>
-                    <div className="grid grid-cols-3 gap-6">
-                      {categories.map(([slug, cat]) => {
-                        const Ic = iconMap[cat.icon] || Server
-                        const categoryLabel = navLabels[slug]?._category || cat.name
-                        return (
-                          <div key={slug} className="space-y-2">
-                            <Link href={`/services/${slug}`} className="flex gap-2.5 p-2.5 rounded-lg hover:bg-[#E87722]/8 transition-colors group">
-                              <Ic className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
-                              <div>
-                                <div className="text-[#0D2B55] text-[13.5px] font-semibold group-hover:text-[#E87722] transition-colors">{categoryLabel}</div>
-                                <div className="text-[#6B7280] text-[11.5px]">{cat.short}</div>
-                              </div>
-                            </Link>
-                            {cat.subpages && Object.keys(cat.subpages).length > 0 && (
-                              <ul className="ml-7 space-y-1.5 border-l pl-3" style={{ borderColor: '#E5E7EB' }}>
-                                {Object.entries(cat.subpages).map(([subSlug, sub]) => {
-                                  const displayLabel = navLabels[slug]?.[subSlug] || sub.h1
-                                  return (
-                                    <li key={subSlug}>
-                                      <Link 
-                                        href={`/services/${slug}/${subSlug}`} 
-                                        className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
-                                      >
-                                        {displayLabel}
-                                      </Link>
-                                    </li>
-                                  )
-                                })}
-                              </ul>
-                            )}
-                          </div>
-                        )
-                      })}
-                    </div>
-                    <Link href="/services" className="flex gap-2 p-3 rounded-lg hover:bg-[#E87722]/10 text-center justify-center items-center mt-5 transition-colors" style={{ borderTop: '1px solid #E5E7EB' }}>
-                      <span className="text-[#E87722] font-semibold text-sm">View All Services <ArrowRight size={14} className="inline"/></span>
-                    </Link>
-                  </div>
-                )}
-                
-                {/* Event IT Dropdown — SOLID WHITE */}
-                {l.dropdown && eventITOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[420px] p-7 rounded-xl" style={{ background: '#ffffff', border: '1px solid #E5E7EB', boxShadow: '0 25px 60px -15px rgba(8,20,52,0.28)' }}>
-                    <div className="space-y-2">
-                      <div className="flex gap-2.5 p-2.5 rounded-lg">
-                        <Calendar className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
-                        <div>
-                          <div className="text-[#0D2B55] text-[13.5px] font-semibold">Event IT Infrastructure</div>
-                          <div className="text-[#6B7280] text-[11.5px]">Mission-critical IT infrastructure for world-class events</div>
-                        </div>
-                      </div>
-                      <ul className="ml-7 space-y-1.5 border-l pl-3" style={{ borderColor: '#E5E7EB' }}>
-                        <li>
-                          <Link 
-                            href="/event-it/portfolio" 
-                            className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
-                          >
-                            Major Events Portfolio
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/event-it/event-wifi" 
-                            className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
-                          >
-                            High-Density Event WiFi
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/event-it/temporary-data-centres" 
-                            className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
-                          >
-                            Temporary Data Centres
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href="/event-it/event-cctv" 
-                            className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
-                          >
-                            Event CCTV & Security
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <Link href="/contact" className="flex gap-2 p-3 rounded-lg hover:bg-[#E87722]/10 text-center justify-center items-center mt-5 transition-colors" style={{ borderTop: '1px solid #E5E7EB' }}>
-                      <span className="text-[#E87722] font-semibold text-sm">Plan Your Event IT <ArrowRight size={14} className="inline"/></span>
-                    </Link>
-                  </div>
-                )}
               </li>
             ))}
           </ul>
@@ -263,6 +197,138 @@ export default function Header() {
           </div>
         </div>
       </nav>
+
+      {/* Services Mega Menu — contained card, desktop only (≥ lg) */}
+      {servicesOpen && (
+        <div
+          className="hidden lg:flex fixed left-0 right-0 z-40 justify-center px-6"
+          style={{ top: `${navBottom}px` }}
+          onMouseEnter={openServices}
+          onMouseLeave={scheduleCloseServices}
+        >
+          <div
+            className="w-full py-10 px-12"
+            style={{
+              maxWidth: '1280px',
+              background: '#ffffff',
+              borderLeft: '1px solid #E5E7EB',
+              borderRight: '1px solid #E5E7EB',
+              borderBottom: '1px solid #E5E7EB',
+              borderRadius: '0 0 14px 14px',
+              boxShadow: '0 24px 60px -15px rgba(8,20,52,0.25)',
+              maxHeight: 'calc(100vh - 120px)',
+              overflowY: 'auto',
+            }}
+          >
+            {/* 4-col at xl (1280+), 3-col at lg (1024-1279) */}
+            <div className="grid grid-cols-3 xl:grid-cols-4 gap-10">
+              {servicesOrder.map((slug) => {
+                const cat = serviceCategories[slug]
+                if (!cat) return null
+                const Ic = iconMap[cat.icon] || Server
+                const categoryLabel = navLabels[slug]?._category || cat.name
+                return (
+                  <div key={slug} className="space-y-2.5">
+                    <Link href={`/services/${slug}`} className="flex gap-2.5 p-2.5 -ml-2.5 rounded-lg hover:bg-[#E87722]/8 transition-colors group">
+                      <Ic className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
+                      <div>
+                        <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">{categoryLabel}</div>
+                        <div className="text-[#6B7280] text-[11.5px] mt-0.5">{cat.short}</div>
+                      </div>
+                    </Link>
+                    {cat.subpages && Object.keys(cat.subpages).length > 0 && (
+                      <ul className="ml-7 space-y-1.5 border-l pl-3" style={{ borderColor: '#E5E7EB' }}>
+                        {Object.entries(cat.subpages).map(([subSlug, sub]) => {
+                          const displayLabel = navLabels[slug]?.[subSlug] || sub.h1
+                          return (
+                            <li key={subSlug}>
+                              <Link 
+                                href={`/services/${slug}/${subSlug}`} 
+                                className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
+                              >
+                                {displayLabel}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                )
+              })}
+
+              {/* CTA card — 8th cell at xl, spans 2 cols at lg (fills row neatly with Email Solutions) */}
+              <div
+                className="col-span-2 xl:col-span-1 p-5 flex flex-col justify-between"
+                style={{
+                  background: 'linear-gradient(135deg, #F3F6FC 0%, #EAEFF9 100%)',
+                  borderRadius: '10px',
+                  border: '1px solid #E5E7EB',
+                }}
+              >
+                <div>
+                  <div className="text-[#0D2B55] text-[15px] font-semibold leading-snug">Need a custom solution?</div>
+                  <div className="text-[#6B7280] text-[13px] mt-1.5">Talk to our enterprise team.</div>
+                </div>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-[#E87722] font-medium text-[13px] mt-3 hover:gap-2 transition-all">
+                  Contact Us <ArrowRight size={14}/>
+                </Link>
+              </div>
+            </div>
+
+            {/* View All Services — bottom link */}
+            <div className="mt-8 pt-5 text-center" style={{ borderTop: '1px solid #E5E7EB' }}>
+              <Link href="/services" className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all">
+                View All Services <ArrowRight size={14}/>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Event IT Dropdown — same contained-card style, single column */}
+      {eventITOpen && (
+        <div
+          className="hidden lg:flex fixed left-0 right-0 z-40 justify-center px-6"
+          style={{ top: `${navBottom}px` }}
+          onMouseEnter={openEventIT}
+          onMouseLeave={scheduleCloseEventIT}
+        >
+          <div
+            className="w-full py-8 px-8"
+            style={{
+              maxWidth: '440px',
+              background: '#ffffff',
+              borderLeft: '1px solid #E5E7EB',
+              borderRight: '1px solid #E5E7EB',
+              borderBottom: '1px solid #E5E7EB',
+              borderRadius: '0 0 14px 14px',
+              boxShadow: '0 24px 60px -15px rgba(8,20,52,0.25)',
+            }}
+          >
+            <div className="space-y-2">
+              <div className="flex gap-2.5 p-2.5 -ml-2.5 rounded-lg">
+                <Calendar className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
+                <div>
+                  <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight">Event IT Infrastructure</div>
+                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Mission-critical IT infrastructure for world-class events</div>
+                </div>
+              </div>
+              <ul className="ml-7 space-y-1.5 border-l pl-3" style={{ borderColor: '#E5E7EB' }}>
+                <li><Link href="/event-it/portfolio" className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block">Major Events Portfolio</Link></li>
+                <li><Link href="/event-it/event-wifi" className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block">High-Density Event WiFi</Link></li>
+                <li><Link href="/event-it/temporary-data-centres" className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block">Temporary Data Centres</Link></li>
+                <li><Link href="/event-it/event-cctv" className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block">Event CCTV & Security</Link></li>
+              </ul>
+            </div>
+            <div className="mt-6 pt-4 text-center" style={{ borderTop: '1px solid #E5E7EB' }}>
+              <Link href="/contact" className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all">
+                Plan Your Event IT <ArrowRight size={14}/>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] flex flex-col" style={{ background: '#ffffff' }}>
