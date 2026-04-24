@@ -497,7 +497,7 @@ function About() {
             ))}
           </div>
           <div className="mt-8">
-            <a href="#contact" className="btn-primary">Talk to an Expert <ArrowRight size={16}/></a>
+            <a href="/contact" className="btn-primary">Talk to an Expert <ArrowRight size={16}/></a>
           </div>
         </div>
         <div className="reveal">
