@@ -41,6 +41,8 @@ export default function CookieBanner() {
     try {
       localStorage.setItem(LS_KEY, choice)
       if (savedPrefs) localStorage.setItem(LS_PREFS, JSON.stringify(savedPrefs))
+      // Notify Analytics and any listener in the same tab
+      window.dispatchEvent(new CustomEvent('ipcare:consent-updated', { detail: { choice, prefs: savedPrefs } }))
     } catch {}
     setShow(false)
   }

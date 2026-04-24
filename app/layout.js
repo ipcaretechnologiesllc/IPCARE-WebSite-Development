@@ -2,36 +2,78 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import RentalShell from '@/components/rental/RentalShell'
 import CookieBanner from '@/components/global/CookieBanner'
+import Analytics from '@/components/global/Analytics'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
 
+const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcares.com'
+const SITE_NAME = 'IP Care Technologies'
+const SITE_TITLE = 'IP Care Technologies — Enterprise IT Solutions UAE & Canada'
+const SITE_DESC = 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada. Trusted since 2003. 24/7 SLA. 100M+ users protected.'
+
 export const metadata = {
-  title: 'IP Care Technologies — Enterprise IT Solutions UAE & Canada',
-  description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada. Trusted since 2003. 24/7 SLA. 100M+ users protected.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: '%s | IP Care Technologies',
+  },
+  description: SITE_DESC,
+  applicationName: SITE_NAME,
+  authors: [{ name: 'IP Care Technologies L.L.C.' }],
+  keywords: [
+    'IT services UAE', 'Managed IT Abu Dhabi', 'Cybersecurity UAE', 'SASE UAE',
+    'Zero Trust', 'Event IT Infrastructure', 'Equipment Rental UAE', 'Laptop Rental Dubai',
+    'IT consulting UAE', 'Data center UAE', 'Event WiFi Dubai', 'IP Care',
+  ],
+  category: 'technology',
+  creator: 'IP Care Technologies',
+  publisher: 'IP Care Technologies',
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'IP Care Technologies — Enterprise IT Solutions UAE & Canada',
-    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — UAE & Canada',
+    title: SITE_TITLE,
+    description: SITE_DESC,
     url: '/',
-    siteName: 'IP Care Technologies',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'IP Care Technologies' }],
+    siteName: SITE_NAME,
     locale: 'en_US',
     type: 'website',
+    // opengraph-image.png at /app/app/ is picked up automatically by Next.js
   },
-  twitter: { card: 'summary_large_image', title: 'IP Care Technologies', description: 'Enterprise IT Solutions UAE & Canada' },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: 'Enterprise IT Solutions UAE & Canada',
+    creator: '@ipcaretech',
+    site: '@ipcaretech',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  manifest: '/manifest.webmanifest',
+  verification: {
+    // Add Google Search Console / Bing verification tokens here when available
+    // google: 'xxxxxxxxxxxxxxxxxxxxxxxx',
+  },
 }
 
-export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#0F245F' }
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0F245F' },
+    { media: '(prefers-color-scheme: dark)', color: '#0F245F' },
+  ],
+}
 
 export default function RootLayout({ children }) {
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'IP Care Technologies L.L.C.',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae',
-    logo: '/logo.png',
+    url: SITE_URL,
+    logo: `${SITE_URL}/ipcare-logo.png`,
     foundingDate: '2003',
     description: 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.',
     contactPoint: [
@@ -48,12 +90,32 @@ export default function RootLayout({ children }) {
       'https://www.instagram.com/ipcaretech',
     ],
   }
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/blog?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  }
+
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        {/* Default Google Consent Mode v2 state — set BEFORE gtag loads. Analytics denied until user accepts. */}
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});` }} />
+        <link rel="manifest" href="/manifest.webmanifest" />
+      </head>
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <RentalShell>{children}</RentalShell>
         <CookieBanner />
+        <Analytics />
       </body>
     </html>
   )

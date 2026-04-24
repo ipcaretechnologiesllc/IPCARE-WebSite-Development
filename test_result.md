@@ -102,7 +102,18 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the complete Equipment Rental Hub quote-cart user flow on https://ipcare-go-live.preview.emergentagent.com"
+user_problem_statement: |
+  Pre-launch verification for IP Care Technologies B2B website. Phase P2 (SEO/launch, no API keys needed) is complete:
+    - Dynamic sitemap.xml (144 URLs covering all static + dynamic routes: services, rental, blog, event-it, advisory, legal)
+    - robots.txt with Disallow for /api/, /admin/, /_next/, /rental/quote, /unsubscribe
+    - Favicon set: app/icon.png (32x32), app/apple-icon.png (180x180), public/icons/icon-{16,32,48,96,144,192,512}.png
+    - Web manifest (PWA) at /manifest.webmanifest
+    - OG default image (1200x630 branded) at app/opengraph-image.png + twitter-image.png + public/og-default.png
+    - Enhanced metadata in layout.js: title template, keywords, robots+googlebot directives, Twitter card (summary_large_image), canonical, Organization + WebSite JSON-LD
+    - GA4 Analytics component (consent-gated) via Google Consent Mode v2 — default denied, loads only after user accepts on Cookie Banner
+    - Mobile viewport audit passed on 8 key pages at 390px (home, about, contact, services, rental, blog, careers, advisory) — zero horizontal overflow
+  
+  Phase P1 (SendGrid email for 4 forms, reCAPTCHA v3, Careers PDF upload, GA4 measurement ID wire-up) is BLOCKED on user-provided API keys.
 
 frontend:
   - task: "Rental Hub Main Page"
