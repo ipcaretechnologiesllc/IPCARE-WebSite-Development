@@ -97,8 +97,11 @@ export async function GET(request, { params }) {
   if (path === 'rental/quotes') {
     try {
       const db = await getDb()
-      const docs = await db.collection('leads').find({ type: { $in: ['rental-quote', 'quote', 'contact'] } }).sort({ createdAt: -1 }).limit(100).toArray()
-      return jsonOk({ count: docs.length, leads: docs.map(d => ({ ...d, _id: undefined })) })
+      const docs = await db.collection('leads').find(
+        { type: { $in: ['rental-quote', 'quote', 'contact'] } },
+        { projection: { _id: 0, id: 1, reference: 1, type: 1, 'customer.fullName': 1, 'customer.company': 1, 'customer.email': 1, createdAt: 1, status: 1 } }
+      ).sort({ createdAt: -1 }).limit(100).toArray()
+      return jsonOk({ count: docs.length, leads: docs })
     } catch (e) {
       return jsonErr(e.message, 500)
     }
@@ -161,7 +164,7 @@ export async function POST(request, { params }) {
 
       const db = await getDb()
       const coll = db.collection('newsletter_subscribers')
-      const existing = await coll.findOne({ email: clean.email })
+      const existing = await coll.findOne({ email: clean.email }, { projection: { _id: 1 } })
       if (existing) return jsonOk({ duplicate: true })
 
       const token = uuidv4().replace(/-/g, '')
