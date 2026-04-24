@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { jobs } from '@/lib/careers-data'
+import { getRecaptchaToken } from '@/lib/recaptcha-client'
+
+const MAX_CV_BYTES = 5 * 1024 * 1024
 
 function useReveal() {
   useEffect(() => {
@@ -26,21 +29,47 @@ export default function CareersClient() {
   const [selectedJob, setSelectedJob] = useState('')
   const [form, setForm] = useState({ name: '', email: '', role: '', cover: '' })
   const [cv, setCv] = useState(null)
+  const [cvErr, setCvErr] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [err, setErr] = useState('')
+
+  function handleCvSelect(file) {
+    setCvErr('')
+    if (!file) { setCv(null); return }
+    if (file.size > MAX_CV_BYTES) { setCvErr('File too large — max 5 MB.'); setCv(null); return }
+    const name = (file.name || '').toLowerCase()
+    if (!(file.type === 'application/pdf' || name.endsWith('.pdf'))) { setCvErr('Only PDF files are accepted.'); setCv(null); return }
+    setCv(file)
+  }
 
   async function submit(e) {
     e.preventDefault()
-    if (!form.name || !form.email || !form.role) return
+    setErr('')
+    if (!form.name || !form.email || !form.role) { setErr('Please complete required fields.'); return }
     setSubmitting(true)
     try {
-      await fetch('/api/careers/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, cvFileName: cv?.name || null, cvSize: cv?.size || null }),
-      })
+      const recaptchaToken = await getRecaptchaToken('careers')
+      const fd = new FormData()
+      fd.append('name', form.name)
+      fd.append('email', form.email)
+      fd.append('role', form.role)
+      fd.append('cover', form.cover)
+      fd.append('recaptchaToken', recaptchaToken)
+      if (cv) fd.append('cv', cv, cv.name)
+      const res = await fetch('/api/careers/apply', { method: 'POST', body: fd })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.ok) {
+        if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh and try again.')
+        else if (data.error === 'too-many-requests') setErr('Too many submissions from your IP. Please try again in a few minutes.')
+        else if (data.error === 'file-too-large') setErr('CV exceeds 5 MB limit. Please compress and retry.')
+        else if (data.error === 'invalid-pdf-signature' || data.error === 'invalid-file-type') setErr('The uploaded file is not a valid PDF.')
+        else setErr('Submission failed. Please try again or email hr@ipcare.ae.')
+        setSubmitting(false)
+        return
+      }
       setSubmitted(true)
-    } catch {}
+    } catch { setErr('Submission failed. Please try again.') }
     setSubmitting(false)
   }
 
@@ -113,15 +142,18 @@ export default function CareersClient() {
                 </select>
               </div>
               <div>
-                <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">CV Upload (PDF only)</label>
-                <input type="file" accept="application/pdf" onChange={e => setCv(e.target.files?.[0] || null)} className="w-full text-white text-sm file:mr-3 file:px-3 file:py-2 file:rounded file:border-0 file:bg-[#E87722] file:text-white file:font-semibold"/>
-                {cv && <div className="mt-2 mono text-xs text-white/60">\u2713 {cv.name} ({(cv.size/1024).toFixed(0)} KB)</div>}
+                <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">CV Upload (PDF only, max 5MB)</label>
+                <input type="file" accept="application/pdf,.pdf" onChange={e => handleCvSelect(e.target.files?.[0] || null)} className="w-full text-white text-sm file:mr-3 file:px-3 file:py-2 file:rounded file:border-0 file:bg-[#E87722] file:text-white file:font-semibold"/>
+                {cv && !cvErr && <div className="mt-2 mono text-xs text-green-400">✓ {cv.name} ({(cv.size/1024).toFixed(0)} KB)</div>}
+                {cvErr && <div className="mt-2 mono text-xs text-red-400">✗ {cvErr}</div>}
               </div>
               <div>
                 <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Cover Note</label>
                 <textarea value={form.cover} onChange={e => setForm(f => ({ ...f, cover: e.target.value }))} rows={5} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.15)' }} placeholder="Tell us why you’d be a great fit."/>
               </div>
               <button type="submit" disabled={submitting} className="btn-primary w-full justify-center disabled:opacity-60">{submitting ? 'Submitting...' : <>Submit Application <Icons.ArrowRight size={14}/></>}</button>
+              {err && <div className="text-red-400 text-sm p-3 rounded" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)' }}>{err}</div>}
+              <div className="mono text-[10px] text-white/40 uppercase tracking-wider text-center pt-2">Protected by Google reCAPTCHA v3</div>
             </form>
           )}
         </div>

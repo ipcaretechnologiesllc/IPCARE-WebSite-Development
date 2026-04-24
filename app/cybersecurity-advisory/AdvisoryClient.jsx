@@ -87,7 +87,7 @@ function Hero() {
                 <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Enterprise Engagements</div>
               </div>
             </div>
-            <Link href="/#contact" className="btn-primary text-sm inline-flex items-center gap-2">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
+            <Link href="/contact" className="btn-primary text-sm inline-flex items-center gap-2">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
           </div>
 
           {/* Card 2 - Tanveer Ahmed */}
@@ -388,7 +388,7 @@ function BottomCTA() {
               <div key={i} className="px-3 py-3 rounded-lg text-center mono text-xs text-white/80" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>{slot}</div>
             ))}
           </div>
-          <Link href="/#contact" className="btn-primary w-full justify-center">Book a Call <Icons.ArrowRight size={16}/></Link>
+          <Link href="/contact" className="btn-primary w-full justify-center">Book a Call <Icons.ArrowRight size={16}/></Link>
         </div>
 
         <div className="flex flex-wrap gap-4 justify-center text-white/50 text-xs mono uppercase tracking-wider reveal">

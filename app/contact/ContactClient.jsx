@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
+import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
 
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
 
 export default function ContactClient() {
   const [tab, setTab] = useState('general')
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', country: 'UAE', service: '', message: '', recaptcha: false })
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', country: 'UAE', service: '', message: '', agree: false })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [err, setErr] = useState('')
@@ -17,10 +18,23 @@ export default function ContactClient() {
     e.preventDefault()
     setErr('')
     if (!form.name || !form.company || !form.email || !form.phone) { setErr('Please complete required fields.'); return }
-    if (!form.recaptcha) { setErr('Please verify you are not a robot.'); return }
+    if (!form.agree) { setErr('Please agree to the privacy policy before continuing.'); return }
     setSubmitting(true)
     try {
-      await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, tab }) })
+      const recaptchaToken = await getRecaptchaToken('contact')
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, tab, recaptchaToken }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.ok) {
+        if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh the page and try again.')
+        else if (data.error === 'too-many-requests') setErr('Too many submissions from your IP. Please try again in a few minutes.')
+        else setErr('Submission failed, please try again.')
+        setSubmitting(false)
+        return
+      }
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again.') }
     setSubmitting(false)
@@ -65,9 +79,9 @@ export default function ContactClient() {
                   </div>
                   <div><L>Message</L><textarea value={form.message} onChange={e => setForm(f => ({...f, message:e.target.value}))} rows={4} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={iS}/></div>
                   <div className="flex items-center gap-3 p-3 rounded" style={iS}>
-                    <input type="checkbox" checked={form.recaptcha} onChange={e => setForm(f => ({...f, recaptcha:e.target.checked}))} className="accent-[#E87722]"/>
-                    <span className="text-white/80 text-sm flex-1">I’m not a robot</span>
-                    <div className="mono text-[10px] text-white/40 uppercase tracking-wider">reCAPTCHA</div>
+                    <input type="checkbox" checked={form.agree} onChange={e => setForm(f => ({...f, agree:e.target.checked}))} className="accent-[#E87722]"/>
+                    <span className="text-white/80 text-sm flex-1">I agree to the privacy policy and consent to be contacted about this enquiry.</span>
+                    <div className="mono text-[10px] text-white/40 uppercase tracking-wider" title={isRecaptchaConfigured() ? 'Protected by Google reCAPTCHA v3' : 'reCAPTCHA not configured'}>reCAPTCHA v3</div>
                   </div>
                   {err && <div className="text-red-400 text-sm p-3 rounded" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)' }}>{err}</div>}
                   <button type="submit" disabled={submitting} className="btn-primary w-full justify-center disabled:opacity-60">{submitting ? 'Sending...' : <>Send Message <Icons.ArrowRight size={14}/></>}</button>

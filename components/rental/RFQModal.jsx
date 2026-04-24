@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import * as Icons from 'lucide-react'
+import { getRecaptchaToken } from '@/lib/recaptcha-client'
 
 export default function RFQModal({ onClose, onSuccess, items }) {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [reference, setReference] = useState('')
 
   const set = (k, v) => setForm(prev => ({ ...prev, [k]: v }))
 
@@ -24,12 +26,21 @@ export default function RFQModal({ onClose, onSuccess, items }) {
     if (!form.agree) { setError('Please accept the terms to continue.'); return }
     setSubmitting(true)
     try {
+      const recaptchaToken = await getRecaptchaToken('rental_quote')
       const res = await fetch('/api/rental/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, phone: `${form.phoneCountry} ${form.phone}`, items }),
+        body: JSON.stringify({ ...form, phone: `${form.phoneCountry} ${form.phone}`, items, recaptchaToken }),
       })
-      if (!res.ok) throw new Error('Submission failed')
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data.ok) {
+        if (data.error === 'captcha-failed') setError('Security check failed. Please refresh the page and try again.')
+        else if (data.error === 'too-many-requests') setError('Too many submissions from your IP. Please try again in a few minutes.')
+        else setError('Something went wrong — please try again or call us directly.')
+        setSubmitting(false)
+        return
+      }
+      setReference(data.reference || '')
       setSubmitted(true)
       setTimeout(() => { onSuccess?.() }, 3200)
     } catch (err) {
@@ -57,7 +68,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
             </div>
             <h3 className="text-white text-2xl font-bold mb-3">Quote request received!</h3>
             <p className="body-text mb-6">Thank you — our rental team will email you a tailored quote within <span className="text-[#E87722] font-semibold">4 business hours</span>. We&apos;ve sent a confirmation to <span className="text-white">{form.email}</span>.</p>
-            <p className="mono text-xs text-white/50">Reference: <span className="text-white/80">IPC-{Date.now().toString().slice(-8)}</span></p>
+            <p className="mono text-xs text-white/50">Reference: <span className="text-white/80">{reference || 'pending'}</span></p>
           </div>
         ) : (
           <form onSubmit={submit} className="p-6 space-y-4">
