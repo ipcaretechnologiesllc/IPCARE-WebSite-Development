@@ -7,7 +7,7 @@ import requests
 import random
 
 # Configuration
-BASE_URL = "https://ipcare-go-live.preview.emergentagent.com"
+BASE_URL = "https://repo-sync-73.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 def test_careers_with_empty_file():

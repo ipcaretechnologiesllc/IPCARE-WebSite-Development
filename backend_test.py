@@ -17,7 +17,7 @@ from datetime import datetime
 import re
 
 # Configuration
-BASE_URL = "https://ipcare-go-live.preview.emergentagent.com"
+BASE_URL = "https://repo-sync-73.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 MONGO_URL = "mongodb://localhost:27017"
 DB_NAME = "ipcare"
