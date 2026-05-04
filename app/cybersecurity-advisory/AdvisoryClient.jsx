@@ -305,7 +305,7 @@ function KnowledgeBase() {
               <h3 className="text-white font-semibold text-base md:text-lg leading-snug mb-6 group-hover:text-[#E87722] transition-colors">{a.title}</h3>
               <div className="flex items-center justify-between pt-4 border-t border-white/5">
                 <span className="mono text-[10px] text-white/50 uppercase tracking-wider">{a.date}</span>
-                <span className="inline-flex items-center gap-1 text-[#1B6CA8] text-xs font-semibold group-hover:gap-2 transition-all">Read <Icons.ArrowRight size={12}/></span>
+                <span className="inline-flex items-center gap-1 text-[#E87722] text-xs font-semibold px-2.5 py-1 rounded-md border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2 transition-all">Read <Icons.ArrowRight size={12}/></span>
               </div>
             </article>
           ))}

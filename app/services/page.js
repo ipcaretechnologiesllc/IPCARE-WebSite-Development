@@ -100,7 +100,7 @@ export default function ServicesHub() {
                     </div>
                   )}
                   
-                  <Link href={`/services/${slug}`} className="mt-6 inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm group-hover:gap-2.5 transition-all">
+                  <Link href={`/services/${slug}`} className="mt-6 inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
                     View All {c.name} <Icons.ArrowRight size={14}/>
                   </Link>
                 </div>

@@ -290,7 +290,7 @@ function Services() {
               </div>
               <h3 className="text-white text-xl font-semibold mb-2">{s.name}</h3>
               <p className="body-text text-sm leading-relaxed mb-5">{s.d}</p>
-              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#1B6CA8] font-semibold text-sm hover:gap-2.5 transition-all">
+              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
                 Learn More <ArrowRight size={14}/>
               </a>
             </div>
@@ -570,7 +570,7 @@ function BlogTeaser() {
                 <h3 className="text-white font-semibold text-lg leading-snug mb-2">{p.title}</h3>
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-white/50 text-xs">{p.date}</span>
-                  <span className="inline-flex items-center gap-1 text-[#1B6CA8] text-sm font-semibold group-hover:gap-2 transition-all">Read More <ArrowRight size={13}/></span>
+                  <span className="inline-flex items-center gap-1 text-[#E87722] text-sm font-semibold px-3 py-1.5 rounded-md border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2 transition-all">Read More <ArrowRight size={13}/></span>
                 </div>
               </div>
             </article>

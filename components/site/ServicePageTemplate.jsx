@@ -169,13 +169,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
             </div>
             <div className="grid md:grid-cols-3 gap-5">
               {related.map((r, i) => (
-                <Link key={r.slug} href={`/services/${r.slug}`} className="glass-card p-7 block reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                <Link key={r.slug} href={`/services/${r.slug}`} className="glass-card p-7 block reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
                     <Ic name={r.icon} size={22} className="text-[#E87722]"/>
                   </div>
                   <h3 className="text-white text-lg font-semibold mb-2">{r.name}</h3>
                   <p className="body-text text-sm mb-4">{r.short}</p>
-                  <span className="inline-flex items-center gap-1.5 text-[#1B6CA8] text-sm font-semibold">Explore <Icons.ArrowRight size={14}/></span>
+                  <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Explore <Icons.ArrowRight size={14}/></span>
                 </Link>
               ))}
             </div>

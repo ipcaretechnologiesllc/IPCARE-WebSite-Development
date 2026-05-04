@@ -154,7 +154,7 @@ export default function EventITPage() {
                       <span>{event.year}</span>
                     </div>
                     <p className="body-text text-sm mb-4">{event.tech}</p>
-                    <span className="inline-flex items-center gap-1.5 text-[#1B6CA8] text-sm font-semibold group-hover:gap-2.5 transition-all">
+                    <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">
                       View Case Study <Icons.ArrowRight size={14}/>
                     </span>
                   </div>
