@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   ArrowRight, Menu, X, Mail,
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
@@ -68,6 +69,7 @@ const SOCIAL = {
 }
 
 export default function Header() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
@@ -76,6 +78,14 @@ export default function Header() {
   const [navBottom, setNavBottom] = useState(108)
   const servicesCloseTimer = useRef(null)
   const eventITCloseTimer = useRef(null)
+
+  // Active when pathname matches the link href.
+  // Home ("/") requires exact match. All others: exact OR startsWith(href + '/').
+  const isActive = (href) => {
+    if (!pathname) return false
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(href + '/')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -137,6 +147,7 @@ export default function Header() {
             <span className="flex items-center gap-1.5"><UAEFlag /><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
             <span className="flex items-center gap-1.5"><CanadaFlag /><a href="tel:+14167860782" className="hover:text-white">+1 416 786 0782</a></span>
             <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
+            <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ca" className="hover:text-white">info@ipcare.ca</a></span>
           </div>
           <div className="flex items-center gap-3">
             <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/75 hover:text-white transition-colors"><FaFacebookF size={20}/></a>
@@ -174,7 +185,7 @@ export default function Header() {
                 <Link 
                   href={l.href} 
                   className={`px-3.5 py-2 text-[14px] font-medium transition-colors flex items-center gap-1 ${
-                    l.label === 'Cyber Advisory' 
+                    isActive(l.href)
                       ? 'text-[#E87722] hover:text-[#E87722] font-semibold' 
                       : 'text-[#0D2B55] hover:text-[#E87722]'
                   }`}

@@ -188,6 +188,15 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: |
+      [2026-05-04] Pre-launch UI cleanup batch (frontend-only, no backend impact):
+        FIX 1: Top dark info strip now shows BOTH info@ipcare.ae AND info@ipcare.ca (mailto links). Header.jsx.
+        FIX 2: Active-link logic rewritten using usePathname() + isActive() helper. Orange now ONLY when href === pathname (exact for "/", or pathname.startsWith(href + "/")). Verified: navy on /, /about, /services, etc.; orange on /cybersecurity-advisory. Header.jsx.
+        FIX 3: Stripped " in UAE"/" in Abu Dhabi" suffix from 30 sub-page h1 values in lib/services-data.js (parent category h1 preserved). Cascades to /services bullets, /services/[category] sub-grid, and individual sub-page h1.
+        FIX 4: /about Journey converted from horizontal-scroll flex to grid (lg:grid-cols-9, sm:grid-cols-3, grid-cols-2). All 9 milestones visible in one row at desktop (verified: body horizontal overflow = 0px). Orange ::-webkit-scrollbar-thumb that appeared as a "progress bar" is gone since no scroll container exists.
+      No backend changes. No retesting required.
+
+  - agent: "main"
+    message: |
       P1 implementation complete in dev/mock mode. All 4 form endpoints wired to SendGrid (mocked when SENDGRID_API_KEY missing), reCAPTCHA v3 verify (bypassed when RECAPTCHA_SECRET_KEY missing), rate limiting (5/IP/10min), input sanitization, and Careers PDF upload with 5MB + magic-byte check.
 
       Backend verification already done via curl (see status_history). Please run deep_testing_backend_nextjs to cover:

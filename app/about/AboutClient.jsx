@@ -62,15 +62,16 @@ export default function AboutClient() {
       <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-14 reveal"><div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Journey</div><h2 className="text-white text-3xl md:text-5xl font-bold">From 2003 to 2026</h2></div>
-          <div className="overflow-x-auto pb-4">
-            <div className="flex gap-4 min-w-max px-2 relative">
-              <div className="absolute top-7 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.4), transparent)' }}/>
+          <div className="relative">
+            {/* Connector line — full row, desktop only (single-row layout) */}
+            <div className="hidden lg:block absolute top-7 left-0 right-0 h-px pointer-events-none" style={{ background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.4), transparent)' }}/>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-4">
               {timeline.map((t, i) => (
-                <div key={t.year} className="relative w-[280px] flex-shrink-0 reveal" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div key={t.year} className="relative reveal" style={{ transitionDelay: `${i * 60}ms` }}>
                   <div className="w-14 h-14 rounded-full mx-auto flex items-center justify-center text-white font-bold mono mb-4 relative z-10" style={{ background: '#E87722', boxShadow: '0 0 0 5px rgba(232,119,34,0.15)' }}>{t.year}</div>
-                  <div className="glass-card p-5 text-center">
-                    <h3 className="text-white font-semibold text-base mb-2 leading-tight">{t.title}</h3>
-                    <p className="body-text text-xs leading-relaxed">{t.desc}</p>
+                  <div className="glass-card p-4 text-center">
+                    <h3 className="text-white font-semibold text-sm mb-2 leading-tight break-words">{t.title}</h3>
+                    <p className="body-text text-xs leading-relaxed break-words">{t.desc}</p>
                   </div>
                 </div>
               ))}
