@@ -1,70 +1,104 @@
 'use client'
 
-// GA4 + Google Consent Mode v2 wrapper.
-// Loads gtag.js ONLY after the visitor grants analytics consent (via Cookie Banner).
-// We keep consent in localStorage ('ipcare_cookie_consent' + 'ipcare_cookie_prefs') — see CookieBanner.jsx.
+// GA4 + Google Consent Mode v2 wrapper (Google-recommended pattern).
+//
+// gtag.js is loaded on EVERY page so Google's tag detector and GA4 modeled-conversions
+// (cookieless pings) work. All storage consent categories are defaulted to "denied"
+// in /app/app/layout.js BEFORE this script loads. When the visitor clicks
+// Accept All (or toggles Analytics in Manage Preferences) we send a
+// gtag('consent', 'update', { analytics_storage: 'granted', ... }) call.
+//
+// Consent state is persisted in localStorage by CookieBanner.jsx:
+//   ipcare_cookie_consent  = 'accepted' | 'rejected'
+//   ipcare_cookie_prefs    = JSON { analytics: bool, marketing: bool, ... }
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Script from 'next/script'
 
 const LS_KEY = 'ipcare_cookie_consent'
 const LS_PREFS = 'ipcare_cookie_prefs'
 
+function readConsent() {
+  try {
+    const choice = typeof window !== 'undefined' ? localStorage.getItem(LS_KEY) : null
+    if (choice === 'rejected') {
+      return { analytics: false, marketing: false }
+    }
+    if (choice === 'accepted') {
+      const prefsRaw = localStorage.getItem(LS_PREFS)
+      if (prefsRaw) {
+        try {
+          const p = JSON.parse(prefsRaw) || {}
+          return { analytics: !!p.analytics, marketing: !!p.marketing }
+        } catch {
+          return { analytics: true, marketing: true }
+        }
+      }
+      // Plain "Accept All" with no prefs stored → all granted
+      return { analytics: true, marketing: true }
+    }
+    return { analytics: false, marketing: false }
+  } catch {
+    return { analytics: false, marketing: false }
+  }
+}
+
+function pushConsentUpdate({ analytics, marketing }) {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return
+  window.gtag('consent', 'update', {
+    analytics_storage: analytics ? 'granted' : 'denied',
+    ad_storage: marketing ? 'granted' : 'denied',
+    ad_user_data: marketing ? 'granted' : 'denied',
+    ad_personalization: marketing ? 'granted' : 'denied',
+  })
+}
+
 export default function Analytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
-  const [allowed, setAllowed] = useState(false)
 
   useEffect(() => {
     if (!measurementId) return
 
-    const read = () => {
-      try {
-        const choice = localStorage.getItem(LS_KEY)
-        if (choice === 'rejected') return false
-        if (choice === 'accepted') {
-          // If user used 'Manage Preferences', check analytics flag
-          const prefsRaw = localStorage.getItem(LS_PREFS)
-          if (prefsRaw) {
-            try { return !!JSON.parse(prefsRaw)?.analytics } catch { return true }
-          }
-          return true
-        }
-        return false
-      } catch { return false }
+    // On mount, sync any previously-stored consent state to gtag.
+    const apply = () => pushConsentUpdate(readConsent())
+    // Small delay so gtag has a chance to load before first update.
+    const t = setTimeout(apply, 300)
+
+    const onStorage = (e) => {
+      if (e.key === LS_KEY || e.key === LS_PREFS) apply()
     }
+    const onCustom = () => apply()
 
-    setAllowed(read())
-
-    // Listen for preference changes (same-tab via custom event, cross-tab via storage)
-    const onStorage = (e) => { if (e.key === LS_KEY || e.key === LS_PREFS) setAllowed(read()) }
-    const onCustom = () => setAllowed(read())
     window.addEventListener('storage', onStorage)
     window.addEventListener('ipcare:consent-updated', onCustom)
     return () => {
+      clearTimeout(t)
       window.removeEventListener('storage', onStorage)
       window.removeEventListener('ipcare:consent-updated', onCustom)
     }
   }, [measurementId])
 
-  if (!measurementId || !allowed) return null
+  if (!measurementId) return null
 
   return (
     <>
-      <Script id="ga4-src" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`} />
+      {/* Load gtag.js on every page so Google can detect the tag and collect
+          Consent Mode v2 cookieless pings. Storage categories remain DENIED
+          (set in layout.js) until the visitor accepts via the Cookie Banner. */}
+      <Script
+        id="ga4-src"
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+      />
       <Script id="ga4-init" strategy="afterInteractive">{`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        // Consent Mode v2 — user has granted analytics
-        gtag('consent', 'default', {
-          ad_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-          analytics_storage: 'granted',
-          functionality_storage: 'granted',
-          security_storage: 'granted'
-        });
+        window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', '${measurementId}', { anonymize_ip: true });
+        gtag('config', '${measurementId}', {
+          anonymize_ip: true,
+          send_page_view: true
+        });
       `}</Script>
     </>
   )
