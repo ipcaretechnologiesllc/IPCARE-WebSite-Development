@@ -53,8 +53,16 @@ function pushConsentUpdate({ analytics, marketing }) {
   })
 }
 
+// Hardcoded GA4 measurement ID for IP Care Technologies.
+// We intentionally hardcode (vs. NEXT_PUBLIC_ env var) because NEXT_PUBLIC_*
+// vars are baked in at build time — if the production build runs without
+// the var set, the tag silently disappears. Hardcoding guarantees the tag
+// ships in every build, every environment.
+const GA4_MEASUREMENT_ID = 'G-YY2Q2629E7'
+
 export default function Analytics() {
-  const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
+  // Allow env var to override the hardcoded ID (useful for staging / different GA4 properties)
+  const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID
 
   useEffect(() => {
     if (!measurementId) return
