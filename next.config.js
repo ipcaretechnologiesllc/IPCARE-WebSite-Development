@@ -40,6 +40,24 @@ const nextConfig = {
   // 301 preserves SEO equity from any external backlinks / search index entries.
   async redirects() {
     return [
+      // ─── Canonical domain strategy ────────────────────────────────────────
+      // ipcares.com is the legacy/secondary domain. All requests get
+      // permanently (308) redirected to the equivalent path on ipcare.ae.
+      // We do this at next.config level (edge) rather than in middleware
+      // for better performance and to keep middleware focused on pathname injection.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'ipcares.com' }],
+        destination: 'https://ipcare.ae/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.ipcares.com' }],
+        destination: 'https://ipcare.ae/:path*',
+        permanent: true,
+      },
+
       // Office / location pages → unified Contact page (which has both Abu Dhabi + Toronto offices)
       { source: '/office-location.php', destination: '/contact', permanent: true },
       { source: '/office-locations.php', destination: '/contact', permanent: true },

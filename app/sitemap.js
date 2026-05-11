@@ -1,12 +1,38 @@
+import { headers } from 'next/headers'
 import { articles } from '@/lib/blog-data'
 import { rentalCategories, getAllProductParams } from '@/lib/rental-data'
 import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
 import { events, getAllEventSubSlugs } from '@/lib/event-it-data'
 import { getAllAdvisorySlugs, kbArticles } from '@/lib/cyber-advisory-data'
 
-const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcares.com').replace(/\/$/, '')
+// Per-domain canonical base. The sitemap MUST be host-aware so each domain
+// serves a sitemap listing only its own URLs:
+//   https://ipcare.ae/sitemap.xml  →  ipcare.ae URLs only
+//   https://ipcare.ca/sitemap.xml  →  ipcare.ca URLs only
+//   https://ipcares.com/sitemap.xml → redirected at edge to ipcare.ae (so this
+//     code branch is effectively unreachable from production, but we still
+//     fall through to ipcare.ae as a safety default)
+const CANONICAL_DOMAINS = {
+  'ipcare.ae':       'https://ipcare.ae',
+  'www.ipcare.ae':   'https://ipcare.ae',
+  'ipcare.ca':       'https://ipcare.ca',
+  'www.ipcare.ca':   'https://ipcare.ca',
+  'ipcares.com':     'https://ipcare.ae',
+  'www.ipcares.com': 'https://ipcare.ae',
+}
+const DEFAULT_BASE = 'https://ipcare.ae'
+
+// Force dynamic so the sitemap is generated per-request and can read the host header.
+// (Without this, Next.js would pre-render the sitemap once at build time and the
+//  same XML would be served on every domain — defeating the multi-domain strategy.)
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default function sitemap() {
+  const h = headers()
+  const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
+  const BASE = (CANONICAL_DOMAINS[rawHost] || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_BASE).replace(/\/$/, '')
+
   const now = new Date().toISOString()
 
   // Priority buckets
