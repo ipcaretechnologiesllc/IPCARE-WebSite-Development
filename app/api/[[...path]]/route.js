@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { sanitizeForm, sanitizeText, sanitizeEmail, escapeHtml } from '@/lib/server/sanitize'
 import { rateLimit, getClientIp } from '@/lib/server/ratelimit'
 import { verifyRecaptchaToken } from '@/lib/server/recaptcha'
-import { sendMail } from '@/lib/server/sendgrid'
+import { sendMail } from '@/lib/server/resend'
 import {
   tplContactTeam, tplContactAutoReply,
   tplRentalQuoteTeam, tplRentalQuoteAutoReply,

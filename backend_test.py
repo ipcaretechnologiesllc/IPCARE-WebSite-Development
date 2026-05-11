@@ -608,6 +608,72 @@ class BackendTester:
             self.log_result("Sanitization regression", False, f"Exception: {str(e)}")
             return False
             
+    def test_resend_migration(self):
+        """Test Resend migration - verify mock logs show [Resend][MOCKED] not [SendGrid][MOCKED]"""
+        try:
+            import subprocess
+            
+            # Clear previous logs by reading them
+            subprocess.run(['sudo', 'supervisorctl', 'restart', 'nextjs'], 
+                         capture_output=True, timeout=10)
+            time.sleep(2)  # Wait for restart
+            
+            # Make a request that triggers email sending
+            payload = {
+                "email": f"resend-test-{random.randint(1000,9999)}@example.com",
+                "source": "migration-test"
+            }
+            
+            response = self.session.post(f"{API_BASE}/newsletter/subscribe", json=payload)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('ok') == True and data.get('mocked') == True:
+                    # Check supervisor logs for Resend mock message
+                    time.sleep(1)  # Give logs time to flush
+                    
+                    result = subprocess.run(
+                        ['tail', '-n', '100', '/var/log/supervisor/nextjs.out.log'],
+                        capture_output=True, text=True, timeout=5
+                    )
+                    
+                    logs = result.stdout
+                    
+                    # Check for Resend mock log
+                    if '[Resend][MOCKED]' in logs:
+                        self.log_result("Resend migration - mock logs", True, "Found [Resend][MOCKED] in logs")
+                        
+                        # Verify NO SendGrid references
+                        if '[SendGrid][MOCKED]' in logs or 'SendGrid' in logs:
+                            self.log_result("Resend migration - no SendGrid logs", False, "Found SendGrid references in logs")
+                        else:
+                            self.log_result("Resend migration - no SendGrid logs", True, "No SendGrid references found")
+                    else:
+                        self.log_result("Resend migration - mock logs", False, f"[Resend][MOCKED] not found in logs. Log sample: {logs[-500:]}")
+                else:
+                    self.log_result("Resend migration - mock response", False, f"Expected mocked=true, got: {data}")
+            else:
+                self.log_result("Resend migration - request", False, f"Status: {response.status_code}")
+                
+            # Check source code for SendGrid imports
+            result = subprocess.run(
+                ['grep', '-r', 'sendgrid', '/app/app/', '/app/lib/'],
+                capture_output=True, text=True, timeout=5
+            )
+            
+            if result.returncode == 0:
+                # Found sendgrid references
+                self.log_result("Resend migration - no SendGrid imports", False, f"Found SendGrid references: {result.stdout[:200]}")
+            else:
+                # No sendgrid found (grep returns 1 when no matches)
+                self.log_result("Resend migration - no SendGrid imports", True, "No SendGrid imports in codebase")
+                
+            return True
+            
+        except Exception as e:
+            self.log_result("Resend migration", False, f"Exception: {str(e)}")
+            return False
+            
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting IP Care P1 Backend Testing Suite")
@@ -619,6 +685,7 @@ class BackendTester:
         
         test_methods = [
             self.test_health_endpoint,
+            self.test_resend_migration,  # NEW: Test Resend migration first
             self.test_newsletter_subscribe,
             self.test_contact_form,
             self.test_rental_quote,
