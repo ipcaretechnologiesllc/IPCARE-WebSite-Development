@@ -52,7 +52,9 @@ export async function generateMetadata() {
     metadataBase: new URL(canonicalBase),
     title: {
       default: SITE_TITLE,
-      template: '%s | IP Care Technologies',
+      // Pages already include the brand suffix in their own title strings,
+      // so the template is a pass-through to avoid "… | IP Care | IP Care" duplication.
+      template: '%s',
     },
     description: SITE_DESC,
     applicationName: SITE_NAME,
