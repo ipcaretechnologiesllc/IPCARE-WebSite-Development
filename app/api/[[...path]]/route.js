@@ -193,8 +193,9 @@ export async function POST(request, { params }) {
     // CONTACT — info@ipcare.ae + auto-reply. reCAPTCHA verified.
     // =====================================================================
     if (path === 'contact') {
+      console.log('[contact-debug] handler reached, env check:', { hasResend: !!process.env.RESEND_API_KEY, hasRecaptchaSecret: !!process.env.RECAPTCHA_SECRET_KEY, threshold: process.env.RECAPTCHA_THRESHOLD, hasContactToEmail: !!process.env.CONTACT_TO_EMAIL, mongoUrlSet: !!process.env.MONGO_URL, baseUrlSet: !!process.env.NEXT_PUBLIC_BASE_URL, nodeEnv: process.env.NODE_ENV })
       const { ip, response } = await enforceRateLimit(request, 'contact')
-      if (response) return response
+      if (response) { console.log('[contact-debug] rate-limited, returning early'); return response }
 
       const clean = sanitizeForm(body, {
         name: { type: 'text', maxLen: 120, allowNewlines: false },
@@ -207,27 +208,35 @@ export async function POST(request, { params }) {
         tab: { type: 'text', maxLen: 20, allowNewlines: false },
       })
       if (!clean.name || !clean.email || !clean.company || !clean.phone) {
+        console.log('[contact-debug] missing-required-fields:', { hasName: !!clean.name, hasEmail: !!clean.email, hasCompany: !!clean.company, hasPhone: !!clean.phone })
         return jsonErr('missing-required-fields', 400)
       }
+      console.log('[contact-debug] sanitized OK, fields present')
 
       // reCAPTCHA v3
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'contact', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
       console.log(`[recaptcha] action=contact score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
-      if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
+      console.log('[contact-debug] captcha full result:', JSON.stringify(captcha))
+      if (!captcha.ok) { console.log('[contact-debug] captcha rejected, returning 400'); return jsonErr('captcha-failed', 400, { captcha }) }
 
       const reference = newContactReference()
+      console.log('[contact-debug] reference generated:', reference)
       const db = await getDb()
+      console.log('[contact-debug] db connected')
       const doc = {
         id: uuidv4(), reference, type: 'contact', ...clean,
         createdAt: new Date().toISOString(), ipAddress: ip, userAgent,
         recaptchaScore: captcha.score, recaptchaBypassed: !!captcha.bypassed,
       }
       await db.collection('leads').insertOne(doc)
+      console.log('[contact-debug] lead inserted into MongoDB')
 
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
-      await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['contact', 'team'] })
+      const teamRes = await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['contact', 'team'] })
+      console.log('[contact-debug] team email result:', JSON.stringify(teamRes))
       const auto = tplContactAutoReply({ name: clean.name })
-      await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
+      const autoRes = await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
+      console.log('[contact-debug] auto-reply result:', JSON.stringify(autoRes))
 
       return jsonOk({ reference, recaptchaScore: captcha.score })
     }
@@ -344,6 +353,16 @@ export async function POST(request, { params }) {
     return jsonErr('not-found', 404)
   } catch (e) {
     console.error('[api] route error:', e)
+    try {
+      // Full error dump: includes name, message, stack, cause, statusCode, and every enumerable + non-enumerable prop
+      const dump = { name: e?.name, message: e?.message, stack: e?.stack, cause: e?.cause }
+      for (const k of Object.getOwnPropertyNames(e || {})) {
+        if (!(k in dump)) dump[k] = e[k]
+      }
+      console.error('[contact-debug] FULL ERROR:', JSON.stringify(dump, (k, v) => v instanceof Error ? { name: v.name, message: v.message, stack: v.stack } : v))
+    } catch (logErr) {
+      console.error('[contact-debug] failed to serialize error:', logErr?.message, 'raw:', String(e))
+    }
     return jsonErr(e.message || 'server-error', 500)
   }
 }
