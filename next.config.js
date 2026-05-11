@@ -74,6 +74,7 @@ const nextConfig = {
       { source: '/services.php', destination: '/services', permanent: true },
       { source: '/our-services.php', destination: '/services', permanent: true },
       { source: '/managed-it.php', destination: '/services/managed-it', permanent: true },
+      { source: '/managed-it-services.php', destination: '/services/managed-it', permanent: true },
       { source: '/cyber-security.php', destination: '/cybersecurity-advisory', permanent: true },
       { source: '/cybersecurity.php', destination: '/cybersecurity-advisory', permanent: true },
       { source: '/event-it.php', destination: '/event-it', permanent: true },
@@ -88,6 +89,111 @@ const nextConfig = {
       { source: '/privacy-policy.php', destination: '/privacy-policy', permanent: true },
       { source: '/terms.php', destination: '/terms', permanent: true },
       { source: '/terms-conditions.php', destination: '/terms', permanent: true },
+
+      // ─── IT Consulting ─────────────────────────────────────────────────
+      { source: '/it-consulting.php', destination: '/services/it-consulting', permanent: true },
+      { source: '/it-consultancy.php', destination: '/services/it-consulting', permanent: true },
+      { source: '/technology-strategy.php', destination: '/services/it-consulting/technology-strategy', permanent: true },
+      { source: '/it-assessment.php', destination: '/services/it-consulting/it-assessment', permanent: true },
+      { source: '/digital-transformation.php', destination: '/services/it-consulting/digital-transformation', permanent: true },
+
+      // ─── Infrastructure ────────────────────────────────────────────────
+      { source: '/infrastructure.php', destination: '/services/infrastructure', permanent: true },
+      { source: '/data-center-management.php', destination: '/services/infrastructure/data-centre-management', permanent: true },
+      { source: '/data-centre-management.php', destination: '/services/infrastructure/data-centre-management', permanent: true },
+      { source: '/data-center.php', destination: '/services/infrastructure/data-centre-management', permanent: true },
+      { source: '/virtualization.php', destination: '/services/infrastructure/virtualization', permanent: true },
+      { source: '/hardware-procurement.php', destination: '/services/infrastructure/hardware-procurement', permanent: true },
+
+      // ─── ELV / Physical Security ───────────────────────────────────────
+      { source: '/elv.php', destination: '/services/elv', permanent: true },
+      { source: '/elv-solutions.php', destination: '/services/elv', permanent: true },
+      { source: '/cctv.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/cctv-systems.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/surveillance.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/surveillance-solutions.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/access-control.php', destination: '/services/elv/access-control', permanent: true },
+      { source: '/access-control-systems.php', destination: '/services/elv/access-control', permanent: true },
+      { source: '/gate-barriers.php', destination: '/services/elv/gate-barriers', permanent: true },
+      { source: '/gate-barrier.php', destination: '/services/elv/gate-barriers', permanent: true },
+      { source: '/public-address.php', destination: '/services/elv/public-address-systems', permanent: true },
+      { source: '/public-address-systems.php', destination: '/services/elv/public-address-systems', permanent: true },
+      { source: '/pa-systems.php', destination: '/services/elv/public-address-systems', permanent: true },
+      { source: '/intercom.php', destination: '/services/elv/intercom-systems', permanent: true },
+      { source: '/intercom-systems.php', destination: '/services/elv/intercom-systems', permanent: true },
+      { source: '/video-intercom.php', destination: '/services/elv/intercom-systems', permanent: true },
+      { source: '/structured-cabling.php', destination: '/services/elv/structured-cabling', permanent: true },
+
+      // ─── Managed IT ────────────────────────────────────────────────────
+      { source: '/network-management.php', destination: '/services/managed-it/network-management', permanent: true },
+      { source: '/network-solutions.php', destination: '/services/managed-it/network-management', permanent: true },
+      { source: '/server-management.php', destination: '/services/managed-it/server-management', permanent: true },
+      { source: '/it-support.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
+      { source: '/it-support-help-desk.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
+      { source: '/it-support-helpdesk.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
+      { source: '/helpdesk.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
+      { source: '/sla.php', destination: '/services/managed-it/sla', permanent: true },
+      { source: '/managed-it-abu-dhabi.php', destination: '/services/managed-it/abu-dhabi', permanent: true },
+
+      // ─── Cloud ─────────────────────────────────────────────────────────
+      { source: '/cloud.php', destination: '/services/cloud', permanent: true },
+      { source: '/cloud-services.php', destination: '/services/cloud', permanent: true },
+      { source: '/cloud-server-support.php', destination: '/services/cloud', permanent: true },
+      { source: '/cloud-migration.php', destination: '/services/cloud/migration', permanent: true },
+      { source: '/migration.php', destination: '/services/cloud/migration', permanent: true },
+      { source: '/backup-recovery.php', destination: '/services/cloud/backup-recovery', permanent: true },
+      { source: '/disaster-recovery.php', destination: '/services/cloud/backup-recovery', permanent: true },
+
+      // ─── Cybersecurity (service category) ──────────────────────────────
+      { source: '/security-assessment.php', destination: '/services/cybersecurity/security-assessment', permanent: true },
+      { source: '/vapt.php', destination: '/services/cybersecurity/security-assessment', permanent: true },
+      { source: '/incident-response.php', destination: '/services/cybersecurity/incident-response', permanent: true },
+      { source: '/compliance.php', destination: '/services/cybersecurity/compliance', permanent: true },
+      { source: '/endpoint-protection.php', destination: '/services/cybersecurity/endpoint-protection', permanent: true },
+      { source: '/pam.php', destination: '/services/cybersecurity/pam', permanent: true },
+      { source: '/privileged-access.php', destination: '/services/cybersecurity/pam', permanent: true },
+      { source: '/email-security.php', destination: '/services/cybersecurity/email-security', permanent: true },
+      { source: '/microsoft-entra.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
+      { source: '/microsoft-entra-id.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
+      { source: '/azure-ad.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
+      { source: '/nesa-compliance.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
+      { source: '/nesa.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
+
+      // ─── Cybersecurity Advisory (separate hub) ─────────────────────────
+      { source: '/zero-trust.php', destination: '/cybersecurity-advisory/zero-trust', permanent: true },
+      { source: '/sase.php', destination: '/cybersecurity-advisory/sase', permanent: true },
+      { source: '/cloud-security.php', destination: '/cybersecurity-advisory/cloud-security', permanent: true },
+      { source: '/security-automation.php', destination: '/cybersecurity-advisory/security-automation', permanent: true },
+      { source: '/executive-advisory.php', destination: '/cybersecurity-advisory/executive-advisory', permanent: true },
+
+      // ─── Email Solutions ───────────────────────────────────────────────
+      { source: '/email-solutions.php', destination: '/services/email-solutions', permanent: true },
+      { source: '/google-workspace.php', destination: '/services/email-solutions/google-workspace', permanent: true },
+      { source: '/gsuite.php', destination: '/services/email-solutions/google-workspace', permanent: true },
+      { source: '/email-hosting.php', destination: '/services/email-solutions/email-hosting', permanent: true },
+      { source: '/hybrid-email.php', destination: '/services/email-solutions/hybrid', permanent: true },
+
+      // ─── Rental ────────────────────────────────────────────────────────
+      { source: '/laptop-rental.php', destination: '/rental/laptops-desktops', permanent: true },
+      { source: '/laptops-rental.php', destination: '/rental/laptops-desktops', permanent: true },
+      { source: '/desktop-rental.php', destination: '/rental/laptops-desktops', permanent: true },
+      { source: '/macbook-rental.php', destination: '/rental/macbooks', permanent: true },
+      { source: '/tablet-rental.php', destination: '/rental/tablets-ipads', permanent: true },
+      { source: '/ipad-rental.php', destination: '/rental/tablets-ipads', permanent: true },
+      { source: '/printer-rental.php', destination: '/rental/printers', permanent: true },
+      { source: '/wifi-rental.php', destination: '/rental/event-wifi', permanent: true },
+      { source: '/event-wifi.php', destination: '/rental/event-wifi', permanent: true },
+      { source: '/networking-rental.php', destination: '/rental/networking', permanent: true },
+      { source: '/cctv-rental.php', destination: '/rental/cctv', permanent: true },
+      { source: '/server-rental.php', destination: '/rental/servers', permanent: true },
+      { source: '/testing-equipment-rental.php', destination: '/rental/testing-equipment', permanent: true },
+
+      // ─── No clean equivalent — route to nearest sensible hub ───────────
+      { source: '/mobile-app-development.php', destination: '/services', permanent: true },
+      { source: '/web-development.php', destination: '/services', permanent: true },
+      { source: '/digital-marketing.php', destination: '/services', permanent: true },
+      { source: '/telephony.php', destination: '/services/managed-it/network-management', permanent: true },
+      { source: '/telephony-solutions.php', destination: '/services/managed-it/network-management', permanent: true },
 
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
