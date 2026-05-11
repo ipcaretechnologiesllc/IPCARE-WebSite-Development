@@ -29,9 +29,9 @@ export default function CategoryPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: process.env.NEXT_PUBLIC_BASE_URL + '/rental' },
-      { '@type': 'ListItem', position: 3, name: cat.name, item: process.env.NEXT_PUBLIC_BASE_URL + `/rental/${params.category}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/rental' },
+      { '@type': 'ListItem', position: 3, name: cat.name, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/rental/${params.category}` },
     ],
   }
 

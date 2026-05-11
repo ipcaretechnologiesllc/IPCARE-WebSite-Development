@@ -1,14 +1,14 @@
-import Header from '@/components/site/Header'
+﻿import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
 
 export const metadata = {
   title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed | IP Care Technologies',
-  description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+  description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) â€” Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
     title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed',
-    description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) — Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+    description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) â€” Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
     url: '/cybersecurity-advisory',
     type: 'website',
   },
@@ -17,12 +17,12 @@ export const metadata = {
 const advisoryService = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'The Cyber Adviser — Cybersecurity Advisory',
+  name: 'The Cyber Adviser â€” Cybersecurity Advisory',
   description: 'Enterprise cybersecurity advisory: Zero Trust architecture, SASE transformation, cloud security, executive advisory and security automation.',
   provider: {
     '@type': 'Organization',
     name: 'IP Care Technologies L.L.C.',
-    url: process.env.NEXT_PUBLIC_BASE_URL,
+    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
   },
   areaServed: [
     { '@type': 'Country', name: 'Canada' },

@@ -47,9 +47,9 @@ export default function EventSubPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Event IT', item: process.env.NEXT_PUBLIC_BASE_URL + '/event-it' },
-      { '@type': 'ListItem', position: 3, name: sub.h1, item: process.env.NEXT_PUBLIC_BASE_URL + `/event-it/${params.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Event IT', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/event-it' },
+      { '@type': 'ListItem', position: 3, name: sub.h1, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/event-it/${params.slug}` },
     ],
   }
   const serviceSchema = {
@@ -57,7 +57,7 @@ export default function EventSubPage({ params }) {
     '@type': 'Service',
     name: sub.h1,
     description: sub.metaDescription,
-    provider: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: process.env.NEXT_PUBLIC_BASE_URL },
+    provider: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') },
     areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
   }
 

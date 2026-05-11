@@ -42,10 +42,10 @@ export default function SubPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: process.env.NEXT_PUBLIC_BASE_URL + '/services' },
-      { '@type': 'ListItem', position: 3, name: sub.parentName, item: process.env.NEXT_PUBLIC_BASE_URL + `/services/${params.category}` },
-      { '@type': 'ListItem', position: 4, name: sub.h1, item: process.env.NEXT_PUBLIC_BASE_URL + `/services/${params.category}/${params.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/services' },
+      { '@type': 'ListItem', position: 3, name: sub.parentName, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}` },
+      { '@type': 'ListItem', position: 4, name: sub.h1, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}/${params.slug}` },
     ],
   }
   const serviceSchema = {
@@ -56,7 +56,7 @@ export default function SubPage({ params }) {
     provider: {
       '@type': 'Organization',
       name: 'IP Care Technologies L.L.C.',
-      url: process.env.NEXT_PUBLIC_BASE_URL,
+      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
     },
     areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
   }

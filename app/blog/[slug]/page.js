@@ -28,15 +28,15 @@ export default function ArticlePage({ params }) {
   const articleSchema = {
     '@context': 'https://schema.org', '@type': 'Article',
     headline: a.title, image: [`${a.img}?w=1200&q=85`], datePublished: a.date, author: { '@type': 'Person', name: a.author },
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: process.env.NEXT_PUBLIC_BASE_URL },
+    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') },
     description: a.excerpt,
   }
   const breadcrumb = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: process.env.NEXT_PUBLIC_BASE_URL + '/blog' },
-      { '@type': 'ListItem', position: 3, name: a.title, item: process.env.NEXT_PUBLIC_BASE_URL + `/blog/${params.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/blog' },
+      { '@type': 'ListItem', position: 3, name: a.title, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/blog/${params.slug}` },
     ],
   }
 

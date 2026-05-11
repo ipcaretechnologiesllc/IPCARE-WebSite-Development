@@ -1,15 +1,15 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { serviceCategories } from '@/lib/services-data'
 
 export const metadata = {
-  title: 'Enterprise IT Solutions & Services — UAE & Canada | IP Care Technologies',
+  title: 'Enterprise IT Solutions & Services â€” UAE & Canada | IP Care Technologies',
   description: 'Comprehensive IT services in UAE and Canada. IT consulting, infrastructure, ELV, managed IT, cloud, cybersecurity, web development, digital marketing and email solutions.',
   alternates: { canonical: '/services' },
   openGraph: {
-    title: 'Enterprise IT Solutions & Services — UAE & Canada | IP Care Technologies',
+    title: 'Enterprise IT Solutions & Services â€” UAE & Canada | IP Care Technologies',
     description: 'Comprehensive IT services in UAE and Canada. IT consulting, infrastructure, ELV, managed IT, cloud, cybersecurity, web development, digital marketing and email solutions.',
     url: '/services',
     type: 'website',
@@ -28,8 +28,8 @@ export default function ServicesHub() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: process.env.NEXT_PUBLIC_BASE_URL + '/services' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/services' },
     ],
   }
   
@@ -56,8 +56,8 @@ export default function ServicesHub() {
               <Icons.Sparkles size={14} className="text-[#E87722]"/>
               <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">Our Services</span>
             </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Enterprise IT Solutions & Services — UAE & Canada</h1>
-            <p className="body-text mt-6 text-base md:text-lg max-w-3xl mx-auto">From strategy to implementation to 24×7 operations — IP Care delivers the complete IT stack for enterprise, government and fast-growth organisations across the UAE and Canada.</p>
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Enterprise IT Solutions & Services â€” UAE & Canada</h1>
+            <p className="body-text mt-6 text-base md:text-lg max-w-3xl mx-auto">From strategy to implementation to 24Ã—7 operations â€” IP Care delivers the complete IT stack for enterprise, government and fast-growth organisations across the UAE and Canada.</p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/contact" className="btn-primary">Get a Free Consultation <Icons.ArrowRight size={16}/></Link>
               <Link href="/about" className="btn-ghost">About IP Care</Link>

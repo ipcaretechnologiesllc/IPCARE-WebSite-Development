@@ -50,10 +50,10 @@ export default function ProductDetailPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: process.env.NEXT_PUBLIC_BASE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: process.env.NEXT_PUBLIC_BASE_URL + '/rental' },
-      { '@type': 'ListItem', position: 3, name: product.categoryName, item: process.env.NEXT_PUBLIC_BASE_URL + `/rental/${params.category}` },
-      { '@type': 'ListItem', position: 4, name: `${product.brand} ${product.model}`, item: process.env.NEXT_PUBLIC_BASE_URL + `/rental/${params.category}/${params.product}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/rental' },
+      { '@type': 'ListItem', position: 3, name: product.categoryName, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/rental/${params.category}` },
+      { '@type': 'ListItem', position: 4, name: `${product.brand} ${product.model}`, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/rental/${params.category}/${params.product}` },
     ],
   }
 
