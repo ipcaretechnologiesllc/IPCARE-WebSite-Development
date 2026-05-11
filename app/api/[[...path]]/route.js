@@ -18,7 +18,11 @@ export const dynamic = 'force-dynamic'
 // ---------- Config ----------
 const INFO_EMAIL = process.env.CONTACT_TO_EMAIL || 'info@ipcare.ae'
 const HR_EMAIL = process.env.CAREERS_TO_EMAIL || 'hr@ipcare.ae'
-const RECAPTCHA_THRESHOLD = Number(process.env.RECAPTCHA_THRESHOLD || 0.5)
+// reCAPTCHA v3 score threshold. Defaults to 0.3 — Google's "catch most bots" recommendation,
+// which is the right value for newly-launched domains where Google hasn't yet learned the
+// site's normal traffic patterns. Raise to 0.5 once you've seen 2-4 weeks of real traffic
+// and confirmed scores are consistently ≥ 0.5 for legitimate users.
+const RECAPTCHA_THRESHOLD = Number(process.env.RECAPTCHA_THRESHOLD || 0.3)
 const MAX_PDF_BYTES = 5 * 1024 * 1024 // 5 MB
 const RL_MAX = 5
 const RL_WINDOW_MS = 10 * 60 * 1000
@@ -208,6 +212,7 @@ export async function POST(request, { params }) {
 
       // reCAPTCHA v3
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'contact', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
+      console.log(`[recaptcha] action=contact score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
       if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
 
       const reference = newContactReference()
@@ -253,6 +258,7 @@ export async function POST(request, { params }) {
       }
 
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'rental_quote', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
+      console.log(`[recaptcha] action=rental_quote score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
       if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
 
       // Sanitise and limit items array
@@ -300,6 +306,7 @@ export async function POST(request, { params }) {
       if (!clean.name || !clean.email || !clean.role) return jsonErr('missing-required-fields', 400)
 
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'careers', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
+      console.log(`[recaptcha] action=careers score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
       if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
 
       const reference = `JOB-${Date.now().toString().slice(-10)}`
