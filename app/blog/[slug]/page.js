@@ -70,11 +70,16 @@ export default function ArticlePage({ params }) {
             </div>
 
             <article className="space-y-5">
-              {a.body.map((b, i) => b.h2 ? (
-                <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{b.h2}</h2>
-              ) : (
-                <p key={i} className="body-text text-base md:text-lg leading-[1.75]">{b.p}</p>
-              ))}
+              {a.body.map((b, i) => {
+                if (b.h2) return <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{b.h2}</h2>
+                if (b.cta) return (
+                  <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
+                    {b.cta.label && <div className="mono text-[10px] uppercase tracking-widest text-[#E87722] mb-1.5">{b.cta.label}</div>}
+                    <div className="text-white text-base md:text-lg font-semibold group-hover:text-[#E87722] transition">{b.cta.text}</div>
+                  </Link>
+                )
+                return <p key={i} className="body-text text-base md:text-lg leading-[1.75]">{b.p}</p>
+              })}
             </article>
 
             {/* Share */}

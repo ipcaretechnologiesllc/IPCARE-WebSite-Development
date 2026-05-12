@@ -125,6 +125,7 @@ export default function RootLayout({ children }) {
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${BRAND_URL}#org`,
     name: 'IP Care Technologies L.L.C.',
     url: BRAND_URL,
     logo: `${BRAND_URL}/ipcare-logo.png`,
@@ -142,6 +143,84 @@ export default function RootLayout({ children }) {
       'https://www.facebook.com/ipcaretech',
       'https://www.linkedin.com/company/ipcaretech',
       'https://www.instagram.com/ipcaretech',
+    ],
+  }
+
+  // LocalBusiness entries — one per physical office. Each is linked back to
+  // the Organization via parentOrganization @id so search engines see a single
+  // brand entity with two trading locations (helps with Local Pack + Maps eligibility).
+  const localBusinessAbuDhabi = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${BRAND_URL}#abu-dhabi`,
+    name: 'IP Care Technologies — Abu Dhabi',
+    parentOrganization: { '@id': `${BRAND_URL}#org` },
+    image: `${BRAND_URL}/ipcare-logo.png`,
+    logo: `${BRAND_URL}/ipcare-logo.png`,
+    url: BRAND_URL,
+    telephone: '+971-2-676-6935',
+    email: 'info@ipcare.ae',
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Salaam Street, Behind Fabrix',
+      postOfficeBoxNumber: '53209',
+      addressLocality: 'Abu Dhabi',
+      addressCountry: 'AE',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 24.4764, longitude: 54.3705 },
+    areaServed: [
+      { '@type': 'City', name: 'Abu Dhabi' },
+      { '@type': 'City', name: 'Dubai' },
+      { '@type': 'City', name: 'Sharjah' },
+      { '@type': 'City', name: 'Al Ain' },
+      { '@type': 'Country', name: 'United Arab Emirates' },
+    ],
+    knowsAbout: ['Managed IT Services', 'Cybersecurity', 'ELV & Physical Security', 'Cloud Services', 'Event IT Infrastructure', 'IT Equipment Rental', 'NESA Compliance', 'ISO 27001', 'ADMCC Certified Installer (Abu Dhabi Monitoring and Control Centre)', 'SIRA Licensed Contractor (Dubai)'],
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
+    ],
+    sameAs: [
+      'https://www.facebook.com/ipcaretech',
+      'https://www.linkedin.com/company/ipcaretech',
+      'https://www.instagram.com/ipcaretech',
+    ],
+  }
+
+  const localBusinessToronto = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': 'https://ipcare.ca#toronto',
+    name: 'IP Care Technologies — Toronto',
+    parentOrganization: { '@id': `${BRAND_URL}#org` },
+    image: `${BRAND_URL}/ipcare-logo.png`,
+    logo: `${BRAND_URL}/ipcare-logo.png`,
+    url: 'https://ipcare.ca',
+    telephone: '+1-416-786-0782',
+    email: 'info@ipcare.ae',
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1 Concorde Gate',
+      addressLocality: 'North York',
+      addressRegion: 'ON',
+      addressCountry: 'CA',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7299, longitude: -79.3309 },
+    areaServed: [
+      { '@type': 'City', name: 'Toronto' },
+      { '@type': 'City', name: 'Mississauga' },
+      { '@type': 'City', name: 'Markham' },
+      { '@type': 'AdministrativeArea', name: 'Ontario' },
+      { '@type': 'Country', name: 'Canada' },
+    ],
+    knowsAbout: ['Managed IT Services', 'Cybersecurity Advisory', 'Cloud Services', 'IT Consulting', 'Microsoft 365', 'Zero Trust'],
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
+    ],
+    sameAs: [
+      'https://www.facebook.com/ipcaretech',
+      'https://www.linkedin.com/company/ipcaretech',
     ],
   }
 
@@ -174,6 +253,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessAbuDhabi) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessToronto) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <RentalShell>{children}</RentalShell>
         <CookieBanner />

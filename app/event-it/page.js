@@ -9,15 +9,23 @@ import * as Icons from 'lucide-react'
 export default function EventITPage() {
   const [portfolioFilter, setPortfolioFilter] = useState('All Events')
 
-  const portfolioCategories = ['All Events', 'UAE Events', 'Global Events']
+  const portfolioCategories = ['All Events', 'Sports', 'Concerts', 'National']
 
   const events = [
-    { name: 'FIFA Club World Cup', location: 'Abu Dhabi, UAE', year: '2021', tech: 'High-density WiFi, Temporary data centre, CCTV surveillance', category: 'UAE Events' },
-    { name: 'UFC Fight Night', location: 'UAE', year: '2022', tech: 'Event WiFi, Live streaming infrastructure, Security systems', category: 'UAE Events' },
-    { name: 'NBA Global Games', location: 'UAE', year: '2023', tech: 'High-density WiFi 6, Point-to-point wireless, NOC setup', category: 'UAE Events' },
-    { name: 'Coldplay World Tour Concert', location: 'UAE', year: '2023', tech: 'Massive WiFi deployment, Structured cabling, Live monitoring', category: 'UAE Events' },
-    { name: 'Corporate Summit', location: 'Canada', year: '2023', tech: 'Event WiFi, Video conferencing, Temporary network', category: 'Global Events' },
-    { name: 'International Product Launch', location: 'Canada', year: '2024', tech: 'High-density WiFi, Streaming setup, Security cameras', category: 'Global Events' },
+    { name: 'FIFA Club World Cup', location: 'Abu Dhabi, UAE', year: '2022', tech: 'High-density WiFi, Temporary data centre, Tournament SOC, CCTV', category: 'Sports' },
+    { name: 'UFC Events in UAE', location: 'Yas Island, Abu Dhabi', year: '2020–2025', tech: 'Arena WiFi, Live streaming infrastructure, Production LAN', category: 'Sports' },
+    { name: 'NBA Abu Dhabi Games', location: 'Etihad Arena', year: '2022, 2023, 2024, 2025', tech: 'High-density WiFi 6E, NOC operations, Broadcast LAN', category: 'Sports' },
+    { name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', tech: 'Aquatic-venue WiFi, Broadcast LAN, Results integration', category: 'Sports' },
+    { name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', tech: 'Arena WiFi, Production LAN, Broadcast uplinks', category: 'Sports' },
+    { name: 'World Tennis League', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', tech: 'Arena WiFi, Hawk-Eye integration, Broadcast LAN', category: 'Sports' },
+    { name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', tech: 'Outdoor venue WiFi, Timing-system network, CCTV', category: 'Sports' },
+    { name: 'Abu Dhabi Pedal Master', location: 'Hudayriat Island', year: '2023', tech: 'Course-side WiFi, PtP microwave, Timing network', category: 'Sports' },
+    { name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', tech: 'Outdoor 60K WiFi, PtP uplinks, RFID backhaul', category: 'Concerts' },
+    { name: 'Saadiyat Nights', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', tech: 'Open-air WiFi, PtP microwave, CCTV', category: 'Concerts' },
+    { name: 'IIFA Awards', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', tech: 'Arena WiFi, Broadcast LAN, Press centre', category: 'Concerts' },
+    { name: 'Ya Salam After Race Concert', location: 'Yas Island, Abu Dhabi', year: '2019–2024', tech: 'Festival WiFi, PtP backhaul, RFID', category: 'Concerts' },
+    { name: 'Eid Al Fitr Concert', location: 'Yas Bay, Abu Dhabi', year: '2023', tech: 'Outdoor concert WiFi, Live stream uplink', category: 'Concerts' },
+    { name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', tech: 'Multi-venue WiFi, Federal CCTV, Government command-centre integration', category: 'National' },
   ]
 
   const services = [
@@ -98,7 +106,7 @@ export default function EventITPage() {
                 Mission-Critical IT Infrastructure for the World's Biggest Events
               </h1>
               <p className="body-text text-lg md:text-xl mb-8">
-                Trusted by FIFA, UFC, NBA and Coldplay — delivering enterprise-grade event technology across UAE & Canada
+                Trusted on FIFA Club World Cup, UFC UAE, NBA Abu Dhabi Games, FINA World Swimming Championship, IIFA Awards, Coldplay, Saadiyat Nights and the UAE Official National Day events — delivering enterprise-grade event technology since 2003
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/contact" className="btn-primary">

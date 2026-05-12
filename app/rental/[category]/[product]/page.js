@@ -29,6 +29,8 @@ export default function ProductDetailPage({ params }) {
   if (!product) notFound()
   const related = getRelatedProducts(params.category, params.product, 3)
 
+  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae')
+  const productUrl = `${BASE}/rental/${params.category}/${params.product}`
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -36,13 +38,29 @@ export default function ProductDetailPage({ params }) {
     brand: { '@type': 'Brand', name: product.brand },
     description: product.specs.join('. '),
     image: [product.image + '?w=1200&q=85'],
+    sku: product.slug,
+    mpn: product.model,
+    category: product.categoryName,
+    url: productUrl,
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'AED',
       lowPrice: product.rates.daily,
       highPrice: product.rates.monthly,
+      offerCount: 3,
       availability: 'https://schema.org/InStock',
-      seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.' },
+      itemCondition: 'https://schema.org/NewCondition',
+      url: productUrl,
+      seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+      areaServed: [
+        { '@type': 'Country', name: 'United Arab Emirates' },
+        { '@type': 'Country', name: 'Canada' },
+      ],
+      priceSpecification: [
+        { '@type': 'UnitPriceSpecification', price: product.rates.daily,   priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'DAY' },   name: 'Daily rental rate' },
+        { '@type': 'UnitPriceSpecification', price: product.rates.weekly,  priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 7, unitCode: 'DAY' },   name: 'Weekly rental rate' },
+        { '@type': 'UnitPriceSpecification', price: product.rates.monthly, priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 30, unitCode: 'DAY' },  name: 'Monthly rental rate' },
+      ],
     },
   }
 

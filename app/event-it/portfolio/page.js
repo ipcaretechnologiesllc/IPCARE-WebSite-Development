@@ -9,21 +9,23 @@ import * as Icons from 'lucide-react'
 export default function EventPortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All')
 
-  const categories = ['All', 'UAE Events', 'Canada Events', 'WiFi Deployments', 'CCTV & Security']
+  const categories = ['All', 'Sports', 'Concerts', 'National', 'WiFi Deployments', 'CCTV & Security']
 
   const events = [
-    { id: 1, name: 'FIFA Club World Cup 2021', location: 'Abu Dhabi, UAE', year: '2021', services: 'High-density WiFi, Temporary data centre', tech: 'HPE Aruba, Cisco', category: ['UAE Events', 'WiFi Deployments'] },
-    { id: 2, name: 'UFC Fight Night', location: 'UAE', year: '2022', services: 'Event WiFi, Live streaming', tech: 'Cisco Meraki, Palo Alto', category: ['UAE Events', 'WiFi Deployments'] },
-    { id: 3, name: 'NBA Global Games', location: 'UAE', year: '2023', services: 'High-density WiFi 6', tech: 'HPE Aruba, Ruckus', category: ['UAE Events', 'WiFi Deployments'] },
-    { id: 4, name: 'Coldplay World Tour', location: 'UAE', year: '2023', services: 'Massive WiFi, Structured cabling', tech: 'HPE Aruba, Fluke', category: ['UAE Events', 'WiFi Deployments'] },
-    { id: 5, name: 'Corporate Summit', location: 'Toronto, Canada', year: '2023', services: 'Event WiFi, Video conferencing', tech: 'Cisco Meraki', category: ['Canada Events', 'WiFi Deployments'] },
-    { id: 6, name: 'Product Launch', location: 'Vancouver, Canada', year: '2024', services: 'WiFi, Streaming, CCTV', tech: 'HPE Aruba, Hikvision', category: ['Canada Events', 'WiFi Deployments', 'CCTV & Security'] },
-    { id: 7, name: 'Trade Show UAE', location: 'Dubai, UAE', year: '2023', services: 'CCTV, Access control', tech: 'Hikvision, Suprema', category: ['UAE Events', 'CCTV & Security'] },
-    { id: 8, name: 'Government Summit', location: 'Abu Dhabi, UAE', year: '2024', services: 'CCTV surveillance, WiFi', tech: 'Axis, HPE Aruba', category: ['UAE Events', 'CCTV & Security'] },
-    { id: 9, name: 'Music Festival', location: 'Canada', year: '2024', services: 'WiFi 7, Point-to-point links', tech: 'Ubiquiti, Ruckus', category: ['Canada Events', 'WiFi Deployments'] },
-    { id: 10, name: 'Sports Tournament', location: 'UAE', year: '2024', services: 'WiFi, CCTV, Data centre', tech: 'Cisco, Hikvision', category: ['UAE Events', 'WiFi Deployments', 'CCTV & Security'] },
-    { id: 11, name: 'International Conference', location: 'Canada', year: '2023', services: 'Event WiFi, NOC setup', tech: 'HPE Aruba', category: ['Canada Events', 'WiFi Deployments'] },
-    { id: 12, name: 'Stadium Opening', location: 'UAE', year: '2022', services: 'CCTV, WiFi, Security', tech: 'Hikvision, Cisco', category: ['UAE Events', 'CCTV & Security'] },
+    { id: 1, name: 'FIFA Club World Cup 2022', location: 'Abu Dhabi, UAE', year: '2022', services: 'High-density WiFi, Temporary data centre, Tournament SOC', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments', 'CCTV & Security'] },
+    { id: 2, name: 'UFC Events in UAE (2020–2025)', location: 'Yas Island, Abu Dhabi', year: '2020–2025', services: 'Arena WiFi, Production LAN, Live streaming', tech: 'Cisco Meraki, Palo Alto', category: ['Sports', 'WiFi Deployments'] },
+    { id: 3, name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', services: 'Aquatic-venue WiFi, Broadcast LAN', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'] },
+    { id: 4, name: 'NBA Abu Dhabi Games (2022–2025)', location: 'Etihad Arena, Abu Dhabi', year: '2022, 2023, 2024, 2025', services: 'Arena WiFi 6E, NOC operations', tech: 'HPE Aruba, Ruckus', category: ['Sports', 'WiFi Deployments'] },
+    { id: 5, name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', services: 'Arena WiFi, Broadcast uplinks', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'] },
+    { id: 6, name: 'World Tennis League (2022, 2023)', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', services: 'Arena WiFi, Hawk-Eye integration', tech: 'Cisco Meraki, HPE Aruba', category: ['Sports', 'WiFi Deployments'] },
+    { id: 7, name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', services: 'Outdoor venue WiFi, Timing-system network', tech: 'HPE Aruba, Fluke', category: ['Sports', 'WiFi Deployments'] },
+    { id: 8, name: 'Abu Dhabi Pedal Master', location: 'Hudayriat Island, Abu Dhabi', year: '2023', services: 'Course-side WiFi, PtP microwave, Timing network', tech: 'Cisco, Ubiquiti', category: ['Sports', 'WiFi Deployments'] },
+    { id: 9, name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', services: 'Multi-venue WiFi, Federal CCTV, Command-centre integration', tech: 'HPE Aruba, Hikvision, Cisco', category: ['National', 'WiFi Deployments', 'CCTV & Security'] },
+    { id: 10, name: 'Ya Salam After Race Concert (2019–2024)', location: 'Yas Island, Abu Dhabi', year: '2019–2024', services: 'Outdoor festival WiFi, PtP backhaul, RFID', tech: 'HPE Aruba, Ruckus', category: ['Concerts', 'WiFi Deployments'] },
+    { id: 11, name: 'IIFA Awards (2022–2024)', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', services: 'Arena WiFi, Broadcast LAN, Press centre', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'] },
+    { id: 12, name: 'Eid Al Fitr Concert 2023', location: 'Yas Bay, Abu Dhabi', year: '2023', services: 'Outdoor concert WiFi, Live stream uplink', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'] },
+    { id: 13, name: 'Saadiyat Nights (2024, 2025)', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', services: 'Open-air WiFi, PtP microwave, CCTV', tech: 'HPE Aruba, Hikvision', category: ['Concerts', 'WiFi Deployments', 'CCTV & Security'] },
+    { id: 14, name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', services: 'Outdoor 60K-attendee WiFi, RFID backhaul', tech: 'HPE Aruba, Fluke', category: ['Concerts', 'WiFi Deployments'] },
   ]
 
   const filteredEvents = activeFilter === 'All' 

@@ -50,11 +50,38 @@ export default function CategoryPage({ params }) {
       { '@type': 'ListItem', position: 3, name: cat.name, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}` },
     ],
   }
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: cat.name,
+    description: cat.metaDescription,
+    serviceType: cat.name,
+    provider: {
+      '@type': 'Organization',
+      name: 'IP Care Technologies L.L.C.',
+      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+    },
+    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}`,
+    hasOfferCatalog: subpages.length > 0 ? {
+      '@type': 'OfferCatalog',
+      name: `${cat.name} sub-services`,
+      itemListElement: subpages.map(([slug, sp]) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: sp.h1 || sp.title,
+          url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}/${slug}`,
+        },
+      })),
+    } : undefined,
+  }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
       <main>
         <ServicePageTemplate

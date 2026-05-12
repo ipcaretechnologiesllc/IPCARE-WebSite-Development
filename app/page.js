@@ -185,7 +185,7 @@ function Hero() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'UFC', 'NBA', 'COLDPLAY']
+  const events = ['FIFA CLUB WORLD CUP', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM', 'UAE NATIONAL DAY', 'EID AL FITR CONCERT', 'PEDAL MASTER']
   return (
     <section 
       className="relative overflow-hidden" 
@@ -422,13 +422,23 @@ function RentalTeaser() {
 /* ---------------- Events Portfolio ---------------- */
 function EventsPortfolio() {
   const events = [
-    { name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'UAE Events', img: 'https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80' },
-    { name: 'UFC Fight Night', loc: 'Yas Island, UAE • 2023', region: 'UAE Events', img: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80' },
-    { name: 'NBA Global Games', loc: 'Toronto, Canada • 2024', region: 'Global Events', img: 'https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=900&q=80' },
-    { name: 'Coldplay World Tour', loc: 'Abu Dhabi • 2024', region: 'Global Events', img: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80' },
+    { name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: 'https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=900&q=80' },
+    { name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020–2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80' },
+    { name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=900&q=80' },
+    { name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80' },
+    { name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80' },
+    { name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80' },
+    { name: 'Mubadala Abu Dhabi Open', loc: 'Zayed Sports City • Annual', region: 'Sports', img: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80' },
+    { name: 'Abu Dhabi Pedal Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80' },
+    { name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80' },
+    { name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=900&q=80' },
+    { name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80' },
+    { name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019–2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&q=80' },
+    { name: 'Eid Al Fitr Concert', loc: 'Yas Bay, Abu Dhabi • 2023', region: 'Concerts', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=900&q=80' },
+    { name: 'UAE Official National Day', loc: 'Multiple venues, UAE • Annual', region: 'National', img: 'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=900&q=80' },
   ]
   const [filter, setFilter] = useState('All Events')
-  const tabs = ['All Events', 'UAE Events', 'Global Events']
+  const tabs = ['All Events', 'Sports', 'Concerts', 'National']
   const filtered = filter === 'All Events' ? events : events.filter(e => e.region === filter)
   return (
     <section id="events" className="py-24 px-6">

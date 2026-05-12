@@ -25,19 +25,49 @@ export default function CategoryPage({ params }) {
   const cat = getCategory(params.category)
   if (!cat) notFound()
 
+  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae')
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/rental' },
-      { '@type': 'ListItem', position: 3, name: cat.name, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/rental/${params.category}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Rental Hub', item: BASE + '/rental' },
+      { '@type': 'ListItem', position: 3, name: cat.name, item: BASE + `/rental/${params.category}` },
     ],
+  }
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${cat.name} for rent in UAE & Canada`,
+    itemListOrder: 'https://schema.org/ItemListUnordered',
+    numberOfItems: cat.products.length,
+    itemListElement: cat.products.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${BASE}/rental/${params.category}/${p.slug}`,
+      item: {
+        '@type': 'Product',
+        name: `${p.brand} ${p.model}`,
+        brand: { '@type': 'Brand', name: p.brand },
+        image: p.image + '?w=1200&q=85',
+        url: `${BASE}/rental/${params.category}/${p.slug}`,
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'AED',
+          lowPrice: p.rates.daily,
+          highPrice: p.rates.monthly,
+          offerCount: 3,
+          availability: 'https://schema.org/InStock',
+          seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.' },
+        },
+      },
+    })),
   }
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <Header />
       <main>
         <div className="max-w-[1400px] mx-auto px-6 pt-6">

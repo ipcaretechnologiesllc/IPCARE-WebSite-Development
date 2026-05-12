@@ -4,19 +4,19 @@
 // metadata which overrides this default per Next.js metadata merging rules.
 
 export const metadata = {
-  title: 'Event IT Infrastructure UAE & Canada — WiFi, Networks, Broadcast | IP Care',
-  description: 'Event IT infrastructure across UAE and Canada. High-density WiFi, temporary networks, broadcast connectivity and on-site engineers. Trusted on FIFA Club World Cup, UFC, NBA and Coldplay events.',
+  title: 'Event IT Infrastructure UAE — FIFA, UFC, NBA, FINA, IIFA, Coldplay | IP Care',
+  description: 'Event IT infrastructure across the UAE. High-density WiFi, temporary networks, broadcast connectivity. Trusted on FIFA Club World Cup, UFC (2020–25), NBA Abu Dhabi Games (2022–25), FINA World Swimming, IIFA Awards, Coldplay, Saadiyat Nights and UAE National Day.',
   alternates: { canonical: '/event-it' },
   openGraph: {
-    title: 'Event IT Infrastructure UAE & Canada — IP Care Technologies',
-    description: 'High-density event WiFi, temporary networks, broadcast connectivity and on-site engineering for major events across UAE and Canada.',
+    title: 'Event IT Infrastructure UAE — IP Care Technologies',
+    description: 'High-density event WiFi, temporary networks, broadcast connectivity and on-site engineering for FIFA, UFC, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights and UAE National Day events.',
     url: '/event-it',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Event IT Infrastructure UAE & Canada — IP Care',
-    description: 'High-density event WiFi, temporary networks and on-site engineering. FIFA, UFC, NBA, Coldplay credentials.',
+    title: 'Event IT Infrastructure UAE — IP Care',
+    description: 'FIFA, UFC UAE, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights, UAE National Day. High-density WiFi, broadcast LAN, on-site engineering.',
   },
 }
 

@@ -2,19 +2,19 @@
 // The page itself is a client component; this layout provides server-side metadata.
 
 export const metadata = {
-  title: 'Event IT Portfolio — FIFA, UFC, NBA, Coldplay & More | IP Care Technologies',
-  description: 'IP Care event IT portfolio. FIFA Club World Cup, UFC Fight Night, NBA Global Games, Coldplay World Tour and 100+ other major events powered by our infrastructure team.',
+  title: 'Event IT Portfolio — FIFA, UFC, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights | IP Care',
+  description: 'IP Care event IT portfolio. FIFA Club World Cup, UFC Events in UAE (2020–2025), NBA Abu Dhabi Games (2022–2025), FINA World Swimming, WBA World Championship, World Tennis League, Mubadala Open, Pedal Master, UAE National Day, Ya Salam, IIFA Awards, Eid Al Fitr Concert, Saadiyat Nights and Coldplay.',
   alternates: { canonical: '/event-it/portfolio' },
   openGraph: {
-    title: 'Event IT Portfolio — FIFA, UFC, NBA, Coldplay | IP Care',
-    description: 'Major events powered by IP Care: FIFA Club World Cup, UFC Fight Night, NBA Global Games, Coldplay World Tour and more.',
+    title: 'Event IT Portfolio — IP Care Technologies',
+    description: 'Major events powered by IP Care: FIFA, UFC, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights and UAE National Day.',
     url: '/event-it/portfolio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Event IT Portfolio — IP Care Technologies',
-    description: 'FIFA, UFC, NBA, Coldplay and 100+ other major events powered by IP Care.',
+    description: 'FIFA, UFC, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights, UAE National Day and more major events powered by IP Care.',
   },
 }
 

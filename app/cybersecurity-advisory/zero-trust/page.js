@@ -1,4 +1,4 @@
-﻿import { notFound } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
@@ -81,10 +81,26 @@ export default function ZeroTrustPage() {
     ],
   }
 
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: pageData.h1,
+    description: pageData.hero,
+    serviceType: 'Cybersecurity Advisory',
+    provider: {
+      '@type': 'Organization',
+      name: 'IP Care Technologies L.L.C.',
+      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+    },
+    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/cybersecurity-advisory/zero-trust',
+  }
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
       <main>
         <ServicePageTemplate

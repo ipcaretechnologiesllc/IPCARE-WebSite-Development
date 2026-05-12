@@ -45,10 +45,10 @@ function Hero() {
           Mission-Critical IT Infrastructure<br/>for the World&apos;s <span className="text-[#E87722]">Biggest Events</span>
         </h1>
         <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">
-          Trusted by FIFA, UFC, NBA and Coldplay. From temporary WiFi for 60,000 fans to broadcast-grade data centres deployed in 48 hours.
+          Trusted on FIFA Club World Cup, UFC UAE (2020–2025), NBA Abu Dhabi Games, FINA World Swimming, IIFA Awards, Coldplay, Saadiyat Nights and the UAE Official National Day events. From temporary WiFi for 60,000 fans to broadcast-grade data centres in 48 hours.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-          {['FIFA', 'UFC', 'NBA', 'Coldplay', '50+ Events'].map((b) => <span key={b} className="pill-badge">{b}</span>)}
+          {['FIFA', 'UFC', 'NBA', 'FINA', 'IIFA', 'Coldplay', 'Saadiyat Nights', 'WBA', 'Mubadala Open', 'UAE National Day'].map((b) => <span key={b} className="pill-badge">{b}</span>)}
         </div>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link href="/#contact" className="btn-primary">Plan Your Event IT <Icons.ArrowRight size={16}/></Link>
