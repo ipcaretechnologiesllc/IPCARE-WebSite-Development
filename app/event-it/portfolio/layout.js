@@ -3,7 +3,7 @@
 
 export const metadata = {
   title: 'Event IT Portfolio — FIFA, UFC, NBA Abu Dhabi, FINA, IIFA, Coldplay, Saadiyat Nights | IP Care',
-  description: 'IP Care event IT portfolio. FIFA Club World Cup, UFC Events in UAE (2020–2025), NBA Abu Dhabi Games (2022–2025), FINA World Swimming, WBA World Championship, World Tennis League, Mubadala Open, Pedal Master, UAE National Day, Ya Salam, IIFA Awards, Eid Al Fitr Concert, Saadiyat Nights and Coldplay.',
+  description: 'IP Care event IT portfolio. FIFA Club World Cup, UFC Events in UAE (2020–2025), NBA Abu Dhabi Games (2022–2025), FINA World Swimming, WBA World Championship, World Tennis League, Mubadala Abu Dhabi Open, Abu Dhabi Padel Master, UAE National Day, Ya Salam After Race Concert, IIFA Awards, Eid Al Fitr Concert, Saadiyat Nights and Coldplay.',
   alternates: { canonical: '/event-it/portfolio' },
   openGraph: {
     title: 'Event IT Portfolio — IP Care Technologies',

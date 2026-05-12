@@ -185,7 +185,7 @@ function Hero() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM', 'UAE NATIONAL DAY', 'EID AL FITR CONCERT', 'PEDAL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY', 'EID AL FITR CONCERT', 'ABU DHABI PADEL MASTER']
   return (
     <section 
       className="relative overflow-hidden" 
@@ -429,7 +429,7 @@ function EventsPortfolio() {
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80' },
     { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80' },
     { slug: 'mubadala-abu-dhabi-open', name: 'Mubadala Abu Dhabi Open', loc: 'Zayed Sports City • Annual', region: 'Sports', img: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80' },
-    { slug: 'abu-dhabi-pedal-master', name: 'Abu Dhabi Pedal Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80' },
+    { slug: 'abu-dhabi-padel-master', name: 'Abu Dhabi Padel Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80' },
     { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80' },
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=900&q=80' },
     { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80' },

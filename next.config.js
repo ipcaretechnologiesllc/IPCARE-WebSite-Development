@@ -195,6 +195,11 @@ const nextConfig = {
       { source: '/telephony.php', destination: '/services/managed-it/network-management', permanent: true },
       { source: '/telephony-solutions.php', destination: '/services/managed-it/network-management', permanent: true },
 
+      // Internal slug correction — original case-study slug used "pedal" (cycling) before the
+      // engagement was correctly identified as "padel" (the racquet sport). 308 preserves any
+      // links that may have been shared with the old slug.
+      { source: '/event-it/abu-dhabi-pedal-master', destination: '/event-it/abu-dhabi-padel-master', permanent: true },
+
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
     ];

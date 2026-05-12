@@ -19,7 +19,7 @@ export default function EventITPage() {
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', tech: 'Arena WiFi, Production LAN, Broadcast uplinks', category: 'Sports' },
     { slug: 'world-tennis-league', name: 'World Tennis League', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', tech: 'Arena WiFi, Hawk-Eye integration, Broadcast LAN', category: 'Sports' },
     { slug: 'mubadala-abu-dhabi-open', name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', tech: 'Outdoor venue WiFi, Timing-system network, CCTV', category: 'Sports' },
-    { slug: 'abu-dhabi-pedal-master', name: 'Abu Dhabi Pedal Master', location: 'Hudayriat Island', year: '2023', tech: 'Course-side WiFi, PtP microwave, Timing network', category: 'Sports' },
+    { slug: 'abu-dhabi-padel-master', name: 'Abu Dhabi Padel Master', location: 'Hudayriat Island', year: '2023', tech: 'Multi-court WiFi, Broadcast LAN, Court-side connectivity', category: 'Sports' },
     { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', tech: 'Outdoor 60K WiFi, PtP uplinks, RFID backhaul', category: 'Concerts' },
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', tech: 'Open-air WiFi, PtP microwave, CCTV', category: 'Concerts' },
     { slug: 'iifa-awards', name: 'IIFA Awards', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', tech: 'Arena WiFi, Broadcast LAN, Press centre', category: 'Concerts' },
