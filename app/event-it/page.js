@@ -12,20 +12,20 @@ export default function EventITPage() {
   const portfolioCategories = ['All Events', 'Sports', 'Concerts', 'National']
 
   const events = [
-    { name: 'FIFA Club World Cup', location: 'Abu Dhabi, UAE', year: '2022', tech: 'High-density WiFi, Temporary data centre, Tournament SOC, CCTV', category: 'Sports' },
-    { name: 'UFC Events in UAE', location: 'Yas Island, Abu Dhabi', year: '2020–2025', tech: 'Arena WiFi, Live streaming infrastructure, Production LAN', category: 'Sports' },
-    { name: 'NBA Abu Dhabi Games', location: 'Etihad Arena', year: '2022, 2023, 2024, 2025', tech: 'High-density WiFi 6E, NOC operations, Broadcast LAN', category: 'Sports' },
-    { name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', tech: 'Aquatic-venue WiFi, Broadcast LAN, Results integration', category: 'Sports' },
-    { name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', tech: 'Arena WiFi, Production LAN, Broadcast uplinks', category: 'Sports' },
-    { name: 'World Tennis League', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', tech: 'Arena WiFi, Hawk-Eye integration, Broadcast LAN', category: 'Sports' },
-    { name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', tech: 'Outdoor venue WiFi, Timing-system network, CCTV', category: 'Sports' },
-    { name: 'Abu Dhabi Pedal Master', location: 'Hudayriat Island', year: '2023', tech: 'Course-side WiFi, PtP microwave, Timing network', category: 'Sports' },
-    { name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', tech: 'Outdoor 60K WiFi, PtP uplinks, RFID backhaul', category: 'Concerts' },
-    { name: 'Saadiyat Nights', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', tech: 'Open-air WiFi, PtP microwave, CCTV', category: 'Concerts' },
-    { name: 'IIFA Awards', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', tech: 'Arena WiFi, Broadcast LAN, Press centre', category: 'Concerts' },
-    { name: 'Ya Salam After Race Concert', location: 'Yas Island, Abu Dhabi', year: '2019–2024', tech: 'Festival WiFi, PtP backhaul, RFID', category: 'Concerts' },
-    { name: 'Eid Al Fitr Concert', location: 'Yas Bay, Abu Dhabi', year: '2023', tech: 'Outdoor concert WiFi, Live stream uplink', category: 'Concerts' },
-    { name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', tech: 'Multi-venue WiFi, Federal CCTV, Government command-centre integration', category: 'National' },
+    { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', location: 'Abu Dhabi, UAE', year: '2022', tech: 'High-density WiFi, Temporary data centre, Tournament SOC, CCTV', category: 'Sports' },
+    { slug: 'ufc-uae', name: 'UFC Events in UAE', location: 'Yas Island, Abu Dhabi', year: '2020–2025', tech: 'Arena WiFi, Live streaming infrastructure, Production LAN', category: 'Sports' },
+    { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', location: 'Etihad Arena', year: '2022, 2023, 2024, 2025', tech: 'High-density WiFi 6E, NOC operations, Broadcast LAN', category: 'Sports' },
+    { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', tech: 'Aquatic-venue WiFi, Broadcast LAN, Results integration', category: 'Sports' },
+    { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', tech: 'Arena WiFi, Production LAN, Broadcast uplinks', category: 'Sports' },
+    { slug: 'world-tennis-league', name: 'World Tennis League', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', tech: 'Arena WiFi, Hawk-Eye integration, Broadcast LAN', category: 'Sports' },
+    { slug: 'mubadala-abu-dhabi-open', name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', tech: 'Outdoor venue WiFi, Timing-system network, CCTV', category: 'Sports' },
+    { slug: 'abu-dhabi-pedal-master', name: 'Abu Dhabi Pedal Master', location: 'Hudayriat Island', year: '2023', tech: 'Course-side WiFi, PtP microwave, Timing network', category: 'Sports' },
+    { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', tech: 'Outdoor 60K WiFi, PtP uplinks, RFID backhaul', category: 'Concerts' },
+    { slug: 'saadiyat-nights', name: 'Saadiyat Nights', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', tech: 'Open-air WiFi, PtP microwave, CCTV', category: 'Concerts' },
+    { slug: 'iifa-awards', name: 'IIFA Awards', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', tech: 'Arena WiFi, Broadcast LAN, Press centre', category: 'Concerts' },
+    { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', location: 'Yas Island, Abu Dhabi', year: '2019–2024', tech: 'Festival WiFi, PtP backhaul, RFID', category: 'Concerts' },
+    { slug: 'eid-al-fitr-concert-2023', name: 'Eid Al Fitr Concert', location: 'Yas Bay, Abu Dhabi', year: '2023', tech: 'Outdoor concert WiFi, Live stream uplink', category: 'Concerts' },
+    { slug: 'uae-national-day', name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', tech: 'Multi-venue WiFi, Federal CCTV, Government command-centre integration', category: 'National' },
   ]
 
   const services = [
@@ -148,7 +148,7 @@ export default function EventITPage() {
             {/* Event Cards */}
             <div className="grid md:grid-cols-3 gap-5">
               {filteredEvents.map((event, i) => (
-                <div key={i} className="glass-card overflow-hidden group">
+                <Link key={i} href={`/event-it/${event.slug}`} className="glass-card overflow-hidden group block hover:ring-2 hover:ring-[#E87722]/50 transition-all">
                   <div className="h-48 flex items-center justify-center relative" style={{ background: 'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)' }}>
                     <Icons.Play size={64} className="text-white/20"/>
                     <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,16,42,0.95)] to-transparent opacity-80"/>
@@ -166,7 +166,7 @@ export default function EventITPage() {
                       View Case Study <Icons.ArrowRight size={14}/>
                     </span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -91,7 +91,7 @@ function EventsPortfolio() {
                 <h3 className="text-white text-2xl font-bold leading-tight mb-1">{ev.name}</h3>
                 <p className="text-white/70 text-sm mb-3 flex items-center gap-1.5"><Icons.MapPin size={12}/>{ev.location}</p>
                 <p className="text-white/85 text-xs leading-relaxed mb-4 opacity-80 line-clamp-2">{ev.tech}</p>
-                <Link href={`/event-it/portfolio#${ev.slug}`} className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold group-hover:gap-2.5 transition-all">
+                <Link href={`/event-it/${ev.slug}`} className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold group-hover:gap-2.5 transition-all">
                   View Case Study <Icons.ArrowRight size={14}/>
                 </Link>
               </div>
