@@ -118,6 +118,7 @@ export default function Header() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services', mega: true },
+    { label: 'Industries', href: '/industries' },
     { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
     { label: 'Event IT', href: '/event-it', dropdown: true },
     { label: 'Rental Hub', href: '/rental' },

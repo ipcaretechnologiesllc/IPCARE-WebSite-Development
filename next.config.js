@@ -200,6 +200,11 @@ const nextConfig = {
       // links that may have been shared with the old slug.
       { source: '/event-it/abu-dhabi-pedal-master', destination: '/event-it/abu-dhabi-padel-master', permanent: true },
 
+      // Removed blog post — the CCTV cost guide was withdrawn following a positioning
+      // change on Dubai physical-security scope. 308 prevents the URL from 404'ing
+      // for any cached search or external link.
+      { source: '/blog/cctv-installation-cost-dubai', destination: '/blog', permanent: true },
+
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
     ];

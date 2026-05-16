@@ -69,6 +69,7 @@ export default function Footer() {
               <li><Link href="/careers" className="hover:text-[#F97316]">Careers</Link></li>
               <li><Link href="/partners" className="hover:text-[#F97316]">Partners</Link></li>
               <li><Link href="/services" className="hover:text-[#F97316]">All Services</Link></li>
+              <li><Link href="/industries" className="hover:text-[#F97316]">Industries</Link></li>
               <li><Link href="/contact" className="hover:text-[#F97316]">Contact</Link></li>
               <li><Link href="/privacy-policy" className="hover:text-[#F97316]">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-[#F97316]">Terms of Service</Link></li>
