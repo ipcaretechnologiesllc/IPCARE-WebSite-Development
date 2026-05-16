@@ -7,9 +7,11 @@ import {
   MapPin, Clock, CheckCircle2, Building2,
   HeartHandshake, Award, Users, Activity, Headphones
 } from 'lucide-react'
+import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
+import { articles } from '@/lib/blog-data'
 
 /* ---------------- IntersectionObserver reveal hook ---------------- */
 function useReveal() {
@@ -557,11 +559,11 @@ function Testimonials() {
 
 /* ---------------- Blog Teaser ---------------- */
 function BlogTeaser() {
-  const posts = [
-    { cat: 'Cybersecurity', title: 'Zero Trust in 2025: A Practical Enterprise Roadmap', date: 'Jun 12, 2025', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80' },
-    { cat: 'Event IT', title: 'How We Powered a 50,000-Seat Stadium Network in 72 Hours', date: 'May 28, 2025', img: 'https://images.unsplash.com/photo-1548092372-0d1bd40894a3?w=800&q=80' },
-    { cat: 'Cloud', title: 'FinOps for Mid-Market: Cut Azure Spend by 34%', date: 'May 15, 2025', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80' },
-  ]
+  // Show the three most recent articles, sorted by date.
+  const posts = [...articles]
+    .map(a => ({ ...a, _ts: new Date(a.date).getTime() }))
+    .sort((a, b) => b._ts - a._ts)
+    .slice(0, 3)
   return (
     <section id="blog" className="py-24 px-6">
       <div className="max-w-[1400px] mx-auto">
@@ -571,23 +573,23 @@ function BlogTeaser() {
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {posts.map((p, i) => (
-            <article key={p.title} className="glass-card overflow-hidden reveal group cursor-pointer" style={{ transitionDelay: `${i * 80}ms` }}>
+            <Link key={p.slug} href={`/blog/${p.slug}`} className="glass-card overflow-hidden reveal group block hover:ring-2 hover:ring-[#E87722]/40 transition-all" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="relative h-48 overflow-hidden">
-                <img src={p.img} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.cat}</span>
+                <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
               </div>
               <div className="p-6">
-                <h3 className="text-white font-semibold text-lg leading-snug mb-2">{p.title}</h3>
+                <h3 className="text-white font-semibold text-lg leading-snug mb-2 group-hover:text-[#E87722] transition-colors">{p.title}</h3>
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-white/50 text-xs">{p.date}</span>
-                  <span className="inline-flex items-center gap-1 text-[#E87722] text-sm font-semibold px-3 py-1.5 rounded-md border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2 transition-all">Read More <ArrowRight size={13}/></span>
+                  <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Read More <ArrowRight size={13}/></span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="/blog" className="btn-ghost">Visit Our Knowledge Base <ArrowRight size={16}/></a>
+          <Link href="/blog" className="btn-ghost">Visit Our Knowledge Base <ArrowRight size={16}/></Link>
         </div>
       </div>
     </section>

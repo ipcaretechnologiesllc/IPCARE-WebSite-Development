@@ -55,7 +55,7 @@ export default function BlogClient() {
                   <h2 className="text-white font-semibold text-lg leading-snug mb-3 group-hover:text-[#E87722] transition-colors">{a.title}</h2>
                   <p className="body-text text-sm mb-5 line-clamp-2">{a.excerpt}</p>
                   <div className="flex items-center justify-between mono text-[11px] text-white/50 uppercase tracking-wider">
-                    <span>{a.author} \u2022 {a.date}</span>
+                    <span>{a.author} {'\u2022'} {a.date}</span>
                     <span className="flex items-center gap-1"><Icons.Clock size={11}/>{a.readTime}</span>
                   </div>
                 </div>

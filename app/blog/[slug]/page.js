@@ -60,9 +60,9 @@ export default function ArticlePage({ params }) {
             <h1 className="text-white text-3xl md:text-5xl font-bold leading-[1.1] mb-6">{a.title}</h1>
             <div className="flex items-center gap-4 text-white/60 text-sm mono mb-8">
               <span>{a.author}</span>
-              <span>\u2022</span>
+              <span>{'\u2022'}</span>
               <span>{a.date}</span>
-              <span>\u2022</span>
+              <span>{'\u2022'}</span>
               <span className="flex items-center gap-1"><Icons.Clock size={13}/>{a.readTime}</span>
             </div>
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-10">
@@ -129,7 +129,7 @@ export default function ArticlePage({ params }) {
                   </div>
                   <div className="p-5">
                     <h3 className="text-white font-semibold text-base leading-snug group-hover:text-[#E87722]">{r.title}</h3>
-                    <div className="mt-3 mono text-[10px] text-white/50 uppercase tracking-wider">{r.date} \u2022 {r.readTime}</div>
+                    <div className="mt-3 mono text-[10px] text-white/50 uppercase tracking-wider">{r.date} {'\u2022'} {r.readTime}</div>
                   </div>
                 </Link>
               ))}
