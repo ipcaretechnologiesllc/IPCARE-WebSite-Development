@@ -4,6 +4,7 @@ import { rentalCategories, getAllProductParams } from '@/lib/rental-data'
 import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
 import { events, getAllEventSubSlugs } from '@/lib/event-it-data'
 import { getAllAdvisorySlugs, kbArticles } from '@/lib/cyber-advisory-data'
+import { getAllIndustrySlugs } from '@/lib/industries-data'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
 // serves a sitemap listing only its own URLs:
@@ -57,6 +58,7 @@ export default function sitemap() {
     ['/cybersecurity-advisory', P_HUB, 'weekly'],
     ['/cybersecurity-advisory/knowledge-base', P_HUB, 'weekly'],
     ['/blog', P_HUB, 'weekly'],
+    ['/industries', P_HUB, 'monthly'],
     ['/partners', P_CATEGORY, 'monthly'],
     ['/careers', P_CATEGORY, 'weekly'],
     ['/contact', P_CATEGORY, 'monthly'],
@@ -103,6 +105,11 @@ export default function sitemap() {
   // Blog — articles
   for (const a of articles || []) {
     entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+  }
+
+  // Industries — sector pages
+  for (const slug of getAllIndustrySlugs() || []) {
+    entries.push({ url: `${BASE}/industries/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_CATEGORY })
   }
 
   // Legal
