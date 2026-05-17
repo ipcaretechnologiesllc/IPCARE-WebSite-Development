@@ -292,8 +292,8 @@ function Services() {
               </div>
               <h3 className="text-white text-xl font-semibold mb-2">{s.name}</h3>
               <p className="body-text text-sm leading-relaxed mb-5">{s.d}</p>
-              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
-                Learn More <ArrowRight size={14}/>
+              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
+                Learn More <ArrowRight size={13}/>
               </a>
             </div>
           ))}

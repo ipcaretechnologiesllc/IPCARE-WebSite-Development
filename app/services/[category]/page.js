@@ -102,7 +102,7 @@ export default function CategoryPage({ params }) {
                   <Link key={slug} href={`/services/${params.category}/${slug}`} className="glass-card p-6 block group">
                     <h3 className="text-white text-lg font-semibold mb-2">{sub.h1}</h3>
                     <p className="body-text text-sm mb-4 line-clamp-2">{sub.hero}</p>
-                    <span className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Learn More <Icons.ArrowRight size={14}/></span>
+                    <span className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Learn More <Icons.ArrowRight size={13}/></span>
                   </Link>
                 ))}
               </div>

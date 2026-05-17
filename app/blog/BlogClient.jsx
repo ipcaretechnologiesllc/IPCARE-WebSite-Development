@@ -19,7 +19,20 @@ export default function BlogClient() {
   useReveal()
   const [filter, setFilter] = useState('All')
   const [query, setQuery] = useState('')
-  const cats = ['All', 'Cybersecurity', 'Managed IT', 'Networking', 'Event IT', 'Rentals', 'News']
+  // Build the category list dynamically from the actual article corpus so the
+  // filter buttons stay in sync as new categories are added. Ordering: 'All' first,
+  // then categories ranked by article count (most-populated first), with a stable
+  // tie-break on the category name.
+  const cats = (() => {
+    const counts = articles.reduce((acc, a) => {
+      acc[a.category] = (acc[a.category] || 0) + 1
+      return acc
+    }, {})
+    const ordered = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([c]) => c)
+    return ['All', ...ordered]
+  })()
   const filtered = articles.filter(a => {
     const fc = filter === 'All' || a.category === filter
     const fq = !query || (a.title + a.excerpt).toLowerCase().includes(query.toLowerCase())
