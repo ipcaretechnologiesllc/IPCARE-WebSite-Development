@@ -57,24 +57,38 @@ export default function BlogClient() {
           <div className="flex justify-center gap-2 flex-wrap mb-10 reveal">
             {cats.map(c => <button key={c} onClick={() => setFilter(c)} className={`glass-pill ${filter === c ? 'active' : ''}`}>{c}</button>)}
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((a, i) => (
-              <Link key={a.slug} href={`/blog/${a.slug}`} className="glass-card overflow-hidden reveal group block" style={{ transitionDelay: `${(i%6) * 50}ms` }}>
-                <div className="relative h-48 overflow-hidden">
-                  <img src={`${a.img}?w=800&q=75`} alt={a.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                  <span className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{a.category}</span>
-                </div>
-                <div className="p-6">
-                  <h2 className="text-white font-semibold text-lg leading-snug mb-3 group-hover:text-[#E87722] transition-colors">{a.title}</h2>
-                  <p className="body-text text-sm mb-5 line-clamp-2">{a.excerpt}</p>
-                  <div className="flex items-center justify-between mono text-[11px] text-white/50 uppercase tracking-wider">
-                    <span>{a.author} {'\u2022'} {a.date}</span>
-                    <span className="flex items-center gap-1"><Icons.Clock size={11}/>{a.readTime}</span>
+          {filtered.length === 0 ? (
+            <div className="text-center py-16 text-white/60">
+              <Icons.SearchX size={32} className="mx-auto mb-4 text-white/40"/>
+              <p className="text-sm">No articles match the current filter and search.</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/*
+                NOTE: deliberately not using the `.reveal` animation class on these cards.
+                `.reveal` starts at opacity:0 and is only switched on by an IntersectionObserver
+                that runs once at mount. When the filter changes, React renders new DOM nodes
+                that the observer never sees, so they would stay invisible. Cards in a
+                filter/search UI need to appear immediately when the filter changes.
+              */}
+              {filtered.map((a, i) => (
+                <Link key={a.slug} href={`/blog/${a.slug}`} className="glass-card overflow-hidden group block">
+                  <div className="relative h-48 overflow-hidden">
+                    <img src={`${a.img}?w=800&q=75`} alt={a.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                    <span className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{a.category}</span>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div className="p-6">
+                    <h2 className="text-white font-semibold text-lg leading-snug mb-3 group-hover:text-[#E87722] transition-colors">{a.title}</h2>
+                    <p className="body-text text-sm mb-5 line-clamp-2">{a.excerpt}</p>
+                    <div className="flex items-center justify-between mono text-[11px] text-white/50 uppercase tracking-wider">
+                      <span>{a.author} {'\u2022'} {a.date}</span>
+                      <span className="flex items-center gap-1"><Icons.Clock size={11}/>{a.readTime}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
