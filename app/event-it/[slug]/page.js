@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
-import { getAllEventSubSlugs, getEventSubpage, eventServices } from '@/lib/event-it-data'
+import { getAllEventSubSlugs, getEventSubpage, eventServices, events } from '@/lib/event-it-data'
 
 export async function generateStaticParams() {
   return getAllEventSubSlugs().map((slug) => ({ slug }))
@@ -27,6 +27,11 @@ export async function generateMetadata({ params }) {
 export default function EventSubPage({ params }) {
   const sub = getEventSubpage(params.slug)
   if (!sub) notFound()
+
+  // Look up the matching event in the events array so we can render its hero
+  // image alongside the case study content. Service sub-pages (event-wifi,
+  // temporary-data-centres, event-cctv) will not match — that's expected.
+  const event = (events || []).find((e) => e.slug === params.slug)
 
   // Related = other event services
   const related = eventServices
@@ -68,6 +73,18 @@ export default function EventSubPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
       <main>
+        {event?.img && (
+          <section className="relative w-full overflow-hidden" style={{ aspectRatio: '16/7' }}>
+            <img src={event.img} alt={`${sub.h1} — event IT delivery by IP Care`} className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.35) 0%, rgba(7,16,42,0.85) 100%)' }} />
+            <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:pb-14">
+              <div className="max-w-[1100px] mx-auto">
+                <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{event.year} • {event.location}</div>
+                <h1 className="text-white text-3xl md:text-5xl font-bold leading-[1.1] max-w-3xl">{sub.h1}</h1>
+              </div>
+            </div>
+          </section>
+        )}
         <ServicePageTemplate
           data={sub}
           related={related}

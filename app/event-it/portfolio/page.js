@@ -12,7 +12,7 @@ export default function EventPortfolioPage() {
   const categories = ['All', 'Sports', 'Concerts', 'National', 'WiFi Deployments', 'CCTV & Security']
 
   const events = [
-    { id: 1, name: 'FIFA Club World Cup 2022', location: 'Abu Dhabi, UAE', year: '2022', services: 'High-density WiFi, Temporary data centre, Tournament SOC', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments', 'CCTV & Security'] },
+    { id: 1, name: 'FIFA Club World Cup 2022', location: 'Abu Dhabi, UAE', year: '2022', services: 'High-density WiFi, Temporary data centre, Tournament SOC', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments', 'CCTV & Security'], img: '/events/fifa-club-world-cup.png' },
     { id: 2, name: 'UFC Events in UAE (2020–2025)', location: 'Yas Island, Abu Dhabi', year: '2020–2025', services: 'Arena WiFi, Production LAN, Live streaming', tech: 'Cisco Meraki, Palo Alto', category: ['Sports', 'WiFi Deployments'] },
     { id: 3, name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', services: 'Aquatic-venue WiFi, Broadcast LAN', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'] },
     { id: 4, name: 'NBA Abu Dhabi Games (2022–2025)', location: 'Etihad Arena, Abu Dhabi', year: '2022, 2023, 2024, 2025', services: 'Arena WiFi 6E, NOC operations', tech: 'HPE Aruba, Ruckus', category: ['Sports', 'WiFi Deployments'] },
@@ -95,9 +95,15 @@ export default function EventPortfolioPage() {
               <div className="grid md:grid-cols-3 gap-5">
                 {filteredEvents.map((event) => (
                   <div key={event.id} className="glass-card overflow-hidden group hover:border-[#E87722]/40 transition-all">
-                    <div className="h-48 flex items-center justify-center relative" style={{ background: 'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)' }}>
-                      <Icons.Play size={64} className="text-white/20"/>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,16,42,0.95)] to-transparent opacity-80"/>
+                    <div className="h-48 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)' }}>
+                      {event.img ? (
+                        <img src={event.img} alt={event.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Icons.Play size={64} className="text-white/20"/>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,16,42,0.95)] to-transparent opacity-80 pointer-events-none"/>
                     </div>
                     <div className="p-6">
                       <h3 className="text-white text-lg font-bold mb-2">{event.name}</h3>
