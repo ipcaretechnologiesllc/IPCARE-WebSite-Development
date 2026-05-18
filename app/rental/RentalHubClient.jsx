@@ -112,7 +112,7 @@ export default function RentalHubClient() {
                     <li key={j} className="body-text text-sm flex items-start gap-2"><Icons.Check size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/>{s}</li>
                   ))}
                 </ul>
-                <span className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm group-hover:gap-2.5 transition-all">View Details <Icons.ArrowRight size={14}/></span>
+                <span className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">View Details <Icons.ArrowRight size={13}/></span>
               </Link>
             ))}
           </div>

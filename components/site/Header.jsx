@@ -290,8 +290,8 @@ export default function Header() {
 
             {/* View All Services — bottom link */}
             <div className="mt-8 pt-5 text-center" style={{ borderTop: '1px solid #E5E7EB' }}>
-              <Link href="/services" className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all">
-                View All Services <ArrowRight size={14}/>
+              <Link href="/services" className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
+                View All Services <ArrowRight size={13}/>
               </Link>
             </div>
           </div>

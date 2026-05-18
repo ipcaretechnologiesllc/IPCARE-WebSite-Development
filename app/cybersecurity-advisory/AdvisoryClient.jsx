@@ -25,12 +25,12 @@ function useReveal() {
 const AdvisorAvatar = ({ initials = "AB" }) => (
   <div className="relative w-32 h-32 md:w-36 md:h-36 mx-auto md:mx-0 flex-shrink-0">
     <div className="absolute inset-0 rounded-full orange-glow"/>
-    <div className="absolute inset-1.5 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1a2847 0%, #0a1028 100%)' }}>
+    <div className="absolute inset-1.5 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1e4ab8 0%, #0f245f 100%)' }}>
       <svg viewBox="0 0 128 128" className="w-full h-full">
         <defs>
           <radialGradient id={`av-bg-${initials}`} cx="50%" cy="40%" r="60%">
             <stop offset="0%" stopColor="#1B6CA8" stopOpacity="0.6"/>
-            <stop offset="100%" stopColor="#0a1028" stopOpacity="0"/>
+            <stop offset="100%" stopColor="#0f245f" stopOpacity="0"/>
           </radialGradient>
         </defs>
         <rect width="128" height="128" fill={`url(#av-bg-${initials})`}/>
@@ -173,7 +173,7 @@ function Platforms() {
 /* ============ 3. SERVICES ============ */
 function ServicesGrid() {
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(3,7,15,0.6)' }}>
+    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
       <div className="max-w-[1300px] mx-auto">
         <div className="text-center mb-12 reveal">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Strategic Practice</div>
@@ -251,7 +251,7 @@ function Philosophy() {
 /* ============ 6. TOOLS ============ */
 function Tools() {
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(3,7,15,0.6)' }}>
+    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
       <div className="max-w-[1300px] mx-auto">
         <div className="text-center mb-12 reveal">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Interactive Tools</div>
@@ -324,7 +324,7 @@ function CaseStudies() {
   const cats = ['All', 'Prisma Access', 'Prisma SD-WAN', 'Cortex Operations', 'Network Security']
   const filtered = filter === 'All' ? caseStudies : caseStudies.filter(c => c.tag === filter)
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(3,7,15,0.6)' }}>
+    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Case Studies</div>
@@ -340,7 +340,7 @@ function CaseStudies() {
             <div key={c.title} className="glass-premium overflow-hidden reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="relative h-56 overflow-hidden">
                 <img src={c.img} alt={c.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, rgba(1,3,7,0.95) 100%)' }}/>
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, rgba(7,16,42,0.8) 100%)' }}/>
                 <span className="absolute top-4 left-4 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full" style={{ background: '#E87722', color: '#fff' }}>{c.tag}</span>
                 <div className="absolute bottom-4 right-4 flex gap-3 mono text-[11px] text-white/80">
                   <span className="flex items-center gap-1"><Icons.Users size={12}/> {c.users}</span>

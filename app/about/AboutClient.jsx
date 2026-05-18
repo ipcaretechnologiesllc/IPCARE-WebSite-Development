@@ -22,9 +22,11 @@ export default function AboutClient() {
     <main>
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-20 overflow-hidden" style={{ position: 'relative', zIndex: 0 }}>
-        <div className="absolute inset-0" style={{ zIndex: 0 }}>
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=85" alt="IP Care Technologies team and office" className="absolute inset-0 w-full h-full object-cover opacity-30"/>
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(4,10,24,0.7) 0%, rgba(4,10,24,0.95) 100%)' }}/>
+        {/* Ambient orbs — matches homepage blue */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+          <div className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-40" style={{ background: 'radial-gradient(circle, #3B7BFF 0%, transparent 70%)' }}/>
+          <div className="absolute -bottom-40 -right-32 w-[560px] h-[560px] rounded-full blur-3xl opacity-25" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-3xl opacity-15" style={{ background: 'radial-gradient(circle, #1E50A2 0%, transparent 70%)' }}/>
         </div>
         <div className="relative hero-glass max-w-[900px] w-full px-8 md:px-12 py-12 text-center reveal" style={{ zIndex: 1 }}>
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4">About Us</div>

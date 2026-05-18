@@ -24,7 +24,7 @@ export default function EventPortfolioPage() {
     { id: 9, name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', services: 'Multi-venue WiFi, Federal CCTV, Command-centre integration', tech: 'HPE Aruba, Hikvision, Cisco', category: ['National', 'WiFi Deployments', 'CCTV & Security'], img: '/events/uae-national-day.png' },
     { id: 10, name: 'Ya Salam After Race Concert (2019–2024)', location: 'Yas Island, Abu Dhabi', year: '2019–2024', services: 'Outdoor festival WiFi, PtP backhaul, RFID', tech: 'HPE Aruba, Ruckus', category: ['Concerts', 'WiFi Deployments'], img: '/events/ya-salam-after-race-concert.png' },
     { id: 11, name: 'IIFA Awards (2022–2024)', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', services: 'Arena WiFi, Broadcast LAN, Press centre', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'], img: '/events/iifa-awards.jpg' },
-    { id: 12, name: 'Eid Al Fitr Concert 2023', location: 'Yas Bay, Abu Dhabi', year: '2023', services: 'Outdoor concert WiFi, Live stream uplink', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'] },
+    { id: 12, name: 'Eid Al Fitr Concert 2023', location: 'Yas Bay, Abu Dhabi', year: '2023', services: 'Outdoor concert WiFi, Live stream uplink', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'], img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80' },
     { id: 13, name: 'Saadiyat Nights (2024, 2025)', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', services: 'Open-air WiFi, PtP microwave, CCTV', tech: 'HPE Aruba, Hikvision', category: ['Concerts', 'WiFi Deployments', 'CCTV & Security'], img: '/events/saadiyat-nights.png' },
     { id: 14, name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', services: 'Outdoor 60K-attendee WiFi, RFID backhaul', tech: 'HPE Aruba, Fluke', category: ['Concerts', 'WiFi Deployments'], img: '/events/coldplay-world-tour.png' },
   ]
@@ -116,8 +116,8 @@ export default function EventPortfolioPage() {
                       </div>
                       <p className="body-text text-sm mb-2"><strong>Services:</strong> {event.services}</p>
                       <p className="body-text text-sm mb-4"><strong>Technology:</strong> {event.tech}</p>
-                      <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">
-                        Read Case Study <Icons.ArrowRight size={14}/>
+                      <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">
+                        Read Case Study <Icons.ArrowRight size={13}/>
                       </span>
                     </div>
                   </div>
