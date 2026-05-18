@@ -424,7 +424,7 @@ function RentalTeaser() {
 /* ---------------- Events Portfolio ---------------- */
 function EventsPortfolio() {
   const events = [
-    { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: '/events/fifa-club-world-cup.jpg' },
+    { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: '/events/fifa-club-world-cup.png' },
     { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020–2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80' },
     { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=900&q=80' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80' },
