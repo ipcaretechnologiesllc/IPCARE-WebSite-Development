@@ -459,7 +459,7 @@ function EventsPortfolio() {
           {filtered.map((ev, i) => (
             <a key={ev.slug} href={`/event-it/${ev.slug}`} className="group relative rounded-xl overflow-hidden aspect-[3/4] reveal block" style={{ transitionDelay: `${i * 80}ms` }}>
               <img src={ev.img} alt={`${ev.name} — event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.1) 0%, rgba(7,16,42,0.95) 85%)' }}/>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <span className="inline-block px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
                 <h3 className="text-white text-lg font-semibold leading-snug">{ev.name}</h3>
