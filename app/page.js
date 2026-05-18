@@ -425,14 +425,14 @@ function RentalTeaser() {
 function EventsPortfolio() {
   const events = [
     { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: '/events/fifa-club-world-cup.png' },
-    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020–2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=900&q=80' },
-    { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: 'https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=900&q=80' },
+    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020–2025', region: 'Sports', img: '/events/ufc-uae.jpeg' },
+    { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: '/events/nba-abu-dhabi-games.png' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=900&q=80' },
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80' },
     { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=900&q=80' },
     { slug: 'mubadala-abu-dhabi-open', name: 'Mubadala Abu Dhabi Open', loc: 'Zayed Sports City • Annual', region: 'Sports', img: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80' },
     { slug: 'abu-dhabi-padel-master', name: 'Abu Dhabi Padel Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80' },
-    { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=900&q=80' },
+    { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: '/events/coldplay-world-tour.png' },
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=900&q=80' },
     { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80' },
     { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019–2024', region: 'Concerts', img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&q=80' },

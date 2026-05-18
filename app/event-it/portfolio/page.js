@@ -13,9 +13,9 @@ export default function EventPortfolioPage() {
 
   const events = [
     { id: 1, name: 'FIFA Club World Cup 2022', location: 'Abu Dhabi, UAE', year: '2022', services: 'High-density WiFi, Temporary data centre, Tournament SOC', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments', 'CCTV & Security'], img: '/events/fifa-club-world-cup.png' },
-    { id: 2, name: 'UFC Events in UAE (2020–2025)', location: 'Yas Island, Abu Dhabi', year: '2020–2025', services: 'Arena WiFi, Production LAN, Live streaming', tech: 'Cisco Meraki, Palo Alto', category: ['Sports', 'WiFi Deployments'] },
+    { id: 2, name: 'UFC Events in UAE (2020–2025)', location: 'Yas Island, Abu Dhabi', year: '2020–2025', services: 'Arena WiFi, Production LAN, Live streaming', tech: 'Cisco Meraki, Palo Alto', category: ['Sports', 'WiFi Deployments'], img: '/events/ufc-uae.jpeg' },
     { id: 3, name: 'FINA World Swimming Championship', location: 'Etihad Arena, Abu Dhabi', year: '2021', services: 'Aquatic-venue WiFi, Broadcast LAN', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'] },
-    { id: 4, name: 'NBA Abu Dhabi Games (2022–2025)', location: 'Etihad Arena, Abu Dhabi', year: '2022, 2023, 2024, 2025', services: 'Arena WiFi 6E, NOC operations', tech: 'HPE Aruba, Ruckus', category: ['Sports', 'WiFi Deployments'] },
+    { id: 4, name: 'NBA Abu Dhabi Games (2022–2025)', location: 'Etihad Arena, Abu Dhabi', year: '2022, 2023, 2024, 2025', services: 'Arena WiFi 6E, NOC operations', tech: 'HPE Aruba, Ruckus', category: ['Sports', 'WiFi Deployments'], img: '/events/nba-abu-dhabi-games.png' },
     { id: 5, name: 'WBA Light Heavyweight World Championship', location: 'Etihad Arena, Abu Dhabi', year: '2022', services: 'Arena WiFi, Broadcast uplinks', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'] },
     { id: 6, name: 'World Tennis League (2022, 2023)', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', services: 'Arena WiFi, Hawk-Eye integration', tech: 'Cisco Meraki, HPE Aruba', category: ['Sports', 'WiFi Deployments'] },
     { id: 7, name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', services: 'Outdoor venue WiFi, Timing-system network', tech: 'HPE Aruba, Fluke', category: ['Sports', 'WiFi Deployments'] },
@@ -25,7 +25,7 @@ export default function EventPortfolioPage() {
     { id: 11, name: 'IIFA Awards (2022–2024)', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', services: 'Arena WiFi, Broadcast LAN, Press centre', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'] },
     { id: 12, name: 'Eid Al Fitr Concert 2023', location: 'Yas Bay, Abu Dhabi', year: '2023', services: 'Outdoor concert WiFi, Live stream uplink', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'] },
     { id: 13, name: 'Saadiyat Nights (2024, 2025)', location: 'Saadiyat Island, Abu Dhabi', year: '2024, 2025', services: 'Open-air WiFi, PtP microwave, CCTV', tech: 'HPE Aruba, Hikvision', category: ['Concerts', 'WiFi Deployments', 'CCTV & Security'] },
-    { id: 14, name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', services: 'Outdoor 60K-attendee WiFi, RFID backhaul', tech: 'HPE Aruba, Fluke', category: ['Concerts', 'WiFi Deployments'] },
+    { id: 14, name: 'Coldplay World Tour', location: 'Zayed Sports City, Abu Dhabi', year: '2024', services: 'Outdoor 60K-attendee WiFi, RFID backhaul', tech: 'HPE Aruba, Fluke', category: ['Concerts', 'WiFi Deployments'], img: '/events/coldplay-world-tour.png' },
   ]
 
   const filteredEvents = activeFilter === 'All' 
