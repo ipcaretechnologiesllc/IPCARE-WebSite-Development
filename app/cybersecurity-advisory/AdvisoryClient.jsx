@@ -405,7 +405,7 @@ function BottomCTA() {
 export default function AdvisoryClient() {
   useReveal()
   return (
-    <main style={{ background: 'radial-gradient(ellipse at 50% 15%, #162347 0%, #0d1b3d 35%, #07102a 65%, #040a18 100%)' }}>
+    <main>
       <Hero />
       <Platforms />
       <ServicesGrid />
