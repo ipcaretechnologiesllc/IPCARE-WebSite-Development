@@ -24,7 +24,7 @@ export default function ProductCard({ product, categorySlug }) {
         </ul>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {['daily', 'weekly', 'monthly'].map(d => (
-            <span key={d} className="mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.45)', color: '#E87722' }}>{d}</span>
+            <span key={d} className="glass-pill" style={{ fontSize: '10px' }}>{d}</span>
           ))}
         </div>
         <AddToQuoteButton product={p} size="sm"/>
