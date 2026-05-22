@@ -30,7 +30,7 @@ const CATEGORY_IMAGES = {
   'event-wifi':       'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=600&q=80',
   'networking':       'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80',
   'cctv':             'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80',
-  'testing-equipment':'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf?w=600&q=80',
+  'testing-equipment':'/Rental/category-testing-equipment.jpg',
   'servers':          'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=600&q=80',
   'bundles':          'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80',
   'macbooks':         'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80',
