@@ -397,20 +397,58 @@ function RentalTeaser() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {items.map((it, i) => (
-            <div key={it.name} className="glass-card overflow-hidden reveal" style={{ transitionDelay: `${i * 60}ms` }}>
-              <div className="relative h-36 overflow-hidden bg-black/30">
-                <img src={it.img} alt={`${it.name} for rent from IP Care Technologies`} loading="lazy" className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform"/>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 40%, rgba(7,16,42,0.8) 100%)' }}/>
-                <div className="absolute top-3 left-3 w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.9)' }}>
-                  <it.icon size={18} className="text-white"/>
-                </div>
+            <a
+              key={it.name}
+              href="/rental"
+              className="group relative rounded-2xl overflow-hidden reveal block"
+              style={{ transitionDelay: `${i * 80}ms`, aspectRatio: '3/4', minHeight: '260px' }}
+            >
+              {/* Full-bleed image */}
+              <img
+                src={it.img}
+                alt={`${it.name} rental UAE — IP Care Technologies`}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              />
+
+              {/* Base gradient overlay */}
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.10) 0%, rgba(7,16,42,0.40) 35%, rgba(7,16,42,0.93) 100%)' }}
+              />
+
+              {/* Hover — orange tint bleeds in from top */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: 'linear-gradient(180deg, rgba(232,119,34,0.12) 0%, transparent 55%)' }}
+              />
+
+              {/* Orange icon badge — top left */}
+              <div
+                className="absolute top-3 left-3 p-2 rounded-xl transition-transform duration-300 group-hover:scale-110"
+                style={{ background: '#E87722', boxShadow: '0 4px 14px rgba(232,119,34,0.50)' }}
+              >
+                <it.icon size={17} className="text-white" />
               </div>
-              <div className="p-4">
-                <h4 className="text-white font-semibold text-base">{it.name}</h4>
-                <p className="text-white/60 text-xs mt-1 mb-3">{it.spec}</p>
-                <button className="w-full btn-primary text-xs justify-center" style={{ padding: '8px 12px' }}>Add to Quote</button>
+
+              {/* Content pinned to bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h4 className="text-white font-bold text-base leading-tight mb-1">{it.name}</h4>
+                <p className="text-white/65 text-xs mb-3 leading-snug">{it.spec}</p>
+                <button
+                  className="w-full text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 group-hover:brightness-110"
+                  style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)' }}
+                >
+                  Add to Quote
+                </button>
               </div>
-            </div>
+
+              {/* Orange sweep line on hover */}
+              <div
+                className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
+                style={{ background: '#E87722' }}
+              />
+            </a>
           ))}
         </div>
         <div className="text-center mt-10 reveal">
