@@ -382,11 +382,11 @@ function CyberAdvisory() {
 /* ---------------- Rental Teaser ---------------- */
 function RentalTeaser() {
   const items = [
-    { name: 'Laptops', spec: 'Intel i7 / 16GB / SSD', icon: Laptop, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80' },
-    { name: 'iPads & Tablets', spec: 'iPad Pro, Samsung Tab', icon: Tablet, img: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80' },
-    { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: '/Rental/rental-event-wifi.png' },
-    { name: 'Networking', spec: 'Switches, firewalls, servers', icon: Network, img: 'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=600&q=80' },
-    { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg' },
+    { name: 'Laptops', spec: 'Intel i7 / 16GB / SSD', icon: Laptop, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80', href: '/rental/laptops-desktops' },
+    { name: 'iPads & Tablets', spec: 'iPad Pro, Samsung Tab', icon: Tablet, img: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80', href: '/rental/tablets-ipads' },
+    { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: '/Rental/rental-event-wifi.png', href: '/rental/event-wifi' },
+    { name: 'Networking', spec: 'Switches, firewalls, servers', icon: Network, img: 'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=600&q=80', href: '/rental/networking' },
+    { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg', href: '/rental/printers' },
   ]
   return (
     <section id="rental" className="py-24 px-6">
@@ -399,7 +399,7 @@ function RentalTeaser() {
           {items.map((it, i) => (
             <a
               key={it.name}
-              href="/rental"
+              href={it.href}
               className="group relative rounded-2xl overflow-hidden reveal block"
               style={{ transitionDelay: `${i * 80}ms`, aspectRatio: '3/4', minHeight: '260px' }}
             >
