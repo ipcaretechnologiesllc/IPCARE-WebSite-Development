@@ -384,9 +384,9 @@ function RentalTeaser() {
   const items = [
     { name: 'Laptops', spec: 'Intel i7 / 16GB / SSD', icon: Laptop, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80' },
     { name: 'iPads & Tablets', spec: 'iPad Pro, Samsung Tab', icon: Tablet, img: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80' },
-    { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: 'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=600&q=80' },
+    { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: '/Rental/rental-event-wifi.png' },
     { name: 'Networking', spec: 'Switches, firewalls, servers', icon: Network, img: 'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=600&q=80' },
-    { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: 'https://images.unsplash.com/photo-1650094980833-7373de26feb6?w=600&q=80' },
+    { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg' },
   ]
   return (
     <section id="rental" className="py-24 px-6">
@@ -438,7 +438,7 @@ function EventsPortfolio() {
     { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: '/events/iifa-awards.jpg' },
     { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019–2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.png' },
     { slug: 'uae-national-day-48th', name: 'UAE National Day — 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.png' },
-    { slug: 'uae-national-day-49th', name: 'UAE National Day — 49th Edition', loc: 'Multiple venues, UAE • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.png' },
+    { slug: 'uae-national-day-49th', name: 'UAE National Day — 49th Edition', loc: 'Al Jubail Mangrove Park, Abu Dhabi • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.png' },
     { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.png' },
   ]
   const [filter, setFilter] = useState('All Events')
