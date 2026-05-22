@@ -20,6 +20,7 @@ export default function PortfolioClient() {
   useReveal()
   const [filter, setFilter] = useState('All Events')
   const [query, setQuery] = useState('')
+  const [videoModal, setVideoModal] = useState(null)
   const tabs = ['All Events', 'UAE Events', 'Global Events']
   const filtered = events.filter((e) => {
     const matchesFilter = filter === 'All Events' || e.region === filter
@@ -28,6 +29,7 @@ export default function PortfolioClient() {
   })
 
   return (
+    <>
     <main>
       {/* Breadcrumb */}
       <div className="max-w-[1400px] mx-auto px-6 pt-6">
@@ -104,9 +106,17 @@ export default function PortfolioClient() {
                     ))}
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-3">
                     <Link href="/#contact" className="btn-primary !py-2.5 !px-5 text-sm">Discuss a Similar Event <Icons.ArrowRight size={14}/></Link>
                     <Link href="/event-it" className="btn-ghost !py-2.5 !px-5 text-sm">Back to Event IT</Link>
+                    {ev.video && (
+                      <button
+                        onClick={() => setVideoModal({ src: ev.video, label: ev.videoLabel || ev.name })}
+                        className="btn-ghost !py-2.5 !px-5 text-sm inline-flex items-center gap-2"
+                      >
+                        <Icons.Play size={14}/> Watch Video
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -127,5 +137,38 @@ export default function PortfolioClient() {
         </div>
       </section>
     </main>
+
+      {/* Video Modal */}
+      {videoModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(7,16,42,0.92)', backdropFilter: 'blur(8px)' }}
+          onClick={() => setVideoModal(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-2xl overflow-hidden"
+            style={{ background: '#0D2B55', border: '1px solid rgba(255,255,255,0.12)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="text-white font-semibold text-sm">{videoModal.label}</span>
+              <button onClick={() => setVideoModal(null)} className="text-white/60 hover:text-white transition-colors">
+                <Icons.X size={20}/>
+              </button>
+            </div>
+            <div className="relative" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                src={videoModal.src}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowFullScreen
+                title={videoModal.label}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }

@@ -8,6 +8,7 @@ import * as Icons from 'lucide-react'
 
 export default function EventPortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('All')
+  const [videoModal, setVideoModal] = useState(null)
 
   const categories = ['All', 'Sports', 'Concerts', 'National', 'WiFi Deployments', 'CCTV & Security']
 
@@ -21,7 +22,9 @@ export default function EventPortfolioPage() {
     { id: 6, name: 'World Tennis League (2022, 2023)', location: 'Coca-Cola Arena, Dubai', year: '2022, 2023', services: 'Arena WiFi, Hawk-Eye integration', tech: 'Cisco Meraki, HPE Aruba', category: ['Sports', 'WiFi Deployments'], img: '/events/world-tennis-league.png' },
     { id: 7, name: 'Mubadala Abu Dhabi Open', location: 'Zayed Sports City', year: 'Annual', services: 'Outdoor venue WiFi, Timing-system network', tech: 'HPE Aruba, Fluke', category: ['Sports', 'WiFi Deployments'], img: '/events/mubadala-abu-dhabi-open.png' },
     { id: 8, name: 'Abu Dhabi Padel Master', location: 'Hudayriat Island, Abu Dhabi', year: '2023', services: 'Multi-court WiFi, Broadcast LAN, Court-side connectivity, Ball-tracking integration', tech: 'HPE Aruba, Cisco', category: ['Sports', 'WiFi Deployments'], img: '/events/abu-dhabi-padel-master.jpeg' },
-    { id: 9, name: 'UAE Official National Day — 48th & 49th', location: 'Zayed Sports City + national venues', year: '2019, 2020', services: 'Multi-venue WiFi, Federal CCTV, Command-centre integration', tech: 'HPE Aruba, Hikvision, Cisco', category: ['National', 'WiFi Deployments', 'CCTV & Security'], img: '/events/uae-national-day.png' },
+    { id: 9, name: 'UAE Official National Day — 48th Edition', location: 'Zayed Sports City + nationwide venues', year: '2019', services: 'Multi-venue WiFi mesh, government-grade CCTV, command-centre integration, federal coordination', tech: 'HPE Aruba, Hikvision, Cisco', category: ['National', 'WiFi Deployments', 'CCTV & Security'], img: '/events/uae-national-day-48th.png', video: 'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1002301510156090%2F&show_text=false&width=800', videoLabel: 'Watch 48th National Day' },
+    { id: 16, name: 'UAE Official National Day — 49th Edition', location: 'Multiple venues, UAE', year: '2020', services: 'Multi-venue WiFi, broadcast LAN, government-grade CCTV, command-centre integration', tech: 'HPE Aruba, Hikvision, Cisco', category: ['National', 'WiFi Deployments', 'CCTV & Security'], img: '/events/uae-national-day-49th.png', video: 'https://www.youtube.com/embed/3zioTRC9Cc8', videoLabel: 'Watch 49th National Day' },
+    { id: 17, name: 'USA Basketball Showcase 2024', location: 'Etihad Arena, Abu Dhabi', year: '2024', services: 'Arena WiFi 6E, broadcast LAN, media-centre connectivity, NOC operations, digital signage', tech: 'HPE Aruba, Cisco, Palo Alto', category: ['Sports', 'WiFi Deployments'], img: '/events/usa-basketball-2024.png' },
     { id: 10, name: 'Ya Salam After Race Concert (2019–2024)', location: 'Yas Island, Abu Dhabi', year: '2019–2024', services: 'Outdoor festival WiFi, PtP backhaul, RFID', tech: 'HPE Aruba, Ruckus', category: ['Concerts', 'WiFi Deployments'], img: '/events/ya-salam-after-race-concert.png' },
     { id: 11, name: 'IIFA Awards (2022–2024)', location: 'Yas Island, Abu Dhabi', year: '2022, 2023, 2024', services: 'Arena WiFi, Broadcast LAN, Press centre', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'], img: '/events/iifa-awards.jpg' },
     { id: 12, name: 'Eid Al Fitr Concert 2023', location: 'Yas Bay, Abu Dhabi', year: '2023', services: 'Outdoor concert WiFi, Live stream uplink', tech: 'HPE Aruba, Cisco', category: ['Concerts', 'WiFi Deployments'], img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80' },
@@ -116,9 +119,19 @@ export default function EventPortfolioPage() {
                       </div>
                       <p className="body-text text-sm mb-2"><strong>Services:</strong> {event.services}</p>
                       <p className="body-text text-sm mb-4"><strong>Technology:</strong> {event.tech}</p>
-                      <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">
-                        Read Case Study <Icons.ArrowRight size={13}/>
-                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] transition-all">
+                          Read Case Study <Icons.ArrowRight size={13}/>
+                        </span>
+                        {event.video && (
+                          <button
+                            onClick={(e) => { e.preventDefault(); setVideoModal({ src: event.video, label: event.videoLabel }) }}
+                            className="inline-flex items-center gap-1.5 text-white/80 text-sm font-semibold px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition-all"
+                          >
+                            <Icons.Play size={13}/> Watch Video
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -144,6 +157,38 @@ export default function EventPortfolioPage() {
         </section>
       </main>
       <Footer />
+
+      {/* Video Modal */}
+      {videoModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(7,16,42,0.92)', backdropFilter: 'blur(8px)' }}
+          onClick={() => setVideoModal(null)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-2xl overflow-hidden"
+            style={{ background: '#0D2B55', border: '1px solid rgba(255,255,255,0.12)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="text-white font-semibold text-sm">{videoModal.label}</span>
+              <button onClick={() => setVideoModal(null)} className="text-white/60 hover:text-white transition-colors">
+                <Icons.X size={20}/>
+              </button>
+            </div>
+            <div className="relative" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                src={videoModal.src}
+                className="absolute inset-0 w-full h-full"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowFullScreen
+                title={videoModal.label}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

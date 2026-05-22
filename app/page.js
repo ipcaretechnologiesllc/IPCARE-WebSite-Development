@@ -187,7 +187,7 @@ function Hero() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY', 'EID AL FITR CONCERT', 'ABU DHABI PADEL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'USA BASKETBALL 2024', 'ABU DHABI PADEL MASTER']
   return (
     <section 
       className="relative overflow-hidden" 
@@ -437,8 +437,9 @@ function EventsPortfolio() {
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: '/events/saadiyat-nights.png' },
     { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: '/events/iifa-awards.jpg' },
     { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019–2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.png' },
-    { slug: 'eid-al-fitr-concert-2023', name: 'Eid Al Fitr Concert', loc: 'Yas Bay, Abu Dhabi • 2023', region: 'Concerts', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=900&q=80' },
-    { slug: 'uae-national-day', name: 'UAE Official National Day', loc: 'Multiple venues, UAE • Annual', region: 'National', img: '/events/uae-national-day.png' },
+    { slug: 'uae-national-day-48th', name: 'UAE National Day — 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.png' },
+    { slug: 'uae-national-day-49th', name: 'UAE National Day — 49th Edition', loc: 'Multiple venues, UAE • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.png' },
+    { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.png' },
   ]
   const [filter, setFilter] = useState('All Events')
   const tabs = ['All Events', 'Sports', 'Concerts', 'National']
