@@ -11,7 +11,7 @@ export default function ProductCard({ product, categorySlug }) {
       <Link href={`/rental/${categorySlug}/${product.slug}`} className="relative block h-44 overflow-hidden bg-black/30">
         <img src={`${product.image}?w=600&q=80`} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(7,16,42,0.85) 100%)' }}/>
-        <div className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: 'rgba(0,0,0,0.55)', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.85)' }}>{product.brand}</div>
+        <div className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', border: 'none', color: '#ffffff' }}>{product.brand}</div>
       </Link>
 
       <div className="flex-1 flex flex-col p-5">
@@ -25,7 +25,7 @@ export default function ProductCard({ product, categorySlug }) {
         </ul>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {['daily', 'weekly', 'monthly'].map(d => (
-            <span key={d} className="mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>{d}</span>
+            <span key={d} className="mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.45)', color: '#E87722' }}>{d}</span>
           ))}
         </div>
         <AddToQuoteButton product={p} size="sm"/>
