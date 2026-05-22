@@ -23,6 +23,19 @@ const bundles = Object.values(rentalCategories.bundles.products).slice(0, 3)
 const featured = getFeaturedProducts(6)
 const cats = Object.entries(rentalCategories)
 
+const CATEGORY_IMAGES = {
+  'laptops-desktops': 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80',
+  'tablets-ipads':    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80',
+  'printers':         'https://images.unsplash.com/photo-1650094980833-7373de26feb6?w=600&q=80',
+  'event-wifi':       'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=600&q=80',
+  'networking':       'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80',
+  'cctv':             'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80',
+  'testing-equipment':'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf?w=600&q=80',
+  'servers':          'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=600&q=80',
+  'bundles':          'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80',
+  'macbooks':         'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80',
+}
+
 export default function RentalHubClient() {
   useReveal()
   return (
@@ -54,21 +67,61 @@ export default function RentalHubClient() {
               <Link
                 key={slug}
                 href={`/rental/${slug}`}
-                className="glass-card text-center group reveal flex flex-col items-center justify-between"
-                style={{
-                  paddingTop: '32px',
-                  paddingBottom: '24px',
-                  paddingLeft: '20px',
-                  paddingRight: '20px',
-                  minHeight: '180px',
-                  transitionDelay: `${i * 40}ms`,
-                }}
+                className="group relative rounded-2xl overflow-hidden reveal block"
+                style={{ transitionDelay: `${i * 40}ms`, aspectRatio: '4/5', minHeight: '200px' }}
               >
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform flex-shrink-0" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
-                  <Ic name={c.icon} size={24} className="text-[#E87722]"/>
+                {/* Full-bleed category image */}
+                <img
+                  src={CATEGORY_IMAGES[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80'}
+                  alt={c.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+
+                {/* Base gradient */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.08) 0%, rgba(7,16,42,0.45) 40%, rgba(7,16,42,0.94) 100%)' }}
+                />
+
+                {/* Orange tint on hover from top */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: 'linear-gradient(180deg, rgba(232,119,34,0.18) 0%, transparent 55%)' }}
+                />
+
+                {/* Orange top border that sweeps in on hover */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
+                  style={{ background: '#E87722' }}
+                />
+
+                {/* Icon badge — top left */}
+                <div
+                  className="absolute top-3 left-3 p-2 rounded-xl transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: '#E87722', boxShadow: '0 4px 14px rgba(232,119,34,0.50)' }}
+                >
+                  <Ic name={c.icon} size={16} className="text-white" />
                 </div>
-                <h3 className="text-white font-semibold text-sm leading-tight flex-1 flex items-center justify-center">{c.name}</h3>
-                <p className="mono text-[10px] text-white/50 uppercase tracking-wider" style={{ marginTop: '12px' }}>{c.products.length} items</p>
+
+                {/* Arrow — top right, slides in on hover */}
+                <div
+                  className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300"
+                  style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(4px)' }}
+                >
+                  <Icons.ArrowRight size={13} className="text-white" />
+                </div>
+
+                {/* Content pinned to bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="text-white font-bold text-sm leading-tight mb-1.5">{c.name}</h3>
+                  <p
+                    className="mono text-[10px] uppercase tracking-widest"
+                    style={{ color: '#E87722' }}
+                  >
+                    {c.products.length} items
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
