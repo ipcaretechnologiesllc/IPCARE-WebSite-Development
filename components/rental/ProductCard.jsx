@@ -8,8 +8,8 @@ export default function ProductCard({ product, categorySlug }) {
   const p = { ...product, categorySlug }
   return (
     <div className="glass-card overflow-hidden group flex flex-col h-full">
-      <Link href={`/rental/${categorySlug}/${product.slug}`} className="relative block h-44 overflow-hidden bg-black/30">
-        <img src={`${product.image}?w=600&q=80`} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+      <Link href={`/rental/${categorySlug}/${product.slug}`} className="relative block h-60 overflow-hidden bg-black/30">
+        <img src={product.image.startsWith('http') ? `${product.image}?w=600&q=80` : product.image} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"/>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(7,16,42,0.85) 100%)' }}/>
         <div className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', border: 'none', color: '#ffffff' }}>{product.brand}</div>
       </Link>

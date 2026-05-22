@@ -81,7 +81,7 @@ export default function RentalHubClient() {
                 {/* Base gradient */}
                 <div
                   className="absolute inset-0"
-                  style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.08) 0%, rgba(7,16,42,0.45) 40%, rgba(7,16,42,0.94) 100%)' }}
+                  style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.10) 45%, rgba(7,16,42,0.88) 100%)' }}
                 />
 
                 {/* Orange tint on hover from top */}
