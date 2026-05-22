@@ -385,7 +385,7 @@ function RentalTeaser() {
     { name: 'Laptops', spec: 'Intel i7 / 16GB / SSD', icon: Laptop, img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80', href: '/rental/laptops-desktops' },
     { name: 'iPads & Tablets', spec: 'iPad Pro, Samsung Tab', icon: Tablet, img: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&q=80', href: '/rental/tablets-ipads' },
     { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: '/Rental/rental-event-wifi.png', href: '/rental/event-wifi' },
-    { name: 'Testing Equipment', spec: 'Fluke DSX 5000, OTDR, Splicer', icon: Wrench, img: 'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf?w=600&q=80', href: '/rental/testing-equipment' },
+    { name: 'Testing Equipment', spec: 'Fluke DSX 5000, OTDR, Splicer', icon: Wrench, img: '/Rental/category-testing-equipment.jpg', href: '/rental/testing-equipment' },
     { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg', href: '/rental/printers' },
   ]
   return (
