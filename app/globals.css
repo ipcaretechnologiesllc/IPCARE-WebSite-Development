@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --brand-orange: #E87722;
+  --brand-orange:       #E87722;
   --brand-orange-hover: #D06010;
-  --brand-navy: #0D2B55;
-  --brand-blue: #1B6CA8;
+  --brand-navy:         #0B1A46;  /* darkest — ticker + footer */
+  --brand-blue:         #1E3A8A;  /* primary section background */
 
-  /* Unified blue gradient palette (matches reference hero) */
+  /* Blue scale */
   --blue-100: #2E64D8;
-  --blue-200: #1E4AB8;
+  --blue-200: #1E3A8A;
   --blue-300: #1A3E9E;
   --blue-400: #152F7F;
   --blue-500: #0F245F;
@@ -19,18 +19,14 @@
 }
 
 html, body {
-  background-color: #0F245F;
+  background-color: #1E3A8A;
   color: #ffffff;
   overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  background:
-    radial-gradient(ellipse at 50% 0%, #2e64d8 0%, transparent 45%),
-    radial-gradient(ellipse at 80% 80%, #1e4ab8 0%, transparent 50%),
-    linear-gradient(180deg, #1e4ab8 0%, #1a3e9e 40%, #152f7f 75%, #0f245f 100%);
-  background-attachment: fixed;
+  background: #1E3A8A;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -64,7 +60,7 @@ body {
 
 /* ===== Buttons ===== */
 .btn-primary {
-  background: linear-gradient(135deg, #FF7A3C 0%, #F97316 50%, #EA580C 100%);
+  background: linear-gradient(135deg, #F28A2E 0%, #E87722 50%, #D46B19 100%);
   color: #ffffff;
   border-radius: 10px;
   padding: 14px 28px;
@@ -74,12 +70,12 @@ body {
   gap: 8px;
   transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
   border: 1px solid transparent;
-  box-shadow: 0 6px 20px -6px rgba(249,115,22,0.6);
+  box-shadow: 0 6px 20px -6px rgba(232,119,34,0.60);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #FF8A4C 0%, #FB8530 50%, #F86720 100%);
+  background: linear-gradient(135deg, #F59430 0%, #EB7E26 50%, #D4711D 100%);
   transform: translateY(-1px);
-  box-shadow: 0 12px 30px -8px rgba(249,115,22,0.75);
+  box-shadow: 0 12px 30px -8px rgba(232,119,34,0.75);
 }
 
 .btn-ghost {
@@ -100,7 +96,7 @@ body {
 
 /* Nav scroll state — blue-tinted, not near-black */
 .nav-scrolled {
-  background: rgba(21,47,127,0.75);
+  background: rgba(30,58,138,0.90);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid rgba(255,255,255,0.10);
@@ -154,7 +150,7 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #0F245F; }
+::-webkit-scrollbar-track { background: #1E3A8A; }
 ::-webkit-scrollbar-thumb { background: rgba(232,119,34,0.5); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #E87722; }
 
@@ -171,7 +167,7 @@ body {
 
 /* Orange gradient text (for hero highlight) */
 .orange-gradient-text {
-  background: linear-gradient(135deg, #FF8A3C 0%, #F97316 45%, #EA580C 100%);
+  background: linear-gradient(135deg, #F28A2E 0%, #E87722 45%, #D46B19 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

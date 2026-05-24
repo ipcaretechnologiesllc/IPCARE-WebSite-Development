@@ -433,7 +433,7 @@ function Stats() {
       className="py-24 px-6 relative overflow-hidden"
       style={{
         background:
-          'radial-gradient(ellipse at 50% 0%, rgba(59,123,255,0.10) 0%, transparent 60%), #0B1A46',
+          'radial-gradient(ellipse at 50% 0%, rgba(59,123,255,0.10) 0%, transparent 60%), #1E3A8A',
       }}
     >
       <div className="max-w-[1400px] mx-auto relative z-10">

@@ -4,7 +4,7 @@ import Logo from './Logo'
 
 export default function Footer() {
   return (
-    <footer className="pt-16 pb-8 px-6" style={{ background: 'linear-gradient(180deg, rgba(11,26,70,0.6) 0%, rgba(8,20,52,0.95) 100%)', borderTop: '1px solid rgba(255,255,255,0.10)', backdropFilter: 'blur(14px)' }}>
+    <footer className="pt-16 pb-8 px-6" style={{ background: '#0B1A46', borderTop: '1px solid rgba(255,255,255,0.10)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand + social */}
@@ -43,12 +43,12 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Enterprise Services</h4>
             <ul className="space-y-2.5 text-white/70 text-sm">
-              <li><Link href="/services/managed-it" className="hover:text-[#F97316]">Managed IT Services</Link></li>
-              <li><Link href="/services/cybersecurity" className="hover:text-[#F97316]">Cybersecurity</Link></li>
-              <li><Link href="/services/elv" className="hover:text-[#F97316]">ELV &amp; Physical Security</Link></li>
-              <li><Link href="/services/cloud" className="hover:text-[#F97316]">Cloud Services</Link></li>
-              <li><Link href="/services/infrastructure" className="hover:text-[#F97316]">Infrastructure</Link></li>
-              <li><Link href="/services/it-consulting" className="hover:text-[#F97316]">IT Consulting</Link></li>
+              <li><Link href="/services/managed-it" className="hover:text-[#E87722]">Managed IT Services</Link></li>
+              <li><Link href="/services/cybersecurity" className="hover:text-[#E87722]">Cybersecurity</Link></li>
+              <li><Link href="/services/elv" className="hover:text-[#E87722]">ELV &amp; Physical Security</Link></li>
+              <li><Link href="/services/cloud" className="hover:text-[#E87722]">Cloud Services</Link></li>
+              <li><Link href="/services/infrastructure" className="hover:text-[#E87722]">Infrastructure</Link></li>
+              <li><Link href="/services/it-consulting" className="hover:text-[#E87722]">IT Consulting</Link></li>
             </ul>
           </div>
 
@@ -56,7 +56,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Rental Hub</h4>
             <ul className="space-y-2.5 text-white/70 text-sm">
               {['Laptops','iPads & Tablets','Event WiFi','Networking Gear','Printers & MFPs','Servers'].map(l => (
-                <li key={l}><Link href="/rental" className="hover:text-[#F97316]">{l}</Link></li>
+                <li key={l}><Link href="/rental" className="hover:text-[#E87722]">{l}</Link></li>
               ))}
             </ul>
           </div>
@@ -64,15 +64,15 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2.5 text-white/70 text-sm">
-              <li><Link href="/about" className="hover:text-[#F97316]">About</Link></li>
-              <li><Link href="/blog" className="hover:text-[#F97316]">Blog</Link></li>
-              <li><Link href="/careers" className="hover:text-[#F97316]">Careers</Link></li>
-              <li><Link href="/partners" className="hover:text-[#F97316]">Partners</Link></li>
-              <li><Link href="/services" className="hover:text-[#F97316]">All Services</Link></li>
-              <li><Link href="/industries" className="hover:text-[#F97316]">Industries</Link></li>
-              <li><Link href="/contact" className="hover:text-[#F97316]">Contact</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-[#F97316]">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-[#F97316]">Terms of Service</Link></li>
+              <li><Link href="/about" className="hover:text-[#E87722]">About</Link></li>
+              <li><Link href="/blog" className="hover:text-[#E87722]">Blog</Link></li>
+              <li><Link href="/careers" className="hover:text-[#E87722]">Careers</Link></li>
+              <li><Link href="/partners" className="hover:text-[#E87722]">Partners</Link></li>
+              <li><Link href="/services" className="hover:text-[#E87722]">All Services</Link></li>
+              <li><Link href="/industries" className="hover:text-[#E87722]">Industries</Link></li>
+              <li><Link href="/contact" className="hover:text-[#E87722]">Contact</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-[#E87722]">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-[#E87722]">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
