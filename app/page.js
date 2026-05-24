@@ -303,9 +303,8 @@ function TrustMarquee() {
       className="relative overflow-hidden"
       style={{
         minHeight: '80px',
-        background: '#E87722',
-        borderTop: '2px solid #0D2B55',
-        borderBottom: '2px solid #0D2B55',
+        background: '#0B1A46',
+        borderTop: '3px solid #E87722',
         paddingTop: '22px',
         paddingBottom: '22px',
       }}
@@ -317,7 +316,7 @@ function TrustMarquee() {
           style={{
             fontSize: '11px',
             fontWeight: 700,
-            color: '#FFFFFF',
+            color: '#E87722',
             letterSpacing: '3px',
           }}
         >
@@ -332,7 +331,7 @@ function TrustMarquee() {
           className="absolute left-0 top-0 bottom-0 pointer-events-none z-10"
           style={{
             width: '80px',
-            background: 'linear-gradient(to right, #E87722, transparent)',
+            background: 'linear-gradient(to right, #0b1a46, transparent)',
           }}
         />
 
@@ -341,7 +340,7 @@ function TrustMarquee() {
           className="absolute right-0 top-0 bottom-0 pointer-events-none z-10"
           style={{
             width: '80px',
-            background: 'linear-gradient(to left, #E87722, transparent)',
+            background: 'linear-gradient(to left, #0b1a46, transparent)',
           }}
         />
 
@@ -362,7 +361,7 @@ function TrustMarquee() {
               </span>
               <span
                 style={{
-                  color: '#0D2B55',
+                  color: '#E87722',
                   margin: '0 24px',
                   fontSize: '16px',
                 }}
