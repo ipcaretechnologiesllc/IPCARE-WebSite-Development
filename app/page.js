@@ -60,7 +60,7 @@ const HERO_SLIDES = [
     service: 'Managed IT Services',
     icon: Server,
     headline: 'End-to-End IT Operations, Monitored 24/7',
-    description: 'Proactive monitoring, maintenance and SLA-backed support.',
+    description: 'Proactive Monitoring, Maintenance and SLA-Backed Support.',
     link: '/services/managed-it',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
   },
@@ -69,7 +69,7 @@ const HERO_SLIDES = [
     service: 'Cybersecurity',
     icon: Lock,
     headline: 'Zero Trust Security and Compliance, Built In',
-    description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
+    description: 'SOC-Grade Protection Aligned to NESA, PCI and ISO 27001.',
     link: '/services/cybersecurity',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
   },
@@ -78,7 +78,7 @@ const HERO_SLIDES = [
     service: 'ELV & Physical Security',
     icon: ShieldCheck,
     headline: 'CCTV, Access Control and Structured Cabling',
-    description: 'Intelligent physical security for modern facilities.',
+    description: 'Intelligent Physical Security for Modern Facilities.',
     link: '/services/elv',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
   },
@@ -87,7 +87,7 @@ const HERO_SLIDES = [
     service: 'Event IT Infrastructure',
     icon: Calendar,
     headline: "The IT Backbone for the World's Biggest Events",
-    description: 'Temporary networks and connectivity at global event scale.',
+    description: 'Temporary Networks and Connectivity at Global Event Scale.',
     link: '/event-it',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
   },
@@ -96,7 +96,7 @@ const HERO_SLIDES = [
     service: 'Equipment Rental',
     icon: Network,
     headline: 'Laptops, Networks and Event Tech, on Demand',
-    description: 'Short and long-term rentals with nationwide logistics.',
+    description: 'Short and Long-Term Rentals with Nationwide Logistics.',
     link: '/rental',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
   },
@@ -105,7 +105,7 @@ const HERO_SLIDES = [
     service: 'Cloud Services',
     icon: Cloud,
     headline: 'Cloud Design, Migration and Cost Optimization',
-    description: 'AWS, Azure and private cloud, engineered for scale.',
+    description: 'AWS, Azure and Private Cloud, Engineered for Scale.',
     link: '/services/cloud',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
   },
@@ -303,11 +303,11 @@ function TrustMarquee() {
       className="relative overflow-hidden" 
       style={{ 
         minHeight: '80px',
-        background: 'rgba(13, 27, 61, 0.95)', 
-        borderTop: '1px solid rgba(232, 119, 34, 0.30)', 
-        borderBottom: '1px solid rgba(232, 119, 34, 0.30)',
-        paddingTop: '16px',
-        paddingBottom: '16px'
+        background: '#0B1A46',
+        borderTop: '3px solid #E87722',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        paddingTop: '22px',
+        paddingBottom: '22px'
       }}
     >
       {/* Label */}
@@ -332,7 +332,7 @@ function TrustMarquee() {
           className="absolute left-0 top-0 bottom-0 pointer-events-none z-10" 
           style={{ 
             width: '80px',
-            background: 'linear-gradient(to right, #0d1b3d, transparent)' 
+            background: 'linear-gradient(to right, #0b1a46, transparent)' 
           }}
         />
         
@@ -341,7 +341,7 @@ function TrustMarquee() {
           className="absolute right-0 top-0 bottom-0 pointer-events-none z-10" 
           style={{ 
             width: '80px',
-            background: 'linear-gradient(to left, #0d1b3d, transparent)' 
+            background: 'linear-gradient(to left, #0b1a46, transparent)' 
           }}
         />
         
@@ -352,7 +352,7 @@ function TrustMarquee() {
               <span 
                 className="whitespace-nowrap uppercase"
                 style={{ 
-                  fontSize: '16px', 
+                  fontSize: '17px', 
                   fontWeight: 700, 
                   color: '#FFFFFF', 
                   letterSpacing: '2px' 
