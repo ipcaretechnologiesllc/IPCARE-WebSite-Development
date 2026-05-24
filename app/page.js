@@ -53,189 +53,63 @@ function Counter({ end, suffix = '', duration = 1600 }) {
   return <span ref={ref} className="stat-num text-4xl md:text-5xl">{val.toLocaleString()}{suffix}</span>
 }
 
-/* ---------------- Fixed Statement Hero ---------------- */
-function Hero() {
-  const capabilities = [
-    { icon: Lock, label: 'Zero Trust Security' },
-    { icon: Network, label: 'Enterprise Networks' },
-    { icon: Calendar, label: 'Event IT Backbone' },
-    { icon: Laptop, label: 'Equipment Rental' },
-  ]
-  return (
-    <section
-      id="home"
-      className="relative overflow-hidden flex items-center"
-      style={{ minHeight: 'calc(100vh - 108px)' }}
-    >
-      {/* Ambient gradient orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-30"
-          style={{ background: 'radial-gradient(circle, #3B7BFF 0%, transparent 70%)' }}
-        />
-        <div
-          className="absolute -bottom-44 -right-32 w-[620px] h-[620px] rounded-full blur-3xl opacity-20"
-          style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)' }}
-        />
-      </div>
-
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 py-20 md:py-24 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-
-        {/* ── Left: text content ── */}
-        <div className="flex-1 text-center lg:text-left reveal">
-
-          {/* Badge */}
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-xs font-semibold"
-            style={{ background: 'rgba(232,119,34,0.10)', border: '1px solid rgba(232,119,34,0.30)', color: '#E87722' }}
-          >
-            <ShieldCheck size={13} strokeWidth={2.2} /> Enterprise IT · Trusted Since 2003
-          </div>
-
-          {/* Headline */}
-          <h1
-            className="text-white font-extrabold leading-tight"
-            style={{ fontSize: 'clamp(34px, 4.5vw, 60px)', lineHeight: 1.12 }}
-          >
-            Powering UAE&apos;s Biggest Events &amp;{' '}
-            <span style={{ color: '#E87722' }}>Leading Businesses.</span>
-          </h1>
-
-          {/* Sub-text */}
-          <p
-            className="mt-5 text-white/80 leading-relaxed max-w-xl mx-auto lg:mx-0"
-            style={{ fontSize: 'clamp(15px, 1.5vw, 18px)' }}
-          >
-            Managed IT, Cybersecurity, Event Infrastructure &amp; Equipment Rental — UAE &amp; Canada
-          </p>
-
-          {/* Stat row */}
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto lg:mx-0">
-            {[
-              { n: '20+', l: 'Years' },
-              { n: 'UAE & CA', l: 'Two Regions' },
-              { n: '24/7', l: 'Support SLA' },
-              { n: '500M+', l: 'Users Protected' },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="text-center px-3 py-3.5 rounded-xl"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.11)' }}
-              >
-                <div className="text-[#E87722] font-bold text-lg leading-tight">{s.n}</div>
-                <div className="text-white/60 text-[11px] mt-1 leading-snug">{s.l}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-            <a
-              href="/contact"
-              className="btn-primary w-full sm:w-auto justify-center"
-              style={{ padding: '15px 32px', fontSize: '15px' }}
-            >
-              Get a Free Consultation <ArrowRight size={17} />
-            </a>
-            <a
-              href="/services"
-              className="btn-ghost w-full sm:w-auto justify-center"
-              style={{ padding: '14px 28px', fontSize: '15px' }}
-            >
-              View Our Services
-            </a>
-          </div>
-        </div>
-
-        {/* ── Right: capability card ── */}
-        <div className="w-full lg:w-[300px] flex-shrink-0 reveal" style={{ transitionDelay: '120ms' }}>
-          <div className="glass-card p-6">
-            <div
-              className="text-[11px] font-semibold uppercase tracking-[0.22em] mb-5"
-              style={{ color: '#E87722' }}
-            >
-              Core Capabilities
-            </div>
-            {capabilities.map((c, idx) => {
-              const Icon = c.icon
-              return (
-                <div
-                  key={c.label}
-                  className={`flex items-center gap-3 py-3.5${idx > 0 ? ' border-t border-white/10' : ''}`}
-                >
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.25)' }}
-                  >
-                    <Icon size={16} className="text-[#E87722]" strokeWidth={2} />
-                  </div>
-                  <span className="text-white/90 font-medium text-sm">{c.label}</span>
-                  <ArrowRight size={13} className="ml-auto text-white/30" />
-                </div>
-              )
-            })}
-          </div>
-        </div>
-
-      </div>
-    </section>
-  )
-}
-
-/* ---------------- Hero Service Carousel ---------------- */
+/* ---------------- Hero Carousel (7 slides) ---------------- */
 const HERO_SLIDES = [
   {
     id: 0,
+    service: "Trusted by the World's Biggest Events",
+    icon: ShieldCheck,
+    headline: "Powering UAE's Biggest Events &",
+    headlineAccent: 'Leading Businesses.',
+    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — Delivered Across the UAE & Canada Since 2003.',
+    bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
+  },
+  {
+    id: 1,
     service: 'Managed IT Services',
     icon: Server,
     headline: 'End-to-End IT Operations, Monitored 24/7',
     description: 'Proactive Monitoring, Maintenance and SLA-Backed Support.',
-    link: '/services/managed-it',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
   },
   {
-    id: 1,
+    id: 2,
     service: 'Cybersecurity',
     icon: Lock,
     headline: 'Zero Trust Security and Compliance, Built In',
     description: 'SOC-Grade Protection Aligned to NESA, PCI and ISO 27001.',
-    link: '/services/cybersecurity',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
   },
   {
-    id: 2,
+    id: 3,
     service: 'ELV & Physical Security',
     icon: ShieldCheck,
     headline: 'CCTV, Access Control and Structured Cabling',
     description: 'Intelligent Physical Security for Modern Facilities.',
-    link: '/services/elv',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
   },
   {
-    id: 3,
+    id: 4,
     service: 'Event IT Infrastructure',
     icon: Calendar,
     headline: "The IT Backbone for the World's Biggest Events",
     description: 'Temporary Networks and Connectivity at Global Event Scale.',
-    link: '/event-it',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
   },
   {
-    id: 4,
+    id: 5,
     service: 'Equipment Rental',
     icon: Network,
     headline: 'Laptops, Networks and Event Tech, on Demand',
     description: 'Short and Long-Term Rentals with Nationwide Logistics.',
-    link: '/rental',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
   },
   {
-    id: 5,
+    id: 6,
     service: 'Cloud Services',
     icon: Cloud,
     headline: 'Cloud Design, Migration and Cost Optimization',
     description: 'AWS, Azure and Private Cloud, Engineered for Scale.',
-    link: '/services/cloud',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
   },
 ]
@@ -286,9 +160,9 @@ function HeroCarousel() {
 
   return (
     <section
-      id="services-showcase"
+      id="home"
       className="relative overflow-hidden"
-      style={{ height: 'calc(62vh)', minHeight: '420px' }}
+      style={{ height: 'calc(100vh - 108px)', minHeight: '600px' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
@@ -296,16 +170,6 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="IP Care Technologies — Services"
     >
-      {/* ── OUR CORE SERVICES eyebrow ── */}
-      <div className="absolute top-5 left-0 right-0 z-30 text-center pointer-events-none">
-        <span
-          className="uppercase tracking-[0.28em] font-semibold"
-          style={{ fontSize: '10px', color: '#E87722', opacity: 0.9 }}
-        >
-          Our Core Services
-        </span>
-      </div>
-
       {/* ── Slides (all absolutely stacked; only active is opaque) ── */}
       {HERO_SLIDES.map((slide, i) => {
         const Icon = slide.icon
@@ -338,7 +202,7 @@ function HeroCarousel() {
               className="absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(5,12,30,0.62) 0%, rgba(10,22,58,0.56) 45%, rgba(13,36,90,0.52) 100%)',
+                  'linear-gradient(135deg, rgba(5,12,30,0.88) 0%, rgba(10,22,58,0.84) 45%, rgba(13,36,90,0.80) 100%)',
               }}
             />
 
@@ -364,14 +228,18 @@ function HeroCarousel() {
                   </span>
                 </div>
 
-                {/* Headline */}
-                <h2
+                {/* Headline — optional orange accent for brand slide */}
+                <h1
                   className="text-white font-extrabold leading-tight"
-                  style={{ fontSize: 'clamp(22px, 3.6vw, 46px)', lineHeight: 1.14 }}
+                  style={{ fontSize: 'clamp(28px, 4.6vw, 58px)', lineHeight: 1.14 }}
                   aria-live={active ? 'polite' : undefined}
                 >
-                  {slide.headline}
-                </h2>
+                  {slide.headlineAccent ? (
+                    <>{slide.headline}{' '}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span></>
+                  ) : (
+                    slide.headline
+                  )}
+                </h1>
 
                 {/* Description */}
                 <p
@@ -380,6 +248,24 @@ function HeroCarousel() {
                 >
                   {slide.description}
                 </p>
+
+                {/* CTAs */}
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href="/contact"
+                    className="btn-primary w-full sm:w-auto justify-center"
+                    style={{ padding: '15px 32px', fontSize: '15px' }}
+                  >
+                    Get a Free Consultation <ArrowRight size={17} />
+                  </a>
+                  <a
+                    href="/services"
+                    className="btn-ghost w-full sm:w-auto justify-center"
+                    style={{ padding: '14px 28px', fontSize: '15px' }}
+                  >
+                    View Our Services
+                  </a>
+                </div>
 
               </div>
             </div>
@@ -910,9 +796,8 @@ const App = () => {
   return (
     <main>
       <Header />
-      <Hero />
-      <TrustMarquee />
       <HeroCarousel />
+      <TrustMarquee />
       <Services />
       <Stats />
       <CyberAdvisory />
