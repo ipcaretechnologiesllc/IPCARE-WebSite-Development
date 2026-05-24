@@ -9,7 +9,7 @@ import random
 from pymongo import MongoClient
 
 # Configuration
-BASE_URL = "https://quizzical-pascal-7.preview.emergentagent.com"
+BASE_URL = "https://ecstatic-ptolemy-10.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 MONGO_URL = "mongodb://localhost:27017"
 DB_NAME = "ipcare"

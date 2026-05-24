@@ -61,7 +61,7 @@ const HERO_SLIDES = [
     icon: ShieldCheck,
     headline: "Powering UAE's Biggest Events &",
     headlineAccent: 'Leading Businesses.',
-    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — Delivered Across the UAE & Canada Since 2003.',
+    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — delivered across the UAE & Canada since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
   },
   {
@@ -69,7 +69,7 @@ const HERO_SLIDES = [
     service: 'Managed IT Services',
     icon: Server,
     headline: 'End-to-End IT Operations, Monitored 24/7',
-    description: 'Proactive Monitoring, Maintenance and SLA-Backed Support.',
+    description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
   },
   {
@@ -77,7 +77,7 @@ const HERO_SLIDES = [
     service: 'Cybersecurity',
     icon: Lock,
     headline: 'Zero Trust Security and Compliance, Built In',
-    description: 'SOC-Grade Protection Aligned to NESA, PCI and ISO 27001.',
+    description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
   },
   {
@@ -85,7 +85,7 @@ const HERO_SLIDES = [
     service: 'ELV & Physical Security',
     icon: ShieldCheck,
     headline: 'CCTV, Access Control and Structured Cabling',
-    description: 'Intelligent Physical Security for Modern Facilities.',
+    description: 'Intelligent physical security for modern facilities.',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
   },
   {
@@ -93,7 +93,7 @@ const HERO_SLIDES = [
     service: 'Event IT Infrastructure',
     icon: Calendar,
     headline: "The IT Backbone for the World's Biggest Events",
-    description: 'Temporary Networks and Connectivity at Global Event Scale.',
+    description: 'Temporary networks and connectivity at global event scale.',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
   },
   {
@@ -101,7 +101,7 @@ const HERO_SLIDES = [
     service: 'Equipment Rental',
     icon: Network,
     headline: 'Laptops, Networks and Event Tech, on Demand',
-    description: 'Short and Long-Term Rentals with Nationwide Logistics.',
+    description: 'Short and long-term rentals with nationwide logistics.',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
   },
   {
@@ -109,7 +109,7 @@ const HERO_SLIDES = [
     service: 'Cloud Services',
     icon: Cloud,
     headline: 'Cloud Design, Migration and Cost Optimization',
-    description: 'AWS, Azure and Private Cloud, Engineered for Scale.',
+    description: 'AWS, Azure and private cloud, engineered for scale.',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
   },
 ]
@@ -695,7 +695,7 @@ function About() {
             <Building2 size={14}/> ABOUT IP CARE TECHNOLOGIES
           </div>
           <h2 className="text-[32px] md:text-[44px] font-bold leading-tight" style={{ color: '#0D2B55' }}>
-            Two decades of enterprise IT excellence across <span className="text-[#E87722]">UAE & Canada</span>.
+            Two Decades of Enterprise IT Excellence across <span className="text-[#E87722]">UAE & Canada</span>.
           </h2>
           <p className="mt-5 text-base md:text-lg" style={{ color: '#333F50' }}>
             Founded in 2003, IP Care Technologies L.L.C. is a premier enterprise IT services firm delivering managed IT, cybersecurity, event infrastructure and equipment rental. From government institutions to Fortune 500 clients — we design, deploy and operate mission-critical technology.
@@ -834,7 +834,7 @@ function OfficesCTA() {
               </div>
             </div>
             <div className="text-center md:text-right">
-              <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s build something<br/>enterprise-grade.</h3>
+              <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
               <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
             </div>
           </div>
