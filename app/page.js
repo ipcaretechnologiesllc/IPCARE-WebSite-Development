@@ -299,72 +299,72 @@ function HeroCarousel() {
 function TrustMarquee() {
   const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'USA BASKETBALL 2024', 'ABU DHABI PADEL MASTER']
   return (
-    <section 
-      className="relative overflow-hidden" 
-      style={{ 
+    <section
+      className="relative overflow-hidden"
+      style={{
         minHeight: '80px',
-        background: '#0B1A46',
-        borderTop: '3px solid #E87722',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        background: '#E87722',
+        borderTop: '2px solid #0D2B55',
+        borderBottom: '2px solid #0D2B55',
         paddingTop: '22px',
-        paddingBottom: '22px'
+        paddingBottom: '22px',
       }}
     >
       {/* Label */}
       <div className="text-center mb-[10px]">
-        <p 
-          className="uppercase" 
-          style={{ 
-            fontSize: '11px', 
-            fontWeight: 700, 
-            color: '#E87722', 
-            letterSpacing: '3px' 
+        <p
+          className="uppercase"
+          style={{
+            fontSize: '11px',
+            fontWeight: 700,
+            color: '#FFFFFF',
+            letterSpacing: '3px',
           }}
         >
           TRUSTED BY THE WORLD'S BIGGEST EVENTS
         </p>
       </div>
-      
+
       {/* Scrolling Strip with Fade Edges */}
       <div className="relative overflow-hidden">
         {/* Left fade gradient */}
-        <div 
-          className="absolute left-0 top-0 bottom-0 pointer-events-none z-10" 
-          style={{ 
+        <div
+          className="absolute left-0 top-0 bottom-0 pointer-events-none z-10"
+          style={{
             width: '80px',
-            background: 'linear-gradient(to right, #0b1a46, transparent)' 
+            background: 'linear-gradient(to right, #E87722, transparent)',
           }}
         />
-        
+
         {/* Right fade gradient */}
-        <div 
-          className="absolute right-0 top-0 bottom-0 pointer-events-none z-10" 
-          style={{ 
+        <div
+          className="absolute right-0 top-0 bottom-0 pointer-events-none z-10"
+          style={{
             width: '80px',
-            background: 'linear-gradient(to left, #0b1a46, transparent)' 
+            background: 'linear-gradient(to left, #E87722, transparent)',
           }}
         />
-        
+
         {/* Marquee Track */}
         <div className="marquee-track">
           {[...events, ...events, ...events, ...events].map((event, i) => (
             <div key={i} className="flex-shrink-0 flex items-center">
-              <span 
+              <span
                 className="whitespace-nowrap uppercase"
-                style={{ 
-                  fontSize: '17px', 
-                  fontWeight: 700, 
-                  color: '#FFFFFF', 
-                  letterSpacing: '2px' 
+                style={{
+                  fontSize: '17px',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
+                  letterSpacing: '2px',
                 }}
               >
                 {event}
               </span>
-              <span 
-                style={{ 
-                  color: '#E87722', 
+              <span
+                style={{
+                  color: '#0D2B55',
                   margin: '0 24px',
-                  fontSize: '16px'
+                  fontSize: '16px',
                 }}
               >
                 ◆
