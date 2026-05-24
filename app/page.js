@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
   Laptop, Tablet, Wifi, Printer, Wrench, ArrowRight, Phone, Mail,
@@ -53,133 +53,243 @@ function Counter({ end, suffix = '', duration = 1600 }) {
   return <span ref={ref} className="stat-num text-4xl md:text-5xl">{val.toLocaleString()}{suffix}</span>
 }
 
-/* ---------------- Hero (wide, no back card) ---------------- */
-const HERO_HEADLINES = [
-  { main: 'Enterprise IT Solutions.', accent: 'Trusted Since 2003.' },
-  { main: "Powering UAE's Biggest Events &", accent: 'Leading Businesses.' },
-  { main: 'Expert Cybersecurity.', accent: 'Zero Trust. SASE. Cloud.' },
+/* ---------------- Hero Service Carousel ---------------- */
+const HERO_SLIDES = [
+  {
+    id: 0,
+    service: 'Managed IT Services',
+    icon: Server,
+    headline: 'End-to-End IT Operations, Monitored 24/7',
+    description: 'Proactive monitoring, maintenance and SLA-backed support.',
+    link: '/services/managed-it',
+    bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
+  },
+  {
+    id: 1,
+    service: 'Cybersecurity',
+    icon: Lock,
+    headline: 'Zero Trust Security and Compliance, Built In',
+    description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
+    link: '/services/cybersecurity',
+    bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
+  },
+  {
+    id: 2,
+    service: 'ELV & Physical Security',
+    icon: ShieldCheck,
+    headline: 'CCTV, Access Control and Structured Cabling',
+    description: 'Intelligent physical security for modern facilities.',
+    link: '/services/elv',
+    bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
+  },
+  {
+    id: 3,
+    service: 'Event IT Infrastructure',
+    icon: Calendar,
+    headline: "The IT Backbone for the World's Biggest Events",
+    description: 'Temporary networks and connectivity at global event scale.',
+    link: '/event-it',
+    bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
+  },
+  {
+    id: 4,
+    service: 'Equipment Rental',
+    icon: Network,
+    headline: 'Laptops, Networks and Event Tech, on Demand',
+    description: 'Short and long-term rentals with nationwide logistics.',
+    link: '/rental',
+    bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
+  },
+  {
+    id: 5,
+    service: 'Cloud Services',
+    icon: Cloud,
+    headline: 'Cloud Design, Migration and Cost Optimization',
+    description: 'AWS, Azure and private cloud, engineered for scale.',
+    link: '/services/cloud',
+    bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
+  },
 ]
 
-function RotatingHeadline() {
-  const [idx, setIdx] = useState(0)
-  const [visible, setVisible] = useState(true)
+function HeroCarousel() {
+  const [current, setCurrent] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+  const touchStartX = useRef(null)
+  const intervalRef = useRef(null)
 
-  useEffect(() => {
-    const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-    const ADVANCE = 4000
-    const FADE = reduced ? 0 : 500
-
-    const tick = setInterval(() => {
-      setVisible(false)
-      setTimeout(() => {
-        setIdx((i) => (i + 1) % HERO_HEADLINES.length)
-        setVisible(true)
-      }, FADE)
-    }, ADVANCE)
-    return () => clearInterval(tick)
+  const goTo = useCallback((idx) => {
+    setCurrent(((idx % HERO_SLIDES.length) + HERO_SLIDES.length) % HERO_SLIDES.length)
   }, [])
 
-  const jumpTo = (next) => {
-    if (next === idx) return
-    setVisible(false)
-    setTimeout(() => { setIdx(next); setVisible(true) }, 500)
+  const goNext = useCallback(() => {
+    setCurrent((c) => (c + 1) % HERO_SLIDES.length)
+  }, [])
+
+  const goPrev = useCallback(() => {
+    setCurrent((c) => (c - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
+  }, [])
+
+  /* Auto-advance every 5 s; pause when mouse is over the carousel */
+  useEffect(() => {
+    if (isHovered) return
+    intervalRef.current = setInterval(goNext, 5000)
+    return () => clearInterval(intervalRef.current)
+  }, [isHovered, goNext])
+
+  /* Keyboard: ArrowLeft / ArrowRight */
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') goNext()
+      else if (e.key === 'ArrowLeft') goPrev()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [goNext, goPrev])
+
+  /* Touch / swipe */
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const dx = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(dx) > 50) { dx > 0 ? goNext() : goPrev() }
+    touchStartX.current = null
   }
 
-  const h = HERO_HEADLINES[idx]
-
   return (
-    <>
-      <h1
-        aria-live="polite"
-        className="transition-opacity duration-500"
-        style={{
-          opacity: visible ? 1 : 0,
-          fontSize: '56px',
-          fontWeight: 800,
-          lineHeight: '1.15',
-        }}
-      >
-        <span style={{ color: '#FFFFFF' }}>{h.main}</span>
-        <br/>
-        <span style={{ color: '#E87722' }}>{h.accent}</span>
-      </h1>
-      
-      {/* Responsive font sizes via media queries in style tag */}
-      <style jsx>{`
-        @media (max-width: 1024px) {
-          h1 {
-            font-size: 38px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          h1 {
-            font-size: 32px !important;
-          }
-        }
-      `}</style>
+    <section
+      id="home"
+      className="relative overflow-hidden"
+      style={{ height: 'calc(100vh - 108px)', minHeight: '600px' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      aria-roledescription="carousel"
+      aria-label="IP Care Technologies — Services"
+    >
+      {/* ── Slides (all absolutely stacked; only active is opaque) ── */}
+      {HERO_SLIDES.map((slide, i) => {
+        const Icon = slide.icon
+        const active = i === current
+        return (
+          <div
+            key={slide.id}
+            className="absolute inset-0"
+            style={{
+              opacity: active ? 1 : 0,
+              transition: 'opacity 0.6s ease-in-out',
+              pointerEvents: active ? 'auto' : 'none',
+            }}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${HERO_SLIDES.length}: ${slide.service}`}
+            aria-hidden={!active}
+          >
+            {/* Background image */}
+            <img
+              src={slide.bg}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
 
-      {/* Dot indicators */}
-      <div className="mt-6 flex items-center justify-center gap-2.5" role="tablist" aria-label="Headline slide">
-        {HERO_HEADLINES.map((_, i) => (
+            {/* Dark blue overlay — keeps white text readable over any image */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(5,12,30,0.88) 0%, rgba(10,22,58,0.84) 45%, rgba(13,36,90,0.80) 100%)',
+              }}
+            />
+
+            {/* Slide content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 py-16 md:py-24 text-center">
+              <div className="w-full max-w-[960px] mx-auto">
+
+                {/* Service label pill */}
+                <div
+                  className="inline-flex items-center gap-2 mb-7 px-4 py-2 rounded-full"
+                  style={{
+                    background: 'rgba(232,119,34,0.12)',
+                    border: '1px solid rgba(232,119,34,0.40)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <Icon size={14} style={{ color: '#E87722' }} strokeWidth={2.2} />
+                  <span
+                    className="uppercase font-semibold tracking-[0.22em]"
+                    style={{ fontSize: '11px', color: '#E87722' }}
+                  >
+                    {slide.service}
+                  </span>
+                </div>
+
+                {/* Headline */}
+                <h1
+                  className="text-white font-extrabold leading-tight"
+                  style={{ fontSize: 'clamp(28px, 4.6vw, 58px)', lineHeight: 1.14 }}
+                  aria-live={active ? 'polite' : undefined}
+                >
+                  {slide.headline}
+                </h1>
+
+                {/* Description */}
+                <p
+                  className="mt-5 text-white/80 leading-relaxed max-w-2xl mx-auto"
+                  style={{ fontSize: 'clamp(15px, 1.8vw, 20px)' }}
+                >
+                  {slide.description}
+                </p>
+
+                {/* CTAs */}
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href="/contact"
+                    className="btn-primary w-full sm:w-auto justify-center"
+                    style={{ padding: '15px 32px', fontSize: '15px' }}
+                  >
+                    Get a Free Consultation <ArrowRight size={17} />
+                  </a>
+                  <a
+                    href={slide.link}
+                    className="btn-ghost w-full sm:w-auto justify-center"
+                    style={{ padding: '14px 28px', fontSize: '15px' }}
+                  >
+                    Learn More
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )
+      })}
+
+      {/* ── Dot indicators ── */}
+      <div
+        className="absolute bottom-7 left-0 right-0 z-20 flex items-center justify-center gap-3"
+        role="tablist"
+        aria-label="Service slide navigation"
+      >
+        {HERO_SLIDES.map((slide, i) => (
           <button
             key={i}
             type="button"
             role="tab"
-            aria-selected={i === idx}
-            aria-label={`Show headline ${i + 1}`}
-            onClick={() => jumpTo(i)}
-            className="rounded-full transition-all duration-300"
+            aria-selected={i === current}
+            aria-label={`Go to ${slide.service}`}
+            onClick={() => goTo(i)}
+            tabIndex={0}
+            className="rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
             style={{
-              width: i === idx ? 22 : 8,
+              width: i === current ? 26 : 8,
               height: 8,
-              background: i === idx ? '#E87722' : 'rgba(255,255,255,0.3)',
+              background: i === current ? '#E87722' : 'rgba(255,255,255,0.38)',
+              boxShadow: i === current ? '0 0 12px rgba(232,119,34,0.65)' : 'none',
             }}
           />
         ))}
-      </div>
-    </>
-  )
-}
-
-function Hero() {
-  return (
-    <section id="home" className="relative flex items-center justify-center min-h-[calc(100vh-72px-36px)] px-6 py-20 md:py-24 overflow-hidden">
-      {/* subtle ambient orbs */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-35" style={{ background: 'radial-gradient(circle, #3B7BFF 0%, transparent 70%)' }}/>
-        <div className="absolute -bottom-44 -right-32 w-[620px] h-[620px] rounded-full blur-3xl opacity-25" style={{ background: 'radial-gradient(circle, #F97316 0%, transparent 70%)' }}/>
-      </div>
-
-      <div className="relative w-full max-w-[1100px] mx-auto text-center reveal">
-        {/* Shield icon */}
-        <div className="mx-auto mb-7 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(10px)' }}>
-          <ShieldCheck size={30} className="text-white" strokeWidth={2.2}/>
-        </div>
-
-        {/* Rotating headline + dot indicators */}
-        <RotatingHeadline />
-
-        {/* Subheading */}
-        <p className="mt-7 text-white/85 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
-          Managed IT, Cybersecurity, Event Infrastructure &amp; Equipment Rental — UAE &amp; Canada
-        </p>
-
-        {/* Trust pills */}
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          {['20+ Years','UAE & Canada','24/7 SLA','100M+ Users Protected'].map((b) => (
-            <span key={b} className="pill-badge">{b}</span>
-          ))}
-        </div>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/contact" className="btn-primary w-full sm:w-auto justify-center" style={{ padding: '16px 34px', fontSize: '15px' }}>
-            Get a Free Consultation <ArrowRight size={18}/>
-          </a>
-          <a href="/services" className="btn-ghost w-full sm:w-auto justify-center" style={{ padding: '15px 30px', fontSize: '15px' }}>
-            View Our Services
-          </a>
-        </div>
       </div>
     </section>
   )
@@ -680,7 +790,7 @@ const App = () => {
   return (
     <main>
       <Header />
-      <Hero />
+      <HeroCarousel />
       <TrustMarquee />
       <Services />
       <Stats />
