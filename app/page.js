@@ -429,18 +429,72 @@ function Stats() {
     { display: '24/7', label: 'Support', icon: Headphones },
   ]
   return (
-    <section className="py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-12 reveal">
+    <section
+      className="py-24 px-6 relative overflow-hidden"
+      style={{
+        background:
+          'radial-gradient(ellipse at 50% 0%, rgba(59,123,255,0.10) 0%, transparent 60%), #0B1A46',
+      }}
+    >
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="text-center mb-14 reveal">
           <h2 className="text-white text-3xl md:text-4xl font-bold">Why Choose IP Care</h2>
-          <p className="body-text mt-3">Numbers that reflect our commitment to enterprise excellence.</p>
+          <p className="mt-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)' }}>
+            Numbers that reflect our commitment to enterprise excellence.
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5 md:gap-6">
           {stats.map((s, i) => (
-            <div key={s.label} className="glass-card p-6 text-center reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-              <s.icon className="mx-auto mb-3 text-[#E87722] opacity-90" size={22}/>
-              <div className="text-[#E87722] text-3xl md:text-4xl font-bold mb-2">{s.display}</div>
-              <div className="text-white/60 text-xs md:text-sm mt-2 uppercase tracking-wider">{s.label}</div>
+            <div key={s.label} className="reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+              <div
+                className="relative text-center h-full"
+                style={{
+                  background: 'rgba(255,255,255,0.07)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  borderRadius: '14px',
+                  boxShadow: '0 4px 22px rgba(0,0,0,0.28)',
+                  padding: '32px 20px 28px',
+                  overflow: 'hidden',
+                  transition: 'transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease',
+                  cursor: 'default',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-5px)'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.28)'
+                  e.currentTarget.style.boxShadow = '0 10px 36px rgba(0,0,0,0.38)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+                  e.currentTarget.style.boxShadow = '0 4px 22px rgba(0,0,0,0.28)'
+                }}
+              >
+                {/* Orange top accent line */}
+                <div
+                  className="absolute top-0 left-0 right-0"
+                  style={{ height: '3px', background: '#E87722', borderRadius: '14px 14px 0 0' }}
+                />
+                {/* Icon */}
+                <s.icon
+                  className="mx-auto mb-4 text-[#E87722]"
+                  size={26}
+                  strokeWidth={1.8}
+                />
+                {/* Big number */}
+                <div
+                  className="text-[#E87722] font-bold leading-none"
+                  style={{ fontSize: 'clamp(34px, 3.2vw, 46px)' }}
+                >
+                  {s.display}
+                </div>
+                {/* Label */}
+                <div
+                  className="mt-3 uppercase tracking-wider font-medium"
+                  style={{ fontSize: '11px', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.14em' }}
+                >
+                  {s.label}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -798,8 +852,8 @@ const App = () => {
       <Header />
       <HeroCarousel />
       <TrustMarquee />
-      <Services />
       <Stats />
+      <Services />
       <CyberAdvisory />
       <RentalTeaser />
       <EventsPortfolio />
