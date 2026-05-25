@@ -575,15 +575,15 @@ function RentalTeaser() {
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
           <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">IT Equipment Rental — UAE & Canada</h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">Flexible short-term and long-term rentals with nationwide logistics, configuration and white-glove support.</p>
+          <p className="body-text mt-5 max-w-2xl mx-auto">Short-term or long-term, UAE and Canada — delivered, configured and collected. No procurement headaches, no hidden costs.</p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-5">
           {items.map((it, i) => (
             <a
               key={it.name}
               href={it.href}
-              className="group relative rounded-2xl overflow-hidden reveal block"
-              style={{ transitionDelay: `${i * 80}ms`, aspectRatio: '3/4', minHeight: '260px' }}
+              className={`group relative rounded-2xl overflow-hidden reveal block rental-card md:col-span-2 lg:col-span-1${i === 3 ? ' md:col-start-2 lg:col-start-auto' : ''}${i === 4 ? ' md:col-start-4 lg:col-start-auto' : ''}`}
+              style={{ transitionDelay: `${i * 80}ms`, aspectRatio: '3/4', minHeight: '320px' }}
             >
               {/* Full-bleed image */}
               <img
@@ -593,30 +593,18 @@ function RentalTeaser() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
 
-              {/* Base gradient overlay */}
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.10) 0%, rgba(7,16,42,0.40) 35%, rgba(7,16,42,0.93) 100%)' }}
-              />
-
-              {/* Hover — orange tint bleeds in from top */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: 'linear-gradient(180deg, rgba(232,119,34,0.12) 0%, transparent 55%)' }}
-              />
+              {/* Bottom-only gradient overlay (lightens on hover via CSS) */}
+              <div className="rental-card__overlay" />
 
               {/* Orange icon badge — top left */}
-              <div
-                className="absolute top-3 left-3 p-2 rounded-xl transition-transform duration-300 group-hover:scale-110"
-                style={{ background: '#E87722', boxShadow: '0 4px 14px rgba(232,119,34,0.50)' }}
-              >
+              <div className="rental-card__badge p-2 rounded-xl">
                 <it.icon size={17} className="text-white" />
               </div>
 
               {/* Content pinned to bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h4 className="text-white font-bold text-base leading-tight mb-1">{it.name}</h4>
-                <p className="text-white/65 text-xs mb-3 leading-snug">{it.spec}</p>
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <h4 className="text-white font-bold text-base leading-tight mb-2">{it.name}</h4>
+                <p className="text-white/70 text-xs mb-4 leading-snug">{it.spec}</p>
                 <button
                   className="w-full text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 group-hover:brightness-110"
                   style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)' }}
@@ -634,7 +622,7 @@ function RentalTeaser() {
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="/rental" className="btn-ghost">Browse Full Rental Catalogue <ArrowRight size={16}/></a>
+          <a href="/rental" className="btn-primary">Browse Full Rental Catalogue <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>

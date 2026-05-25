@@ -108,6 +108,48 @@ body {
   box-shadow: 0 12px 36px rgba(10, 26, 70, 0.26);
 }
 
+/* ===== Rental teaser cards ===== */
+.rental-card {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.rental-card:hover {
+  transform: scale(1.03);
+}
+.rental-card__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(10, 26, 70, 0.85) 75%,
+    rgba(10, 26, 70, 0.96) 100%
+  );
+  transition: background 0.3s ease;
+}
+.rental-card:hover .rental-card__overlay {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(10, 26, 70, 0.70) 75%,
+    rgba(10, 26, 70, 0.82) 100%
+  );
+}
+.rental-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #E87722;
+  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.35);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.rental-card:hover .rental-card__badge {
+  box-shadow: 0 0 12px rgba(232, 119, 34, 0.6), 0 4px 12px rgba(232, 119, 34, 0.45);
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);
