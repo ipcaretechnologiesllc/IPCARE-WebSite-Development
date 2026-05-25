@@ -530,6 +530,7 @@ function CyberAdvisory() {
       </div>
       <div className="max-w-[1200px] mx-auto relative">
         <div
+          id="cyber-grid"
           className="reveal"
           style={{
             display: 'grid',
