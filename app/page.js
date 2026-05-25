@@ -690,46 +690,57 @@ function EventsPortfolio() {
 function About() {
   return (
     <section id="about" className="py-24 px-6" style={{ background: '#FFFFFF' }}>
-      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-14 items-center">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-10 md:gap-[60px] items-center">
         <div className="reveal">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: 'rgba(232,119,34,0.1)', color: '#E87722' }}>
             <Building2 size={14}/> ABOUT IP CARE TECHNOLOGIES
           </div>
-          <h2 className="text-[32px] md:text-[44px] font-bold leading-tight" style={{ color: '#0D2B55' }}>
-            Two Decades of Enterprise IT Excellence across <span className="text-[#E87722]">UAE & Canada</span>.
+          <h2 className="text-[32px] md:text-[44px] font-bold leading-tight" style={{ color: '#0B1A46' }}>
+            Two Decades of Enterprise IT Excellence
           </h2>
           <p className="mt-5 text-base md:text-lg" style={{ color: '#333F50' }}>
-            Founded in 2003, IP Care Technologies L.L.C. is a premier enterprise IT services firm delivering managed IT, cybersecurity, event infrastructure and equipment rental. From government institutions to Fortune 500 clients — we design, deploy and operate mission-critical technology.
+            Founded in 2003, IP Care Technologies LLC delivers managed IT, cybersecurity, event infrastructure and equipment rental across the UAE and Canada. From government institutions to global event organisers — we design, deploy and operate mission-critical technology that can&apos;t go down.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-5">
             {[
               { icon: Award, t: 'Since 2003', d: '20+ years of enterprise delivery' },
-              { icon: MapPin, t: 'Two Regions', d: 'UAE HQ & Canada operations' },
-              { icon: HeartHandshake, t: 'Vendor Certified', d: 'Palo Alto, Check Point, Fortinet' },
-              { icon: Clock, t: '24/7 SLA', d: 'Round-the-clock support' },
+              { icon: MapPin, t: 'UAE & Canada', d: 'Two-region operations' },
             ].map((f) => (
               <div key={f.t} className="flex gap-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(232,119,34,0.12)' }}>
                   <f.icon size={18} className="text-[#E87722]"/>
                 </div>
                 <div>
-                  <div className="font-semibold" style={{ color: '#0D2B55' }}>{f.t}</div>
+                  <div className="font-semibold" style={{ color: '#0B1A46' }}>{f.t}</div>
                   <div className="text-sm" style={{ color: '#333F50' }}>{f.d}</div>
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-8">
-            <a href="/contact" className="btn-primary">Talk to an Expert <ArrowRight size={16}/></a>
+            <a href="/contact" className="btn-primary">Talk to Our Team <ArrowRight size={16}/></a>
           </div>
         </div>
         <div className="reveal">
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=900&q=85" alt="Enterprise data center operated by IP Care Technologies" loading="lazy" className="absolute inset-0 w-full h-full object-cover"/>
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 40%, rgba(13,43,85,0.7) 100%)' }}/>
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <div className="text-5xl font-bold text-[#E87722]">20+</div>
-              <div className="text-sm uppercase tracking-wider opacity-90 mt-1">Years Protecting Business</div>
+          <div
+            className="relative overflow-hidden"
+            style={{ borderRadius: '16px', boxShadow: '0 20px 60px rgba(10, 26, 70, 0.15)', aspectRatio: '4 / 5' }}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=900&q=85"
+              alt="Enterprise data center operated by IP Care Technologies"
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div
+              className="absolute bottom-4 left-4 flex items-stretch"
+              style={{ background: '#0B1A46', borderRadius: '10px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(10, 26, 70, 0.35)' }}
+            >
+              <div style={{ width: '4px', background: '#E87722' }} aria-hidden="true" />
+              <div className="px-5 py-3">
+                <div className="text-3xl font-bold text-white leading-none">20+</div>
+                <div className="text-[11px] uppercase tracking-wider text-white/85 mt-1">Years Protecting Business</div>
+              </div>
             </div>
           </div>
         </div>
