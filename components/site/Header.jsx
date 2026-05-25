@@ -151,9 +151,9 @@ export default function Header() {
             <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ca" className="hover:text-white">info@ipcare.ca</a></span>
           </div>
           <div className="flex items-center gap-3">
-            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-white/75 hover:text-white transition-colors"><FaFacebookF size={20}/></a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/75 hover:text-white transition-colors"><FaLinkedinIn size={20}/></a>
-            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-white/75 hover:text-white transition-colors"><FaInstagram size={20}/></a>
+            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={14}/></a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#0A66C2' }}><FaLinkedinIn size={14}/></a>
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}><FaInstagram size={14}/></a>
           </div>
         </div>
       </div>
@@ -354,9 +354,9 @@ export default function Header() {
             ))}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
             <div className="flex items-center gap-4 mt-6">
-              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-[#0D2B55] hover:text-[#E87722]"><FaFacebookF size={22}/></a>
-              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0D2B55] hover:text-[#E87722]"><FaLinkedinIn size={22}/></a>
-              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[#0D2B55] hover:text-[#E87722]"><FaInstagram size={22}/></a>
+              <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={20}/></a>
+              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#0A66C2' }}><FaLinkedinIn size={20}/></a>
+              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}><FaInstagram size={20}/></a>
             </div>
           </ul>
         </div>

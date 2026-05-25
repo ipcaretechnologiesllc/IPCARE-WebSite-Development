@@ -54,24 +54,22 @@ export default function Footer() {
 
             <div className="flex items-center mt-6" style={{ gap: '12px' }}>
               {[
-                { Ic: FaFacebookF, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook' },
-                { Ic: FaLinkedinIn, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn' },
-                { Ic: FaInstagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram' },
-              ].map(({ Ic, href, label }) => (
+                { Ic: FaFacebookF, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook', bg: '#1877F2' },
+                { Ic: FaLinkedinIn, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn', bg: '#0A66C2' },
+                { Ic: FaInstagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram', bg: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' },
+              ].map(({ Ic, href, label, bg }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="social-icon-footer inline-flex items-center justify-center text-white transition-all"
+                  className="social-brand inline-flex items-center justify-center text-white"
                   style={{
                     width: '40px',
                     height: '40px',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    background: 'rgba(255,255,255,0.10)',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '9999px',
+                    background: bg,
                   }}
                 >
                   <Ic size={18} />
