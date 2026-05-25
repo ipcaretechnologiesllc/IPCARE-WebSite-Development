@@ -859,23 +859,22 @@ function BlogTeaser() {
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {posts.map((p, i) => (
-            <Link key={p.slug} href={`/blog/${p.slug}`} className="glass-card overflow-hidden reveal group block hover:ring-2 hover:ring-[#E87722]/40 transition-all" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="relative h-48 overflow-hidden">
+            <Link key={p.slug} href={`/blog/${p.slug}`} className="article-card reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
+              <div className="article-card__media">
                 <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
                 <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
+                <div className="article-card__media-fade" />
               </div>
-              <div className="p-6">
-                <h3 className="text-white font-semibold text-lg leading-snug mb-2 group-hover:text-[#E87722] transition-colors">{p.title}</h3>
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-white/50 text-xs">{p.date}</span>
-                  <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Read More <ArrowRight size={13}/></span>
-                </div>
+              <div className="article-card__body">
+                <h3 className="article-card__title">{p.title}</h3>
+                <div className="article-card__date">{p.date}</div>
+                <span className="article-card__cta">Read More <ArrowRight size={14}/></span>
               </div>
             </Link>
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <Link href="/blog" className="btn-ghost">Visit Our Knowledge Base <ArrowRight size={16}/></Link>
+          <Link href="/blog" className="btn-primary">Visit Our Knowledge Base <ArrowRight size={16}/></Link>
         </div>
       </div>
     </section>
@@ -885,34 +884,30 @@ function BlogTeaser() {
 /* ---------------- Global Offices CTA ---------------- */
 function OfficesCTA() {
   return (
-    <section id="contact" className="py-16 px-6">
+    <section id="contact" className="py-16 px-6" style={{ borderTop: '3px solid #E87722' }}>
       <div className="max-w-[1300px] mx-auto">
-        <div className="rounded-2xl p-10 md:p-14 reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)', backdropFilter: 'blur(14px)' }}>
-          <div className="grid md:grid-cols-3 gap-10 items-center">
-            <div className="md:col-span-2 grid sm:grid-cols-2 gap-8">
-              <div>
-                <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><UAEFlag/> UNITED ARAB EMIRATES</div>
-                <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi Headquarters</h3>
-                <div className="space-y-1.5 text-white/85 text-sm">
-                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+971 2 676 6935</span></div>
-                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
-                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><CanadaFlag/> CANADA</div>
-                <h3 className="text-white text-xl font-bold mb-2">Toronto Operations</h3>
-                <div className="space-y-1.5 text-white/85 text-sm">
-                  <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+1 416 786 0782</span></div>
-                  <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
-                  <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-[35fr_35fr_30fr] gap-10 items-center reveal">
+          <div>
+            <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><UAEFlag/> UNITED ARAB EMIRATES</div>
+            <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi Headquarters</h3>
+            <div className="space-y-1.5 text-white/85 text-sm">
+              <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+971 2 676 6935</span></div>
+              <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
             </div>
-            <div className="text-center md:text-right">
-              <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
-              <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
+          </div>
+          <div>
+            <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><CanadaFlag/> CANADA</div>
+            <h3 className="text-white text-xl font-bold mb-2">Toronto Operations</h3>
+            <div className="space-y-1.5 text-white/85 text-sm">
+              <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+1 416 786 0782</span></div>
+              <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
             </div>
+          </div>
+          <div className="text-center md:text-right md:border-l md:border-white/15 md:pl-10">
+            <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
+            <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
           </div>
         </div>
       </div>
