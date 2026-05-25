@@ -340,6 +340,16 @@ body {
   filter: brightness(1.15);
 }
 
+/* ===== Floating action buttons — mobile position ===== */
+/* Desktop positions are inline-styled on each component. On mobile,
+   shift the whole stack closer to the viewport bottom while
+   preserving the 72px center-to-center spacing. */
+@media (max-width: 768px) {
+  .floating-btn-cart     { bottom: calc(32px  + var(--cookie-offset, 0px)) !important; }
+  .floating-btn-call     { bottom: calc(104px + var(--cookie-offset, 0px)) !important; }
+  .floating-btn-whatsapp { bottom: calc(176px + var(--cookie-offset, 0px)) !important; }
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);

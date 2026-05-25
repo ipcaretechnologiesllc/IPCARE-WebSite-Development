@@ -1,16 +1,22 @@
 'use client'
 
 import * as Icons from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { useCart } from './CartContext'
 
 export default function FloatingCartButton() {
   const { count, setOpen, hydrated } = useCart()
+  const pathname = usePathname()
+
+  // Hide the briefcase/cart button on the homepage only.
+  // Component, links, and behavior remain intact for every other route.
+  if (pathname === '/') return null
 
   return (
     <button
       onClick={() => setOpen(true)}
       aria-label={`Open quote cart, ${count} item${count === 1 ? '' : 's'}`}
-      className="group fixed transition-all floating-btn"
+      className="group fixed transition-all floating-btn floating-btn-cart"
       style={{
         bottom: 'calc(124px + var(--cookie-offset, 0px))',
         right: '24px',

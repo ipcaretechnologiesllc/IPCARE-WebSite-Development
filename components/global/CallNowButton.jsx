@@ -7,7 +7,7 @@ export default function CallNowButton() {
     <a
       href="tel:+971506828290"
       aria-label="Call Us"
-      className="group floating-btn"
+      className="group floating-btn floating-btn-call"
       style={{
         position: 'fixed',
         right: '24px',
@@ -16,28 +16,29 @@ export default function CallNowButton() {
         width: '56px',
         height: '56px',
         borderRadius: '9999px',
-        background: '#1E3A8A',
+        background: '#FFFFFF',
+        border: '2px solid #E87722',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 4px 14px rgba(30, 58, 138, 0.45)',
+        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.20)',
         transition: 'transform 200ms ease, box-shadow 200ms ease',
         textDecoration: 'none',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'scale(1.1)'
-        e.currentTarget.style.boxShadow = '0 8px 22px rgba(30, 58, 138, 0.6)'
+        e.currentTarget.style.boxShadow = '0 8px 22px rgba(0, 0, 0, 0.28)'
         const tip = e.currentTarget.querySelector('.call-tooltip')
         if (tip) tip.style.opacity = '1'
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'scale(1)'
-        e.currentTarget.style.boxShadow = '0 4px 14px rgba(30, 58, 138, 0.45)'
+        e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 0, 0, 0.20)'
         const tip = e.currentTarget.querySelector('.call-tooltip')
         if (tip) tip.style.opacity = '0'
       }}
     >
-      <Phone size={24} color="#ffffff" strokeWidth={2} />
+      <Phone size={24} color="#E87722" strokeWidth={2} />
       <span
         className="call-tooltip"
         style={{

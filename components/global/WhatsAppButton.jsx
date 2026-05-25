@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="group floating-btn"
+      className="group floating-btn floating-btn-whatsapp"
       style={{
         position: 'fixed',
         right: '24px',
