@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
       style={{
         position: 'fixed',
         right: '24px',
-        bottom: 'calc(96px + var(--cookie-offset, 0px))',
+        bottom: 'calc(268px + var(--cookie-offset, 0px))',
         zIndex: 9999,
         width: '56px',
         height: '56px',

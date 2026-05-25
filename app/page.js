@@ -653,6 +653,12 @@ function EventsPortfolio() {
   const [filter, setFilter] = useState('All Events')
   const tabs = ['All Events', 'Sports', 'Concerts', 'National']
   const filtered = filter === 'All Events' ? events : events.filter(e => e.region === filter)
+  const categoryFor = (region) => {
+    const r = (region || '').toLowerCase()
+    if (r.includes('concert')) return 'concerts'
+    if (r === 'national') return 'national'
+    return 'sports'
+  }
   return (
     <section id="events" className="py-24 px-6">
       <div className="max-w-[1400px] mx-auto">
@@ -667,7 +673,7 @@ function EventsPortfolio() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
-            <a key={ev.slug} href={`/event-it/${ev.slug}`} className="group relative rounded-xl overflow-hidden aspect-[3/4] reveal block" style={{ transitionDelay: `${i * 80}ms` }}>
+            <a key={ev.slug} href={`/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
               <img src={ev.img} alt={`${ev.name} — event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">

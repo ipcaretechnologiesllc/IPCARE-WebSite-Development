@@ -12,7 +12,7 @@ export default function FloatingCartButton() {
       aria-label={`Open quote cart, ${count} item${count === 1 ? '' : 's'}`}
       className="group fixed transition-all floating-btn"
       style={{
-        bottom: 'calc(24px + var(--cookie-offset, 0px))',
+        bottom: 'calc(124px + var(--cookie-offset, 0px))',
         right: '24px',
         zIndex: 9999,
         width: '56px',
