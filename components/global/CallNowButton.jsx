@@ -11,7 +11,7 @@ export default function CallNowButton() {
       style={{
         position: 'fixed',
         right: '24px',
-        bottom: 'calc(196px + var(--cookie-offset, 0px))',
+        bottom: '24px',
         zIndex: 9999,
         width: '56px',
         height: '56px',
