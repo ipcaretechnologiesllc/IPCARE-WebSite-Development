@@ -95,6 +95,19 @@ body {
   gap: 0.625rem;
 }
 
+/* ===== Cybersecurity Advisory stat cards ===== */
+.cyber-stat-card {
+  background: #FFFFFF;
+  border-top: 3px solid #E87722;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(10, 26, 70, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cyber-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(10, 26, 70, 0.26);
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);

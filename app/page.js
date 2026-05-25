@@ -518,31 +518,43 @@ function CyberAdvisory() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
       </div>
       <div className="max-w-[1200px] mx-auto relative">
-        <div className="glass-card p-10 md:p-14 reveal" style={{ borderColor: 'rgba(232,119,34,0.35)' }}>
-          <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
-            <Lock size={16}/> Cybersecurity Advisory
-          </div>
-          <h2 className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
-            Expert Cybersecurity Advisory — <span className="text-[#E87722]">Powered by The Cyber Adviser</span>
-          </h2>
-          <p className="body-text md:text-lg max-w-3xl mb-8">Strategy, architecture and deployment across world-class platforms. From Zero Trust rollouts to SOC maturity — delivered by practitioners who have protected the world's largest enterprises.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center reveal">
+          {/* Left column ~55% */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
+              <Lock size={16}/> Powered by The Cyber Adviser
+            </div>
+            <h2 className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
+              Expert Cybersecurity Advisory — <span className="text-[#E87722]">Powered by The Cyber Adviser</span>
+            </h2>
+            <p className="body-text md:text-lg mb-8">We&apos;ve spent 15+ years building security programs that hold. Zero Trust rollouts, SOC maturity, firewall architecture — across banks, government entities and enterprises that can&apos;t afford to get it wrong.</p>
 
-          <div className="flex flex-wrap gap-3 mb-10">
-            {vendors.map((v) => (
-              <span key={v} className="px-4 py-2 rounded-full text-white/90 text-sm font-medium" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)' }}>{v}</span>
-            ))}
+            <div className="flex flex-wrap gap-3 mb-10">
+              {vendors.map((v) => (
+                <span
+                  key={v}
+                  className="px-4 py-2 text-sm font-medium"
+                  style={{ background: '#FFFFFF', color: '#0B1A46', border: '1px solid #E87722', borderRadius: '30px' }}
+                >
+                  {v}
+                </span>
+              ))}
+            </div>
+
+            <a href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-10">
-            {stats.map((s) => (
-              <div key={s.l} className="p-5 rounded-xl" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.2)' }}>
-                <div className="text-2xl md:text-3xl font-bold text-[#E87722]">{s.n}</div>
-                <div className="text-white/70 text-xs md:text-sm mt-1">{s.l}</div>
-              </div>
-            ))}
+          {/* Right column ~45% — 2x2 stats */}
+          <div className="lg:col-span-5">
+            <div className="grid grid-cols-2 gap-5">
+              {stats.map((s) => (
+                <div key={s.l} className="cyber-stat-card p-5">
+                  <div className="text-2xl md:text-3xl font-bold text-[#E87722]">{s.n}</div>
+                  <div className="text-xs md:text-sm mt-1 uppercase tracking-wider" style={{ color: '#4B5563' }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <a href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
