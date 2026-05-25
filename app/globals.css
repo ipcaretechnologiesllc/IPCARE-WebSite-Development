@@ -50,6 +50,55 @@ body {
   box-shadow: 0 12px 30px -10px rgba(0,0,0,0.35);
 }
 
+/* ===== Premium service cards (Our Core Services section) ===== */
+.service-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(10, 26, 70, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #1E3A8A;
+  transition: background 0.25s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(10, 26, 70, 0.26);
+}
+.service-card:hover::before {
+  background: #E87722;
+}
+.service-card__icon {
+  background: #EEF2FF;
+  border-radius: 10px;
+}
+.service-card__title {
+  color: #0B1A46;
+  font-weight: 700;
+}
+.service-card__desc {
+  color: #4B5563;
+}
+.service-card__cta {
+  background: #E87722;
+  color: #FFFFFF;
+  border-radius: 8px;
+  width: fit-content;
+  transition: background 0.25s ease, gap 0.25s ease;
+}
+.service-card__cta:hover {
+  background: #D06010;
+  gap: 0.625rem;
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);

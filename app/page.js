@@ -402,13 +402,13 @@ function Services() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
-            <div key={s.name} className="glass-card p-7 reveal group" style={{ transitionDelay: `${i * 60}ms` }}>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
+            <div key={s.name} className="service-card p-7 reveal group" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div className="service-card__icon w-12 h-12 flex items-center justify-center mb-5">
                 <s.icon size={24} className="text-[#E87722]" strokeWidth={2}/>
               </div>
-              <h3 className="text-white text-xl font-semibold mb-2">{s.name}</h3>
-              <p className="body-text text-sm leading-relaxed mb-5">{s.d}</p>
-              <a href={s.link} className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 hover:bg-[#E87722] hover:text-white hover:border-[#E87722] hover:gap-2.5 transition-all">
+              <h3 className="service-card__title text-xl mb-2">{s.name}</h3>
+              <p className="service-card__desc text-sm leading-relaxed mb-5">{s.d}</p>
+              <a href={s.link} className="service-card__cta inline-flex items-center gap-1.5 font-semibold text-sm px-4 py-2">
                 Learn More <ArrowRight size={13}/>
               </a>
             </div>
