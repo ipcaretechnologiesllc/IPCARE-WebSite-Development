@@ -665,7 +665,7 @@ function EventsPortfolio() {
             <button key={t} onClick={() => setFilter(t)} className={`glass-pill ${filter === t ? 'active' : ''}`}>{t}</button>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
             <a key={ev.slug} href={`/event-it/${ev.slug}`} className="group relative rounded-xl overflow-hidden aspect-[3/4] reveal block" style={{ transitionDelay: `${i * 80}ms` }}>
               <img src={ev.img} alt={`${ev.name} — event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
@@ -679,7 +679,7 @@ function EventsPortfolio() {
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="/event-it/portfolio" className="btn-ghost">View Full Portfolio <ArrowRight size={16}/></a>
+          <a href="/event-it/portfolio" className="btn-primary">View Full Portfolio <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
