@@ -16,23 +16,23 @@ export default function CallNowButton() {
         width: '56px',
         height: '56px',
         borderRadius: '9999px',
-        background: '#E87722',
+        background: '#1E3A8A',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 4px 14px rgba(232, 119, 34, 0.45)',
+        boxShadow: '0 4px 14px rgba(30, 58, 138, 0.45)',
         transition: 'transform 200ms ease, box-shadow 200ms ease',
         textDecoration: 'none',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'scale(1.1)'
-        e.currentTarget.style.boxShadow = '0 8px 22px rgba(232, 119, 34, 0.6)'
+        e.currentTarget.style.boxShadow = '0 8px 22px rgba(30, 58, 138, 0.6)'
         const tip = e.currentTarget.querySelector('.call-tooltip')
         if (tip) tip.style.opacity = '1'
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'scale(1)'
-        e.currentTarget.style.boxShadow = '0 4px 14px rgba(232, 119, 34, 0.45)'
+        e.currentTarget.style.boxShadow = '0 4px 14px rgba(30, 58, 138, 0.45)'
         const tip = e.currentTarget.querySelector('.call-tooltip')
         if (tip) tip.style.opacity = '0'
       }}
