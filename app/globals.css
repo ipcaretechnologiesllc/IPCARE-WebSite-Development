@@ -341,13 +341,17 @@ body {
 }
 
 /* ===== Floating action buttons — mobile position ===== */
-/* Desktop positions are inline-styled on each component. On mobile,
-   shift the whole stack closer to the viewport bottom while
-   preserving the 72px center-to-center spacing. */
+/* Desktop positions are inline-styled on each component (they include
+   var(--cookie-offset) so the cookie banner can shift them up). On
+   mobile the cookie banner can be 200-300px tall, which would push
+   the stack mid-screen — so we ignore the cookie offset on mobile
+   and pin the stack near the viewport bottom instead, just above
+   the browser chrome (80px). 72px center-to-center spacing matches
+   desktop. */
 @media (max-width: 768px) {
-  .floating-btn-cart     { bottom: calc(32px  + var(--cookie-offset, 0px)) !important; }
-  .floating-btn-call     { bottom: calc(104px + var(--cookie-offset, 0px)) !important; }
-  .floating-btn-whatsapp { bottom: calc(176px + var(--cookie-offset, 0px)) !important; }
+  .floating-btn-cart     { position: fixed !important; bottom: 80px  !important; }
+  .floating-btn-call     { position: fixed !important; bottom: 152px !important; }
+  .floating-btn-whatsapp { position: fixed !important; bottom: 224px !important; }
 }
 
 .hero-glass {
