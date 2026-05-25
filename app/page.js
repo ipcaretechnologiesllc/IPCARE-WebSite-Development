@@ -5,7 +5,8 @@ import {
   ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
   Laptop, Tablet, Wifi, Printer, Wrench, ArrowRight, Phone, Mail,
   MapPin, Clock, CheckCircle2, Building2,
-  HeartHandshake, Award, Users, Activity, Headphones
+  HeartHandshake, Award, Users, Activity, Headphones,
+  ChevronLeft, ChevronRight
 } from 'lucide-react'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
@@ -740,26 +741,101 @@ function About() {
 /* ---------------- Testimonials ---------------- */
 function Testimonials() {
   const quotes = [
-    { q: 'IP Care delivered flawless event IT for a global broadcast — zero incidents across 10 days. Their team is world-class.', who: 'Director of Operations', type: 'Event IT Infrastructure', loc: 'Abu Dhabi, UAE' },
-    { q: 'Their cybersecurity advisory transformed our Zero Trust roadmap. Deployment was ahead of schedule and under budget.', who: 'CISO', type: 'Cybersecurity Advisory', loc: 'Toronto, Canada' },
-    { q: '24/7 managed IT that actually responds in minutes. Best SLA partner we have worked with in over a decade.', who: 'VP Technology', type: 'Managed IT Services', loc: 'Dubai, UAE' },
+    {
+      q: "IP Care delivered flawless event IT for a global broadcast — zero incidents across 10 days. When you're live in front of millions, that's the only result that matters.",
+      who: 'Director of Operations',
+      meta: 'Global Broadcasting Client • Abu Dhabi, UAE',
+    },
+    {
+      q: 'Their cybersecurity advisory transformed our Zero Trust roadmap. Deployment was ahead of schedule and under budget — not something we expected from a first engagement.',
+      who: 'CISO',
+      meta: 'Enterprise Technology Firm • Toronto, Canada',
+    },
+    {
+      q: "24/7 managed IT that actually responds in minutes. The best SLA partner we've had in ten years.",
+      who: 'VP Technology',
+      meta: 'Managed IT Services Client • Dubai, UAE',
+    },
   ]
+
+  const trackRef = useRef(null)
+  const [current, setCurrent] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+
+  const goTo = useCallback((idx) => {
+    const total = quotes.length
+    const next = ((idx % total) + total) % total
+    const track = trackRef.current
+    if (track) {
+      const card = track.children[next]
+      if (card) track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' })
+    }
+    setCurrent(next)
+  }, [quotes.length])
+
+  useEffect(() => {
+    if (isHovered) return
+    const t = setInterval(() => goTo(current + 1), 6000)
+    return () => clearInterval(t)
+  }, [isHovered, current, goTo])
+
   return (
     <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
           <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">What Clients Say</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {quotes.map((t, i) => (
-            <div key={i} className="glass-card p-7 reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-              <div className="text-[#E87722] text-5xl font-serif leading-none mb-3">&ldquo;</div>
-              <p className="text-white/90 leading-relaxed text-[15px] mb-6">{t.q}</p>
-              <div className="border-t border-white/10 pt-4">
-                <div className="text-white font-semibold text-sm">{t.who}</div>
-                <div className="text-white/60 text-xs mt-0.5">{t.type} • {t.loc}</div>
+
+        <div
+          className="relative reveal"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div
+            ref={trackRef}
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-2"
+          >
+            {quotes.map((t, i) => (
+              <div
+                key={i}
+                className="testimonial-card snap-start flex-shrink-0 w-full md:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
+              >
+                <div className="testimonial-card__quote-mark">&ldquo;</div>
+                <p className="testimonial-card__quote">{t.q}</p>
+                <div className="testimonial-card__divider" />
+                <div className="testimonial-card__name">{t.who}</div>
+                <div className="testimonial-card__meta">{t.meta}</div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Previous testimonial"
+            onClick={() => goTo(current - 1)}
+            className="testimonial-nav testimonial-nav--prev"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next testimonial"
+            onClick={() => goTo(current + 1)}
+            className="testimonial-nav testimonial-nav--next"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-8">
+          {quotes.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Go to testimonial ${i + 1}`}
+              onClick={() => goTo(i)}
+              className={`testimonial-dot${current === i ? ' testimonial-dot--active' : ''}`}
+            />
           ))}
         </div>
       </div>

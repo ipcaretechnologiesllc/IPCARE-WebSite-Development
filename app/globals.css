@@ -150,6 +150,99 @@ body {
   box-shadow: 0 0 12px rgba(232, 119, 34, 0.6), 0 4px 12px rgba(232, 119, 34, 0.45);
 }
 
+/* ===== Testimonial carousel ===== */
+.testimonial-card {
+  position: relative;
+  background: #FFFFFF;
+  border-top: 3px solid #E87722;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(10, 26, 70, 0.18);
+  padding: 32px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(10, 26, 70, 0.22);
+}
+.testimonial-card__quote-mark {
+  color: #E87722;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.testimonial-card__quote {
+  color: #1a2a4a;
+  font-size: 16px;
+  line-height: 1.7;
+  font-style: italic;
+}
+.testimonial-card__divider {
+  height: 1px;
+  background: #e8edf5;
+  margin: 20px 0;
+}
+.testimonial-card__name {
+  color: #0B1A46;
+  font-size: 15px;
+  font-weight: 700;
+}
+.testimonial-card__meta {
+  color: #4B5563;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.testimonial-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(11, 26, 70, 0.55);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+.testimonial-nav:hover {
+  background: rgba(11, 26, 70, 0.85);
+}
+.testimonial-nav--prev { left: -10px; }
+.testimonial-nav--next { right: -10px; }
+@media (min-width: 1024px) {
+  .testimonial-nav--prev { left: -22px; }
+  .testimonial-nav--next { right: -22px; }
+}
+
+.testimonial-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.testimonial-dot--active {
+  background: #E87722;
+  transform: scale(1.25);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);
