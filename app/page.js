@@ -513,13 +513,31 @@ function CyberAdvisory() {
     { n: '50+', l: 'Enterprise Engagements' },
     { n: '99.9%', l: 'Deployment Success' },
   ]
+  // Force the two-column layout via inline styles — external CSS / Tailwind
+  // arbitrary utilities have failed to apply on this wrapper twice, so we
+  // bypass external rules entirely. Inline styles outrank any class-based CSS.
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   return (
     <section className="relative py-24 px-6 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
       </div>
       <div className="max-w-[1200px] mx-auto relative">
-        <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-10 md:gap-12 items-center reveal">
+        <div
+          className="reveal"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '55fr 45fr',
+            gap: isMobile ? '32px' : '48px',
+            alignItems: 'center',
+          }}
+        >
           {/* Left column 55% */}
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
