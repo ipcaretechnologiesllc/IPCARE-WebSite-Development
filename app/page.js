@@ -6,7 +6,7 @@ import {
   Laptop, Tablet, Wifi, Printer, Wrench, ArrowRight, Phone, Mail,
   MapPin, Clock, CheckCircle2, Building2,
   HeartHandshake, Award, Users, Activity, Headphones,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, Globe
 } from 'lucide-react'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
@@ -906,19 +906,21 @@ function OfficesCTA() {
         <div className="grid grid-cols-1 md:grid-cols-[35fr_35fr_30fr] gap-10 items-center reveal">
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><UAEFlag/> UNITED ARAB EMIRATES</div>
-            <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi Headquarters</h3>
+            <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi</h3>
             <div className="space-y-1.5 text-white/85 text-sm">
               <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+971 2 676 6935</span></div>
               <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+              <div className="flex items-center gap-2"><Globe size={14} className="text-[#E87722] flex-shrink-0"/><a href="https://www.ipcare.ae" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">www.ipcare.ae</a></div>
               <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
             </div>
           </div>
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><CanadaFlag/> CANADA</div>
-            <h3 className="text-white text-xl font-bold mb-2">Toronto Operations</h3>
+            <h3 className="text-white text-xl font-bold mb-2">Toronto</h3>
             <div className="space-y-1.5 text-white/85 text-sm">
               <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+1 416 786 0782</span></div>
-              <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
+              <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ca</span></div>
+              <div className="flex items-center gap-2"><Globe size={14} className="text-[#E87722] flex-shrink-0"/><a href="https://www.ipcare.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">www.ipcare.ca</a></div>
               <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
             </div>
           </div>
