@@ -343,15 +343,21 @@ body {
 /* ===== Floating action buttons — mobile position ===== */
 /* Desktop positions are inline-styled on each component (they include
    var(--cookie-offset) so the cookie banner can shift them up). On
-   mobile the cookie banner can be 200-300px tall, which would push
-   the stack mid-screen — so we ignore the cookie offset on mobile
-   and pin the stack near the viewport bottom instead, just above
-   the browser chrome (80px). 72px center-to-center spacing matches
-   desktop. */
+   mobile we ignore the cookie offset (banner can be 200-300px tall
+   and would push the stack mid-screen) and pin the lowest visible
+   button right at the bottom (16px). Stack above with 72px spacing. */
 @media (max-width: 768px) {
-  .floating-btn-cart     { position: fixed !important; bottom: 80px  !important; }
-  .floating-btn-call     { position: fixed !important; bottom: 152px !important; }
-  .floating-btn-whatsapp { position: fixed !important; bottom: 224px !important; }
+  /* Default = non-home (cart rendered): Cart 16 / Call 88 / WhatsApp 160 */
+  .floating-btn-cart     { position: fixed !important; bottom: 16px  !important; }
+  .floating-btn-call     { position: fixed !important; bottom: 88px  !important; }
+  .floating-btn-whatsapp { position: fixed !important; bottom: 160px !important; }
+
+  /* On the home page the cart returns null so it's not in the DOM.
+     :has() lets us detect this and pull Call Now + WhatsApp down,
+     so the visible 2-button stack sits at the bottom of the viewport
+     instead of leaving a 16px gap where the cart would have been. */
+  body:not(:has(.floating-btn-cart)) .floating-btn-call     { bottom: 16px !important; }
+  body:not(:has(.floating-btn-cart)) .floating-btn-whatsapp { bottom: 88px !important; }
 }
 
 .hero-glass {
