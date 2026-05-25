@@ -519,9 +519,9 @@ function CyberAdvisory() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
       </div>
       <div className="max-w-[1200px] mx-auto relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center reveal">
-          {/* Left column ~55% */}
-          <div className="lg:col-span-7">
+        <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-10 md:gap-12 items-center reveal">
+          {/* Left column 55% */}
+          <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
               <Lock size={16}/> Powered by The Cyber Adviser
             </div>
@@ -545,8 +545,8 @@ function CyberAdvisory() {
             <a href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
           </div>
 
-          {/* Right column ~45% — 2x2 stats */}
-          <div className="lg:col-span-5">
+          {/* Right column 45% — 2x2 stats */}
+          <div>
             <div className="grid grid-cols-2 gap-5">
               {stats.map((s) => (
                 <div key={s.l} className="cyber-stat-card p-5">
