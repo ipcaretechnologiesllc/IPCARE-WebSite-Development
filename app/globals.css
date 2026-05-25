@@ -305,6 +305,32 @@ body {
   gap: 10px;
 }
 
+/* ===== Footer ===== */
+.footer-heading {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.footer-link {
+  color: #A0AEBF;
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: #FFFFFF;
+}
+
+/* ===== Nav CTA — flat brand orange + subtle glow on hover ===== */
+.btn-primary.nav-cta {
+  background: #E87722;
+}
+.btn-primary.nav-cta:hover {
+  background: #E87722;
+  box-shadow: 0 4px 16px rgba(232, 119, 34, 0.4);
+}
+
 .hero-glass {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(130%);

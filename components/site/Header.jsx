@@ -199,7 +199,7 @@ export default function Header() {
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/contact" className="btn-primary text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
+            <Link href="/contact" className="btn-primary nav-cta text-[14px]" style={{ padding: '10px 20px' }}>Contact Us <ArrowRight size={16}/></Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-3">
