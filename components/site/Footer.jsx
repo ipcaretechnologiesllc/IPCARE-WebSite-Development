@@ -37,21 +37,6 @@ export default function Footer() {
               Enterprise IT solutions, cybersecurity, event infrastructure and equipment rental. Trusted since 2003.
             </p>
 
-            <ul className="mt-5 space-y-2 text-sm" style={{ color: MUTED }}>
-              <li>
-                <span className="text-white/55">Phone: </span>
-                <a href="tel:+971506828290" className="footer-link">+971 50 6828290</a>
-              </li>
-              <li>
-                <span className="text-white/55">Email: </span>
-                <a href="mailto:shakeel@ipcare.ae" className="footer-link">shakeel@ipcare.ae</a>
-              </li>
-              <li>
-                <span className="text-white/55">Web: </span>
-                <a href="https://www.ipcare.ae" target="_blank" rel="noopener noreferrer" className="footer-link">www.ipcare.ae</a>
-              </li>
-            </ul>
-
             <div className="flex items-center mt-6" style={{ gap: '12px' }}>
               {[
                 { Ic: FaFacebookF, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook', bg: '#1877F2' },
@@ -111,17 +96,6 @@ export default function Footer() {
             <Link href="/contact" className="btn-primary mt-4">
               Contact Us <span aria-hidden="true">→</span>
             </Link>
-
-            <div className="mt-6 space-y-3 text-sm" style={{ color: MUTED }}>
-              <div>
-                <div className="text-white font-semibold text-[13px] mb-0.5">Abu Dhabi, UAE</div>
-                <a href="tel:+97126766935" className="footer-link">+971 2 676 6935</a>
-              </div>
-              <div>
-                <div className="text-white font-semibold text-[13px] mb-0.5">Toronto, Canada</div>
-                <a href="tel:+14167860782" className="footer-link">+1 416 786 0782</a>
-              </div>
-            </div>
           </div>
         </div>
 
