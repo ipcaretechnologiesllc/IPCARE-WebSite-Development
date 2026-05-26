@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Phone, Mail, Globe, MapPin, Clock } from 'lucide-react'
+import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Star, Handshake, ShieldCheck, Lightbulb, Users, Globe2 } from 'lucide-react'
 
 /* ── IntersectionObserver reveal ── */
 function useReveal() {
@@ -46,15 +46,25 @@ function Hero() {
       position: 'relative',
       overflow: 'hidden',
       padding: '110px 24px 88px',
+      minHeight: '520px',
+      display: 'flex',
+      alignItems: 'center',
     }}>
-      {/* Subtle grid texture */}
+      {/* Grid texture */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
         backgroundImage:
-          'linear-gradient(rgba(232,119,34,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.045) 1px, transparent 1px)',
+          'linear-gradient(rgba(232,119,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.06) 1px, transparent 1px)',
         backgroundSize: '60px 60px',
         maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
         WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
+      }} />
+      {/* Radial orange glow — left side */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', top: '-80px', left: '-120px',
+        width: '560px', height: '560px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(232,119,34,0.18) 0%, transparent 65%)',
+        pointerEvents: 'none',
       }} />
       <div
         className="reveal"
@@ -129,7 +139,8 @@ function Story() {
         </div>
 
         {/* Image — right column */}
-        <div className="reveal" style={{ transitionDelay: '100ms' }}>
+        <div className="reveal" style={{ transitionDelay: '100ms', position: 'relative', paddingBottom: '24px' }}>
+          {/* overflow: hidden clips the image to border-radius; badge lives outside */}
           <div style={{
             position: 'relative',
             borderRadius: '16px',
@@ -143,23 +154,23 @@ function Story() {
               loading="lazy"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
             />
-            {/* Est. 2003 badge */}
-            <div style={{
-              position: 'absolute', bottom: '20px', left: '20px',
-              background: '#0B1A46', borderRadius: '10px', overflow: 'hidden',
-              boxShadow: '0 8px 24px rgba(10,26,70,0.4)',
-              display: 'flex', alignItems: 'stretch',
-            }}>
-              <div style={{ width: '4px', background: '#E87722', flexShrink: 0 }} aria-hidden="true" />
-              <div style={{ padding: '12px 20px' }}>
-                <div style={{ color: '#E87722', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
-                  Est. 2003
-                </div>
-                <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '12px', marginTop: '3px', letterSpacing: '0.5px' }}>
-                  Abu Dhabi, UAE
-                </div>
-              </div>
-            </div>
+          </div>
+          {/* Est. 2003 badge — outside overflow:hidden so it's fully visible */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-16px',
+            left: '-16px',
+            background: '#E87722',
+            color: '#FFFFFF',
+            padding: '14px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 8px 24px rgba(232,119,34,0.4)',
+            fontWeight: 700,
+            fontSize: '14px',
+            whiteSpace: 'nowrap',
+            zIndex: 2,
+          }}>
+            Est. 2003 · Abu Dhabi, UAE
           </div>
         </div>
       </div>
@@ -260,7 +271,7 @@ function Timeline() {
               top: 0,
               bottom: 0,
               width: '3px',
-              background: 'linear-gradient(to bottom, #E87722, rgba(232,119,34,0.15))',
+              background: 'linear-gradient(to bottom, #E87722, rgba(232,119,34,0.5))',
               transform: 'translateX(-50%)',
               borderRadius: '3px',
             }} />
@@ -276,7 +287,7 @@ function Timeline() {
                   position: 'relative',
                   display: 'flex',
                   justifyContent: isMobile ? 'flex-start' : (isLeft ? 'flex-start' : 'flex-end'),
-                  marginBottom: '36px',
+                  marginBottom: '48px',
                   transitionDelay: `${i * 70}ms`,
                 }}
               >
@@ -320,16 +331,16 @@ function Timeline() {
                   <div style={{
                     color: '#E87722',
                     fontWeight: 700,
-                    fontSize: '13px',
+                    fontSize: '0.78rem',
                     letterSpacing: '1.5px',
                     marginBottom: '6px',
                   }}>
                     {m.year}
                   </div>
-                  <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '16px', marginBottom: '8px', lineHeight: 1.3 }}>
+                  <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '1rem', marginBottom: '8px', lineHeight: 1.3 }}>
                     {m.title}
                   </h3>
-                  <p style={{ color: '#4B5563', fontSize: '14px', lineHeight: 1.65 }}>
+                  <p style={{ color: '#4B5563', fontSize: '0.88rem', lineHeight: 1.65 }}>
                     {m.desc}
                   </p>
                 </div>
@@ -374,13 +385,13 @@ function MissionVision() {
               className="reveal"
               style={{
                 transitionDelay: `${i * 100}ms`,
-                background: 'rgba(255,255,255,0.09)',
-                backdropFilter: 'blur(14px)',
-                WebkitBackdropFilter: 'blur(14px)',
-                border: '1px solid rgba(255,255,255,0.14)',
+                background: 'rgba(255,255,255,0.08)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.15)',
                 borderTop: '3px solid #E87722',
                 borderRadius: '16px',
-                padding: '40px',
+                padding: '44px 40px',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
               }}
               onMouseEnter={(e) => {
@@ -402,10 +413,10 @@ function MissionVision() {
               }}>
                 {card.label}
               </div>
-              <h3 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '22px', lineHeight: 1.3, marginBottom: '16px' }}>
+              <h3 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.4rem', lineHeight: 1.3, marginBottom: '16px' }}>
                 {card.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '16px', lineHeight: 1.75 }}>
+              <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1rem', lineHeight: 1.8 }}>
                 {card.body}
               </p>
             </div>
@@ -425,7 +436,7 @@ function TwoRegions() {
     borderTop: '3px solid #E87722',
     borderRadius: '16px',
     boxShadow: '0 8px 32px rgba(10,26,70,0.18)',
-    padding: '36px',
+    padding: '40px',
     transition: 'transform 0.25s ease, box-shadow 0.25s ease',
   }
   const rowItem = { display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '12px', color: '#4B5563', fontSize: '15px' }
@@ -453,15 +464,17 @@ function TwoRegions() {
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }}
           >
-            <div style={{ fontSize: '32px', marginBottom: '12px' }}>🇦🇪</div>
-            <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '20px', marginBottom: '4px' }}>Abu Dhabi</h3>
-            <div style={{ color: '#E87722', fontWeight: 600, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '20px' }}>
-              Headquarters
+            <div style={{ fontSize: '2.8rem', marginBottom: '20px' }}>🇦🇪</div>
+            <div style={{ borderBottom: '1px solid #EEF0F5', paddingBottom: '20px', marginBottom: '20px' }}>
+              <h3 style={{ color: '#0B1A46', fontWeight: 800, fontSize: '1.35rem', marginBottom: '6px' }}>Abu Dhabi</h3>
+              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                Headquarters
+              </div>
             </div>
             <div>
               <div style={rowItem}><MapPin size={15} style={iconStyle} /><span>Hamdan Street, Abu Dhabi, P.O. Box 43830</span></div>
               <div style={rowItem}><Phone size={15} style={iconStyle} /><span>+971 2 6726300</span></div>
-              <div style={rowItem}><Mail size={15} style={iconStyle} /><span>shakeel@ipcare.ae</span></div>
+              <div style={rowItem}><Mail size={15} style={iconStyle} /><span>info@ipcare.ae</span></div>
               <div style={rowItem}>
                 <Globe size={15} style={iconStyle} />
                 <a href="https://www.ipcare.ae" target="_blank" rel="noopener noreferrer" style={{ color: '#1E3A8A', fontWeight: 600 }}>
@@ -479,10 +492,12 @@ function TwoRegions() {
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }}
           >
-            <div style={{ fontSize: '32px', marginBottom: '12px' }}>🇨🇦</div>
-            <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '20px', marginBottom: '4px' }}>Toronto, Canada</h3>
-            <div style={{ color: '#E87722', fontWeight: 600, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '20px' }}>
-              North America Operations
+            <div style={{ fontSize: '2.8rem', marginBottom: '20px' }}>🇨🇦</div>
+            <div style={{ borderBottom: '1px solid #EEF0F5', paddingBottom: '20px', marginBottom: '20px' }}>
+              <h3 style={{ color: '#0B1A46', fontWeight: 800, fontSize: '1.35rem', marginBottom: '6px' }}>Toronto, Canada</h3>
+              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                North America Operations
+              </div>
             </div>
             <div>
               <div style={rowItem}><MapPin size={15} style={iconStyle} /><span>Consumers Road, North York, ON</span></div>
@@ -636,18 +651,18 @@ function Certifications() {
             <span
               key={c}
               style={{
-                padding: '12px 26px',
+                padding: '18px 32px',
                 borderRadius: '999px',
-                border: '1.5px solid rgba(255,255,255,0.25)',
+                border: '2px solid rgba(255,255,255,0.25)',
                 background: 'rgba(255,255,255,0.06)',
                 color: 'rgba(255,255,255,0.9)',
-                fontSize: '14px',
+                fontSize: '0.95rem',
                 fontWeight: 600,
                 cursor: 'default',
                 transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#E87722'
+                e.currentTarget.style.background = 'rgba(232,119,34,0.1)'
                 e.currentTarget.style.borderColor = '#E87722'
                 e.currentTarget.style.color = '#FFFFFF'
               }}
@@ -670,12 +685,12 @@ function Certifications() {
    9. OUR VALUES
 ═══════════════════════════════════════════════ */
 const VALUES = [
-  { title: 'Excellence', desc: "We don't cut corners. Every deployment gets the same standard regardless of size." },
-  { title: 'Partnership', desc: 'We succeed when clients succeed. Our average client relationship runs 7+ years.' },
-  { title: 'Integrity', desc: 'We tell you what you need to hear, not what you want to hear.' },
-  { title: 'Innovation', desc: 'Knowing which new tools actually move the needle — and which are noise.' },
-  { title: 'People-First', desc: 'IT that frees your team to do their best work, not fight their tools.' },
-  { title: 'Global Mindset', desc: 'UAE roots. Canadian reach. GCC expertise. Great IT ignores borders.' },
+  { title: 'Excellence', desc: "We don't cut corners. Every deployment gets the same standard regardless of size.", Icon: Star },
+  { title: 'Partnership', desc: 'We succeed when clients succeed. Our average client relationship runs 7+ years.', Icon: Handshake },
+  { title: 'Integrity', desc: 'We tell you what you need to hear, not what you want to hear.', Icon: ShieldCheck },
+  { title: 'Innovation', desc: 'Knowing which new tools actually move the needle — and which are noise.', Icon: Lightbulb },
+  { title: 'People-First', desc: 'IT that frees your team to do their best work, not fight their tools.', Icon: Users },
+  { title: 'Global Mindset', desc: 'UAE roots. Canadian reach. GCC expertise. Great IT ignores borders.', Icon: Globe2 },
 ]
 
 function OurValues() {
@@ -689,7 +704,7 @@ function OurValues() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px' }}>
           {VALUES.map((v, i) => (
             <div
               key={v.title}
@@ -699,14 +714,15 @@ function OurValues() {
                 borderTop: '3px solid #E87722',
                 borderRadius: '16px',
                 boxShadow: '0 8px 32px rgba(10,26,70,0.18)',
-                padding: '28px',
+                padding: '36px',
                 transition: 'transform 0.25s ease, box-shadow 0.25s ease',
                 transitionDelay: `${i * 60}ms`,
               }}
               onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }}
             >
-              <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '18px', marginBottom: '10px' }}>
+              <v.Icon size={32} style={{ color: '#E87722', marginBottom: '20px' }} strokeWidth={1.8} />
+              <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '1.1rem', marginBottom: '10px' }}>
                 {v.title}
               </h3>
               <p style={{ color: '#4B5563', fontSize: '15px', lineHeight: 1.7 }}>
@@ -754,21 +770,22 @@ function CTAStrip() {
 
         {/* Contact details */}
         <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: '20px',
-          justifyContent: 'center', fontSize: '14px',
+          display: 'flex', flexWrap: 'wrap', gap: '32px',
+          justifyContent: 'center', fontSize: '0.95rem',
+          color: 'rgba(255,255,255,0.8)', marginTop: '24px',
         }}>
           {[
             { href: 'tel:+971506828290', icon: Phone, label: '+971 50 6828290' },
-            { href: 'mailto:shakeel@ipcare.ae', icon: Mail, label: 'shakeel@ipcare.ae' },
+            { href: 'mailto:info@ipcare.ae', icon: Mail, label: 'info@ipcare.ae' },
             { href: 'https://www.ipcare.ae', icon: Globe, label: 'www.ipcare.ae', external: true },
           ].map(({ href, icon: Icon, label, external }) => (
             <a
               key={label}
               href={href}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              style={{ color: 'rgba(255,255,255,0.6)', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s ease' }}
+              style={{ color: 'rgba(255,255,255,0.8)', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s ease' }}
               onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.6)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
             >
               <Icon size={14} />
               {label}
