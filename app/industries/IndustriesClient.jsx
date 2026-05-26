@@ -256,7 +256,7 @@ function Hero() {
           Healthcare, banking and federal IT each operate against regulatory environments
           that generic enterprise IT does not touch. The work is different. The teams are
           different. The runbooks are different. This page lays out what we deliver in
-          each of the three sectors where we have the deepest UAE history.
+          each of the core sectors where we have the deepest UAE history.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
           <Link href="/contact" className="btn-primary">
