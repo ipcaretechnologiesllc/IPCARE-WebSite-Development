@@ -535,35 +535,45 @@ body {
 
 /* ================================================================
    ABOUT PAGE — OVERRIDE LAYER
-   These rules use !important to beat both Tailwind base resets
-   and any inline-style declarations on the same elements.
-   Class names are applied directly in AboutClient.jsx.
+   Edited in-place: selectors normalised, values updated.
+   Class names applied in AboutClient.jsx.
    ================================================================ */
 
-/* FIX 1 — Hero section */
-section.about-hero {
-  min-height: 560px !important;
-  padding: 140px 24px 100px !important;
+/* HERO */
+.hero {
+  min-height: 580px !important;
+  padding: 150px 24px 110px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
 }
-section.about-hero h1 {
-  font-size: clamp(2.8rem, 5vw, 4.2rem) !important;
+.hero h1 {
+  font-size: clamp(3rem, 5.5vw, 4.5rem) !important;
   font-weight: 800 !important;
   color: #FFFFFF !important;
-  line-height: 1.15 !important;
+  line-height: 1.12 !important;
   letter-spacing: -0.02em !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 22px !important;
 }
-.hero-sub,
-section.about-hero p.hero-sub {
-  font-size: 1.2rem !important;
+.hero-sub {
+  font-size: 1.25rem !important;
   color: rgba(255,255,255,0.78) !important;
-  max-width: 600px !important;
+  max-width: 620px !important;
   margin: 0 auto !important;
   line-height: 1.7 !important;
+}
+/* NOTE: no element currently has class="hero-eyebrow".
+   The hero eyebrow uses class="section-eyebrow" (see Eyebrow component).
+   Rule added below — wire it up by adding hero-eyebrow to that element if needed. */
+.hero-eyebrow {
+  font-size: 14px !important;
+  letter-spacing: 4px !important;
+  color: #E87722 !important;
+  margin-bottom: 22px !important;
+  font-weight: 700 !important;
+  display: block !important;
+  text-transform: uppercase !important;
 }
 .hero-inner {
   text-align: center !important;
@@ -571,10 +581,8 @@ section.about-hero p.hero-sub {
   margin: 0 auto !important;
 }
 
-/* FIX 2 — All eyebrow labels */
-.section-eyebrow,
-span.section-eyebrow,
-p.section-eyebrow {
+/* EYEBROW LABELS */
+.section-eyebrow {
   font-size: 13px !important;
   font-weight: 700 !important;
   letter-spacing: 4px !important;
@@ -584,18 +592,18 @@ p.section-eyebrow {
   margin-bottom: 16px !important;
 }
 
-/* FIX 3 — All section H2 headings */
-h2.section-title {
-  font-size: clamp(2rem, 4vw, 3rem) !important;
+/* SECTION H2 HEADINGS */
+.section-title {
+  font-size: clamp(2.1rem, 4vw, 3rem) !important;
   font-weight: 800 !important;
   letter-spacing: -0.02em !important;
   line-height: 1.15 !important;
 }
-h2.section-title.section-title-white {
+.section-title-white {
   color: #FFFFFF !important;
 }
 
-/* FIX 4 — Mission & Vision glass cards */
+/* MISSION & VISION GLASS CARDS */
 .mv-card {
   background: rgba(255,255,255,0.09) !important;
   backdrop-filter: blur(10px) !important;
@@ -617,8 +625,11 @@ h2.section-title.section-title-white {
   line-height: 1.85 !important;
 }
 
-/* FIX 5 — Section padding (non-hero, non-stats sections) */
-section.about-section {
+/* SECTION SPACING */
+/* NOTE: no <section> element currently has class="section" in AboutClient.jsx.
+   Rule is defined here — add class="section" (or "... section") to each
+   <section> element to activate it. */
+.section {
   padding-top: 96px !important;
   padding-bottom: 96px !important;
 }

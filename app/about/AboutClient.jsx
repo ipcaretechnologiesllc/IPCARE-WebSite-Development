@@ -41,7 +41,7 @@ function Eyebrow({ children }) {
 ═══════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="about-hero" style={{
+    <section className="hero" style={{
       background: '#0B1A46',
       borderBottom: '3px solid #E87722',
       position: 'relative',
