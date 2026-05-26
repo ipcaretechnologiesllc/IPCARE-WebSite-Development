@@ -100,7 +100,17 @@ function Hero() {
 
       <div
         className="reveal"
-        style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}
+        style={{
+          maxWidth: '820px',
+          margin: '0 auto',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 1,
+        }}
       >
         <Eyebrow>Our Services</Eyebrow>
         <h1 style={{
@@ -108,9 +118,10 @@ function Hero() {
           fontWeight: 800,
           color: '#FFFFFF',
           lineHeight: 1.15,
-          marginBottom: '22px',
-          maxWidth: '900px',
           margin: '0 auto 22px',
+          maxWidth: '900px',
+          width: '100%',
+          textAlign: 'center',
         }}>
           <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>Enterprise IT Solutions &amp; Services</span>
           <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>UAE &amp; Canada</span>
@@ -154,7 +165,6 @@ function ServicesGrid() {
     transition: 'transform 0.25s ease, box-shadow 0.25s ease',
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
   }
 
   return (
@@ -235,7 +245,7 @@ function ServicesGrid() {
                     padding: 0,
                     listStyle: 'none',
                     marginBottom: '24px',
-                    flex: 1,
+                    flex: '1 1 auto',
                   }}>
                     {nonLocationSubpages.slice(0, 5).map(([subSlug, sub]) => (
                       <li key={subSlug} style={{ marginBottom: '8px' }}>
