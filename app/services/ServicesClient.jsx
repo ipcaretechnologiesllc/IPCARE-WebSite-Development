@@ -151,6 +151,7 @@ function ServicesGrid() {
     transition: 'transform 0.25s ease, box-shadow 0.25s ease',
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
   }
 
   return (
@@ -160,6 +161,7 @@ function ServicesGrid() {
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '24px',
+          alignItems: 'stretch',
         }}
           className="services-grid"
         >
