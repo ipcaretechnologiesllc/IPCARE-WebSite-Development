@@ -70,7 +70,6 @@ const SOCIAL = {
 
 export default function Header() {
   const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [eventITOpen, setEventITOpen] = useState(false)
@@ -86,12 +85,6 @@ export default function Header() {
     if (href === '/') return pathname === '/'
     return pathname === href || pathname.startsWith(href + '/')
   }
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    onScroll(); window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     const measure = () => {
@@ -158,20 +151,19 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main nav — transparent at top, white when scrolled */}
+      {/* Main nav — always white, sticky */}
       <nav
         ref={navRef}
         className="sticky top-0 z-50"
         style={{
-          background:    scrolled ? '#ffffff' : 'transparent',
-          borderBottom:  scrolled ? '1px solid rgba(15,36,95,0.08)' : '1px solid transparent',
-          boxShadow:     scrolled ? '0 4px 20px rgba(10,26,70,0.08)' : 'none',
-          transition:    'background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+          background:   '#ffffff',
+          borderBottom: '1px solid rgba(15,36,95,0.08)',
+          boxShadow:    '0 2px 12px rgba(10,26,70,0.08)',
         }}
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" aria-label="IP Care Technologies home" className="flex items-center overflow-hidden">
-            <Logo size={36} variant={scrolled ? 'color' : 'white'} />
+            <Logo size={36} />
           </Link>
 
           <ul className="hidden lg:flex items-center gap-0.5">
@@ -193,9 +185,7 @@ export default function Header() {
                   className={`px-3.5 py-2 text-[14px] font-medium transition-colors flex items-center gap-1 ${
                     isActive(l.href)
                       ? 'text-[#E87722] hover:text-[#E87722] font-semibold'
-                      : scrolled
-                        ? 'text-[#0D2B55] hover:text-[#E87722]'
-                        : 'text-white/90 hover:text-[#E87722]'
+                      : 'text-[#0D2B55] hover:text-[#E87722]'
                   }`}
                 >
                   {l.label}
@@ -210,11 +200,7 @@ export default function Header() {
           </div>
 
           <div className="lg:hidden flex items-center gap-3">
-            <button
-              className={scrolled ? 'text-[#0D2B55]' : 'text-white'}
-              onClick={() => setMobileOpen(true)}
-              aria-label="Open menu"
-            >
+            <button className="text-[#0D2B55]" onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <Menu size={26} />
             </button>
           </div>
