@@ -21,7 +21,8 @@
 html, body {
   background-color: #1E3A8A;
   color: #ffffff;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip (not hidden) — prevents horizontal scroll without creating a new
+                       scroll container, so position:sticky on the navbar keeps working */
 }
 
 body {
