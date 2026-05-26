@@ -531,10 +531,10 @@ function CyberAdvisory() {
       <div className="max-w-[1200px] mx-auto relative">
         <div
           id="cyber-grid"
-          className="reveal md:grid md:grid-cols-[55fr_45fr] md:gap-12 md:items-center"
+          className="reveal"
           style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : '55fr 45fr',
+            gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1.2fr) minmax(0, 1fr)',
             gap: isMobile ? '32px' : '48px',
             alignItems: 'center',
           }}
