@@ -107,10 +107,13 @@ function Hero() {
           fontSize: 'clamp(2.8rem, 5.5vw, 4.2rem)',
           fontWeight: 800,
           color: '#FFFFFF',
-          lineHeight: 1.1,
+          lineHeight: 1.15,
           marginBottom: '22px',
+          maxWidth: '900px',
+          margin: '0 auto 22px',
         }}>
-          Enterprise IT Solutions &amp; Services &mdash; UAE &amp; Canada
+          <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>Enterprise IT Solutions &amp; Services</span>
+          <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>UAE &amp; Canada</span>
         </h1>
         <p style={{
           fontSize: '1.2rem',
@@ -293,10 +296,11 @@ function ServicesGrid() {
         </div>
       </div>
 
-      {/* Responsive grid overrides */}
+      {/* Responsive overrides */}
       <style>{`
         @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr) !important; } }
         @media (max-width: 640px)  { .services-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 600px)  { .hero-h1-line { white-space: normal !important; } }
       `}</style>
     </section>
   )
