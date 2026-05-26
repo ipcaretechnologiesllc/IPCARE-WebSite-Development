@@ -8,7 +8,9 @@ const LOGO_URL = 'https://customer-assets.emergentagent.com/job_ipcare-enterpris
  *                         cleanly on any background (recommended for header/footer)
  */
 export default function Logo({ size = 36, variant = 'color', tile = false, className = '' }) {
-  const filterStyle = variant === 'white' ? { filter: 'brightness(0) invert(1)' } : {}
+  const filterStyle = variant === 'white'
+    ? { filter: 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }
+    : { transition: 'filter 0.3s ease' }
 
   const img = (
     <img
