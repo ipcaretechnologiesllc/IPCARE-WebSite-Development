@@ -1,32 +1,43 @@
-﻿import Header from '@/components/site/Header'
+import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
 
+const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
+
 export const metadata = {
-  title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed | IP Care Technologies',
-  description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) â€” Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+  title: 'Cyber Advisory UAE | Zero Trust, SASE & Enterprise Security Consulting | IP Care',
+  description: 'Enterprise cybersecurity advisory across UAE and Canada: Zero Trust architecture, SASE transformation, cloud security, and executive advisory. Vendor-certified across Palo Alto, Fortinet, Check Point, and more.',
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
-    title: 'Cybersecurity Advisory UAE & Canada | Attique Bhatti & Tanveer Ahmed',
-    description: 'Attique Bhatti (15+ years) and Tanveer Ahmed (25+ years experience, CCIE certified) â€” Zero Trust, SASE, Prisma Access, CASB, DLP and cloud security for enterprises in UAE & Canada.',
+    title: 'Cyber Advisory UAE | Zero Trust, SASE & Enterprise Security Consulting | IP Care',
+    description: 'Enterprise cybersecurity advisory across UAE and Canada: Zero Trust architecture, SASE transformation, cloud security, and executive advisory. Vendor-certified across Palo Alto, Fortinet, Check Point, and more.',
     url: '/cybersecurity-advisory',
     type: 'website',
   },
 }
 
-const advisoryService = {
+const breadcrumbSchema = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'The Cyber Adviser â€” Cybersecurity Advisory',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home',            item: `${BASE}/` },
+    { '@type': 'ListItem', position: 2, name: 'Cyber Advisory',  item: `${BASE}/cybersecurity-advisory` },
+  ],
+}
+
+const advisorySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'The Cyber Adviser — Cybersecurity Advisory',
   description: 'Enterprise cybersecurity advisory: Zero Trust architecture, SASE transformation, cloud security, executive advisory and security automation.',
   provider: {
     '@type': 'Organization',
-    name: 'IP Care Technologies L.L.C.',
-    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+    name: 'IP Care Technologies LLC',
+    url: BASE,
   },
   areaServed: [
-    { '@type': 'Country', name: 'Canada' },
     { '@type': 'Country', name: 'United Arab Emirates' },
+    { '@type': 'Country', name: 'Canada' },
   ],
   serviceType: [
     'Zero Trust Architecture',
@@ -35,12 +46,28 @@ const advisoryService = {
     'Executive Cybersecurity Advisory',
     'Security Automation',
   ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Platform Expertise',
+    itemListElement: [
+      'Palo Alto Networks — Prisma Access, Cortex, Strata, XSIAM',
+      'Check Point — Quantum, Harmony, CloudGuard, Infinity',
+      'Fortinet — FortiGate, FortiEDR, FortiSASE, FortiAnalyzer',
+      'Microsoft Azure — Defender, Sentinel, Entra ID, Purview',
+      'AWS — GuardDuty, Security Hub, WAF, IAM Identity Center',
+      'Google Cloud — Chronicle, SCC, BeyondCorp, Mandiant',
+      'Zscaler — ZIA, ZPA, ZDX, ZTNA',
+      'CrowdStrike — Falcon, Insight XDR, Identity, Cloud',
+      'Netskope — SSE, CASB, SWG, ZTNA Next',
+    ].map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s } })),
+  },
 }
 
 export default function CybersecurityAdvisoryPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(advisoryService) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(advisorySchema) }} />
       <Header />
       <AdvisoryClient />
       <Footer />

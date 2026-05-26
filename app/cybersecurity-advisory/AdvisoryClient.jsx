@@ -2,274 +2,899 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import {
+  ArrowRight, ExternalLink, Phone, Mail, Globe,
+  Lock, Globe2, Cloud, Briefcase, Bot,
+  Calculator, BarChart3, ArrowRightLeft,
+  CalendarDays, Shield, Users, ArrowUpRight,
+} from 'lucide-react'
 import * as Icons from 'lucide-react'
-import { advisor, platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
+import { platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
 
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Shield
   return <C {...rest} />
 }
 
+/* ── IntersectionObserver reveal ── */
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll('.reveal')
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) } })
-    }, { threshold: 0.12 })
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) }
+      }),
+      { threshold: 0.1 }
+    )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
 }
 
-// Advisor avatar (stylized SVG since we don't have a photo)
-const AdvisorAvatar = ({ initials = "AB" }) => (
-  <div className="relative w-32 h-32 md:w-36 md:h-36 mx-auto md:mx-0 flex-shrink-0">
-    <div className="absolute inset-0 rounded-full orange-glow"/>
-    <div className="absolute inset-1.5 rounded-full overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1e4ab8 0%, #0f245f 100%)' }}>
-      <svg viewBox="0 0 128 128" className="w-full h-full">
-        <defs>
-          <radialGradient id={`av-bg-${initials}`} cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="#1B6CA8" stopOpacity="0.6"/>
-            <stop offset="100%" stopColor="#0f245f" stopOpacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="128" height="128" fill={`url(#av-bg-${initials})`}/>
-        <circle cx="64" cy="50" r="20" fill="#E87722" opacity="0.9"/>
-        <path d="M24 120 Q24 80 64 80 Q104 80 104 120 Z" fill="#E87722" opacity="0.9"/>
-        <text x="64" y="58" textAnchor="middle" fontSize="22" fontWeight="700" fill="#ffffff" fontFamily="Inter">{initials}</text>
-      </svg>
-    </div>
-  </div>
+/* ── Eyebrow label ── */
+function Eyebrow({ children }) {
+  return (
+    <p style={{
+      fontSize: '13px', fontWeight: 700, color: '#E87722',
+      letterSpacing: '4px', textTransform: 'uppercase',
+      display: 'block', marginBottom: '16px',
+    }}>
+      {children}
+    </p>
+  )
+}
+
+/* ── Shared white card base ── */
+const cardBase = {
+  background: '#FFFFFF',
+  borderTop: '3px solid #E87722',
+  borderRadius: '16px',
+  boxShadow: '0 8px 32px rgba(10,26,70,0.18)',
+  padding: '32px',
+  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+  display: 'flex',
+  flexDirection: 'column',
+}
+
+const hoverOn  = (e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }
+const hoverOff = (e) => { e.currentTarget.style.transform = 'translateY(0)';    e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }
+
+/* ── Green "Active Practice" badge ── */
+const ActiveBadge = () => (
+  <span style={{
+    display: 'inline-flex', alignItems: 'center', gap: '5px',
+    fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
+    letterSpacing: '0.08em', padding: '3px 10px', borderRadius: '20px',
+    background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.35)',
+    color: '#16a34a', flexShrink: 0,
+  }}>
+    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+    Active Practice
+  </span>
 )
 
-/* ============ 1. HERO ============ */
+/* ═══════════════════════════════════════════
+   1. HERO  — navy, grid texture, orange glow
+═══════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative py-20 md:py-28 px-6 overflow-hidden">
-      <div className="absolute inset-0 premium-grid pointer-events-none"/>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-3xl opacity-30" style={{ background: 'radial-gradient(ellipse, #E87722 0%, transparent 60%)' }}/>
-      </div>
+    <section style={{
+      background: '#0B1A46',
+      borderBottom: '3px solid #E87722',
+      position: 'relative',
+      overflow: 'hidden',
+      padding: '120px 24px 80px',
+    }}>
+      {/* Grid texture overlay */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        backgroundImage: 'linear-gradient(rgba(232,119,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.06) 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+        maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
+      }} />
+      {/* Orange radial glow — left */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', top: '-80px', left: '-120px',
+        width: '560px', height: '560px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(232,119,34,0.18) 0%, transparent 65%)',
+        pointerEvents: 'none',
+      }} />
 
-      <div className="relative max-w-[1200px] mx-auto">
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal" style={{ background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.4)' }}>
-            <span className="status-dot"/>
-            <span className="mono text-[#E87722] text-xs font-semibold uppercase">The Cyber Adviser × IP Care</span>
-          </div>
-          <h1 className="premium-h1 text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight max-w-5xl mx-auto reveal">
-            Architecting Enterprise Security<br/>for the Modern Era
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        {/* Centered hero copy */}
+        <div className="reveal" style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          textAlign: 'center', marginBottom: '60px',
+        }}>
+          <Eyebrow>Cyber Advisory</Eyebrow>
+          <h1 style={{
+            fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
+            fontWeight: 800, color: '#FFFFFF',
+            lineHeight: 1.15, margin: '0 auto 22px',
+            maxWidth: '900px', width: '100%', textAlign: 'center',
+          }}>
+            Architecting Enterprise Security for the Modern Era
           </h1>
-          <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto reveal">
-            Zero Trust architecture, SASE transformation, and cloud security — delivered by practitioners who have protected 100M+ users at Fortune 500 scale.
+          <p style={{
+            fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',
+            lineHeight: 1.75, maxWidth: '760px', margin: '0 auto 36px',
+          }}>
+            Zero Trust architecture, SASE transformation, and cloud security — delivered by
+            practitioners who have protected 100M+ users at Fortune 500 scale.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+            <Link href="/contact" className="btn-primary">
+              Schedule Consultation <ArrowRight size={16} />
+            </Link>
+            <a href="#platforms" className="btn-ghost">View Expertise</a>
+          </div>
+        </div>
+
+        {/* Advisor cards — white cards inside navy hero */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '24px',
+          maxWidth: '900px',
+          margin: '0 auto',
+          alignItems: 'stretch',
+        }}>
+
+          {/* Attique Bhatti */}
+          <div
+            className="reveal"
+            style={{ ...cardBase, boxShadow: '0 8px 40px rgba(10,26,70,0.32)', textAlign: 'center' }}
+            onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+          >
+            <div style={{
+              width: '80px', height: '80px', borderRadius: '50%',
+              background: '#0B1A46', border: '3px solid #E87722',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 16px', fontSize: '24px', fontWeight: 800, color: '#FFFFFF',
+            }}>AB</div>
+            <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '20px', marginBottom: '4px' }}>
+              Attique Bhatti
+            </h3>
+            <div style={{ color: '#E87722', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', marginBottom: '4px' }}>
+              Enterprise Security Consultant
+            </div>
+            <div style={{ color: '#1E3A8A', fontSize: '13px', fontWeight: 600, marginBottom: '16px' }}>
+              The Cyber Adviser
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '11px', color: '#4A5878', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 600 }}>Certifications</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
+                {['PCNSE', 'CISSP', 'AWS Security', 'Azure Security', 'GIAC GCFA'].map((c) => (
+                  <span key={c} style={{
+                    fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                    background: 'rgba(30,58,138,0.08)', color: '#1E3A8A',
+                    border: '1px solid rgba(30,58,138,0.18)',
+                  }}>{c}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px',
+              borderTop: '1px solid #E8EDF5', paddingTop: '20px', marginTop: 'auto',
+            }}>
+              {[
+                { n: '15+', l: 'Years' },
+                { n: '100M+', l: 'Users Protected' },
+                { n: '50+', l: 'Engagements' },
+              ].map((s) => (
+                <div key={s.l}>
+                  <div style={{ color: '#0B1A46', fontWeight: 700, fontSize: '15px' }}>{s.n}</div>
+                  <div style={{ color: '#4B5563', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '3px' }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tanveer Ahmed */}
+          <div
+            className="reveal"
+            style={{ ...cardBase, boxShadow: '0 8px 40px rgba(10,26,70,0.32)', textAlign: 'center', transitionDelay: '60ms' }}
+            onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+          >
+            <div style={{
+              width: '80px', height: '80px', borderRadius: '50%',
+              background: '#0B1A46', border: '3px solid #E87722',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 16px', fontSize: '24px', fontWeight: 800, color: '#FFFFFF',
+            }}>TA</div>
+            <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '20px', marginBottom: '4px' }}>
+              Tanveer Ahmed
+            </h3>
+            <div style={{ color: '#E87722', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', marginBottom: '4px' }}>
+              Independent Network Security Consultant
+            </div>
+            <div style={{ color: '#4A5878', fontSize: '12px', marginBottom: '16px' }}>
+              Prisma Access &amp; SASE Specialist — Milton, Ontario, Canada
+            </div>
+            <div style={{ marginBottom: '12px' }}>
+              <div style={{ fontSize: '11px', color: '#4A5878', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 600 }}>Specialisations</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
+                {['SASE', 'ZTNA', 'CASB', 'DLP', 'SWG', 'Prisma Access'].map((s) => (
+                  <span key={s} style={{
+                    fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                    background: 'rgba(232,119,34,0.1)', color: '#E87722',
+                    border: '1px solid rgba(232,119,34,0.25)',
+                  }}>{s}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '11px', color: '#4A5878', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 600 }}>Certifications</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}>
+                {['PCNSE', 'PCCSA', 'CNSS', 'AlgoSec'].map((c) => (
+                  <span key={c} style={{
+                    fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                    background: 'rgba(30,58,138,0.08)', color: '#1E3A8A',
+                    border: '1px solid rgba(30,58,138,0.18)',
+                  }}>{c}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px',
+              borderTop: '1px solid #E8EDF5', paddingTop: '20px', marginTop: 'auto',
+            }}>
+              {[
+                { n: '25+', l: 'Years' },
+                { n: 'CCIE', l: 'Certified' },
+                { n: 'Prisma', l: 'Access SME' },
+              ].map((s) => (
+                <div key={s.l}>
+                  <div style={{ color: '#0B1A46', fontWeight: 700, fontSize: '15px' }}>{s.n}</div>
+                  <div style={{ color: '#4B5563', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '3px' }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #E8EDF5' }}>
+              <a
+                href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  color: '#0A66C2', fontSize: '13px', fontWeight: 600, textDecoration: 'none',
+                }}
+              >
+                <Icons.Linkedin size={15} /> LinkedIn Profile
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   2. PLATFORMS — white cards on #F4F6FA
+═══════════════════════════════════════════ */
+function Platforms() {
+  return (
+    <section id="platforms" style={{ background: '#F4F6FA', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <Eyebrow>Platform Expertise</Eyebrow>
+          <h2 style={{
+            color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
+          }}>
+            Advisory Depth Across Enterprise Platforms
+          </h2>
+          <p style={{ color: '#4A5878', fontSize: '17px', lineHeight: 1.75, maxWidth: '640px', margin: '0 auto' }}>
+            Certified, hands-on expertise across the vendors that power modern enterprise security and cloud.
           </p>
         </div>
 
-        {/* Advisor profile cards - matches /about Leadership design */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1100px] mx-auto justify-center reveal">
-          {/* Card 1 - Attique Bhatti */}
-          <div className="glass-card p-8 text-center">
-            <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>AB</div>
-            <h3 className="text-white font-semibold text-xl mb-1">Attique Bhatti</h3>
-            <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Enterprise Security Consultant</div>
-            <div className="text-white/60 text-sm mb-5">The Cyber Adviser</div>
-            <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <div>
-                <div className="text-white font-bold text-lg">15+</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">100M+</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Users Protected</div>
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">50+</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Enterprise Engagements</div>
-              </div>
-            </div>
-            <Link href="/contact" className="btn-primary text-sm inline-flex items-center gap-2">Schedule Consultation <Icons.ArrowRight size={14}/></Link>
-          </div>
-
-          {/* Card 2 - Tanveer Ahmed */}
-          <div className="glass-card p-8 text-center">
-            <div className="w-24 h-24 rounded-full mx-auto mb-5 flex items-center justify-center text-white font-bold text-2xl mono" style={{ background: '#E87722' }}>TB</div>
-            <h3 className="text-white font-semibold text-xl mb-1">Tanveer Ahmed</h3>
-            <div className="text-[#E87722] text-xs mono uppercase tracking-wider mb-1">Independent Network Security Consultant</div>
-            <div className="text-white/60 text-sm mb-5">Prisma Access & SASE Specialist &mdash; Milton, Ontario, Canada</div>
-
-            <div className="mb-4 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Specialisations</div>
-              <div className="flex flex-wrap gap-1.5 justify-center">
-                {['SASE','ZTNA','CASB','DLP','SWG','Prisma Access'].map((s) => (
-                  <span key={s} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(232,119,34,0.12)', color: '#E87722', border: '1px solid rgba(232,119,34,0.25)' }}>{s}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-5">
-              <div className="text-[10px] text-white/50 mono uppercase tracking-wider mb-2">Certifications</div>
-              <div className="flex flex-wrap gap-1.5 justify-center">
-                {['PCNSE','PCCSA','CNSS','AlgoSec'].map((c) => (
-                  <span key={c} className="text-[10px] px-2 py-1 rounded mono" style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.8)', border: '1px solid rgba(255,255,255,0.12)' }}>{c}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 mb-5 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <div>
-                <div className="text-white font-bold text-lg">25+</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Years</div>
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">CCIE</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Certified</div>
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">Prisma</div>
-                <div className="text-[10px] text-white/50 mono uppercase tracking-wider">Access SME</div>
-              </div>
-            </div>
-
-            <a href="https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#0A66C2] text-sm transition-colors">
-              <Icons.Linkedin size={16}/> LinkedIn
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ============ 2. PLATFORMS ============ */
-function Platforms() {
-  return (
-    <section className="py-20 md:py-24 px-6">
-      <div className="max-w-[1300px] mx-auto">
-        <div className="text-center mb-12 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Platform Expertise</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Advisory Depth Across Enterprise Platforms</h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">Certified, hands-on expertise across the vendors that power modern enterprise security and cloud.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '24px',
+          alignItems: 'stretch',
+        }}>
           {platforms.map((p, i) => (
-            <div key={p.name} className="glass-premium p-6 relative reveal" style={{ transitionDelay: `${i * 50}ms` }}>
-              <div className="flex items-start justify-between mb-5">
-                <div className="mono text-2xl font-bold tracking-tight" style={{ color: p.color }}>{p.vendor}</div>
-                <span className="inline-flex items-center text-[10px] uppercase mono tracking-widest px-2 py-1 rounded-full" style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.35)', color: '#4ade80' }}>
-                  <span className="status-dot !w-1.5 !h-1.5 !mr-1.5"/> Active Practice
-                </span>
+            <div
+              key={p.name}
+              className="reveal"
+              style={{ ...cardBase, transitionDelay: `${i * 50}ms` }}
+              onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                {p.vendor ? (
+                  <span style={{ fontSize: '20px', fontWeight: 800, color: p.color, letterSpacing: '-0.02em' }}>
+                    {p.vendor}
+                  </span>
+                ) : (
+                  <span style={{
+                    fontSize: '12px', fontWeight: 700, color: '#0B1A46',
+                    textTransform: 'uppercase', letterSpacing: '1px',
+                    padding: '3px 10px', borderRadius: '8px',
+                    background: 'rgba(11,26,70,0.07)',
+                  }}>
+                    {p.name}
+                  </span>
+                )}
+                <ActiveBadge />
               </div>
-              <h3 className="text-white text-lg font-semibold mb-2">{p.name}</h3>
-              <p className="body-text text-xs mono">{p.sub}</p>
+              <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '16px', marginBottom: '8px', lineHeight: 1.3, flex: '1 1 auto' }}>
+                {p.vendor ? p.name : ''}
+              </h3>
+              <p style={{ color: '#4A5878', fontSize: '13px', lineHeight: 1.65, margin: 0 }}>
+                {p.sub || p.spec}
+              </p>
+              {p.advisor && (
+                <div style={{ marginTop: '12px', fontSize: '11px', color: '#E87722', fontWeight: 600 }}>
+                  Lead: {p.advisor}
+                </div>
+              )}
             </div>
           ))}
         </div>
+
+        {/* Responsive: 2-col at tablet, 1-col at mobile */}
+        <style>{`
+          @media (max-width: 1024px) {
+            #platforms .adv-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 640px) {
+            #platforms .adv-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
       </div>
     </section>
   )
 }
 
-/* ============ 3. SERVICES ============ */
+/* ═══════════════════════════════════════════
+   3. SERVICES — white cards on #FFFFFF
+═══════════════════════════════════════════ */
 function ServicesGrid() {
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
-      <div className="max-w-[1300px] mx-auto">
-        <div className="text-center mb-12 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Strategic Practice</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Strategic Security Expertise</h2>
+    <section style={{ background: '#FFFFFF', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <Eyebrow>Strategic Practice</Eyebrow>
+          <h2 style={{
+            color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+          }}>
+            Strategic Security Expertise
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: '24px',
+          alignItems: 'stretch',
+        }}>
           {services.map((s, i) => (
-            <Link key={s.slug} href={`/cybersecurity-advisory/${s.slug}`} className="glass-premium p-6 block reveal relative overflow-hidden group" style={{ transitionDelay: `${i * 70}ms` }}>
-              <div className="absolute top-0 right-0 w-32 h-32 blur-2xl opacity-0 group-hover:opacity-30 transition-opacity" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
-              <div className="relative">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)' }}>
-                  <Ic name={s.icon} size={22} className="text-[#E87722]"/>
-                </div>
-                <h3 className="text-white text-base font-semibold mb-2 leading-tight">{s.name}</h3>
-                <p className="body-text text-xs mb-4 leading-relaxed">{s.short}</p>
-                <span className="inline-flex items-center text-[10px] uppercase mono tracking-widest px-2 py-0.5 rounded-full" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)', color: '#ffd7b8' }}>
-                  <span className="status-dot !w-1.5 !h-1.5 !mr-1.5 !bg-[#E87722]"/> In Active Practice
+            <Link
+              key={s.slug}
+              href={`/cybersecurity-advisory/${s.slug}`}
+              className="reveal"
+              style={{
+                ...cardBase,
+                textDecoration: 'none',
+                transitionDelay: `${i * 70}ms`,
+              }}
+              onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            >
+              {/* Icon */}
+              <div style={{
+                width: '48px', height: '48px',
+                background: 'rgba(232,119,34,0.12)',
+                borderRadius: '12px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                marginBottom: '20px', flexShrink: 0,
+              }}>
+                <Ic name={s.icon} size={22} color="#E87722" />
+              </div>
+              <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '15px', marginBottom: '10px', lineHeight: 1.3 }}>
+                {s.name}
+              </h3>
+              <p style={{ color: '#4A5878', fontSize: '13px', lineHeight: 1.7, flex: '1 1 auto', margin: 0 }}>
+                {s.short}
+              </p>
+              <div style={{ marginTop: 'auto', paddingTop: '20px' }}>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  color: '#E87722', fontWeight: 600, fontSize: '13px',
+                }}>
+                  Explore <ArrowRight size={13} />
                 </span>
               </div>
             </Link>
           ))}
         </div>
+
+        <style>{`
+          @media (max-width: 1200px) { .svc-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+          @media (max-width: 768px)  { .svc-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+          @media (max-width: 480px)  { .svc-grid { grid-template-columns: 1fr !important; } }
+        `}</style>
       </div>
     </section>
   )
 }
 
-/* ============ 4. TRACK RECORD ============ */
+/* ═══════════════════════════════════════════
+   4. TRACK RECORD — KEEP ON NAVY
+═══════════════════════════════════════════ */
 function TrackRecord() {
   return (
-    <section className="py-16 md:py-20 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(232,119,34,0.04) 50%, transparent 100%)' }}/>
-      </div>
-      <div className="max-w-[1200px] mx-auto relative">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <section style={{ background: '#0B1A46', padding: '80px 24px', position: 'relative', overflow: 'hidden' }}>
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        backgroundImage: 'linear-gradient(rgba(232,119,34,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.05) 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+      }} />
+      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {trackRecord.map((t, i) => (
-            <div key={t.l} className="glass-premium p-7 text-center reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="text-4xl md:text-5xl font-bold text-[#E87722] tracking-tight">{t.n}</div>
-              <div className="text-white/60 text-xs md:text-sm mt-2 uppercase tracking-wider mono">{t.l}</div>
+            <div
+              key={t.l}
+              className="reveal"
+              style={{
+                textAlign: 'center', padding: '40px 24px',
+                borderTop: '3px solid rgba(232,119,34,0.4)',
+                borderRadius: '12px',
+                background: 'rgba(255,255,255,0.04)',
+                transitionDelay: `${i * 80}ms`,
+              }}
+            >
+              <div style={{ fontSize: 'clamp(2.4rem, 4vw, 3rem)', fontWeight: 800, color: '#E87722', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                {t.n}
+              </div>
+              <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: '13px', marginTop: '10px', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 600 }}>
+                {t.l}
+              </div>
             </div>
           ))}
         </div>
+        <style>{`@media (max-width: 640px) { .track-grid { grid-template-columns: repeat(2,1fr) !important; } }`}</style>
       </div>
     </section>
   )
 }
 
-/* ============ 5. PHILOSOPHY ============ */
+/* ═══════════════════════════════════════════
+   5. PHILOSOPHY — KEEP ON NAVY/BLUE
+═══════════════════════════════════════════ */
 function Philosophy() {
   return (
-    <section className="py-20 md:py-28 px-6">
-      <div className="max-w-[1000px] mx-auto">
-        <div className="text-center mb-10 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Philosophy</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Security as a Strategic Enabler</h2>
+    <section style={{
+      background: 'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)',
+      padding: '96px 24px',
+    }}>
+      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <Eyebrow>Philosophy</Eyebrow>
+          <h2 style={{
+            color: '#FFFFFF', fontWeight: 800,
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+          }}>
+            Security as a Strategic Enabler
+          </h2>
         </div>
-        <blockquote className="relative mt-12 reveal">
-          <div className="absolute -top-4 -left-2 text-[#E87722] text-8xl font-serif leading-none opacity-80 select-none">&ldquo;</div>
-          <p className="text-white text-xl md:text-3xl font-medium leading-[1.35] tracking-tight pl-8 md:pl-12">
-            Security architecture is not about building walls. It's about enabling secure access to the right resources, for the right people, at the right time.
+
+        <blockquote className="reveal" style={{ position: 'relative', margin: 0, padding: '0 0 0 48px' }}>
+          <div style={{
+            position: 'absolute', top: '-16px', left: 0,
+            color: '#E87722', fontSize: '80px', fontFamily: 'Georgia, serif',
+            lineHeight: 1, opacity: 0.8, userSelect: 'none',
+          }}>&ldquo;</div>
+          <p style={{
+            color: '#FFFFFF', fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+            fontWeight: 500, lineHeight: 1.45, letterSpacing: '-0.01em', margin: 0,
+          }}>
+            Security architecture is not about building walls. It&apos;s about enabling secure
+            access to the right resources, for the right people, at the right time.
           </p>
-          <footer className="pl-8 md:pl-12 mt-5 mono text-sm text-[#E87722] uppercase tracking-[0.2em]">— Attique Bhatti</footer>
+          <footer style={{
+            marginTop: '20px', color: '#E87722',
+            fontSize: '13px', fontWeight: 700,
+            textTransform: 'uppercase', letterSpacing: '3px',
+          }}>
+            — Attique Bhatti
+          </footer>
         </blockquote>
-        <div className="mt-14 space-y-5 body-text text-base md:text-lg leading-relaxed reveal">
-          <p>For two decades, cybersecurity has been framed as a cost of doing business — an expensive, reactive layer bolted onto the network perimeter. That framing is obsolete. In a cloud-native, identity-driven world, security is the foundation that makes modern business possible.</p>
-          <p>Our Zero Trust approach puts identity and context at the centre of every access decision. We design architectures where users, devices, workloads and data are continuously verified — not trusted by virtue of network location. The result is a security posture that is both stronger and more flexible, enabling rather than constraining the business.</p>
+
+        <div className="reveal" style={{ marginTop: '48px' }}>
+          <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '20px' }}>
+            For two decades, cybersecurity has been framed as a cost of doing business — an expensive,
+            reactive layer bolted onto the network perimeter. That framing is obsolete. In a cloud-native,
+            identity-driven world, security is the foundation that makes modern business possible.
+          </p>
+          <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.8 }}>
+            Our Zero Trust approach puts identity and context at the centre of every access decision.
+            We design architectures where users, devices, workloads and data are continuously verified —
+            not trusted by virtue of network location. The result is a security posture that is both
+            stronger and more flexible, enabling rather than constraining the business.
+          </p>
         </div>
       </div>
     </section>
   )
 }
 
-/* ============ 6. TOOLS ============ */
+/* ═══════════════════════════════════════════
+   6. TOOLS — white cards on #F4F6FA
+═══════════════════════════════════════════ */
 function Tools() {
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
-      <div className="max-w-[1300px] mx-auto">
-        <div className="text-center mb-12 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Interactive Tools</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Engineering-Grade Calculators</h2>
-          <p className="body-text mt-4 max-w-2xl mx-auto">Free tools used by security architects worldwide — hosted on thecyberadviser.com.</p>
+    <section style={{ background: '#F4F6FA', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
+          <Eyebrow>Interactive Tools</Eyebrow>
+          <h2 style={{
+            color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
+          }}>
+            Engineering-Grade Calculators
+          </h2>
+          <p style={{ color: '#4A5878', fontSize: '17px', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
+            Free tools used by security architects worldwide — hosted on thecyberadviser.com.
+          </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {tools.map((t, i) => (
-            <a key={t.name} href={t.href} target="_blank" rel="noopener" className="glass-premium p-7 block reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)' }}>
-                  <Ic name={t.icon} size={22} className="text-[#E87722]"/>
+            <a
+              key={t.name}
+              href={t.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="reveal"
+              style={{
+                ...cardBase,
+                textDecoration: 'none',
+                transitionDelay: `${i * 80}ms`,
+              }}
+              onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            >
+              {/* Icon row */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+                <div style={{
+                  width: '48px', height: '48px', background: 'rgba(232,119,34,0.12)',
+                  borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Ic name={t.icon} size={22} color="#E87722" />
                 </div>
-                <Icons.ExternalLink size={14} className="text-white/40 group-hover:text-[#E87722] transition-colors"/>
+                <ExternalLink size={14} color="#9CA3AF" />
               </div>
-              <h3 className="text-white text-lg font-semibold mb-2">{t.name}</h3>
-              <p className="body-text text-sm leading-relaxed mb-5">{t.desc}</p>
-              <span className="mono text-xs text-[#E87722] uppercase tracking-wider inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">Launch Tool <Icons.ArrowUpRight size={14}/></span>
+              <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '17px', marginBottom: '12px', lineHeight: 1.3 }}>
+                {t.name}
+              </h3>
+              <p style={{ color: '#4A5878', fontSize: '14px', lineHeight: 1.7, flex: '1 1 auto', margin: 0 }}>
+                {t.desc}
+              </p>
+              <div style={{ marginTop: 'auto', paddingTop: '20px' }}>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  color: '#E87722', fontWeight: 700, fontSize: '13px',
+                  textTransform: 'uppercase', letterSpacing: '1px',
+                }}>
+                  Launch Tool <ArrowUpRight size={14} />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <style>{`@media (max-width: 768px) { .tools-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   7. KNOWLEDGE BASE — white cards on #FFFFFF
+═══════════════════════════════════════════ */
+function KnowledgeBase() {
+  const [filter, setFilter] = useState('All')
+  const cats = ['All', 'Palo Alto', 'Check Point', 'Fortinet', 'Architecture']
+  const filtered = filter === 'All' ? kbArticles.slice(0, 6) : kbArticles.filter((a) => a.category === filter).slice(0, 6)
+
+  return (
+    <section style={{ background: '#FFFFFF', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <Eyebrow>Knowledge Base</Eyebrow>
+          <h2 style={{
+            color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+          }}>
+            Field-Tested Insights
+          </h2>
+        </div>
+
+        {/* Filter pills */}
+        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '48px' }}>
+          {cats.map((c) => (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              style={{
+                padding: '7px 18px', borderRadius: '20px', fontSize: '12px',
+                fontWeight: 600, cursor: 'pointer', letterSpacing: '0.5px',
+                background: filter === c ? '#E87722' : 'transparent',
+                color: filter === c ? '#FFFFFF' : '#4A5878',
+                border: filter === c ? '1px solid #E87722' : '1px solid #D1D5DB',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+          {filtered.map((a, i) => (
+            <article
+              key={a.title}
+              className="reveal"
+              style={{ ...cardBase, transitionDelay: `${i * 60}ms`, cursor: 'pointer' }}
+              onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{
+                  fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
+                  letterSpacing: '1px', padding: '3px 10px', borderRadius: '20px',
+                  background: 'rgba(232,119,34,0.1)', color: '#E87722',
+                  border: '1px solid rgba(232,119,34,0.3)',
+                }}>{a.category}</span>
+                <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 600 }}>{a.readTime}</span>
+              </div>
+              <h3 style={{
+                color: '#0B1A46', fontWeight: 700, fontSize: '15px',
+                lineHeight: 1.45, flex: '1 1 auto', marginBottom: '20px',
+              }}>
+                {a.title}
+              </h3>
+              <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                borderTop: '1px solid #E8EDF5', paddingTop: '16px', marginTop: 'auto',
+              }}>
+                <span style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>{a.date}</span>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '5px',
+                  color: '#E87722', fontWeight: 700, fontSize: '12px',
+                }}>
+                  Read <ArrowRight size={12} />
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="reveal" style={{ textAlign: 'center', marginTop: '48px' }}>
+          <Link
+            href="/cybersecurity-advisory/knowledge-base"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              color: '#E87722', fontWeight: 700, fontSize: '14px',
+              padding: '10px 24px', borderRadius: '24px',
+              border: '2px solid rgba(232,119,34,0.5)',
+              background: 'rgba(232,119,34,0.05)',
+              textDecoration: 'none', transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#E87722'; e.currentTarget.style.color = '#fff' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(232,119,34,0.05)'; e.currentTarget.style.color = '#E87722' }}
+          >
+            Browse Full Knowledge Base <ArrowRight size={15} />
+          </Link>
+        </div>
+
+        <style>{`@media (max-width: 900px) { .kb-grid { grid-template-columns: repeat(2,1fr) !important; } } @media (max-width: 600px) { .kb-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   8. CASE STUDIES — white cards on #F4F6FA
+═══════════════════════════════════════════ */
+function CaseStudies() {
+  const [filter, setFilter] = useState('All')
+  const cats = ['All', 'Prisma Access', 'Prisma SD-WAN', 'Cortex Operations', 'Network Security']
+  const filtered = filter === 'All' ? caseStudies : caseStudies.filter((c) => c.tag === filter)
+
+  return (
+    <section style={{ background: '#F4F6FA', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <Eyebrow>Case Studies</Eyebrow>
+          <h2 style={{
+            color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em', lineHeight: 1.15,
+          }}>
+            Proven at Enterprise Scale
+          </h2>
+        </div>
+
+        {/* Filter pills */}
+        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center', marginBottom: '48px' }}>
+          {cats.map((c) => (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              style={{
+                padding: '7px 18px', borderRadius: '20px', fontSize: '12px',
+                fontWeight: 600, cursor: 'pointer', letterSpacing: '0.5px',
+                background: filter === c ? '#E87722' : 'transparent',
+                color: filter === c ? '#FFFFFF' : '#4A5878',
+                border: filter === c ? '1px solid #E87722' : '1px solid #D1D5DB',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+          {filtered.map((c, i) => (
+            <div
+              key={c.title}
+              className="reveal"
+              style={{
+                background: '#FFFFFF',
+                borderTop: '3px solid #E87722',
+                borderRadius: '16px',
+                boxShadow: '0 8px 32px rgba(10,26,70,0.18)',
+                overflow: 'hidden',
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                transitionDelay: `${i * 80}ms`,
+              }}
+              onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', height: '220px', overflow: 'hidden', flexShrink: 0 }}>
+                <img
+                  src={c.img}
+                  alt={`${c.title} — case study`}
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 30%, rgba(11,26,70,0.6) 100%)' }} />
+                <span style={{
+                  position: 'absolute', top: '16px', left: '16px',
+                  fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
+                  letterSpacing: '1px', padding: '4px 10px', borderRadius: '20px',
+                  background: '#E87722', color: '#fff',
+                }}>{c.tag}</span>
+                <div style={{
+                  position: 'absolute', bottom: '12px', right: '16px',
+                  display: 'flex', gap: '12px', fontSize: '11px', color: 'rgba(255,255,255,0.85)',
+                  fontWeight: 600,
+                }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Users size={12} /> {c.users}
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Globe size={12} /> {c.region}
+                  </span>
+                </div>
+              </div>
+              {/* Body */}
+              <div style={{ padding: '28px 28px 32px', flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+                <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '18px', marginBottom: '10px', lineHeight: 1.3 }}>
+                  {c.title}
+                </h3>
+                <p style={{ color: '#4A5878', fontSize: '14px', lineHeight: 1.7, margin: 0, flex: '1 1 auto' }}>
+                  {c.outcome}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <style>{`@media (max-width: 768px) { .cs-grid { grid-template-columns: 1fr !important; } }`}</style>
+      </div>
+    </section>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   9. BOTTOM CTA — navy→blue gradient
+═══════════════════════════════════════════ */
+function BottomCTA() {
+  return (
+    <section style={{
+      background: 'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)',
+      borderTop: '3px solid #E87722',
+      padding: '96px 24px',
+    }}>
+      <div className="reveal" style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+        <Eyebrow>Next Step</Eyebrow>
+        <h2 style={{
+          color: '#FFFFFF', fontWeight: 800,
+          fontSize: 'clamp(2rem, 4vw, 3rem)',
+          letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
+        }}>
+          Schedule a Confidential Consultation
+        </h2>
+        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto 40px' }}>
+          Thirty minutes with a senior advisor. No sales pitch, no obligation. Just direct,
+          candid guidance on your most pressing security challenges.
+        </p>
+
+        {/* Booking widget */}
+        <div className="reveal" style={{
+          background: 'rgba(255,255,255,0.07)',
+          backdropFilter: 'blur(14px)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderRadius: '16px',
+          padding: '40px',
+          maxWidth: '560px',
+          margin: '0 auto 40px',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '28px' }}>
+            <div style={{
+              width: '48px', height: '48px', borderRadius: '12px',
+              background: 'rgba(232,119,34,0.15)', border: '1px solid rgba(232,119,34,0.4)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <CalendarDays size={22} color="#E87722" />
+            </div>
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ color: '#FFFFFF', fontWeight: 600, fontSize: '16px' }}>30-minute consultation</div>
+              <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '12px', marginTop: '2px' }}>Google Meet · Mutual NDA available</div>
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginBottom: '24px' }}>
+            {['Tue 3:00 PM', 'Wed 10:00 AM', 'Thu 2:30 PM'].map((slot) => (
+              <div key={slot} style={{
+                padding: '10px 6px', borderRadius: '10px', textAlign: 'center',
+                fontSize: '12px', color: 'rgba(255,255,255,0.75)', fontWeight: 600,
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+              }}>{slot}</div>
+            ))}
+          </div>
+          <Link href="/contact" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+            Book a Call <ArrowRight size={16} />
+          </Link>
+        </div>
+
+        {/* Trust chips */}
+        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center', marginBottom: '40px' }}>
+          {[
+            { icon: Shield, label: 'NDA Available' },
+            { icon: Icons.Lock, label: 'Confidential' },
+            { icon: Globe, label: 'Canada & UAE' },
+          ].map(({ icon: Icon, label }) => (
+            <span key={label} style={{ display: 'flex', alignItems: 'center', gap: '7px', color: 'rgba(255,255,255,0.65)', fontSize: '13px', fontWeight: 600 }}>
+              <Icon size={14} color="rgba(255,255,255,0.5)" /> {label}
+            </span>
+          ))}
+        </div>
+
+        {/* Contact line */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px', justifyContent: 'center', fontSize: '14px', color: 'rgba(255,255,255,0.75)' }}>
+          {[
+            { href: 'tel:+971506828290', icon: Phone, label: '+971 50 6828290' },
+            { href: 'mailto:info@ipcare.ae', icon: Mail,  label: 'info@ipcare.ae' },
+            { href: 'https://www.ipcare.ae', icon: Globe, label: 'www.ipcare.ae', external: true },
+          ].map(({ href, icon: Icon, label, external }) => (
+            <a
+              key={label}
+              href={href}
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              style={{ color: 'rgba(255,255,255,0.75)', display: 'flex', alignItems: 'center', gap: '7px', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)' }}
+            >
+              <Icon size={14} /> {label}
             </a>
           ))}
         </div>
@@ -278,130 +903,9 @@ function Tools() {
   )
 }
 
-/* ============ 7. KNOWLEDGE BASE ============ */
-function KnowledgeBase() {
-  const [filter, setFilter] = useState('All')
-  const cats = ['All', 'Palo Alto', 'Check Point', 'Fortinet', 'Architecture']
-  const filtered = filter === 'All' ? kbArticles.slice(0, 6) : kbArticles.filter(a => a.category === filter).slice(0, 6)
-  return (
-    <section className="py-20 md:py-24 px-6">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-10 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Knowledge Base</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Field-Tested Insights</h2>
-        </div>
-        <div className="flex justify-center flex-wrap gap-2 mb-10 reveal">
-          {cats.map(c => (
-            <button key={c} onClick={() => setFilter(c)} className={`glass-pill mono !text-[11px] !uppercase !tracking-widest ${filter === c ? 'active' : ''}`}>{c}</button>
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((a, i) => (
-            <article key={a.title} className="glass-premium p-6 reveal group cursor-pointer" style={{ transitionDelay: `${i * 60}ms` }}>
-              <div className="flex items-center justify-between mb-4">
-                <span className="mono text-[10px] uppercase tracking-widest px-2 py-1 rounded-full" style={{ background: 'rgba(232,119,34,0.1)', border: '1px solid rgba(232,119,34,0.3)', color: '#ffd7b8' }}>{a.category}</span>
-                <span className="mono text-[10px] text-white/50">{a.readTime}</span>
-              </div>
-              <h3 className="text-white font-semibold text-base md:text-lg leading-snug mb-6 group-hover:text-[#E87722] transition-colors">{a.title}</h3>
-              <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                <span className="mono text-[10px] text-white/50 uppercase tracking-wider">{a.date}</span>
-                <span className="inline-flex items-center gap-1 text-[#E87722] text-xs font-semibold px-2.5 py-1 rounded-md border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2 transition-all">Read <Icons.ArrowRight size={12}/></span>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="text-center mt-10 reveal">
-          <Link href="/cybersecurity-advisory/knowledge-base" className="btn-ghost">Browse Full Knowledge Base <Icons.ArrowRight size={16}/></Link>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ============ 8. CASE STUDIES ============ */
-function CaseStudies() {
-  const [filter, setFilter] = useState('All')
-  const cats = ['All', 'Prisma Access', 'Prisma SD-WAN', 'Cortex Operations', 'Network Security']
-  const filtered = filter === 'All' ? caseStudies : caseStudies.filter(c => c.tag === filter)
-  return (
-    <section className="py-20 md:py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)' }}>
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-10 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Case Studies</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">Proven at Enterprise Scale</h2>
-        </div>
-        <div className="flex justify-center flex-wrap gap-2 mb-10 reveal">
-          {cats.map(c => (
-            <button key={c} onClick={() => setFilter(c)} className={`glass-pill mono !text-[11px] !uppercase !tracking-widest ${filter === c ? 'active' : ''}`}>{c}</button>
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 gap-5">
-          {filtered.map((c, i) => (
-            <div key={c.title} className="glass-premium overflow-hidden reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="relative h-56 overflow-hidden">
-                <img src={c.img} alt={c.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, rgba(7,16,42,0.8) 100%)' }}/>
-                <span className="absolute top-4 left-4 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full" style={{ background: '#E87722', color: '#fff' }}>{c.tag}</span>
-                <div className="absolute bottom-4 right-4 flex gap-3 mono text-[11px] text-white/80">
-                  <span className="flex items-center gap-1"><Icons.Users size={12}/> {c.users}</span>
-                  <span className="flex items-center gap-1"><Icons.Globe2 size={12}/> {c.region}</span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-white text-xl font-bold mb-2">{c.title}</h3>
-                <p className="body-text text-sm leading-relaxed">{c.outcome}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ============ 9. BOTTOM CTA ============ */
-function BottomCTA() {
-  return (
-    <section className="py-20 md:py-28 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 premium-grid"/>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-3xl opacity-25" style={{ background: 'radial-gradient(ellipse, #E87722 0%, transparent 60%)' }}/>
-      </div>
-      <div className="max-w-[1000px] mx-auto relative text-center">
-        <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Next Step</div>
-        <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight mb-5 reveal">Schedule a Confidential Consultation</h2>
-        <p className="body-text text-base md:text-lg max-w-xl mx-auto mb-10 reveal">Thirty minutes with a senior advisor. No sales pitch, no obligation. Just direct, candid guidance on your most pressing security challenges.</p>
-
-        {/* Calendly placeholder */}
-        <div className="glass-premium p-8 md:p-10 max-w-2xl mx-auto mb-8 reveal">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)' }}>
-              <Icons.CalendarDays size={22} className="text-[#E87722]"/>
-            </div>
-            <div className="text-left">
-              <div className="text-white font-semibold">30-minute consultation</div>
-              <div className="mono text-xs text-white/60">Google Meet · Mutual NDA available</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-2 mb-6">
-            {['Tue 3:00 PM', 'Wed 10:00 AM', 'Thu 2:30 PM'].map((slot, i) => (
-              <div key={i} className="px-3 py-3 rounded-lg text-center mono text-xs text-white/80" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>{slot}</div>
-            ))}
-          </div>
-          <Link href="/contact" className="btn-primary w-full justify-center">Book a Call <Icons.ArrowRight size={16}/></Link>
-        </div>
-
-        <div className="flex flex-wrap gap-4 justify-center text-white/50 text-xs mono uppercase tracking-wider reveal">
-          <span className="flex items-center gap-1.5"><Icons.Shield size={12}/> NDA Available</span>
-          <span className="flex items-center gap-1.5"><Icons.Lock size={12}/> Confidential</span>
-          <span className="flex items-center gap-1.5"><Icons.Globe2 size={12}/> Canada & UAE</span>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ============ MAIN ============ */
+/* ═══════════════════════════════════════════
+   ROOT EXPORT
+═══════════════════════════════════════════ */
 export default function AdvisoryClient() {
   useReveal()
   return (

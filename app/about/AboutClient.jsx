@@ -525,25 +525,27 @@ function Team() {
     {
       initials: 'AB',
       name: 'Attique Bhatti',
-      role: 'Founder & CEO',
-      certs: 'CISSP · PMP · CCIE',
-      bio: '20+ years leading enterprise IT, cybersecurity, and infrastructure engagements across UAE, Qatar, and Saudi Arabia.',
+      role: 'Founder & CEO',           // IP Care role kept; see Cyber Advisory for advisory title
+      certs: 'PCNSE · CISSP · AWS Security · Azure Security · GIAC GCFA',
+      bio: 'Enterprise cybersecurity architect with 15+ years advising Fortune 500 and government clients on Zero Trust, SASE, and cloud security transformation across Canada, UAE, and globally.',
       stats: [
-        { n: '20+ Yrs', l: 'Experience' },
-        { n: '1000+', l: 'Projects' },
-        { n: '50+', l: 'Certifications' },
+        { n: '15+',   l: 'Years' },
+        { n: '100M+', l: 'Users Protected' },
+        { n: '50+',   l: 'Engagements' },
       ],
     },
     {
       initials: 'TA',
       name: 'Tanveer Ahmed',
-      role: 'IT Specialist, UAE & Canada',
-      certs: 'CCNP · AWS · Prisma',
-      bio: 'Cloud migration, network architecture, and managed services across IP Care\'s UAE and Canadian operations.',
+      role: 'Independent Network Security Consultant',
+      subRole: 'Prisma Access & SASE Specialist — Milton, Ontario, Canada',
+      certs: 'PCNSE · PCCSA · CNSS · AlgoSec',
+      bio: 'Prisma Access and SASE specialist with 25+ years of network security experience. CCIE-certified practitioner focused on ZTNA, CASB, SWG, and DLP deployments across North America and UAE.',
+      specializations: ['SASE', 'ZTNA', 'CASB', 'DLP', 'SWG', 'Prisma Access'],
       stats: [
-        { n: '10+ Yrs', l: 'Experience' },
-        { n: 'CCOE', l: 'Cloud Centre' },
-        { n: 'UAE/CA', l: 'Regions' },
+        { n: '25+',    l: 'Years' },
+        { n: 'CCIE',   l: 'Certified' },
+        { n: 'Prisma', l: 'Access SME' },
       ],
     },
   ]
@@ -593,12 +595,28 @@ function Team() {
               <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '20px', marginBottom: '4px' }}>
                 {m.name}
               </h3>
-              <div style={{ color: '#E87722', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', marginBottom: '6px' }}>
+              <div style={{ color: '#E87722', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.2px', marginBottom: m.subRole ? '3px' : '6px' }}>
                 {m.role}
               </div>
-              <div style={{ color: '#1E3A8A', fontSize: '13px', fontWeight: 600, marginBottom: '16px' }}>
+              {m.subRole && (
+                <div style={{ color: '#4A5878', fontSize: '12px', marginBottom: '8px' }}>
+                  {m.subRole}
+                </div>
+              )}
+              <div style={{ color: '#1E3A8A', fontSize: '13px', fontWeight: 600, marginBottom: '14px' }}>
                 {m.certs}
               </div>
+              {m.specializations && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', justifyContent: 'center', marginBottom: '14px' }}>
+                  {m.specializations.map((s) => (
+                    <span key={s} style={{
+                      fontSize: '11px', padding: '3px 8px', borderRadius: '6px', fontWeight: 600,
+                      background: 'rgba(232,119,34,0.1)', color: '#E87722',
+                      border: '1px solid rgba(232,119,34,0.25)',
+                    }}>{s}</span>
+                  ))}
+                </div>
+              )}
               <p style={{ color: '#4B5563', fontSize: '14px', lineHeight: 1.65, marginBottom: '24px' }}>
                 {m.bio}
               </p>
