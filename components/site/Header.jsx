@@ -86,6 +86,16 @@ export default function Header() {
     return pathname === href || pathname.startsWith(href + '/')
   }
 
+  // Close all menus whenever the route changes (App Router keeps Header mounted
+  // across navigations — without this, a menu left open on page A stays open on page B).
+  useEffect(() => {
+    setServicesOpen(false)
+    setEventITOpen(false)
+    setMobileOpen(false)
+    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
+    if (eventITCloseTimer.current) clearTimeout(eventITCloseTimer.current)
+  }, [pathname])
+
   useEffect(() => {
     const measure = () => {
       if (navRef.current) {
