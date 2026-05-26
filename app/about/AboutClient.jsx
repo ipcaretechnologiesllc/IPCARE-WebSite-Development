@@ -525,7 +525,8 @@ function Team() {
     {
       initials: 'AB',
       name: 'Attique Bhatti',
-      role: 'Founder & CEO',           // IP Care role kept; see Cyber Advisory for advisory title
+      role: 'Enterprise Security Consultant',
+      subRole: 'The Cyber Adviser',
       certs: 'PCNSE · CISSP · AWS Security · Azure Security · GIAC GCFA',
       bio: 'Enterprise cybersecurity architect with 15+ years advising Fortune 500 and government clients on Zero Trust, SASE, and cloud security transformation across Canada, UAE, and globally.',
       stats: [
