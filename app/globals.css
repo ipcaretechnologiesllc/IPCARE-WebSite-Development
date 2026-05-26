@@ -532,3 +532,93 @@ body {
 
 /* Stat number */
 .stat-num { color: #E87722; font-weight: 800; font-feature-settings: 'tnum'; }
+
+/* ================================================================
+   ABOUT PAGE — OVERRIDE LAYER
+   These rules use !important to beat both Tailwind base resets
+   and any inline-style declarations on the same elements.
+   Class names are applied directly in AboutClient.jsx.
+   ================================================================ */
+
+/* FIX 1 — Hero section */
+section.about-hero {
+  min-height: 560px !important;
+  padding: 140px 24px 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+section.about-hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.2rem) !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 20px !important;
+}
+.hero-sub,
+section.about-hero p.hero-sub {
+  font-size: 1.2rem !important;
+  color: rgba(255,255,255,0.78) !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  line-height: 1.7 !important;
+}
+.hero-inner {
+  text-align: center !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+}
+
+/* FIX 2 — All eyebrow labels */
+.section-eyebrow,
+span.section-eyebrow,
+p.section-eyebrow {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  color: #E87722 !important;
+  display: block !important;
+  margin-bottom: 16px !important;
+}
+
+/* FIX 3 — All section H2 headings */
+h2.section-title {
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+}
+h2.section-title.section-title-white {
+  color: #FFFFFF !important;
+}
+
+/* FIX 4 — Mission & Vision glass cards */
+.mv-card {
+  background: rgba(255,255,255,0.09) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  border-top: 3px solid #E87722 !important;
+  border-radius: 16px !important;
+  padding: 44px 40px !important;
+}
+.mv-card h3 {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 14px !important;
+}
+.mv-card p {
+  font-size: 1rem !important;
+  color: rgba(255,255,255,0.78) !important;
+  line-height: 1.85 !important;
+}
+
+/* FIX 5 — Section padding (non-hero, non-stats sections) */
+section.about-section {
+  padding-top: 96px !important;
+  padding-bottom: 96px !important;
+}
