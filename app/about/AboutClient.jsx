@@ -20,15 +20,16 @@ function useReveal() {
 }
 
 /* ── Reusable eyebrow label ── */
-function Eyebrow({ children, dark = false }) {
+function Eyebrow({ children }) {
   return (
     <p style={{
-      fontSize: '11px',
+      fontSize: '13px',
       fontWeight: 700,
       color: '#E87722',
-      letterSpacing: '3px',
+      letterSpacing: '4px',
       textTransform: 'uppercase',
-      marginBottom: '14px',
+      display: 'block',
+      marginBottom: '16px',
     }}>
       {children}
     </p>
@@ -45,8 +46,8 @@ function Hero() {
       borderBottom: '3px solid #E87722',
       position: 'relative',
       overflow: 'hidden',
-      padding: '110px 24px 88px',
-      minHeight: '520px',
+      padding: '140px 24px 100px',
+      minHeight: '560px',
       display: 'flex',
       alignItems: 'center',
     }}>
@@ -72,7 +73,7 @@ function Hero() {
       >
         <Eyebrow>Our Story</Eyebrow>
         <h1 style={{
-          fontSize: 'clamp(32px, 5vw, 62px)',
+          fontSize: 'clamp(2.8rem, 5vw, 4.2rem)',
           fontWeight: 800,
           color: '#FFFFFF',
           lineHeight: 1.1,
@@ -81,10 +82,10 @@ function Hero() {
           About IP Care Technologies
         </h1>
         <p style={{
-          fontSize: 'clamp(16px, 2vw, 20px)',
-          color: 'rgba(255,255,255,0.78)',
+          fontSize: '1.2rem',
+          color: 'rgba(255,255,255,0.75)',
           lineHeight: 1.75,
-          maxWidth: '680px',
+          maxWidth: '600px',
           margin: '0 auto',
         }}>
           Two decades of enterprise IT across UAE and Canada — 500+ projects, 200+ clients, one unwavering standard.
@@ -112,10 +113,11 @@ function Story() {
         <div className="reveal">
           <Eyebrow>Powering Business Since 2003</Eyebrow>
           <h2 style={{
-            fontSize: 'clamp(28px, 3.5vw, 44px)',
-            fontWeight: 700,
+            fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+            fontWeight: 800,
             color: '#0B1A46',
-            lineHeight: 1.2,
+            letterSpacing: '-0.02em',
+            lineHeight: 1.15,
             marginBottom: '28px',
           }}>
             We started with a simple promise.
@@ -190,7 +192,7 @@ function StatsBand() {
     { n: '24/7', l: 'Support' },
   ]
   return (
-    <section style={{ background: '#0B1A46', borderTop: '3px solid #E87722', padding: '64px 24px' }}>
+    <section style={{ background: '#0B1A46', borderTop: '3px solid #E87722', padding: '72px 24px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{
           display: 'grid',
@@ -257,13 +259,13 @@ function Timeline() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
           <Eyebrow>Our Journey</Eyebrow>
-          <h2 style={{ color: '#0B1A46', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)' }}>
+          <h2 style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             From 2003 to Today
           </h2>
         </div>
 
         <div style={{ position: 'relative' }}>
-          {/* Vertical center line — desktop only */}
+          {/* Vertical center line — desktop only, bisects the 48px center column */}
           {!isMobile && (
             <div aria-hidden="true" style={{
               position: 'absolute',
@@ -271,7 +273,8 @@ function Timeline() {
               top: 0,
               bottom: 0,
               width: '3px',
-              background: 'linear-gradient(to bottom, #E87722, rgba(232,119,34,0.5))',
+              opacity: 1,
+              background: 'linear-gradient(to bottom, #E87722, rgba(232,119,34,0.15))',
               transform: 'translateX(-50%)',
               borderRadius: '3px',
             }} />
@@ -279,71 +282,68 @@ function Timeline() {
 
           {MILESTONES.map((m, i) => {
             const isLeft = i % 2 === 0
+
+            /* Card markup — identical for both sides */
+            const card = (
+              <div
+                style={{
+                  background: '#FFFFFF',
+                  borderTop: '3px solid #E87722',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 32px rgba(10,26,70,0.10)',
+                  padding: '24px 28px',
+                  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 16px 40px rgba(10,26,70,0.16)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.10)'
+                }}
+              >
+                <div style={{ color: '#E87722', fontWeight: 700, fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '6px' }}>
+                  {m.year}
+                </div>
+                <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '1rem', marginBottom: '6px', lineHeight: 1.3 }}>
+                  {m.title}
+                </h3>
+                <p style={{ color: '#8B9BB4', fontSize: '0.88rem', lineHeight: 1.6 }}>
+                  {m.desc}
+                </p>
+              </div>
+            )
+
             return (
               <div
                 key={m.year}
                 className="reveal"
                 style={{
                   position: 'relative',
-                  display: 'flex',
-                  justifyContent: isMobile ? 'flex-start' : (isLeft ? 'flex-start' : 'flex-end'),
+                  display: isMobile ? 'block' : 'grid',
+                  gridTemplateColumns: isMobile ? undefined : '1fr 48px 1fr',
+                  alignItems: 'start',
                   marginBottom: '48px',
                   transitionDelay: `${i * 70}ms`,
                 }}
               >
-                {/* Center dot */}
-                {!isMobile && (
-                  <div aria-hidden="true" style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '26px',
-                    transform: 'translateX(-50%)',
-                    width: '16px',
-                    height: '16px',
-                    borderRadius: '50%',
-                    background: '#E87722',
-                    border: '3px solid #F3F4F6',
-                    boxShadow: '0 0 0 4px rgba(232,119,34,0.25)',
-                    zIndex: 2,
-                  }} />
+                {isMobile ? card : (
+                  <>
+                    {/* Left column */}
+                    <div>{isLeft ? card : null}</div>
+                    {/* Center column — dot */}
+                    <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '22px', position: 'relative', zIndex: 2 }}>
+                      <div aria-hidden="true" style={{
+                        width: '16px', height: '16px', borderRadius: '50%', flexShrink: 0,
+                        background: '#E87722', border: '3px solid #F3F4F6',
+                        boxShadow: '0 0 0 4px rgba(232,119,34,0.25)',
+                      }} />
+                    </div>
+                    {/* Right column */}
+                    <div>{!isLeft ? card : null}</div>
+                  </>
                 )}
-
-                {/* Card */}
-                <div
-                  style={{
-                    width: isMobile ? '100%' : 'calc(50% - 52px)',
-                    background: '#FFFFFF',
-                    borderTop: '3px solid #E87722',
-                    borderRadius: '12px',
-                    boxShadow: '0 8px 32px rgba(10,26,70,0.10)',
-                    padding: '24px 28px',
-                    transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)'
-                    e.currentTarget.style.boxShadow = '0 16px 40px rgba(10,26,70,0.16)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.10)'
-                  }}
-                >
-                  <div style={{
-                    color: '#E87722',
-                    fontWeight: 700,
-                    fontSize: '0.78rem',
-                    letterSpacing: '1.5px',
-                    marginBottom: '6px',
-                  }}>
-                    {m.year}
-                  </div>
-                  <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '1rem', marginBottom: '8px', lineHeight: 1.3 }}>
-                    {m.title}
-                  </h3>
-                  <p style={{ color: '#4B5563', fontSize: '0.88rem', lineHeight: 1.65 }}>
-                    {m.desc}
-                  </p>
-                </div>
               </div>
             )
           })}
@@ -374,7 +374,7 @@ function MissionVision() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>What Drives Us</Eyebrow>
-          <h2 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)' }}>
+          <h2 style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Mission &amp; Vision
           </h2>
         </div>
@@ -385,10 +385,10 @@ function MissionVision() {
               className="reveal"
               style={{
                 transitionDelay: `${i * 100}ms`,
-                background: 'rgba(255,255,255,0.08)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.15)',
+                background: 'rgba(255,255,255,0.09)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.16)',
                 borderTop: '3px solid #E87722',
                 borderRadius: '16px',
                 padding: '44px 40px',
@@ -413,10 +413,10 @@ function MissionVision() {
               }}>
                 {card.label}
               </div>
-              <h3 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.4rem', lineHeight: 1.3, marginBottom: '16px' }}>
+              <h3 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.4rem', lineHeight: 1.3, marginBottom: '14px' }}>
                 {card.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1rem', lineHeight: 1.8 }}>
+              <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1rem', lineHeight: 1.85 }}>
                 {card.body}
               </p>
             </div>
@@ -439,7 +439,7 @@ function TwoRegions() {
     padding: '40px',
     transition: 'transform 0.25s ease, box-shadow 0.25s ease',
   }
-  const rowItem = { display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '12px', color: '#4B5563', fontSize: '15px' }
+  const rowItem = { display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '10px', color: '#4A5878', fontSize: '0.92rem' }
   const iconStyle = { color: '#E87722', flexShrink: 0, marginTop: '2px' }
 
   return (
@@ -447,7 +447,7 @@ function TwoRegions() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>Where We Operate</Eyebrow>
-          <h2 style={{ color: '#0B1A46', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)', marginBottom: '16px' }}>
+          <h2 style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
             Two Regions. One Standard.
           </h2>
           <p style={{ color: '#4B5563', fontSize: '17px', lineHeight: 1.75, maxWidth: '640px', margin: '0 auto' }}>
@@ -464,10 +464,10 @@ function TwoRegions() {
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }}
           >
-            <div style={{ fontSize: '2.8rem', marginBottom: '20px' }}>🇦🇪</div>
+            <div style={{ fontSize: '2.8rem', display: 'block', marginBottom: '18px' }}>🇦🇪</div>
             <div style={{ borderBottom: '1px solid #EEF0F5', paddingBottom: '20px', marginBottom: '20px' }}>
               <h3 style={{ color: '#0B1A46', fontWeight: 800, fontSize: '1.35rem', marginBottom: '6px' }}>Abu Dhabi</h3>
-              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '20px' }}>
                 Headquarters
               </div>
             </div>
@@ -492,10 +492,10 @@ function TwoRegions() {
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(10,26,70,0.26)' }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(10,26,70,0.18)' }}
           >
-            <div style={{ fontSize: '2.8rem', marginBottom: '20px' }}>🇨🇦</div>
+            <div style={{ fontSize: '2.8rem', display: 'block', marginBottom: '18px' }}>🇨🇦</div>
             <div style={{ borderBottom: '1px solid #EEF0F5', paddingBottom: '20px', marginBottom: '20px' }}>
               <h3 style={{ color: '#0B1A46', fontWeight: 800, fontSize: '1.35rem', marginBottom: '6px' }}>Toronto, Canada</h3>
-              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+              <div style={{ color: '#E87722', fontWeight: 600, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '20px' }}>
                 North America Operations
               </div>
             </div>
@@ -563,7 +563,7 @@ function Team() {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>The People Behind the Work</Eyebrow>
-          <h2 style={{ color: '#0B1A46', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)' }}>
+          <h2 style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             The Team
           </h2>
         </div>
@@ -637,7 +637,7 @@ function Certifications() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
           <Eyebrow>Industry Recognised</Eyebrow>
-          <h2 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)', marginBottom: '16px' }}>
+          <h2 style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
             Certified Across the Industry
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
@@ -646,7 +646,7 @@ function Certifications() {
           </p>
         </div>
 
-        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+        <div className="reveal" style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', justifyContent: 'center' }}>
           {CERTS.map((c, i) => (
             <span
               key={c}
@@ -657,12 +657,12 @@ function Certifications() {
                 background: 'rgba(255,255,255,0.06)',
                 color: 'rgba(255,255,255,0.9)',
                 fontSize: '0.95rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 cursor: 'default',
                 transition: 'background 0.2s ease, border-color 0.2s ease, color 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(232,119,34,0.1)'
+                e.currentTarget.style.background = 'rgba(232,119,34,0.12)'
                 e.currentTarget.style.borderColor = '#E87722'
                 e.currentTarget.style.color = '#FFFFFF'
               }}
@@ -699,7 +699,7 @@ function OurValues() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>How We Work</Eyebrow>
-          <h2 style={{ color: '#0B1A46', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)' }}>
+          <h2 style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Our Values
           </h2>
         </div>
@@ -725,7 +725,7 @@ function OurValues() {
               <h3 style={{ color: '#0B1A46', fontWeight: 700, fontSize: '1.1rem', marginBottom: '10px' }}>
                 {v.title}
               </h3>
-              <p style={{ color: '#4B5563', fontSize: '15px', lineHeight: 1.7 }}>
+              <p style={{ color: '#4A5878', fontSize: '0.9rem', lineHeight: 1.7 }}>
                 {v.desc}
               </p>
             </div>
@@ -750,7 +750,7 @@ function CTAStrip() {
         className="reveal"
         style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}
       >
-        <h2 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: 'clamp(28px, 3.5vw, 44px)', marginBottom: '16px' }}>
+        <h2 style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
           Ready to Work with Us?
         </h2>
         <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', lineHeight: 1.75, marginBottom: '36px' }}>
@@ -770,9 +770,9 @@ function CTAStrip() {
 
         {/* Contact details */}
         <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: '32px',
+          display: 'flex', flexWrap: 'wrap', gap: '36px',
           justifyContent: 'center', fontSize: '0.95rem',
-          color: 'rgba(255,255,255,0.8)', marginTop: '24px',
+          color: 'rgba(255,255,255,0.8)', marginTop: '28px',
         }}>
           {[
             { href: 'tel:+971506828290', icon: Phone, label: '+971 50 6828290' },
