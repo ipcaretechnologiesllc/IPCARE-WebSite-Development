@@ -148,27 +148,27 @@ function EventsPortfolio() {
                     'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)'
                 }}
               />
-              {/* Dark gradient overlay */}
+              {/* Dark gradient overlay — tall enough for two-line titles */}
               <div
                 className="absolute inset-0"
                 style={{
                   background:
-                    'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)',
+                    'linear-gradient(to top, rgba(11,26,70,0.95) 0%, rgba(11,26,70,0.75) 35%, transparent 75%)',
                 }}
               />
               {/* Card content */}
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              <div className="absolute bottom-0 left-0 right-0" style={{ padding: '20px' }}>
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold mb-2"
-                  style={{ background: '#E87722', color: '#fff' }}
+                  className="inline-block px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold"
+                  style={{ background: '#E87722', color: '#fff', marginBottom: '8px' }}
                 >
                   {ev.category}
                 </span>
-                <h3 className="text-white text-lg font-bold leading-snug">{ev.name}</h3>
-                <p className="text-white/70 text-xs mt-1">
+                <h3 className="text-white text-lg font-bold leading-snug" style={{ marginBottom: '6px' }}>{ev.name}</h3>
+                <p className="text-white/70 text-xs" style={{ marginBottom: '10px' }}>
                   {ev.location} · {ev.year}
                 </p>
-                <span className="inline-flex items-center gap-1 text-[#E87722] text-xs font-semibold mt-3 group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-[#E87722] text-xs font-semibold group-hover:gap-2 transition-all">
                   View Case Study <Icons.ArrowRight size={12} />
                 </span>
               </div>
