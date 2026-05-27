@@ -270,13 +270,15 @@ export async function POST(request, { params }) {
       console.log(`[recaptcha] action=rental_quote score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
       if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
 
-      // Sanitise and limit items array
+      // Sanitise and limit items array.
+      // Cart items arrive as { product: { brand, model, slug, ... }, duration, quantity, ... }
+      // Fallback to flat shape (it?.brand) for any legacy callers.
       const rawItems = Array.isArray(body.items) ? body.items.slice(0, 50) : []
       const items = rawItems.map(it => ({
-        brand: sanitizeText(it?.brand, { maxLen: 80, allowNewlines: false }),
-        model: sanitizeText(it?.model, { maxLen: 120, allowNewlines: false }),
-        slug: sanitizeText(it?.slug, { maxLen: 120, allowNewlines: false }),
-        category: sanitizeText(it?.category, { maxLen: 80, allowNewlines: false }),
+        brand:    sanitizeText(it?.product?.brand    ?? it?.brand,    { maxLen: 80,  allowNewlines: false }),
+        model:    sanitizeText(it?.product?.model    ?? it?.model,    { maxLen: 120, allowNewlines: false }),
+        slug:     sanitizeText(it?.product?.slug     ?? it?.slug,     { maxLen: 120, allowNewlines: false }),
+        category: sanitizeText(it?.product?.categoryName ?? it?.category, { maxLen: 80, allowNewlines: false }),
         quantity: Math.max(1, Math.min(999, Number(it?.quantity ?? it?.qty ?? 1) || 1)),
         duration: sanitizeText(it?.duration, { maxLen: 20, allowNewlines: false }),
       }))
