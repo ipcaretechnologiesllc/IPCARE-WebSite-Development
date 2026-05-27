@@ -34,9 +34,11 @@ export default function RFQModal({ onClose, onSuccess, items }) {
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.ok) {
-        if (data.error === 'captcha-failed') setError('Security check failed. Please refresh the page and try again.')
+        if (data.error === 'captcha-failed')     setError('Security check failed. Please refresh the page and try again.')
         else if (data.error === 'too-many-requests') setError('Too many submissions from your IP. Please try again in a few minutes.')
-        else setError('Something went wrong — please try again or call us directly.')
+        else if (data.error === 'cart-is-empty') setError('Your quote cart is empty. Please add items before submitting.')
+        else if (typeof data.error === 'string' && data.error.length < 120) setError(data.error)
+        else setError('Something went wrong — please try again or call +971 2 676 6935.')
         setSubmitting(false)
         return
       }
@@ -44,7 +46,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
       setSubmitted(true)
       setTimeout(() => { onSuccess?.() }, 3200)
     } catch (err) {
-      setError('Something went wrong — please try again or call us directly.')
+      setError('Could not reach the server. Please try again or call +971 2 676 6935.')
     } finally {
       setSubmitting(false)
     }
@@ -67,8 +69,9 @@ export default function RFQModal({ onClose, onSuccess, items }) {
               <Icons.Check size={28} className="text-green-400"/>
             </div>
             <h3 className="text-white text-2xl font-bold mb-3">Quote request received!</h3>
-            <p className="body-text mb-6">Thank you — our rental team will email you a tailored quote within <span className="text-[#E87722] font-semibold">4 business hours</span>. We&apos;ve sent a confirmation to <span className="text-white">{form.email}</span>.</p>
-            <p className="mono text-xs text-white/50">Reference: <span className="text-white/80">{reference || 'pending'}</span></p>
+            <p className="body-text mb-3">Thanks — we&apos;ll reply to <span className="text-white">{form.email}</span> within <span className="text-[#E87722] font-semibold">1 business day</span> with a tailored quote.</p>
+            <p className="mono text-xs text-white/50 mb-6">Reference: <span className="text-white/80">{reference || 'pending'}</span></p>
+            <p className="body-text text-sm">Need it sooner? Call us: <a href="tel:+97126766935" className="text-[#E87722] hover:underline">+971 2 676 6935</a></p>
           </div>
         ) : (
           <form onSubmit={submit} className="p-6 space-y-4">
