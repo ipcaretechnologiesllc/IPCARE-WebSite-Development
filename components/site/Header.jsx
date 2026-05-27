@@ -70,106 +70,59 @@ const SOCIAL = {
 
 export default function Header() {
   const pathname = usePathname()
-  const [mobileOpen,    setMobileOpen]    = useState(false)
-  const [servicesOpen,  setServicesOpen]  = useState(false)
-  const [eventITOpen,   setEventITOpen]   = useState(false)
-  const navRef             = useRef(null)
-  const servicesCloseTimer = useRef(null)
-  const eventITCloseTimer  = useRef(null)
+  const [mobileOpen,   setMobileOpen]   = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [eventITOpen,  setEventITOpen]  = useState(false)
+  const navRef = useRef(null)
 
-  // Active when pathname matches the link href.
-  // Home ("/") requires exact match. All others: exact OR startsWith(href + '/').
   const isActive = (href) => {
     if (!pathname) return false
     if (href === '/') return pathname === '/'
     return pathname === href || pathname.startsWith(href + '/')
   }
 
-  // ─── Close all menus on every route change ────────────────────────────────
-  // App Router keeps Header mounted across navigations. This is a safety-net
-  // for cases not caught by the synchronous closeAll() onClick handlers below.
+  // ─── Safety net: close everything on route change ─────────────────────────
+  // Each page.js renders its own <Header>, so the component remounts on
+  // navigation and state already resets. This effect handles the edge case
+  // where Next.js reuses the instance (e.g. shallow routing).
   useEffect(() => {
     setServicesOpen(false)
     setEventITOpen(false)
     setMobileOpen(false)
-    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
   }, [pathname])
 
   // ─── Click-outside closes all menus ──────────────────────────────────────
-  // The dropdown panels are now INSIDE navRef, so a single contains() check
-  // covers both the nav links and the dropdown panels.
+  // Dropdown panels live INSIDE navRef, so one contains() check covers all.
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-        if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
-        setServicesOpen(false)
-        setEventITOpen(false)
-      }
+    const handler = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) closeAll()
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
   }, [])
 
   // ─── Escape key closes all menus ─────────────────────────────────────────
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-        if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
-        setServicesOpen(false)
-        setEventITOpen(false)
-      }
-    }
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    const handler = (e) => { if (e.key === 'Escape') closeAll() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
   }, [])
 
-  // ─── Open / close helpers ─────────────────────────────────────────────────
-  // Mutual exclusion: opening one dropdown immediately closes the other.
-
-  const openServices = () => {
-    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
-    setEventITOpen(false)
-    setServicesOpen(true)
-  }
-  const scheduleCloseServices = () => {
-    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 150)
-  }
-
-  const openEventIT = () => {
-    if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
-    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    setServicesOpen(false)
-    setEventITOpen(true)
-  }
-  const scheduleCloseEventIT = () => {
-    if (eventITCloseTimer.current) clearTimeout(eventITCloseTimer.current)
-    eventITCloseTimer.current = setTimeout(() => setEventITOpen(false), 150)
-  }
-
-  // Synchronous close — attached to every Link onClick inside the dropdowns so
-  // the dropdown disappears before the new page renders (not after first paint).
-  const closeAll = () => {
-    if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current)
-    if (eventITCloseTimer.current)  clearTimeout(eventITCloseTimer.current)
-    setServicesOpen(false)
-    setEventITOpen(false)
-  }
+  // ─── Close helpers ────────────────────────────────────────────────────────
+  // No timers. The nav's own onMouseLeave is the single reliable close trigger
+  // (see the <nav> element below for the architectural explanation).
+  const closeAll = () => { setServicesOpen(false); setEventITOpen(false) }
 
   const navLinks = [
-    { label: 'Home',             href: '/' },
-    { label: 'About',            href: '/about' },
-    { label: 'Services',         href: '/services',              mega: true },
-    { label: 'Industries',       href: '/industries' },
-    { label: 'Cyber Advisory',   href: '/cybersecurity-advisory' },
-    { label: 'Event IT',         href: '/event-it',              dropdown: true },
-    { label: 'Rental Hub',       href: '/rental' },
-    { label: 'Blog',             href: '/blog' },
-    { label: 'Contact',          href: '/contact' },
+    { label: 'Home',           href: '/' },
+    { label: 'About',          href: '/about' },
+    { label: 'Services',       href: '/services',              mega: true },
+    { label: 'Industries',     href: '/industries' },
+    { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
+    { label: 'Event IT',       href: '/event-it',              dropdown: true },
+    { label: 'Rental Hub',     href: '/rental' },
+    { label: 'Blog',           href: '/blog' },
+    { label: 'Contact',        href: '/contact' },
   ]
 
   // Ordered list for mega-menu grid
@@ -195,18 +148,20 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* ═══════════════════════════════════════════════════════════════════
           Main nav — always white, sticky top-0.
 
-          KEY ARCHITECTURE CHANGE: both dropdown panels now live INSIDE this
-          <nav> element as position:absolute children. This means:
-            1. No DOM gap — mouse travels from nav-link <li> into the panel
-               without leaving the nav element's hover zone.
-            2. top:'100%' always equals bottom-of-nav at any scroll position
-               (no navBottom state / measurement effect needed).
-            3. click-outside uses a single navRef.contains() check that covers
-               both nav links and the panel.
-      ════════════════════════════════════════════════════════════════════════ */}
+          ARCHITECTURE: Both dropdown panels are position:absolute children
+          of this <nav>. Because of this, the browser's native `mouseleave`
+          event fires on <nav> ONLY when the cursor exits the entire subtree
+          (nav bar + dropdown panel together). Moving between the nav links
+          and the panel stays inside the subtree — no event fires, no timers
+          needed, no race conditions.
+
+          Open:  onMouseEnter of the specific <li> → immediate setState
+          Close: onMouseLeave of the whole <nav>   → immediate closeAll()
+                 + click-outside, Escape key, route change (see effects above)
+      ═══════════════════════════════════════════════════════════════════ */}
       <nav
         ref={navRef}
         className="sticky top-0 z-50"
@@ -215,6 +170,7 @@ export default function Header() {
           borderBottom: '1px solid rgba(15,36,95,0.08)',
           boxShadow:    '0 2px 12px rgba(10,26,70,0.08)',
         }}
+        onMouseLeave={closeAll}
       >
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <Link href="/" aria-label="IP Care Technologies home" className="flex items-center overflow-hidden">
@@ -222,29 +178,18 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav links.
-              items-stretch + h-full: each <li> fills the full 72 px nav height.
-              When the mouse moves downward from a link toward the dropdown panel
-              it stays inside the <li> hitbox all the way to the nav's bottom
-              edge — which is exactly where top:'100%' on the panel starts.
-              No gap, no accidental timer fires. */}
+              items-stretch + h-full: every <li> fills the full 72 px nav
+              height, so there is zero gap between a link's hover zone and
+              the dropdown panel that starts at top:100% of the nav. */}
           <ul className="hidden lg:flex items-stretch h-full gap-0.5">
             {navLinks.map((l) => (
               <li
                 key={l.label}
                 className="relative flex items-center"
                 onMouseEnter={() => {
-                  if      (l.mega)     openServices()
-                  else if (l.dropdown) openEventIT()
-                  else {
-                    // Hovering any non-dropdown link schedules close so the
-                    // open dropdown collapses as the cursor moves away.
-                    scheduleCloseServices()
-                    scheduleCloseEventIT()
-                  }
-                }}
-                onMouseLeave={() => {
-                  if      (l.mega)     scheduleCloseServices()
-                  else if (l.dropdown) scheduleCloseEventIT()
+                  if      (l.mega)     { setEventITOpen(false);  setServicesOpen(true)  }
+                  else if (l.dropdown) { setServicesOpen(false); setEventITOpen(true)   }
+                  else                 { setServicesOpen(false); setEventITOpen(false)  }
                 }}
               >
                 <Link
@@ -273,25 +218,23 @@ export default function Header() {
           </div>
         </div>
 
-        {/* ── Services Mega Menu ─────────────────────────────────────────────
-            position:absolute inside sticky nav.
-            top:'100%'  → always snaps to the bottom of the nav bar.
-            The panel's onMouseEnter cancels the close timer; onMouseLeave
-            restarts it.  Every Link carries onClick={closeAll} so the dropdown
-            disappears synchronously before the new page's first paint.
-        ──────────────────────────────────────────────────────────────────── */}
+        {/* ── Services Mega Menu ───────────────────────────────────────────
+            position:absolute inside sticky nav → top:100% always snaps
+            to the bottom of the nav bar at any scroll position.
+            No hover handlers here — the parent <nav> onMouseLeave handles
+            all closing. Every Link has onClick={closeAll} so the dropdown
+            vanishes synchronously before the new page renders.
+        ─────────────────────────────────────────────────────────────────── */}
         {servicesOpen && (
           <div
             className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
             style={{ top: '100%' }}
-            onMouseEnter={() => { if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current) }}
-            onMouseLeave={scheduleCloseServices}
           >
             <div
               className="w-full py-10 px-12"
               style={{
-                maxWidth: '1280px',
-                background: '#ffffff',
+                maxWidth:     '1280px',
+                background:   '#ffffff',
                 borderLeft:   '1px solid #E5E7EB',
                 borderRight:  '1px solid #E5E7EB',
                 borderBottom: '1px solid #E5E7EB',
@@ -301,7 +244,7 @@ export default function Header() {
                 overflowY:    'auto',
               }}
             >
-              {/* 4-col at xl (1280+), 3-col at lg (1024-1279) */}
+              {/* 4-col at xl (1280+), 3-col at lg (1024–1279) */}
               <div className="grid grid-cols-3 xl:grid-cols-4 gap-10">
                 {servicesOrder.map((slug) => {
                   const cat = serviceCategories[slug]
@@ -380,16 +323,14 @@ export default function Header() {
           </div>
         )}
 
-        {/* ── Event IT Dropdown ──────────────────────────────────────────────
-            Same pattern: absolute inside sticky nav, onClick={closeAll} on
-            every Link, mutual exclusion handled in openEventIT().
-        ──────────────────────────────────────────────────────────────────── */}
+        {/* ── Event IT Dropdown ────────────────────────────────────────────
+            Same architecture: absolute inside sticky nav, no panel-level
+            hover handlers, onClick={closeAll} on every Link.
+        ─────────────────────────────────────────────────────────────────── */}
         {eventITOpen && (
           <div
             className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
             style={{ top: '100%' }}
-            onMouseEnter={() => { if (eventITCloseTimer.current) clearTimeout(eventITCloseTimer.current) }}
-            onMouseLeave={scheduleCloseEventIT}
           >
             <div
               className="w-full py-8 px-8"
