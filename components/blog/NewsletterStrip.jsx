@@ -3,7 +3,7 @@
 import React, { Component, useState } from 'react'
 import * as Icons from 'lucide-react'
 
-// ErrorBoundary class — cannot break the whole page if anything throws
+// ErrorBoundary — silently hides the strip if anything throws; never blocks the page
 class NewsletterErrorBoundary extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +16,7 @@ class NewsletterErrorBoundary extends Component {
     try { console.error('[NewsletterStrip] render error:', err?.message || err) } catch {}
   }
   render() {
-    if (this.state.hasError) return null // silently hide on any crash; never block the page
+    if (this.state.hasError) return null
     return this.props.children
   }
 }
@@ -45,17 +45,13 @@ function NewsletterStripInner() {
           body: JSON.stringify({ email: trimmed, source: 'blog_page' }),
         })
         if (res && res.ok) ok = true
-        else if (res && res.status === 404) {
-          setErr("Newsletter signup isn't available right now. Please try again later.")
-        } else {
-          setErr('Subscription failed, please try again.')
-        }
-      } catch (networkErr) {
-        setErr("Subscription failed, please try again later.")
+        else if (res && res.status === 404) setErr("Newsletter signup isn't available right now. Please try again later.")
+        else setErr('Subscription failed — please try again.')
+      } catch {
+        setErr('Could not reach the server. Please try again later.')
       }
       if (ok) setSubmitted(true)
     } catch {
-      // Absolute last-resort safety net — no throws allowed
       setErr('Something went wrong. Please try again later.')
     } finally {
       setSubmitting(false)
@@ -66,42 +62,27 @@ function NewsletterStripInner() {
     <section
       className="w-full px-6"
       style={{
-        background: 'rgba(255,255,255,0.04)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        borderTop: '1px solid rgba(255,255,255,0.10)',
-        borderBottom: '1px solid rgba(255,255,255,0.10)',
+        background: '#fff',
+        borderTop: '3px solid #E87722',
         paddingTop: '72px',
         paddingBottom: '72px',
       }}
     >
       <div className="max-w-[640px] mx-auto text-center">
-        <div
-          className="uppercase"
-          style={{ color: '#E87722', fontSize: '12px', letterSpacing: '2px', marginBottom: '12px' }}
-        >
+        <div className="mono uppercase mb-3" style={{ color: '#E87722', fontSize: '11px', letterSpacing: '2.5px' }}>
           Stay Informed
         </div>
-        <h2
-          className="text-white font-bold mb-4"
-          style={{ fontSize: '32px', fontWeight: 700, lineHeight: 1.25 }}
-        >
+        <h2 className="font-bold mb-4" style={{ color: '#0B1A46', fontSize: '28px', lineHeight: 1.25 }}>
           Monthly Insights from IP Care Engineers
         </h2>
-        <p
-          style={{ color: 'rgba(255,255,255,0.7)', fontSize: '15px', lineHeight: 1.55, marginBottom: '28px' }}
-        >
+        <p className="mb-8" style={{ color: '#4B5C7E', fontSize: '15px', lineHeight: 1.6 }}>
           Zero spam. One monthly email with our best articles on cybersecurity, cloud, and enterprise IT. Unsubscribe anytime.
         </p>
 
         {submitted ? (
           <div
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg mx-auto"
-            style={{
-              background: 'rgba(34,197,94,0.12)',
-              border: '1px solid rgba(34,197,94,0.4)',
-              color: '#4ade80',
-            }}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg"
+            style={{ background: 'rgba(34,197,94,0.10)', border: '1px solid rgba(34,197,94,0.3)', color: '#16a34a' }}
           >
             <Icons.Check size={18} />
             <span className="text-sm font-medium">You&apos;re subscribed. Welcome aboard.</span>
@@ -116,18 +97,21 @@ function NewsletterStripInner() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 placeholder="your@company.com"
                 required
                 disabled={submitting}
-                className="flex-1 text-white text-sm focus:outline-none focus:border-[#E87722]"
+                className="flex-1 text-sm focus:outline-none"
                 style={{
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: '#fff',
+                  border: '1.5px solid #D1D9E6',
                   height: '48px',
                   borderRadius: '8px',
                   padding: '0 16px',
+                  color: '#0B1A46',
                 }}
+                onFocus={e => { e.target.style.borderColor = '#E87722' }}
+                onBlur={e => { e.target.style.borderColor = '#D1D9E6' }}
               />
               <button
                 type="submit"
@@ -140,12 +124,13 @@ function NewsletterStripInner() {
                   padding: '0 28px',
                   border: 'none',
                   cursor: 'pointer',
+                  flexShrink: 0,
                 }}
               >
-                {submitting ? 'Subscribing...' : 'Subscribe'}
+                {submitting ? 'Subscribing…' : 'Subscribe'}
               </button>
             </form>
-            {err && <div className="text-red-400 text-xs mt-3">{err}</div>}
+            {err && <div className="text-red-500 text-xs mt-3">{err}</div>}
           </>
         )}
       </div>

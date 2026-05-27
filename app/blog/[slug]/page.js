@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation'
 import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs } from '@/lib/blog-data'
+
+const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export async function generateStaticParams() {
   return getAllArticleSlugs().map(slug => ({ slug }))
@@ -16,29 +19,51 @@ export async function generateMetadata({ params }) {
     title: `${a.title} | IP Care Technologies Blog`,
     description: a.excerpt,
     alternates: { canonical: `/blog/${params.slug}` },
-    openGraph: { title: a.title, description: a.excerpt, url: `/blog/${params.slug}`, images: [`${a.img}?w=1200&q=85`], type: 'article', publishedTime: a.date, authors: [a.author] },
+    openGraph: {
+      title: a.title,
+      description: a.excerpt,
+      url: `${BASE}/blog/${params.slug}`,
+      images: [`${a.img}?w=1200&q=85`],
+      type: 'article',
+      publishedTime: a.date,
+      authors: [a.author],
+    },
   }
 }
 
 export default function ArticlePage({ params }) {
   const a = getArticle(params.slug)
   if (!a) notFound()
-  const related = articles.filter(x => x.slug !== params.slug).slice(0, 3)
+
+  // Same-category articles first, then fill from others
+  const sameCat = articles.filter(x => x.slug !== params.slug && x.category === a.category)
+  const others  = articles.filter(x => x.slug !== params.slug && x.category !== a.category)
+  const related = [...sameCat, ...others].slice(0, 3)
 
   const articleSchema = {
-    '@context': 'https://schema.org', '@type': 'Article',
-    headline: a.title, image: [`${a.img}?w=1200&q=85`], datePublished: a.date, author: { '@type': 'Person', name: a.author },
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') },
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: a.title,
+    image: [`${a.img}?w=1200&q=85`],
+    datePublished: a.date,
+    dateModified: a.date,
+    author: { '@type': 'Person', name: a.author },
+    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
     description: a.excerpt,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/blog/${params.slug}` },
   }
+
   const breadcrumb = {
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/blog' },
-      { '@type': 'ListItem', position: 3, name: a.title, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/blog/${params.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home',  item: `${BASE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog',  item: `${BASE}/blog` },
+      { '@type': 'ListItem', position: 3, name: a.title, item: `${BASE}/blog/${params.slug}` },
     ],
   }
+
+  const shareUrl = `${BASE}/blog/${params.slug}`
 
   return (
     <>
@@ -46,96 +71,131 @@ export default function ArticlePage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <main>
-        <div className="max-w-[1200px] mx-auto px-6 pt-6">
-          <nav className="text-xs text-white/50 flex items-center gap-1.5">
-            <Link href="/" className="hover:text-white">Home</Link><Icons.ChevronRight size={12}/>
-            <Link href="/blog" className="hover:text-white">Blog</Link><Icons.ChevronRight size={12}/>
-            <span className="text-white/80 truncate">{a.title}</span>
-          </nav>
-        </div>
 
-        <section className="py-12 md:py-16 px-6">
-          <div className="max-w-[850px] mx-auto">
+        {/* ── HERO — navy + grid + orange border ─────────────────────── */}
+        <section style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
+          <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
+          <div style={{ position: 'absolute', top: '-80px', right: '10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+          <div className="relative px-6 pt-6 pb-12 md:pb-16 max-w-[900px] mx-auto">
+            {/* Breadcrumb */}
+            <nav className="text-xs flex items-center gap-1.5 mb-8" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <Icons.ChevronRight size={12} />
+              <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+              <Icons.ChevronRight size={12} />
+              <span className="truncate max-w-[260px]" style={{ color: 'rgba(255,255,255,0.8)' }}>{a.title}</span>
+            </nav>
             <span className="mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded inline-block mb-5" style={{ background: '#E87722', color: '#fff' }}>{a.category}</span>
             <h1 className="text-white text-3xl md:text-5xl font-bold leading-[1.1] mb-6">{a.title}</h1>
-            <div className="flex items-center gap-4 text-white/60 text-sm mono mb-8">
+            <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mono" style={{ color: 'rgba(255,255,255,0.6)' }}>
               <span>{a.author}</span>
-              <span>{'\u2022'}</span>
+              <span>&bull;</span>
               <span>{a.date}</span>
-              <span>{'\u2022'}</span>
-              <span className="flex items-center gap-1"><Icons.Clock size={13}/>{a.readTime}</span>
+              <span>&bull;</span>
+              <span className="flex items-center gap-1"><Icons.Clock size={13} />{a.readTime}</span>
             </div>
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-10">
-              <img src={`${a.img}?w=1600&q=85`} alt={a.title} className="absolute inset-0 w-full h-full object-cover"/>
+          </div>
+        </section>
+
+        {/* ── ARTICLE BODY ────────────────────────────────────────────── */}
+        <section className="px-6 py-12" style={{ background: '#fff' }}>
+          <div className="max-w-[720px] mx-auto">
+            {/* Hero image */}
+            <div className="relative rounded-2xl overflow-hidden mb-10" style={{ aspectRatio: '16/9' }}>
+              <img src={`${a.img}?w=1600&q=85`} alt={a.title} className="absolute inset-0 w-full h-full object-cover" />
             </div>
 
+            {/* Body content */}
             <article className="space-y-5">
               {a.body.map((b, i) => {
-                if (b.h2) return <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{b.h2}</h2>
+                if (b.h2) return (
+                  <h2 key={i} className="font-bold mt-10 mb-2" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>{b.h2}</h2>
+                )
                 if (b.cta) return (
-                  <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
-                    {b.cta.label && <div className="mono text-[10px] uppercase tracking-widest text-[#E87722] mb-1.5">{b.cta.label}</div>}
-                    <div className="text-white text-base md:text-lg font-semibold group-hover:text-[#E87722] transition">{b.cta.text}</div>
+                  <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.06)', border: '1px solid rgba(232,119,34,0.28)' }}>
+                    {b.cta.label && <div className="mono text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#E87722' }}>{b.cta.label}</div>}
+                    <div className="text-base md:text-lg font-semibold group-hover:text-[#E87722] transition" style={{ color: '#0B1A46' }}>{b.cta.text}</div>
                   </Link>
                 )
-                return <p key={i} className="body-text text-base md:text-lg leading-[1.75]">{b.p}</p>
+                return <p key={i} className="text-base md:text-lg leading-[1.75]" style={{ color: '#374151' }}>{b.p}</p>
               })}
             </article>
 
-            {/* Share */}
-            <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center gap-2">
-                <span className="mono text-xs text-white/50 uppercase tracking-widest">Share</span>
-                {[{ I: Icons.Linkedin, href: '#' }, { I: Icons.Twitter, href: '#' }, { I: Icons.Facebook, href: '#' }, { I: Icons.Link, href: '#' }].map(({ I, href }, i) => (
-                  <a key={i} href={href} className="w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E87722] transition" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}><I size={14}/></a>
-                ))}
-              </div>
+            {/* Share bar */}
+            <div className="mt-12 pt-8 flex items-center gap-3 flex-wrap" style={{ borderTop: '1px solid #E5E7EB' }}>
+              <span className="mono text-xs uppercase tracking-widest" style={{ color: '#9CA3AF' }}>Share</span>
+              {[
+                { I: Icons.Linkedin, label: 'Share on LinkedIn', href: `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(a.title)}` },
+                { I: Icons.Twitter,  label: 'Share on Twitter',  href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(a.title)}` },
+                { I: Icons.Facebook, label: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}` },
+              ].map(({ I, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-[#4B5563] bg-[#F4F6FA] border border-[#E1E8F0] hover:bg-[#E87722] hover:text-white hover:border-[#E87722] transition-all"
+                >
+                  <I size={14} />
+                </a>
+              ))}
             </div>
 
             {/* Author bio */}
-            <div className="mt-10 glass-card p-6 flex gap-4 items-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold mono text-xl flex-shrink-0" style={{ background: 'linear-gradient(135deg, #E87722 0%, #0D2B55 100%)' }}>{a.author.split(' ').map(w => w[0]).join('').slice(0, 2)}</div>
+            <div className="mt-10 flex gap-4 items-center p-6 rounded-2xl" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold mono text-lg flex-shrink-0"
+                style={{ background: 'linear-gradient(135deg, #E87722 0%, #0B1A46 100%)' }}
+              >
+                {a.author.split(' ').map(w => w[0]).join('').slice(0, 2)}
+              </div>
               <div>
-                <div className="text-white font-semibold">{a.author}</div>
-                <p className="body-text text-xs mt-1">Senior contributor to the IP Care Knowledge Base.</p>
+                <div className="font-semibold" style={{ color: '#0B1A46' }}>{a.author}</div>
+                <p className="text-xs mt-1" style={{ color: '#6B7280' }}>Senior contributor to the IP Care Knowledge Base.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Newsletter */}
-        <section className="py-16 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-          <div className="max-w-[800px] mx-auto rounded-2xl p-10 text-center" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
-            <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Newsletter</div>
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-3">Monthly insights, zero spam.</h2>
-            <p className="body-text mb-6">Enterprise IT analysis delivered to your inbox once a month.</p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-3 rounded-full text-white text-sm" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.15)' }}/>
-              <button type="submit" className="btn-primary">Subscribe</button>
-            </form>
-          </div>
-        </section>
-
-        {/* Related */}
-        <section className="py-16 px-6">
-          <div className="max-w-[1200px] mx-auto">
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-8">Related Articles</h2>
-            <div className="grid md:grid-cols-3 gap-5">
-              {related.map(r => (
-                <Link key={r.slug} href={`/blog/${r.slug}`} className="glass-card overflow-hidden group block">
-                  <div className="relative h-40 overflow-hidden">
-                    <img src={`${r.img}?w=600&q=75`} alt={r.title} className="w-full h-full object-cover"/>
-                    <span className="absolute top-3 left-3 mono text-[9px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-white font-semibold text-base leading-snug group-hover:text-[#E87722]">{r.title}</h3>
-                    <div className="mt-3 mono text-[10px] text-white/50 uppercase tracking-wider">{r.date} {'\u2022'} {r.readTime}</div>
-                  </div>
-                </Link>
-              ))}
+        {/* ── RELATED ARTICLES ────────────────────────────────────────── */}
+        {related.length > 0 && (
+          <section className="px-6 py-16" style={{ background: '#F4F6FA' }}>
+            <div className="max-w-[1100px] mx-auto">
+              <h2 className="font-bold text-2xl md:text-3xl mb-8" style={{ color: '#0B1A46' }}>
+                {sameCat.length > 0 ? `More on ${a.category}` : 'Related Articles'}
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {related.map(r => (
+                  <Link
+                    key={r.slug}
+                    href={`/blog/${r.slug}`}
+                    className="service-card group flex flex-col overflow-hidden"
+                    style={{ padding: 0 }}
+                  >
+                    <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10' }}>
+                      <img
+                        src={`${r.img}?w=600&q=75`}
+                        alt={r.title}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                      <span className="absolute top-3 left-3 mono text-[9px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="font-semibold text-base leading-snug mb-2 group-hover:text-[#E87722] transition-colors" style={{ color: '#0B1A46' }}>{r.title}</h3>
+                      <div className="mt-auto mono text-[10px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>{r.date} &bull; {r.readTime}</div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
+
+        {/* ── NEWSLETTER ─────────────────────────────────────────────── */}
+        <NewsletterStrip />
+
       </main>
       <Footer />
     </>
