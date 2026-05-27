@@ -28,6 +28,30 @@ const bundles  = rentalCategories['bundles'].products.slice(0, 3)
 // All categories except 'bundles' (bundles get their own dedicated section)
 const cats = Object.entries(rentalCategories).filter(([slug]) => slug !== 'bundles')
 
+const CATEGORY_PHOTOS = {
+  'laptops-desktops':  'https://images.unsplash.com/photo-1496181133206-80ce9b88a853',
+  'tablets-ipads':     'https://images.unsplash.com/photo-1561154464-82e9adf32764',
+  'printers':          'https://images.unsplash.com/photo-1650094980833-7373de26feb6',
+  'event-wifi':        'https://images.unsplash.com/photo-1606904825846-647eb07f5be2',
+  'networking':        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8',
+  'cctv':              'https://images.unsplash.com/photo-1557804506-669a67965ba0',
+  'testing-equipment': 'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf',
+  'servers':           'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee',
+  'macbooks':          'https://images.unsplash.com/photo-1517336714731-489689fd1ca8',
+}
+
+const CATEGORY_ALT = {
+  'laptops-desktops':  'Laptop rental UAE — IP Care Technologies',
+  'tablets-ipads':     'iPad and tablet rental UAE — IP Care Technologies',
+  'printers':          'Printer rental UAE — IP Care Technologies',
+  'event-wifi':        'Event WiFi and router rental UAE — IP Care Technologies',
+  'networking':        'Networking equipment rental UAE — IP Care Technologies',
+  'cctv':              'CCTV and security camera rental UAE — IP Care Technologies',
+  'testing-equipment': 'Cable and fibre testing equipment rental UAE — IP Care Technologies',
+  'servers':           'Server rental UAE — IP Care Technologies',
+  'macbooks':          'MacBook and Mac rental UAE — IP Care Technologies',
+}
+
 const WHY_ITEMS = [
   { icon: 'Truck',   t: 'Delivery & Setup Included',    d: 'White-glove delivery, rack-and-stack and full configuration — not a hidden extra like other vendors.' },
   { icon: 'Wrench',  t: 'Certified Engineers On-Site',  d: 'Our engineers stay through your event or project — not just for handover.' },
@@ -104,30 +128,49 @@ export default function RentalHubClient() {
               <Link
                 key={slug}
                 href={`/rental/${slug}`}
-                className="group service-card p-6 flex flex-col items-center text-center reveal"
+                className="group service-card overflow-hidden flex flex-col reveal"
                 style={{ transitionDelay: `${i * 40}ms` }}
               >
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-[#E87722]"
-                  style={{ background: 'rgba(232,119,34,0.10)' }}
-                >
-                  <Ic
-                    name={c.icon}
-                    size={24}
-                    className="text-[#E87722] group-hover:text-white transition-colors duration-300"
+                {/* Photo — edge-to-edge, zooms on hover */}
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                  <img
+                    src={`${CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'}?w=600&q=80`}
+                    alt={CATEGORY_ALT[slug] || `${c.name} rental UAE — IP Care`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
-                <h3 className="font-bold text-sm leading-tight mb-2" style={{ color: '#0B1A46' }}>
-                  {c.name}
-                </h3>
-                <p className="mono text-[10px] uppercase tracking-widest" style={{ color: '#E87722' }}>
-                  {c.products.length} items
-                </p>
-                <div
-                  className="mt-3 flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
-                  style={{ color: '#1E3A8A' }}
-                >
-                  Browse <Icons.ArrowRight size={12}/>
+
+                {/* Content area */}
+                <div className="flex flex-col items-center text-center" style={{ padding: '20px 16px 22px' }}>
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300 group-hover:bg-[#E87722]"
+                    style={{ background: 'rgba(232,119,34,0.10)' }}
+                  >
+                    <Ic
+                      name={c.icon}
+                      size={18}
+                      className="text-[#E87722] group-hover:text-white transition-colors duration-300"
+                    />
+                  </div>
+                  <h3
+                    className="font-bold leading-tight mb-1.5"
+                    style={{ color: '#0B1A46', fontSize: '1.05rem' }}
+                  >
+                    {c.name}
+                  </h3>
+                  <p
+                    className="mono text-[10px] uppercase"
+                    style={{ color: '#E87722', letterSpacing: '1px' }}
+                  >
+                    {c.products.length} Items
+                  </p>
+                  <div
+                    className="mt-2.5 flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
+                    style={{ color: '#1E3A8A' }}
+                  >
+                    Browse <Icons.ArrowRight size={12}/>
+                  </div>
                 </div>
               </Link>
             ))}
