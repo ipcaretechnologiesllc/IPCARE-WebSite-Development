@@ -13,21 +13,21 @@ const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'
 // (see next.config.js), but if a request still arrives here we canonicalise it
 // to ipcare.ae anyway so any cached/proxied HTML still points to the right place.
 const CANONICAL_DOMAINS = {
-  'ipcare.ae':       'https://ipcare.ae',
-  'www.ipcare.ae':   'https://ipcare.ae',
+  'ipcare.ae':       'https://www.ipcare.ae',
+  'www.ipcare.ae':   'https://www.ipcare.ae',
   'ipcare.ca':       'https://ipcare.ca',
   'www.ipcare.ca':   'https://ipcare.ca',
-  'ipcares.com':     'https://ipcare.ae',
-  'www.ipcares.com': 'https://ipcare.ae',
+  'ipcares.com':     'https://www.ipcare.ae',
+  'www.ipcares.com': 'https://www.ipcare.ae',
 }
-const DEFAULT_CANONICAL = 'https://ipcare.ae'
+const DEFAULT_CANONICAL = 'https://www.ipcare.ae'
 
 // Per-domain hreflang regions. ipcares.com is intentionally absent because it
 // always redirects to ipcare.ae — Google should index the destinations only.
 const HREFLANG_TARGETS = [
-  { lang: 'en-AE',     domain: 'https://ipcare.ae' },
+  { lang: 'en-AE',     domain: 'https://www.ipcare.ae' },
   { lang: 'en-CA',     domain: 'https://ipcare.ca' },
-  { lang: 'x-default', domain: 'https://ipcare.ae' },
+  { lang: 'x-default', domain: 'https://www.ipcare.ae' },
 ]
 
 function readHostAndPath() {
@@ -121,7 +121,7 @@ export default function RootLayout({ children }) {
   // JSON-LD schemas — use the canonical brand domain so search engines see
   // a single authoritative Organization/WebSite entity regardless of which
   // domain mirror the request landed on.
-  const BRAND_URL = 'https://ipcare.ae'
+  const BRAND_URL = 'https://www.ipcare.ae'
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',

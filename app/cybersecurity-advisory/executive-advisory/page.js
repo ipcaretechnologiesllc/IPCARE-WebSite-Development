@@ -72,9 +72,9 @@ export default function ExecutiveAdvisoryPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Cybersecurity Advisory', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/cybersecurity-advisory' },
-      { '@type': 'ListItem', position: 3, name: pageData.h1, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/cybersecurity-advisory/executive-advisory' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Cybersecurity Advisory', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/cybersecurity-advisory' },
+      { '@type': 'ListItem', position: 3, name: pageData.h1, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/cybersecurity-advisory/executive-advisory' },
     ],
   }
 
@@ -87,10 +87,10 @@ export default function ExecutiveAdvisoryPage() {
     provider: {
       '@type': 'Organization',
       name: 'IP Care Technologies L.L.C.',
-      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'),
     },
     areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
-    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/cybersecurity-advisory/executive-advisory',
+    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/cybersecurity-advisory/executive-advisory',
   }
 
   return (

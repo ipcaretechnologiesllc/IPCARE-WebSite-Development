@@ -30,7 +30,7 @@ export default function IndustryDetailPage({ params }) {
   if (!ind) notFound()
   const Icon = Icons[ind.icon] || Icons.Building2
 
-  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae')
+  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

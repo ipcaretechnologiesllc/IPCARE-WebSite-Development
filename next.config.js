@@ -48,13 +48,13 @@ const nextConfig = {
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'ipcares.com' }],
-        destination: 'https://ipcare.ae/:path*',
+        destination: 'https://www.ipcare.ae/:path*',
         permanent: true,
       },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.ipcares.com' }],
-        destination: 'https://ipcare.ae/:path*',
+        destination: 'https://www.ipcare.ae/:path*',
         permanent: true,
       },
 

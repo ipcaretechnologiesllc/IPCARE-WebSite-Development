@@ -12,14 +12,14 @@ export const metadata = {
 const localBusiness = [
   {
     '@context': 'https://schema.org', '@type': 'LocalBusiness',
-    name: 'IP Care Technologies — Abu Dhabi', '@id': 'https://ipcare.ae/#abu-dhabi',
+    name: 'IP Care Technologies — Abu Dhabi', '@id': 'https://www.ipcare.ae/#abu-dhabi',
     telephone: '+971-2-676-6935', email: 'info@ipcare.ae',
     address: { '@type': 'PostalAddress', streetAddress: 'Salaam Street, Behind Fabrix', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
     openingHours: 'Su-Th 09:00-18:00',
   },
   {
     '@context': 'https://schema.org', '@type': 'LocalBusiness',
-    name: 'IP Care Technologies — Toronto', '@id': 'https://ipcare.ae/#toronto',
+    name: 'IP Care Technologies — Toronto', '@id': 'https://www.ipcare.ae/#toronto',
     telephone: '+1-416-786-0782', email: 'info@ipcare.ae',
     address: { '@type': 'PostalAddress', streetAddress: '1 Concorde Gate', addressLocality: 'North York', addressRegion: 'ON', addressCountry: 'CA' },
     openingHours: 'Mo-Fr 09:00-17:00',

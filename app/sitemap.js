@@ -14,14 +14,14 @@ import { getAllIndustrySlugs } from '@/lib/industries-data'
 //     code branch is effectively unreachable from production, but we still
 //     fall through to ipcare.ae as a safety default)
 const CANONICAL_DOMAINS = {
-  'ipcare.ae':       'https://ipcare.ae',
-  'www.ipcare.ae':   'https://ipcare.ae',
+  'ipcare.ae':       'https://www.ipcare.ae',
+  'www.ipcare.ae':   'https://www.ipcare.ae',
   'ipcare.ca':       'https://ipcare.ca',
   'www.ipcare.ca':   'https://ipcare.ca',
-  'ipcares.com':     'https://ipcare.ae',
-  'www.ipcares.com': 'https://ipcare.ae',
+  'ipcares.com':     'https://www.ipcare.ae',
+  'www.ipcares.com': 'https://www.ipcare.ae',
 }
-const DEFAULT_BASE = 'https://ipcare.ae'
+const DEFAULT_BASE = 'https://www.ipcare.ae'
 
 // Force dynamic so the sitemap is generated per-request and can read the host header.
 // (Without this, Next.js would pre-render the sitemap once at build time and the

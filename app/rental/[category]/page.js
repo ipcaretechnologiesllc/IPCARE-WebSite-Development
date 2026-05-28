@@ -25,7 +25,7 @@ export default function CategoryPage({ params }) {
   const cat = getCategory(params.category)
   if (!cat) notFound()
 
-  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae')
+  const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

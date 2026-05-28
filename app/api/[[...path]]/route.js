@@ -183,7 +183,7 @@ export async function POST(request, { params }) {
       }
       await coll.insertOne(doc)
 
-      const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcares.com'}/unsubscribe?token=${token}`
+      const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'}/unsubscribe?token=${token}`
       const welcome = tplNewsletterWelcome({ unsubscribeUrl })
       const r = await sendMail({ to: clean.email, subject: welcome.subject, html: welcome.html, replyTo: INFO_EMAIL, categories: ['newsletter', 'welcome'] })
       return jsonOk({ emailSent: r.ok, mocked: !!r.mocked })

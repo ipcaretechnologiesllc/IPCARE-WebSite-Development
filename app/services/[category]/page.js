@@ -45,9 +45,9 @@ export default function CategoryPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + '/services' },
-      { '@type': 'ListItem', position: 3, name: cat.name, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/services' },
+      { '@type': 'ListItem', position: 3, name: cat.name, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + `/services/${params.category}` },
     ],
   }
   const serviceSchema = {
@@ -59,10 +59,10 @@ export default function CategoryPage({ params }) {
     provider: {
       '@type': 'Organization',
       name: 'IP Care Technologies L.L.C.',
-      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae'),
+      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'),
     },
     areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
-    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}`,
+    url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + `/services/${params.category}`,
     hasOfferCatalog: subpages.length > 0 ? {
       '@type': 'OfferCatalog',
       name: `${cat.name} sub-services`,
@@ -71,7 +71,7 @@ export default function CategoryPage({ params }) {
         itemOffered: {
           '@type': 'Service',
           name: sp.h1 || sp.title,
-          url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://ipcare.ae') + `/services/${params.category}/${slug}`,
+          url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + `/services/${params.category}/${slug}`,
         },
       })),
     } : undefined,
