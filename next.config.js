@@ -211,6 +211,10 @@ const nextConfig = {
       // for any cached search or external link.
       { source: '/blog/cctv-installation-cost-dubai', destination: '/blog', permanent: true },
 
+      // Dot-notation variant of the PAM URL (privileged.access.management vs privileged-access-management).
+      // Must sit ABOVE the catch-all so the specific rule wins.
+      { source: '/privileged.access.management.php', destination: '/services/cybersecurity/pam', permanent: true },
+
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
     ];
