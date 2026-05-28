@@ -38,7 +38,8 @@ const jsonLd = {
         email: 'info@ipcare.ae',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Salaam Street, Behind Fabrix, P.O. Box 53209',
+          streetAddress: 'Salam Street',
+          postOfficeBoxNumber: '53209',
           addressLocality: 'Abu Dhabi',
           addressCountry: 'AE',
         },

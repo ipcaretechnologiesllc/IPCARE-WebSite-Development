@@ -91,8 +91,8 @@ export default function ContactClient() {
 
             {/* Office cards */}
             <div className="space-y-5">
-              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)"/>
-              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ae" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)"/>
+              <OfficeCard flag={<UAEFlag/>} region="United Arab Emirates" city="Abu Dhabi" phone="+971 2 676 6935" email="info@ipcare.ae" address="Salam Street, P.O. Box 53209, Abu Dhabi, UAE" hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)"/>
+              <OfficeCard flag={<CanadaFlag/>} region="Canada" city="Toronto" phone="+1 416 786 0782" email="info@ipcare.ca" address="1 Concorde Gate, North York, ON, Canada" hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)"/>
             </div>
           </div>
 

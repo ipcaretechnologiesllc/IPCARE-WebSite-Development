@@ -136,7 +136,7 @@ export default function RootLayout({ children }) {
       { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'CA', availableLanguage: 'English' },
     ],
     address: [
-      { '@type': 'PostalAddress', streetAddress: 'Salaam Street, Behind Fabrix', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
+      { '@type': 'PostalAddress', streetAddress: 'Salam Street', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
       { '@type': 'PostalAddress', streetAddress: '1 Concorde Gate', addressLocality: 'North York', addressRegion: 'ON', addressCountry: 'CA' },
     ],
     sameAs: [
@@ -163,7 +163,7 @@ export default function RootLayout({ children }) {
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Salaam Street, Behind Fabrix',
+      streetAddress: 'Salam Street',
       postOfficeBoxNumber: '53209',
       addressLocality: 'Abu Dhabi',
       addressCountry: 'AE',

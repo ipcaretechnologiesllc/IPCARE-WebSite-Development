@@ -930,7 +930,7 @@ function OfficesCTA() {
               <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+971 2 676 6935</span></div>
               <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ae</span></div>
               <div className="flex items-center gap-2"><Globe size={14} className="text-[#E87722] flex-shrink-0"/><a href="https://www.ipcare.ae" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">www.ipcare.ae</a></div>
-              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salaam Street, Behind Fabrix, P.O. Box 53209, Abu Dhabi, UAE</span></div>
+              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salam Street, P.O. Box 53209, Abu Dhabi, UAE</span></div>
             </div>
           </div>
           <div>
