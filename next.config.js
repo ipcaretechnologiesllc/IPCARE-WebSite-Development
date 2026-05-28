@@ -41,10 +41,16 @@ const nextConfig = {
   async redirects() {
     return [
       // ─── Canonical domain strategy ────────────────────────────────────────
-      // ipcares.com is the legacy/secondary domain. All requests get
-      // permanently (308) redirected to the equivalent path on ipcare.ae.
-      // We do this at next.config level (edge) rather than in middleware
-      // for better performance and to keep middleware focused on pathname injection.
+      // www.ipcare.ae is the single canonical host for the UAE site.
+      // Non-www ipcare.ae and legacy ipcares.com both 308 to www.ipcare.ae.
+      // This keeps canonical tags, sitemap, and redirect all pointing the
+      // same direction so Google never has to resolve a mismatch.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'ipcare.ae' }],
+        destination: 'https://www.ipcare.ae/:path*',
+        permanent: true,
+      },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'ipcares.com' }],
