@@ -473,7 +473,7 @@ function TwoRegions() {
             </div>
             <div>
               <div style={rowItem}><MapPin size={15} style={iconStyle} /><span>Salam Street, P.O. Box 53209, Abu Dhabi, UAE</span></div>
-              <div style={rowItem}><Phone size={15} style={iconStyle} /><span>+971 2 6726300</span></div>
+              <div style={rowItem}><Phone size={15} style={iconStyle} /><span>+971 2 676 6935</span></div>
               <div style={rowItem}><Mail size={15} style={iconStyle} /><span>info@ipcare.ae</span></div>
               <div style={rowItem}>
                 <Globe size={15} style={iconStyle} />
