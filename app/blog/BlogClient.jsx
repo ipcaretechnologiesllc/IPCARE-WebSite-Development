@@ -49,7 +49,7 @@ export default function BlogClient() {
         <div style={{ position: 'absolute', top: '-100px', right: '10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="relative py-20 md:py-28 px-6">
           <div className="max-w-[800px] mx-auto text-center">
-            <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Knowledge Base</div>
+            <div className="section-eyebrow reveal">Knowledge Base</div>
             <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">IT Knowledge Base &amp; Insights</h1>
             <p className="mt-5 text-lg max-w-2xl mx-auto reveal" style={{ color: 'rgba(255,255,255,0.75)' }}>
               Field-tested articles from IP Care engineers and advisors — cybersecurity, cloud, networking, and more.

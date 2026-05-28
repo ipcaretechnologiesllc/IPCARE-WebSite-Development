@@ -52,7 +52,7 @@ export default function ContactClient() {
         <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
         <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto">
-          <div className="mono uppercase mb-4" style={{ color: '#E87722', fontSize: '13px', letterSpacing: '4px', fontWeight: 700 }}>Contact</div>
+          <div className="section-eyebrow">Contact</div>
           <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get in Touch</h1>
           <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.1rem' }}>We respond within 4 business hours.</p>
         </div>
@@ -182,7 +182,7 @@ export default function ContactClient() {
 
               {/* What to expect — fills the remaining height and balances the column */}
               <div className="bg-white rounded-2xl" style={{ borderTop: '3px solid #E87722', boxShadow: '0 8px 32px rgba(10,26,70,0.12)', padding: '28px 32px' }}>
-                <div className="mono uppercase mb-4" style={{ color: '#E87722', fontSize: '11px', letterSpacing: '3px', fontWeight: 700 }}>What to Expect</div>
+                <div className="section-eyebrow">What to Expect</div>
                 <ul className="space-y-3.5">
                   {[
                     { I: Icons.Clock,      text: 'Reply within 4 business hours — usually sooner' },
@@ -206,7 +206,7 @@ export default function ContactClient() {
 
             <div className="bg-white rounded-2xl overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(10,26,70,0.12)' }}>
               <div className="px-6 pt-5 pb-3">
-                <div className="mono uppercase" style={{ color: '#E87722', fontSize: '11px', letterSpacing: '3px', fontWeight: 700 }}>Abu Dhabi, UAE</div>
+                <div className="section-eyebrow">Abu Dhabi, UAE</div>
               </div>
               <iframe
                 src="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"
@@ -220,7 +220,7 @@ export default function ContactClient() {
 
             <div className="bg-white rounded-2xl overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(10,26,70,0.12)' }}>
               <div className="px-6 pt-5 pb-3">
-                <div className="mono uppercase" style={{ color: '#E87722', fontSize: '11px', letterSpacing: '3px', fontWeight: 700 }}>Toronto, Canada</div>
+                <div className="section-eyebrow">Toronto, Canada</div>
               </div>
               <iframe
                 src="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"

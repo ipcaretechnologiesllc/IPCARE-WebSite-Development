@@ -69,7 +69,7 @@ function NewsletterStripInner() {
       }}
     >
       <div className="max-w-[640px] mx-auto text-center">
-        <div className="mono uppercase mb-3" style={{ color: '#E87722', fontSize: '11px', letterSpacing: '2.5px' }}>
+        <div className="section-eyebrow">
           Stay Informed
         </div>
         <h2 className="font-bold mb-4" style={{ color: '#0B1A46', fontSize: '28px', lineHeight: 1.25 }}>

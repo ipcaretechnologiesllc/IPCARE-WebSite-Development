@@ -192,7 +192,7 @@ function Services() {
     <section className="py-20 md:py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1300px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Services</div>
+          <div className="section-eyebrow">Services</div>
           <h2 className="text-[#0B1A46] text-3xl md:text-5xl font-bold leading-tight">
             End-to-End Event IT Services
           </h2>
@@ -263,7 +263,7 @@ function HowItWorks() {
     <section className="py-20 md:py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-14 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Process</div>
+          <div className="section-eyebrow">Process</div>
           <h2 className="text-[#0B1A46] text-3xl md:text-5xl font-bold leading-tight">How It Works</h2>
           <p className="text-[#4B5563] mt-4 max-w-xl mx-auto">Four steps from kick-off to encore.</p>
         </div>
@@ -337,7 +337,7 @@ function CapabilityStats() {
       </div>
       <div className="max-w-[1200px] mx-auto relative">
         <div className="text-center mb-10 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Capability</div>
+          <div className="section-eyebrow">Capability</div>
           <h2 className="text-white text-3xl md:text-4xl font-bold">Engineered at Event Scale</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -368,7 +368,7 @@ function Technology() {
     >
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">
+          <div className="section-eyebrow">
             Technology Partners
           </div>
           <h2 className="text-white text-2xl md:text-3xl font-bold">Technology We Deploy</h2>
@@ -421,7 +421,7 @@ function CTAStrip() {
       <div className="max-w-[1200px] mx-auto reveal">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">
+            <div className="section-eyebrow">
               Book Your Event
             </div>
             <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">

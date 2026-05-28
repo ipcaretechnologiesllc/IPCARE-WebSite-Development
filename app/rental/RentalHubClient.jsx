@@ -88,7 +88,7 @@ export default function RentalHubClient() {
         </div>
 
         <div className="relative max-w-[1200px] mx-auto text-center">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">
+          <div className="section-eyebrow reveal">
             Rental Hub
           </div>
           <h1
@@ -115,7 +115,7 @@ export default function RentalHubClient() {
         <div className="max-w-[1400px] mx-auto">
 
           <div className="text-center mb-12 reveal">
-            <div className="mono text-[11px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>
+            <div className="section-eyebrow">
               Equipment Categories
             </div>
             <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
@@ -183,7 +183,7 @@ export default function RentalHubClient() {
         <div className="max-w-[1400px] mx-auto">
 
           <div className="text-center mb-12 reveal">
-            <div className="mono text-[11px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>
+            <div className="section-eyebrow">
               Popular Rentals
             </div>
             <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
@@ -218,7 +218,7 @@ export default function RentalHubClient() {
         <div className="max-w-[1400px] mx-auto">
 
           <div className="text-center mb-12 reveal">
-            <div className="mono text-[11px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>
+            <div className="section-eyebrow">
               Pre-Built Packages
             </div>
             <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
@@ -276,7 +276,7 @@ export default function RentalHubClient() {
         <div className="max-w-[1300px] mx-auto">
 
           <div className="text-center mb-12 reveal">
-            <div className="mono text-[11px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>
+            <div className="section-eyebrow">
               The IP Care Advantage
             </div>
             <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
@@ -314,9 +314,7 @@ export default function RentalHubClient() {
         }}
       >
         <div className="max-w-[1000px] mx-auto reveal">
-          <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4">
-            Get a Quote Today
-          </div>
+          <div className="section-eyebrow">Get a Quote Today</div>
           <h2
             className="text-white font-bold leading-tight mb-5"
             style={{ fontSize: 'clamp(1.8rem,3.5vw,2.6rem)' }}
