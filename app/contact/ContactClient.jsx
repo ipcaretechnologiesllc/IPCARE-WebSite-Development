@@ -274,7 +274,7 @@ function OfficeCard({ flag, region, city, phone, email, address, hours }) {
     <div className="bg-white rounded-2xl" style={{ borderTop: '3px solid #E87722', boxShadow: '0 8px 32px rgba(10,26,70,0.12)', padding: '28px 32px' }}>
       <div className="flex items-center gap-2 mb-1">
         {flag}
-        <span className="mono text-[10px] uppercase tracking-widest font-bold" style={{ color: '#E87722' }}>{region}</span>
+        <span className="mono text-[13px] uppercase tracking-widest font-bold" style={{ color: '#E87722' }}>{region}</span>
       </div>
       <h3 className="font-extrabold mb-4" style={{ color: '#0B1A46', fontSize: '1.35rem' }}>{city}</h3>
       <div className="space-y-2.5 text-sm" style={{ color: '#4A5878' }}>

@@ -159,7 +159,7 @@ function EventsPortfolio() {
               {/* Card content */}
               <div className="absolute bottom-0 left-0 right-0" style={{ padding: '20px' }}>
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold"
+                  className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold"
                   style={{ background: '#E87722', color: '#fff', marginBottom: '8px' }}
                 >
                   {ev.category}

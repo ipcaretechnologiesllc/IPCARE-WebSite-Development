@@ -33,8 +33,8 @@ const CATEGORY_PHOTOS = {
   'tablets-ipads':     'https://images.unsplash.com/photo-1561154464-82e9adf32764',
   'printers':          'https://images.unsplash.com/photo-1650094980833-7373de26feb6',
   'event-wifi':        'https://images.unsplash.com/photo-1606904825846-647eb07f5be2',
-  'networking':        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8',
-  'cctv':              'https://images.unsplash.com/photo-1557804506-669a67965ba0',
+  'networking':        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64',
+  'cctv':              'https://images.unsplash.com/photo-1585771724684-38269d6639fd',
   'testing-equipment': 'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf',
   'servers':           'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee',
   'macbooks':          'https://images.unsplash.com/photo-1517336714731-489689fd1ca8',
@@ -160,7 +160,7 @@ export default function RentalHubClient() {
                     {c.name}
                   </h3>
                   <p
-                    className="mono text-[10px] uppercase"
+                    className="mono text-[13px] uppercase"
                     style={{ color: '#E87722', letterSpacing: '1px' }}
                   >
                     {c.products.length} Items
@@ -374,13 +374,13 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
       >
         <img
           src={p.image.startsWith('http') ? `${p.image}?w=600&q=80` : p.image}
-          alt={`${p.brand} ${p.model}`}
+          alt={`${p.brand} ${p.model} rental — IP Care Technologies`}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
         />
         {/* Brand badge */}
         <div
-          className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded"
+          className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded"
           style={{ background: '#E87722', color: '#ffffff' }}
         >
           {p.brand}
@@ -413,7 +413,7 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
           {['daily', 'weekly', 'monthly'].map((d) => (
             <span
               key={d}
-              className="mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full"
+              className="mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded-full"
               style={{ background: '#F4F6FA', color: '#1E3A8A', border: '1px solid #E2E8F0' }}
             >
               {d}

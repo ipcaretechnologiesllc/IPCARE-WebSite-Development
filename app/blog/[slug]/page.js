@@ -85,7 +85,7 @@ export default function ArticlePage({ params }) {
               <Icons.ChevronRight size={12} />
               <span className="truncate max-w-[260px]" style={{ color: 'rgba(255,255,255,0.8)' }}>{a.title}</span>
             </nav>
-            <span className="mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded inline-block mb-5" style={{ background: '#E87722', color: '#fff' }}>{a.category}</span>
+            <span className="mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded inline-block mb-5" style={{ background: '#E87722', color: '#fff' }}>{a.category}</span>
             <h1 className="text-white text-3xl md:text-5xl font-bold leading-[1.1] mb-6">{a.title}</h1>
             <div className="flex items-center flex-wrap gap-x-4 gap-y-1 text-sm mono" style={{ color: 'rgba(255,255,255,0.6)' }}>
               <span>{a.author}</span>
@@ -113,7 +113,7 @@ export default function ArticlePage({ params }) {
                 )
                 if (b.cta) return (
                   <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.06)', border: '1px solid rgba(232,119,34,0.28)' }}>
-                    {b.cta.label && <div className="mono text-[10px] uppercase tracking-widest mb-1.5" style={{ color: '#E87722' }}>{b.cta.label}</div>}
+                    {b.cta.label && <div className="mono text-[13px] uppercase tracking-widest mb-1.5" style={{ color: '#E87722' }}>{b.cta.label}</div>}
                     <div className="text-base md:text-lg font-semibold group-hover:text-[#E87722] transition" style={{ color: '#0B1A46' }}>{b.cta.text}</div>
                   </Link>
                 )
@@ -180,11 +180,11 @@ export default function ArticlePage({ params }) {
                         loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       />
-                      <span className="absolute top-3 left-3 mono text-[9px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
+                      <span className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
                     </div>
                     <div className="p-5 flex flex-col flex-1">
                       <h3 className="font-semibold text-base leading-snug mb-2 group-hover:text-[#E87722] transition-colors" style={{ color: '#0B1A46' }}>{r.title}</h3>
-                      <div className="mt-auto mono text-[10px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>{r.date} &bull; {r.readTime}</div>
+                      <div className="mt-auto mono text-[13px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>{r.date} &bull; {r.readTime}</div>
                     </div>
                   </Link>
                 ))}

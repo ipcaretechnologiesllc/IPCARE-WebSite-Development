@@ -139,7 +139,7 @@ function ArticleCard({ a }) {
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
         <span
-          className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded"
+          className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded"
           style={{ background: '#E87722', color: '#fff' }}
         >
           {a.category}

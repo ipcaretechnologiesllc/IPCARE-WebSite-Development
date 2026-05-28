@@ -86,7 +86,7 @@ export default function PortfolioClient() {
                 <div className="relative lg:col-span-2 aspect-[4/3] lg:aspect-auto overflow-hidden">
                   <img src={ev.img} alt={ev.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover"/>
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.2) 0%, rgba(7,16,42,0.65) 100%)' }}/>
-                  <span className="absolute top-4 left-4 mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
+                  <span className="absolute top-4 left-4 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded-full" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
                 </div>
                 <div className="p-8 md:p-10 lg:col-span-3">
                   <div className="flex items-center gap-3 mb-3">
@@ -100,7 +100,7 @@ export default function PortfolioClient() {
                   <div className="grid grid-cols-3 gap-3 mb-6">
                     {Object.entries(ev.stats).map(([k, v]) => (
                       <div key={k} className="p-3 rounded-lg" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                        <div className="mono text-[10px] text-white/50 uppercase tracking-wider">{k}</div>
+                        <div className="mono text-[13px] text-white/50 uppercase tracking-wider">{k}</div>
                         <div className="text-white font-semibold text-sm mt-1">{v}</div>
                       </div>
                     ))}

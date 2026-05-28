@@ -10,7 +10,7 @@ export default function ProductCard({ product, categorySlug }) {
     <div className="glass-card overflow-hidden group flex flex-col h-full">
       <Link href={`/rental/${categorySlug}/${product.slug}`} className="relative block h-60 overflow-hidden" style={{ background: '#ffffff' }}>
         <img src={product.image.startsWith('http') ? `${product.image}?w=600&q=80` : product.image} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-3"/>
-        <div className="absolute top-3 left-3 mono text-[10px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', border: 'none', color: '#ffffff' }}>{product.brand}</div>
+        <div className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', border: 'none', color: '#ffffff' }}>{product.brand}</div>
       </Link>
 
       <div className="flex-1 flex flex-col p-5">
@@ -24,7 +24,7 @@ export default function ProductCard({ product, categorySlug }) {
         </ul>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {['daily', 'weekly', 'monthly'].map(d => (
-            <span key={d} className="glass-pill" style={{ fontSize: '10px' }}>{d}</span>
+            <span key={d} className="glass-pill" style={{ fontSize: '13px' }}>{d}</span>
           ))}
         </div>
         <AddToQuoteButton product={p} size="sm"/>

@@ -696,7 +696,7 @@ function EventsPortfolio() {
               <img src={ev.img} alt={`${ev.name} — event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
-                <span className="inline-block px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
+                <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
                 <h3 className="text-white text-lg font-semibold leading-snug">{ev.name}</h3>
                 <p className="text-white/70 text-xs mt-1">{ev.loc}</p>
               </div>
@@ -898,7 +898,7 @@ function BlogTeaser() {
             <Link key={p.slug} href={`/blog/${p.slug}`} className="article-card reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="article-card__media">
                 <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
                 <div className="article-card__media-fade" />
               </div>
               <div className="article-card__body">
