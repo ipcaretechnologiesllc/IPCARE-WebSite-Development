@@ -123,8 +123,7 @@ function Hero() {
           width: '100%',
           textAlign: 'center',
         }}>
-          <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>Enterprise IT Solutions &amp; Services</span>
-          <span className="hero-h1-line" style={{ display: 'block', whiteSpace: 'nowrap' }}>UAE &amp; Canada</span>
+          Enterprise IT Solutions &amp; Services <span className="text-[#E87722]">&mdash; UAE &amp; Canada</span>
         </h1>
         <p style={{
           fontSize: '1.2rem',

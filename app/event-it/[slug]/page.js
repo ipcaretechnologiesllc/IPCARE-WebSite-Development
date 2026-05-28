@@ -80,7 +80,7 @@ export default function EventSubPage({ params }) {
             <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:pb-14">
               <div className="max-w-[1100px] mx-auto">
                 <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{event.year} • {event.location}</div>
-                <h1 className="text-white text-3xl md:text-5xl font-bold leading-[1.1] max-w-3xl">{sub.h1}</h1>
+                <div className="text-white text-3xl md:text-5xl font-bold leading-[1.1] max-w-3xl" aria-hidden="true">{sub.h1}</div>
               </div>
             </div>
           </section>

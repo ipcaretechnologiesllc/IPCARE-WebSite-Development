@@ -229,18 +229,23 @@ function HeroCarousel() {
                   </span>
                 </div>
 
-                {/* Headline — optional orange accent for brand slide */}
-                <h1
-                  className="text-white font-extrabold leading-tight"
-                  style={{ fontSize: 'clamp(28px, 4.6vw, 58px)', lineHeight: 1.14 }}
-                  aria-live={active ? 'polite' : undefined}
-                >
-                  {slide.headlineAccent ? (
-                    <>{slide.headline}{' '}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span></>
-                  ) : (
-                    slide.headline
-                  )}
-                </h1>
+                {/* Headline — H1 on the brand slide only; service slides use H2 (visual size identical via className) */}
+                {(() => {
+                  const HeadingTag = slide.headlineAccent ? 'h1' : 'h2'
+                  return (
+                    <HeadingTag
+                      className="text-white font-extrabold leading-tight"
+                      style={{ fontSize: 'clamp(28px, 4.6vw, 58px)', lineHeight: 1.14 }}
+                      aria-live={active ? 'polite' : undefined}
+                    >
+                      {slide.headlineAccent ? (
+                        <>{slide.headline}{' '}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span></>
+                      ) : (
+                        slide.headline
+                      )}
+                    </HeadingTag>
+                  )
+                })()}
 
                 {/* Description */}
                 <p
