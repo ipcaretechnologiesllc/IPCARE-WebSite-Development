@@ -133,7 +133,7 @@ function EventsPortfolio() {
           {filtered.map((ev, i) => (
             <Link
               key={ev.slug}
-              href={`/event-it/${ev.slug}`}
+              href={ev.link || `/event-it/${ev.slug}`}
               className="group relative rounded-xl overflow-hidden aspect-[3/4] block reveal"
               style={{ transitionDelay: `${i * 60}ms` }}
             >

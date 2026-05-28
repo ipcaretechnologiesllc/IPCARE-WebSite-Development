@@ -2,7 +2,7 @@ import { headers } from 'next/headers'
 import { articles } from '@/lib/blog-data'
 import { rentalCategories, getAllProductParams } from '@/lib/rental-data'
 import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
-import { events, getAllEventSubSlugs } from '@/lib/event-it-data'
+import { getAllEventSubSlugs } from '@/lib/event-it-data'
 import { getAllAdvisorySlugs, kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
 
@@ -81,10 +81,9 @@ export default function sitemap() {
     entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
-  // Event IT — event detail pages + subpages
-  for (const ev of events || []) {
-    entries.push({ url: `${BASE}/event-it/${ev.slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
-  }
+  // Event IT — only slugs that have a built subpage (getAllEventSubSlugs = Object.keys(subpages)).
+  // Previously this also looped over the raw `events` array, which emitted 4 slugs that exist
+  // in the portfolio data but have no page route — causing live sitemap 404s. Removed that loop.
   for (const slug of getAllEventSubSlugs() || []) {
     entries.push({ url: `${BASE}/event-it/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
   }
