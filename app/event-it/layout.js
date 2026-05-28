@@ -72,12 +72,30 @@ const jsonLd = {
         item: {
           '@type': 'Event',
           name: ev.name,
+          startDate: ev.startDate,
+          endDate: ev.endDate,
+          eventStatus: 'https://schema.org/EventScheduled',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
           location: {
             '@type': 'Place',
             name: ev.location,
-            address: { '@type': 'PostalAddress', addressCountry: 'AE' },
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: ev.location.split(',')[0].trim(),
+              addressCountry: 'AE',
+            },
           },
           description: ev.tech,
+          image: ev.img
+            ? ev.img.startsWith('/')
+              ? `https://www.ipcare.ae${ev.img}`
+              : ev.img
+            : `https://www.ipcare.ae/ipcare-logo.png`,
+          organizer: {
+            '@type': 'Organization',
+            name: 'IP Care Technologies LLC',
+            url: 'https://www.ipcare.ae',
+          },
           url: `https://www.ipcare.ae/event-it/${ev.slug}`,
         },
       })),
