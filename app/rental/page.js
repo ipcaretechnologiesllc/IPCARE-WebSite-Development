@@ -8,10 +8,12 @@ export const metadata = {
     'Short-term and long-term IT equipment rental in UAE and Canada. Laptop rental, event WiFi, servers, CCTV, networking gear and bundle packages. Delivery, setup and certified engineers included.',
   alternates: { canonical: '/rental' },
   openGraph: {
-    title: 'IT Equipment Rental Hub — IP Care Technologies',
+    title: 'IT Equipment Rental UAE & Canada — Laptops, WiFi, Servers, CCTV | IP Care Technologies',
     description:
-      'Laptop rental UAE, event WiFi rental UAE, server rental, CCTV rental. 500+ items, pre-built bundles, daily/weekly/monthly rates. Delivery & setup included.',
+      'Short-term and long-term IT equipment rental in UAE and Canada. Laptop rental, event WiFi, servers, CCTV, networking gear and bundle packages. Delivery, setup and certified engineers included.',
     url: '/rental',
+    type: 'website',
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IT equipment rental UAE — IP Care Technologies' }],
   },
 }
 

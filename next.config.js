@@ -166,6 +166,8 @@ const nextConfig = {
       { source: '/nesa.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
 
       // ─── Cybersecurity Advisory (separate hub) ─────────────────────────
+      // Short alias used in some marketing materials and email signatures.
+      { source: '/cyber-advisory', destination: '/cybersecurity-advisory', permanent: true },
       { source: '/zero-trust.php', destination: '/cybersecurity-advisory/zero-trust', permanent: true },
       { source: '/sase.php', destination: '/cybersecurity-advisory/sase', permanent: true },
       { source: '/cloud-security.php', destination: '/cybersecurity-advisory/cloud-security', permanent: true },

@@ -11,6 +11,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const sub = getEventSubpage(params.slug)
   if (!sub) return {}
+
+  // Pull the event's own hero image for the og:image — the `events` array
+  // (already imported below for the page component) holds per-event img paths.
+  // Fall back to the site default if the slug is a service sub-page (event-wifi etc.)
+  // that has no matching entry in the events portfolio array.
+  const event = (events || []).find((e) => e.slug === params.slug)
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
+  const imgSrc = event?.img
+    ? event.img.startsWith('http')
+      ? event.img
+      : `${BASE}${event.img}`
+    : `${BASE}/opengraph-image.png`
+  const ogImages = [{ url: imgSrc, width: 1200, height: 630, alt: `${sub.h1} — Event IT by IP Care` }]
+
   return {
     title: sub.title,
     description: sub.metaDescription,
@@ -20,6 +34,7 @@ export async function generateMetadata({ params }) {
       description: sub.metaDescription,
       url: `/event-it/${params.slug}`,
       type: 'website',
+      images: ogImages,
     },
   }
 }

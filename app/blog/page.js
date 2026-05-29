@@ -9,10 +9,11 @@ export const metadata = {
   description: 'Expert articles on cybersecurity, managed IT services, networking, cloud, and enterprise IT. Field-tested insights from IP Care engineers based in UAE and Canada.',
   alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'IT Knowledge Base & Insights — IP Care Technologies',
-    description: 'Expert articles on cybersecurity, managed IT, networking, and enterprise technology from IP Care engineers.',
+    title: 'IT Knowledge Base & Insights — IP Care Technologies Blog',
+    description: 'Expert articles on cybersecurity, managed IT services, networking, cloud, and enterprise IT. Field-tested insights from IP Care engineers based in UAE and Canada.',
     url: `${BASE}/blog`,
     type: 'website',
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IP Care Knowledge Base — IT insights and articles' }],
   },
 }
 

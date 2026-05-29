@@ -95,6 +95,7 @@ export const metadata = {
     description: 'Enterprise IT services across UAE and Canada: managed IT, cloud, cybersecurity, infrastructure, ELV, and email solutions. SLA-backed support since 2003.',
     url: '/services',
     type: 'website',
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Enterprise IT services — IP Care Technologies' }],
   },
 }
 

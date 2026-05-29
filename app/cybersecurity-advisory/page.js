@@ -13,6 +13,7 @@ export const metadata = {
     description: 'Enterprise cybersecurity advisory across UAE and Canada: Zero Trust architecture, SASE transformation, cloud security, and executive advisory. Vendor-certified across Palo Alto, Fortinet, Check Point, and more.',
     url: '/cybersecurity-advisory',
     type: 'website',
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Cyber advisory — Zero Trust, SASE and security architecture by IP Care' }],
   },
 }
 

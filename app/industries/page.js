@@ -100,6 +100,7 @@ export const metadata = {
     description: 'Sector-specific IT across UAE and Canada: healthcare (DOH/DHA/NABIDH), banking (DFSA/FSRA), government (NESA/Azure), event management, and construction IT. Two decades of regulated-industry delivery.',
     url: '/industries',
     type: 'website',
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions — IP Care Technologies' }],
   },
 }
 
