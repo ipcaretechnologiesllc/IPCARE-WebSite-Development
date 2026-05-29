@@ -79,7 +79,7 @@ const HERO_SLIDES = [
     id: 2,
     service: 'Cybersecurity',
     icon: Lock,
-    headline: 'Zero Trust Security and Compliance, Built In',
+    headline: 'SOC, Zero Trust and Compliance — NESA, PCI, ISO 27001',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
     cta: { primary: { label: 'View Cyber Services', href: '/services/cybersecurity' }, secondary: { label: 'Book Security Review', href: '/contact' } },

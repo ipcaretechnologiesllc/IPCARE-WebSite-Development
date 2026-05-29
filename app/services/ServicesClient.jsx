@@ -169,6 +169,22 @@ function ServicesGrid() {
   return (
     <section style={{ background: '#F4F6FA', padding: '96px 24px' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <p style={{
+          fontSize: '1.1rem',
+          color: '#333F50',
+          lineHeight: 1.8,
+          maxWidth: '820px',
+          margin: '0 auto 56px',
+          textAlign: 'center',
+        }}>
+          For two decades, we&apos;ve operated enterprise IT the way it&apos;s supposed to work — quietly,
+          reliably, and at a scale where downtime is measured in minutes a year, not hours. From
+          government agencies running mission-critical systems to global event organisers needing
+          50,000-seat venue networks deployed in 72 hours, the work is the same: design for what
+          can go wrong, deploy what won&apos;t, and stay close enough to fix it before anyone notices.
+          Managed IT, cybersecurity, ELV, cloud, event infrastructure and equipment rental —
+          delivered by the same team, under one SLA, across UAE and Canada.
+        </p>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
