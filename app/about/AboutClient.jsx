@@ -428,6 +428,91 @@ function MissionVision() {
 }
 
 /* ════════════════════════════════════════════════
+   6a. TWO REGIONS MAP — inline SVG infographic
+═══════════════════════════════════════════════ */
+function TwoRegionsMap() {
+  const ca = { x: 200, y: 82 }   // Toronto  (lon -79.4 → x≈201, lat 43.7 → y≈72 + label offset)
+  const ae = { x: 470, y: 102 }  // Abu Dhabi (lon  54.4 → x≈469, lat 24.5 → y≈102)
+  const arcPath = `M ${ca.x},${ca.y} Q 335,18 ${ae.x},${ae.y}`
+
+  return (
+    <div className="reveal" style={{ marginBottom: '40px' }}>
+      <svg
+        viewBox="0 0 720 280"
+        style={{ width: '100%', maxWidth: '720px', display: 'block', margin: '0 auto', borderRadius: '16px' }}
+        role="img"
+        aria-label="World map showing IP Care Technologies offices: Abu Dhabi, UAE (headquarters) and Toronto, Canada (North American operations)"
+      >
+        {/* Background */}
+        <rect width="720" height="280" rx="16" fill="#0B1A46" />
+
+        {/* Lat / lon grid lines */}
+        {[62, 124, 187, 249].map(y => (
+          <line key={`h${y}`} x1="0" y1={y} x2="720" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+        ))}
+        {[120, 240, 360, 480, 600].map(x => (
+          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="280" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+        ))}
+
+        {/* Simplified continent shapes (stylised equirectangular, not geographically precise) */}
+        {/* North America */}
+        <path d="M 52,58 L 98,50 L 146,62 L 163,80 L 167,100 L 156,112 L 170,120 L 208,122 L 224,110 L 232,98 L 244,86 L 252,74 L 246,62 L 224,56 L 194,50 L 158,50 L 116,52 L 76,54 Z"
+          fill="rgba(42,72,140,0.60)" />
+        {/* Greenland */}
+        <path d="M 248,40 L 272,34 L 298,38 L 298,54 L 282,62 L 260,58 Z"
+          fill="rgba(42,72,140,0.45)" />
+        {/* South America */}
+        <path d="M 192,136 L 222,131 L 240,146 L 238,168 L 226,196 L 210,210 L 196,200 L 186,178 L 184,156 L 188,140 Z"
+          fill="rgba(42,72,140,0.60)" />
+        {/* Europe */}
+        <path d="M 334,52 L 380,48 L 408,56 L 410,68 L 423,70 L 420,82 L 400,88 L 376,88 L 356,80 L 344,70 L 335,60 Z"
+          fill="rgba(42,72,140,0.60)" />
+        {/* Africa */}
+        <path d="M 353,94 L 418,92 L 440,106 L 446,130 L 434,162 L 413,178 L 390,174 L 367,158 L 356,138 L 351,116 L 354,98 Z"
+          fill="rgba(42,72,140,0.60)" />
+        {/* Arabian Peninsula */}
+        <path d="M 452,100 L 486,97 L 513,103 L 524,118 L 520,130 L 502,134 L 481,128 L 463,117 L 453,107 Z"
+          fill="rgba(50,90,156,0.72)" />
+        {/* Asia */}
+        <path d="M 512,52 L 578,48 L 648,56 L 664,72 L 650,90 L 614,98 L 578,95 L 550,86 L 530,72 L 516,60 Z"
+          fill="rgba(42,72,140,0.60)" />
+        {/* Australia */}
+        <path d="M 574,168 L 622,163 L 648,172 L 650,194 L 635,210 L 608,212 L 584,202 L 572,186 Z"
+          fill="rgba(42,72,140,0.45)" />
+
+        {/* Dashed great-circle arc Toronto → Abu Dhabi */}
+        <path d={arcPath} fill="none" stroke="#E87722" strokeWidth="1.8"
+          strokeDasharray="7,5" strokeLinecap="round" opacity="0.88" />
+
+        {/* Toronto pin */}
+        <circle cx={ca.x} cy={ca.y} r="22" fill="rgba(232,119,34,0.12)" />
+        <circle cx={ca.x} cy={ca.y} r="13" fill="rgba(232,119,34,0.25)" />
+        <circle cx={ca.x} cy={ca.y} r="7"  fill="#E87722" />
+        <circle cx={ca.x} cy={ca.y} r="3"  fill="#FFFFFF" />
+
+        {/* Abu Dhabi pin */}
+        <circle cx={ae.x} cy={ae.y} r="22" fill="rgba(232,119,34,0.12)" />
+        <circle cx={ae.x} cy={ae.y} r="13" fill="rgba(232,119,34,0.25)" />
+        <circle cx={ae.x} cy={ae.y} r="7"  fill="#E87722" />
+        <circle cx={ae.x} cy={ae.y} r="3"  fill="#FFFFFF" />
+
+        {/* City labels */}
+        <text x={ca.x} y={ca.y + 30} textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="700">Toronto</text>
+        <text x={ca.x} y={ca.y + 43} textAnchor="middle" fill="rgba(255,255,255,0.55)" fontSize="9">Canada</text>
+        <text x={ae.x} y={ae.y + 30} textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="700">Abu Dhabi</text>
+        <text x={ae.x} y={ae.y + 43} textAnchor="middle" fill="rgba(255,255,255,0.55)" fontSize="9">UAE</text>
+
+        {/* Footer tagline */}
+        <text x="360" y="268" textAnchor="middle" fill="rgba(255,255,255,0.38)"
+          fontSize="9.5" letterSpacing="2.5" fontWeight="600">
+          SAME TEAM · SAME STANDARDS · TWO REGIONS
+        </text>
+      </svg>
+    </div>
+  )
+}
+
+/* ════════════════════════════════════════════════
    6. TWO REGIONS
 ═══════════════════════════════════════════════ */
 function TwoRegions() {
@@ -445,8 +530,7 @@ function TwoRegions() {
   return (
     <section style={{ background: '#FFFFFF', padding: '96px 24px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <Eyebrow>Where We Operate</Eyebrow>
+        <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
             Two Regions. One Standard.
           </h2>
@@ -455,6 +539,8 @@ function TwoRegions() {
             same team — wherever you are.
           </p>
         </div>
+
+        <TwoRegionsMap />
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
           {/* UAE */}
