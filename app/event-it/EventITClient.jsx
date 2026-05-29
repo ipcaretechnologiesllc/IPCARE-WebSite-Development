@@ -140,7 +140,11 @@ function EventsPortfolio() {
               <img
                 src={ev.img}
                 alt={`${ev.name} — event IT infrastructure by IP Care`}
-                loading="lazy"
+                width={600}
+                height={800}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none'

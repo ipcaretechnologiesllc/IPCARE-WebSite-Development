@@ -100,9 +100,18 @@ export default function ArticlePage({ params }) {
         {/* ── ARTICLE BODY ────────────────────────────────────────────── */}
         <section className="px-6 py-12" style={{ background: '#fff' }}>
           <div className="max-w-[720px] mx-auto">
-            {/* Hero image */}
+            {/* Hero image — LCP element; eager + preload hint */}
             <div className="relative rounded-2xl overflow-hidden mb-10" style={{ aspectRatio: '16/9' }}>
-              <img src={`${a.img}?w=1600&q=85`} alt={a.title} className="absolute inset-0 w-full h-full object-cover" />
+              <img
+                src={`${a.img}?w=1200&fm=webp&q=82`}
+                alt={a.title}
+                width={1200}
+                height={675}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
 
             {/* Body content */}
@@ -175,9 +184,12 @@ export default function ArticlePage({ params }) {
                   >
                     <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10' }}>
                       <img
-                        src={`${r.img}?w=600&q=75`}
+                        src={`${r.img}?w=600&fm=webp&q=82`}
                         alt={r.title}
+                        width={600}
+                        height={375}
                         loading="lazy"
+                        decoding="async"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       />
                       <span className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>

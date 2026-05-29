@@ -86,11 +86,22 @@ export default function EventSubPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      {/* Preload the hero image so the browser fetches it before parsing body */}
+      {event?.img && <link rel="preload" as="image" href={event.img} fetchPriority="high" />}
       <Header />
       <main>
         {event?.img && (
           <section className="relative w-full overflow-hidden" style={{ aspectRatio: '16/7' }}>
-            <img src={event.img} alt={`${sub.h1} — event IT delivery by IP Care`} className="absolute inset-0 w-full h-full object-cover" />
+            <img
+              src={event.img}
+              alt={`${sub.h1} — event IT delivery by IP Care`}
+              width={1200}
+              height={525}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.35) 0%, rgba(7,16,42,0.85) 100%)' }} />
             <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:pb-14">
               <div className="max-w-[1100px] mx-auto">

@@ -109,8 +109,8 @@ export default function BlogClient() {
                 When filter changes, React renders new DOM nodes the observer never sees — they
                 would stay invisible. Cards in a filter/search UI must appear immediately.
               */}
-              {filtered.map(a => (
-                <ArticleCard key={a.slug} a={a} />
+              {filtered.map((a, idx) => (
+                <ArticleCard key={a.slug} a={a} priority={idx === 0} />
               ))}
             </div>
           )}
@@ -123,7 +123,7 @@ export default function BlogClient() {
   )
 }
 
-function ArticleCard({ a }) {
+function ArticleCard({ a, priority = false }) {
   return (
     <Link
       href={`/blog/${a.slug}`}
@@ -133,9 +133,13 @@ function ArticleCard({ a }) {
       {/* Photo — 16:10 aspect, hover zoom */}
       <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10' }}>
         <img
-          src={`${a.img}?w=800&q=75`}
+          src={`${a.img}?w=600&fm=webp&q=82`}
           alt={a.title}
-          loading="lazy"
+          width={600}
+          height={375}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
         <span

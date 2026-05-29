@@ -84,7 +84,16 @@ export default function PortfolioClient() {
             <article key={ev.slug} id={ev.slug} className="glass-card overflow-hidden reveal" style={{ transitionDelay: `${i * 60}ms`, scrollMarginTop: '90px' }}>
               <div className="grid lg:grid-cols-5 gap-0">
                 <div className="relative lg:col-span-2 aspect-[4/3] lg:aspect-auto overflow-hidden">
-                  <img src={ev.img} alt={ev.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover"/>
+                  <img
+                    src={ev.img}
+                    alt={ev.name}
+                    width={640}
+                    height={480}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : 'auto'}
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.2) 0%, rgba(7,16,42,0.65) 100%)' }}/>
                   <span className="absolute top-4 left-4 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded-full" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
                 </div>

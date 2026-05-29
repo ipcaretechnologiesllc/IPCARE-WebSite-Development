@@ -134,9 +134,12 @@ export default function RentalHubClient() {
                 {/* Photo — edge-to-edge, zooms on hover */}
                 <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
                   <img
-                    src={`${CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'}?w=600&q=80`}
+                    src={`${CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'}?w=600&fm=webp&q=82`}
                     alt={CATEGORY_ALT[slug] || `${c.name} rental UAE — IP Care`}
+                    width={600}
+                    height={375}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
@@ -373,9 +376,12 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
         style={{ height: '200px', background: '#F8F9FC' }}
       >
         <img
-          src={p.image.startsWith('http') ? `${p.image}?w=600&q=80` : p.image}
+          src={p.image.startsWith('http') ? `${p.image}?w=600&fm=webp&q=82` : p.image}
           alt={`${p.brand} ${p.model} rental — IP Care Technologies`}
+          width={600}
+          height={200}
           loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
         />
         {/* Brand badge */}
