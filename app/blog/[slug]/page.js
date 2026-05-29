@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   const a = getArticle(params.slug)
   if (!a) return {}
   return {
-    title: `${a.title} | IP Care Technologies Blog`,
+    title: a.seoTitle || `${a.title} | IP Care Technologies Blog`,
     description: a.excerpt,
     alternates: { canonical: `/blog/${params.slug}` },
     openGraph: {

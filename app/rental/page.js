@@ -3,14 +3,14 @@ import Footer from '@/components/site/Footer'
 import RentalHubClient from './RentalHubClient'
 
 export const metadata = {
-  title: 'IT Equipment Rental UAE & Canada — Laptops, WiFi, Servers, CCTV | IP Care Technologies',
+  title: 'IT Equipment Rental UAE — Laptops, WiFi & Servers',
   description:
-    'Short-term and long-term IT equipment rental in UAE and Canada. Laptop rental, event WiFi, servers, CCTV, networking gear and bundle packages. Delivery, setup and certified engineers included.',
+    'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
   alternates: { canonical: '/rental' },
   openGraph: {
-    title: 'IT Equipment Rental UAE & Canada — Laptops, WiFi, Servers, CCTV | IP Care Technologies',
+    title: 'IT Equipment Rental UAE — Laptops, WiFi & Servers',
     description:
-      'Short-term and long-term IT equipment rental in UAE and Canada. Laptop rental, event WiFi, servers, CCTV, networking gear and bundle packages. Delivery, setup and certified engineers included.',
+      'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
     url: '/rental',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IT equipment rental UAE — IP Care Technologies' }],

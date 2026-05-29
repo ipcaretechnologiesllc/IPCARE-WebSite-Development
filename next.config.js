@@ -175,6 +175,9 @@ const nextConfig = {
       { source: '/executive-advisory.php', destination: '/cybersecurity-advisory/executive-advisory', permanent: true },
 
       // ─── Email Solutions ───────────────────────────────────────────────
+      // Microsoft 365 exists in both /services/cloud and /services/email-solutions.
+      // Canonical is email-solutions; redirect the cloud copy so only one URL is indexed.
+      { source: '/services/cloud/microsoft-365', destination: '/services/email-solutions/microsoft-365', permanent: true },
       { source: '/email-solutions.php', destination: '/services/email-solutions', permanent: true },
       { source: '/google-workspace.php', destination: '/services/email-solutions/google-workspace', permanent: true },
       { source: '/gsuite.php', destination: '/services/email-solutions/google-workspace', permanent: true },

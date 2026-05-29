@@ -92,12 +92,12 @@ const breadcrumbSchema = {
 }
 
 export const metadata = {
-  title: 'Industry IT Solutions UAE | Healthcare, Banking, Government, Events & Construction | IP Care',
-  description: 'Sector-specific IT across UAE and Canada: healthcare (DOH/DHA/NABIDH), banking (DFSA/FSRA), government (NESA/Azure), event management, and construction IT. Two decades of regulated-industry delivery.',
+  title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
+  description: 'Sector-specific IT in UAE and Canada: healthcare (DOH/DHA), banking (DFSA/FSRA), government (NESA), events and construction. 20+ years regulated delivery.',
   alternates: { canonical: '/industries' },
   openGraph: {
-    title: 'Industry IT Solutions UAE | Healthcare, Banking, Government, Events & Construction | IP Care',
-    description: 'Sector-specific IT across UAE and Canada: healthcare (DOH/DHA/NABIDH), banking (DFSA/FSRA), government (NESA/Azure), event management, and construction IT. Two decades of regulated-industry delivery.',
+    title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
+    description: 'Sector-specific IT in UAE and Canada: healthcare (DOH/DHA), banking (DFSA/FSRA), government (NESA), events and construction. 20+ years regulated delivery.',
     url: '/industries',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions — IP Care Technologies' }],

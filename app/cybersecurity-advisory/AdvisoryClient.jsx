@@ -114,7 +114,7 @@ function Hero() {
             lineHeight: 1.15, margin: '0 auto 22px',
             maxWidth: '900px', width: '100%', textAlign: 'center',
           }}>
-            Architecting Enterprise Security for the Modern Era
+            Zero Trust. SASE. Cloud Security. Done by Practitioners.
           </h1>
           <p style={{
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',

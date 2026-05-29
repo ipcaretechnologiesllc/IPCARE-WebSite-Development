@@ -60,10 +60,11 @@ const HERO_SLIDES = [
     id: 0,
     service: "Trusted by the World's Biggest Events",
     icon: ShieldCheck,
-    headline: "Powering UAE's Biggest Events &",
-    headlineAccent: 'Leading Businesses.',
+    headline: "Enterprise IT for UAE's Biggest Events &",
+    headlineAccent: 'Growing Businesses.',
     description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — delivered across the UAE & Canada since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
+    cta: { primary: { label: 'Get a Free Consultation', href: '/contact' }, secondary: { label: 'View Our Services', href: '/services' } },
   },
   {
     id: 1,
@@ -72,6 +73,7 @@ const HERO_SLIDES = [
     headline: 'End-to-End IT Operations, Monitored 24/7',
     description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
+    cta: { primary: { label: 'Explore Managed IT', href: '/services/managed-it' }, secondary: { label: 'Request SLA Quote', href: '/contact' } },
   },
   {
     id: 2,
@@ -80,6 +82,7 @@ const HERO_SLIDES = [
     headline: 'Zero Trust Security and Compliance, Built In',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
+    cta: { primary: { label: 'View Cyber Services', href: '/services/cybersecurity' }, secondary: { label: 'Book Security Review', href: '/contact' } },
   },
   {
     id: 3,
@@ -88,6 +91,7 @@ const HERO_SLIDES = [
     headline: 'CCTV, Access Control and Structured Cabling',
     description: 'Intelligent physical security for modern facilities.',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
+    cta: { primary: { label: 'Explore ELV & Security', href: '/services/elv' }, secondary: { label: 'Request a Survey', href: '/contact' } },
   },
   {
     id: 4,
@@ -96,6 +100,7 @@ const HERO_SLIDES = [
     headline: "The IT Backbone for the World's Biggest Events",
     description: 'Temporary networks and connectivity at global event scale.',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
+    cta: { primary: { label: 'See Event IT Services', href: '/event-it' }, secondary: { label: 'Plan Your Event', href: '/contact' } },
   },
   {
     id: 5,
@@ -104,6 +109,7 @@ const HERO_SLIDES = [
     headline: 'Laptops, Networks and Event Tech, on Demand',
     description: 'Short and long-term rentals with nationwide logistics.',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    cta: { primary: { label: 'Browse Equipment', href: '/rental' }, secondary: { label: 'Get a Rental Quote', href: '/contact' } },
   },
   {
     id: 6,
@@ -112,6 +118,7 @@ const HERO_SLIDES = [
     headline: 'Cloud Design, Migration and Cost Optimization',
     description: 'AWS, Azure and private cloud, engineered for scale.',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
+    cta: { primary: { label: 'Explore Cloud Services', href: '/services/cloud' }, secondary: { label: 'Book Cloud Review', href: '/contact' } },
   },
 ]
 
@@ -255,21 +262,21 @@ function HeroCarousel() {
                   {slide.description}
                 </p>
 
-                {/* CTAs */}
+                {/* CTAs — per-slide, defined in HERO_SLIDES */}
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a
-                    href="/contact"
+                    href={slide.cta.primary.href}
                     className="btn-primary w-full sm:w-auto justify-center"
                     style={{ padding: '15px 32px', fontSize: '15px' }}
                   >
-                    Get a Free Consultation <ArrowRight size={17} />
+                    {slide.cta.primary.label} <ArrowRight size={17} />
                   </a>
                   <a
-                    href="/services"
+                    href={slide.cta.secondary.href}
                     className="btn-ghost w-full sm:w-auto justify-center"
                     style={{ padding: '14px 28px', fontSize: '15px' }}
                   >
-                    View Our Services
+                    {slide.cta.secondary.label}
                   </a>
                 </div>
 
@@ -446,7 +453,7 @@ function Stats() {
         <div className="text-center mb-14 reveal">
           <h2 className="text-white text-3xl md:text-4xl font-bold">Why Choose IP Care</h2>
           <p className="mt-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)' }}>
-            Numbers that reflect our commitment to enterprise excellence.
+            Real numbers from two decades of live enterprise delivery.
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5 md:gap-6">
@@ -550,7 +557,7 @@ function CyberAdvisory() {
               <Lock size={16}/> Powered by The Cyber Adviser
             </div>
             <h2 className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
-              Expert Cybersecurity Advisory — <span className="text-[#E87722]">Powered by The Cyber Adviser</span>
+              15+ Years of Cybersecurity Practice — <span className="text-[#E87722]">The Cyber Adviser</span>
             </h2>
             <p className="body-text md:text-lg mb-8">We&apos;ve spent 15+ years building security programs that hold. Zero Trust rollouts, SOC maturity, firewall architecture — across banks, government entities and enterprises that can&apos;t afford to get it wrong.</p>
 

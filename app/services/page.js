@@ -87,11 +87,11 @@ const breadcrumbSchema = {
 }
 
 export const metadata = {
-  title: 'IT Services UAE | Managed IT, Cloud, Cybersecurity & Infrastructure | IP Care',
+  title: 'IT Services UAE — Managed IT, Cloud & Cybersecurity',
   description: 'Enterprise IT services across UAE and Canada: managed IT, cloud, cybersecurity, infrastructure, ELV, and email solutions. SLA-backed support since 2003.',
   alternates: { canonical: '/services' },
   openGraph: {
-    title: 'IT Services UAE | Managed IT, Cloud, Cybersecurity & Infrastructure | IP Care',
+    title: 'IT Services UAE — Managed IT, Cloud & Cybersecurity',
     description: 'Enterprise IT services across UAE and Canada: managed IT, cloud, cybersecurity, infrastructure, ELV, and email solutions. SLA-backed support since 2003.',
     url: '/services',
     type: 'website',

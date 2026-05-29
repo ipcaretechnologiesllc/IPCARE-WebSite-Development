@@ -2,7 +2,7 @@ import { headers } from 'next/headers'
 import { articles } from '@/lib/blog-data'
 import { rentalCategories, getAllProductParams } from '@/lib/rental-data'
 import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
-import { getAllEventSubSlugs } from '@/lib/event-it-data'
+import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-data'
 import { getAllAdvisorySlugs, kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
 
@@ -23,6 +23,59 @@ const CANONICAL_DOMAINS = {
 }
 const DEFAULT_BASE = 'https://www.ipcare.ae'
 
+// ── Lastmod helpers ──────────────────────────────────────────────────────────
+// Parse 'May 06, 2026' → '2026-05-06'
+const MONTH_MAP = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6, Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12 }
+function parseBlogDate(str) {
+  if (!str) return null
+  const m = str.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})$/)
+  if (!m) return null
+  const mo = String(MONTH_MAP[m[1].slice(0, 3)] || 1).padStart(2, '0')
+  const dy = String(m[2]).padStart(2, '0')
+  return `${m[3]}-${mo}-${dy}`
+}
+// Parse 'Jun 2025' → '2025-06-01'
+function parseKbDate(str) {
+  if (!str) return null
+  const m = str.match(/^([A-Za-z]+)\s+(\d{4})$/)
+  if (!m) return null
+  const mo = String(MONTH_MAP[m[1].slice(0, 3)] || 1).padStart(2, '0')
+  return `${m[2]}-${mo}-01`
+}
+
+// Static lastmod dates for hub/category pages (real deploy/refresh dates, not build time).
+const HUB_DATES = {
+  '/':                                     '2026-05-10',
+  '/about':                                '2025-01-01',
+  '/services':                             '2025-03-01',
+  '/rental':                               '2025-03-01',
+  '/event-it':                             '2025-05-25',
+  '/event-it/portfolio':                   '2025-05-25',
+  '/cybersecurity-advisory':               '2025-06-01',
+  '/cybersecurity-advisory/knowledge-base':'2025-06-01',
+  '/blog':                                 '2026-05-10',
+  '/industries':                           '2025-01-01',
+  '/partners':                             '2025-01-01',
+  '/careers':                              '2025-04-01',
+  '/contact':                              '2025-01-01',
+  '/terms':                                '2024-01-01',
+  '/privacy-policy':                       '2024-01-01',
+  '/cookie-policy':                        '2024-01-01',
+}
+
+// Advisory sub-page static dates (service pages, not time-sensitive articles)
+const ADVISORY_SUB_DATES = {
+  'cloud-security':       '2025-03-01',
+  'zero-trust':           '2025-03-01',
+  'executive-advisory':   '2025-01-01',
+  'security-automation':  '2025-03-01',
+  'sase':                 '2025-03-01',
+}
+
+// Redirect pair: /services/cloud/microsoft-365 → /services/email-solutions/microsoft-365.
+// Exclude the source URL from the sitemap so only the canonical URL appears.
+const SITEMAP_EXCLUDE = new Set(['/services/cloud/microsoft-365'])
+
 // Force dynamic so the sitemap is generated per-request and can read the host header.
 // (Without this, Next.js would pre-render the sitemap once at build time and the
 //  same XML would be served on every domain — defeating the multi-domain strategy.)
@@ -34,7 +87,13 @@ export default function sitemap() {
   const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
   const BASE = (CANONICAL_DOMAINS[rawHost] || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_BASE).replace(/\/$/, '')
 
-  const now = new Date().toISOString()
+  // Build event slug → endDate lookup from the portfolio events array.
+  const eventEndDateMap = {}
+  for (const ev of (eventPortfolio || [])) {
+    if (ev.slug && ev.endDate) eventEndDateMap[ev.slug] = ev.endDate
+  }
+
+  const now = new Date().toISOString() // fallback only — should not appear in final output
 
   // Priority buckets
   const P_HOME = 1.0
@@ -46,7 +105,7 @@ export default function sitemap() {
   const entries = []
 
   // Home
-  entries.push({ url: `${BASE}/`, lastModified: now, changeFrequency: 'weekly', priority: P_HOME })
+  entries.push({ url: `${BASE}/`, lastModified: HUB_DATES['/'] || now, changeFrequency: 'weekly', priority: P_HOME })
 
   // Primary hubs / top pages
   const hubs = [
@@ -63,57 +122,66 @@ export default function sitemap() {
     ['/careers', P_CATEGORY, 'weekly'],
     ['/contact', P_CATEGORY, 'monthly'],
   ]
-  for (const [p, pri, ch] of hubs) entries.push({ url: `${BASE}${p}`, lastModified: now, changeFrequency: ch, priority: pri })
+  for (const [p, pri, ch] of hubs) entries.push({ url: `${BASE}${p}`, lastModified: HUB_DATES[p] || now, changeFrequency: ch, priority: pri })
 
   // Services — categories + subpages
   for (const slug of Object.keys(serviceCategories || {})) {
-    entries.push({ url: `${BASE}/services/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/services/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, slug } of getAllSubpageParams() || []) {
-    entries.push({ url: `${BASE}/services/${category}/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    const path = `/services/${category}/${slug}`
+    if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
+    entries.push({ url: `${BASE}${path}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Rental — categories + products
   for (const slug of Object.keys(rentalCategories || {})) {
-    entries.push({ url: `${BASE}/rental/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/rental/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, product } of getAllProductParams() || []) {
-    entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Event IT — only slugs that have a built subpage (getAllEventSubSlugs = Object.keys(subpages)).
   // Previously this also looped over the raw `events` array, which emitted 4 slugs that exist
   // in the portfolio data but have no page route — causing live sitemap 404s. Removed that loop.
+  // Lastmod: use the event's endDate when slug matches a portfolio event; fall back to service-page
+  // launch estimate ('2025-06-01') for service sub-pages (event-wifi, temporary-data-centres, event-cctv).
   for (const slug of getAllEventSubSlugs() || []) {
-    entries.push({ url: `${BASE}/event-it/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    const lastMod = eventEndDateMap[slug] || '2025-06-01'
+    entries.push({ url: `${BASE}/event-it/${slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Cybersecurity Advisory — fixed subroutes + dynamic slugs
   const advisoryFixed = ['cloud-security', 'zero-trust', 'executive-advisory', 'security-automation', 'sase']
   for (const slug of advisoryFixed) {
-    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: ADVISORY_SUB_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   const dynamicAdvisory = (getAllAdvisorySlugs() || []).filter(s => !advisoryFixed.includes(s))
   for (const slug of dynamicAdvisory) {
-    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
   for (const art of kbArticles || []) {
-    if (art?.slug) entries.push({ url: `${BASE}/cybersecurity-advisory/knowledge-base/${art.slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    if (art?.slug) {
+      const lastMod = parseKbDate(art.date) || '2025-06-01'
+      entries.push({ url: `${BASE}/cybersecurity-advisory/knowledge-base/${art.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
+    }
   }
 
-  // Blog — articles
+  // Blog — articles (use real publish date as lastmod)
   for (const a of articles || []) {
-    entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_DETAIL })
+    const lastMod = parseBlogDate(a.date) || now
+    entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Industries — sector pages
   for (const slug of getAllIndustrySlugs() || []) {
-    entries.push({ url: `${BASE}/industries/${slug}`, lastModified: now, changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/industries/${slug}`, lastModified: '2025-01-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
 
   // Legal
   const legal = ['/terms', '/privacy-policy', '/cookie-policy']
-  for (const p of legal) entries.push({ url: `${BASE}${p}`, lastModified: now, changeFrequency: 'yearly', priority: P_LEGAL })
+  for (const p of legal) entries.push({ url: `${BASE}${p}`, lastModified: HUB_DATES[p] || '2024-01-01', changeFrequency: 'yearly', priority: P_LEGAL })
 
   // Dedupe by url (last wins)
   const map = new Map()

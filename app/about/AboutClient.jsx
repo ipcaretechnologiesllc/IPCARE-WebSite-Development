@@ -242,7 +242,7 @@ const MILESTONES = [
   { year: '2017', title: 'Events Technology Services Launched', desc: 'Began delivering temporary IT infrastructure for major international events across the UAE.' },
   { year: '2020', title: 'Canada (Toronto) Operations Opened', desc: 'Established North American operations in Toronto, Ontario — same standards, new timezone.' },
   { year: '2023', title: '20-Year Milestone', desc: '500+ projects and 200+ enterprise clients. Two decades of delivery without compromise.' },
-  { year: '2026', title: 'Cloud & AI-Ready Infrastructure Portfolio', desc: 'Launched a next-generation cloud and AI infrastructure portfolio for enterprise transformation.' },
+  { year: '2026 →', title: 'Cloud & AI-Ready Infrastructure Portfolio', desc: 'Expanding our cloud and AI-ready infrastructure offering for enterprise clients across UAE and Canada.' },
 ]
 
 function Timeline() {
