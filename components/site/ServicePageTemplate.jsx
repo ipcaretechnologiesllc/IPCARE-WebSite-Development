@@ -2,125 +2,373 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import * as Icons from 'lucide-react'
 
+/* ── Icon helper ─────────────────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Check
   return <C {...rest} />
 }
 
+/* ── Scroll-reveal hook ──────────────────────────────────────────────────── */
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll('.reveal')
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) } })
-    }, { threshold: 0.12 })
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) }
+        })
+      },
+      { threshold: 0.10 }
+    )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
 }
 
+/* ── Design tokens (light sections) ─────────────────────────────────────── */
+// Headings on light bg
+const T_NAV   = '#0B1A46'
+// Body text on light bg
+const T_BODY  = '#4B5563'
+// Section backgrounds — alternating
+const BG_WHITE = '#FFFFFF'
+const BG_GREY  = '#F4F6FA'
+
+/* ── Reusable section-eyebrow (light version) ────────────────────────────── */
+function Eyebrow({ children }) {
+  return (
+    <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#E87722', marginBottom: '12px' }}>
+      {children}
+    </p>
+  )
+}
+
+/* ── Light H2 with orange accent bar ────────────────────────────────────── */
+function SectionHeading({ children, centered = true }) {
+  return (
+    <div className={centered ? 'text-center' : ''}>
+      <h2 style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+        {children}
+      </h2>
+      <div
+        style={{
+          width: '56px', height: '3px', background: '#E87722', borderRadius: '3px',
+          marginTop: '14px', ...(centered ? { margin: '14px auto 0' } : { marginTop: '14px' }),
+        }}
+        aria-hidden="true"
+      />
+    </div>
+  )
+}
+
+/* ── Feature card — matches home .service-card exactly ──────────────────── */
+function FeatureCard({ icon, title, desc, delay = 0 }) {
+  return (
+    <div
+      className="service-card p-7 reveal"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div
+        className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+        style={{ background: 'rgba(232,119,34,0.10)' }}
+      >
+        <Ic name={icon} size={20} className="text-[#E87722]" />
+      </div>
+      <h3 className="service-card__title text-base mb-2">{title}</h3>
+      <p className="service-card__desc text-sm leading-relaxed">{desc}</p>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN COMPONENT
+══════════════════════════════════════════════════════════════════════════ */
 export default function ServicePageTemplate({ data, related, breadcrumb }) {
   useReveal()
+
   const {
     h1, hero, overview, features, benefits, process, industries, faqs, icon,
-    // Optional override fields — all backwards-compatible with existing subpages
-    eyebrow,       // Hero pill label; defaults to 'IP Care Enterprise Service'
-    overviewTitle, // Overview card H2; defaults to 'Overview'
-    phonePrimary,  // E.g. '+971 50 6828290' — adds phone CTA in hero + bottom band
+    // Optional fields — all backwards-compatible (undefined = graceful no-op)
+    eyebrow,        // Hero pill label; default 'IP Care Enterprise Service'
+    overviewTitle,  // Overview H2; default 'Overview'
+    phonePrimary,   // '+971 50 6828290' — phone button in hero + bottom CTA
+    heroImage,      // Unsplash URL or /public path — right panel on desktop
+    heroImageAlt,   // Descriptive alt text for heroImage
+    sectionImage,   // Photo for the "What We Migrate" split section
+    sectionImageAlt,// Descriptive alt for sectionImage
   } = data
 
   return (
     <>
-      {/* Breadcrumb */}
+      {/* ──────────────────────────────────────────────────────────────────
+          BREADCRUMB — sits inside the navy hero zone
+      ────────────────────────────────────────────────────────────────── */}
       {breadcrumb && (
-        <div className="max-w-[1400px] mx-auto px-6 pt-6">
-          <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-white">Home</Link>
-            <Icons.ChevronRight size={12}/>
-            <Link href="/services" className="hover:text-white">Services</Link>
+        <div
+          className="max-w-[1400px] mx-auto px-6 pt-5"
+          style={{ background: '#0B1A46' }}
+        >
+          <nav
+            className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap"
+            aria-label="Breadcrumb"
+          >
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Icons.ChevronRight size={12} />
+            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
             {breadcrumb.map((b, i) => (
               <span key={i} className="flex items-center gap-1.5">
-                <Icons.ChevronRight size={12}/>
-                {b.href ? <Link href={b.href} className="hover:text-white">{b.label}</Link> : <span className="text-white/80">{b.label}</span>}
+                <Icons.ChevronRight size={12} />
+                {b.href
+                  ? <Link href={b.href} className="hover:text-white transition-colors">{b.label}</Link>
+                  : <span className="text-white/80">{b.label}</span>
+                }
               </span>
             ))}
           </nav>
         </div>
       )}
 
-      {/* 1. Hero */}
-      <section className="relative py-20 md:py-28 px-6">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
+      {/* ──────────────────────────────────────────────────────────────────
+          1. HERO — navy background, orange bottom border, optional image
+      ────────────────────────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: '#0B1A46', borderBottom: '3px solid #E87722' }}
+      >
+        {/* Orange glow blotch */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            className="absolute -top-32 left-1/4 w-[600px] h-[500px] rounded-full blur-3xl opacity-20"
+            style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}
+          />
         </div>
-        <div className="relative max-w-[1000px] mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}>
-            {icon && <Ic name={icon} size={14} className="text-[#E87722]"/>}
-            <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">{eyebrow || 'IP Care Enterprise Service'}</span>
-          </div>
-          <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight reveal">{h1}</h1>
-          <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto reveal">{hero}</p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 reveal">
-            <Link href="/contact" className="btn-primary">Get a Free Quote <Icons.ArrowRight size={16}/></Link>
-            {phonePrimary
-              ? <a href={`tel:${phonePrimary.replace(/\s/g, '')}`} className="btn-ghost"><Icons.Phone size={14}/> {phonePrimary}</a>
-              : <Link href="/services" className="btn-ghost">View All Services</Link>
-            }
+
+        {/* Grid texture overlay (matches cybersecurity advisory premium look) */}
+        <div
+          className="pointer-events-none absolute inset-0 premium-grid opacity-60"
+          aria-hidden="true"
+        />
+
+        {/* Inner — split on desktop when heroImage is set, centered otherwise */}
+        <div
+          className="relative max-w-[1400px] mx-auto px-6"
+          style={{ paddingTop: heroImage ? '64px' : '80px', paddingBottom: heroImage ? '64px' : '80px' }}
+        >
+          <div className={`flex ${heroImage ? 'flex-col lg:flex-row items-center gap-10 lg:gap-16' : 'flex-col items-center text-center'}`}>
+
+            {/* Text column */}
+            <div className={heroImage ? 'flex-1 min-w-0' : 'max-w-[840px]'}>
+              {/* Eyebrow pill */}
+              <div
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal"
+                style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}
+              >
+                {icon && <Ic name={icon} size={14} className="text-[#E87722]" />}
+                <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">
+                  {eyebrow || 'IP Care Enterprise Service'}
+                </span>
+              </div>
+
+              {/* H1 */}
+              <h1
+                className="text-white font-bold leading-[1.1] tracking-tight reveal"
+                style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.25rem)' }}
+              >
+                {h1}
+              </h1>
+
+              {/* Subtitle */}
+              <p
+                className="mt-5 reveal"
+                style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.65, maxWidth: heroImage ? '560px' : '680px' }}
+              >
+                {hero}
+              </p>
+
+              {/* CTAs */}
+              <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${heroImage ? '' : 'justify-center'}`}>
+                <Link href="/contact" className="btn-primary">
+                  Get a Free Quote <Icons.ArrowRight size={16} />
+                </Link>
+                {phonePrimary
+                  ? (
+                    <a
+                      href={`tel:${phonePrimary.replace(/\s/g, '')}`}
+                      className="btn-ghost"
+                    >
+                      <Icons.Phone size={14} /> {phonePrimary}
+                    </a>
+                  )
+                  : (
+                    <Link href="/services" className="btn-ghost">
+                      View All Services
+                    </Link>
+                  )
+                }
+              </div>
+            </div>
+
+            {/* Hero image — desktop only, hidden on mobile */}
+            {heroImage && (
+              <div
+                className="hidden lg:block flex-shrink-0 reveal"
+                style={{ width: '420px', height: '340px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.10)' }}
+              >
+                <img
+                  src={heroImage}
+                  alt={heroImageAlt || h1}
+                  loading="eager"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* 2. Overview */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-[900px] mx-auto">
-          <div className="glass-card p-8 md:p-12 reveal">
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-6">{overviewTitle || 'Overview'}</h2>
-            <div className="space-y-4 body-text text-base md:text-[17px] leading-relaxed">
-              {overview?.map((p, i) => <p key={i}>{p}</p>)}
+      {/* ──────────────────────────────────────────────────────────────────
+          2. OVERVIEW — white, navy headings, slate body text
+      ────────────────────────────────────────────────────────────────── */}
+      <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
+        <div className="max-w-[860px] mx-auto reveal">
+          <SectionHeading centered={false}>
+            {overviewTitle || 'Overview'}
+          </SectionHeading>
+          <div
+            className="mt-8 space-y-5"
+            style={{ color: T_BODY, fontSize: '1.0625rem', lineHeight: 1.75 }}
+          >
+            {overview?.map((p, i) => <p key={i}>{p}</p>)}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────────────
+          3. IMAGE + TEXT SPLIT — "What We Migrate" (renders only if sectionImage set)
+      ────────────────────────────────────────────────────────────────── */}
+      {sectionImage && (
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[1200px] mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+              {/* Image */}
+              <div
+                className="flex-shrink-0 reveal w-full md:w-[45%]"
+                style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(10,26,70,0.14)', aspectRatio: '4/3' }}
+              >
+                <img
+                  src={sectionImage}
+                  alt={sectionImageAlt || 'Cloud migration infrastructure'}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0 reveal" style={{ transitionDelay: '80ms' }}>
+                <Eyebrow>What We Migrate</Eyebrow>
+                <SectionHeading centered={false}>
+                  Every Workload Type, Every Cloud Target
+                </SectionHeading>
+                <div
+                  className="mt-6 space-y-4"
+                  style={{ color: T_BODY, fontSize: '0.9375rem', lineHeight: 1.7 }}
+                >
+                  <p>We move everything from single-server applications to multi-tier enterprise platforms. The platform drives the destination choice — not the other way round.</p>
+                  <ul className="space-y-2.5">
+                    {[
+                      'On-prem servers, VMs and physical bare-metal to Azure, AWS or Nutanix',
+                      'Exchange, SharePoint, Teams and OneDrive to Microsoft 365 / Azure',
+                      'Databases — SQL Server, Oracle, PostgreSQL — to managed cloud services',
+                      'Legacy applications: rehost (lift-and-shift), replatform (containers), or refactor',
+                      'Networking: SD-WAN, ExpressRoute and Direct Connect for cloud edge connectivity',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <Icons.CheckCircle2
+                          size={18}
+                          className="flex-shrink-0 mt-0.5"
+                          style={{ color: '#E87722' }}
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 3. Key features */}
+      {/* ──────────────────────────────────────────────────────────────────
+          4. KEY FEATURES — white, service-card style (3-col grid)
+      ────────────────────────────────────────────────────────────────── */}
       {features?.length > 0 && (
-        <section className="py-16 md:py-20 px-6">
+        <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="text-center mb-12 reveal">
-              <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Key Features</h2>
+              <Eyebrow>Capabilities</Eyebrow>
+              <SectionHeading>What's Included</SectionHeading>
             </div>
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((f, i) => (
-                <div key={i} className="glass-card p-7 reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
-                    <Ic name={f.icon} size={22} className="text-[#E87722]"/>
-                  </div>
-                  <h3 className="text-white text-lg font-semibold mb-2">{f.title}</h3>
-                  <p className="body-text text-sm leading-relaxed">{f.desc}</p>
-                </div>
+                <FeatureCard
+                  key={i}
+                  icon={f.icon}
+                  title={f.title}
+                  desc={f.desc}
+                  delay={i * 70}
+                />
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* 4. Benefits */}
+      {/* ──────────────────────────────────────────────────────────────────
+          5. BUSINESS BENEFITS — light grey, 2-col benefit items
+      ────────────────────────────────────────────────────────────────── */}
       {benefits?.length > 0 && (
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-12 reveal">
-              <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Business Benefits</h2>
+              <Eyebrow>Why IP Care</Eyebrow>
+              <SectionHeading>What Sets Us Apart</SectionHeading>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-5">
               {benefits.map((b, i) => (
-                <div key={i} className="flex gap-4 p-5 rounded-xl reveal" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(232,119,34,0.15)' }}>
-                    <Ic name={b.icon} size={20} className="text-[#E87722]"/>
+                <div
+                  key={i}
+                  className="flex gap-4 p-6 rounded-2xl reveal"
+                  style={{
+                    background: BG_WHITE,
+                    borderTop: '3px solid #E87722',
+                    boxShadow: '0 4px 20px rgba(10,26,70,0.07)',
+                    transitionDelay: `${i * 70}ms`,
+                    transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-4px)'
+                    e.currentTarget.style.boxShadow = '0 10px 32px rgba(10,26,70,0.13)'
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(10,26,70,0.07)'
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'rgba(232,119,34,0.10)' }}
+                  >
+                    <Ic name={b.icon} size={22} className="text-[#E87722]" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold text-base">{b.t}</div>
-                    <div className="body-text text-sm mt-0.5">{b.d}</div>
+                    <div className="font-bold text-base" style={{ color: T_NAV }}>{b.t}</div>
+                    <div className="text-sm mt-1 leading-relaxed" style={{ color: T_BODY }}>{b.d}</div>
                   </div>
                 </div>
               ))}
@@ -129,25 +377,45 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
         </section>
       )}
 
-      {/* 5. Process */}
+      {/* ──────────────────────────────────────────────────────────────────
+          6. PROCESS — white, numbered steps with orange circles
+      ────────────────────────────────────────────────────────────────── */}
       {process?.length > 0 && (
-        <section className="py-16 md:py-20 px-6">
+        <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
           <div className="max-w-[1300px] mx-auto">
-            <div className="text-center mb-12 reveal">
-              <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">How It Works</h2>
-              <p className="body-text mt-4">A proven, repeatable delivery approach.</p>
+            <div className="text-center mb-14 reveal">
+              <Eyebrow>Our Delivery Approach</Eyebrow>
+              <SectionHeading>How We Deliver</SectionHeading>
+              <p className="mt-4 text-sm" style={{ color: T_BODY }}>A proven, repeatable approach — used on every engagement.</p>
             </div>
-            <div className={`grid gap-5 relative ${process.length <= 4 ? 'md:grid-cols-4' : 'md:grid-cols-5'}`}>
-              <div className="hidden md:block absolute top-10 h-px" style={{ left: `${(1 / (process.length * 2)) * 100}%`, right: `${(1 / (process.length * 2)) * 100}%`, background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.5), transparent)' }}/>
+            <div
+              className={`grid gap-6 relative ${process.length <= 4 ? 'md:grid-cols-4' : 'md:grid-cols-5'}`}
+            >
+              {/* Connector line */}
+              <div
+                className="hidden md:block absolute top-7 h-px pointer-events-none"
+                style={{
+                  left: `${(1 / (process.length * 2)) * 100}%`,
+                  right: `${(1 / (process.length * 2)) * 100}%`,
+                  background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.4), transparent)',
+                }}
+                aria-hidden="true"
+              />
               {process.map((s, i) => (
-                <div key={i} className="relative reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 text-white font-bold relative z-10" style={{ background: '#E87722', boxShadow: '0 0 0 6px rgba(232,119,34,0.15)' }}>
+                <div
+                  key={i}
+                  className="relative reveal text-center"
+                  style={{ transitionDelay: `${i * 90}ms` }}
+                >
+                  {/* Numbered circle */}
+                  <div
+                    className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 text-white font-bold text-lg relative z-10"
+                    style={{ background: '#E87722', boxShadow: '0 0 0 6px rgba(232,119,34,0.12)' }}
+                  >
                     {s.n}
                   </div>
-                  <div className="text-center">
-                    <h3 className="text-white font-semibold text-lg mb-2">{s.t}</h3>
-                    <p className="body-text text-sm">{s.d}</p>
-                  </div>
+                  <h3 className="font-bold text-base mb-2" style={{ color: T_NAV }}>{s.t}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T_BODY }}>{s.d}</p>
                 </div>
               ))}
             </div>
@@ -155,36 +423,63 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
         </section>
       )}
 
-      {/* 6. Industries */}
+      {/* ──────────────────────────────────────────────────────────────────
+          7. WHO IT'S FOR — light grey, orange pill tags
+      ────────────────────────────────────────────────────────────────── */}
       {industries?.length > 0 && (
-        <section className="py-16 px-6">
-          <div className="max-w-[1100px] mx-auto text-center reveal">
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-6">Relevant Industries</h2>
-            <div className="flex flex-wrap justify-center gap-2.5">
+        <section style={{ background: BG_GREY, padding: '64px 24px' }}>
+          <div className="max-w-[1000px] mx-auto text-center reveal">
+            <Eyebrow>Who It's For</Eyebrow>
+            <SectionHeading>Industries We Serve</SectionHeading>
+            <div className="flex flex-wrap justify-center gap-3 mt-10">
               {industries.map((ind) => (
-                <span key={ind} className="px-5 py-2 rounded-full text-sm font-semibold" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.4)', color: '#E87722' }}>{ind}</span>
+                <span
+                  key={ind}
+                  className="px-5 py-2 rounded-full text-sm font-semibold"
+                  style={{
+                    background: BG_WHITE,
+                    color: T_NAV,
+                    border: '1.5px solid #E87722',
+                    boxShadow: '0 2px 8px rgba(10,26,70,0.06)',
+                  }}
+                >
+                  {ind}
+                </span>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* 7. Related services */}
+      {/* ──────────────────────────────────────────────────────────────────
+          8. RELATED SERVICES — white, service-card style
+      ────────────────────────────────────────────────────────────────── */}
       {related?.length > 0 && (
-        <section className="py-16 md:py-20 px-6">
+        <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
           <div className="max-w-[1400px] mx-auto">
-            <div className="text-center mb-10 reveal">
-              <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Related Services</h2>
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>You May Also Need</Eyebrow>
+              <SectionHeading>Related Services</SectionHeading>
             </div>
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className={`grid gap-6 ${related.length === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
               {related.map((r, i) => (
-                <Link key={r.href || r.slug} href={r.href || `/services/${r.slug}`} className="glass-card p-7 block reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
-                    <Ic name={r.icon} size={22} className="text-[#E87722]"/>
+                <Link
+                  key={r.href || r.slug}
+                  href={r.href || `/services/${r.slug}`}
+                  className="service-card p-7 block group reveal"
+                  style={{ transitionDelay: `${i * 75}ms` }}
+                >
+                  <div
+                    className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                    style={{ background: 'rgba(232,119,34,0.10)' }}
+                  >
+                    <Ic name={r.icon} size={20} className="text-[#E87722]" />
                   </div>
-                  <h3 className="text-white text-lg font-semibold mb-2">{r.name}</h3>
-                  <p className="body-text text-sm mb-4">{r.short}</p>
-                  <span className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-2 rounded-lg border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] group-hover:gap-2.5 transition-all">Explore <Icons.ArrowRight size={14}/></span>
+                  <h3 className="service-card__title text-base mb-2">{r.name}</h3>
+                  <p className="service-card__desc text-sm mb-5 leading-relaxed">{r.short}</p>
+                  <span className="service-card__cta inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2">
+                    Explore <Icons.ArrowRight size={13} />
+                  </span>
                 </Link>
               ))}
             </div>
@@ -192,21 +487,44 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
         </section>
       )}
 
-      {/* 8. FAQ */}
+      {/* ──────────────────────────────────────────────────────────────────
+          9. FAQ — light grey, white accordion cards, navy text
+      ────────────────────────────────────────────────────────────────── */}
       {faqs?.length > 0 && (
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-          <div className="max-w-[900px] mx-auto">
-            <div className="text-center mb-10 reveal">
-              <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">Frequently Asked Questions</h2>
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[860px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>Questions & Answers</Eyebrow>
+              <SectionHeading>Frequently Asked Questions</SectionHeading>
             </div>
             <div className="space-y-3">
               {faqs.map((f, i) => (
-                <details key={i} className="glass-card p-5 reveal group" style={{ transitionDelay: `${i * 60}ms` }}>
-                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4">
-                    <h3 className="text-white font-semibold text-base md:text-lg">{f.q}</h3>
-                    <Icons.Plus size={20} className="text-[#E87722] group-open:rotate-45 transition-transform flex-shrink-0"/>
+                <details
+                  key={i}
+                  className="reveal group"
+                  style={{
+                    background: BG_WHITE,
+                    borderRadius: '14px',
+                    borderTop: '3px solid #E87722',
+                    boxShadow: '0 4px 20px rgba(10,26,70,0.07)',
+                    overflow: 'hidden',
+                    transitionDelay: `${i * 55}ms`,
+                  }}
+                >
+                  <summary
+                    className="cursor-pointer list-none flex items-center justify-between gap-4"
+                    style={{ padding: '20px 24px' }}
+                  >
+                    <h3 className="font-semibold text-base" style={{ color: T_NAV }}>{f.q}</h3>
+                    <Icons.Plus
+                      size={18}
+                      className="flex-shrink-0 group-open:rotate-45 transition-transform duration-200"
+                      style={{ color: '#E87722' }}
+                    />
                   </summary>
-                  <p className="body-text text-sm md:text-base mt-4 leading-relaxed">{f.a}</p>
+                  <div style={{ padding: '0 24px 20px', borderTop: '1px solid #EEF1F5' }}>
+                    <p className="text-sm leading-relaxed pt-4" style={{ color: T_BODY }}>{f.a}</p>
+                  </div>
                 </details>
               ))}
             </div>
@@ -214,19 +532,49 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
         </section>
       )}
 
-      {/* Bottom CTA */}
-      <section className="py-16 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)', borderRadius: '12px', backdropFilter: 'blur(12px)' }}>
-            <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Ready to get started?</h2>
-            <p className="body-text max-w-xl mx-auto mb-8">Talk to our enterprise team for a free consultation and tailored proposal — typically within 48 hours.</p>
+      {/* ──────────────────────────────────────────────────────────────────
+          10. BOTTOM CTA BAND — navy, orange border top (matches home OfficesCTA)
+      ────────────────────────────────────────────────────────────────── */}
+      <section
+        style={{ background: '#0B1A46', borderTop: '3px solid #E87722', padding: '64px 24px' }}
+      >
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center reveal">
+            <h2
+              className="text-white font-bold mb-4"
+              style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}
+            >
+              Ready to Start Your Migration?
+            </h2>
+            <p
+              className="max-w-xl mx-auto mb-8"
+              style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}
+            >
+              Talk to our UAE-based team for a free readiness assessment — we'll scope the work, size the business case, and tell you honestly what moves where and when.
+            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
-              <Link href="/contact" className="btn-primary">Start a Conversation <Icons.ArrowRight size={16}/></Link>
+              <Link href="/contact" className="btn-primary">
+                Start a Conversation <Icons.ArrowRight size={16} />
+              </Link>
               {phonePrimary && (
-                <a href={`tel:${phonePrimary.replace(/\s/g, '')}`} className="btn-ghost"><Icons.Phone size={14}/> {phonePrimary}</a>
+                <a
+                  href={`tel:${phonePrimary.replace(/\s/g, '')}`}
+                  className="btn-ghost"
+                >
+                  <Icons.Phone size={14} /> {phonePrimary}
+                </a>
               )}
-              <a href="tel:+97126766935" className="btn-ghost"><Icons.Phone size={14}/> +971 2 676 6935</a>
+              <a href="tel:+97126766935" className="btn-ghost">
+                <Icons.Phone size={14} /> +971 2 676 6935
+              </a>
             </div>
+            {/* NAP — Salam St address */}
+            <p
+              className="mt-8 text-xs"
+              style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}
+            >
+              info@ipcare.ae &nbsp;·&nbsp; Salam Street, P.O. Box 53209, Abu Dhabi, UAE &nbsp;·&nbsp; UAE: +971 2 676 6935 &nbsp;·&nbsp; Canada: +1 416 786 0782
+            </p>
           </div>
         </div>
       </section>
