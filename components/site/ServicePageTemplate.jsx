@@ -107,27 +107,31 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
           BREADCRUMB — sits inside the navy hero zone
       ────────────────────────────────────────────────────────────────── */}
       {breadcrumb && (
-        <div
-          className="max-w-[1400px] mx-auto px-6 pt-5"
-          style={{ background: '#0B1A46' }}
-        >
-          <nav
-            className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap"
-            aria-label="Breadcrumb"
-          >
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <Icons.ChevronRight size={12} />
-            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-            {breadcrumb.map((b, i) => (
-              <span key={i} className="flex items-center gap-1.5">
-                <Icons.ChevronRight size={12} />
-                {b.href
-                  ? <Link href={b.href} className="hover:text-white transition-colors">{b.label}</Link>
-                  : <span className="text-white/80">{b.label}</span>
-                }
-              </span>
-            ))}
-          </nav>
+        /* Full-width outer wrapper carries the background so it covers
+           the entire viewport on any screen size — even beyond max-w-[1400px].
+           Previously the background was on the inner constrained div, which
+           left the body's #1E3A8A bleeding through at the corners on wide
+           displays (>1400 px), producing the hard bright-blue rectangle. */
+        <div style={{ background: '#0B1A46' }}>
+          <div className="max-w-[1400px] mx-auto px-6 pt-5">
+            <nav
+              className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap"
+              aria-label="Breadcrumb"
+            >
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <Icons.ChevronRight size={12} />
+              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+              {breadcrumb.map((b, i) => (
+                <span key={i} className="flex items-center gap-1.5">
+                  <Icons.ChevronRight size={12} />
+                  {b.href
+                    ? <Link href={b.href} className="hover:text-white transition-colors">{b.label}</Link>
+                    : <span className="text-white/80">{b.label}</span>
+                  }
+                </span>
+              ))}
+            </nav>
+          </div>
         </div>
       )}
 
