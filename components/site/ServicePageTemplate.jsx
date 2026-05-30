@@ -95,8 +95,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
     eyebrow,        // Hero pill label; default 'IP Care Enterprise Service'
     overviewTitle,  // Overview H2; default 'Overview'
     phonePrimary,   // '+971 50 6828290' — phone button in hero + bottom CTA
-    heroImage,      // Unsplash URL or /public path — right panel on desktop
-    heroImageAlt,   // Descriptive alt text for heroImage
+    heroImage,      // /public path or URL — full-bleed background behind the hero section
+    heroImageAlt,   // Descriptive alt text (kept on the <img>, not aria-hidden)
     sectionImage,   // Photo for the image+text split section
     sectionImageAlt,// Descriptive alt for sectionImage
     sectionContent, // { eyebrow, heading, body, checklist[] } — drives the split section copy
