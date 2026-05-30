@@ -56,7 +56,6 @@ const navLabels = {
   },
   'email-solutions': {
     'google-workspace': 'Google Workspace',
-    'microsoft-365': 'Microsoft 365 / Exchange',
     'email-hosting': 'Email Hosting',
     'hybrid': 'Hybrid Cloud Mail',
   },

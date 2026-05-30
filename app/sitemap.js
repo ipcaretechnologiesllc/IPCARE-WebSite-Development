@@ -72,9 +72,9 @@ const ADVISORY_SUB_DATES = {
   'sase':                 '2025-03-01',
 }
 
-// Redirect pair: /services/cloud/microsoft-365 → /services/email-solutions/microsoft-365.
-// Exclude the source URL from the sitemap so only the canonical URL appears.
-const SITEMAP_EXCLUDE = new Set(['/services/cloud/microsoft-365'])
+// /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
+// Exclude the redirect source so only the canonical URL appears in the sitemap.
+const SITEMAP_EXCLUDE = new Set(['/services/email-solutions/microsoft-365'])
 
 // Force dynamic so the sitemap is generated per-request and can read the host header.
 // (Without this, Next.js would pre-render the sitemap once at build time and the
