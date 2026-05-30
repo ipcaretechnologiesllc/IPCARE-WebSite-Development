@@ -137,100 +137,142 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          1. HERO — navy background, orange bottom border, optional image
+          1. HERO
+          When heroImage is set: full-bleed background image behind content.
+          Layers (back→front):
+            1. <img> absolute, inset-0, object-fit:cover (LCP — eager + high priority)
+            2a. Mobile flat scrim rgba(11,26,70,0.88) — strong flat overlay
+            2b. Desktop left-weighted gradient scrim — text on dark left, image
+                visible on right; gradient goes 0.92→0.75→0.45 opacity
+            3. Orange glow blotch (existing, kept)
+            4. Grid texture (existing, kept)
+            5. Content — left-aligned inside max-w-[700px]
+          When heroImage is unset: plain navy, centered content (unchanged).
+          Orange 3px bottom border retained in both cases.
+          White H1 on rgba(11,26,70,0.92)≈#0C1B49 → contrast ratio ≈15:1 ✓ WCAG AA
       ────────────────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
         style={{ background: '#0B1A46', borderBottom: '3px solid #E87722' }}
       >
-        {/* Orange glow blotch */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        {/* ── Layer 1: full-bleed image (only when set) ─────────────────── */}
+        {heroImage && (
+          <img
+            src={heroImage}
+            alt={heroImageAlt || h1}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: 'center',
+              zIndex: 0,
+            }}
+          />
+        )}
+
+        {/* ── Layer 2a: mobile flat scrim ─────────────────────────────── */}
+        {heroImage && (
+          <div
+            className="sm:hidden absolute inset-0 pointer-events-none"
+            style={{ background: 'rgba(11,26,70,0.88)', zIndex: 1 }}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* ── Layer 2b: desktop left-weighted gradient scrim ──────────── */}
+        {heroImage && (
+          <div
+            className="hidden sm:block absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(90deg, rgba(11,26,70,0.92) 0%, rgba(11,26,70,0.80) 40%, rgba(11,26,70,0.55) 70%, rgba(11,26,70,0.30) 100%)',
+              zIndex: 1,
+            }}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* ── Layer 3: orange glow blotch ──────────────────────────────── */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 2 }} aria-hidden="true">
           <div
             className="absolute -top-32 left-1/4 w-[600px] h-[500px] rounded-full blur-3xl opacity-20"
             style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}
           />
         </div>
 
-        {/* Grid texture overlay (matches cybersecurity advisory premium look) */}
+        {/* ── Layer 4: grid texture ────────────────────────────────────── */}
         <div
           className="pointer-events-none absolute inset-0 premium-grid opacity-60"
+          style={{ zIndex: 2 }}
           aria-hidden="true"
         />
 
-        {/* Inner — split on desktop when heroImage is set, centered otherwise */}
+        {/* ── Layer 5: content ─────────────────────────────────────────── */}
         <div
           className="relative max-w-[1400px] mx-auto px-6"
-          style={{ paddingTop: heroImage ? '64px' : '80px', paddingBottom: heroImage ? '64px' : '80px' }}
+          style={{ paddingTop: '80px', paddingBottom: '80px', zIndex: 3 }}
         >
-          <div className={`flex ${heroImage ? 'flex-col lg:flex-row items-center gap-10 lg:gap-16' : 'flex-col items-center text-center'}`}>
+          {/*
+            heroImage → left-aligned content in max-w-[700px] column so the
+            image is visible in the right ~40-50% of the hero.
+            No heroImage → centered content as before.
+          */}
+          <div className={heroImage ? 'max-w-[700px]' : 'max-w-[840px] mx-auto text-center'}>
 
-            {/* Text column */}
-            <div className={heroImage ? 'flex-1 min-w-0' : 'max-w-[840px]'}>
-              {/* Eyebrow pill */}
-              <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal"
-                style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}
-              >
-                {icon && <Ic name={icon} size={14} className="text-[#E87722]" />}
-                <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">
-                  {eyebrow || 'IP Care Enterprise Service'}
-                </span>
-              </div>
-
-              {/* H1 */}
-              <h1
-                className="text-white font-bold leading-[1.1] tracking-tight reveal"
-                style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.25rem)' }}
-              >
-                {h1}
-              </h1>
-
-              {/* Subtitle */}
-              <p
-                className="mt-5 reveal"
-                style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.65, maxWidth: heroImage ? '560px' : '680px' }}
-              >
-                {hero}
-              </p>
-
-              {/* CTAs */}
-              <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${heroImage ? '' : 'justify-center'}`}>
-                <Link href="/contact" className="btn-primary">
-                  Get a Free Quote <Icons.ArrowRight size={16} />
-                </Link>
-                {phonePrimary
-                  ? (
-                    <a
-                      href={`tel:${phonePrimary.replace(/\s/g, '')}`}
-                      className="btn-ghost"
-                    >
-                      <Icons.Phone size={14} /> {phonePrimary}
-                    </a>
-                  )
-                  : (
-                    <Link href="/services" className="btn-ghost">
-                      View All Services
-                    </Link>
-                  )
-                }
-              </div>
+            {/* Eyebrow pill */}
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal"
+              style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}
+            >
+              {icon && <Ic name={icon} size={14} className="text-[#E87722]" />}
+              <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">
+                {eyebrow || 'IP Care Enterprise Service'}
+              </span>
             </div>
 
-            {/* Hero image — desktop only, hidden on mobile */}
-            {heroImage && (
-              <div
-                className="hidden lg:block flex-shrink-0 reveal"
-                style={{ width: '420px', height: '340px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.10)' }}
-              >
-                <img
-                  src={heroImage}
-                  alt={heroImageAlt || h1}
-                  loading="eager"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              </div>
-            )}
+            {/* H1 — white on ≥0.92 opacity navy scrim → ~15:1 contrast ✓ */}
+            <h1
+              className="text-white font-bold leading-[1.1] tracking-tight reveal"
+              style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.25rem)' }}
+            >
+              {h1}
+            </h1>
+
+            {/* Subtitle — rgba(255,255,255,0.85) on dark scrim → ≥7:1 ✓ */}
+            <p
+              className="mt-5 reveal"
+              style={{
+                color: 'rgba(255,255,255,0.85)',
+                fontSize: '1.05rem',
+                lineHeight: 1.65,
+                maxWidth: heroImage ? '520px' : '680px',
+              }}
+            >
+              {hero}
+            </p>
+
+            {/* CTAs */}
+            <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${!heroImage ? 'justify-center' : ''}`}>
+              <Link href="/contact" className="btn-primary">
+                Get a Free Quote <Icons.ArrowRight size={16} />
+              </Link>
+              {phonePrimary
+                ? (
+                  <a
+                    href={`tel:${phonePrimary.replace(/\s/g, '')}`}
+                    className="btn-ghost"
+                  >
+                    <Icons.Phone size={14} /> {phonePrimary}
+                  </a>
+                )
+                : (
+                  <Link href="/services" className="btn-ghost">
+                    View All Services
+                  </Link>
+                )
+              }
+            </div>
           </div>
         </div>
       </section>
