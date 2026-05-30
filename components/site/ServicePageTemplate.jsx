@@ -100,6 +100,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
     sectionImage,   // Photo for the image+text split section
     sectionImageAlt,// Descriptive alt for sectionImage
     sectionContent, // { eyebrow, heading, body, checklist[] } — drives the split section copy
+    ctaHeading,     // Bottom CTA H2; default 'Ready to Get Started?'
+    ctaSubtext,     // Bottom CTA body; default neutral consultation copy
   } = data
 
   return (
@@ -589,13 +591,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
               className="text-white font-bold mb-4"
               style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}
             >
-              Ready to Start Your Migration?
+              {ctaHeading || 'Ready to Get Started?'}
             </h2>
             <p
               className="max-w-xl mx-auto mb-8"
               style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}
             >
-              Talk to our UAE-based team for a free readiness assessment — we'll scope the work, size the business case, and tell you honestly what moves where and when.
+              {ctaSubtext || "Talk to our UAE-based team for a free consultation and a tailored proposal — typically within 48 hours."}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
               <Link href="/contact" className="btn-primary">
