@@ -97,8 +97,9 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
     phonePrimary,   // '+971 50 6828290' — phone button in hero + bottom CTA
     heroImage,      // Unsplash URL or /public path — right panel on desktop
     heroImageAlt,   // Descriptive alt text for heroImage
-    sectionImage,   // Photo for the "What We Migrate" split section
+    sectionImage,   // Photo for the image+text split section
     sectionImageAlt,// Descriptive alt for sectionImage
+    sectionContent, // { eyebrow, heading, body, checklist[] } — drives the split section copy
   } = data
 
   return (
@@ -252,7 +253,9 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
       </section>
 
       {/* ──────────────────────────────────────────────────────────────────
-          3. IMAGE + TEXT SPLIT — "What We Migrate" (renders only if sectionImage set)
+          3. IMAGE + TEXT SPLIT — data-driven via sectionContent; renders
+             only when sectionImage is set. Backwards-compat: falls back to
+             generic labels when sectionContent is not defined.
       ────────────────────────────────────────────────────────────────── */}
       {sectionImage && (
         <section style={{ background: BG_GREY, padding: '72px 24px' }}>
@@ -265,42 +268,38 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
               >
                 <img
                   src={sectionImage}
-                  alt={sectionImageAlt || 'Cloud migration infrastructure'}
+                  alt={sectionImageAlt || 'Service details'}
                   loading="lazy"
                   decoding="async"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
 
-              {/* Text */}
+              {/* Text — driven by sectionContent field in subpage data */}
               <div className="flex-1 min-w-0 reveal" style={{ transitionDelay: '80ms' }}>
-                <Eyebrow>What We Migrate</Eyebrow>
+                <Eyebrow>{sectionContent?.eyebrow || 'What We Include'}</Eyebrow>
                 <SectionHeading centered={false}>
-                  Every Workload Type, Every Cloud Target
+                  {sectionContent?.heading || 'Service Details'}
                 </SectionHeading>
                 <div
                   className="mt-6 space-y-4"
                   style={{ color: T_BODY, fontSize: '0.9375rem', lineHeight: 1.7 }}
                 >
-                  <p>We move everything from single-server applications to multi-tier enterprise platforms. The platform drives the destination choice — not the other way round.</p>
-                  <ul className="space-y-2.5">
-                    {[
-                      'On-prem servers, VMs and physical bare-metal to Azure, AWS or Nutanix',
-                      'Exchange, SharePoint, Teams and OneDrive to Microsoft 365 / Azure',
-                      'Databases — SQL Server, Oracle, PostgreSQL — to managed cloud services',
-                      'Legacy applications: rehost (lift-and-shift), replatform (containers), or refactor',
-                      'Networking: SD-WAN, ExpressRoute and Direct Connect for cloud edge connectivity',
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <Icons.CheckCircle2
-                          size={18}
-                          className="flex-shrink-0 mt-0.5"
-                          style={{ color: '#E87722' }}
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {sectionContent?.body && <p>{sectionContent.body}</p>}
+                  {sectionContent?.checklist?.length > 0 && (
+                    <ul className="space-y-2.5">
+                      {sectionContent.checklist.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                          <Icons.CheckCircle2
+                            size={18}
+                            className="flex-shrink-0 mt-0.5"
+                            style={{ color: '#E87722' }}
+                          />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             </div>
