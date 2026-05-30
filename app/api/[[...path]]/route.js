@@ -6,7 +6,7 @@ import { rateLimit, getClientIp } from '@/lib/server/ratelimit'
 import { verifyRecaptchaToken } from '@/lib/server/recaptcha'
 import { sendMail } from '@/lib/server/resend'
 import {
-  tplContactTeam, tplContactAutoReply,
+  tplContactTeam, tplContactAutoReply, tplContactRentalAutoReply,
   tplRentalQuoteTeam, tplRentalQuoteAutoReply,
   tplCareerTeam, tplCareerAutoReply,
   tplNewsletterWelcome,
@@ -234,7 +234,9 @@ export async function POST(request, { params }) {
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
       const teamRes = await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['contact', 'team'] })
       console.log('[contact-debug] team email result:', JSON.stringify(teamRes))
-      const auto = tplContactAutoReply({ name: clean.name })
+      const auto = clean.tab === 'rental'
+        ? tplContactRentalAutoReply({ name: clean.name })
+        : tplContactAutoReply({ name: clean.name })
       const autoRes = await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
       console.log('[contact-debug] auto-reply result:', JSON.stringify(autoRes))
 
