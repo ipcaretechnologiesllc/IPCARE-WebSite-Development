@@ -27,7 +27,8 @@ export async function generateMetadata({ params }) {
 export default function SubPage({ params }) {
   const sub = getSubpage(params.category, params.slug)
   if (!sub) notFound()
-  const related = getRelatedServices(params.category, 3)
+  // Prefer curated relatedLinks defined on the subpage; fall back to auto-generated category list
+  const related = sub.relatedLinks || getRelatedServices(params.category, 3)
 
   const faqSchema = {
     '@context': 'https://schema.org',

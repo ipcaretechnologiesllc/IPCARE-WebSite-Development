@@ -22,7 +22,13 @@ function useReveal() {
 
 export default function ServicePageTemplate({ data, related, breadcrumb }) {
   useReveal()
-  const { h1, hero, overview, features, benefits, process, industries, faqs, icon } = data
+  const {
+    h1, hero, overview, features, benefits, process, industries, faqs, icon,
+    // Optional override fields — all backwards-compatible with existing subpages
+    eyebrow,       // Hero pill label; defaults to 'IP Care Enterprise Service'
+    overviewTitle, // Overview card H2; defaults to 'Overview'
+    phonePrimary,  // E.g. '+971 50 6828290' — adds phone CTA in hero + bottom band
+  } = data
 
   return (
     <>
@@ -51,13 +57,16 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
         <div className="relative max-w-[1000px] mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}>
             {icon && <Ic name={icon} size={14} className="text-[#E87722]"/>}
-            <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">IP Care Enterprise Service</span>
+            <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">{eyebrow || 'IP Care Enterprise Service'}</span>
           </div>
           <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight reveal">{h1}</h1>
           <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto reveal">{hero}</p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 reveal">
             <Link href="/contact" className="btn-primary">Get a Free Quote <Icons.ArrowRight size={16}/></Link>
-            <Link href="/services" className="btn-ghost">View All Services</Link>
+            {phonePrimary
+              ? <a href={`tel:${phonePrimary.replace(/\s/g, '')}`} className="btn-ghost"><Icons.Phone size={14}/> {phonePrimary}</a>
+              : <Link href="/services" className="btn-ghost">View All Services</Link>
+            }
           </div>
         </div>
       </section>
@@ -66,7 +75,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
       <section className="py-16 md:py-20 px-6">
         <div className="max-w-[900px] mx-auto">
           <div className="glass-card p-8 md:p-12 reveal">
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-6">Overview</h2>
+            <h2 className="text-white text-2xl md:text-3xl font-bold mb-6">{overviewTitle || 'Overview'}</h2>
             <div className="space-y-4 body-text text-base md:text-[17px] leading-relaxed">
               {overview?.map((p, i) => <p key={i}>{p}</p>)}
             </div>
@@ -128,8 +137,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
               <h2 className="text-white text-3xl md:text-4xl font-bold heading-accent">How It Works</h2>
               <p className="body-text mt-4">A proven, repeatable delivery approach.</p>
             </div>
-            <div className="grid md:grid-cols-4 gap-5 relative">
-              <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.5), transparent)' }}/>
+            <div className={`grid gap-5 relative ${process.length <= 4 ? 'md:grid-cols-4' : 'md:grid-cols-5'}`}>
+              <div className="hidden md:block absolute top-10 h-px" style={{ left: `${(1 / (process.length * 2)) * 100}%`, right: `${(1 / (process.length * 2)) * 100}%`, background: 'linear-gradient(90deg, transparent, rgba(232,119,34,0.5), transparent)' }}/>
               {process.map((s, i) => (
                 <div key={i} className="relative reveal" style={{ transitionDelay: `${i * 90}ms` }}>
                   <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 text-white font-bold relative z-10" style={{ background: '#E87722', boxShadow: '0 0 0 6px rgba(232,119,34,0.15)' }}>
@@ -169,7 +178,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
             </div>
             <div className="grid md:grid-cols-3 gap-5">
               {related.map((r, i) => (
-                <Link key={r.slug} href={`/services/${r.slug}`} className="glass-card p-7 block reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
+                <Link key={r.href || r.slug} href={r.href || `/services/${r.slug}`} className="glass-card p-7 block reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.3)' }}>
                     <Ic name={r.icon} size={22} className="text-[#E87722]"/>
                   </div>
@@ -211,8 +220,11 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
           <div className="rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)', borderRadius: '12px', backdropFilter: 'blur(12px)' }}>
             <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Ready to get started?</h2>
             <p className="body-text max-w-xl mx-auto mb-8">Talk to our enterprise team for a free consultation and tailored proposal — typically within 48 hours.</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
               <Link href="/contact" className="btn-primary">Start a Conversation <Icons.ArrowRight size={16}/></Link>
+              {phonePrimary && (
+                <a href={`tel:${phonePrimary.replace(/\s/g, '')}`} className="btn-ghost"><Icons.Phone size={14}/> {phonePrimary}</a>
+              )}
               <a href="tel:+97126766935" className="btn-ghost"><Icons.Phone size={14}/> +971 2 676 6935</a>
             </div>
           </div>
