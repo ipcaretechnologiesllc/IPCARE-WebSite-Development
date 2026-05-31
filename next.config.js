@@ -71,6 +71,7 @@ const nextConfig = {
       { source: '/location.php', destination: '/contact', permanent: true },
       { source: '/contact-us.php', destination: '/contact', permanent: true },
       { source: '/contact.php', destination: '/contact', permanent: true },
+      { source: '/request-consultation.php', destination: '/contact', permanent: true },
 
       // Other common legacy PHP URLs
       { source: '/index.php', destination: '/', permanent: true },
@@ -95,6 +96,7 @@ const nextConfig = {
       { source: '/privacy-policy.php', destination: '/privacy-policy', permanent: true },
       { source: '/terms.php', destination: '/terms', permanent: true },
       { source: '/terms-conditions.php', destination: '/terms', permanent: true },
+      { source: '/terms-and-conditions.php', destination: '/terms', permanent: true },
 
       // ─── IT Consulting ─────────────────────────────────────────────────
       { source: '/it-consulting.php', destination: '/services/it-consulting', permanent: true },
@@ -109,6 +111,7 @@ const nextConfig = {
       { source: '/data-centre-management.php', destination: '/services/infrastructure/data-centre-management', permanent: true },
       { source: '/data-center.php', destination: '/services/infrastructure/data-centre-management', permanent: true },
       { source: '/virtualization.php', destination: '/services/infrastructure/virtualization', permanent: true },
+      { source: '/virtualization-solution.php', destination: '/services/infrastructure/virtualization', permanent: true },
       { source: '/hardware-procurement.php', destination: '/services/infrastructure/hardware-procurement', permanent: true },
 
       // ─── ELV / Physical Security ───────────────────────────────────────
@@ -118,10 +121,12 @@ const nextConfig = {
       { source: '/cctv-systems.php', destination: '/services/elv/cctv-systems', permanent: true },
       { source: '/surveillance.php', destination: '/services/elv/cctv-systems', permanent: true },
       { source: '/surveillance-solutions.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/best-cctv-company-abudhabi.php', destination: '/services/elv/cctv-systems', permanent: true },
       { source: '/access-control.php', destination: '/services/elv/access-control', permanent: true },
       { source: '/access-control-systems.php', destination: '/services/elv/access-control', permanent: true },
       { source: '/gate-barriers.php', destination: '/services/elv/gate-barriers', permanent: true },
       { source: '/gate-barrier.php', destination: '/services/elv/gate-barriers', permanent: true },
+      { source: '/automatic-gate-barrier-systems.php', destination: '/services/elv/gate-barriers', permanent: true },
       { source: '/public-address.php', destination: '/services/elv/public-address-systems', permanent: true },
       { source: '/public-address-systems.php', destination: '/services/elv/public-address-systems', permanent: true },
       { source: '/pa-systems.php', destination: '/services/elv/public-address-systems', permanent: true },
@@ -139,6 +144,7 @@ const nextConfig = {
       { source: '/it-support-helpdesk.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
       { source: '/helpdesk.php', destination: '/services/managed-it/it-support-helpdesk', permanent: true },
       { source: '/sla.php', destination: '/services/managed-it/sla', permanent: true },
+      { source: '/service-level-agreement.php', destination: '/services/managed-it/sla', permanent: true },
       { source: '/managed-it-abu-dhabi.php', destination: '/services/managed-it/abu-dhabi', permanent: true },
 
       // ─── Cloud ─────────────────────────────────────────────────────────
@@ -182,6 +188,7 @@ const nextConfig = {
       { source: '/google-workspace.php', destination: '/services/email-solutions/google-workspace', permanent: true },
       { source: '/gsuite.php', destination: '/services/email-solutions/google-workspace', permanent: true },
       { source: '/email-hosting.php', destination: '/services/email-solutions/email-hosting', permanent: true },
+      { source: '/best-email-hosting-company-in-uae.php', destination: '/services/email-solutions/email-hosting', permanent: true },
       { source: '/hybrid-email.php', destination: '/services/email-solutions/hybrid', permanent: true },
 
       // ─── Rental ────────────────────────────────────────────────────────
@@ -194,10 +201,12 @@ const nextConfig = {
       { source: '/printer-rental.php', destination: '/rental/printers', permanent: true },
       { source: '/wifi-rental.php', destination: '/rental/event-wifi', permanent: true },
       { source: '/event-wifi.php', destination: '/rental/event-wifi', permanent: true },
+      { source: '/event-wifi-and-cctv-rental.php', destination: '/rental/event-wifi', permanent: true },
       { source: '/networking-rental.php', destination: '/rental/networking', permanent: true },
       { source: '/cctv-rental.php', destination: '/rental/cctv', permanent: true },
       { source: '/server-rental.php', destination: '/rental/servers', permanent: true },
       { source: '/testing-equipment-rental.php', destination: '/rental/testing-equipment', permanent: true },
+      { source: '/it-infrastructure-rental.php', destination: '/rental', permanent: true },
 
       // ─── No clean equivalent — route to nearest sensible hub ───────────
       { source: '/mobile-app-development.php', destination: '/services', permanent: true },
