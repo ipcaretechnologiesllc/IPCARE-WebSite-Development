@@ -227,6 +227,7 @@ const nextConfig = {
       { source: '/event-it/uae-national-day-49th',    destination: '/event-it/uae-national-day', permanent: true },
       { source: '/event-it/usa-basketball-2024',      destination: '/event-it/portfolio',         permanent: true },
       { source: '/event-it/eid-al-fitr-concert-2023', destination: '/event-it/portfolio',         permanent: true },
+      { source: '/event-it/product-launch',           destination: '/event-it/portfolio',         permanent: true },
 
       // Removed blog post — the CCTV cost guide was withdrawn following a positioning
       // change on Dubai physical-security scope. 308 prevents the URL from 404'ing
@@ -239,6 +240,23 @@ const nextConfig = {
 
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
+
+      // ─── Rental product 404s (slugs crawled by Google but not in current data) ──
+      { source: '/rental/testing-equipment/ekahau-sidekick-2', destination: '/rental/testing-equipment', permanent: true },
+      { source: '/rental/testing-equipment/keysight-n9914b',   destination: '/rental/testing-equipment', permanent: true },
+
+      // ─── Legacy WordPress .html pages ────────────────────────────────────────
+      // Specific destinations for pages that have a meaningful equivalent.
+      { source: '/contact-2.html',           destination: '/contact', permanent: true },
+      { source: '/shortcode-blog-post.html', destination: '/blog',    permanent: true },
+      { source: '/blog-grid-3.html',         destination: '/blog',    permanent: true },
+      { source: '/product-list.html',        destination: '/rental',  permanent: true },
+      // Catch-all: index.html, index-2.html, Spanish spam pages, any other .html relic → home
+      { source: '/:slug(.+)\\.html', destination: '/', permanent: true },
+
+      // ─── WordPress author / category archive URLs ─────────────────────────────
+      { source: '/author/:author', destination: '/about', permanent: true },
+      { source: '/category/:cat',  destination: '/blog',  permanent: true },
     ];
   },
 };
