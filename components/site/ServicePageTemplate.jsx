@@ -65,12 +65,10 @@ function SectionHeading({ children, centered = true }) {
 }
 
 /* ── Feature card — matches home .service-card exactly ──────────────────── */
-function FeatureCard({ icon, title, desc, delay = 0 }) {
-  return (
-    <div
-      className="service-card p-7 reveal"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+/* When href is provided the whole card becomes a spoke link.               */
+function FeatureCard({ icon, title, desc, delay = 0, href }) {
+  const body = (
+    <>
       <div
         className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
         style={{ background: 'rgba(232,119,34,0.10)' }}
@@ -79,6 +77,30 @@ function FeatureCard({ icon, title, desc, delay = 0 }) {
       </div>
       <h3 className="service-card__title text-base mb-2">{title}</h3>
       <p className="service-card__desc text-sm leading-relaxed">{desc}</p>
+      {href && (
+        <span className="service-card__cta inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 mt-4">
+          Learn more <Icons.ArrowRight size={13} />
+        </span>
+      )}
+    </>
+  )
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className="service-card p-7 reveal block"
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {body}
+      </Link>
+    )
+  }
+  return (
+    <div
+      className="service-card p-7 reveal"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {body}
     </div>
   )
 }
