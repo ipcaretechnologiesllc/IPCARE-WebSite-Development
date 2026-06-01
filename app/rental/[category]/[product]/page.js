@@ -11,6 +11,8 @@ export async function generateStaticParams() {
   return getAllProductParams()
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const p = getProduct(params.category, params.product)
   if (!p) return {}

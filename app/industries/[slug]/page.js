@@ -9,6 +9,8 @@ export async function generateStaticParams() {
   return getAllIndustrySlugs().map((slug) => ({ slug }))
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const ind = getIndustry(params.slug)
   if (!ind) return {}

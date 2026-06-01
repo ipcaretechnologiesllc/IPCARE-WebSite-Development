@@ -8,6 +8,8 @@ export async function generateStaticParams() {
   return getAllSubpageParams()
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const sub = getSubpage(params.category, params.slug)
   if (!sub) return {}

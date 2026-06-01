@@ -227,7 +227,8 @@ const nextConfig = {
       { source: '/event-it/uae-national-day-49th',    destination: '/event-it/uae-national-day', permanent: true },
       { source: '/event-it/usa-basketball-2024',      destination: '/event-it/portfolio',         permanent: true },
       { source: '/event-it/eid-al-fitr-concert-2023', destination: '/event-it/portfolio',         permanent: true },
-      { source: '/event-it/product-launch',           destination: '/event-it/portfolio',         permanent: true },
+      { source: '/event-it/product-launch',            destination: '/event-it/portfolio',          permanent: true },
+      { source: '/event-it/nba-global-games',         destination: '/event-it/nba-abu-dhabi-games', permanent: true },
 
       // Removed blog post — the CCTV cost guide was withdrawn following a positioning
       // change on Dubai physical-security scope. 308 prevents the URL from 404'ing

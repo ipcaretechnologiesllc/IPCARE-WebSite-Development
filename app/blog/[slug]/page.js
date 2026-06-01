@@ -12,6 +12,8 @@ export async function generateStaticParams() {
   return getAllArticleSlugs().map(slug => ({ slug }))
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const a = getArticle(params.slug)
   if (!a) return {}

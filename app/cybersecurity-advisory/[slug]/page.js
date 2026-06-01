@@ -10,6 +10,8 @@ export async function generateStaticParams() {
   return getAllAdvisorySlugs().map((slug) => ({ slug }))
 }
 
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const sub = getAdvisorySubpage(params.slug)
   if (!sub) return {}

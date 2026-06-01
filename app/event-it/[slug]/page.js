@@ -8,6 +8,10 @@ export async function generateStaticParams() {
   return getAllEventSubSlugs().map((slug) => ({ slug }))
 }
 
+// Any slug not returned by generateStaticParams returns a 404 at the framework
+// level — no page code runs, no risk of a 5xx from an unrecognised slug.
+export const dynamicParams = false
+
 export async function generateMetadata({ params }) {
   const sub = getEventSubpage(params.slug)
   if (!sub) return {}
