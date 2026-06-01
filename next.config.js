@@ -170,6 +170,7 @@ const nextConfig = {
       { source: '/azure-ad.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
       { source: '/nesa-compliance.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
       { source: '/nesa.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
+      { source: '/services/cybersecurity-compliance', destination: '/services/cybersecurity/compliance', permanent: true },
 
       // ─── Cybersecurity Advisory (separate hub) ─────────────────────────
       // Short alias used in some marketing materials and email signatures.
