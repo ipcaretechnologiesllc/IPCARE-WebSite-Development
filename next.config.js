@@ -258,6 +258,22 @@ const nextConfig = {
       // ─── WordPress author / category archive URLs ─────────────────────────────
       { source: '/author/:author', destination: '/about', permanent: true },
       { source: '/category/:cat',  destination: '/blog',  permanent: true },
+
+      // ─── WordPress / WooCommerce functional pages ─────────────────────────────
+      // These pages don't exist in the new site. Next.js serves its 404 page
+      // (which carries noindex) — GSC then reports them as "Excluded by noindex".
+      // 301s replace the noindex with a clean redirect to the nearest equivalent.
+      { source: '/cart',           destination: '/contact', permanent: true },
+      { source: '/cart/',          destination: '/contact', permanent: true },
+      { source: '/my-account',     destination: '/contact', permanent: true },
+      { source: '/my-account/',    destination: '/contact', permanent: true },
+      { source: '/checkout',       destination: '/contact', permanent: true },
+      { source: '/checkout/',      destination: '/contact', permanent: true },
+      { source: '/shop',           destination: '/rental',  permanent: true },
+      { source: '/shop/',          destination: '/rental',  permanent: true },
+      { source: '/wp-login.php',   destination: '/',        permanent: true },
+      { source: '/wp-admin',       destination: '/',        permanent: true },
+      { source: '/wp-admin/:path*',destination: '/',        permanent: true },
     ];
   },
 };
