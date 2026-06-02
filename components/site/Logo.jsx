@@ -1,4 +1,4 @@
-const LOGO_URL = 'https://customer-assets.emergentagent.com/job_ipcare-enterprise/artifacts/4c6j1azv_ipcare%20logo.png.png'
+const LOGO_URL = '/ipcare-logo.png'
 
 /**
  * Logo component
