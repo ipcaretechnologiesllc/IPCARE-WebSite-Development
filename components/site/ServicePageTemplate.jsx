@@ -354,16 +354,23 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
                   {sectionContent?.body && <p>{sectionContent.body}</p>}
                   {sectionContent?.checklist?.length > 0 && (
                     <ul className="space-y-2.5">
-                      {sectionContent.checklist.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5">
-                          <Icons.CheckCircle2
-                            size={18}
-                            className="flex-shrink-0 mt-0.5"
-                            style={{ color: '#E87722' }}
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
+                      {sectionContent.checklist.map((item, i) => {
+                        const label = typeof item === 'string' ? item : item.label
+                        const href  = typeof item === 'string' ? null  : item.href
+                        return (
+                          <li key={i} className="flex items-start gap-2.5">
+                            <Icons.CheckCircle2
+                              size={18}
+                              className="flex-shrink-0 mt-0.5"
+                              style={{ color: '#E87722' }}
+                            />
+                            {href
+                              ? <Link href={href} className="hover:underline" style={{ color: 'inherit' }}>{label}</Link>
+                              : <span>{label}</span>
+                            }
+                          </li>
+                        )
+                      })}
                     </ul>
                   )}
                 </div>

@@ -31,7 +31,8 @@ export async function generateMetadata({ params }) {
 export default function CategoryPage({ params }) {
   const cat = getCategory(params.category)
   if (!cat) notFound()
-  const related = getRelatedServices(params.category, 3)
+  // Prefer curated relatedLinks defined on the category; fall back to auto-generated list
+  const related = cat.relatedLinks || getRelatedServices(params.category, 3)
   const subpages = cat.subpages ? Object.entries(cat.subpages) : []
 
   const faqSchema = {
