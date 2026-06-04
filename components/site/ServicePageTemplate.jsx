@@ -656,7 +656,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               className="mt-8 text-xs"
               style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}
             >
-              info@ipcare.ae &nbsp;·&nbsp; Salam Street, P.O. Box 53209, Abu Dhabi, UAE &nbsp;·&nbsp; UAE: +971 2 676 6935 &nbsp;·&nbsp; Canada: +1 416 786 0782
+              info@ipcare.ae &nbsp;·&nbsp; info@ipcare.ca &nbsp;·&nbsp; Salam Street, P.O. Box 53209, Abu Dhabi, UAE &nbsp;·&nbsp; UAE: +971 2 676 6935 &nbsp;·&nbsp; Canada: +1 416 786 0782
             </p>
           </div>
         </div>
