@@ -108,7 +108,7 @@ function FeatureCard({ icon, title, desc, delay = 0, href }) {
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════════════════════ */
-export default function ServicePageTemplate({ data, related, breadcrumb }) {
+export default function ServicePageTemplate({ data, related, breadcrumb, spokeGrid }) {
   useReveal()
 
   const {
@@ -607,6 +607,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb }) {
           </div>
         </section>
       )}
+
+      {/* ──────────────────────────────────────────────────────────────────
+          Optional spoke-services grid — injected by category hub pages
+          between the FAQ section and the CTA band. Rendered only when the
+          parent passes the spokeGrid prop (backwards-compatible no-op).
+      ────────────────────────────────────────────────────────────────── */}
+      {spokeGrid}
 
       {/* ──────────────────────────────────────────────────────────────────
           10. BOTTOM CTA BAND — navy, orange border top (matches home OfficesCTA)
