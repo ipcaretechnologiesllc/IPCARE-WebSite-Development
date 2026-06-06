@@ -210,7 +210,7 @@ function HeroCarousel() {
               className="absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(5,12,30,0.88) 0%, rgba(10,22,58,0.84) 45%, rgba(13,36,90,0.80) 100%)',
+                  'linear-gradient(135deg, rgba(11,26,70,0.88) 0%, rgba(15,36,95,0.84) 45%, rgba(30,58,138,0.80) 100%)',
               }}
             />
 

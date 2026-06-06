@@ -48,7 +48,7 @@ export default function ContactClient() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
         <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
         <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto">

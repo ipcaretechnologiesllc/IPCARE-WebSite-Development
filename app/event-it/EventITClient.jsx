@@ -33,7 +33,7 @@ function Hero() {
     <section
       className="relative flex items-center justify-center px-6 py-24 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #0B1A46 0%, #0F245F 60%, #1E3A8A 100%)',
+        background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
         borderBottom: '3px solid #E87722',
         minHeight: '85vh',
       }}

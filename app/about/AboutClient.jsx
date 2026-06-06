@@ -42,7 +42,7 @@ function Eyebrow({ children }) {
 function Hero() {
   return (
     <section className="hero" style={{
-      background: '#0B1A46',
+      background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
       borderBottom: '3px solid #E87722',
       position: 'relative',
       overflow: 'hidden',
