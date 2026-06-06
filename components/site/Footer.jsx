@@ -1,7 +1,6 @@
 import Link from 'next/link'
-import { Mail, Phone } from 'lucide-react'
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
-import Logo, { UAEFlag, CanadaFlag } from './Logo'
+import Logo from './Logo'
 
 const MUTED = '#A0AEBF'
 
@@ -94,18 +93,6 @@ export default function Footer() {
             <p className="text-sm leading-relaxed" style={{ color: MUTED }}>
               Ready to build something enterprise-grade?
             </p>
-            <div className="flex items-center flex-wrap gap-1 text-sm mt-3" style={{ color: MUTED }}>
-              <UAEFlag /><span className="ml-1">UAE:</span>
-              <Phone size={13} className="ml-1"/><a href="tel:+97126766935" className="ml-0.5 hover:text-white transition-colors">+971 2 676 6935</a>
-              <span className="mx-1 opacity-50">·</span>
-              <Mail size={13}/><a href="mailto:info@ipcare.ae" className="ml-0.5 hover:text-white transition-colors">info@ipcare.ae</a>
-            </div>
-            <div className="flex items-center flex-wrap gap-1 text-sm mt-2" style={{ color: MUTED }}>
-              <CanadaFlag /><span className="ml-1">Canada:</span>
-              <Phone size={13} className="ml-1"/><a href="tel:+14167860782" className="ml-0.5 hover:text-white transition-colors">+1 416 786 0782</a>
-              <span className="mx-1 opacity-50">·</span>
-              <Mail size={13}/><a href="mailto:info@ipcare.ca" className="ml-0.5 hover:text-white transition-colors">info@ipcare.ca</a>
-            </div>
             <Link href="/contact" className="btn-primary mt-4">
               Contact Us <span aria-hidden="true">→</span>
             </Link>

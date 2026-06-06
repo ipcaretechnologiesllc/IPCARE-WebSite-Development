@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { rentalCategories, getFeaturedProducts } from '@/lib/rental-data'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
 
 /* ── Icon helper ─────────────────────────────────────────────── */
@@ -328,29 +329,7 @@ export default function RentalHubClient() {
             Our rental catalogue has 500+ items. Tell us your project and we&apos;ll source the right
             kit — delivered and configured.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <Link href="/#contact" className="btn-primary">
-              Request Custom Quote <Icons.ArrowRight size={16}/>
-            </Link>
-            <a href="tel:+97126766935" className="btn-ghost">
-              <Icons.Phone size={14}/> +971 2 676 6935
-            </a>
-          </div>
-          {/* Contact line */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" style={{ color: 'rgba(255,255,255,0.50)', fontSize: '0.85rem' }}>
-            <span>
-              <Icons.Phone size={13} className="inline mr-1.5 text-[#E87722]"/>
-              +971 50 682 8290
-            </span>
-            <span>
-              <Icons.Mail size={13} className="inline mr-1.5 text-[#E87722]"/>
-              info@ipcare.ae
-            </span>
-            <span>
-              <Icons.Globe size={13} className="inline mr-1.5 text-[#E87722]"/>
-              www.ipcare.ae
-            </span>
-          </div>
+          <CTAPhoneButtons />
         </div>
       </section>
 

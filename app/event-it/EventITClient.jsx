@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { events, eventServices, partners, capabilityStats } from '@/lib/event-it-data'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Wifi
@@ -424,48 +425,18 @@ function CTAStrip() {
     >
       <div className="max-w-[1200px] mx-auto reveal">
         <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div>
+          <div className="md:col-span-2 text-center">
             <div className="section-eyebrow">
               Book Your Event
             </div>
             <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
               Ready to Power Your Next Event?
             </h2>
-            <p className="body-text mb-6">
+            <p className="body-text mb-8">
               From kick-off to encore, IP Care keeps the network on. Get a tailored event IT
               proposal within 48 hours.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 flex-wrap text-white/85 text-sm">
-              <a
-                href="tel:+971506828290"
-                className="flex items-center gap-2 hover:text-white transition-colors duration-200"
-              >
-                <Icons.Phone size={14} className="text-[#E87722] flex-shrink-0" />
-                +971 50 6828290
-              </a>
-              <a
-                href="mailto:info@ipcare.ae"
-                className="flex items-center gap-2 hover:text-white transition-colors duration-200"
-              >
-                <Icons.Mail size={14} className="text-[#E87722] flex-shrink-0" />
-                info@ipcare.ae
-              </a>
-              <a
-                href="https://www.ipcare.ae"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-white transition-colors duration-200"
-              >
-                <Icons.Globe size={14} className="text-[#E87722] flex-shrink-0" />
-                www.ipcare.ae
-              </a>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 md:justify-end">
-            <Link href="/#contact" className="btn-primary">
-              Get an Event Quote <Icons.ArrowRight size={16} />
-            </Link>
+            <CTAPhoneButtons />
           </div>
         </div>
       </div>
