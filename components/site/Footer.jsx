@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Mail } from 'lucide-react'
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo from './Logo'
 
@@ -93,6 +94,9 @@ export default function Footer() {
             <p className="text-sm leading-relaxed" style={{ color: MUTED }}>
               Ready to build something enterprise-grade?
             </p>
+            <a href="mailto:info@ipcare.ae" className="inline-flex items-center gap-1.5 text-sm mt-3 hover:text-white transition-colors" style={{ color: MUTED }}>
+              <Mail size={14} /><span>info@ipcare.ae</span>
+            </a>
             <Link href="/contact" className="btn-primary mt-4">
               Contact Us <span aria-hidden="true">→</span>
             </Link>
