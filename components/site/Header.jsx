@@ -136,8 +136,8 @@ export default function Header() {
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-1.5"><UAEFlag /><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
             <span className="flex items-center gap-1.5"><CanadaFlag /><a href="tel:+14167860782" className="hover:text-white">+1 416 786 0782</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/><a href="mailto:info@ipcare.ca" className="hover:text-white">info@ipcare.ca</a></span>
+            <span className="flex items-center gap-1.5"><Mail size={13}/><span>UAE:</span><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
+            <span className="flex items-center gap-1.5"><Mail size={13}/><span>Canada:</span><a href="mailto:info@ipcare.ca" className="hover:text-white">info@ipcare.ca</a></span>
           </div>
           <div className="flex items-center gap-3">
             <a href={SOCIAL.facebook}  target="_blank" rel="noopener noreferrer" aria-label="Facebook"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={14}/></a>

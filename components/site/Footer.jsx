@@ -95,10 +95,10 @@ export default function Footer() {
               Ready to build something enterprise-grade?
             </p>
             <a href="mailto:info@ipcare.ae" className="inline-flex items-center gap-1.5 text-sm mt-3 hover:text-white transition-colors" style={{ color: MUTED }}>
-              <Mail size={14} /><span>info@ipcare.ae</span>
+              <Mail size={14} /><span>UAE: info@ipcare.ae</span>
             </a>
             <a href="mailto:info@ipcare.ca" className="inline-flex items-center gap-1.5 text-sm mt-2 hover:text-white transition-colors" style={{ color: MUTED }}>
-              <Mail size={14} /><span>info@ipcare.ca</span>
+              <Mail size={14} /><span>Canada: info@ipcare.ca</span>
             </a>
             <Link href="/contact" className="btn-primary mt-4">
               Contact Us <span aria-hidden="true">→</span>
