@@ -121,7 +121,7 @@ function Hero() {
             lineHeight: 1.75, maxWidth: '760px', margin: '0 auto 36px',
           }}>
             Zero Trust architecture, SASE transformation, and cloud security — delivered by
-            practitioners who have protected 100M+ users at Fortune 500 scale.
+            practitioners who have protected 100K+ users at Fortune 500 scale.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
             <Link href="/contact" className="btn-primary">
@@ -180,7 +180,7 @@ function Hero() {
             }}>
               {[
                 { n: '15+', l: 'Years' },
-                { n: '100M+', l: 'Users Protected' },
+                { n: '100K+', l: 'Users Protected' },
                 { n: '50+', l: 'Engagements' },
               ].map((s) => (
                 <div key={s.l}>

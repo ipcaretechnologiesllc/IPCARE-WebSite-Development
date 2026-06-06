@@ -521,7 +521,7 @@ function CyberAdvisory() {
   const vendors = ['Palo Alto Networks', 'Check Point', 'Fortinet', 'Zscaler']
   const stats = [
     { n: '15+ Years', l: 'Cybersecurity Practice' },
-    { n: '100M+', l: 'Users Protected' },
+    { n: '100K+', l: 'Users Protected' },
     { n: '50+', l: 'Enterprise Engagements' },
     { n: '99.9%', l: 'Deployment Success' },
   ]

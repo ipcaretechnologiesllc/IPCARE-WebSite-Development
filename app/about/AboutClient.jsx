@@ -617,7 +617,7 @@ function Team() {
       bio: 'Enterprise cybersecurity architect with 15+ years advising Fortune 500 and government clients on Zero Trust, SASE, and cloud security transformation across Canada, UAE, and globally.',
       stats: [
         { n: '15+',   l: 'Years' },
-        { n: '100M+', l: 'Users Protected' },
+        { n: '100K+', l: 'Users Protected' },
         { n: '50+',   l: 'Engagements' },
       ],
     },

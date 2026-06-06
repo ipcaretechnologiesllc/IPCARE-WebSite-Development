@@ -40,7 +40,7 @@ function readHostAndPath() {
 
 const SITE_NAME = 'IP Care Technologies'
 const SITE_TITLE = 'IP Care Technologies — Enterprise IT Solutions UAE & Canada'
-const SITE_DESC = 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada. Trusted since 2003. 24/7 SLA. 100M+ users protected.'
+const SITE_DESC = 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada. Trusted since 2003. 24/7 SLA. 100K+ users protected.'
 
 // ─── Dynamic metadata — host-aware canonicals ────────────────────────────────
 // Replaces the previous static `metadata` export. Every existing child-page
@@ -176,7 +176,7 @@ export default function RootLayout({ children }) {
       { '@type': 'City', name: 'Al Ain' },
       { '@type': 'Country', name: 'United Arab Emirates' },
     ],
-    knowsAbout: ['Managed IT Services', 'Cybersecurity', 'ELV & Physical Security', 'Cloud Services', 'Event IT Infrastructure', 'IT Equipment Rental', 'NESA Compliance', 'ISO 27001', 'ADMCC Certified Installer (Abu Dhabi Monitoring and Control Centre)'],
+    knowsAbout: ['Managed IT Services', 'Cybersecurity', 'ELV & Physical Security', 'Cloud Services', 'Event IT Infrastructure', 'IT Equipment Rental', 'NESA Compliance', 'ISO 27001'],
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
     ],

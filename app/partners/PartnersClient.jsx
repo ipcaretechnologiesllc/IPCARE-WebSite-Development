@@ -14,8 +14,6 @@ function useReveal() {
   }, [])
 }
 
-const tierColor = { Gold: '#E87722', Silver: '#C0C0C0', Authorised: '#1B6CA8' }
-
 export default function PartnersClient() {
   useReveal()
   const [filter, setFilter] = useState('All')
@@ -41,7 +39,6 @@ export default function PartnersClient() {
               <div key={p.slug} className="glass-card p-7 reveal" style={{ transitionDelay: `${i * 50}ms` }}>
                 <div className="flex items-start justify-between mb-4">
                   <div className="mono text-2xl font-bold tracking-tight" style={{ color: p.color }}>{p.name}</div>
-                  <span className="mono text-[13px] uppercase tracking-widest px-2 py-1 rounded-full" style={{ background: `${tierColor[p.tier]}22`, border: `1px solid ${tierColor[p.tier]}66`, color: tierColor[p.tier] === '#C0C0C0' ? '#e8e8e8' : tierColor[p.tier] }}>{p.tier}</span>
                 </div>
                 <div className="text-[#E87722] mono text-xs uppercase tracking-widest mb-3">{p.category}</div>
                 <p className="body-text text-sm leading-relaxed">{p.short}</p>
