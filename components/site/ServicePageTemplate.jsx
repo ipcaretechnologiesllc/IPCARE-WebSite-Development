@@ -620,7 +620,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           10. BOTTOM CTA BAND — navy, orange border top (matches home OfficesCTA)
       ────────────────────────────────────────────────────────────────── */}
       <section
-        style={{ background: '#0B1A46', borderTop: '3px solid #E87722', padding: '64px 24px' }}
+        style={{ background: '#1E3A8A', borderTop: '3px solid #E87722', padding: '64px 24px' }}
       >
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center reveal">

@@ -419,7 +419,7 @@ function CTAStrip() {
     <section
       className="py-20 px-6"
       style={{
-        background: 'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 60%, #2E64D8 100%)',
+        background: '#1E3A8A',
         borderTop: '3px solid #E87722',
       }}
     >
