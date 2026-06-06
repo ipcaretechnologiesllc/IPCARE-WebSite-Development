@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  ArrowRight, Menu, X, Mail,
+  ArrowRight, Menu, X, Mail, Phone,
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
 } from 'lucide-react'
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
@@ -134,10 +134,9 @@ export default function Header() {
       <div className="hidden md:block w-full text-[12.5px] text-white/85 border-b border-white/10" style={{ background: 'rgba(21,47,127,0.55)', backdropFilter: 'blur(10px)' }}>
         <div className="max-w-[1400px] mx-auto px-6 h-9 flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><UAEFlag /><a href="tel:+97126766935" className="hover:text-white">+971 2 676 6935</a></span>
-            <span className="flex items-center gap-1.5"><CanadaFlag /><a href="tel:+14167860782" className="hover:text-white">+1 416 786 0782</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/><span>UAE:</span><a href="mailto:info@ipcare.ae" className="hover:text-white">info@ipcare.ae</a></span>
-            <span className="flex items-center gap-1.5"><Mail size={13}/><span>Canada:</span><a href="mailto:info@ipcare.ca" className="hover:text-white">info@ipcare.ca</a></span>
+            <span className="flex items-center gap-1"><UAEFlag /><span className="ml-1">UAE:</span><Phone size={12} className="ml-1.5"/><a href="tel:+97126766935" className="ml-0.5 hover:text-white">+971 2 676 6935</a><span className="mx-1 opacity-50">·</span><Mail size={12}/><a href="mailto:info@ipcare.ae" className="ml-0.5 hover:text-white">info@ipcare.ae</a></span>
+            <span className="opacity-40 mx-1">|</span>
+            <span className="flex items-center gap-1"><CanadaFlag /><span className="ml-1">Canada:</span><Phone size={12} className="ml-1.5"/><a href="tel:+14167860782" className="ml-0.5 hover:text-white">+1 416 786 0782</a><span className="mx-1 opacity-50">·</span><Mail size={12}/><a href="mailto:info@ipcare.ca" className="ml-0.5 hover:text-white">info@ipcare.ca</a></span>
           </div>
           <div className="flex items-center gap-3">
             <a href={SOCIAL.facebook}  target="_blank" rel="noopener noreferrer" aria-label="Facebook"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={14}/></a>

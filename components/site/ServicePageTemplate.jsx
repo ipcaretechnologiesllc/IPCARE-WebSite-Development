@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import * as Icons from 'lucide-react'
+import { UAEFlag, CanadaFlag } from './Logo'
 
 /* ── Icon helper ─────────────────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => {
@@ -651,12 +652,24 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                 <Icons.Phone size={14} /> +971 2 676 6935
               </a>
             </div>
-            {/* NAP — Salam St address */}
+            {/* Contact line — region-grouped */}
             <p
-              className="mt-8 text-xs"
+              className="mt-8 text-xs flex items-center justify-center flex-wrap gap-x-1 gap-y-1"
               style={{ color: 'rgba(255,255,255,0.40)', lineHeight: 1.7 }}
             >
-              info@ipcare.ae &nbsp;·&nbsp; info@ipcare.ca &nbsp;·&nbsp; Salam Street, P.O. Box 53209, Abu Dhabi, UAE &nbsp;·&nbsp; UAE: +971 2 676 6935 &nbsp;·&nbsp; Canada: +1 416 786 0782
+              <span className="inline-flex items-center gap-1">
+                <UAEFlag /><span className="ml-0.5">UAE:</span>
+                <Icons.Phone size={11} className="ml-1"/><a href="tel:+97126766935" className="ml-0.5 hover:text-white/70 transition-colors">+971 2 676 6935</a>
+                <span className="mx-1 opacity-50">·</span>
+                <Icons.Mail size={11}/><a href="mailto:info@ipcare.ae" className="ml-0.5 hover:text-white/70 transition-colors">info@ipcare.ae</a>
+              </span>
+              <span className="mx-2 opacity-30">|</span>
+              <span className="inline-flex items-center gap-1">
+                <CanadaFlag /><span className="ml-0.5">Canada:</span>
+                <Icons.Phone size={11} className="ml-1"/><a href="tel:+14167860782" className="ml-0.5 hover:text-white/70 transition-colors">+1 416 786 0782</a>
+                <span className="mx-1 opacity-50">·</span>
+                <Icons.Mail size={11}/><a href="mailto:info@ipcare.ca" className="ml-0.5 hover:text-white/70 transition-colors">info@ipcare.ca</a>
+              </span>
             </p>
           </div>
         </div>
