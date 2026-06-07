@@ -934,7 +934,7 @@ function OfficesCTA() {
   return (
     <section id="contact" className="py-16 px-6" style={{ borderTop: '3px solid #E87722' }}>
       <div className="max-w-[1300px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 reveal">
+        <div className="grid grid-cols-1 md:grid-cols-[35fr_35fr_30fr] gap-10 items-center reveal">
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><UAEFlag/> UNITED ARAB EMIRATES</div>
             <h3 className="text-white text-xl font-bold mb-2">Abu Dhabi</h3>
@@ -955,10 +955,10 @@ function OfficesCTA() {
               <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
             </div>
           </div>
-        </div>
-        <div className="text-center mt-14 pt-14 reveal" style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}>
-          <h3 className="text-white text-2xl font-bold mb-5">Let&apos;s Build Something Enterprise-Grade.</h3>
-          <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
+          <div className="text-center md:text-right md:border-l md:border-white/15 md:pl-10">
+            <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
+            <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
+          </div>
         </div>
       </div>
     </section>
