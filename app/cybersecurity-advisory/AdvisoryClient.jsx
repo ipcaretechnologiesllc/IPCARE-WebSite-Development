@@ -128,7 +128,7 @@ function Hero() {
             <Link href="/contact" className="btn-primary">
               Schedule Consultation <ArrowRight size={16} />
             </Link>
-            <a href="#platforms" className="btn-secondary-navy">View Expertise</a>
+            <a href="#platforms" className="btn-secondary-pill">View Expertise</a>
           </div>
         </div>
 

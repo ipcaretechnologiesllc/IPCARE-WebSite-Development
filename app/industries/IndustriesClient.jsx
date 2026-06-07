@@ -262,9 +262,6 @@ function Hero() {
           <Link href="/contact" className="btn-primary">
             Get a Sector Consultation <ArrowRight size={16} />
           </Link>
-          <Link href="/about" className="btn-secondary-navy">
-            About IP Care
-          </Link>
         </div>
       </div>
     </section>

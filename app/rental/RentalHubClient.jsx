@@ -106,7 +106,7 @@ export default function RentalHubClient() {
             <a href="#categories" className="btn-primary">
               Browse Catalogue <Icons.ArrowRight size={16}/>
             </a>
-            <Link href="/#contact" className="btn-secondary-navy">Talk to a Specialist</Link>
+            <Link href="/#contact" className="btn-secondary-pill">Talk to a Specialist</Link>
           </div>
         </div>
       </section>
