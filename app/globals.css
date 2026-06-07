@@ -394,6 +394,24 @@ body {
 }
 .btn-ghost:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.8); }
 
+/* ===== Secondary CTA — solid navy, same geometry as .btn-primary ===== */
+.btn-secondary-navy {
+  background: #0B1A46;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  border: 1px solid transparent;
+}
+.btn-secondary-navy:hover {
+  background: #162347;
+  transform: translateY(-1px);
+}
+
 /* Nav scroll state — blue-tinted, not near-black */
 .nav-scrolled {
   background: rgba(30,58,138,0.90);

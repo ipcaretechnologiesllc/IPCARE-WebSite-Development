@@ -89,7 +89,7 @@ function Hero() {
           <Link href="/#contact" className="btn-primary">
             Plan Your Event IT <Icons.ArrowRight size={16} />
           </Link>
-          <Link href="/event-it/portfolio" className="btn-ghost">
+          <Link href="/event-it/portfolio" className="btn-secondary-navy">
             View Our Portfolio
           </Link>
         </div>

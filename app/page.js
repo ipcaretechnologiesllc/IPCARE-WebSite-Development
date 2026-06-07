@@ -273,8 +273,8 @@ function HeroCarousel() {
                   </a>
                   <a
                     href={slide.cta.secondary.href}
-                    className="btn-ghost w-full sm:w-auto justify-center"
-                    style={{ padding: '14px 28px', fontSize: '15px' }}
+                    className="btn-secondary-navy w-full sm:w-auto justify-center"
+                    style={{ padding: '15px 32px', fontSize: '15px' }}
                   >
                     {slide.cta.secondary.label}
                   </a>
