@@ -51,7 +51,7 @@ const FLAGSHIP = [
     name:      'Healthcare IT',
     Icon:      Activity,
     iconLabel: 'Healthcare IT icon',
-    body:      'Hospital and clinic IT that does not fail during a shift — DOH and DHA-aligned, Malaffi and NABIDH integrated, with 24/7 operational support that clinical teams can actually call.',
+    body:      'Hospital and clinic IT that does not fail during a shift — aligned with UAE healthcare data regulations, connected to national health information exchanges, with 24/7 operational support that clinical teams can actually call.',
     /* 6-col grid placement */
     gridCol:   '1 / 3',
   },
@@ -60,7 +60,7 @@ const FLAGSHIP = [
     name:      'Banking & Financial Services IT',
     Icon:      Building2,
     iconLabel: 'Banking and Financial Services IT icon',
-    body:      'Banking IT that the Central Bank, DFSA and FSRA can sign off on — CB IBR-aligned operations, payment systems integration and a managed SOC that actually catches threats during business hours.',
+    body:      'Banking IT that your banking regulator can sign off on — compliance-aligned operations, payment systems integration and a managed SOC that actually catches threats during business hours.',
     gridCol:   '3 / 5',
   },
   {
@@ -188,7 +188,7 @@ function IndustryCard({ Icon, iconLabel, name, body, href, linkLabel, gridCol, i
 function Hero() {
   return (
     <section style={{
-      background:    '#0B1A46',
+      background:    'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
       borderBottom:  '3px solid #E87722',
       position:      'relative',
       overflow:      'hidden',

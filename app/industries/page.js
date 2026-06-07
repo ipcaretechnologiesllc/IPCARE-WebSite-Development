@@ -17,7 +17,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Healthcare IT',
-        description: 'DOH and DHA-aligned hospital and clinic IT, Malaffi and NABIDH integration, medical device security, and 24/7 clinical support across the UAE.',
+        description: 'Hospital and clinic IT aligned with UAE healthcare data regulations, national health information exchange integration, medical device security, and 24/7 clinical support across the UAE.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
           { '@type': 'Country', name: 'United Arab Emirates' },
@@ -31,7 +31,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Banking & Financial Services IT',
-        description: 'CB IBR-compliant cloud and managed SOC, DFSA and FSRA cyber risk management, payment systems integration for UAE-licensed banks and financial services firms.',
+        description: 'Compliance-aligned cloud and managed SOC, financial-services regulator cyber risk management, payment systems integration for UAE-licensed banks and financial services firms.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
           { '@type': 'Country', name: 'United Arab Emirates' },
@@ -93,11 +93,11 @@ const breadcrumbSchema = {
 
 export const metadata = {
   title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
-  description: 'Sector-specific IT in UAE and Canada: healthcare (DOH/DHA), banking (DFSA/FSRA), government (NESA), events and construction. 20+ years regulated delivery.',
+  description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
   alternates: { canonical: '/industries' },
   openGraph: {
     title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
-    description: 'Sector-specific IT in UAE and Canada: healthcare (DOH/DHA), banking (DFSA/FSRA), government (NESA), events and construction. 20+ years regulated delivery.',
+    description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
     url: '/industries',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions — IP Care Technologies' }],
