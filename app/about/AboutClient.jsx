@@ -854,12 +854,12 @@ function CTAStrip() {
     }}>
       <div
         className="reveal"
-        style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}
+        style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
         <h2 className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
           Ready to Work with Us?
         </h2>
-        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', lineHeight: 1.75, marginBottom: '36px' }}>
+        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', lineHeight: 1.75, marginBottom: '36px', maxWidth: '640px', marginLeft: 'auto', marginRight: 'auto' }}>
           Let&apos;s talk about your infrastructure, your challenges, and what a proper enterprise IT
           partnership looks like.
         </p>

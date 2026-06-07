@@ -816,7 +816,7 @@ function BottomCTA() {
       borderTop: '3px solid #E87722',
       padding: '96px 24px',
     }}>
-      <div className="reveal" style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+      <div className="reveal" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
         <Eyebrow>Next Step</Eyebrow>
         <h2 style={{
           color: '#FFFFFF', fontWeight: 800,

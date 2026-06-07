@@ -5,6 +5,7 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { articles } from '@/lib/blog-data'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 function useReveal() {
   useEffect(() => {
@@ -119,6 +120,37 @@ export default function BlogClient() {
 
       {/* ── NEWSLETTER ─────────────────────────────────────────────── */}
       <NewsletterStrip />
+
+      {/* ── CONTACT CTA ────────────────────────────────────────────── */}
+      <section style={{
+        background:   'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)',
+        borderTop:    '3px solid #E87722',
+        padding:      '96px 24px',
+      }}>
+        <div className="reveal" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{
+            color:         '#FFFFFF',
+            fontWeight:    800,
+            fontSize:      'clamp(2rem, 4vw, 3rem)',
+            letterSpacing: '-0.02em',
+            lineHeight:    1.15,
+            marginBottom:  '16px',
+          }}>
+            Have a Project in Mind?
+          </h2>
+          <p style={{
+            color:      'rgba(255,255,255,0.78)',
+            fontSize:   '17px',
+            lineHeight: 1.75,
+            maxWidth:   '580px',
+            margin:     '0 auto 36px',
+          }}>
+            Whatever you just read about, we can help you build, secure, or run it.
+            Talk to our team in the UAE or Canada.
+          </p>
+          <CTAPhoneButtons />
+        </div>
+      </section>
     </main>
   )
 }

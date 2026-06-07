@@ -12,7 +12,7 @@ import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
  */
 export default function CTAPhoneButtons() {
   return (
-    <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
+    <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-3 justify-center">
       <Link href="/contact" className="btn-primary">
         Get a Free Quote <ArrowRight size={16} />
       </Link>

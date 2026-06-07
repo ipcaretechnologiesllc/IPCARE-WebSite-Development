@@ -344,7 +344,7 @@ function CTAStrip() {
     }}>
       <div
         className="reveal"
-        style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}
+        style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
         <h2 style={{
           color: '#FFFFFF',
