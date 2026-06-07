@@ -73,7 +73,7 @@ function Hero() {
           Trusted on FIFA Club World Cup, UFC UAE (2020–2025), NBA Abu Dhabi Games, EuroLeague
           Final Four 2025 (first outside Europe), FINA World Swimming, IIFA Awards, Coldplay,
           Saadiyat Nights and the UAE Official National Day events. From temporary WiFi for
-          60,000 fans to broadcast-grade data centres in 48 hours.
+          60,000 fans to broadcast-grade data centres, deployed at speed.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
@@ -244,7 +244,7 @@ const HOW_IT_WORKS_STEPS = [
   {
     n: '01',
     t: 'Consultation',
-    d: 'We scope your event requirements — venue layout, capacity, broadcast needs, timeline — and deliver a written IT brief within 48 hours.',
+    d: 'We scope your event requirements — venue layout, capacity, broadcast needs, timeline — and deliver a written IT brief on a fast turnaround.',
   },
   {
     n: '02',
@@ -434,7 +434,7 @@ function CTAStrip() {
             </h2>
             <p className="body-text mb-8">
               From kick-off to encore, IP Care keeps the network on. Get a tailored event IT
-              proposal within 48 hours.
+              proposal, fast.
             </p>
             <CTAPhoneButtons />
           </div>

@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { articles } from '@/lib/blog-data'
 
@@ -790,7 +791,7 @@ function About() {
 function Testimonials() {
   const quotes = [
     {
-      q: "IP Care delivered flawless event IT for a global broadcast — zero incidents across 10 days. When you're live in front of millions, that's the only result that matters.",
+      q: "IP Care delivered steady, dependable event IT for a global broadcast across 10 straight days of live coverage. When you're live in front of millions, that's the only result that matters.",
       who: 'Director of Operations',
       meta: 'Global Broadcasting Client • Abu Dhabi, UAE',
     },
@@ -955,9 +956,9 @@ function OfficesCTA() {
               <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
             </div>
           </div>
-          <div className="text-center md:text-right md:border-l md:border-white/15 md:pl-10">
-            <h3 className="text-white text-2xl font-bold mb-2">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
-            <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
+          <div className="text-center md:border-l md:border-white/15 md:pl-10">
+            <h3 className="text-white text-2xl font-bold mb-4">Let&apos;s Build Something<br/>Enterprise-Grade.</h3>
+            <CTAPhoneButtons />
           </div>
         </div>
       </div>

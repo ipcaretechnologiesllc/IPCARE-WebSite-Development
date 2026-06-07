@@ -3,8 +3,9 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { ArrowRight, Phone, Mail, Globe } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { serviceCategories } from '@/lib/services-data'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 /* ── IntersectionObserver reveal (same as About page) ── */
 function useReveal() {
@@ -180,7 +181,7 @@ function ServicesGrid() {
           For two decades, we&apos;ve operated enterprise IT the way it&apos;s supposed to work — quietly,
           reliably, and at a scale where downtime is measured in minutes a year, not hours. From
           government agencies running mission-critical systems to global event organisers needing
-          50,000-seat venue networks deployed in 72 hours, the work is the same: design for what
+          50,000-seat venue networks stood up at speed, the work is the same: design for what
           can go wrong, deploy what won&apos;t, and stay close enough to fix it before anyone notices.
           Managed IT, cybersecurity, ELV, cloud, event infrastructure and equipment rental —
           delivered by the same team, under one SLA, across UAE and Canada.
@@ -366,35 +367,7 @@ function CTAStrip() {
           Free, no obligation — we&apos;ll point you in the right direction.
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '36px' }}>
-          <Link href="/contact" className="btn-primary">
-            Book a Discovery Call <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: '36px',
-          justifyContent: 'center', fontSize: '0.95rem',
-          color: 'rgba(255,255,255,0.8)',
-        }}>
-          {[
-            { href: 'tel:+971506828290', icon: Phone, label: '+971 50 6828290' },
-            { href: 'mailto:info@ipcare.ae', icon: Mail, label: 'info@ipcare.ae' },
-            { href: 'https://www.ipcare.ae', icon: Globe, label: 'www.ipcare.ae', external: true },
-          ].map(({ href, icon: Icon, label, external }) => (
-            <a
-              key={label}
-              href={href}
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              style={{ color: 'rgba(255,255,255,0.8)', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.8)' }}
-            >
-              <Icon size={14} />
-              {label}
-            </a>
-          ))}
-        </div>
+        <CTAPhoneButtons />
       </div>
     </section>
   )

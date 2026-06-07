@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
-  ArrowRight, ExternalLink, Phone, Mail, Globe,
+  ArrowRight, ExternalLink, Globe,
   Lock, Globe2, Cloud, Briefcase, Bot,
   Calculator, BarChart3, ArrowRightLeft,
   CalendarDays, Shield, Users, ArrowUpRight,
 } from 'lucide-react'
 import * as Icons from 'lucide-react'
 import { platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Shield
@@ -879,25 +880,7 @@ function BottomCTA() {
           ))}
         </div>
 
-        {/* Contact line */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px', justifyContent: 'center', fontSize: '14px', color: 'rgba(255,255,255,0.75)' }}>
-          {[
-            { href: 'tel:+971506828290', icon: Phone, label: '+971 50 6828290' },
-            { href: 'mailto:info@ipcare.ae', icon: Mail,  label: 'info@ipcare.ae' },
-            { href: 'https://www.ipcare.ae', icon: Globe, label: 'www.ipcare.ae', external: true },
-          ].map(({ href, icon: Icon, label, external }) => (
-            <a
-              key={label}
-              href={href}
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              style={{ color: 'rgba(255,255,255,0.75)', display: 'flex', alignItems: 'center', gap: '7px', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)' }}
-            >
-              <Icon size={14} /> {label}
-            </a>
-          ))}
-        </div>
+        <CTAPhoneButtons />
       </div>
     </section>
   )

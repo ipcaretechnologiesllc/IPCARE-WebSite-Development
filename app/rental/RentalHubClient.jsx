@@ -55,7 +55,7 @@ const CATEGORY_ALT = {
 
 const WHY_ITEMS = [
   { icon: 'Truck',   t: 'Delivery & Setup Included',    d: 'White-glove delivery, rack-and-stack and full configuration — not a hidden extra like other vendors.' },
-  { icon: 'Wrench',  t: 'Certified Engineers On-Site',  d: 'Our engineers stay through your event or project — not just for handover.' },
+  { icon: 'Wrench',  t: 'Experienced Engineers On-Site', d: 'Our engineers stay through your event or project — not just for handover.' },
   { icon: 'Globe2',  t: 'UAE + Canada Coverage',        d: 'One partner, two regions, consistent SLA and support. Dubai, Abu Dhabi, Toronto, Vancouver.' },
   { icon: 'Award',   t: '20+ Years, 500+ Projects',     d: 'Deep vendor relationships since 2003 — real stock, real rates, no broker mark-ups.' },
 ]
@@ -100,7 +100,7 @@ export default function RentalHubClient() {
             <span className="text-[#E87722]">UAE &amp; Canada</span>
           </h1>
           <p className="body-text mt-5 text-base md:text-lg max-w-2xl mx-auto reveal">
-            Short-term &amp; long-term · Delivery &amp; setup included · Certified engineers on-site
+            Short-term &amp; long-term · Delivery &amp; setup included · Experienced engineers on-site
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 reveal">
             <a href="#categories" className="btn-primary">
