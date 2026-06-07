@@ -5,8 +5,8 @@ import Link from 'next/link'
 import {
   ArrowRight,
   Activity, Building2, Landmark, Calendar, HardHat,
-  Phone, Mail, Globe,
 } from 'lucide-react'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 /* ── IntersectionObserver reveal (same pattern as About/Services) ── */
 function useReveal() {
@@ -373,38 +373,7 @@ function CTAStrip() {
           the portfolio.
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '36px' }}>
-          <Link href="/contact" className="btn-primary">
-            Talk to Us About Your Sector <ArrowRight size={16} />
-          </Link>
-        </div>
-
-        <div style={{
-          display:         'flex',
-          flexWrap:        'wrap',
-          gap:             '36px',
-          justifyContent:  'center',
-          fontSize:        '0.95rem',
-          color:           'rgba(255,255,255,0.8)',
-        }}>
-          {[
-            { href: 'tel:+971506828290',       icon: Phone, label: '+971 50 6828290' },
-            { href: 'mailto:info@ipcare.ae',    icon: Mail,  label: 'info@ipcare.ae' },
-            { href: 'https://www.ipcare.ae',    icon: Globe, label: 'www.ipcare.ae', external: true },
-          ].map(({ href, icon: Icon, label, external }) => (
-            <a
-              key={label}
-              href={href}
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              style={{ color: 'rgba(255,255,255,0.8)', display: 'flex', alignItems: 'center', gap: '6px', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.8)' }}
-            >
-              <Icon size={14} />
-              {label}
-            </a>
-          ))}
-        </div>
+        <CTAPhoneButtons />
       </div>
     </section>
   )
