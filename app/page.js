@@ -11,7 +11,6 @@ import {
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
-import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { articles } from '@/lib/blog-data'
 
@@ -959,7 +958,7 @@ function OfficesCTA() {
         </div>
         <div className="text-center mt-14 pt-14 reveal" style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}>
           <h3 className="text-white text-2xl font-bold mb-5">Let&apos;s Build Something Enterprise-Grade.</h3>
-          <CTAPhoneButtons />
+          <a href="mailto:info@ipcare.ae" className="btn-primary mt-4">Get in Touch <ArrowRight size={16}/></a>
         </div>
       </div>
     </section>
