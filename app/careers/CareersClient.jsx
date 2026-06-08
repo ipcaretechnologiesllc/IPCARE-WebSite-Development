@@ -78,7 +78,7 @@ export default function CareersClient() {
       <section className="py-20 md:py-24 px-6">
         <div className="max-w-[1200px] mx-auto text-center reveal">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4">Careers</div>
-          <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08]">Build Your Career at IP Care</h1>
+          <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08]">Build <span className="text-[#E87722]">Your Career</span> at IP Care</h1>
           <p className="body-text mt-5 text-lg max-w-2xl mx-auto">Senior-level technology work across UAE and Canada — cybersecurity, cloud, networking and event IT.</p>
         </div>
       </section>

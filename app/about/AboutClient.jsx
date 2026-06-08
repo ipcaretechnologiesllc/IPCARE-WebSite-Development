@@ -80,7 +80,7 @@ function Hero() {
           lineHeight: 1.1,
           marginBottom: '22px',
         }}>
-          About IP Care Technologies
+          About<br /><span className="text-[#E87722]">IP Care Technologies</span>
         </h1>
         <p className="hero-sub" style={{
           fontSize: '1.2rem',

@@ -51,7 +51,7 @@ export default function BlogClient() {
         <div className="relative py-20 md:py-28 px-6">
           <div className="max-w-[800px] mx-auto text-center">
             <div className="section-eyebrow reveal">Knowledge Base</div>
-            <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">IT Knowledge Base &amp; Insights</h1>
+            <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">IT <span className="text-[#E87722]">Knowledge Base</span> &amp; Insights</h1>
             <p className="mt-5 text-lg max-w-2xl mx-auto reveal" style={{ color: 'rgba(255,255,255,0.75)' }}>
               Field-tested articles from IP Care engineers and advisors — cybersecurity, cloud, networking, and more.
             </p>

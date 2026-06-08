@@ -115,7 +115,7 @@ function Hero() {
             lineHeight: 1.15, margin: '0 auto 22px',
             maxWidth: '900px', width: '100%', textAlign: 'center',
           }}>
-            Zero Trust. SASE. Cloud Security. Done by Practitioners.
+            Zero Trust. SASE. Cloud Security. <span className="text-[#E87722]">Done by Practitioners.</span>
           </h1>
           <p style={{
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',

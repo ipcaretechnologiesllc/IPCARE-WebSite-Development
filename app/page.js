@@ -70,7 +70,8 @@ const HERO_SLIDES = [
     id: 1,
     service: 'Managed IT Services',
     icon: Server,
-    headline: 'End-to-End IT Operations, Monitored 24/7',
+    headline: 'End-to-End IT Operations,',
+    headlineAccent: 'Monitored 24/7',
     description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
     cta: { primary: { label: 'Explore Managed IT', href: '/services/managed-it' }, secondary: { label: 'Request SLA Quote', href: '/contact' } },
@@ -79,7 +80,8 @@ const HERO_SLIDES = [
     id: 2,
     service: 'Cybersecurity',
     icon: Lock,
-    headline: 'SOC, Zero Trust and Compliance — NESA, PCI, ISO 27001',
+    headline: 'SOC, Zero Trust and Compliance —',
+    headlineAccent: 'NESA, PCI, ISO 27001',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
     cta: { primary: { label: 'View Cyber Services', href: '/services/cybersecurity' }, secondary: { label: 'Book Security Review', href: '/contact' } },
@@ -88,7 +90,8 @@ const HERO_SLIDES = [
     id: 3,
     service: 'ELV & Physical Security',
     icon: ShieldCheck,
-    headline: 'CCTV, Access Control and Structured Cabling',
+    headline: 'CCTV, Access Control and',
+    headlineAccent: 'Structured Cabling',
     description: 'Intelligent physical security for modern facilities.',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
     cta: { primary: { label: 'Explore ELV & Security', href: '/services/elv' }, secondary: { label: 'Request a Survey', href: '/contact' } },
@@ -97,7 +100,8 @@ const HERO_SLIDES = [
     id: 4,
     service: 'Event IT Infrastructure',
     icon: Calendar,
-    headline: "The IT Backbone for the World's Biggest Events",
+    headline: "The IT Backbone for the World's",
+    headlineAccent: 'Biggest Events',
     description: 'Temporary networks and connectivity at global event scale.',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
     cta: { primary: { label: 'See Event IT Services', href: '/event-it' }, secondary: { label: 'Plan Your Event', href: '/contact' } },
@@ -106,7 +110,8 @@ const HERO_SLIDES = [
     id: 5,
     service: 'Equipment Rental',
     icon: Network,
-    headline: 'Laptops, Networks and Event Tech, on Demand',
+    headline: 'Laptops, Networks and Event Tech,',
+    headlineAccent: 'on Demand',
     description: 'Short and long-term rentals with nationwide logistics.',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
     cta: { primary: { label: 'Browse Equipment', href: '/rental' }, secondary: { label: 'Get a Rental Quote', href: '/contact' } },
@@ -115,7 +120,8 @@ const HERO_SLIDES = [
     id: 6,
     service: 'Cloud Services',
     icon: Cloud,
-    headline: 'Cloud Design, Migration and Cost Optimization',
+    headline: 'Cloud Design, Migration and',
+    headlineAccent: 'Cost Optimization',
     description: 'AWS, Azure and private cloud, engineered for scale.',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
     cta: { primary: { label: 'Explore Cloud Services', href: '/services/cloud' }, secondary: { label: 'Book Cloud Review', href: '/contact' } },
@@ -238,7 +244,7 @@ function HeroCarousel() {
 
                 {/* Headline — H1 on the brand slide only; service slides use H2 (visual size identical via className) */}
                 {(() => {
-                  const HeadingTag = slide.headlineAccent ? 'h1' : 'h2'
+                  const HeadingTag = slide.id === 0 ? 'h1' : 'h2'
                   return (
                     <HeadingTag
                       className="text-white font-extrabold leading-tight"

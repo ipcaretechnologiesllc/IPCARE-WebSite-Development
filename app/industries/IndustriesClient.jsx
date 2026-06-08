@@ -244,7 +244,7 @@ function Hero() {
           width:        '100%',
           textAlign:    'center',
         }}>
-          IT Built for the Sector, Not the Generic Template
+          IT Built for <span className="text-[#E87722]">the Sector</span>, Not the Generic Template
         </h1>
         <p style={{
           fontSize:   '1.15rem',

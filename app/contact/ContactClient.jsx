@@ -53,7 +53,7 @@ export default function ContactClient() {
         <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto">
           <div className="section-eyebrow">Contact</div>
-          <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get in Touch</h1>
+          <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get <span className="text-[#E87722]">in Touch</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.1rem' }}>We respond within 4 business hours.</p>
         </div>
       </section>
