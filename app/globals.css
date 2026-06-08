@@ -369,7 +369,7 @@ body {
   align-items: center;
   gap: 8px;
   transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   box-shadow: 0 6px 20px -6px rgba(232,119,34,0.60);
 }
 .btn-primary:hover {

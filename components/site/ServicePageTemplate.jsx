@@ -286,13 +286,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                 ? (
                   <a
                     href={`tel:${phonePrimary.replace(/\s/g, '')}`}
-                    className="btn-ghost"
+                    className="btn-secondary-pill"
                   >
                     <Icons.Phone size={14} /> {phonePrimary}
                   </a>
                 )
                 : (
-                  <Link href="/services" className="btn-ghost">
+                  <Link href="/services" className="btn-secondary-pill">
                     View All Services
                   </Link>
                 )
