@@ -166,12 +166,12 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           When heroImage is set: full-bleed background image behind content.
           Layers (back→front):
             1. <img> absolute, inset-0, object-fit:cover (LCP — eager + high priority)
-            2a. Mobile flat scrim — brand-blue wash (same palette as Home hero)
-            2b. Desktop left-weighted brand-blue gradient scrim — text on dark
-                left, image visible on right; same rgba stops as the Home hero
-                overlay (rgba(11,26,70)→rgba(15,36,95)→rgba(30,58,138)),
-                arranged left→right instead of diagonally so the H1 column
-                stays high-contrast while the photo reads through on the right
+            2a. Mobile flat scrim — brand-blue #1E3A8A dominant wash, same
+                tone the About hero reads as
+            2b. Desktop gradient scrim — brand blue #1E3A8A is the dominant
+                colour across the whole hero incl. behind the H1 (navy
+                rgba(11,26,70) only ever deepens the far-left edge), fading
+                in opacity left→right so the photo reads through on the right
             3. Orange glow blotch (existing, kept)
             4. Grid texture (existing, kept)
             5. Content — left-aligned inside max-w-[700px]
@@ -200,21 +200,24 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           />
         )}
 
-        {/* ── Layer 2a: mobile flat scrim — brand-blue wash ────────────── */}
+        {/* ── Layer 2a: mobile flat scrim — brand-blue #1E3A8A dominant ─── */}
         {heroImage && (
           <div
             className="sm:hidden absolute inset-0 pointer-events-none"
-            style={{ background: 'rgba(15,36,95,0.88)', zIndex: 1 }}
+            style={{ background: 'rgba(30,58,138,0.82)', zIndex: 1 }}
             aria-hidden="true"
           />
         )}
 
-        {/* ── Layer 2b: desktop left-weighted brand-blue gradient scrim ── */}
+        {/* ── Layer 2b: desktop gradient scrim — brand-blue #1E3A8A is the
+               dominant tone everywhere (incl. behind the H1); navy
+               rgba(11,26,70) only deepens the far-left edge, matching how
+               the About hero reads as blue rather than navy ──────────── */}
         {heroImage && (
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, rgba(11,26,70,0.92) 0%, rgba(15,36,95,0.84) 40%, rgba(30,58,138,0.65) 70%, rgba(30,58,138,0.35) 100%)',
+              background: 'linear-gradient(90deg, rgba(15,36,95,0.88) 0%, rgba(30,58,138,0.85) 30%, rgba(30,58,138,0.65) 65%, rgba(30,58,138,0.35) 100%)',
               zIndex: 1,
             }}
             aria-hidden="true"
