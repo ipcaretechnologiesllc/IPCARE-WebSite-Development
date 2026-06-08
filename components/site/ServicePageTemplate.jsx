@@ -106,6 +106,20 @@ function FeatureCard({ icon, title, desc, delay = 0, href }) {
   )
 }
 
+/* Wraps the first occurrence of `accent` within `h1` in an orange span;
+   falls back to plain text when accent is absent or not a substring. */
+function renderH1(h1, accent) {
+  if (!accent || !h1.includes(accent)) return h1
+  const i = h1.indexOf(accent)
+  return (
+    <>
+      {h1.slice(0, i)}
+      <span style={{ color: '#E87722' }}>{accent}</span>
+      {h1.slice(i + accent.length)}
+    </>
+  )
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════════════════════ */
@@ -115,6 +129,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
   const {
     h1, hero, overview, features, benefits, process, industries, faqs, icon,
     // Optional fields — all backwards-compatible (undefined = graceful no-op)
+    h1Accent,       // Optional substring of h1 to render in orange (#E87722)
     eyebrow,        // Hero pill label; default 'IP Care Enterprise Service'
     overviewTitle,  // Overview H2; default 'Overview'
     phonePrimary,   // '+971 50 6828290' — phone button in hero + bottom CTA
@@ -267,7 +282,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               className="text-white font-bold leading-[1.1] tracking-tight reveal"
               style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.25rem)' }}
             >
-              {h1}
+              {renderH1(h1, h1Accent)}
             </h1>
 
             {/* Subtitle — rgba(255,255,255,0.85) on dark scrim → ≥7:1 ✓ */}
