@@ -413,8 +413,20 @@ function Services() {
     { icon: Cloud, name: 'Cloud Services', d: 'AWS, Azure, private cloud design, migration, cost optimisation and FinOps.', link: '/services/cloud' },
   ]
   return (
-    <section id="services" className="py-24 md:py-28 px-6">
-      <div className="max-w-[1400px] mx-auto">
+    <section id="services" className="relative overflow-hidden py-24 md:py-28 px-6">
+      {/* Background image */}
+      <img
+        src="/images/pages/services-bg.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
+        loading="lazy"
+      />
+      {/* Navy overlay */}
+      <div className="absolute inset-0 bg-[#0B1A46]/70" style={{ zIndex: 10 }} />
+      {/* Section content */}
+      <div className="relative max-w-[1400px] mx-auto" style={{ zIndex: 20 }}>
         <div className="text-center mb-14 reveal">
           <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">Our Core Services</h2>
           <p className="body-text mt-5 max-w-2xl mx-auto text-base md:text-lg">Full-stack IT capability delivered across enterprise, government and event clients in UAE & Canada.</p>

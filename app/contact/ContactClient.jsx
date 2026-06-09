@@ -59,8 +59,19 @@ export default function ContactClient() {
       </section>
 
       {/* ── MAIN CONTENT ─────────────────────────────────────────────────── */}
-      <section className="px-6" style={{ background: '#F4F6FA', paddingTop: '72px', paddingBottom: '96px' }}>
-        <div className="max-w-[1200px] mx-auto">
+      <section className="px-6 relative overflow-hidden" style={{ paddingTop: '72px', paddingBottom: '96px' }}>
+        {/* Background image */}
+        <img
+          src="/images/pages/contact-bg.webp"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ zIndex: 0 }}
+          loading="lazy"
+        />
+        {/* Navy overlay */}
+        <div className="absolute inset-0 bg-[#0B1A46]/70" style={{ zIndex: 10 }} />
+        <div className="relative max-w-[1200px] mx-auto" style={{ zIndex: 20 }}>
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">
 
