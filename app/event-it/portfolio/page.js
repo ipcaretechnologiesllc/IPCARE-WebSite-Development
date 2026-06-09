@@ -61,7 +61,7 @@ export default function EventPortfolioPage() {
               <Icons.FolderOpen size={14} className="text-[#E87722]"/>
               <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">Event Portfolio</span>
             </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">Major Events IT Portfolio — UAE & Canada</h1>
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"><span style={{ color: '#E87722' }}>Major Events</span> IT Portfolio — UAE & Canada</h1>
             <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">Delivering enterprise-grade IT infrastructure for world-class events across UAE and Canada</p>
           </div>
         </section>
