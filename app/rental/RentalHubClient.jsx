@@ -73,36 +73,48 @@ export default function RentalHubClient() {
       <section
         className="relative py-24 md:py-32 px-6 overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
+          background: '#0B1A46',
           borderBottom: '3px solid #E87722',
         }}
       >
+        {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+        <img
+          src="/images/pages/rental-hero.webp"
+          alt="Event IT equipment rental Abu Dhabi"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+        />
+        {/* Brand-blue overlay at 60% opacity */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} />
         {/* Grid texture */}
-        <div className="premium-grid absolute inset-0 pointer-events-none" />
+        <div className="premium-grid absolute inset-0 pointer-events-none" style={{ zIndex: 11 }} />
 
         {/* Orange glow */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 11 }}>
           <div
             className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[700px] h-[420px] rounded-full blur-3xl"
             style={{ background: 'radial-gradient(ellipse, rgba(232,119,34,0.20) 0%, transparent 70%)' }}
           />
         </div>
 
-        <div className="relative max-w-[1200px] mx-auto text-center">
+        <div className="relative w-full md:max-w-[50%] text-center md:text-left" style={{ zIndex: 20 }}>
           <div className="section-eyebrow reveal">
             Rental Hub
           </div>
           <h1
-            className="text-white font-bold leading-[1.08] tracking-tight max-w-4xl mx-auto reveal"
+            className="text-white font-bold leading-[1.08] tracking-tight reveal"
             style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
           >
             IT Equipment Rental —{' '}
             <span className="text-[#E87722]">UAE &amp; Canada</span>
           </h1>
-          <p className="body-text mt-5 text-base md:text-lg max-w-2xl mx-auto reveal">
+          <p className="body-text mt-5 text-base md:text-lg reveal">
             Short-term &amp; long-term · Delivery &amp; setup included · Experienced engineers on-site
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 reveal">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 reveal">
             <a href="#categories" className="btn-primary">
               Browse Catalogue <Icons.ArrowRight size={16}/>
             </a>

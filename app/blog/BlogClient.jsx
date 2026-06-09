@@ -45,18 +45,29 @@ export default function BlogClient() {
   return (
     <main>
       {/* ── HERO ───────────────────────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
-        <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
-        <div style={{ position: 'absolute', top: '-100px', right: '10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="relative py-20 md:py-28 px-6">
-          <div className="max-w-[800px] mx-auto text-center">
+      <section style={{ background: '#0B1A46', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
+        {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+        <img
+          src="/images/pages/blog-hero.webp"
+          alt="IP Care IT insights Abu Dhabi"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+        />
+        {/* Brand-blue overlay at 60% opacity */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} />
+        <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 11 }} />
+        <div style={{ position: 'absolute', top: '-100px', right: '10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 11 }} />
+        <div className="relative py-20 md:py-28 px-6" style={{ zIndex: 20 }}>
+          <div className="w-full md:max-w-[50%] text-center md:text-left">
             <div className="section-eyebrow reveal">Knowledge Base</div>
             <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">IT <span className="text-[#E87722]">Knowledge Base</span> &amp; Insights</h1>
-            <p className="mt-5 text-lg max-w-2xl mx-auto reveal" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            <p className="mt-5 text-lg reveal" style={{ color: 'rgba(255,255,255,0.75)' }}>
               Field-tested articles from IP Care engineers and advisors — cybersecurity, cloud, networking, and more.
             </p>
             {/* Search bar */}
-            <div className="mt-8 max-w-[480px] mx-auto relative reveal">
+            <div className="mt-8 max-w-[480px] mx-auto md:mx-0 relative reveal">
               <Icons.Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: '#9CA3AF', pointerEvents: 'none' }} />
               <input
                 value={query}

@@ -80,12 +80,23 @@ const ActiveBadge = () => (
 function Hero() {
   return (
     <section style={{
-      background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
+      background: '#0B1A46',
       borderBottom: '3px solid #E87722',
       position: 'relative',
       overflow: 'hidden',
       padding: '120px 24px 80px',
     }}>
+      {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+      <img
+        src="/images/pages/cyber-advisory-hero.webp"
+        alt="Cybersecurity advisory Abu Dhabi"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+      />
+      {/* Brand-blue overlay at 60% opacity */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} />
       {/* Grid texture overlay */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -93,6 +104,7 @@ function Hero() {
         backgroundSize: '60px 60px',
         maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
         WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 85%)',
+        zIndex: 11,
       }} />
       {/* Orange radial glow — left */}
       <div aria-hidden="true" style={{
@@ -100,31 +112,29 @@ function Hero() {
         width: '560px', height: '560px', borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(232,119,34,0.18) 0%, transparent 65%)',
         pointerEvents: 'none',
+        zIndex: 11,
       }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        {/* Centered hero copy */}
-        <div className="reveal" style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center',
-          textAlign: 'center', marginBottom: '60px',
-        }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 20 }}>
+        {/* H1 copy — left-aligned on desktop, centred on mobile */}
+        <div className="reveal w-full md:max-w-[50%] text-center md:text-left" style={{ marginBottom: '60px' }}>
           <Eyebrow>Cyber Advisory</Eyebrow>
           <h1 style={{
             fontSize: 'clamp(2.4rem, 5vw, 3.6rem)',
             fontWeight: 800, color: '#FFFFFF',
-            lineHeight: 1.15, margin: '0 auto 22px',
-            maxWidth: '900px', width: '100%', textAlign: 'center',
+            lineHeight: 1.15, margin: '0 0 22px',
+            width: '100%',
           }}>
             Zero Trust. SASE. Cloud Security. <span className="text-[#E87722]">Done by Practitioners.</span>
           </h1>
           <p style={{
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',
-            lineHeight: 1.75, maxWidth: '760px', margin: '0 auto 36px',
+            lineHeight: 1.75, margin: '0 0 36px',
           }}>
             Zero Trust architecture, SASE transformation, and cloud security — delivered by
             practitioners who have protected 100K+ users at Fortune 500 scale.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             <Link href="/contact" className="btn-primary">
               Schedule Consultation <ArrowRight size={16} />
             </Link>
