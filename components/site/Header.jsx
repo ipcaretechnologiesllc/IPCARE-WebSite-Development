@@ -10,6 +10,7 @@ import {
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { serviceCategories } from '@/lib/services-data'
+import { services as cyberServices } from '@/lib/cyber-advisory-data'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
@@ -72,6 +73,7 @@ export default function Header() {
   const [mobileOpen,   setMobileOpen]   = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [eventITOpen,  setEventITOpen]  = useState(false)
+  const [cyberOpen,    setCyberOpen]    = useState(false)
   const navRef = useRef(null)
 
   const isActive = (href) => {
@@ -87,6 +89,7 @@ export default function Header() {
   useEffect(() => {
     setServicesOpen(false)
     setEventITOpen(false)
+    setCyberOpen(false)
     setMobileOpen(false)
   }, [pathname])
 
@@ -110,14 +113,14 @@ export default function Header() {
   // ─── Close helpers ────────────────────────────────────────────────────────
   // No timers. The nav's own onMouseLeave is the single reliable close trigger
   // (see the <nav> element below for the architectural explanation).
-  const closeAll = () => { setServicesOpen(false); setEventITOpen(false) }
+  const closeAll = () => { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false) }
 
   const navLinks = [
     { label: 'Home',           href: '/' },
     { label: 'About',          href: '/about' },
     { label: 'Services',       href: '/services',              mega: true },
     { label: 'Industries',     href: '/industries' },
-    { label: 'Cyber Advisory', href: '/cybersecurity-advisory' },
+    { label: 'Cyber Advisory', href: '/cybersecurity-advisory', cyber: true },
     { label: 'Event IT',       href: '/event-it',              dropdown: true },
     { label: 'Rental Hub',     href: '/rental' },
     { label: 'Blog',           href: '/blog' },
@@ -185,9 +188,10 @@ export default function Header() {
                 key={l.label}
                 className="relative flex items-center"
                 onMouseEnter={() => {
-                  if      (l.mega)     { setEventITOpen(false);  setServicesOpen(true)  }
-                  else if (l.dropdown) { setServicesOpen(false); setEventITOpen(true)   }
-                  else                 { setServicesOpen(false); setEventITOpen(false)  }
+                  if      (l.mega)     { setCyberOpen(false); setEventITOpen(false);  setServicesOpen(true)  }
+                  else if (l.dropdown) { setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)   }
+                  else if (l.cyber)    { setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)   }
+                  else                 { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false)  }
                 }}
               >
                 <Link
@@ -199,7 +203,7 @@ export default function Header() {
                   }`}
                 >
                   {l.label}
-                  {(l.mega || l.dropdown) && <ChevronDown size={12} className="opacity-60" />}
+                  {(l.mega || l.dropdown || l.cyber) && <ChevronDown size={12} className="opacity-60" />}
                 </Link>
               </li>
             ))}
@@ -364,6 +368,71 @@ export default function Header() {
                   className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all"
                 >
                   Plan Your Event IT <ArrowRight size={14}/>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Cyber Advisory Dropdown ──────────────────────────────────────
+            Same architecture: absolute inside sticky nav, no panel-level
+            hover handlers, onClick={closeAll} on every Link.
+        ─────────────────────────────────────────────────────────────────── */}
+        {cyberOpen && (
+          <div
+            className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
+            style={{ top: '100%' }}
+          >
+            <div
+              className="w-full py-8 px-8"
+              style={{
+                maxWidth:     '560px',
+                background:   '#ffffff',
+                borderLeft:   '1px solid #E5E7EB',
+                borderRight:  '1px solid #E5E7EB',
+                borderBottom: '1px solid #E5E7EB',
+                borderRadius: '0 0 14px 14px',
+                boxShadow:    '0 24px 60px -15px rgba(8,20,52,0.25)',
+              }}
+            >
+              {/* Overview — category header link */}
+              <Link
+                href="/cybersecurity-advisory"
+                onClick={closeAll}
+                className="flex gap-2.5 p-2.5 -ml-2.5 rounded-lg hover:bg-[#E87722]/8 transition-colors group mb-3"
+              >
+                <Shield className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
+                <div>
+                  <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">Cyber Advisory</div>
+                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Zero Trust, SASE &amp; cloud security — by practitioners</div>
+                </div>
+              </Link>
+
+              {/* 5 service links — 2-col grid */}
+              <div
+                className="grid grid-cols-2 gap-x-6 gap-y-1.5 ml-7 border-l pl-3"
+                style={{ borderColor: '#E5E7EB' }}
+              >
+                {cyberServices.map((s) => (
+                  <Link
+                    key={s.slug}
+                    href={`/cybersecurity-advisory/${s.slug}`}
+                    onClick={closeAll}
+                    className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Knowledge Base — footer separator link */}
+              <div className="mt-6 pt-4" style={{ borderTop: '1px solid #E5E7EB' }}>
+                <Link
+                  href="/cybersecurity-advisory/knowledge-base"
+                  onClick={closeAll}
+                  className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all"
+                >
+                  Browse Knowledge Base <ArrowRight size={14}/>
                 </Link>
               </div>
             </div>
