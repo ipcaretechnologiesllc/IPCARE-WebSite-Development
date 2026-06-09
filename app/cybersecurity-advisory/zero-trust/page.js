@@ -19,6 +19,7 @@ export const metadata = {
 
 const pageData = {
   h1: 'Zero Trust Architecture Consulting UAE & Canada',
+  h1Accent: 'Zero Trust Architecture',
   icon: 'Shield',
   hero: 'Never trust, always verify â€” implement Zero Trust architecture for modern enterprise security.',
   overview: [

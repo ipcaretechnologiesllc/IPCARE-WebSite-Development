@@ -16,6 +16,7 @@ export const metadata = {
 
 const pageData = {
   h1: 'Cloud Security Advisory â€” Multi-Cloud UAE & Canada',
+  h1Accent: 'Cloud Security Advisory',
   icon: 'Cloud',
   hero: 'Secure your cloud estate â€” from landing zones to workload protection.',
   overview: [

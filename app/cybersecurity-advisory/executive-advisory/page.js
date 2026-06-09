@@ -16,6 +16,7 @@ export const metadata = {
 
 const pageData = {
   h1: 'Executive Cybersecurity Advisory UAE & Canada',
+  h1Accent: 'Executive Cybersecurity Advisory',
   icon: 'Briefcase',
   hero: 'Board-level security strategy â€” translate cyber risk to business outcomes.',
   overview: [

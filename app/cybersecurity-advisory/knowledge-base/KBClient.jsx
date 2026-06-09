@@ -46,7 +46,7 @@ export default function KBClient() {
         <div className="max-w-[1200px] mx-auto relative text-center">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Knowledge Base</div>
           <h1 className="premium-h1 text-4xl md:text-6xl font-bold leading-[1.08] tracking-tight max-w-4xl mx-auto reveal">
-            Field-Tested Cybersecurity Insights
+            Field-Tested <span style={{ color: '#E87722' }}>Cybersecurity Insights</span>
           </h1>
           <p className="body-text mt-5 text-base md:text-lg max-w-2xl mx-auto reveal">
             Deep-dive engineering articles from The Cyber Adviser practice. Written by senior architects, reviewed by peers, battle-tested in production.

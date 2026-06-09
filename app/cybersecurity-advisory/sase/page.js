@@ -16,6 +16,7 @@ export const metadata = {
 
 const pageData = {
   h1: 'SASE Transformation Consulting UAE & Canada',
+  h1Accent: 'SASE Transformation',
   icon: 'Cloud',
   hero: 'Secure Access Service Edge â€” cloud-delivered security for the distributed enterprise.',
   overview: [

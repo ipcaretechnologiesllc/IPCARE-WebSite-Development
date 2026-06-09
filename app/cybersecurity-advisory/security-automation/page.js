@@ -16,6 +16,7 @@ export const metadata = {
 
 const pageData = {
   h1: 'Security Automation SOAR & XSOAR UAE & Canada',
+  h1Accent: 'Security Automation',
   icon: 'Zap',
   hero: 'Automate security operations â€” from alert to response in seconds.',
   overview: [
