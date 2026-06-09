@@ -18,11 +18,11 @@ const pageData = {
   h1: 'SASE Transformation Consulting UAE & Canada',
   h1Accent: 'SASE Transformation',
   icon: 'Cloud',
-  hero: 'Secure Access Service Edge â€” cloud-delivered security for the distributed enterprise.',
+  hero: 'Secure Access Service Edge — cloud-delivered security for the distributed enterprise.',
   overview: [
-    'SASE (Secure Access Service Edge) converges networking and security into a single cloud-delivered service. It eliminates the complexity of multiple appliances, VPNs and point solutions â€” delivering consistent security for users anywhere, on any device.',
-    'IP Care designs and deploys SASE architectures with Palo Alto Prisma Access, Netskope and Zscaler. We integrate SD-WAN for intelligent routing, Zero Trust access control, cloud firewall, DLP and advanced threat prevention â€” all delivered from the cloud edge.',
-    'Our SASE transformations cover assessment, architecture, pilot deployment, migration planning and managed operations â€” typically delivered over 4â€“12 months.',
+    'SASE (Secure Access Service Edge) converges networking and security into a single cloud-delivered service. It eliminates the complexity of multiple appliances, VPNs and point solutions — delivering consistent security for users anywhere, on any device.',
+    'IP Care designs and deploys SASE architectures with Palo Alto Prisma Access, Netskope and Zscaler. We integrate SD-WAN for intelligent routing, Zero Trust access control, cloud firewall, DLP and advanced threat prevention — all delivered from the cloud edge.',
+    'Our SASE transformations cover assessment, architecture, pilot deployment, migration planning and managed operations — typically delivered over 4–12 months.',
   ],
   features: [
     { icon: 'Cloud', title: 'Prisma Access Deployment', desc: 'Palo Alto Prisma Access SASE platform with cloud-delivered firewall, Zero Trust access and threat prevention.' },
@@ -34,9 +34,9 @@ const pageData = {
   ],
   benefits: [
     { icon: 'Zap', t: 'Better performance', d: 'Cloud-edge delivery reduces latency for SaaS and cloud applications compared to backhauling through VPN.' },
-    { icon: 'ShieldCheck', t: 'Consistent security', d: 'Unified security policies enforced everywhere â€” office, home, branch, cloud.' },
+    { icon: 'ShieldCheck', t: 'Consistent security', d: 'Unified security policies enforced everywhere — office, home, branch, cloud.' },
     { icon: 'Wallet', t: 'Lower TCO', d: 'Eliminate hardware refresh cycles, reduce MPLS costs and simplify operations.' },
-    { icon: 'TrendingUp', t: 'Faster deployment', d: 'Onboard new sites and users in hours, not weeks â€” with zero hardware shipping.' },
+    { icon: 'TrendingUp', t: 'Faster deployment', d: 'Onboard new sites and users in hours, not weeks — with zero hardware shipping.' },
   ],
   process: [
     { n: '01', t: 'Assess', d: 'Current network architecture, application inventory, user distribution and WAN costs.' },
@@ -47,7 +47,7 @@ const pageData = {
   industries: ['Banking', 'Retail', 'Professional Services', 'Technology', 'Government', 'Healthcare'],
   faqs: [
     { q: 'What is the difference between SASE and traditional VPN?', a: 'VPN backhau ls traffic through a central data centre, adding latency. SASE delivers security at the cloud edge closest to users, with better performance for SaaS and cloud applications. It also integrates Zero Trust access control that VPN lacks.' },
-    { q: 'How long does a SASE transformation take?', a: 'Typical engagements run 4â€“12 months depending on organization size, number of locations and complexity. We deliver in waves with immediate value from early adopters.' },
+    { q: 'How long does a SASE transformation take?', a: 'Typical engagements run 4–12 months depending on organization size, number of locations and complexity. We deliver in waves with immediate value from early adopters.' },
     { q: 'Can SASE replace our existing firewalls?', a: 'For most use cases, yes. SASE platforms like Prisma Access deliver cloud firewall capabilities that match or exceed traditional perimeter firewalls. However, some enterprises maintain hybrid models with on-prem firewalls for data centre workloads.' },
     { q: 'Is SASE suitable for UAE organizations with data residency requirements?', a: 'Yes. Prisma Access and Netskope have UAE-region presence to support data residency requirements. We design SASE architectures that align with UAE PDPL and NESA regulations.' },
   ],

@@ -18,11 +18,11 @@ const pageData = {
   h1: 'Security Automation SOAR & XSOAR UAE & Canada',
   h1Accent: 'Security Automation',
   icon: 'Zap',
-  hero: 'Automate security operations â€” from alert to response in seconds.',
+  hero: 'Automate security operations — from alert to response in seconds.',
   overview: [
-    'Security teams are drowning in alerts. The average SOC receives 10,000+ alerts per day with only 5â€“10% being actionable. Manual triage, investigation and response create fatigue, delays and missed threats.',
-    'IP Care implements Security Orchestration, Automation and Response (SOAR) platforms to automate repetitive security tasks. We specialize in Palo Alto Cortex XSOAR and XSIAM â€” the industry-leading platforms for alert triage, incident investigation, threat hunting and automated response.',
-    'Our SOAR engagements cover playbook development, integration with existing security tools, custom automation and managed SOC operations â€” delivering 70%+ reduction in mean-time-to-respond (MTTR) and freeing analysts to focus on high-value threat hunting.',
+    'Security teams are drowning in alerts. The average SOC receives 10,000+ alerts per day with only 5–10% being actionable. Manual triage, investigation and response create fatigue, delays and missed threats.',
+    'IP Care implements Security Orchestration, Automation and Response (SOAR) platforms to automate repetitive security tasks. We specialize in Palo Alto Cortex XSOAR and XSIAM — the industry-leading platforms for alert triage, incident investigation, threat hunting and automated response.',
+    'Our SOAR engagements cover playbook development, integration with existing security tools, custom automation and managed SOC operations — delivering 70%+ reduction in mean-time-to-respond (MTTR) and freeing analysts to focus on high-value threat hunting.',
   ],
   features: [
     { icon: 'Zap', title: 'Cortex XSOAR Implementation', desc: 'Deploy and configure Cortex XSOAR with pre-built and custom playbooks for automated incident response.' },
@@ -46,10 +46,10 @@ const pageData = {
   ],
   industries: ['Financial Services', 'Technology', 'Healthcare', 'Government', 'Energy', 'Telecom'],
   faqs: [
-    { q: 'What is the difference between SOAR and SIEM?', a: 'SIEM collects and correlates security logs to detect threats. SOAR takes action on those threats â€” automating investigation, enrichment and response. They work together: SIEM detects, SOAR automates response.' },
-    { q: 'How long does a SOAR implementation take?', a: 'Typical engagements run 3â€“6 months from deployment to production with 5â€“10 automated playbooks. We deliver quick wins in first 30 days with high-value use cases like phishing investigation and malware containment.' },
+    { q: 'What is the difference between SOAR and SIEM?', a: 'SIEM collects and correlates security logs to detect threats. SOAR takes action on those threats — automating investigation, enrichment and response. They work together: SIEM detects, SOAR automates response.' },
+    { q: 'How long does a SOAR implementation take?', a: 'Typical engagements run 3–6 months from deployment to production with 5–10 automated playbooks. We deliver quick wins in first 30 days with high-value use cases like phishing investigation and malware containment.' },
     { q: 'Can XSOAR integrate with our existing security tools?', a: 'Yes. XSOAR has 600+ pre-built integrations with SIEM (Splunk, QRadar, Sentinel), EDR (CrowdStrike, SentinelOne), firewalls (Palo Alto, Check Point), email security and more. We also build custom integrations for proprietary tools.' },
-    { q: 'What ROI can we expect from SOAR?', a: 'Organizations typically see 70%+ reduction in mean-time-to-respond (MTTR), 50%+ reduction in analyst workload for tier-1 tasks and ability to handle 3â€“10x more alerts without adding headcount. ROI is usually achieved within 6â€“12 months.' },
+    { q: 'What ROI can we expect from SOAR?', a: 'Organizations typically see 70%+ reduction in mean-time-to-respond (MTTR), 50%+ reduction in analyst workload for tier-1 tasks and ability to handle 3–10x more alerts without adding headcount. ROI is usually achieved within 6–12 months.' },
   ],
 }
 

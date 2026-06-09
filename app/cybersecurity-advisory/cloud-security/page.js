@@ -3,11 +3,11 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 
 export const metadata = {
-  title: 'Cloud Security Advisory â€” Multi-Cloud UAE & Canada | IP Care Technologies',
+  title: 'Cloud Security Advisory — Multi-Cloud UAE & Canada | IP Care Technologies',
   description: 'Cloud security advisory for AWS, Azure and GCP in UAE and Canada. Cloud workload protection, CSPM, secure landing zones and cloud-native security architecture.',
   alternates: { canonical: '/cybersecurity-advisory/cloud-security' },
   openGraph: {
-    title: 'Cloud Security Advisory â€” Multi-Cloud UAE & Canada | IP Care Technologies',
+    title: 'Cloud Security Advisory — Multi-Cloud UAE & Canada | IP Care Technologies',
     description: 'Cloud security advisory for AWS, Azure and GCP. Cloud workload protection, CSPM and secure landing zones.',
     url: '/cybersecurity-advisory/cloud-security',
     type: 'website',
@@ -15,14 +15,14 @@ export const metadata = {
 }
 
 const pageData = {
-  h1: 'Cloud Security Advisory â€” Multi-Cloud UAE & Canada',
+  h1: 'Cloud Security Advisory — Multi-Cloud UAE & Canada',
   h1Accent: 'Cloud Security Advisory',
   icon: 'Cloud',
-  hero: 'Secure your cloud estate â€” from landing zones to workload protection.',
+  hero: 'Secure your cloud estate — from landing zones to workload protection.',
   overview: [
     'Cloud security is fundamentally different from on-premise security. The shared responsibility model, ephemeral workloads, API-driven access and multi-cloud complexity demand a cloud-native security approach.',
     'IP Care, powered by The Cyber Adviser, delivers cloud security advisory across AWS, Azure and Google Cloud. We cover secure landing zone design, cloud security posture management (CSPM), workload protection (CWPP), identity and access management (IAM) and compliance automation.',
-    'Our cloud security engagements span architecture, tool selection, implementation and managed security operations â€” aligned to CIS Benchmarks, NIST 800-53, UAE NESA and Canadian privacy regulations.',
+    'Our cloud security engagements span architecture, tool selection, implementation and managed security operations — aligned to CIS Benchmarks, NIST 800-53, UAE NESA and Canadian privacy regulations.',
   ],
   features: [
     { icon: 'Shield', title: 'Secure Landing Zones', desc: 'Multi-account AWS Organizations, Azure landing zones and GCP resource hierarchies with security guardrails baked in.' },
