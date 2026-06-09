@@ -31,22 +31,33 @@ function useReveal() {
 function Hero() {
   return (
     <section
-      className="relative flex items-center justify-center px-6 py-24 overflow-hidden"
+      className="relative flex items-center justify-center md:justify-start px-6 py-24 overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
+        background: '#0B1A46',
         borderBottom: '3px solid #E87722',
         minHeight: '85vh',
       }}
     >
+      {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+      <img
+        src="/images/event-it/event-it-hero.webp"
+        alt="Event IT infrastructure UAE"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+      />
+      {/* Brand-blue overlay at 60% opacity */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} aria-hidden="true" />
       {/* Grid texture */}
-      <div className="absolute inset-0 premium-grid pointer-events-none" />
+      <div className="absolute inset-0 premium-grid pointer-events-none" style={{ zIndex: 11 }} />
       {/* Orange glow */}
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-3xl opacity-25 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, #E87722 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse, #E87722 0%, transparent 60%)', zIndex: 11 }}
       />
 
-      <div className="relative max-w-[900px] w-full text-center reveal">
+      <div className="relative w-full md:max-w-[50%] text-center md:text-left reveal" style={{ zIndex: 20 }}>
         {/* Eyebrow */}
         <div
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
@@ -69,14 +80,14 @@ function Hero() {
           <span className="text-[#E87722]">Biggest Events</span>
         </h1>
 
-        <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">
+        <p className="body-text mt-6 text-base md:text-lg max-w-2xl">
           Trusted on FIFA Club World Cup, UFC UAE (2020–2025), NBA Abu Dhabi Games, EuroLeague
           Final Four 2025 (first outside Europe), FINA World Swimming, IIFA Awards, Coldplay,
           Saadiyat Nights and the UAE Official National Day events. From temporary WiFi for
           60,000 fans to broadcast-grade data centres, deployed at speed.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
+        <div className="mt-8 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
           {[
             'FIFA', 'UFC', 'NBA', 'EuroLeague', 'FINA', 'IIFA',
             'Coldplay', 'Saadiyat Nights', 'WBA', 'Mubadala Open', 'UAE National Day',
@@ -85,7 +96,7 @@ function Hero() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3">
           <Link href="/#contact" className="btn-primary">
             Plan Your Event IT <Icons.ArrowRight size={16} />
           </Link>

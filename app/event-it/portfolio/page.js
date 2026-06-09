@@ -52,17 +52,31 @@ export default function EventPortfolioPage() {
         </div>
 
         {/* Hero */}
-        <section className="relative py-20 md:py-28 px-6">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <section className="relative py-20 md:py-28 px-6 overflow-hidden" style={{ background: '#0B1A46' }}>
+          {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+          <img
+            src="/images/event-it/portfolio-hero.webp"
+            alt="Event IT portfolio Abu Dhabi"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+          />
+          {/* Brand-blue overlay at 60% opacity */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} aria-hidden="true" />
+          {/* Orange glow */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 11 }}>
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
           </div>
-          <div className="relative max-w-[1100px] mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}>
-              <Icons.FolderOpen size={14} className="text-[#E87722]"/>
-              <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">Event Portfolio</span>
+          <div className="relative max-w-[1400px] mx-auto" style={{ zIndex: 20 }}>
+            <div className="w-full md:max-w-[50%] text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}>
+                <Icons.FolderOpen size={14} className="text-[#E87722]"/>
+                <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">Event Portfolio</span>
+              </div>
+              <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"><span style={{ color: '#E87722' }}>Major Events</span> IT Portfolio — UAE & Canada</h1>
+              <p className="body-text mt-6 text-base md:text-lg max-w-2xl">Delivering enterprise-grade IT infrastructure for world-class events across UAE and Canada</p>
             </div>
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"><span style={{ color: '#E87722' }}>Major Events</span> IT Portfolio — UAE & Canada</h1>
-            <p className="body-text mt-6 text-base md:text-lg max-w-2xl mx-auto">Delivering enterprise-grade IT infrastructure for world-class events across UAE and Canada</p>
           </div>
         </section>
 
