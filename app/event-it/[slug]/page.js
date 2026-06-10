@@ -94,29 +94,8 @@ export default function EventSubPage({ params }) {
       {event?.img && <link rel="preload" as="image" href={event.img} fetchPriority="high" />}
       <Header />
       <main>
-        {event?.img && (
-          <section className="relative w-full overflow-hidden" style={{ aspectRatio: '16/7' }}>
-            <img
-              src={event.img}
-              alt={`${sub.h1} — event IT delivery by IP Care`}
-              width={1200}
-              height={525}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.35) 0%, rgba(7,16,42,0.85) 100%)' }} />
-            <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:pb-14">
-              <div className="max-w-[1100px] mx-auto">
-                <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{event.year} • {event.location}</div>
-                <div className="text-white text-3xl md:text-5xl font-bold leading-[1.1] max-w-3xl" aria-hidden="true">{sub.h1}</div>
-              </div>
-            </div>
-          </section>
-        )}
         <ServicePageTemplate
-          data={sub}
+          data={event?.img ? { ...sub, heroImage: event.img, heroImageAlt: sub.heroImageAlt || `${sub.h1} — event IT delivery by IP Care` } : sub}
           related={related}
           breadcrumb={[
             { label: 'Event IT', href: '/event-it' },

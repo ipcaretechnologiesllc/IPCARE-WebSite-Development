@@ -215,24 +215,23 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           />
         )}
 
-        {/* ── Layer 2a: mobile flat scrim — brand-blue #1E3A8A dominant ─── */}
+        {/* ── Layer 2a: mobile flat scrim — navy #0B1A46 dominant ───────── */}
         {heroImage && (
           <div
             className="sm:hidden absolute inset-0 pointer-events-none"
-            style={{ background: 'rgba(30,58,138,0.82)', zIndex: 1 }}
+            style={{ background: 'rgba(11,26,70,0.82)', zIndex: 1 }}
             aria-hidden="true"
           />
         )}
 
-        {/* ── Layer 2b: desktop gradient scrim — brand-blue #1E3A8A is the
-               dominant tone everywhere (incl. behind the H1); navy
-               rgba(11,26,70) only deepens the far-left edge, matching how
-               the About hero reads as blue rather than navy ──────────── */}
+        {/* ── Layer 2b: desktop gradient scrim — navy #0B1A46 dominant tone
+               everywhere (incl. behind the H1), fading toward the right so
+               the photo reads through ─────────────────────────────────── */}
         {heroImage && (
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, rgba(15,36,95,0.88) 0%, rgba(30,58,138,0.85) 30%, rgba(30,58,138,0.65) 65%, rgba(30,58,138,0.35) 100%)',
+              background: 'linear-gradient(90deg, rgba(11,26,70,0.92) 0%, rgba(11,26,70,0.85) 30%, rgba(11,26,70,0.65) 65%, rgba(11,26,70,0.35) 100%)',
               zIndex: 1,
             }}
             aria-hidden="true"
