@@ -50,7 +50,7 @@ export default function PortfolioClient() {
         <div className="relative max-w-[1200px] mx-auto text-center">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Portfolio</div>
           <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] tracking-tight max-w-4xl mx-auto reveal">Event IT Case Studies</h1>
-          <p className="body-text mt-5 text-base md:text-lg max-w-2xl mx-auto reveal">A decade of event IT delivery — from world football finals to stadium concerts to government summits.</p>
+          <p className="body-text mt-5 text-base md:text-lg max-w-2xl mx-auto reveal">A decade of event IT delivery, from world football finals to stadium concerts to government summits.</p>
         </div>
       </section>
 
@@ -138,7 +138,7 @@ export default function PortfolioClient() {
       <section className="py-16 px-6">
         <div className="max-w-[1100px] mx-auto rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
           <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Your Event Could Be Next.</h2>
-          <p className="body-text max-w-xl mx-auto mb-8">Tell us the dates, venue and scope — we&apos;ll get you a costed event IT proposal in 48 hours.</p>
+          <p className="body-text max-w-xl mx-auto mb-8">Tell us the dates, venue and scope. We&apos;ll get you a costed event IT proposal in 48 hours.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/#contact" className="btn-primary">Get an Event Quote <Icons.ArrowRight size={16}/></Link>
             <Link href="/event-it" className="btn-ghost">Explore Event Services</Link>

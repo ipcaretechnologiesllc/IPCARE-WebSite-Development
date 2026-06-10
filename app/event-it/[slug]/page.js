@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
       ? event.img
       : `${BASE}${event.img}`
     : `${BASE}/opengraph-image.png`
-  const ogImages = [{ url: imgSrc, width: 1200, height: 630, alt: `${sub.h1} — Event IT by IP Care` }]
+  const ogImages = [{ url: imgSrc, width: 1200, height: 630, alt: `${sub.h1}, Event IT by IP Care` }]
 
   return {
     title: sub.title,
@@ -95,7 +95,7 @@ export default function EventSubPage({ params }) {
       <Header />
       <main>
         <ServicePageTemplate
-          data={event?.img ? { ...sub, heroImage: event.img, heroImageAlt: sub.heroImageAlt || `${sub.h1} — event IT delivery by IP Care` } : sub}
+          data={event?.img ? { ...sub, heroImage: event.img, heroImageAlt: sub.heroImageAlt || `${sub.h1}, event IT delivery by IP Care` } : sub}
           related={related}
           breadcrumb={[
             { label: 'Event IT', href: '/event-it' },

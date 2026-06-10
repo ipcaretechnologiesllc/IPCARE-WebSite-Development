@@ -18,11 +18,11 @@ const pageData = {
   h1: 'Executive Cybersecurity Advisory UAE & Canada',
   h1Accent: 'Executive Cybersecurity Advisory',
   icon: 'Briefcase',
-  hero: 'Board-level security strategy — translate cyber risk to business outcomes.',
+  hero: 'Board-level security strategy, translate cyber risk to business outcomes.',
   overview: [
     'Cybersecurity is a board-level business risk, not just an IT problem. Executives need to understand cyber risk in business terms, make informed investment decisions and communicate security posture to stakeholders.',
     'IP Care provides executive cybersecurity advisory to CEOs, CFOs, board members and CISOs across UAE and Canada. We translate technical security into strategic business language, quantify cyber risk, build investment business cases and design security programmes aligned to business outcomes.',
-    'Our executive advisory engagements span strategy development, risk quantification, board reporting, CISO-as-a-Service and security programme maturity assessment — delivered by practitioners who have led security at Fortune 500 scale.',
+    'Our executive advisory engagements span strategy development, risk quantification, board reporting, CISO-as-a-Service and security programme maturity assessment, delivered by practitioners who have led security at Fortune 500 scale.',
   ],
   features: [
     { icon: 'Target', title: 'Board-Level Strategy', desc: 'Multi-year cybersecurity roadmaps aligned to business goals, risk appetite and regulatory requirements.' },

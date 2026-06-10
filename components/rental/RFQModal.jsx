@@ -38,7 +38,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
         else if (data.error === 'too-many-requests') setError('Too many submissions from your IP. Please try again in a few minutes.')
         else if (data.error === 'cart-is-empty') setError('Your quote cart is empty. Please add items before submitting.')
         else if (typeof data.error === 'string' && data.error.length < 120) setError(data.error)
-        else setError('Something went wrong — please try again or call +971 2 676 6935.')
+        else setError('Something went wrong, please try again or call +971 2 676 6935.')
         setSubmitting(false)
         return
       }
@@ -69,7 +69,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
               <Icons.Check size={28} className="text-green-400"/>
             </div>
             <h3 className="text-white text-2xl font-bold mb-3">Quote request received!</h3>
-            <p className="body-text mb-3">Thanks — we&apos;ll reply to <span className="text-white">{form.email}</span> within <span className="text-[#E87722] font-semibold">1 business day</span> with a tailored quote.</p>
+            <p className="body-text mb-3">Thanks. We&apos;ll reply to <span className="text-white">{form.email}</span> within <span className="text-[#E87722] font-semibold">1 business day</span> with a tailored quote.</p>
             <p className="mono text-xs text-white/50 mb-6">Reference: <span className="text-white/80">{reference || 'pending'}</span></p>
             <p className="body-text text-sm">Need it sooner? Call us: <a href="tel:+97126766935" className="text-[#E87722] hover:underline">+971 2 676 6935</a></p>
           </div>
@@ -145,7 +145,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
             <div>
               <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">How did you hear about us?</label>
               <select value={form.source} onChange={e => set('source', e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-white text-sm focus:outline-none focus:border-[#E87722]" style={inputStyle}>
-                <option value="" disabled style={{ color: '#0F245F', background: '#FFFFFF' }}>— Select —</option>
+                <option value="" disabled style={{ color: '#0F245F', background: '#FFFFFF' }}>, Select ,</option>
                 <option value="Google Search" style={{ color: '#0F245F', background: '#FFFFFF' }}>Google Search</option>
                 <option value="LinkedIn" style={{ color: '#0F245F', background: '#FFFFFF' }}>LinkedIn</option>
                 <option value="Referral from a colleague" style={{ color: '#0F245F', background: '#FFFFFF' }}>Referral from a colleague</option>

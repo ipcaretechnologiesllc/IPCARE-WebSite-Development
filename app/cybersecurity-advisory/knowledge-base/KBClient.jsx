@@ -103,7 +103,7 @@ export default function KBClient() {
           <div className="mt-16 glass-premium p-10 md:p-14 text-center max-w-3xl mx-auto reveal">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Consultation</div>
             <h2 className="text-white text-2xl md:text-4xl font-bold mb-4">Need a direct answer?</h2>
-            <p className="body-text mb-8">The knowledge base is a great start. For specific architecture decisions, 30 minutes with a senior advisor is often faster — and free.</p>
+            <p className="body-text mb-8">The knowledge base is a great start. For specific architecture decisions, 30 minutes with a senior advisor is often faster, and free.</p>
             <Link href="/#contact" className="btn-primary">Schedule a Consultation <Icons.ArrowRight size={16}/></Link>
           </div>
         </div>

@@ -21,11 +21,11 @@ const pageData = {
   h1: 'Zero Trust Architecture Consulting UAE & Canada',
   h1Accent: 'Zero Trust Architecture',
   icon: 'Shield',
-  hero: 'Never trust, always verify — implement Zero Trust architecture for modern enterprise security.',
+  hero: 'Never trust, always verify, implement Zero Trust architecture for modern enterprise security.',
   overview: [
     'Zero Trust is not a product, it is an architecture philosophy: assume breach, verify explicitly, enforce least-privilege access, and segment your network down to the workload level.',
     'IP Care, powered by The Cyber Adviser, designs and delivers complete Zero Trust architectures aligned to NIST 800-207, Forrester ZTX frameworks and UAE NESA requirements. We cover identity, devices, applications, data and infrastructure with unified policy enforcement.',
-    'Our Zero Trust engagements span strategy, architecture, implementation and operations — typically delivered over 6–18 months depending on your starting point and maturity goals.',
+    'Our Zero Trust engagements span strategy, architecture, implementation and operations, typically delivered over 6-18 months depending on your starting point and maturity goals.',
   ],
   features: [
     { icon: 'UserCheck', title: 'Identity-Driven Access', desc: 'Every access decision starts with verifying the user identity through MFA, risk scoring and continuous authentication.' },
@@ -36,7 +36,7 @@ const pageData = {
     { icon: 'FileCheck', title: 'NESA & Compliance', desc: 'Zero Trust design aligned to UAE NESA, Canadian privacy laws, ISO 27001 and SOC 2 requirements.' },
   ],
   benefits: [
-    { icon: 'ShieldCheck', t: 'Reduced breach impact', d: 'Micro-segmentation limits lateral movement — containing breaches to single workloads.' },
+    { icon: 'ShieldCheck', t: 'Reduced breach impact', d: 'Micro-segmentation limits lateral movement, containing breaches to single workloads.' },
     { icon: 'Zap', t: 'Faster secure access', d: 'Identity-driven policies eliminate VPN bottlenecks for remote and cloud workloads.' },
     { icon: 'Eye', t: 'Full visibility', d: 'Unified logging and monitoring across all access decisions for security and compliance.' },
     { icon: 'TrendingDown', t: 'Lower long-term cost', d: 'Cloud-delivered Zero Trust eliminates hardware refresh cycles and simplifies operations.' },
@@ -49,10 +49,10 @@ const pageData = {
   ],
   industries: ['Banking', 'Government', 'Energy', 'Healthcare', 'Technology', 'Critical Infrastructure'],
   faqs: [
-    { q: 'How long does a Zero Trust implementation take?', a: 'Typical engagements run 6–18 months depending on your starting maturity, organization size and chosen technology stack. We deliver in phased waves with immediate value in early pilots.' },
+    { q: 'How long does a Zero Trust implementation take?', a: 'Typical engagements run 6-18 months depending on your starting maturity, organization size and chosen technology stack. We deliver in phased waves with immediate value in early pilots.' },
     { q: 'Do we need to replace all our existing security tools?', a: 'No. Zero Trust is an architecture, not a rip-and-replace. We integrate with your existing identity (Active Directory, Entra ID), firewalls and endpoint tools to build unified policy enforcement.' },
     { q: 'Is Zero Trust compliant with UAE NESA requirements?', a: 'Yes. Zero Trust principles align strongly with NESA controls around identity assurance, access control and network segmentation. We design implementations that meet NESA IAS and critical infrastructure requirements.' },
-    { q: 'Can Zero Trust work for on-premise and cloud workloads?', a: 'Absolutely. Modern Zero Trust architectures are hybrid by default — covering on-prem data centres, multi-cloud (AWS, Azure, GCP) and SaaS applications with consistent policy enforcement.' },
+    { q: 'Can Zero Trust work for on-premise and cloud workloads?', a: 'Absolutely. Modern Zero Trust architectures are hybrid by default, covering on-prem data centres, multi-cloud (AWS, Azure, GCP) and SaaS applications with consistent policy enforcement.' },
   ],
 }
 

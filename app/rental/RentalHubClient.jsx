@@ -42,22 +42,22 @@ const CATEGORY_PHOTOS = {
 }
 
 const CATEGORY_ALT = {
-  'laptops-desktops':  'Laptop rental UAE — IP Care Technologies',
-  'tablets-ipads':     'iPad and tablet rental UAE — IP Care Technologies',
-  'printers':          'Printer rental UAE — IP Care Technologies',
-  'event-wifi':        'Event WiFi and router rental UAE — IP Care Technologies',
-  'networking':        'Networking equipment rental UAE — IP Care Technologies',
-  'cctv':              'CCTV and security camera rental UAE — IP Care Technologies',
-  'testing-equipment': 'Cable and fibre testing equipment rental UAE — IP Care Technologies',
-  'servers':           'Server rental UAE — IP Care Technologies',
-  'macbooks':          'MacBook and Mac rental UAE — IP Care Technologies',
+  'laptops-desktops':  'Laptop rental UAE, IP Care Technologies',
+  'tablets-ipads':     'iPad and tablet rental UAE, IP Care Technologies',
+  'printers':          'Printer rental UAE, IP Care Technologies',
+  'event-wifi':        'Event WiFi and router rental UAE, IP Care Technologies',
+  'networking':        'Networking equipment rental UAE, IP Care Technologies',
+  'cctv':              'CCTV and security camera rental UAE, IP Care Technologies',
+  'testing-equipment': 'Cable and fibre testing equipment rental UAE, IP Care Technologies',
+  'servers':           'Server rental UAE, IP Care Technologies',
+  'macbooks':          'MacBook and Mac rental UAE, IP Care Technologies',
 }
 
 const WHY_ITEMS = [
-  { icon: 'Truck',   t: 'Delivery & Setup Included',    d: 'White-glove delivery, rack-and-stack and full configuration — not a hidden extra like other vendors.' },
-  { icon: 'Wrench',  t: 'Experienced Engineers On-Site', d: 'Our engineers stay through your event or project — not just for handover.' },
+  { icon: 'Truck',   t: 'Delivery & Setup Included',    d: 'White-glove delivery, rack-and-stack and full configuration, not a hidden extra like other vendors.' },
+  { icon: 'Wrench',  t: 'Experienced Engineers On-Site', d: 'Our engineers stay through your event or project, not just for handover.' },
   { icon: 'Globe2',  t: 'UAE + Canada Coverage',        d: 'One partner, two regions, consistent SLA and support. Dubai, Abu Dhabi, Toronto, Vancouver.' },
-  { icon: 'Award',   t: '20+ Years, 500+ Projects',     d: 'Deep vendor relationships since 2003 — real stock, real rates, no broker mark-ups.' },
+  { icon: 'Award',   t: '20+ Years, 500+ Projects',     d: 'Deep vendor relationships since 2003, real stock, real rates, no broker mark-ups.' },
 ]
 
 /* ════════════════════════════════════════════════════════════════
@@ -108,7 +108,7 @@ export default function RentalHubClient() {
             className="text-white font-bold leading-[1.08] tracking-tight reveal"
             style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
           >
-            IT Equipment Rental —{' '}
+            IT Equipment Rental ,{' '}
             <span className="text-[#E87722]">UAE &amp; Canada</span>
           </h1>
           <p className="body-text mt-5 text-base md:text-lg reveal">
@@ -148,7 +148,7 @@ export default function RentalHubClient() {
                 <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
                   <img
                     src={`${CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'}?w=600&fm=webp&q=82`}
-                    alt={CATEGORY_ALT[slug] || `${c.name} rental UAE — IP Care`}
+                    alt={CATEGORY_ALT[slug] || `${c.name} rental UAE, IP Care`}
                     width={600}
                     height={375}
                     loading="lazy"
@@ -241,7 +241,7 @@ export default function RentalHubClient() {
               Bundle Packages
             </h2>
             <p className="mt-4 text-base max-w-2xl mx-auto" style={{ color: '#4A5568' }}>
-              Sized for common use cases — everything assembled, delivered and set up. One line item, one price.
+              Sized for common use cases, everything assembled, delivered and set up. One line item, one price.
             </p>
           </div>
 
@@ -339,7 +339,7 @@ export default function RentalHubClient() {
           </h2>
           <p className="text-white/75 text-base md:text-lg max-w-xl mx-auto mb-8">
             Our rental catalogue has 500+ items. Tell us your project and we&apos;ll source the right
-            kit — delivered and configured.
+            kit, delivered and configured.
           </p>
           <CTAPhoneButtons />
         </div>
@@ -351,7 +351,7 @@ export default function RentalHubClient() {
 
 /* ════════════════════════════════════════════════════════════════
    LIGHT PRODUCT CARD
-   White service-card style — used only on this hub page.
+   White service-card style, used only on this hub page.
    Does NOT replace the dark ProductCard used on category pages.
 ════════════════════════════════════════════════════════════════ */
 function LightProductCard({ product: p, categorySlug, delay = 0 }) {
@@ -368,7 +368,7 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
       >
         <img
           src={p.image.startsWith('http') ? `${p.image}?w=600&fm=webp&q=82` : p.image}
-          alt={`${p.brand} ${p.model} rental — IP Care Technologies`}
+          alt={`${p.brand} ${p.model} rental, IP Care Technologies`}
           width={600}
           height={200}
           loading="lazy"

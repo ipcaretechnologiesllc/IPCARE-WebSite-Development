@@ -75,7 +75,7 @@ const ActiveBadge = () => (
 )
 
 /* ═══════════════════════════════════════════
-   1. HERO  — navy, grid texture, orange glow
+   1. HERO , navy, grid texture, orange glow
 ═══════════════════════════════════════════ */
 function Hero() {
   return (
@@ -131,7 +131,7 @@ function Hero() {
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',
             lineHeight: 1.75, margin: '0 0 36px',
           }}>
-            Zero Trust architecture, SASE transformation, and cloud security — delivered by
+            Zero Trust architecture, SASE transformation, and cloud security, delivered by
             practitioners who have protected 100K+ users at Fortune 500 scale.
           </p>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
@@ -221,7 +221,7 @@ function Hero() {
               Independent Network Security Consultant
             </div>
             <div style={{ color: '#4A5878', fontSize: '12px', marginBottom: '16px' }}>
-              Prisma Access &amp; SASE Specialist — Milton, Ontario, Canada
+              Prisma Access &amp; SASE Specialist, Milton, Ontario, Canada
             </div>
             <div style={{ marginBottom: '12px' }}>
               <div style={{ fontSize: '11px', color: '#4A5878', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: 600 }}>Specialisations</div>
@@ -284,7 +284,7 @@ function Hero() {
 }
 
 /* ═══════════════════════════════════════════
-   2. PLATFORMS — white cards on #F4F6FA
+   2. PLATFORMS, white cards on #F4F6FA
 ═══════════════════════════════════════════ */
 function Platforms() {
   return (
@@ -363,7 +363,7 @@ function Platforms() {
 }
 
 /* ═══════════════════════════════════════════
-   3. SERVICES — white cards on #FFFFFF
+   3. SERVICES, white cards on #FFFFFF
 ═══════════════════════════════════════════ */
 function ServicesGrid() {
   return (
@@ -436,7 +436,7 @@ function ServicesGrid() {
 }
 
 /* ═══════════════════════════════════════════
-   4. TRACK RECORD — KEEP ON NAVY
+   4. TRACK RECORD, KEEP ON NAVY
 ═══════════════════════════════════════════ */
 function TrackRecord() {
   return (
@@ -476,7 +476,7 @@ function TrackRecord() {
 }
 
 /* ═══════════════════════════════════════════
-   5. PHILOSOPHY — KEEP ON NAVY/BLUE
+   5. PHILOSOPHY, KEEP ON NAVY/BLUE
 ═══════════════════════════════════════════ */
 function Philosophy() {
   return (
@@ -514,19 +514,19 @@ function Philosophy() {
             fontSize: '13px', fontWeight: 700,
             textTransform: 'uppercase', letterSpacing: '3px',
           }}>
-            — Attique Bhatti
+           , Attique Bhatti
           </footer>
         </blockquote>
 
         <div className="reveal" style={{ marginTop: '48px' }}>
           <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '20px' }}>
-            For two decades, cybersecurity has been framed as a cost of doing business — an expensive,
+            For two decades, cybersecurity has been framed as a cost of doing business, an expensive,
             reactive layer bolted onto the network perimeter. That framing is obsolete. In a cloud-native,
             identity-driven world, security is the foundation that makes modern business possible.
           </p>
           <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.05rem', lineHeight: 1.8 }}>
             Our Zero Trust approach puts identity and context at the centre of every access decision.
-            We design architectures where users, devices, workloads and data are continuously verified —
+            We design architectures where users, devices, workloads and data are continuously verified ,
             not trusted by virtue of network location. The result is a security posture that is both
             stronger and more flexible, enabling rather than constraining the business.
           </p>
@@ -537,7 +537,7 @@ function Philosophy() {
 }
 
 /* ═══════════════════════════════════════════
-   6. TOOLS — white cards on #F4F6FA
+   6. TOOLS, white cards on #F4F6FA
 ═══════════════════════════════════════════ */
 function Tools() {
   return (
@@ -552,7 +552,7 @@ function Tools() {
             Engineering-Grade Calculators
           </h2>
           <p style={{ color: '#4A5878', fontSize: '17px', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
-            Free tools used by security architects worldwide — hosted on thecyberadviser.com.
+            Free tools used by security architects worldwide, hosted on thecyberadviser.com.
           </p>
         </div>
 
@@ -607,7 +607,7 @@ function Tools() {
 }
 
 /* ═══════════════════════════════════════════
-   7. KNOWLEDGE BASE — white cards on #FFFFFF
+   7. KNOWLEDGE BASE, white cards on #FFFFFF
 ═══════════════════════════════════════════ */
 function KnowledgeBase() {
   const [filter, setFilter] = useState('All')
@@ -711,7 +711,7 @@ function KnowledgeBase() {
 }
 
 /* ═══════════════════════════════════════════
-   8. CASE STUDIES — white cards on #F4F6FA
+   8. CASE STUDIES, white cards on #F4F6FA
 ═══════════════════════════════════════════ */
 function CaseStudies() {
   const [filter, setFilter] = useState('All')
@@ -773,7 +773,7 @@ function CaseStudies() {
               <div style={{ position: 'relative', height: '220px', overflow: 'hidden', flexShrink: 0 }}>
                 <img
                   src={c.img}
-                  alt={`${c.title} — case study`}
+                  alt={`${c.title}, case study`}
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -817,7 +817,7 @@ function CaseStudies() {
 }
 
 /* ═══════════════════════════════════════════
-   9. BOTTOM CTA — navy→blue gradient
+   9. BOTTOM CTA, navy→blue gradient
 ═══════════════════════════════════════════ */
 function BottomCTA() {
   return (

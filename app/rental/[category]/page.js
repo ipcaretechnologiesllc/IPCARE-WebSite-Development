@@ -86,7 +86,7 @@ export default function CategoryPage({ params }) {
         <section className="py-14 md:py-16 px-6">
           <div className="max-w-[1200px] mx-auto text-center">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{cat.keyword}</div>
-            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.name} Rental — <span className="text-[#E87722]">UAE &amp; Canada</span></h1>
+            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.name} Rental, <span className="text-[#E87722]">UAE &amp; Canada</span></h1>
             <p className="body-text mt-5 max-w-2xl mx-auto">{cat.description}</p>
           </div>
         </section>

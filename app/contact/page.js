@@ -5,7 +5,7 @@ import ContactClient from './ContactClient'
 
 export const metadata = {
   title: 'Contact IP Care Technologies | IT Support UAE & Canada',
-  description: 'Contact IP Care Technologies — enterprise IT support across UAE and Canada. Abu Dhabi: +971 2 676 6935. We respond within 4 business hours.',
+  description: 'Contact IP Care Technologies, enterprise IT support across UAE and Canada. Abu Dhabi: +971 2 676 6935. We respond within 4 business hours.',
   alternates: { canonical: '/contact' },
 }
 
@@ -24,7 +24,7 @@ const localBusiness = [
   {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'IP Care Technologies — Abu Dhabi',
+    name: 'IP Care Technologies: Abu Dhabi',
     '@id': `${BASE}/#abu-dhabi`,
     url: BASE,
     telephone: '+971-2-676-6935',
@@ -46,7 +46,7 @@ const localBusiness = [
   {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'IP Care Technologies — Toronto',
+    name: 'IP Care Technologies: Toronto',
     '@id': `${BASE}/#toronto`,
     url: 'https://www.ipcare.ca',
     telephone: '+1-416-786-0782',

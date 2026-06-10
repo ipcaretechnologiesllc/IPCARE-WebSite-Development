@@ -3,7 +3,7 @@ import Footer from '@/components/site/Footer'
 import CareersClient from './CareersClient'
 
 export const metadata = {
-  title: 'Careers at IP Care Technologies — Join Our Team | UAE & Canada',
+  title: 'Careers at IP Care Technologies: Join Our Team | UAE & Canada',
   description: 'Join IP Care Technologies. Opportunities across cybersecurity, networking, cloud, event IT and business development in UAE and Canada.',
   alternates: { canonical: '/careers' },
 }

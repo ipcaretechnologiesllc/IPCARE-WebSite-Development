@@ -3,17 +3,17 @@ import Footer from '@/components/site/Footer'
 import RentalHubClient from './RentalHubClient'
 
 export const metadata = {
-  title: 'IT Equipment Rental UAE — Laptops, WiFi & Servers',
+  title: 'IT Equipment Rental UAE: Laptops, WiFi & Servers',
   description:
     'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
   alternates: { canonical: '/rental' },
   openGraph: {
-    title: 'IT Equipment Rental UAE — Laptops, WiFi & Servers',
+    title: 'IT Equipment Rental UAE: Laptops, WiFi & Servers',
     description:
       'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
     url: '/rental',
     type: 'website',
-    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IT equipment rental UAE — IP Care Technologies' }],
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IT equipment rental UAE, IP Care Technologies' }],
   },
 }
 
@@ -25,7 +25,7 @@ const jsonLd = {
       '@id': 'https://www.ipcare.ae/rental',
       name: 'IT Equipment Rental UAE & Canada',
       description:
-        'Short-term and long-term IT equipment rental in UAE and Canada — laptops, event WiFi, servers, CCTV, networking gear and bundle packages, with delivery, setup and on-site engineers.',
+        'Short-term and long-term IT equipment rental in UAE and Canada, laptops, event WiFi, servers, CCTV, networking gear and bundle packages, with delivery, setup and on-site engineers.',
       url: 'https://www.ipcare.ae/rental',
       provider: {
         '@type': 'Organization',

@@ -51,7 +51,7 @@ const FLAGSHIP = [
     name:      'Healthcare IT',
     Icon:      Activity,
     iconLabel: 'Healthcare IT icon',
-    body:      'Hospital and clinic IT that does not fail during a shift — aligned with UAE healthcare data regulations, connected to national health information exchanges, with 24/7 operational support that clinical teams can actually call.',
+    body:      'Hospital and clinic IT that does not fail during a shift, aligned with UAE healthcare data regulations, connected to national health information exchanges, with 24/7 operational support that clinical teams can actually call.',
     /* 6-col grid placement */
     gridCol:   '1 / 3',
   },
@@ -60,7 +60,7 @@ const FLAGSHIP = [
     name:      'Banking & Financial Services IT',
     Icon:      Building2,
     iconLabel: 'Banking and Financial Services IT icon',
-    body:      'Banking IT that your banking regulator can sign off on — compliance-aligned operations, payment systems integration and a managed SOC that actually catches threats during business hours.',
+    body:      'Banking IT that your banking regulator can sign off on, compliance-aligned operations, payment systems integration and a managed SOC that actually catches threats during business hours.',
     gridCol:   '3 / 5',
   },
   {
@@ -68,7 +68,7 @@ const FLAGSHIP = [
     name:      'Government & Federal IT',
     Icon:      Landmark,
     iconLabel: 'Government and Federal IT icon',
-    body:      'Federal-grade IT delivery for UAE government entities, sovereign and quasi-sovereign organisations — Azure UAE North landing zones, NESA / UAE IAS as standard practice, classification-aware operations and the operating-procedure familiarity that comes with two decades of federal work.',
+    body:      'Federal-grade IT delivery for UAE government entities, sovereign and quasi-sovereign organisations, Azure UAE North landing zones, NESA / UAE IAS as standard practice, classification-aware operations and the operating-procedure familiarity that comes with two decades of federal work.',
     gridCol:   '5 / 7',
   },
 ]
@@ -80,7 +80,7 @@ const NEW_CARDS = [
     name:      'Event Management IT',
     Icon:      Calendar,
     iconLabel: 'Event Management IT icon',
-    body:      "The IT backbone for the UAE's biggest events — temporary high-density networks, on-site connectivity, and command-centre support that holds up under 50,000+ concurrent users. We have powered sports finals, concerts, and national-scale events where failure is not an option.",
+    body:      "The IT backbone for the UAE's biggest events, temporary high-density networks, on-site connectivity, and command-centre support that holds up under 50,000+ concurrent users. We have powered sports finals, concerts, and national-scale events where failure is not an option.",
     href:      '/event-it',
     linkLabel: 'Explore Event Management IT',
     /* Placed at columns 2–3, centred under card 1 and card 2 */
@@ -91,7 +91,7 @@ const NEW_CARDS = [
     name:      'Construction & Field Services IT',
     Icon:      HardHat,
     iconLabel: 'Construction and Field Services IT icon',
-    body:      'Site-ready IT for construction and field operations — rugged connectivity across remote sites, mobile workforce management, and infrastructure that survives dust, distance, and tight deadlines. Built for teams that work where the office network does not reach.',
+    body:      'Site-ready IT for construction and field operations, rugged connectivity across remote sites, mobile workforce management, and infrastructure that survives dust, distance, and tight deadlines. Built for teams that work where the office network does not reach.',
     href:      '/contact',
     linkLabel: 'Explore Construction & Field Services IT',
     /* Placed at columns 4–5, centred under card 2 and card 3 */
@@ -334,7 +334,7 @@ function IndustriesGrid() {
 }
 
 /* ════════════════════════════════════════════════
-   3. CTA STRIP — Other Sectors
+   3. CTA STRIP, Other Sectors
 ═══════════════════════════════════════════════ */
 function CTAStrip() {
   return (
@@ -366,7 +366,7 @@ function CTAStrip() {
         }}>
           Beyond the five industries above, we deliver across hospitality, retail,
           education, energy, real estate and the broader UAE enterprise market. The sector
-          pattern recognition compounds — engagements feed forward and backward across
+          pattern recognition compounds, engagements feed forward and backward across
           the portfolio.
         </p>
 

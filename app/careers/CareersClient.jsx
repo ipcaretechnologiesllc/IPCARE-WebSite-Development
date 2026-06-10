@@ -37,7 +37,7 @@ export default function CareersClient() {
   function handleCvSelect(file) {
     setCvErr('')
     if (!file) { setCv(null); return }
-    if (file.size > MAX_CV_BYTES) { setCvErr('File too large — max 5 MB.'); setCv(null); return }
+    if (file.size > MAX_CV_BYTES) { setCvErr('File too large, max 5 MB.'); setCv(null); return }
     const name = (file.name || '').toLowerCase()
     if (!(file.type === 'application/pdf' || name.endsWith('.pdf'))) { setCvErr('Only PDF files are accepted.'); setCv(null); return }
     setCv(file)
@@ -79,7 +79,7 @@ export default function CareersClient() {
         <div className="max-w-[1200px] mx-auto text-center reveal">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4">Careers</div>
           <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08]">Build <span className="text-[#E87722]">Your Career</span> at IP Care</h1>
-          <p className="body-text mt-5 text-lg max-w-2xl mx-auto">Senior-level technology work across UAE and Canada — cybersecurity, cloud, networking and event IT.</p>
+          <p className="body-text mt-5 text-lg max-w-2xl mx-auto">Senior-level technology work across UAE and Canada, cybersecurity, cloud, networking and event IT.</p>
         </div>
       </section>
 
@@ -136,7 +136,7 @@ export default function CareersClient() {
               <div>
                 <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Role *</label>
                 <select value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} className="w-full px-3 py-2.5 rounded-lg text-white text-sm" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                  <option value="">— Select a role —</option>
+                  <option value="">, Select a role ,</option>
                   {jobs.map(j => <option key={j.slug} value={j.title}>{j.title}</option>)}
                   <option value="General Application">General Application</option>
                 </select>

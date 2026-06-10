@@ -81,7 +81,7 @@ function Hero() {
         </h1>
 
         <p className="body-text mt-6 text-base md:text-lg max-w-2xl">
-          Trusted on FIFA Club World Cup, UFC UAE (2020–2025), NBA Abu Dhabi Games, EuroLeague
+          Trusted on FIFA Club World Cup, UFC UAE (2020-2025), NBA Abu Dhabi Games, EuroLeague
           Final Four 2025 (first outside Europe), FINA World Swimming, IIFA Awards, Coldplay,
           Saadiyat Nights and the UAE Official National Day events. From temporary WiFi for
           60,000 fans to broadcast-grade data centres, deployed at speed.
@@ -123,7 +123,7 @@ function EventsPortfolio() {
             Major Events Powered
           </h2>
           <p className="body-text mt-5 max-w-2xl mx-auto">
-            From world finals to global tours — we deliver the IT backbone that keeps the show on.
+            From world finals to global tours. We deliver the IT backbone that keeps the show on.
           </p>
         </div>
 
@@ -151,7 +151,7 @@ function EventsPortfolio() {
             >
               <img
                 src={ev.img}
-                alt={`${ev.name} — event IT infrastructure by IP Care`}
+                alt={`${ev.name}, event IT infrastructure by IP Care`}
                 width={600}
                 height={800}
                 loading={i === 0 ? 'eager' : 'lazy'}
@@ -213,7 +213,7 @@ function Services() {
             End-to-End Event IT Services
           </h2>
           <p className="text-[#4B5563] mt-4 max-w-2xl mx-auto">
-            From first network diagram to final de-rig — we own every layer.
+            From first network diagram to final de-rig. We own every layer.
           </p>
         </div>
 
@@ -255,7 +255,7 @@ const HOW_IT_WORKS_STEPS = [
   {
     n: '01',
     t: 'Consultation',
-    d: 'We scope your event requirements — venue layout, capacity, broadcast needs, timeline — and deliver a written IT brief on a fast turnaround.',
+    d: 'We scope your event requirements, venue layout, capacity, broadcast needs, timeline, and deliver a written IT brief on a fast turnaround.',
   },
   {
     n: '02',

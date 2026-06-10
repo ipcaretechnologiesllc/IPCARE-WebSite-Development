@@ -62,7 +62,7 @@ const HERO_SLIDES = [
     icon: ShieldCheck,
     headline: "Enterprise IT for UAE's Biggest Events &",
     headlineAccent: 'Growing Businesses.',
-    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental — delivered across the UAE & Canada since 2003.',
+    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental, delivered across the UAE & Canada since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
     cta: { primary: { label: 'Get a Free Consultation', href: '/contact' }, secondary: { label: 'View Our Services', href: '/services' } },
   },
@@ -80,7 +80,7 @@ const HERO_SLIDES = [
     id: 2,
     service: 'Cybersecurity',
     icon: Lock,
-    headline: 'SOC, Zero Trust and Compliance —',
+    headline: 'SOC, Zero Trust and Compliance ,',
     headlineAccent: 'NESA, PCI, ISO 27001',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
@@ -200,7 +200,7 @@ function HeroCarousel() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       aria-roledescription="carousel"
-      aria-label="IP Care Technologies — Services"
+      aria-label="IP Care Technologies, Services"
     >
       {/* ── Persistent background: video on desktop, poster on mobile/reduced-motion ── */}
       <div className="absolute inset-0 z-0">
@@ -351,7 +351,7 @@ function HeroCarousel() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020–25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'USA BASKETBALL 2024', 'ABU DHABI PADEL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020-25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'USA BASKETBALL 2024', 'ABU DHABI PADEL MASTER']
   return (
     <section
       className="relative overflow-hidden"
@@ -437,7 +437,7 @@ function Services() {
     { icon: Lock, name: 'Cybersecurity', d: 'SOC, Zero Trust, firewall management and compliance aligned to NESA, PCI, ISO 27001.', link: '/services/cybersecurity' },
     { icon: Cable, name: 'ELV & Physical Security', d: 'CCTV, access control, structured cabling and intrusion detection for modern facilities.', link: '/services/elv' },
     { icon: Calendar, name: 'Event IT Infrastructure', d: 'Turnkey event networks, temporary WiFi, broadcast connectivity and production LANs.', link: '/event-it' },
-    { icon: Network, name: 'Equipment Rental', d: 'Laptops, iPads, routers, switches & printers — short & long-term with logistics.', link: '/rental' },
+    { icon: Network, name: 'Equipment Rental', d: 'Laptops, iPads, routers, switches & printers, short & long-term with logistics.', link: '/rental' },
     { icon: Cloud, name: 'Cloud Services', d: 'AWS, Azure, private cloud design, migration, cost optimisation and FinOps.', link: '/services/cloud' },
   ]
   return (
@@ -603,9 +603,9 @@ function CyberAdvisory() {
               <Lock size={16}/> Powered by The Cyber Adviser
             </div>
             <h2 className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
-              15+ Years of Cybersecurity Practice — <span className="text-[#E87722]">The Cyber Adviser</span>
+              15+ Years of Cybersecurity Practice, <span className="text-[#E87722]">The Cyber Adviser</span>
             </h2>
-            <p className="body-text md:text-lg mb-8">We&apos;ve spent 15+ years building security programs that hold. Zero Trust rollouts, SOC maturity, firewall architecture — across banks, government entities and enterprises that can&apos;t afford to get it wrong.</p>
+            <p className="body-text md:text-lg mb-8">We&apos;ve spent 15+ years building security programs that hold. Zero Trust rollouts, SOC maturity, firewall architecture, across banks, government entities and enterprises that can&apos;t afford to get it wrong.</p>
 
             <div className="flex flex-wrap gap-3 mb-10">
               {vendors.map((v) => (
@@ -652,8 +652,8 @@ function RentalTeaser() {
     <section id="rental" className="py-24 px-6">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">IT Equipment Rental — UAE & Canada</h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">Short-term or long-term, UAE and Canada — delivered, configured and collected. No procurement headaches, no hidden costs.</p>
+          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">IT Equipment Rental, UAE & Canada</h2>
+          <p className="body-text mt-5 max-w-2xl mx-auto">Short-term or long-term, UAE and Canada, delivered, configured and collected. No procurement headaches, no hidden costs.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-5">
           {items.map((it, i) => (
@@ -666,7 +666,7 @@ function RentalTeaser() {
               {/* Full-bleed image */}
               <img
                 src={it.img}
-                alt={`${it.name} rental UAE — IP Care Technologies`}
+                alt={`${it.name} rental UAE, IP Care Technologies`}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
@@ -711,9 +711,9 @@ function RentalTeaser() {
 function EventsPortfolio() {
   const events = [
     { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: '/events/fifa-club-world-cup.webp' },
-    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020–2025', region: 'Sports', img: '/events/ufc-uae.webp' },
+    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020-2025', region: 'Sports', img: '/events/ufc-uae.webp' },
     { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: '/events/nba-abu-dhabi-games.webp' },
-    { slug: 'euroleague-final-four-2025', name: 'EuroLeague Final Four 2025', loc: 'Etihad Arena, Abu Dhabi • 23–25 May 2025', region: 'Sports', img: '/events/euroleague-final-four-2025.webp' },
+    { slug: 'euroleague-final-four-2025', name: 'EuroLeague Final Four 2025', loc: 'Etihad Arena, Abu Dhabi • 23-25 May 2025', region: 'Sports', img: '/events/euroleague-final-four-2025.webp' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: '/events/fina-world-swimming-championship.webp' },
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: '/events/wba-light-heavyweight-championship.webp' },
     { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: '/events/world-tennis-league.webp' },
@@ -722,9 +722,9 @@ function EventsPortfolio() {
     { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: '/events/coldplay-world-tour.webp' },
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: '/events/saadiyat-nights.webp' },
     { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: '/events/iifa-awards.webp' },
-    { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019–2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.webp' },
-    { slug: 'uae-national-day-48th', name: 'UAE National Day — 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.webp' },
-    { slug: 'uae-national-day-49th', name: 'UAE National Day — 49th Edition', loc: 'Al Jubail Mangrove Park, Abu Dhabi • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.webp' },
+    { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019-2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.webp' },
+    { slug: 'uae-national-day-48th', name: 'UAE National Day: 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.webp' },
+    { slug: 'uae-national-day-49th', name: 'UAE National Day: 49th Edition', loc: 'Al Jubail Mangrove Park, Abu Dhabi • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.webp' },
     { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },
   ]
   const [filter, setFilter] = useState('All Events')
@@ -741,7 +741,7 @@ function EventsPortfolio() {
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
           <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">Major Events Powered</h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">From world finals to global tours — we deliver the IT backbone that keeps the show on.</p>
+          <p className="body-text mt-5 max-w-2xl mx-auto">From world finals to global tours. We deliver the IT backbone that keeps the show on.</p>
         </div>
         <div className="flex justify-center gap-2.5 mb-10 flex-wrap reveal">
           {tabs.map((t) => (
@@ -751,7 +751,7 @@ function EventsPortfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
             <a key={ev.slug} href={`/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
-              <img src={ev.img} alt={`${ev.name} — event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <img src={ev.img} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
@@ -782,7 +782,7 @@ function About() {
             Two Decades of Enterprise IT Excellence
           </h2>
           <p className="mt-5 text-base md:text-lg" style={{ color: '#333F50' }}>
-            Founded in 2003, IP Care Technologies LLC delivers managed IT, cybersecurity, event infrastructure and equipment rental across the UAE and Canada. From government institutions to global event organisers — we design, deploy and operate mission-critical technology that can&apos;t go down.
+            Founded in 2003, IP Care Technologies LLC delivers managed IT, cybersecurity, event infrastructure and equipment rental across the UAE and Canada. From government institutions to global event organisers. We design, deploy and operate mission-critical technology that can&apos;t go down.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-5">
             {[
@@ -841,7 +841,7 @@ function Testimonials() {
       meta: 'Global Broadcasting Client • Abu Dhabi, UAE',
     },
     {
-      q: 'Their cybersecurity advisory transformed our Zero Trust roadmap. Deployment was ahead of schedule and under budget — not something we expected from a first engagement.',
+      q: 'Their cybersecurity advisory transformed our Zero Trust roadmap. Deployment was ahead of schedule and under budget, not something we expected from a first engagement.',
       who: 'CISO',
       meta: 'Enterprise Technology Firm • Toronto, Canada',
     },

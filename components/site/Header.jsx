@@ -150,13 +150,13 @@ export default function Header() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          Main nav — always white, sticky top-0.
+          Main nav, always white, sticky top-0.
 
           ARCHITECTURE: Both dropdown panels are position:absolute children
           of this <nav>. Because of this, the browser's native `mouseleave`
           event fires on <nav> ONLY when the cursor exits the entire subtree
           (nav bar + dropdown panel together). Moving between the nav links
-          and the panel stays inside the subtree — no event fires, no timers
+          and the panel stays inside the subtree. No event fires, no timers
           needed, no race conditions.
 
           Open:  onMouseEnter of the specific <li> → immediate setState
@@ -223,7 +223,7 @@ export default function Header() {
         {/* ── Services Mega Menu ───────────────────────────────────────────
             position:absolute inside sticky nav → top:100% always snaps
             to the bottom of the nav bar at any scroll position.
-            No hover handlers here — the parent <nav> onMouseLeave handles
+            No hover handlers here. The parent <nav> onMouseLeave handles
             all closing. Every Link has onClick={closeAll} so the dropdown
             vanishes synchronously before the new page renders.
         ─────────────────────────────────────────────────────────────────── */}
@@ -404,7 +404,7 @@ export default function Header() {
                 <Shield className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
                 <div>
                   <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">Cyber Advisory</div>
-                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Zero Trust, SASE &amp; cloud security — by practitioners</div>
+                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Zero Trust, SASE &amp; cloud security, by practitioners</div>
                 </div>
               </Link>
 

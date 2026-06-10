@@ -5,15 +5,15 @@ import BlogClient from './BlogClient'
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export const metadata = {
-  title: 'IT Knowledge Base & Insights — IP Care Technologies Blog',
+  title: 'IT Knowledge Base & Insights: IP Care Technologies Blog',
   description: 'Expert articles on cybersecurity, managed IT services, networking, cloud, and enterprise IT. Field-tested insights from IP Care engineers based in UAE and Canada.',
   alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'IT Knowledge Base & Insights — IP Care Technologies Blog',
+    title: 'IT Knowledge Base & Insights: IP Care Technologies Blog',
     description: 'Expert articles on cybersecurity, managed IT services, networking, cloud, and enterprise IT. Field-tested insights from IP Care engineers based in UAE and Canada.',
     url: `${BASE}/blog`,
     type: 'website',
-    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IP Care Knowledge Base — IT insights and articles' }],
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IP Care Knowledge Base, IT insights and articles' }],
   },
 }
 

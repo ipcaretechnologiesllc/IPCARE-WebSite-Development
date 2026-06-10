@@ -48,7 +48,7 @@ const Ic = ({ name, ...rest }) => {
 /* ── Human-rewritten card sub-lines (spec Step 5) ── */
 const SERVICE_SUBTITLES = {
   'it-consulting':   'Strategy, assessments, and digital transformation that actually ships.',
-  'infrastructure':  'Data centre, virtualization, and procurement — built to scale.',
+  'infrastructure':  'Data centre, virtualization, and procurement, built to scale.',
   'elv':             'CCTV, access control, structured cabling, and PA systems.',
   'managed-it':      '24/7 monitoring, SLA-backed support, network and server management.',
   'cloud':           'Migration, Microsoft 365, and backup that survives a bad day.',
@@ -68,7 +68,7 @@ const ICON_LABELS = {
 }
 
 /* ════════════════════════════════════════════════
-   1. HERO — matches About page hero exactly
+   1. HERO, matches About page hero exactly
 ═══════════════════════════════════════════════ */
 function Hero() {
   return (
@@ -161,7 +161,7 @@ function Hero() {
 }
 
 /* ════════════════════════════════════════════════
-   2. SERVICES GRID — white cards on #F4F6FA bg
+   2. SERVICES GRID, white cards on #F4F6FA bg
 ═══════════════════════════════════════════════ */
 function ServicesGrid() {
   const cats = Object.entries(serviceCategories)
@@ -188,12 +188,12 @@ function ServicesGrid() {
           margin: '0 auto 56px',
           textAlign: 'center',
         }}>
-          For two decades, we&apos;ve operated enterprise IT the way it&apos;s supposed to work — quietly,
+          For two decades, we&apos;ve operated enterprise IT the way it&apos;s supposed to work, quietly,
           reliably, and at a scale where downtime is measured in minutes a year, not hours. From
           government agencies running mission-critical systems to global event organisers needing
           50,000-seat venue networks stood up at speed, the work is the same: design for what
           can go wrong, deploy what won&apos;t, and stay close enough to fix it before anyone notices.
-          Managed IT, cybersecurity, ELV, cloud, event infrastructure and equipment rental —
+          Managed IT, cybersecurity, ELV, cloud, event infrastructure and equipment rental ,
           delivered by the same team, under one SLA, across UAE and Canada.
         </p>
         <div style={{
@@ -343,7 +343,7 @@ function ServicesGrid() {
 }
 
 /* ════════════════════════════════════════════════
-   3. CTA STRIP — matches About page CTAStrip exactly
+   3. CTA STRIP, matches About page CTAStrip exactly
 ═══════════════════════════════════════════════ */
 function CTAStrip() {
   return (
@@ -374,7 +374,7 @@ function CTAStrip() {
           margin: '0 auto 36px',
         }}>
           Book a 30-minute discovery call with an IP Care solution architect.
-          Free, no obligation — we&apos;ll point you in the right direction.
+          Free, no obligation. We&apos;ll point you in the right direction.
         </p>
 
         <CTAPhoneButtons />

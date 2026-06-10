@@ -102,7 +102,7 @@ function Hero() {
           maxWidth: '600px',
           margin: '0 auto',
         }}>
-          Two decades of enterprise IT across UAE and Canada — 500+ projects, 200+ clients, one unwavering standard.
+          Two decades of enterprise IT across UAE and Canada, 500+ projects, 200+ clients, one unwavering standard.
         </p>
       </div>
     </section>
@@ -143,7 +143,7 @@ function Story() {
             </p>
             <p style={{ marginBottom: '20px' }}>
               Twenty years in, we carry deep expertise across managed IT, cybersecurity, smart infrastructure,
-              ELV systems, and IT equipment rental. Our UAE headquarters and Canadian operations run 24/7 —
+              ELV systems, and IT equipment rental. Our UAE headquarters and Canadian operations run 24/7 ,
               because our clients don&apos;t switch off at 5pm.
             </p>
             <p>
@@ -250,11 +250,11 @@ function StatsBand() {
 ═══════════════════════════════════════════════ */
 const MILESTONES = [
   { year: '2003', title: 'Founded in Abu Dhabi', desc: 'IP Care Technologies LLC established with a commitment to honest, enterprise-grade IT delivery.' },
-  { year: '2007', title: 'First Major Government IT Contract', desc: 'Secured a landmark government IT infrastructure contract — cementing our public sector credentials.' },
+  { year: '2007', title: 'First Major Government IT Contract', desc: 'Secured a landmark government IT infrastructure contract, cementing our public sector credentials.' },
   { year: '2010', title: 'Cybersecurity Practice Launched', desc: 'Built a dedicated security team as cyber threats became mission-critical for enterprise clients.' },
   { year: '2014', title: 'ELV & Smart Systems Division Added', desc: 'Expanded into CCTV, access control, and structured cabling for intelligent facilities.' },
   { year: '2017', title: 'Events Technology Services Launched', desc: 'Began delivering temporary IT infrastructure for major international events across the UAE.' },
-  { year: '2020', title: 'Canada (Toronto) Operations Opened', desc: 'Established North American operations in Toronto, Ontario — same standards, new timezone.' },
+  { year: '2020', title: 'Canada (Toronto) Operations Opened', desc: 'Established North American operations in Toronto, Ontario, same standards, new timezone.' },
   { year: '2023', title: '20-Year Milestone', desc: '500+ projects and 200+ enterprise clients. Two decades of delivery without compromise.' },
   { year: '2026 →', title: 'Cloud & AI-Ready Infrastructure Portfolio', desc: 'Expanding our cloud and AI-ready infrastructure offering for enterprise clients across UAE and Canada.' },
 ]
@@ -374,7 +374,7 @@ function MissionVision() {
   const cards = [
     {
       label: 'Mission',
-      title: 'We make IT invisible when it works — and fast to fix when it doesn\'t.',
+      title: 'We make IT invisible when it works: and fast to fix when it doesn\'t.',
       body: 'We design, deploy, and operate mission-critical IT so our clients can focus on running their business. Technology should be invisible when it works, and fast to fix when it doesn\'t.',
     },
     {
@@ -442,7 +442,7 @@ function MissionVision() {
 }
 
 /* ════════════════════════════════════════════════
-   6a. TWO REGIONS MAP — inline SVG infographic
+   6a. TWO REGIONS MAP, inline SVG infographic
 ═══════════════════════════════════════════════ */
 function TwoRegionsMap() {
   const ca = { x: 200, y: 82 }   // Toronto  (lon -79.4 → x≈201, lat 43.7 → y≈72 + label offset)
@@ -550,7 +550,7 @@ function TwoRegions() {
           </h2>
           <p style={{ color: '#4B5563', fontSize: '17px', lineHeight: 1.75, maxWidth: '640px', margin: '0 auto' }}>
             Headquarters in Abu Dhabi. Operations in Toronto. Same response times, same technical standards,
-            same team — wherever you are.
+            same team, wherever you are.
           </p>
         </div>
 
@@ -581,7 +581,7 @@ function TwoRegions() {
                   www.ipcare.ae
                 </a>
               </div>
-              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Sun–Fri 9AM–6PM</span></div>
+              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Sun-Fri 9AM-6PM</span></div>
             </div>
           </div>
 
@@ -608,7 +608,7 @@ function TwoRegions() {
                   www.ipcare.ca
                 </a>
               </div>
-              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Mon–Fri 9AM–6PM</span></div>
+              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Mon-Fri 9AM-6PM</span></div>
             </div>
           </div>
         </div>
@@ -639,7 +639,7 @@ function Team() {
       initials: 'TA',
       name: 'Tanveer Ahmed',
       role: 'Independent Network Security Consultant',
-      subRole: 'Prisma Access & SASE Specialist — Milton, Ontario, Canada',
+      subRole: 'Prisma Access & SASE Specialist, Milton, Ontario, Canada',
       certs: 'PCNSE · PCCSA · CNSS · AlgoSec',
       bio: 'Prisma Access and SASE specialist with 25+ years of network security experience. CCIE-certified practitioner focused on ZTNA, CASB, SWG, and DLP deployments across North America and UAE.',
       specializations: ['SASE', 'ZTNA', 'CASB', 'DLP', 'SWG', 'Prisma Access'],
@@ -807,7 +807,7 @@ const VALUES = [
   { title: 'Excellence', desc: "We don't cut corners. Every deployment gets the same standard regardless of size.", Icon: Star },
   { title: 'Partnership', desc: 'We succeed when clients succeed. Our average client relationship runs 7+ years.', Icon: Handshake },
   { title: 'Integrity', desc: 'We tell you what you need to hear, not what you want to hear.', Icon: ShieldCheck },
-  { title: 'Innovation', desc: 'Knowing which new tools actually move the needle — and which are noise.', Icon: Lightbulb },
+  { title: 'Innovation', desc: 'Knowing which new tools actually move the needle, and which are noise.', Icon: Lightbulb },
   { title: 'People-First', desc: 'IT that frees your team to do their best work, not fight their tools.', Icon: Users },
   { title: 'Global Mindset', desc: 'UAE roots. Canadian reach. GCC expertise. Great IT ignores borders.', Icon: Globe2 },
 ]

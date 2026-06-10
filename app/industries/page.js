@@ -58,7 +58,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Event Management IT',
-        description: 'Temporary high-density networks, on-site connectivity, and command-centre support for large-scale events across the UAE — sports finals, concerts, and national-scale events.',
+        description: 'Temporary high-density networks, on-site connectivity, and command-centre support for large-scale events across the UAE, sports finals, concerts, and national-scale events.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
           { '@type': 'Country', name: 'United Arab Emirates' },
@@ -92,15 +92,15 @@ const breadcrumbSchema = {
 }
 
 export const metadata = {
-  title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
+  title: 'Industry IT Solutions UAE: Healthcare, Banking & More',
   description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
   alternates: { canonical: '/industries' },
   openGraph: {
-    title: 'Industry IT Solutions UAE — Healthcare, Banking & More',
+    title: 'Industry IT Solutions UAE: Healthcare, Banking & More',
     description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
     url: '/industries',
     type: 'website',
-    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions — IP Care Technologies' }],
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions, IP Care Technologies' }],
   },
 }
 

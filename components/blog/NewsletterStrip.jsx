@@ -46,7 +46,7 @@ function NewsletterStripInner() {
         })
         if (res && res.ok) ok = true
         else if (res && res.status === 404) setErr("Newsletter signup isn't available right now. Please try again later.")
-        else setErr('Subscription failed — please try again.')
+        else setErr('Subscription failed, please try again.')
       } catch {
         setErr('Could not reach the server. Please try again later.')
       }

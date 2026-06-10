@@ -132,12 +132,12 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     h1Accent,       // Optional substring of h1 to render in orange (#E87722)
     eyebrow,        // Hero pill label; default 'IP Care Enterprise Service'
     overviewTitle,  // Overview H2; default 'Overview'
-    phonePrimary,   // '+971 50 6828290' — phone button in hero + bottom CTA
-    heroImage,      // /public path or URL — full-bleed background behind the hero section
+    phonePrimary,   // '+971 50 6828290', phone button in hero + bottom CTA
+    heroImage,      // /public path or URL, full-bleed background behind the hero section
     heroImageAlt,   // Descriptive alt text (kept on the <img>, not aria-hidden)
     sectionImage,   // Photo for the image+text split section
     sectionImageAlt,// Descriptive alt for sectionImage
-    sectionContent, // { eyebrow, heading, body, checklist[] } — drives the split section copy
+    sectionContent, // { eyebrow, heading, body, checklist[] }, drives the split section copy
     ctaHeading,     // Bottom CTA H2; default 'Ready to Get Started?'
     ctaSubtext,     // Bottom CTA body; default neutral consultation copy
   } = data
@@ -145,11 +145,11 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
   return (
     <>
       {/* ──────────────────────────────────────────────────────────────────
-          BREADCRUMB — sits inside the navy hero zone
+          BREADCRUMB, sits inside the navy hero zone
       ────────────────────────────────────────────────────────────────── */}
       {breadcrumb && (
         /* Full-width outer wrapper carries the background so it covers
-           the entire viewport on any screen size — even beyond max-w-[1400px].
+           the entire viewport on any screen size, even beyond max-w-[1400px].
            Previously the background was on the inner constrained div, which
            left the body's #1E3A8A bleeding through at the corners on wide
            displays (>1400 px), producing the hard bright-blue rectangle. */
@@ -180,16 +180,16 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           1. HERO
           When heroImage is set: full-bleed background image behind content.
           Layers (back→front):
-            1. <img> absolute, inset-0, object-fit:cover (LCP — eager + high priority)
-            2a. Mobile flat scrim — brand-blue #1E3A8A dominant wash, same
+            1. <img> absolute, inset-0, object-fit:cover (LCP, eager + high priority)
+            2a. Mobile flat scrim, brand-blue #1E3A8A dominant wash, same
                 tone the About hero reads as
-            2b. Desktop gradient scrim — brand blue #1E3A8A is the dominant
+            2b. Desktop gradient scrim, brand blue #1E3A8A is the dominant
                 colour across the whole hero incl. behind the H1 (navy
                 rgba(11,26,70) only ever deepens the far-left edge), fading
                 in opacity left→right so the photo reads through on the right
             3. Orange glow blotch (existing, kept)
             4. Grid texture (existing, kept)
-            5. Content — left-aligned inside max-w-[700px]
+            5. Content, left-aligned inside max-w-[700px]
           When heroImage is unset: plain navy, centered content (unchanged).
           Orange 3px bottom border retained in both cases.
           White H1 on rgba(11,26,70,0.92)≈#0C1B49 → contrast ratio ≈15:1 ✓ WCAG AA
@@ -224,7 +224,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           />
         )}
 
-        {/* ── Layer 2b: desktop gradient scrim — navy #0B1A46 dominant tone
+        {/* ── Layer 2b: desktop gradient scrim, navy #0B1A46 dominant tone
                everywhere (incl. behind the H1), fading toward the right so
                the photo reads through ─────────────────────────────────── */}
         {heroImage && (
@@ -323,7 +323,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       </section>
 
       {/* ──────────────────────────────────────────────────────────────────
-          2. OVERVIEW — white, navy headings, slate body text
+          2. OVERVIEW, white, navy headings, slate body text
       ────────────────────────────────────────────────────────────────── */}
       <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
         <div className="max-w-[860px] mx-auto reveal">
@@ -340,7 +340,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       </section>
 
       {/* ──────────────────────────────────────────────────────────────────
-          3. IMAGE + TEXT SPLIT — data-driven via sectionContent; renders
+          3. IMAGE + TEXT SPLIT, data-driven via sectionContent; renders
              only when sectionImage is set. Backwards-compat: falls back to
              generic labels when sectionContent is not defined.
       ────────────────────────────────────────────────────────────────── */}
@@ -402,7 +402,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          4. KEY FEATURES — white, service-card style (3-col grid)
+          4. KEY FEATURES, white, service-card style (3-col grid)
       ────────────────────────────────────────────────────────────────── */}
       {features?.length > 0 && (
         <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
@@ -427,7 +427,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          5. BUSINESS BENEFITS — light grey, 2-col benefit items
+          5. BUSINESS BENEFITS, light grey, 2-col benefit items
       ────────────────────────────────────────────────────────────────── */}
       {benefits?.length > 0 && (
         <section style={{ background: BG_GREY, padding: '72px 24px' }}>
@@ -475,7 +475,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          6. PROCESS — white, numbered steps with orange circles
+          6. PROCESS, white, numbered steps with orange circles
       ────────────────────────────────────────────────────────────────── */}
       {process?.length > 0 && (
         <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
@@ -483,7 +483,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
             <div className="text-center mb-14 reveal">
               <Eyebrow>Our Delivery Approach</Eyebrow>
               <SectionHeading>How We Deliver</SectionHeading>
-              <p className="mt-4 text-sm" style={{ color: T_BODY }}>A proven, repeatable approach — used on every engagement.</p>
+              <p className="mt-4 text-sm" style={{ color: T_BODY }}>A proven, repeatable approach, used on every engagement.</p>
             </div>
             <div
               className={`grid gap-6 relative ${process.length <= 4 ? 'md:grid-cols-4' : 'md:grid-cols-5'}`}
@@ -521,7 +521,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          7. WHO IT'S FOR — light grey, orange pill tags
+          7. WHO IT'S FOR, light grey, orange pill tags
       ────────────────────────────────────────────────────────────────── */}
       {industries?.length > 0 && (
         <section style={{ background: BG_GREY, padding: '64px 24px' }}>
@@ -549,7 +549,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          8. RELATED SERVICES — white, service-card style
+          8. RELATED SERVICES, white, service-card style
       ────────────────────────────────────────────────────────────────── */}
       {related?.length > 0 && (
         <section style={{ background: BG_WHITE, padding: '72px 24px' }}>
@@ -585,7 +585,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          9. FAQ — light grey, white accordion cards, navy text
+          9. FAQ, light grey, white accordion cards, navy text
       ────────────────────────────────────────────────────────────────── */}
       {faqs?.length > 0 && (
         <section style={{ background: BG_GREY, padding: '72px 24px' }}>
@@ -630,14 +630,14 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          Optional spoke-services grid — injected by category hub pages
+          Optional spoke-services grid, injected by category hub pages
           between the FAQ section and the CTA band. Rendered only when the
           parent passes the spokeGrid prop (backwards-compatible no-op).
       ────────────────────────────────────────────────────────────────── */}
       {spokeGrid}
 
       {/* ──────────────────────────────────────────────────────────────────
-          10. BOTTOM CTA BAND — navy, orange border top (matches home OfficesCTA)
+          10. BOTTOM CTA BAND, navy, orange border top (matches home OfficesCTA)
       ────────────────────────────────────────────────────────────────── */}
       <section
         style={{ background: '#1E3A8A', borderTop: '3px solid #E87722', padding: '64px 24px' }}
@@ -654,7 +654,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               className="max-w-xl mx-auto mb-8"
               style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}
             >
-              {ctaSubtext || "Talk to our UAE-based team for a free consultation and a tailored proposal — typically within 48 hours."}
+              {ctaSubtext || "Talk to our UAE-based team for a free consultation and a tailored proposal, typically within 48 hours."}
             </p>
             <CTAPhoneButtons />
           </div>

@@ -101,7 +101,7 @@ export default function CategoryPage({ params }) {
                     Explore
                   </p>
                   <h2 style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
-                    {cat.name} — Explore Specific Services
+                    {cat.name}, Explore Specific Services
                   </h2>
                   <div style={{ width: '56px', height: '3px', background: '#E87722', borderRadius: '3px', margin: '14px auto 0' }} aria-hidden="true" />
                 </div>

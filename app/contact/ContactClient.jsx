@@ -128,7 +128,7 @@ export default function ContactClient() {
                     <div>
                       <L>{tab === 'rental' ? 'Equipment Needed' : 'Service Interest'}</L>
                       <select value={form.service} onChange={e => setForm(f => ({...f, service:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none" style={iS}>
-                        <option value="">— Select —</option>
+                        <option value="">, Select ,</option>
                         {SERVICES.map(s => <option key={s}>{s}</option>)}
                       </select>
                     </div>
@@ -177,7 +177,7 @@ export default function ContactClient() {
                 phone="+971 2 676 6935"
                 email="info@ipcare.ae"
                 address="Salam Street, P.O. Box 53209, Abu Dhabi, UAE"
-                hours="Monday – Friday, 9:00 AM – 6:00 PM (GST)"
+                hours="Monday - Friday, 9:00 AM - 6:00 PM (GST)"
               />
 
               {/* Toronto office */}
@@ -188,7 +188,7 @@ export default function ContactClient() {
                 phone="+1 416 786 0782"
                 email="info@ipcare.ca"
                 address="1 Concorde Gate, North York, ON, Canada"
-                hours="Monday – Friday, 9:00 AM – 6:00 PM (EST)"
+                hours="Monday - Friday, 9:00 AM - 6:00 PM (EST)"
               />
 
               {/* What to expect — fills the remaining height and balances the column */}
@@ -196,7 +196,7 @@ export default function ContactClient() {
                 <div className="section-eyebrow">What to Expect</div>
                 <ul className="space-y-3.5">
                   {[
-                    { I: Icons.Clock,      text: 'Reply within 4 business hours — usually sooner' },
+                    { I: Icons.Clock,      text: 'Reply within 4 business hours, usually sooner' },
                     { I: Icons.UserCheck,  text: 'A named account manager, not a call centre' },
                     { I: Icons.ShieldCheck, text: 'No-obligation initial consultation' },
                     { I: Icons.Globe,      text: 'Coverage across UAE and Canada' },

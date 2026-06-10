@@ -13,7 +13,7 @@ export const metadata = {
       'Enterprise IT infrastructure, cybersecurity and managed services across UAE and Canada since 2003. 500+ projects, 200+ enterprise clients.',
     url: '/about',
     type: 'website',
-    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'About IP Care Technologies — enterprise IT since 2003' }],
+    images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'About IP Care Technologies, enterprise IT since 2003' }],
   },
 }
 

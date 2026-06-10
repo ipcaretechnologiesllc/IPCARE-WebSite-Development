@@ -61,7 +61,7 @@ export default function AdvisorySubPage({ params }) {
     '@type': 'Service',
     name: sub.h1,
     description: sub.metaDescription,
-    provider: { '@type': 'Organization', name: 'IP Care Technologies L.L.C. — The Cyber Adviser', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') },
+    provider: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.: The Cyber Adviser', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') },
     areaServed: [{ '@type': 'Country', name: 'Canada' }, { '@type': 'Country', name: 'United Arab Emirates' }],
   }
 

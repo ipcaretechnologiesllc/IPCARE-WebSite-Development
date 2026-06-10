@@ -64,7 +64,7 @@ export default function BlogClient() {
             <div className="section-eyebrow reveal">Knowledge Base</div>
             <h1 className="text-white text-4xl md:text-6xl font-bold leading-[1.08] reveal">IT <span className="text-[#E87722]">Knowledge Base</span> &amp; Insights</h1>
             <p className="mt-5 text-lg reveal" style={{ color: 'rgba(255,255,255,0.75)' }}>
-              Field-tested articles from IP Care engineers and advisors — cybersecurity, cloud, networking, and more.
+              Field-tested articles from IP Care engineers and advisors, cybersecurity, cloud, networking, and more.
             </p>
             {/* Search bar */}
             <div className="mt-8 max-w-[480px] mx-auto md:mx-0 relative reveal">
@@ -118,7 +118,7 @@ export default function BlogClient() {
               {/*
                 NOTE: deliberately NOT using .reveal on these cards.
                 .reveal starts at opacity:0 and is only triggered by IntersectionObserver at mount.
-                When filter changes, React renders new DOM nodes the observer never sees — they
+                When filter changes, React renders new DOM nodes the observer never sees. They
                 would stay invisible. Cards in a filter/search UI must appear immediately.
               */}
               {filtered.map((a, idx) => (
