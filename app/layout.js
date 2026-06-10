@@ -39,7 +39,7 @@ function readHostAndPath() {
 }
 
 const SITE_NAME = 'IP Care Technologies'
-const SITE_TITLE = 'IP Care Technologies — Enterprise IT Solutions UAE & Canada'
+const SITE_TITLE = 'IP Care Technologies: Enterprise IT Solutions UAE & Canada'
 const SITE_DESC = 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada. Trusted since 2003. 24/7 SLA. 100K+ users protected.'
 
 // ─── Dynamic metadata — host-aware canonicals ────────────────────────────────
@@ -153,7 +153,7 @@ export default function RootLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': `${BRAND_URL}#abu-dhabi`,
-    name: 'IP Care Technologies — Abu Dhabi',
+    name: 'IP Care Technologies: Abu Dhabi',
     parentOrganization: { '@id': `${BRAND_URL}#org` },
     image: `${BRAND_URL}/ipcare-logo.png`,
     logo: `${BRAND_URL}/ipcare-logo.png`,
@@ -191,7 +191,7 @@ export default function RootLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': 'https://ipcare.ca#toronto',
-    name: 'IP Care Technologies — Toronto',
+    name: 'IP Care Technologies: Toronto',
     parentOrganization: { '@id': `${BRAND_URL}#org` },
     image: `${BRAND_URL}/ipcare-logo.png`,
     logo: `${BRAND_URL}/ipcare-logo.png`,
