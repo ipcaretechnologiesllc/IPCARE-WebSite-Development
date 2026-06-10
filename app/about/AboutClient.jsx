@@ -61,8 +61,8 @@ function Hero() {
         style={{ zIndex: 0 }}
         loading="lazy"
       />
-      {/* Navy overlay */}
-      <div className="absolute inset-0 bg-[#0B1A46]/65" style={{ zIndex: 1 }} />
+      {/* Navy radial scrim — keeps centred text legible while image stays visible at edges */}
+      <div className="absolute inset-0" style={{ zIndex: 1, background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)' }} />
       {/* Grid texture */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',

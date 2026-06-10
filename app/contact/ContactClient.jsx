@@ -58,8 +58,8 @@ export default function ContactClient() {
           style={{ zIndex: 0 }}
           loading="lazy"
         />
-        {/* Navy overlay */}
-        <div className="absolute inset-0 bg-[#0B1A46]/60" style={{ zIndex: 1 }} />
+        {/* Navy radial scrim — keeps centred text legible while image stays visible at edges */}
+        <div className="absolute inset-0" style={{ zIndex: 1, background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)' }} />
         <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 2 }} />
         <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 2 }} />
         <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto" style={{ zIndex: 20 }}>
