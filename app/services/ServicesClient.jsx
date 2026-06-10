@@ -165,11 +165,22 @@ function ServicesGrid() {
   }
 
   return (
-    <section style={{ background: '#F4F6FA', padding: '96px 24px' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+    <section className="relative overflow-hidden" style={{ padding: '96px 24px' }}>
+      {/* Background image */}
+      <img
+        src="/images/pages/services-bg.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
+        loading="lazy"
+      />
+      {/* Navy overlay */}
+      <div className="absolute inset-0 bg-[#0B1A46]/55" style={{ zIndex: 10 }} />
+      <div className="relative" style={{ maxWidth: '1400px', margin: '0 auto', zIndex: 20 }}>
         <p style={{
           fontSize: '1.1rem',
-          color: '#333F50',
+          color: '#F4F6FA',
           lineHeight: 1.8,
           maxWidth: '820px',
           margin: '0 auto 56px',

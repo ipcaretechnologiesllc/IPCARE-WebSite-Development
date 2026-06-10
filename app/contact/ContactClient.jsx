@@ -70,7 +70,7 @@ export default function ContactClient() {
           loading="lazy"
         />
         {/* Navy overlay */}
-        <div className="absolute inset-0 bg-[#0B1A46]/70" style={{ zIndex: 10 }} />
+        <div className="absolute inset-0 bg-[#0B1A46]/55" style={{ zIndex: 10 }} />
         <div className="relative max-w-[1200px] mx-auto" style={{ zIndex: 20 }}>
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">

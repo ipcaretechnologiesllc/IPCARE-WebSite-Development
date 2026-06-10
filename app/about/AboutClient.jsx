@@ -52,9 +52,21 @@ function Hero() {
       display: 'flex',
       alignItems: 'center',
     }}>
+      {/* Background image */}
+      <img
+        src="/images/pages/about-bg.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
+        loading="lazy"
+      />
+      {/* Navy overlay */}
+      <div className="absolute inset-0 bg-[#0B1A46]/65" style={{ zIndex: 1 }} />
       {/* Grid texture */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
+        zIndex: 2,
         backgroundImage:
           'linear-gradient(rgba(232,119,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.06) 1px, transparent 1px)',
         backgroundSize: '60px 60px',
@@ -67,10 +79,11 @@ function Hero() {
         width: '560px', height: '560px', borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(232,119,34,0.18) 0%, transparent 65%)',
         pointerEvents: 'none',
+        zIndex: 2,
       }} />
       <div
         className="reveal hero-inner"
-        style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}
+        style={{ maxWidth: '820px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 20 }}
       >
         <Eyebrow>Our Story</Eyebrow>
         <h1 style={{
