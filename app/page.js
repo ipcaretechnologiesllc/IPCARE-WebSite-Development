@@ -131,8 +131,26 @@ const HERO_SLIDES = [
 function HeroCarousel() {
   const [current, setCurrent] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
   const touchStartX = useRef(null)
   const intervalRef = useRef(null)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(motionQuery.matches)
+    const onMotionChange = (e) => setReducedMotion(e.matches)
+    motionQuery.addEventListener('change', onMotionChange)
+
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      motionQuery.removeEventListener('change', onMotionChange)
+    }
+  }, [])
 
   const goTo = useCallback((idx) => {
     setCurrent(((idx % HERO_SLIDES.length) + HERO_SLIDES.length) % HERO_SLIDES.length)
@@ -184,6 +202,34 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="IP Care Technologies — Services"
     >
+      {/* ── Persistent background: video on desktop, poster on mobile/reduced-motion ── */}
+      <div className="absolute inset-0 z-0">
+        {!isMobile && !reducedMotion ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/images/hero-poster.webp"
+          >
+            <source src="/Video/hero.webm" type="video/webm" />
+            <source src="/Video/hero.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src="/images/hero-poster.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+      </div>
+
+      {/* Navy scrim — keeps white text readable while video stays visible */}
+      <div className="absolute inset-0 z-10 bg-[#0B1A46]/45" />
+
       {/* ── Slides (all absolutely stacked; only active is opaque) ── */}
       {HERO_SLIDES.map((slide, i) => {
         const Icon = slide.icon
@@ -202,26 +248,8 @@ function HeroCarousel() {
             aria-label={`${i + 1} of ${HERO_SLIDES.length}: ${slide.service}`}
             aria-hidden={!active}
           >
-            {/* Background image */}
-            <img
-              src={slide.bg}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
-
-            {/* Dark blue overlay — keeps white text readable over any image */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(11,26,70,0.88) 0%, rgba(15,36,95,0.84) 45%, rgba(30,58,138,0.80) 100%)',
-              }}
-            />
-
             {/* Slide content */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 py-16 md:py-24 text-center">
+            <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 py-16 md:py-24 text-center">
               <div className="w-full max-w-[960px] mx-auto">
 
                 {/* Service label pill */}
@@ -294,7 +322,7 @@ function HeroCarousel() {
 
       {/* ── Dot indicators ── */}
       <div
-        className="absolute bottom-7 left-0 right-0 z-20 flex items-center justify-center gap-3"
+        className="absolute bottom-7 left-0 right-0 z-30 flex items-center justify-center gap-3"
         role="tablist"
         aria-label="Service slide navigation"
       >
