@@ -135,6 +135,9 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     phonePrimary,   // '+971 50 6828290', phone button in hero + bottom CTA
     heroImage,      // /public path or URL, full-bleed background behind the hero section
     heroImageAlt,   // Descriptive alt text (kept on the <img>, not aria-hidden)
+    heroFullBleed,  // When true + heroImage set: centered content over a radial scrim
+                    // (matches About/Services/Contact), instead of the default
+                    // left-aligned content with a left-to-right linear scrim.
     sectionImage,   // Photo for the image+text split section
     sectionImageAlt,// Descriptive alt for sectionImage
     sectionContent, // { eyebrow, heading, body, checklist[] }, drives the split section copy
@@ -215,19 +218,30 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           />
         )}
 
-        {/* ── Layer 2a: mobile flat scrim — navy #0B1A46 dominant ───────── */}
-        {heroImage && (
+        {/* ── Layer 2: scrim ─────────────────────────────────────────────
+               heroFullBleed: radial navy scrim centred behind the content,
+               matching the About/Services/Contact full-bleed hero — image
+               stays visible at the edges.
+               default: mobile flat scrim + desktop left-to-right gradient
+               so the photo reads through on the right (right-weighted). ── */}
+        {heroImage && heroFullBleed && (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.82) 0%, rgba(11,26,70,0.55) 55%, rgba(11,26,70,0.30) 100%)',
+              zIndex: 1,
+            }}
+            aria-hidden="true"
+          />
+        )}
+        {heroImage && !heroFullBleed && (
           <div
             className="sm:hidden absolute inset-0 pointer-events-none"
             style={{ background: 'rgba(11,26,70,0.82)', zIndex: 1 }}
             aria-hidden="true"
           />
         )}
-
-        {/* ── Layer 2b: desktop gradient scrim, navy #0B1A46 dominant tone
-               everywhere (incl. behind the H1), fading toward the right so
-               the photo reads through ─────────────────────────────────── */}
-        {heroImage && (
+        {heroImage && !heroFullBleed && (
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
@@ -263,7 +277,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
             image is visible in the right ~40-50% of the hero.
             No heroImage → centered content as before.
           */}
-          <div className={heroImage ? 'max-w-[700px]' : 'max-w-[840px] mx-auto text-center'}>
+          <div className={heroImage && !heroFullBleed ? 'max-w-[700px]' : 'max-w-[840px] mx-auto text-center'}>
 
             {/* Eyebrow pill */}
             <div
@@ -291,14 +305,15 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                 color: 'rgba(255,255,255,0.85)',
                 fontSize: '1.05rem',
                 lineHeight: 1.65,
-                maxWidth: heroImage ? '520px' : '680px',
+                maxWidth: heroImage && !heroFullBleed ? '520px' : '680px',
+                ...(heroFullBleed ? { marginLeft: 'auto', marginRight: 'auto' } : {}),
               }}
             >
               {hero}
             </p>
 
             {/* CTAs */}
-            <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${!heroImage ? 'justify-center' : ''}`}>
+            <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${!heroImage || heroFullBleed ? 'justify-center' : ''}`}>
               <Link href="/contact" className="btn-primary">
                 Get a Free Quote <Icons.ArrowRight size={16} />
               </Link>

@@ -22,6 +22,9 @@ const pageData = {
   h1Accent: 'Zero Trust Architecture',
   icon: 'Shield',
   hero: 'Never trust, always verify, implement Zero Trust architecture for modern enterprise security.',
+  heroImage: '/images/cyber-advisory/zero-trust-architecture-hero.webp',
+  heroImageAlt: 'Zero Trust architecture consulting by IP Care',
+  heroFullBleed: true,
   overview: [
     'Zero Trust is not a product, it is an architecture philosophy: assume breach, verify explicitly, enforce least-privilege access, and segment your network down to the workload level.',
     'IP Care, powered by The Cyber Adviser, designs and delivers complete Zero Trust architectures aligned to NIST 800-207, Forrester ZTX frameworks and UAE NESA requirements. We cover identity, devices, applications, data and infrastructure with unified policy enforcement.',

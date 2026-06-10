@@ -19,6 +19,9 @@ const pageData = {
   h1Accent: 'Cloud Security Advisory',
   icon: 'Cloud',
   hero: 'Secure your cloud estate, from landing zones to workload protection.',
+  heroImage: '/images/cyber-advisory/cloud-security-hero.webp',
+  heroImageAlt: 'Cloud security advisory, multi-cloud protection by IP Care',
+  heroFullBleed: true,
   overview: [
     'Cloud security is fundamentally different from on-premise security. The shared responsibility model, ephemeral workloads, API-driven access and multi-cloud complexity demand a cloud-native security approach.',
     'IP Care, powered by The Cyber Adviser, delivers cloud security advisory across AWS, Azure and Google Cloud. We cover secure landing zone design, cloud security posture management (CSPM), workload protection (CWPP), identity and access management (IAM) and compliance automation.',

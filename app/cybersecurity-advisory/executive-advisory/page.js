@@ -19,6 +19,9 @@ const pageData = {
   h1Accent: 'Executive Cybersecurity Advisory',
   icon: 'Briefcase',
   hero: 'Board-level security strategy, translate cyber risk to business outcomes.',
+  heroImage: '/images/cyber-advisory/executive-advisory-hero.webp',
+  heroImageAlt: 'Executive cybersecurity advisory, board-level strategy by IP Care',
+  heroFullBleed: true,
   overview: [
     'Cybersecurity is a board-level business risk, not just an IT problem. Executives need to understand cyber risk in business terms, make informed investment decisions and communicate security posture to stakeholders.',
     'IP Care provides executive cybersecurity advisory to CEOs, CFOs, board members and CISOs across UAE and Canada. We translate technical security into strategic business language, quantify cyber risk, build investment business cases and design security programmes aligned to business outcomes.',

@@ -19,6 +19,9 @@ const pageData = {
   h1Accent: 'Security Automation',
   icon: 'Zap',
   hero: 'Automate security operations, from alert to response in seconds.',
+  heroImage: '/images/cyber-advisory/security-automation-hero.webp',
+  heroImageAlt: 'Security automation, SOAR and XSOAR by IP Care',
+  heroFullBleed: true,
   overview: [
     'Security teams are drowning in alerts. The average SOC receives 10,000+ alerts per day with only 5-10% being actionable. Manual triage, investigation and response create fatigue, delays and missed threats.',
     'IP Care implements Security Orchestration, Automation and Response (SOAR) platforms to automate repetitive security tasks. We specialize in Palo Alto Cortex XSOAR and XSIAM. The industry-leading platforms for alert triage, incident investigation, threat hunting and automated response.',

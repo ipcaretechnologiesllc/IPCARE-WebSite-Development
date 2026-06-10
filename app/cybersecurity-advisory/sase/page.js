@@ -19,6 +19,9 @@ const pageData = {
   h1Accent: 'SASE Transformation',
   icon: 'Cloud',
   hero: 'Secure Access Service Edge, cloud-delivered security for the distributed enterprise.',
+  heroImage: '/images/cyber-advisory/sase-transformation-hero.webp',
+  heroImageAlt: 'SASE transformation consulting, cloud-delivered security by IP Care',
+  heroFullBleed: true,
   overview: [
     'SASE (Secure Access Service Edge) converges networking and security into a single cloud-delivered service. It eliminates the complexity of multiple appliances, VPNs and point solutions, delivering consistent security for users anywhere, on any device.',
     'IP Care designs and deploys SASE architectures with Palo Alto Prisma Access, Netskope and Zscaler. We integrate SD-WAN for intelligent routing, Zero Trust access control, cloud firewall, DLP and advanced threat prevention. All delivered from the cloud edge.',
