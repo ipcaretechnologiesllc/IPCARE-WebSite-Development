@@ -944,11 +944,11 @@ function BlogTeaser() {
     .sort((a, b) => b._ts - a._ts)
     .slice(0, 3)
   return (
-    <section id="blog" className="py-24 px-6">
+    <section id="blog" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">From the Knowledge Base</h2>
-          <p className="body-text mt-5">Insights from our engineers and advisors.</p>
+          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>From the Knowledge Base</h2>
+          <p className="mt-5" style={{ color: '#58595B' }}>Insights from our engineers and advisors.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {posts.map((p, i) => (
