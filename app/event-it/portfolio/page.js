@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import * as Icons from 'lucide-react'
 
 export default function EventPortfolioPage() {
@@ -53,17 +54,17 @@ export default function EventPortfolioPage() {
 
         {/* Hero */}
         <section className="relative py-20 md:py-28 px-6 overflow-hidden" style={{ background: '#0B1A46' }}>
-          {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+          {/* Hero photo — full-bleed, edge to edge */}
           <img
             src="/images/event-it/portfolio-hero.webp"
             alt="Event IT portfolio Abu Dhabi"
             loading="eager"
             fetchPriority="high"
             decoding="async"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
-          {/* Brand-blue overlay at 60% opacity */}
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} aria-hidden="true" />
+          {/* Left-to-right gradient scrim — text legible on left, arena visible on right */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(11,26,70,0.75) 0%, rgba(11,26,70,0.45) 45%, rgba(11,26,70,0.10) 100%)', zIndex: 10 }} aria-hidden="true" />
           {/* Orange glow */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 11 }}>
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
@@ -81,7 +82,7 @@ export default function EventPortfolioPage() {
         </section>
 
         {/* Filter Tabs */}
-        <section className="py-8 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+        <section className="py-8 px-6" style={{ background: '#F4F6FA' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="flex flex-wrap justify-center gap-2">
               {categories.map((cat) => (
@@ -91,7 +92,7 @@ export default function EventPortfolioPage() {
                   className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                     activeFilter === cat
                       ? 'bg-[#E87722] text-white'
-                      : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/10'
+                      : 'bg-white text-[#0B1A46] hover:bg-[#E87722]/10 border border-[#0B1A46]/10'
                   }`}
                 >
                   {cat}
@@ -107,12 +108,16 @@ export default function EventPortfolioPage() {
         </section>
 
         {/* Events Grid */}
-        <section className="py-16 px-6">
+        <section className="py-16 px-6" style={{ background: '#F4F6FA' }}>
           <div className="max-w-[1400px] mx-auto">
             {filteredEvents.length > 0 ? (
               <div className="grid md:grid-cols-3 gap-5">
                 {filteredEvents.map((event) => (
-                  <div key={event.id} className="glass-card overflow-hidden group hover:border-[#E87722]/40 transition-all">
+                  <div
+                    key={event.id}
+                    className="overflow-hidden group transition-all"
+                    style={{ background: '#FFFFFF', borderTop: '3px solid #E87722', borderRadius: '16px', boxShadow: '0 8px 32px rgba(10,26,70,0.18)' }}
+                  >
                     <div className="h-48 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)' }}>
                       {event.img ? (
                         <img
@@ -129,28 +134,27 @@ export default function EventPortfolioPage() {
                           <Icons.Play size={64} className="text-white/20"/>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,16,42,0.95)] to-transparent opacity-80 pointer-events-none"/>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-white text-lg font-bold mb-2">{event.name}</h3>
-                      <div className="flex items-center gap-2 mb-3 text-white/60 text-sm">
+                      <h3 className="text-lg font-bold mb-2" style={{ color: '#0B1A46' }}>{event.name}</h3>
+                      <div className="flex items-center gap-2 mb-3 text-sm" style={{ color: '#58595B' }}>
                         <Icons.MapPin size={14}/>
                         <span>{event.location}</span>
                         <span>•</span>
                         <span>{event.year}</span>
                       </div>
-                      <p className="body-text text-sm mb-2"><strong>Services:</strong> {event.services}</p>
-                      <p className="body-text text-sm mb-4"><strong>Technology:</strong> {event.tech}</p>
+                      <p className="text-sm mb-2" style={{ color: '#58595B' }}><strong style={{ color: '#0B1A46' }}>Services:</strong> {event.services}</p>
+                      <p className="text-sm mb-4" style={{ color: '#58595B' }}><strong style={{ color: '#0B1A46' }}>Technology:</strong> {event.tech}</p>
                       <div className="flex flex-wrap gap-2">
                         {event.slug && (
-                          <Link href={`/event-it/${event.slug}`} className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold px-4 py-1.5 rounded-full border border-[#E87722]/50 bg-[#E87722]/5 group-hover:bg-[#E87722] group-hover:text-white group-hover:border-[#E87722] transition-all">
+                          <Link href={`/event-it/${event.slug}`} className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold hover:underline transition-all">
                             Read Case Study <Icons.ArrowRight size={13}/>
                           </Link>
                         )}
                         {event.video && (
                           <button
                             onClick={(e) => { e.preventDefault(); setVideoModal({ src: event.video, label: event.videoLabel }) }}
-                            className="inline-flex items-center gap-1.5 text-white/80 text-sm font-semibold px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition-all"
+                            className="inline-flex items-center gap-1.5 text-[#E87722] text-sm font-semibold hover:underline transition-all"
                           >
                             <Icons.Play size={13}/> Watch Video
                           </button>
@@ -162,21 +166,41 @@ export default function EventPortfolioPage() {
               </div>
             ) : (
               <div className="text-center py-16">
-                <Icons.Search size={48} className="text-white/20 mx-auto mb-4"/>
-                <p className="text-white/60 text-lg">No events found in this category</p>
+                <Icons.Search size={48} className="mx-auto mb-4" style={{ color: '#0B1A46', opacity: 0.2 }}/>
+                <p className="text-lg" style={{ color: '#58595B' }}>No events found in this category</p>
               </div>
             )}
           </div>
         </section>
 
         {/* Bottom CTA */}
-        <section className="py-16 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
-          <div className="max-w-[1200px] mx-auto text-center">
-            <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Plan Your Event IT Infrastructure</h2>
-            <p className="body-text max-w-2xl mx-auto mb-8">Get a custom quote for your upcoming event with our expert team</p>
-            <Link href="/contact" className="btn-primary">
-              Get an Event Quote <Icons.ArrowRight size={16}/>
-            </Link>
+        <section style={{
+          background: 'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)',
+          borderTop: '3px solid #E87722',
+          padding: '96px 24px',
+        }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+            <h2 style={{
+              color: '#FFFFFF',
+              fontWeight: 800,
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.15,
+              marginBottom: '16px',
+            }}>
+              Plan Your Event IT Infrastructure
+            </h2>
+            <p style={{
+              color: 'rgba(255,255,255,0.78)',
+              fontSize: '17px',
+              lineHeight: 1.75,
+              maxWidth: '580px',
+              margin: '0 auto 36px',
+            }}>
+              Get a custom quote for your upcoming event with our expert team — temporary
+              networks, broadcast LAN, CCTV and command-centre support across UAE and Canada.
+            </p>
+            <CTAPhoneButtons />
           </div>
         </section>
       </main>
