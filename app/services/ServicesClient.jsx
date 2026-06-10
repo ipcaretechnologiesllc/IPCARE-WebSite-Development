@@ -82,9 +82,21 @@ function Hero() {
       display: 'flex',
       alignItems: 'center',
     }}>
+      {/* Background image */}
+      <img
+        src="/images/pages/services-bg.webp"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ zIndex: 0 }}
+        loading="lazy"
+      />
+      {/* Navy overlay */}
+      <div className="absolute inset-0 bg-[#0B1A46]/70" style={{ zIndex: 1 }} />
       {/* Grid texture overlay */}
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
+        zIndex: 2,
         backgroundImage:
           'linear-gradient(rgba(232,119,34,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(232,119,34,0.06) 1px, transparent 1px)',
         backgroundSize: '60px 60px',
@@ -97,6 +109,7 @@ function Hero() {
         width: '560px', height: '560px', borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(232,119,34,0.18) 0%, transparent 65%)',
         pointerEvents: 'none',
+        zIndex: 2,
       }} />
 
       <div
@@ -110,7 +123,7 @@ function Hero() {
           alignItems: 'center',
           textAlign: 'center',
           position: 'relative',
-          zIndex: 1,
+          zIndex: 20,
         }}
       >
         <Eyebrow>Our Services</Eyebrow>
@@ -165,22 +178,11 @@ function ServicesGrid() {
   }
 
   return (
-    <section className="relative overflow-hidden" style={{ padding: '96px 24px' }}>
-      {/* Background image */}
-      <img
-        src="/images/pages/services-bg.webp"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ zIndex: 0 }}
-        loading="lazy"
-      />
-      {/* Navy overlay */}
-      <div className="absolute inset-0 bg-[#0B1A46]/55" style={{ zIndex: 10 }} />
-      <div className="relative" style={{ maxWidth: '1400px', margin: '0 auto', zIndex: 20 }}>
+    <section style={{ background: '#F4F6FA', padding: '96px 24px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <p style={{
           fontSize: '1.1rem',
-          color: '#F4F6FA',
+          color: '#333F50',
           lineHeight: 1.8,
           maxWidth: '820px',
           margin: '0 auto 56px',

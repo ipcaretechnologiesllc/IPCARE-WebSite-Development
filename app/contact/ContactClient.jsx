@@ -49,17 +49,6 @@ export default function ContactClient() {
     <main>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
-        <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
-        <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto">
-          <div className="section-eyebrow">Contact</div>
-          <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get <span className="text-[#E87722]">in Touch</span></h1>
-          <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.1rem' }}>We respond within 4 business hours.</p>
-        </div>
-      </section>
-
-      {/* ── MAIN CONTENT ─────────────────────────────────────────────────── */}
-      <section className="px-6 relative overflow-hidden" style={{ paddingTop: '72px', paddingBottom: '96px' }}>
         {/* Background image */}
         <img
           src="/images/pages/contact-bg.webp"
@@ -70,8 +59,19 @@ export default function ContactClient() {
           loading="lazy"
         />
         {/* Navy overlay */}
-        <div className="absolute inset-0 bg-[#0B1A46]/55" style={{ zIndex: 10 }} />
-        <div className="relative max-w-[1200px] mx-auto" style={{ zIndex: 20 }}>
+        <div className="absolute inset-0 bg-[#0B1A46]/60" style={{ zIndex: 1 }} />
+        <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 2 }} />
+        <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 2 }} />
+        <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto" style={{ zIndex: 20 }}>
+          <div className="section-eyebrow">Contact</div>
+          <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get <span className="text-[#E87722]">in Touch</span></h1>
+          <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.1rem' }}>We respond within 4 business hours.</p>
+        </div>
+      </section>
+
+      {/* ── MAIN CONTENT ─────────────────────────────────────────────────── */}
+      <section className="px-6" style={{ background: '#F4F6FA', paddingTop: '72px', paddingBottom: '96px' }}>
+        <div className="max-w-[1200px] mx-auto">
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">
 
