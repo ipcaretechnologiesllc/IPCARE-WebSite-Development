@@ -206,8 +206,8 @@ function Hero() {
         decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
       />
-      {/* Brand-blue overlay at 60% opacity */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} />
+      {/* Navy radial scrim — weighted left where the H1 sits, clear over the rest of the image */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 90% at 20% 50%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)', zIndex: 10 }} />
       {/* Grid texture overlay */}
       <div aria-hidden="true" style={{
         position:            'absolute',

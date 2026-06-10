@@ -47,8 +47,8 @@ function Hero() {
         decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
       />
-      {/* Brand-blue overlay at 60% opacity */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(30,58,138,0.60)', zIndex: 10 }} aria-hidden="true" />
+      {/* Navy radial scrim — weighted left where the H1 sits, clear over the rest of the image */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 90% at 20% 50%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)', zIndex: 10 }} aria-hidden="true" />
       {/* Grid texture */}
       <div className="absolute inset-0 premium-grid pointer-events-none" style={{ zIndex: 11 }} />
       {/* Orange glow */}

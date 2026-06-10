@@ -48,7 +48,7 @@ export default function ContactClient() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
+      <section style={{ background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
         {/* Background image */}
         <img
           src="/images/pages/contact-bg.webp"
@@ -62,7 +62,7 @@ export default function ContactClient() {
         <div className="absolute inset-0" style={{ zIndex: 1, background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)' }} />
         <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 2 }} />
         <div style={{ position: 'absolute', top: '-80px', right: '15%', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(232,119,34,0.15) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 2 }} />
-        <div className="relative py-20 md:py-28 px-6 text-center max-w-[700px] mx-auto" style={{ zIndex: 20 }}>
+        <div className="relative text-center max-w-[700px] mx-auto w-full" style={{ zIndex: 20 }}>
           <div className="section-eyebrow">Contact</div>
           <h1 className="font-extrabold text-white mb-5" style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)', lineHeight: 1.08 }}>Get <span className="text-[#E87722]">in Touch</span></h1>
           <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '1.1rem' }}>We respond within 4 business hours.</p>
