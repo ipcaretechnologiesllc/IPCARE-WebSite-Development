@@ -649,42 +649,41 @@ function RentalTeaser() {
     { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg', href: '/rental/printers' },
   ]
   return (
-    <section id="rental" className="py-24 px-6">
+    <section id="rental" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">IT Equipment Rental, UAE & Canada</h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">Short-term or long-term, UAE and Canada, delivered, configured and collected. No procurement headaches, no hidden costs.</p>
+          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>IT Equipment Rental, UAE & Canada</h2>
+          <p className="mt-5 max-w-2xl mx-auto" style={{ color: '#58595B' }}>Short-term or long-term, UAE and Canada, delivered, configured and collected. No procurement headaches, no hidden costs.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-5">
           {items.map((it, i) => (
             <a
               key={it.name}
               href={it.href}
-              className={`group relative rounded-2xl overflow-hidden reveal block rental-card md:col-span-2 lg:col-span-1${i === 3 ? ' md:col-start-2 lg:col-start-auto' : ''}${i === 4 ? ' md:col-start-4 lg:col-start-auto' : ''}`}
-              style={{ transitionDelay: `${i * 80}ms`, aspectRatio: '3/4', minHeight: '320px' }}
+              className={`group relative rounded-2xl overflow-hidden reveal block rental-card flex flex-col md:col-span-2 lg:col-span-1${i === 3 ? ' md:col-start-2 lg:col-start-auto' : ''}${i === 4 ? ' md:col-start-4 lg:col-start-auto' : ''}`}
+              style={{ transitionDelay: `${i * 80}ms`, background: '#FFFFFF', boxShadow: '0 8px 32px rgba(10,26,70,0.18)' }}
             >
-              {/* Full-bleed image */}
-              <img
-                src={it.img}
-                alt={`${it.name} rental UAE, IP Care Technologies`}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
+              {/* Image */}
+              <div className="relative" style={{ aspectRatio: '4/3' }}>
+                <img
+                  src={it.img}
+                  alt={`${it.name} rental UAE, IP Care Technologies`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
 
-              {/* Bottom-only gradient overlay (lightens on hover via CSS) */}
-              <div className="rental-card__overlay" />
-
-              {/* Orange icon badge — top left */}
-              <div className="rental-card__badge p-2 rounded-xl">
-                <it.icon size={17} className="text-white" />
+                {/* Orange icon badge — top left */}
+                <div className="rental-card__badge p-2 rounded-xl">
+                  <it.icon size={17} className="text-white" />
+                </div>
               </div>
 
-              {/* Content pinned to bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-5">
-                <h4 className="text-white font-bold text-base leading-tight mb-2">{it.name}</h4>
-                <p className="text-white/70 text-xs mb-4 leading-snug">{it.spec}</p>
+              {/* Content */}
+              <div className="p-5 flex flex-col flex-1">
+                <h4 className="font-bold text-base leading-tight mb-2" style={{ color: '#0B1A46' }}>{it.name}</h4>
+                <p className="text-xs mb-4 leading-snug" style={{ color: '#58595B' }}>{it.spec}</p>
                 <button
-                  className="w-full text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 group-hover:brightness-110"
+                  className="w-full text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 group-hover:brightness-110 mt-auto"
                   style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)' }}
                 >
                   Add to Quote
