@@ -193,8 +193,7 @@ function HeroCarousel() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden"
-      style={{ height: 'calc(100vh - 108px)', minHeight: '600px' }}
+      className="relative overflow-hidden hero-section"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
@@ -683,8 +682,8 @@ function RentalTeaser() {
                 <h4 className="font-bold text-base leading-tight mb-2" style={{ color: '#0B1A46' }}>{it.name}</h4>
                 <p className="text-xs mb-4 leading-snug" style={{ color: '#58595B' }}>{it.spec}</p>
                 <button
-                  className="w-full text-xs font-semibold py-2 px-3 rounded-lg transition-all duration-300 group-hover:brightness-110 mt-auto"
-                  style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)' }}
+                  className="w-full text-xs font-semibold py-2 px-3 transition-all duration-300 group-hover:brightness-110 mt-auto"
+                  style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)', borderRadius: '10px' }}
                 >
                   Add to Quote
                 </button>

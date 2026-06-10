@@ -458,6 +458,21 @@ body {
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
+/* Hero — shortened on md+ so the trust ticker peeks above the fold */
+.hero-section {
+  height: calc(100vh - 108px);
+  min-height: 600px;
+}
+@media (min-width: 768px) {
+  .hero-section {
+    height: auto;
+    min-height: max(520px, calc(100vh - 164px));
+  }
+  .hero-section {
+    min-height: max(520px, calc(100svh - 164px));
+  }
+}
+
 /* Marquee */
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
