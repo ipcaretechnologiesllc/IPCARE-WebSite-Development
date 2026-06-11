@@ -62,7 +62,7 @@ const HERO_SLIDES = [
     icon: ShieldCheck,
     headline: 'The Technology Force Behind ',
     headlineAccent: 'High Stakes Events & Growth Driven Enterprises',
-    headlineSuffix: ' across UAE & Canada.',
+    headlineSuffix: ' across UAE & Canada',
     description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
     mobileBg: '/images/hero-mobile/hero-m-overall.webp',
@@ -72,7 +72,7 @@ const HERO_SLIDES = [
     id: 1,
     service: 'Managed IT Services',
     icon: Server,
-    headline: 'End-to-End IT Operations,',
+    headline: 'End to End IT Operations,',
     headlineAccent: 'Monitored 24/7',
     description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
@@ -83,7 +83,7 @@ const HERO_SLIDES = [
     id: 2,
     service: 'Cybersecurity',
     icon: Lock,
-    headline: 'SOC, Zero Trust and Compliance ,',
+    headline: 'SOC, Zero Trust, Compliance,',
     headlineAccent: 'NESA, PCI, ISO 27001',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
@@ -94,7 +94,7 @@ const HERO_SLIDES = [
     id: 3,
     service: 'ELV & Physical Security',
     icon: ShieldCheck,
-    headline: 'CCTV, Access Control and',
+    headline: 'CCTV, Access Control,',
     headlineAccent: 'Structured Cabling',
     description: 'Intelligent physical security for modern facilities.',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
@@ -116,7 +116,7 @@ const HERO_SLIDES = [
     id: 5,
     service: 'Equipment Rental',
     icon: Network,
-    headline: 'Laptops, Networks and Event Tech,',
+    headline: 'Laptops, Networks, Event Tech,',
     headlineAccent: 'on Demand',
     description: 'Short and long-term rentals with nationwide logistics.',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
@@ -127,7 +127,7 @@ const HERO_SLIDES = [
     id: 6,
     service: 'Cloud Services',
     icon: Cloud,
-    headline: 'Cloud Design, Migration and',
+    headline: 'Cloud Design, Migration,',
     headlineAccent: 'Cost Optimization',
     description: 'AWS, Azure and private cloud, engineered for scale.',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
@@ -387,7 +387,7 @@ function HeroCarousel() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'UFC UAE 2020-25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'USA BASKETBALL 2024', 'ABU DHABI PADEL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'USA BASKETBALL 2024', 'UFC UAE 2020-25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'ABU DHABI PADEL MASTER']
   return (
     <section
       className="relative overflow-hidden"
