@@ -104,7 +104,7 @@ export default function Footer() {
           className="pt-6 flex flex-col md:flex-row md:justify-between items-center gap-3 text-center md:text-left text-[12px]"
           style={{ borderTop: '1px solid rgba(255,255,255,0.10)', color: MUTED }}
         >
-          <div>&copy; {year} IP Care Technologies LLC. All rights reserved.</div>
+          <div>&copy; {year} IP Care Technologies. All rights reserved.</div>
           <div className="flex items-center gap-3">
             <Link href="/privacy-policy" className="footer-link">Privacy Policy</Link>
             <span aria-hidden="true">&middot;</span>

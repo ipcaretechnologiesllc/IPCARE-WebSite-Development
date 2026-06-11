@@ -251,7 +251,7 @@ function StatsBand() {
    4. TIMELINE
 ═══════════════════════════════════════════════ */
 const MILESTONES = [
-  { year: '2003', title: 'Founded in Abu Dhabi', desc: 'IP Care Technologies LLC established with a commitment to honest, enterprise-grade IT delivery.' },
+  { year: '2003', title: 'Founded in Abu Dhabi', desc: 'IP Care Technologies established with a commitment to honest, enterprise-grade IT delivery.' },
   { year: '2007', title: 'First Major Government IT Contract', desc: 'Secured a landmark government IT infrastructure contract, cementing our public sector credentials.' },
   { year: '2010', title: 'Cybersecurity Practice Launched', desc: 'Built a dedicated security team as cyber threats became mission-critical for enterprise clients.' },
   { year: '2014', title: 'ELV & Smart Systems Division Added', desc: 'Expanded into CCTV, access control, and structured cabling for intelligent facilities.' },

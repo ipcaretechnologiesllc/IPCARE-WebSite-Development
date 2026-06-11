@@ -817,7 +817,7 @@ function About() {
             Two Decades of Enterprise IT Excellence
           </h2>
           <p className="mt-5 text-base md:text-lg" style={{ color: '#333F50' }}>
-            Founded in 2003, IP Care Technologies LLC delivers managed IT, cybersecurity, event infrastructure and equipment rental across the UAE and Canada. From government institutions to global event organisers. We design, deploy and operate mission-critical technology that can&apos;t go down.
+            Founded in 2003, IP Care Technologies delivers managed IT, cybersecurity, event infrastructure and equipment rental across the UAE and Canada. From government institutions to global event organisers. We design, deploy and operate mission-critical technology that can&apos;t go down.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-5">
             {[

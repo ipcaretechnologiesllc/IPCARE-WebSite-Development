@@ -19,19 +19,19 @@ export function LegalPage({ title, sections }) {
 
 export const legalContent = {
   privacy: [
-    { h: '1. Introduction', p: ['IP Care Technologies L.L.C. ("IP Care", "we", "us") respects your privacy and is committed to protecting your personal data.', 'This policy explains how we collect, use and safeguard personal data in compliance with the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021) and the Canadian Personal Information Protection and Electronic Documents Act (PIPEDA).'] },
+    { h: '1. Introduction', p: ['IP Care Technologies ("IP Care", "we", "us") respects your privacy and is committed to protecting your personal data.', 'This policy explains how we collect, use and safeguard personal data in compliance with the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021) and the Canadian Personal Information Protection and Electronic Documents Act (PIPEDA).'] },
     { h: '2. Data We Collect', p: ['We collect personal data you provide to us directly (e.g. via contact forms, quote requests, career applications) and data collected automatically (cookies, analytics, IP address).', 'Categories include: name, email, phone, company, job title, project information, CV/resume (for applicants), and technical/usage data.'] },
     { h: '3. How We Use Data', p: ['We use your data to respond to enquiries, provide services, process rental quotes, recruit staff, improve our website, and meet legal obligations.', 'We do not sell your personal data to third parties.'] },
     { h: '4. Legal Basis', p: ['We process personal data on the basis of consent, contract performance, legitimate interests, and legal obligation, aligned to UAE PDPL and PIPEDA requirements.'] },
     { h: '5. Your Rights', p: ['You have the right to access, rectify, erase, restrict and object to processing of your personal data. To exercise these rights contact privacy@ipcare.ae.'] },
     { h: '6. Data Retention', p: ['We retain personal data only for as long as necessary to fulfil the purposes set out in this policy and to comply with legal obligations.'] },
-    { h: '7. Contact', p: ['Questions about this policy: privacy@ipcare.ae | IP Care Technologies L.L.C., Abu Dhabi, UAE.'] },
+    { h: '7. Contact', p: ['Questions about this policy: privacy@ipcare.ae | IP Care Technologies, Abu Dhabi, UAE.'] },
   ],
   terms: [
     { h: '1. Acceptance', p: ['By accessing this website or engaging IP Care Technologies for services, you agree to these Terms of Service.'] },
     { h: '2. Website Use', p: ['Content on this site is provided for general information. While we take reasonable care, we make no warranties regarding accuracy or completeness.'] },
     { h: '3. Services Agreement', p: ['Where IP Care delivers services under a signed Master Services Agreement or Statement of Work, that agreement takes precedence over these Terms for the scope of that engagement.'] },
-    { h: '4. Intellectual Property', p: ['All content, trademarks and branding on this site are the property of IP Care Technologies L.L.C. or its licensors.'] },
+    { h: '4. Intellectual Property', p: ['All content, trademarks and branding on this site are the property of IP Care Technologies or its licensors.'] },
     { h: '5. Limitation of Liability', p: ['To the maximum extent permitted by law, IP Care will not be liable for any indirect, incidental or consequential damages arising from use of this site.'] },
     { h: '6. Governing Law', p: ['These Terms are governed by the laws of the United Arab Emirates for UAE customers, and Canadian law for Canadian customers.'] },
     { h: '7. Contact', p: ['Questions about these Terms: legal@ipcare.ae.'] },
