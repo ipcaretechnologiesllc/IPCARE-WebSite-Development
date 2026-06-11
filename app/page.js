@@ -60,9 +60,10 @@ const HERO_SLIDES = [
     id: 0,
     service: "Trusted by the World's Biggest Events",
     icon: ShieldCheck,
-    headline: "Enterprise IT for UAE's Biggest Events &",
-    headlineAccent: 'Growing Businesses.',
-    description: 'Managed IT, Cybersecurity, Event Infrastructure & Equipment Rental, delivered across the UAE & Canada since 2003.',
+    headline: 'The Technology Force Behind ',
+    headlineAccent: 'High-Stakes Events & Growth-Driven Enterprises',
+    headlineSuffix: ' across UAE & Canada.',
+    description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
     cta: { primary: { label: 'Get a Free Consultation', href: '/contact' }, secondary: { label: 'View Our Services', href: '/services' } },
   },
@@ -279,7 +280,7 @@ function HeroCarousel() {
                       aria-live={active ? 'polite' : undefined}
                     >
                       {slide.headlineAccent ? (
-                        <>{slide.headline}{' '}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span></>
+                        <>{slide.headline}{slide.headlineSuffix === undefined ? ' ' : ''}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span>{slide.headlineSuffix || ''}</>
                       ) : (
                         slide.headline
                       )}
