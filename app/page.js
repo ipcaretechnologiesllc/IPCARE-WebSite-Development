@@ -213,7 +213,8 @@ function HeroCarousel() {
       <div className="absolute inset-0 z-0">
         {!isMobile && !reducedMotion ? (
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
             autoPlay
             muted
             loop
@@ -229,14 +230,16 @@ function HeroCarousel() {
             src="/images/hero-poster.webp"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
           />
         ) : reducedMotion ? (
           <img
             src="/images/hero-mobile/hero-m-overall.webp"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
           />
         ) : (
           HERO_SLIDES.map((slide, i) => (
@@ -247,8 +250,11 @@ function HeroCarousel() {
               aria-hidden="true"
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchPriority={i === 0 ? 'high' : 'auto'}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 object-cover"
               style={{
+                width: '100%',
+                height: '100%',
+                maxWidth: '100%',
                 opacity: i === current ? 1 : 0,
                 transition: 'opacity 0.7s ease-in-out',
               }}

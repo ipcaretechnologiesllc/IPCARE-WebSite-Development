@@ -547,7 +547,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               {industries.map((ind) => (
                 <span
                   key={ind}
-                  className="px-5 py-2 rounded-full text-sm font-semibold"
+                  className="px-5 py-2 rounded-full text-sm font-semibold max-w-full whitespace-normal break-words"
                   style={{
                     background: BG_WHITE,
                     color: T_NAV,

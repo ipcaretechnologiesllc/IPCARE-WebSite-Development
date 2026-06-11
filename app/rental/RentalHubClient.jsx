@@ -84,8 +84,8 @@ export default function RentalHubClient() {
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ width: '100%', height: '100%', maxWidth: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
         />
         {/* Navy radial scrim — weighted left where the H1 sits, clear over the rest of the image */}
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 90% at 20% 50%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)', zIndex: 10 }} />
@@ -153,7 +153,7 @@ export default function RentalHubClient() {
                     height={375}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="w-full h-full max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
 
@@ -373,7 +373,7 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
           height={200}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full max-w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
         />
         {/* Brand badge */}
         <div
