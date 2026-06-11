@@ -109,10 +109,10 @@ export default function RentalHubClient() {
             style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
           >
             IT Equipment Rental<br />
-            <span className="text-[#E87722]">UAE &amp; Canada</span>
+            <span className="text-[#E87722]">UAE and Canada</span>
           </h1>
           <p className="body-text mt-5 text-base md:text-lg reveal">
-            Short-term &amp; long-term · Delivery &amp; setup included · Experienced engineers on-site
+            Short-term and long-term rentals. Delivery and setup included. Experienced engineers on-site.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 reveal">
             <a href="#categories" className="btn-primary">

@@ -125,18 +125,18 @@ function Hero() {
             lineHeight: 1.15, margin: '0 0 22px',
             width: '100%',
           }}>
-            Zero Trust. SASE. Cloud Security. <span className="text-[#E87722]">Done by Practitioners.</span>
+            Cybersecurity Advisory <span className="text-[#E87722]">Done by Practitioners</span>
           </h1>
           <p style={{
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',
             lineHeight: 1.75, margin: '0 0 36px',
           }}>
-            Zero Trust architecture, SASE transformation, and cloud security, delivered by
-            practitioners who have protected 100K+ users at Fortune 500 scale.
+            Zero Trust architecture, SASE transformation, and cloud security delivered by
+            practitioners who have protected 100M+ users at enterprise scale.
           </p>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             <Link href="/contact" className="btn-primary">
-              Schedule Consultation <ArrowRight size={16} />
+              Schedule a Consultation <ArrowRight size={16} />
             </Link>
             <a href="#platforms" className="btn-secondary-pill">View Expertise</a>
           </div>

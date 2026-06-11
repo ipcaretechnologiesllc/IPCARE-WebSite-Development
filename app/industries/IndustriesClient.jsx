@@ -245,7 +245,7 @@ function Hero() {
           margin:     '0 0 22px',
           width:      '100%',
         }}>
-          IT Built for <span className="text-[#E87722]">the Sector</span>, Not the Generic Template
+          IT Solutions Built for Your Industry <span className="text-[#E87722]">Not a Generic Template</span>
         </h1>
         <p style={{
           fontSize:   '1.15rem',
@@ -253,10 +253,9 @@ function Hero() {
           lineHeight: 1.75,
           margin:     '0 0 36px',
         }}>
-          Healthcare, banking and federal IT each operate against regulatory environments
-          that generic enterprise IT does not touch. The work is different. The teams are
-          different. The runbooks are different. This page lays out what we deliver in
-          each of the core sectors where we have the deepest UAE history.
+          Healthcare, banking, government, and enterprise each operate in environments
+          that generic IT does not address. We deliver sector-specific solutions where
+          the work, the teams, and the compliance requirements are different.
         </p>
         <div className="flex flex-wrap gap-3 justify-center md:justify-start">
           <Link href="/contact" className="btn-primary">
