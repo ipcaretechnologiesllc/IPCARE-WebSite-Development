@@ -65,6 +65,7 @@ const HERO_SLIDES = [
     headlineSuffix: ' across UAE & Canada.',
     description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-overall.webp',
     cta: { primary: { label: 'Get a Free Consultation', href: '/contact' }, secondary: { label: 'View Our Services', href: '/services' } },
   },
   {
@@ -75,6 +76,7 @@ const HERO_SLIDES = [
     headlineAccent: 'Monitored 24/7',
     description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-managed-it.webp',
     cta: { primary: { label: 'Explore Managed IT', href: '/services/managed-it' }, secondary: { label: 'Request SLA Quote', href: '/contact' } },
   },
   {
@@ -85,6 +87,7 @@ const HERO_SLIDES = [
     headlineAccent: 'NESA, PCI, ISO 27001',
     description: 'SOC-grade protection aligned to NESA, PCI and ISO 27001.',
     bg: 'https://images.unsplash.com/photo-1585134438520-f71c9af97d5f?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-cyber.webp',
     cta: { primary: { label: 'View Cyber Services', href: '/services/cybersecurity' }, secondary: { label: 'Book Security Review', href: '/contact' } },
   },
   {
@@ -95,6 +98,7 @@ const HERO_SLIDES = [
     headlineAccent: 'Structured Cabling',
     description: 'Intelligent physical security for modern facilities.',
     bg: 'https://images.unsplash.com/photo-1496368077930-c1e31b4e5b44?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-elv.webp',
     cta: { primary: { label: 'Explore ELV & Security', href: '/services/elv' }, secondary: { label: 'Request a Survey', href: '/contact' } },
   },
   {
@@ -105,6 +109,7 @@ const HERO_SLIDES = [
     headlineAccent: 'Biggest Events',
     description: 'Temporary networks and connectivity at global event scale.',
     bg: 'https://images.unsplash.com/photo-1705593973313-75de7bf95b56?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-eventit.webp',
     cta: { primary: { label: 'See Event IT Services', href: '/event-it' }, secondary: { label: 'Plan Your Event', href: '/contact' } },
   },
   {
@@ -115,6 +120,7 @@ const HERO_SLIDES = [
     headlineAccent: 'on Demand',
     description: 'Short and long-term rentals with nationwide logistics.',
     bg: 'https://images.pexels.com/photos/7689881/pexels-photo-7689881.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    mobileBg: '/images/hero-mobile/hero-m-rental.webp',
     cta: { primary: { label: 'Browse Equipment', href: '/rental' }, secondary: { label: 'Get a Rental Quote', href: '/contact' } },
   },
   {
@@ -125,6 +131,7 @@ const HERO_SLIDES = [
     headlineAccent: 'Cost Optimization',
     description: 'AWS, Azure and private cloud, engineered for scale.',
     bg: 'https://images.unsplash.com/photo-1606778303077-3780ea8d5420?w=1920&q=85',
+    mobileBg: '/images/hero-mobile/hero-m-cloud.webp',
     cta: { primary: { label: 'Explore Cloud Services', href: '/services/cloud' }, secondary: { label: 'Book Cloud Review', href: '/contact' } },
   },
 ]
@@ -202,7 +209,7 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="IP Care Technologies, Services"
     >
-      {/* ── Persistent background: video on desktop, poster on mobile/reduced-motion ── */}
+      {/* ── Persistent background: video on desktop, rotating images on mobile/reduced-motion ── */}
       <div className="absolute inset-0 z-0">
         {!isMobile && !reducedMotion ? (
           <video
@@ -217,13 +224,36 @@ function HeroCarousel() {
             <source src="/Video/hero.webm" type="video/webm" />
             <source src="/Video/hero.mp4" type="video/mp4" />
           </video>
-        ) : (
+        ) : !isMobile ? (
           <img
             src="/images/hero-poster.webp"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"
           />
+        ) : reducedMotion ? (
+          <img
+            src="/images/hero-mobile/hero-m-overall.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          HERO_SLIDES.map((slide, i) => (
+            <img
+              key={slide.id}
+              src={slide.mobileBg}
+              alt=""
+              aria-hidden="true"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'auto'}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                opacity: i === current ? 1 : 0,
+                transition: 'opacity 0.7s ease-in-out',
+              }}
+            />
+          ))
         )}
       </div>
 
