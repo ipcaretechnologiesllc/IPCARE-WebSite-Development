@@ -61,7 +61,7 @@ const HERO_SLIDES = [
     service: "Trusted by the World's Biggest Events",
     icon: ShieldCheck,
     headline: 'The Technology Force Behind ',
-    headlineAccent: 'High-Stakes Events & Growth-Driven Enterprises',
+    headlineAccent: 'High Stakes Events & Growth Driven Enterprises',
     headlineSuffix: ' across UAE & Canada.',
     description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
