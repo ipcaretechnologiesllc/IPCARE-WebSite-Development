@@ -62,7 +62,6 @@ const HERO_SLIDES = [
     icon: ShieldCheck,
     headline: 'The Technology Force Behind ',
     headlineAccent: 'High Stakes Events & Growth Driven Enterprises',
-    headlineSuffix: ' across UAE & Canada',
     description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
     bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=85',
     mobileBg: '/images/hero-mobile/hero-m-overall.webp',
@@ -532,7 +531,7 @@ function Stats() {
     >
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="text-center mb-14 reveal">
-          <h2 className="text-white text-3xl md:text-4xl font-bold">Why Choose IP Care</h2>
+          <h2 className="text-white text-3xl md:text-4xl font-bold">Enterprise IT Services We Deliver</h2>
           <p className="mt-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)' }}>
             Real numbers from two decades of live enterprise delivery.
           </p>
