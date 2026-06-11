@@ -277,6 +277,7 @@ function ServicesGrid() {
                       <li key={subSlug} style={{ marginBottom: '8px' }}>
                         <Link
                           href={`/services/${slug}/${subSlug}`}
+                          className="service-subitem-link"
                           style={{
                             display: 'flex', alignItems: 'flex-start', gap: '8px',
                             color: '#0B1A46', fontSize: '0.9rem',

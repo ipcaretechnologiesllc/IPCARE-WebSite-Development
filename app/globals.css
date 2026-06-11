@@ -323,6 +323,14 @@ body {
   color: #FFFFFF;
 }
 
+/* Mobile-only: enlarge footer link tap targets to ~44px without affecting desktop layout */
+@media (max-width: 768px) {
+  .footer-link {
+    display: inline-block;
+    padding: 12px 0;
+  }
+}
+
 /* ===== Nav CTA — flat brand orange + subtle glow on hover ===== */
 .btn-primary.nav-cta {
   background: #E87722;
@@ -348,6 +356,18 @@ body {
 @media (max-width: 768px) {
   .floating-btn-call     { position: fixed !important; bottom: 16px !important; }
   .floating-btn-whatsapp { position: fixed !important; bottom: 88px !important; }
+}
+
+/* ===== Mobile-only: enlarge small service-card sub-links to ~44px tap height ===== */
+@media (max-width: 640px) {
+  .service-subitem-link {
+    min-height: 44px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .service-card__cta {
+    min-height: 44px;
+  }
 }
 
 .hero-glass {

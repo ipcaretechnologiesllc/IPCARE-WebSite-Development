@@ -449,7 +449,7 @@ export default function Header() {
           </div>
           <ul className="flex-1 flex flex-col items-center justify-start gap-6 px-6 pt-10 pb-8 overflow-y-auto">
             {navLinks.map((l) => (
-              <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722]">{l.label}</Link></li>
+              <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link></li>
             ))}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
             <div className="flex items-center gap-4 mt-6">
