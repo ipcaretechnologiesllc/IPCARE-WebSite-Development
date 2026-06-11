@@ -72,7 +72,7 @@ const HERO_SLIDES = [
     id: 1,
     service: 'Managed IT Services',
     icon: Server,
-    headline: 'End to End IT Operations,',
+    headline: 'End to End IT Operations',
     headlineAccent: 'Monitored 24/7',
     description: 'Proactive monitoring, maintenance and SLA-backed support.',
     bg: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=85',
