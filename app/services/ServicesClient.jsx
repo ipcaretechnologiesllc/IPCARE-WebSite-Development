@@ -139,7 +139,7 @@ function Hero() {
           width: '100%',
           textAlign: 'center',
         }}>
-          Enterprise IT Solutions &amp; Services<br /><span className="text-[#E87722]">UAE &amp; Canada</span>
+          Enterprise IT Solutions and <span className="text-[#E87722]">Services That Deliver</span>
         </h1>
         <p style={{
           fontSize: '1.2rem',
@@ -148,9 +148,9 @@ function Hero() {
           maxWidth: '640px',
           margin: '0 auto 36px',
         }}>
-          From strategy to implementation to 24/7 operations, IP Care delivers the
-          complete IT stack for enterprise, government, and fast-growth organisations
-          across the UAE and Canada.
+          From strategy and implementation to 24/7 managed operations, IP Care covers
+          the complete IT stack for enterprise, government, and fast-growth
+          organisations. Trusted since 2003.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
           <Link href="/contact" className="btn-primary">
