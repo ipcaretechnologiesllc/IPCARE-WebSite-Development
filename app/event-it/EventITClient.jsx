@@ -116,13 +116,13 @@ function EventsPortfolio() {
   const filtered = filter === 'All Events' ? events : events.filter((e) => e.category === filter)
 
   return (
-    <section className="py-20 md:py-24 px-6">
+    <section className="py-20 md:py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">
+          <h2 className="text-[#0B1A46] text-4xl md:text-5xl font-bold heading-accent">
             Major Events Powered
           </h2>
-          <p className="body-text mt-5 max-w-2xl mx-auto">
+          <p className="mt-5 max-w-2xl mx-auto" style={{ color: '#58595B' }}>
             From world finals to global tours. We deliver the IT backbone that keeps the show on.
           </p>
         </div>
@@ -133,55 +133,55 @@ function EventsPortfolio() {
             <button
               key={t}
               onClick={() => setFilter(t)}
-              className={`glass-pill${filter === t ? ' active' : ''}`}
+              className={`filter-pill-light${filter === t ? ' active' : ''}`}
             >
               {t}
             </button>
           ))}
         </div>
 
-        {/* Cards — identical structure to homepage EventsPortfolio */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Cards — white-card style (matches Portfolio page) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filtered.map((ev, i) => (
             <Link
               key={ev.slug}
               href={ev.link || `/event-it/${ev.slug}`}
-              className="group relative rounded-xl overflow-hidden aspect-[3/4] block reveal"
-              style={{ transitionDelay: `${i * 60}ms` }}
+              className="group overflow-hidden block reveal"
+              style={{
+                background: '#FFFFFF',
+                borderTop: '3px solid #E87722',
+                borderRadius: '16px',
+                boxShadow: '0 8px 32px rgba(10,26,70,0.18)',
+                transitionDelay: `${i * 60}ms`,
+              }}
             >
-              <img
-                src={ev.img}
-                alt={`${ev.name}, event IT infrastructure by IP Care`}
-                width={600}
-                height={800}
-                loading={i === 0 ? 'eager' : 'lazy'}
-                fetchPriority={i === 0 ? 'high' : 'auto'}
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none'
-                  e.currentTarget.parentElement.style.background =
-                    'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)'
-                }}
-              />
-              {/* Dark gradient overlay — tall enough for two-line titles */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'linear-gradient(to top, rgba(11,26,70,0.95) 0%, rgba(11,26,70,0.75) 35%, transparent 75%)',
-                }}
-              />
+              <div className="h-40 relative overflow-hidden">
+                <img
+                  src={ev.img}
+                  alt={`${ev.name}, event IT infrastructure by IP Care`}
+                  width={600}
+                  height={400}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                    e.currentTarget.parentElement.style.background =
+                      'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)'
+                  }}
+                />
+              </div>
               {/* Card content */}
-              <div className="absolute bottom-0 left-0 right-0" style={{ padding: '20px' }}>
+              <div className="p-5">
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold"
-                  style={{ background: '#E87722', color: '#fff', marginBottom: '8px' }}
+                  className="inline-block px-2.5 py-1 rounded text-[12px] uppercase tracking-wider font-semibold"
+                  style={{ background: 'rgba(232,119,34,0.12)', color: '#E87722', marginBottom: '10px' }}
                 >
                   {ev.category}
                 </span>
-                <h3 className="text-white text-lg font-bold leading-snug" style={{ marginBottom: '6px' }}>{ev.name}</h3>
-                <p className="text-white/70 text-xs" style={{ marginBottom: '10px' }}>
+                <h3 className="text-lg font-bold leading-snug" style={{ color: '#0B1A46', marginBottom: '6px' }}>{ev.name}</h3>
+                <p className="text-xs" style={{ color: '#58595B', marginBottom: '12px' }}>
                   {ev.location} · {ev.year}
                 </p>
                 <span className="inline-flex items-center gap-1 text-[#E87722] text-xs font-semibold group-hover:gap-2 transition-all">
@@ -193,7 +193,7 @@ function EventsPortfolio() {
         </div>
 
         <div className="text-center mt-10 reveal">
-          <Link href="/event-it/portfolio" className="btn-ghost">
+          <Link href="/event-it/portfolio" className="btn-ghost-light">
             View Full Portfolio <Icons.ArrowRight size={16} />
           </Link>
         </div>
@@ -205,14 +205,14 @@ function EventsPortfolio() {
 /* ============ 3. END-TO-END SERVICES ============ */
 function Services() {
   return (
-    <section className="py-20 md:py-24 px-6" style={{ background: '#F4F6FA' }}>
+    <section className="py-20 md:py-24 px-6" style={{ background: '#1E3A8A' }}>
       <div className="max-w-[1300px] mx-auto">
         <div className="text-center mb-12 reveal">
           <div className="section-eyebrow">Services</div>
-          <h2 className="text-[#0B1A46] text-3xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">
             End-to-End Event IT Services
           </h2>
-          <p className="text-[#4B5563] mt-4 max-w-2xl mx-auto">
+          <p className="body-text mt-4 max-w-2xl mx-auto">
             From first network diagram to final de-rig. We own every layer.
           </p>
         </div>

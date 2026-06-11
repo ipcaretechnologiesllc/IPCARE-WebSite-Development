@@ -449,6 +449,39 @@ body {
 }
 .glass-pill.active, .glass-pill:hover { background: #E87722; border-color: #E87722; color: #ffffff; }
 
+/* Filter pills on light backgrounds (e.g. Major Events Powered) */
+.filter-pill-light {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid rgba(11,26,70,0.12);
+  color: #0B1A46;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all .2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(10,26,70,0.06);
+}
+.filter-pill-light.active, .filter-pill-light:hover { background: #E87722; border-color: #E87722; color: #ffffff; }
+
+/* Ghost button on light backgrounds */
+.btn-ghost-light {
+  background: #FFFFFF;
+  color: #0B1A46;
+  border: 1.5px solid rgba(11,26,70,0.15);
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+  box-shadow: 0 4px 16px rgba(10,26,70,0.08);
+}
+.btn-ghost-light:hover { background: #E87722; border-color: #E87722; color: #ffffff; }
+
 /* Animation: fade-in-up via IntersectionObserver */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
