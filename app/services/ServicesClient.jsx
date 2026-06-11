@@ -139,7 +139,7 @@ function Hero() {
           width: '100%',
           textAlign: 'center',
         }}>
-          Enterprise IT Solutions and <span className="text-[#E87722]">Services That Deliver</span>
+          Enterprise <span className="text-[#E87722]">IT Solutions and Services</span> That Deliver
         </h1>
         <p style={{
           fontSize: '1.2rem',

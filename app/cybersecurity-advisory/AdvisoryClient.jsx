@@ -125,7 +125,7 @@ function Hero() {
             lineHeight: 1.15, margin: '0 0 22px',
             width: '100%',
           }}>
-            Cybersecurity Advisory <span className="text-[#E87722]">Done by Practitioners</span>
+            <span className="text-[#E87722]">Cybersecurity Advisory</span> Done by Practitioners
           </h1>
           <p style={{
             fontSize: '1.15rem', color: 'rgba(255,255,255,0.78)',
