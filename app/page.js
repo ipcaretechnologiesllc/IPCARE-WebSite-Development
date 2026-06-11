@@ -749,6 +749,7 @@ function EventsPortfolio() {
     { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020-2025', region: 'Sports', img: '/events/ufc-uae.webp' },
     { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: '/events/nba-abu-dhabi-games.webp' },
     { slug: 'euroleague-final-four-2025', name: 'EuroLeague Final Four 2025', loc: 'Etihad Arena, Abu Dhabi • 23-25 May 2025', region: 'Sports', img: '/events/euroleague-final-four-2025.webp' },
+    { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: '/events/fina-world-swimming-championship.webp' },
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: '/events/wba-light-heavyweight-championship.webp' },
     { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: '/events/world-tennis-league.webp' },
@@ -760,7 +761,6 @@ function EventsPortfolio() {
     { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019-2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.webp' },
     { slug: 'uae-national-day-48th', name: 'UAE National Day: 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.webp' },
     { slug: 'uae-national-day-49th', name: 'UAE National Day: 49th Edition', loc: 'Al Jubail Mangrove Park, Abu Dhabi • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.webp' },
-    { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },
   ]
   const [filter, setFilter] = useState('All Events')
   const tabs = ['All Events', 'Sports', 'Concerts', 'National']
