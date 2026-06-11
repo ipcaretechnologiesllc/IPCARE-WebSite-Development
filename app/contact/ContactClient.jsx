@@ -56,7 +56,9 @@ export default function ContactClient() {
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ zIndex: 0 }}
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         {/* Navy radial scrim — keeps centred text legible while image stays visible at edges */}
         <div className="absolute inset-0" style={{ zIndex: 1, background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)' }} />
