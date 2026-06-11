@@ -499,10 +499,10 @@ body {
 @media (min-width: 768px) {
   .hero-section {
     height: auto;
-    min-height: max(520px, calc(100vh - 164px));
+    min-height: max(360px, calc(100vh - 209px));
   }
   .hero-section {
-    min-height: max(520px, calc(100svh - 164px));
+    min-height: max(360px, calc(100svh - 209px));
   }
 }
 

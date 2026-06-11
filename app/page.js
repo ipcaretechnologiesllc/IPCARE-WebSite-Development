@@ -248,7 +248,7 @@ function HeroCarousel() {
             aria-hidden={!active}
           >
             {/* Slide content */}
-            <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 py-16 md:py-24 text-center">
+            <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 py-16 md:py-14 text-center">
               <div className="w-full max-w-[960px] mx-auto">
 
                 {/* Service label pill */}
