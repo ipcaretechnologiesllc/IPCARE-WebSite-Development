@@ -303,7 +303,7 @@ function Platforms() {
           </p>
         </div>
 
-        <div style={{
+        <div className="adv-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
           gap: '24px',
@@ -313,10 +313,10 @@ function Platforms() {
             <div
               key={p.name}
               className="reveal"
-              style={{ ...cardBase, transitionDelay: `${i * 50}ms` }}
+              style={{ ...cardBase, transitionDelay: `${i * 50}ms`, minWidth: 0 }}
               onMouseEnter={hoverOn} onMouseLeave={hoverOff}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
                 {p.vendor ? (
                   <span style={{ fontSize: '20px', fontWeight: 800, color: p.color, letterSpacing: '-0.02em' }}>
                     {p.vendor}
@@ -379,7 +379,7 @@ function ServicesGrid() {
           </h2>
         </div>
 
-        <div style={{
+        <div className="svc-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(5, 1fr)',
           gap: '24px',
@@ -447,7 +447,7 @@ function TrackRecord() {
         backgroundSize: '60px 60px',
       }} />
       <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+        <div className="track-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {trackRecord.map((t, i) => (
             <div
               key={t.l}
@@ -556,7 +556,7 @@ function Tools() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+        <div className="tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {tools.map((t, i) => (
             <a
               key={t.name}
@@ -647,7 +647,7 @@ function KnowledgeBase() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+        <div className="kb-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {filtered.map((a, i) => (
             <article
               key={a.title}
@@ -751,7 +751,7 @@ function CaseStudies() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', alignItems: 'stretch' }}>
+        <div className="cs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {filtered.map((c, i) => (
             <div
               key={c.title}

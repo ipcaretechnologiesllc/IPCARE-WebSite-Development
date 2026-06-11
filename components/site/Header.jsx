@@ -447,7 +447,7 @@ export default function Header() {
             <Logo size={36}/>
             <button onClick={() => setMobileOpen(false)} className="text-[#0D2B55]" aria-label="Close menu"><X size={26}/></button>
           </div>
-          <ul className="flex-1 flex flex-col items-center justify-center gap-6 px-6 overflow-auto">
+          <ul className="flex-1 flex flex-col items-center justify-start gap-6 px-6 pt-10 pb-8 overflow-y-auto">
             {navLinks.map((l) => (
               <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722]">{l.label}</Link></li>
             ))}

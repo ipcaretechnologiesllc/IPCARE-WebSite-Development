@@ -156,7 +156,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
            Previously the background was on the inner constrained div, which
            left the body's #1E3A8A bleeding through at the corners on wide
            displays (>1400 px), producing the hard bright-blue rectangle. */
-        <div style={{ background: '#0B1A46' }}>
+        <div style={{ background: '#1E3A8A' }}>
           <div className="max-w-[1400px] mx-auto px-6 pt-5">
             <nav
               className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap"
@@ -199,7 +199,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       ────────────────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
-        style={{ background: '#0B1A46', borderBottom: '3px solid #E87722' }}
+        style={{ background: '#1E3A8A', borderBottom: '3px solid #E87722' }}
       >
         {/* ── Layer 1: full-bleed image (only when set) ─────────────────── */}
         {heroImage && (
@@ -228,7 +228,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.82) 0%, rgba(11,26,70,0.55) 55%, rgba(11,26,70,0.30) 100%)',
+              background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(30,58,138,0.82) 0%, rgba(30,58,138,0.55) 55%, rgba(30,58,138,0.30) 100%)',
               zIndex: 1,
             }}
             aria-hidden="true"
@@ -237,7 +237,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
         {heroImage && !heroFullBleed && (
           <div
             className="sm:hidden absolute inset-0 pointer-events-none"
-            style={{ background: 'rgba(11,26,70,0.82)', zIndex: 1 }}
+            style={{ background: 'rgba(30,58,138,0.82)', zIndex: 1 }}
             aria-hidden="true"
           />
         )}
@@ -245,7 +245,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           <div
             className="hidden sm:block absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, rgba(11,26,70,0.92) 0%, rgba(11,26,70,0.85) 30%, rgba(11,26,70,0.65) 65%, rgba(11,26,70,0.35) 100%)',
+              background: 'linear-gradient(90deg, rgba(30,58,138,0.92) 0%, rgba(30,58,138,0.85) 30%, rgba(30,58,138,0.65) 65%, rgba(30,58,138,0.35) 100%)',
               zIndex: 1,
             }}
             aria-hidden="true"
