@@ -83,26 +83,26 @@ export default function ProductDetailPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Header />
       <main>
-        <div className="max-w-[1400px] mx-auto px-6 pt-6">
-          <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-white">Home</Link>
+        <div className="px-6 pt-6" style={{ background: '#F4F6FA' }}>
+          <nav className="max-w-[1400px] mx-auto text-xs flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb" style={{ color: '#58595B' }}>
+            <Link href="/" className="hover:text-[#E87722]">Home</Link>
             <Icons.ChevronRight size={12}/>
-            <Link href="/rental" className="hover:text-white">Rental Hub</Link>
+            <Link href="/rental" className="hover:text-[#E87722]">Rental Hub</Link>
             <Icons.ChevronRight size={12}/>
-            <Link href={`/rental/${params.category}`} className="hover:text-white">{product.categoryName}</Link>
+            <Link href={`/rental/${params.category}`} className="hover:text-[#E87722]">{product.categoryName}</Link>
             <Icons.ChevronRight size={12}/>
-            <span className="text-white/80">{product.model}</span>
+            <span style={{ color: '#0B1A46' }}>{product.model}</span>
           </nav>
         </div>
 
         <ProductDetailClient product={product} categorySlug={params.category}/>
 
         {/* Related products */}
-        <section className="py-16 md:py-20 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+        <section className="py-16 md:py-20 px-6" style={{ background: '#F4F6FA' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="mb-10">
               <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Frequently Rented Together</div>
-              <h2 className="text-white text-2xl md:text-3xl font-bold">Related Products</h2>
+              <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>Related Products</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {related.map((r) => (
