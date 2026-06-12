@@ -145,7 +145,7 @@ export default function RentalHubClient() {
                 style={{ transitionDelay: `${i * 40}ms` }}
               >
                 {/* Photo — edge-to-edge, zooms on hover */}
-                <div className="w-full overflow-hidden flex items-center justify-center p-4" style={{ aspectRatio: '16/10', background: '#F4F6FA' }}>
+                <div className="w-full overflow-hidden flex items-center justify-center p-4" style={{ aspectRatio: '16/10', background: '#FFFFFF' }}>
                   <img
                     src={(() => {
                       const photo = CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'

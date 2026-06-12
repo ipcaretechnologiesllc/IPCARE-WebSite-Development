@@ -703,12 +703,12 @@ function RentalTeaser() {
               style={{ transitionDelay: `${i * 80}ms`, background: '#FFFFFF', boxShadow: '0 8px 32px rgba(10,26,70,0.18)' }}
             >
               {/* Image */}
-              <div className="relative flex items-center justify-center p-4" style={{ aspectRatio: '4/3', background: '#F4F6FA' }}>
+              <div className="relative" style={{ aspectRatio: '4/3' }}>
                 <img
                   src={it.img}
                   alt={`${it.name} rental UAE, IP Care Technologies`}
                   loading="lazy"
-                  className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
 
                 {/* Orange icon badge — top left */}
