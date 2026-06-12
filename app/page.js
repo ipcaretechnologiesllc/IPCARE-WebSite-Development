@@ -222,11 +222,11 @@ function HeroCarousel() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/images/hero-poster.webp"
           >
-            <source src="/Video/hero.webm" type="video/webm" />
-            <source src="/Video/hero.mp4" type="video/mp4" />
+            <source src="/Video/hero.webm" type="video/webm" media="(min-width: 769px)" />
+            <source src="/Video/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
           </video>
         ) : !isMobile ? (
           <img
