@@ -4,7 +4,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
-import { articles, getArticle, getAllArticleSlugs, getAuthor } from '@/lib/blog-data'
+import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways } from '@/lib/blog-data'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -43,6 +43,7 @@ export default function ArticlePage({ params }) {
   const related = [...sameCat, ...others].slice(0, 3)
 
   const authorInfo = getAuthor(a.author)
+  const keyTakeaways = getKeyTakeaways(params.slug)
   // Named experts get Person schema (with jobTitle/worksFor for E-E-A-T); the generic
   // 'IP Care Team' byline falls back to the Organization as author.
   const authorSchema = authorInfo
@@ -128,6 +129,25 @@ export default function ArticlePage({ params }) {
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
+
+            {/* Key takeaways — answer-ready summary for readers and AI engines */}
+            {keyTakeaways?.length > 0 && (
+              <aside
+                className="mb-10 rounded-2xl p-6 md:p-7"
+                style={{ background: '#F4F6FA', border: '1px solid #E1E8F0', borderLeft: '4px solid #E87722' }}
+                aria-label="Key takeaways"
+              >
+                <h2 className="mono text-[13px] uppercase tracking-widest mb-4" style={{ color: '#E87722' }}>Key Takeaways</h2>
+                <ul className="space-y-3">
+                  {keyTakeaways.map((t, i) => (
+                    <li key={i} className="flex gap-3 text-base leading-relaxed" style={{ color: '#374151' }}>
+                      <Icons.Check size={18} className="flex-shrink-0 mt-1 text-[#E87722]" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
 
             {/* Body content */}
             <article className="space-y-5">
