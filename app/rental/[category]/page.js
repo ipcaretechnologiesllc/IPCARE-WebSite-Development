@@ -92,12 +92,12 @@ export default function CategoryPage({ params }) {
         </section>
 
         {/* Products */}
-        <section className="pb-24 px-6">
+        <section className="pb-24 px-6" style={{ background: '#F4F6FA', paddingTop: '56px' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <div className="mono text-xs text-white/60">{cat.products.length} products</div>
+              <div className="mono text-xs" style={{ color: '#58595B' }}>{cat.products.length} products</div>
               <div className="flex gap-2">
-                <Link href="/rental" className="glass-pill">All Categories</Link>
+                <Link href="/rental" className="filter-pill-light">All Categories</Link>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -109,13 +109,13 @@ export default function CategoryPage({ params }) {
         </section>
 
         {/* Related categories */}
-        <section className="py-12 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+        <section className="py-12 px-6" style={{ background: '#F4F6FA' }}>
           <div className="max-w-[1300px] mx-auto text-center">
-            <h2 className="text-white text-2xl font-bold mb-6">Explore Other Categories</h2>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Explore Other Categories</h2>
             <div className="flex flex-wrap justify-center gap-2">
               {getAllCategorySlugs().filter(s => s !== params.category).map(s => {
                 const c = getCategory(s)
-                return <Link key={s} href={`/rental/${s}`} className="glass-pill">{c.name}</Link>
+                return <Link key={s} href={`/rental/${s}`} className="filter-pill-light">{c.name}</Link>
               })}
             </div>
           </div>

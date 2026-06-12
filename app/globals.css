@@ -96,6 +96,29 @@ body {
   gap: 0.625rem;
 }
 
+/* ===== Rental category sub-page product cards (white, on light-grey body) ===== */
+.rental-product-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(10, 26, 70, 0.12);
+  border: 1px solid rgba(11, 26, 70, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.rental-product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(10, 26, 70, 0.20);
+}
+.rental-spec-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #F4F6FA;
+  color: #0B1A46;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
 /* ===== Cybersecurity Advisory stat cards ===== */
 .cyber-stat-card {
   background: #FFFFFF;
