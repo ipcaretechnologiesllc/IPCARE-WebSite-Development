@@ -1013,6 +1013,60 @@ function BlogTeaser() {
   )
 }
 
+/* ---------------- FAQ ---------------- */
+const FAQS = [
+  {
+    q: 'What does IP Care Technologies do?',
+    a: "IP Care Technologies is an enterprise IT company founded in 2003, providing managed IT services, cybersecurity, ELV & physical security, cloud services (AWS, Azure), event IT infrastructure, and IT equipment rental across the UAE and Canada.",
+  },
+  {
+    q: 'Where does IP Care Technologies operate?',
+    a: 'IP Care Technologies operates from offices in Abu Dhabi, UAE and Toronto, Canada, serving enterprise and government clients across Abu Dhabi, Dubai, Sharjah, Al Ain, and the wider UAE, as well as Canada.',
+  },
+  {
+    q: 'Does IP Care Technologies provide event IT infrastructure?',
+    a: 'Yes. IP Care has delivered high-density WiFi, temporary networks, and on-site IT infrastructure for major events including the FIFA Club World Cup, UFC, NBA Abu Dhabi Games, EuroLeague Final Four, and Coldplay world tour stops.',
+  },
+  {
+    q: 'Can I rent IT equipment from IP Care Technologies?',
+    a: 'Yes. IP Care offers short and long-term rental of laptops, tablets, networking gear, event WiFi equipment, CCTV, printers, servers, and testing equipment, delivered, configured, and collected in the UAE and Canada.',
+  },
+  {
+    q: 'Is IP Care Technologies experienced in cybersecurity compliance?',
+    a: 'Yes. IP Care has 15+ years of dedicated cybersecurity practice, delivering SOC monitoring, Zero Trust architecture, and compliance advisory aligned to NESA, PCI DSS, and ISO 27001.',
+  },
+]
+
+function FAQ() {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  return (
+    <section className="py-24 px-6" style={{ background: '#FFFFFF' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="max-w-[900px] mx-auto">
+        <div className="text-center mb-12 reveal">
+          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>Frequently Asked Questions</h2>
+        </div>
+        <div className="space-y-5 reveal">
+          {FAQS.map((f) => (
+            <div key={f.q} className="p-6 rounded-2xl" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>
+              <h3 className="font-semibold text-lg mb-2" style={{ color: '#0B1A46' }}>{f.q}</h3>
+              <p className="text-sm md:text-base leading-relaxed" style={{ color: '#374151' }}>{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ---------------- Global Offices CTA ---------------- */
 function OfficesCTA() {
   return (
@@ -1065,6 +1119,7 @@ const App = () => {
       <About />
       <Testimonials />
       <BlogTeaser />
+      <FAQ />
       <OfficesCTA />
       <Footer />
     </main>

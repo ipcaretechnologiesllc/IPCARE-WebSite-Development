@@ -66,6 +66,33 @@ export default function ProductDetailPage({ params }) {
     },
   }
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What's included when I rent the ${product.brand} ${product.model}?`,
+        acceptedAnswer: { '@type': 'Answer', text: `Rental of the ${product.brand} ${product.model} includes delivery, setup, and collection across the UAE and Canada, plus standard accessories and configuration to your requirements. Support is available for the duration of the rental period.` },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the minimum rental period?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Daily, weekly, and monthly rates are available, with daily rental as the minimum period. Longer-term rentals receive better rates, as shown in the pricing above.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'How quickly can this be delivered?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Delivery timelines depend on quantity, location, and current stock availability. Contact our team with your dates and location for a confirmed delivery schedule.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is technical support included during the rental period?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. IP Care Technologies provides setup and ongoing technical support for all rental equipment, with replacement options available in case of a fault.' },
+      },
+    ],
+  }
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -80,6 +107,7 @@ export default function ProductDetailPage({ params }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Header />
       <main>

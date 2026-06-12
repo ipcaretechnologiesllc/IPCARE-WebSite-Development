@@ -48,7 +48,7 @@ export default function ArticlePage({ params }) {
     headline: a.title,
     image: [`${a.img}?w=1200&q=85`],
     datePublished: a.date,
-    dateModified: a.date,
+    dateModified: a.updatedDate || a.date,
     author: { '@type': 'Person', name: a.author },
     publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
     description: a.excerpt,
