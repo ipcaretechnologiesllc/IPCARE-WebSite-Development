@@ -24,7 +24,7 @@ function useReveal() {
 }
 
 /* ── Static data ─────────────────────────────────────────────── */
-const featured = getFeaturedProducts(6)
+const featured = getFeaturedProducts(3)
 const bundles  = rentalCategories['bundles'].products.slice(0, 3)
 // All categories except 'bundles' (bundles get their own dedicated section)
 const cats = Object.entries(rentalCategories).filter(([slug]) => slug !== 'bundles')
@@ -33,10 +33,10 @@ const CATEGORY_PHOTOS = {
   'laptops-desktops':  'https://images.unsplash.com/photo-1496181133206-80ce9b88a853',
   'tablets-ipads':     'https://images.unsplash.com/photo-1561154464-82e9adf32764',
   'printers':          'https://images.unsplash.com/photo-1650094980833-7373de26feb6',
-  'event-wifi':        'https://images.unsplash.com/photo-1606904825846-647eb07f5be2',
+  'event-wifi':        '/Rental/rental-event-wifi.webp',
   'networking':        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64',
   'cctv':              'https://images.unsplash.com/photo-1585771724684-38269d6639fd',
-  'testing-equipment': 'https://images.unsplash.com/photo-1581092335878-2d9ff86ca2bf',
+  'testing-equipment': '/Rental/category-testing-equipment.webp',
   'servers':           'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee',
   'macbooks':          'https://images.unsplash.com/photo-1517336714731-489689fd1ca8',
 }
@@ -136,7 +136,7 @@ export default function RentalHubClient() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {cats.map(([slug, c], i) => (
               <Link
                 key={slug}
@@ -147,10 +147,13 @@ export default function RentalHubClient() {
                 {/* Photo — edge-to-edge, zooms on hover */}
                 <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
                   <img
-                    src={`${CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'}?w=600&fm=webp&q=82`}
+                    src={(() => {
+                      const photo = CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'
+                      return photo.startsWith('http') ? `${photo}?w=900&fm=webp&q=82` : photo
+                    })()}
                     alt={CATEGORY_ALT[slug] || `${c.name} rental UAE, IP Care`}
-                    width={600}
-                    height={375}
+                    width={900}
+                    height={563}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
@@ -158,20 +161,20 @@ export default function RentalHubClient() {
                 </div>
 
                 {/* Content area */}
-                <div className="flex flex-col items-center text-center" style={{ padding: '20px 16px 22px' }}>
+                <div className="flex flex-col items-center text-center" style={{ padding: '32px 28px 34px' }}>
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300 group-hover:bg-[#E87722]"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-[#E87722]"
                     style={{ background: 'rgba(232,119,34,0.10)' }}
                   >
                     <Ic
                       name={c.icon}
-                      size={18}
+                      size={22}
                       className="text-[#E87722] group-hover:text-white transition-colors duration-300"
                     />
                   </div>
                   <h3
-                    className="font-bold leading-tight mb-1.5"
-                    style={{ color: '#0B1A46', fontSize: '1.05rem' }}
+                    className="font-bold leading-tight mb-2"
+                    style={{ color: '#0B1A46', fontSize: '1.5rem' }}
                   >
                     {c.name}
                   </h3>
@@ -182,10 +185,10 @@ export default function RentalHubClient() {
                     {c.products.length} Items
                   </p>
                   <div
-                    className="mt-2.5 flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
+                    className="mt-3 flex items-center gap-1 text-sm font-semibold opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
                     style={{ color: '#1E3A8A' }}
                   >
-                    Browse <Icons.ArrowRight size={12}/>
+                    Browse <Icons.ArrowRight size={13}/>
                   </div>
                 </div>
               </Link>
@@ -195,33 +198,34 @@ export default function RentalHubClient() {
       </section>
 
       {/* ── MOST-REQUESTED ITEMS ─────────────────────────────── */}
-      <section className="py-20 md:py-24 px-6" style={{ background: '#FFFFFF' }}>
+      <section className="py-12 md:py-14 px-6" style={{ background: '#FFFFFF' }}>
         <div className="max-w-[1400px] mx-auto">
 
-          <div className="text-center mb-12 reveal">
+          <div className="text-center mb-8 reveal">
             <div className="section-eyebrow">
               Popular Rentals
             </div>
-            <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 className="font-bold text-2xl md:text-3xl" style={{ color: '#0B1A46' }}>
               Most-Requested Items
             </h2>
-            <p className="mt-4 text-base max-w-xl mx-auto" style={{ color: '#4A5568' }}>
+            <p className="mt-2 text-sm max-w-xl mx-auto" style={{ color: '#4A5568' }}>
               In stock and ready to ship across UAE and Canada. Daily, weekly and monthly rates.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {featured.map((p, i) => (
               <LightProductCard
                 key={`${p.categorySlug}/${p.slug}`}
                 product={p}
                 categorySlug={p.categorySlug}
                 delay={i * 60}
+                compact
               />
             ))}
           </div>
 
-          <div className="text-center mt-10 reveal">
+          <div className="text-center mt-8 reveal">
             <Link href="/rental/laptops-desktops" className="btn-primary">
               View Full Catalogue <Icons.ArrowRight size={16}/>
             </Link>
@@ -354,7 +358,11 @@ export default function RentalHubClient() {
    White service-card style, used only on this hub page.
    Does NOT replace the dark ProductCard used on category pages.
 ════════════════════════════════════════════════════════════════ */
-function LightProductCard({ product: p, categorySlug, delay = 0 }) {
+function LightProductCard({ product: p, categorySlug, delay = 0, compact = false }) {
+  const imgHeight = compact ? '140px' : '200px'
+  const bodyPadding = compact ? 'p-3.5' : 'p-5'
+  const specCount = compact ? 2 : 3
+
   return (
     <div
       className="group service-card overflow-hidden flex flex-col reveal"
@@ -364,7 +372,7 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
       <Link
         href={`/rental/${categorySlug}/${p.slug}`}
         className="relative block overflow-hidden"
-        style={{ height: '200px', background: '#F8F9FC' }}
+        style={{ height: imgHeight, background: '#F8F9FC' }}
       >
         <img
           src={p.image.startsWith('http') ? `${p.image}?w=600&fm=webp&q=82` : p.image}
@@ -373,11 +381,11 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
           height={200}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full max-w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className={`absolute inset-0 w-full h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105 ${compact ? 'p-2.5' : 'p-4'}`}
         />
         {/* Brand badge */}
         <div
-          className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded"
+          className="absolute top-2.5 left-2.5 mono text-[11px] uppercase tracking-widest px-2 py-0.5 rounded"
           style={{ background: '#E87722', color: '#ffffff' }}
         >
           {p.brand}
@@ -385,10 +393,10 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
       </Link>
 
       {/* ── Body ── */}
-      <div className="flex-1 flex flex-col p-5">
+      <div className={`flex-1 flex flex-col ${bodyPadding}`}>
         <Link href={`/rental/${categorySlug}/${p.slug}`}>
           <h3
-            className="font-bold text-base md:text-lg leading-snug mb-3 hover:text-[#E87722] transition-colors"
+            className={`font-bold leading-snug hover:text-[#E87722] transition-colors ${compact ? 'text-sm mb-2' : 'text-base md:text-lg mb-3'}`}
             style={{ color: '#0B1A46' }}
           >
             {p.model}
@@ -396,8 +404,8 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
         </Link>
 
         {/* Spec bullets */}
-        <ul className="space-y-1.5 mb-4 flex-1">
-          {p.specs.slice(0, 3).map((s, i) => (
+        <ul className={`space-y-1 flex-1 ${compact ? 'mb-2.5' : 'mb-4'}`}>
+          {p.specs.slice(0, specCount).map((s, i) => (
             <li key={i} className="text-xs flex items-start gap-2" style={{ color: '#4A5568' }}>
               <Icons.Check size={12} className="text-[#E87722] mt-0.5 flex-shrink-0"/>
               {s}
@@ -406,11 +414,11 @@ function LightProductCard({ product: p, categorySlug, delay = 0 }) {
         </ul>
 
         {/* Duration chips */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className={`flex flex-wrap gap-1.5 ${compact ? 'mb-2.5' : 'mb-4'}`}>
           {['daily', 'weekly', 'monthly'].map((d) => (
             <span
               key={d}
-              className="mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded-full"
+              className={`mono uppercase tracking-widest rounded-full ${compact ? 'text-[11px] px-2 py-0.5' : 'text-[13px] px-2.5 py-1'}`}
               style={{ background: '#F4F6FA', color: '#1E3A8A', border: '1px solid #E2E8F0' }}
             >
               {d}
