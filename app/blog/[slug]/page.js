@@ -4,7 +4,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
-import { articles, getArticle, getAllArticleSlugs } from '@/lib/blog-data'
+import { articles, getArticle, getAllArticleSlugs, getAuthor } from '@/lib/blog-data'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -42,6 +42,19 @@ export default function ArticlePage({ params }) {
   const others  = articles.filter(x => x.slug !== params.slug && x.category !== a.category)
   const related = [...sameCat, ...others].slice(0, 3)
 
+  const authorInfo = getAuthor(a.author)
+  // Named experts get Person schema (with jobTitle/worksFor for E-E-A-T); the generic
+  // 'IP Care Team' byline falls back to the Organization as author.
+  const authorSchema = authorInfo
+    ? {
+        '@type': 'Person',
+        name: authorInfo.name,
+        jobTitle: authorInfo.jobTitle,
+        worksFor: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+        ...(authorInfo.url ? { url: authorInfo.url, sameAs: [authorInfo.url] } : {}),
+      }
+    : { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE }
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -49,7 +62,7 @@ export default function ArticlePage({ params }) {
     image: [`${a.img}?w=1200&q=85`],
     datePublished: a.date,
     dateModified: a.updatedDate || a.date,
-    author: { '@type': 'Person', name: a.author },
+    author: authorSchema,
     publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
     description: a.excerpt,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/blog/${params.slug}` },
@@ -163,7 +176,7 @@ export default function ArticlePage({ params }) {
               </div>
               <div>
                 <div className="font-semibold" style={{ color: '#0B1A46' }}>{a.author}</div>
-                <p className="text-xs mt-1" style={{ color: '#6B7280' }}>Senior contributor to the IP Care Knowledge Base.</p>
+                <p className="text-xs mt-1" style={{ color: '#6B7280' }}>{authorInfo?.bio || (authorInfo?.jobTitle ? `${authorInfo.jobTitle}, IP Care Technologies.` : 'Contributor to the IP Care Knowledge Base.')}</p>
               </div>
             </div>
           </div>
