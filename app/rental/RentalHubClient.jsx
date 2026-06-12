@@ -198,17 +198,17 @@ export default function RentalHubClient() {
       </section>
 
       {/* ── MOST-REQUESTED ITEMS ─────────────────────────────── */}
-      <section className="py-12 md:py-14 px-6" style={{ background: '#FFFFFF' }}>
+      <section className="py-12 md:py-14 px-6" style={{ background: '#1E3A8A' }}>
         <div className="max-w-[1400px] mx-auto">
 
           <div className="text-center mb-8 reveal">
             <div className="section-eyebrow">
               Popular Rentals
             </div>
-            <h2 className="font-bold text-2xl md:text-3xl" style={{ color: '#0B1A46' }}>
+            <h2 className="font-bold text-2xl md:text-3xl" style={{ color: '#FFFFFF' }}>
               Most-Requested Items
             </h2>
-            <p className="mt-2 text-sm max-w-xl mx-auto" style={{ color: '#4A5568' }}>
+            <p className="mt-2 text-sm max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.8)' }}>
               In stock and ready to ship across UAE and Canada. Daily, weekly and monthly rates.
             </p>
           </div>
