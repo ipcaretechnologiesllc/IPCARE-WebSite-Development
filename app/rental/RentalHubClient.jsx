@@ -32,7 +32,7 @@ const cats = Object.entries(rentalCategories).filter(([slug]) => slug !== 'bundl
 const CATEGORY_PHOTOS = {
   'laptops-desktops':  'https://images.unsplash.com/photo-1496181133206-80ce9b88a853',
   'tablets-ipads':     'https://images.unsplash.com/photo-1561154464-82e9adf32764',
-  'printers':          'https://images.unsplash.com/photo-1650094980833-7373de26feb6',
+  'printers':          '/Rental/rental-printers.jpg',
   'event-wifi':        '/Rental/rental-event-wifi.webp',
   'networking':        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64',
   'cctv':              'https://images.unsplash.com/photo-1585771724684-38269d6639fd',
@@ -145,7 +145,7 @@ export default function RentalHubClient() {
                 style={{ transitionDelay: `${i * 40}ms` }}
               >
                 {/* Photo — edge-to-edge, zooms on hover */}
-                <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                <div className="w-full overflow-hidden flex items-center justify-center p-4" style={{ aspectRatio: '16/10', background: '#F4F6FA' }}>
                   <img
                     src={(() => {
                       const photo = CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'
@@ -156,7 +156,7 @@ export default function RentalHubClient() {
                     height={563}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full max-w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="w-full h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
 
