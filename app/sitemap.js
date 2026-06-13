@@ -136,9 +136,11 @@ export default function sitemap() {
 
   // Rental — categories + products
   for (const slug of Object.keys(rentalCategories || {})) {
+    if (slug === 'bundles') continue  // TODO: re-enable when /rental/bundles/* pages are built
     entries.push({ url: `${BASE}/rental/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, product } of getAllProductParams() || []) {
+    if (category === 'bundles') continue  // TODO: re-enable when /rental/bundles/* pages are built
     entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
