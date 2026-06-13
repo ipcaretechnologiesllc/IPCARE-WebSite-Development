@@ -250,6 +250,7 @@ const nextConfig = {
       // ─── Rental product 404s (slugs crawled by Google but not in current data) ──
       { source: '/rental/testing-equipment/ekahau-sidekick-2', destination: '/rental/testing-equipment', permanent: true },
       { source: '/rental/testing-equipment/keysight-n9914b',   destination: '/rental/testing-equipment', permanent: true },
+      { source: '/rental/testing-equipment/ixia-perfectstorm-40', destination: '/rental/testing-equipment', permanent: true },
 
       // ─── Legacy WordPress .html pages ────────────────────────────────────────
       // Specific destinations for pages that have a meaningful equivalent.
