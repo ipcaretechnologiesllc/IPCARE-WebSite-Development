@@ -622,9 +622,6 @@ function CyberAdvisory() {
   }, [])
   return (
     <section className="relative py-24 px-6 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle, #E87722 0%, transparent 70%)' }}/>
-      </div>
       <div className="max-w-[1200px] mx-auto relative">
         <div
           id="cyber-grid"
