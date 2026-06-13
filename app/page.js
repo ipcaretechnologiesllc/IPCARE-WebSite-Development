@@ -845,8 +845,8 @@ function About() {
             style={{ borderRadius: '16px', boxShadow: '0 20px 60px rgba(10, 26, 70, 0.15)', aspectRatio: '4 / 5' }}
           >
             <img
-              src="https://images.unsplash.com/photo-1695668548342-c0c1ad479aee?w=900&q=85"
-              alt="Enterprise data center operated by IP Care Technologies"
+              src="/images/about/about-feature.webp"
+              alt="Enterprise IT infrastructure, IP Care Technologies"
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
             />
