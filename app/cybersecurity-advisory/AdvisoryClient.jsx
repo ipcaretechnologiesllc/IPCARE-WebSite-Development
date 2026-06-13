@@ -200,6 +200,19 @@ function Hero() {
                 </div>
               ))}
             </div>
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #E8EDF5' }}>
+              <a
+                href="https://www.linkedin.com/in/attiquebhatti/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  color: '#0A66C2', fontSize: '13px', fontWeight: 600, textDecoration: 'none',
+                }}
+              >
+                <Icons.Linkedin size={15} /> LinkedIn Profile
+              </a>
+            </div>
           </div>
 
           {/* Tanveer Ahmed */}

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Star, Handshake, ShieldCheck, Lightbulb, Users, Globe2 } from 'lucide-react'
+import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Star, Handshake, ShieldCheck, Lightbulb, Users, Globe2, Linkedin } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
 // Tiny inlined blur-up placeholder (LQIP) of about-bg.webp — paints on the first
@@ -658,6 +658,14 @@ function Team() {
         { n: 'Prisma', l: 'Access SME' },
       ],
     },
+    {
+      initials: 'WA',
+      name: 'Waseem Abbas',
+      role: 'Network Security Consultant',
+      certs: 'Fortinet Certified Fundamentals · CompTIA Security+ · PA-NGFW-Engineer',
+      bio: 'Network security consultant with hands-on certifications across Fortinet, Palo Alto Networks, and CompTIA Security+, supporting firewall engineering and security operations.',
+      linkedin: 'https://www.linkedin.com/in/waseem-a-0a0928172/',
+    },
   ]
 
   const cardBase = {
@@ -732,17 +740,35 @@ function Team() {
               </p>
 
               {/* Mini stats */}
-              <div style={{
-                display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px',
-                borderTop: '1px solid #E8EDF5', paddingTop: '20px',
-              }}>
-                {m.stats.map((s) => (
-                  <div key={s.l}>
-                    <div style={{ color: '#0B1A46', fontWeight: 700, fontSize: '15px' }}>{s.n}</div>
-                    <div style={{ color: '#4B5563', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '3px' }}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
+              {m.stats && (
+                <div style={{
+                  display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px',
+                  borderTop: '1px solid #E8EDF5', paddingTop: '20px',
+                }}>
+                  {m.stats.map((s) => (
+                    <div key={s.l}>
+                      <div style={{ color: '#0B1A46', fontWeight: 700, fontSize: '15px' }}>{s.n}</div>
+                      <div style={{ color: '#4B5563', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '3px' }}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {m.linkedin && (
+                <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #E8EDF5' }}>
+                  <a
+                    href={m.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '6px',
+                      color: '#0A66C2', fontSize: '13px', fontWeight: 600, textDecoration: 'none',
+                    }}
+                  >
+                    <Linkedin size={15} /> LinkedIn Profile
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>

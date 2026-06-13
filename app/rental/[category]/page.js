@@ -97,7 +97,7 @@ export default function CategoryPage({ params }) {
             <div className="flex items-center justify-between mb-8">
               <div className="mono text-xs" style={{ color: '#58595B' }}>{cat.products.length} products</div>
               <div className="flex gap-2">
-                <Link href="/rental" className="filter-pill-light">All Categories</Link>
+                <Link href="/rental" className="filter-pill-light" style={{ background: '#E87722', borderColor: '#E87722', color: '#ffffff' }}>All Categories</Link>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
