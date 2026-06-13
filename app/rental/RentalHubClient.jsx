@@ -37,7 +37,7 @@ const CATEGORY_PHOTOS = {
   'networking':        '/Rental/category-networking-equipment.webp',
   'cctv':              '/Rental/category-cctv-security.webp',
   'testing-equipment': '/Rental/category-testing-equipment.webp',
-  'servers':           'https://images.unsplash.com/photo-1695668548342-c0c1ad479aee',
+  'servers':           '/Rental/servers-data.webp',
   'macbooks':          'https://images.unsplash.com/photo-1517336714731-489689fd1ca8',
 }
 
@@ -49,7 +49,7 @@ const CATEGORY_ALT = {
   'networking':        'Networking equipment rental UAE, IP Care Technologies',
   'cctv':              'CCTV and security camera rental UAE, IP Care Technologies',
   'testing-equipment': 'Cable and fibre testing equipment rental UAE, IP Care Technologies',
-  'servers':           'Server rental UAE, IP Care Technologies',
+  'servers':           'Servers and data equipment rental',
   'macbooks':          'MacBook and Mac rental UAE, IP Care Technologies',
 }
 
