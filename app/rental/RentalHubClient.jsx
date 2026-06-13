@@ -141,7 +141,7 @@ export default function RentalHubClient() {
               <Link
                 key={slug}
                 href={`/rental/${slug}`}
-                className="group service-card overflow-hidden flex flex-col reveal"
+                className="group service-card rental-category-card overflow-hidden flex flex-col reveal"
                 style={{ transitionDelay: `${i * 40}ms` }}
               >
                 {/* Photo — edge-to-edge, zooms on hover */}
@@ -161,9 +161,9 @@ export default function RentalHubClient() {
                 </div>
 
                 {/* Content area */}
-                <div className="flex flex-col items-center text-center" style={{ padding: '32px 28px 34px' }}>
+                <div className="flex flex-col items-center text-center" style={{ padding: '20px 24px 24px' }}>
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-[#E87722]"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300 group-hover:bg-[#E87722]"
                     style={{ background: 'rgba(232,119,34,0.10)' }}
                   >
                     <Ic
@@ -178,12 +178,9 @@ export default function RentalHubClient() {
                   >
                     {c.name}
                   </h3>
-                  <p
-                    className="mono text-[13px] uppercase"
-                    style={{ color: '#E87722', letterSpacing: '1px' }}
-                  >
+                  <span className="mono uppercase rental-category-card__pill">
                     {c.products.length} Items
-                  </p>
+                  </span>
                   <div
                     className="mt-3 flex items-center gap-1 text-sm font-semibold opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
                     style={{ color: '#1E3A8A' }}
