@@ -643,6 +643,7 @@ function Team() {
         { n: '100K+', l: 'Users Protected' },
         { n: '50+',   l: 'Engagements' },
       ],
+      linkedin: 'https://www.linkedin.com/in/attiquebhatti/',
     },
     {
       initials: 'TA',
@@ -657,6 +658,7 @@ function Team() {
         { n: 'CCIE',   l: 'Certified' },
         { n: 'Prisma', l: 'Access SME' },
       ],
+      linkedin: 'https://www.linkedin.com/in/tanveer-bhatti-sase-ztna-casb-dlp-swg-rbi-pab-79a01718/',
     },
     {
       initials: 'WA',
