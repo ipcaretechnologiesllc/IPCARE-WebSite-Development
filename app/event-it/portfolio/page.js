@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { preload } from 'react-dom'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
@@ -8,6 +9,7 @@ import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import * as Icons from 'lucide-react'
 
 export default function EventPortfolioPage() {
+  preload('/images/event-it/portfolio-hero.webp', { as: 'image', fetchPriority: 'high' })
   const [activeFilter, setActiveFilter] = useState('All')
   const [videoModal, setVideoModal] = useState(null)
 

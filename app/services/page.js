@@ -1,3 +1,4 @@
+import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicesClient from './ServicesClient'
@@ -100,6 +101,7 @@ export const metadata = {
 }
 
 export default function ServicesHub() {
+  preload('/images/pages/services-bg.webp', { as: 'image', fetchPriority: 'high' })
   return (
     <>
       <script

@@ -1,3 +1,4 @@
+import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import EventITClient from './EventITClient'
@@ -18,6 +19,7 @@ export const metadata = {
 }
 
 export default function EventITPage() {
+  preload('/images/event-it/event-it-hero.webp', { as: 'image', fetchPriority: 'high' })
   return (
     <>
       <Header />

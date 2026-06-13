@@ -1,3 +1,4 @@
+import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import WhatsAppBubble from '@/components/site/WhatsAppBubble'
@@ -67,6 +68,7 @@ const localBusiness = [
 ]
 
 export default function ContactPage() {
+  preload('/images/pages/contact-bg.webp', { as: 'image', fetchPriority: 'high' })
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}/>
