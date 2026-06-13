@@ -835,8 +835,9 @@ function About() {
               </div>
             ))}
           </div>
-          <div className="mt-8">
+          <div className="flex flex-wrap gap-4 mt-6">
             <a href="/contact" className="btn-primary">Talk to Our Team <ArrowRight size={16}/></a>
+            <Link href="/about" className="btn-ghost-light">Our Story <ArrowRight size={16}/></Link>
           </div>
         </div>
         <div className="reveal">
