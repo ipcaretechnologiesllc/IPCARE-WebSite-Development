@@ -5,6 +5,10 @@ import Link from 'next/link'
 import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Star, Handshake, ShieldCheck, Lightbulb, Users, Globe2 } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 
+// Tiny inlined blur-up placeholder (LQIP) of about-bg.webp — paints on the first
+// frame with zero network so the bright hero never flashes navy before it decodes.
+const HERO_LQIP = 'data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAABwBACdASogAA4APu1iqk2ppaQiMAgBMB2JagCdMoAKOuJtVNgUF2LICtawoAD+xgfBlbtvyMLS300yPy8rUvVcdcNh7749xkn1xC7g1deb/gzfrqM6NMS6DPXHWW/P7Kg9HTejR2iDiUSceWpCt9nETzawlVDYunAnYshbZ1gAAA=='
+
 /* ── IntersectionObserver reveal ── */
 function useReveal() {
   useEffect(() => {
@@ -43,7 +47,10 @@ function Eyebrow({ children }) {
 function Hero() {
   return (
     <section className="hero" style={{
-      background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)',
+      backgroundImage: `url("${HERO_LQIP}"), linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)`,
+      backgroundSize: 'cover, cover',
+      backgroundPosition: 'center, center',
+      backgroundRepeat: 'no-repeat, no-repeat',
       borderBottom: '3px solid #E87722',
       position: 'relative',
       overflow: 'hidden',

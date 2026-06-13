@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { preload } from 'react-dom'
 import { notFound } from 'next/navigation'
 import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
@@ -36,6 +37,9 @@ export async function generateMetadata({ params }) {
 export default function ArticlePage({ params }) {
   const a = getArticle(params.slug)
   if (!a) notFound()
+
+  // Preload the article hero (the LCP element) so it doesn't pop in after first paint.
+  preload(`${a.img}?w=1200&fm=webp&q=82`, { as: 'image', fetchPriority: 'high' })
 
   // Same-category articles first, then fill from others
   const sameCat = articles.filter(x => x.slug !== params.slug && x.category === a.category)
@@ -117,7 +121,7 @@ export default function ArticlePage({ params }) {
         <section className="px-6 py-12" style={{ background: '#fff' }}>
           <div className="max-w-[720px] mx-auto">
             {/* Hero image — LCP element; eager + preload hint */}
-            <div className="relative rounded-2xl overflow-hidden mb-10" style={{ aspectRatio: '16/9' }}>
+            <div className="relative rounded-2xl overflow-hidden mb-10" style={{ aspectRatio: '16/9', background: 'linear-gradient(135deg, #E1E8F0 0%, #F4F6FA 100%)' }}>
               <img
                 src={`${a.img}?w=1200&fm=webp&q=82`}
                 alt={a.title}

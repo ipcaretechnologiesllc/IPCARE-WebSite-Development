@@ -7,6 +7,10 @@ import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client
 
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
 
+// Tiny inlined blur-up placeholder (LQIP) of contact-bg.webp — paints on the first
+// frame with zero network so the bright hero never flashes navy before it decodes.
+const HERO_LQIP = 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAwBQCdASogABIAPu1krFAppSQisBgIATAdiUATpmX4LytDOyW1mAIc2PgiHgdXN+FhgADb++SFmi7ygboDpD8IUdhOaQsj34SBKik80g3oQS26+kXeR1rz32xmq6L9eUEPQ3qvc/YBd8XRGrea95MxkOcKyqQsj+OJ+CewJKl+inEhTrtSZ+6+1ifHc+SiIwY8+MaKbqZaGNDWy3bmFzQA'
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Form pipeline (Route A → /api/contact → MongoDB leads → Resend) is untouched.
 // Only the JSX layout + visual styles have changed below.
@@ -48,7 +52,7 @@ export default function ContactClient() {
   return (
     <main>
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
+      <section style={{ backgroundImage: `url("${HERO_LQIP}"), linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)`, backgroundSize: 'cover, cover', backgroundPosition: 'center, center', backgroundRepeat: 'no-repeat, no-repeat', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
         {/* Background image */}
         <img
           src="/images/pages/contact-bg.webp"
