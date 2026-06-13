@@ -279,6 +279,14 @@ const nextConfig = {
       { source: '/wp-login.php',   destination: '/',        permanent: true },
       { source: '/wp-admin',       destination: '/',        permanent: true },
       { source: '/wp-admin/:path*',destination: '/',        permanent: true },
+
+      // Wrong URL prefix — Google indexed these with /services/ prefix
+      { source: '/services/event-it/temporary-data-centres', destination: '/event-it/temporary-data-centres', permanent: true },
+      { source: '/services/cybersecurity-advisory', destination: '/cybersecurity-advisory', permanent: true },
+
+      // Dead event slugs — redirect to portfolio
+      { source: '/event-it/ufc-fight-night', destination: '/event-it/portfolio', permanent: true },
+      { source: '/event-it/corporate-summit', destination: '/event-it/portfolio', permanent: true },
     ];
   },
 };
