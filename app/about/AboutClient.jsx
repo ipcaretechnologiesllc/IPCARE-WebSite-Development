@@ -174,9 +174,9 @@ function Story() {
             aspectRatio: '4/5',
           }}>
             <img
-              src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=900&q=85"
-              alt="IP Care Technologies Abu Dhabi headquarters"
-              loading="lazy"
+              src="/images/about/about-promise.webp"
+              alt="IP Care Technologies enterprise IT operations"
+              loading="eager"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
