@@ -1,7 +1,6 @@
 import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
-import WhatsAppBubble from '@/components/site/WhatsAppBubble'
 import ContactClient from './ContactClient'
 
 export const metadata = {
@@ -77,7 +76,6 @@ export default function ContactPage() {
       ))}
       <Header />
       <ContactClient />
-      <WhatsAppBubble />
       <Footer />
     </>
   )
