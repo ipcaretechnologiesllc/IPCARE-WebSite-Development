@@ -67,7 +67,7 @@ export async function generateMetadata() {
     category: 'technology',
     creator: 'IP Care Technologies',
     publisher: 'IP Care Technologies',
-    alternates: { canonical: canonicalBase + '/' },
+    alternates: { canonical: '/' },
     openGraph: {
       title: SITE_TITLE,
       description: SITE_DESC,

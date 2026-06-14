@@ -18,6 +18,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Healthcare IT',
+        url: `${BASE}/industries/healthcare`,
         description: 'Hospital and clinic IT aligned with UAE healthcare data regulations, national health information exchange integration, medical device security, and 24/7 clinical support across the UAE.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
@@ -32,6 +33,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Banking & Financial Services IT',
+        url: `${BASE}/industries/banking`,
         description: 'Compliance-aligned cloud and managed SOC, financial-services regulator cyber risk management, payment systems integration for UAE-licensed banks and financial services firms.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
@@ -46,6 +48,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Government & Federal IT',
+        url: `${BASE}/industries/government`,
         description: 'Federal-grade Azure UAE North landing zones, NESA/UAE IAS compliance programmes, and classification-aware operations for UAE federal entities and government-adjacent organisations.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
@@ -59,6 +62,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Event Management IT',
+        url: `${BASE}/event-it`,
         description: 'Temporary high-density networks, on-site connectivity, and command-centre support for large-scale events across the UAE, sports finals, concerts, and national-scale events.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
@@ -72,6 +76,7 @@ const industrySchema = {
       item: {
         '@type': 'Service',
         name: 'Construction & Field Services IT',
+        url: `${BASE}/services/infrastructure`,
         description: 'Rugged connectivity across remote sites, mobile workforce management, and field infrastructure for construction and field operations in the UAE and Canada.',
         provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
         areaServed: [
