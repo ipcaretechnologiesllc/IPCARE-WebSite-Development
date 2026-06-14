@@ -38,7 +38,7 @@ function Hero() {
         minHeight: '85vh',
       }}
     >
-      {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
+      {/* Hero photo - subject RIGHT, dark zone LEFT carries H1 */}
       <img
         src="/images/event-it/event-it-hero.webp"
         alt="Event IT infrastructure UAE"
@@ -47,7 +47,7 @@ function Hero() {
         decoding="async"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right', zIndex: 0 }}
       />
-      {/* Navy radial scrim — weighted left where the H1 sits, clear over the rest of the image */}
+      {/* Navy radial scrim - weighted left where the H1 sits, clear over the rest of the image */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 90% at 20% 50%, rgba(11,26,70,0.62) 0%, rgba(11,26,70,0.30) 55%, rgba(11,26,70,0.15) 100%)', zIndex: 10 }} aria-hidden="true" />
       {/* Grid texture */}
       <div className="absolute inset-0 premium-grid pointer-events-none" style={{ zIndex: 11 }} />
@@ -127,7 +127,7 @@ function EventsPortfolio() {
           </p>
         </div>
 
-        {/* Filter tabs — All Events / Sports / Concerts / National */}
+        {/* Filter tabs - All Events / Sports / Concerts / National */}
         <div className="flex justify-center gap-2.5 mb-10 flex-wrap reveal">
           {tabs.map((t) => (
             <button
@@ -140,7 +140,7 @@ function EventsPortfolio() {
           ))}
         </div>
 
-        {/* Cards — white-card style (matches Portfolio page) */}
+        {/* Cards - white-card style (matches Portfolio page) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {filtered.map((ev, i) => (
             <Link
@@ -285,7 +285,7 @@ function HowItWorks() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-          {/* Connecting line — desktop only */}
+          {/* Connecting line - desktop only */}
           <div
             className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 pointer-events-none"
             style={{

@@ -9,14 +9,14 @@ export async function generateStaticParams() {
 }
 
 // Any slug not returned by generateStaticParams returns a 404 at the framework
-// level — no page code runs, no risk of a 5xx from an unrecognised slug.
+// level - no page code runs, no risk of a 5xx from an unrecognised slug.
 export const dynamicParams = false
 
 export async function generateMetadata({ params }) {
   const sub = getEventSubpage(params.slug)
   if (!sub) return {}
 
-  // Pull the event's own hero image for the og:image — the `events` array
+  // Pull the event's own hero image for the og:image - the `events` array
   // (already imported below for the page component) holds per-event img paths.
   // Fall back to the site default if the slug is a service sub-page (event-wifi etc.)
   // that has no matching entry in the events portfolio array.
@@ -49,7 +49,7 @@ export default function EventSubPage({ params }) {
 
   // Look up the matching event in the events array so we can render its hero
   // image alongside the case study content. Service sub-pages (event-wifi,
-  // temporary-data-centres, event-cctv) will not match — that's expected.
+  // temporary-data-centres, event-cctv) will not match - that's expected.
   const event = (events || []).find((e) => e.slug === params.slug)
 
   // Related = other event services

@@ -56,7 +56,7 @@ export default function EventPortfolioPage() {
 
         {/* Hero */}
         <section className="relative py-20 md:py-28 px-6 overflow-hidden" style={{ background: '#0B1A46' }}>
-          {/* Hero photo — full-bleed, edge to edge */}
+          {/* Hero photo - full-bleed, edge to edge */}
           <img
             src="/images/event-it/portfolio-hero.webp"
             alt="Event IT portfolio Abu Dhabi"
@@ -65,7 +65,7 @@ export default function EventPortfolioPage() {
             decoding="async"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
           />
-          {/* Left-to-right gradient scrim — text legible on left, arena visible on right */}
+          {/* Left-to-right gradient scrim - text legible on left, arena visible on right */}
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(11,26,70,0.75) 0%, rgba(11,26,70,0.45) 45%, rgba(11,26,70,0.10) 100%)', zIndex: 10 }} aria-hidden="true" />
           {/* Orange glow */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ zIndex: 11 }}>
