@@ -55,6 +55,7 @@ export default function CategoryPage({ params }) {
         url: `${BASE}/rental/${params.category}/${p.slug}`,
         offers: {
           '@type': 'AggregateOffer',
+          businessFunction: 'https://schema.org/LeaseOut',
           priceCurrency: 'AED',
           lowPrice: p.rates.daily,
           highPrice: p.rates.monthly,

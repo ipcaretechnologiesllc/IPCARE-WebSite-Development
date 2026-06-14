@@ -32,7 +32,7 @@ const jsonLd = {
       url: 'https://www.ipcare.ae/event-it',
       provider: {
         '@type': 'LocalBusiness',
-        name: 'IP Care Technologies LLC',
+        name: 'IP Care Technologies L.L.C.',
         url: 'https://www.ipcare.ae',
         telephone: '+971506828290',
         email: 'info@ipcare.ae',
@@ -91,11 +91,7 @@ const jsonLd = {
               ? `https://www.ipcare.ae${ev.img}`
               : ev.img
             : `https://www.ipcare.ae/ipcare-logo.png`,
-          organizer: {
-            '@type': 'Organization',
-            name: 'IP Care Technologies LLC',
-            url: 'https://www.ipcare.ae',
-          },
+          organizer: { '@id': 'https://www.ipcare.ae#org' },
           url: `https://www.ipcare.ae/event-it/${ev.slug}`,
         },
       })),

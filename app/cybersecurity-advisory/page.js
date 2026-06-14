@@ -31,11 +31,7 @@ const advisorySchema = {
   '@type': 'Service',
   name: 'The Cyber Adviser: Cybersecurity Advisory',
   description: 'Enterprise cybersecurity advisory: Zero Trust architecture, SASE transformation, cloud security, executive advisory and security automation.',
-  provider: {
-    '@type': 'Organization',
-    name: 'IP Care Technologies LLC',
-    url: BASE,
-  },
+  provider: { '@id': 'https://www.ipcare.ae#org' },
   areaServed: [
     { '@type': 'Country', name: 'United Arab Emirates' },
     { '@type': 'Country', name: 'Canada' },

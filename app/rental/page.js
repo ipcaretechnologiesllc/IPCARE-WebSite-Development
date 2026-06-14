@@ -27,13 +27,7 @@ const jsonLd = {
       description:
         'Short-term and long-term IT equipment rental in UAE and Canada, laptops, event WiFi, servers, CCTV, networking gear and bundle packages, with delivery, setup and on-site engineers.',
       url: 'https://www.ipcare.ae/rental',
-      provider: {
-        '@type': 'Organization',
-        name: 'IP Care Technologies LLC',
-        url: 'https://www.ipcare.ae',
-        telephone: '+97126766935',
-        email: 'info@ipcare.ae',
-      },
+      provider: { '@id': 'https://www.ipcare.ae#org' },
       areaServed: [
         { '@type': 'Country', name: 'United Arab Emirates' },
         { '@type': 'Country', name: 'Canada' },
@@ -41,6 +35,7 @@ const jsonLd = {
       serviceType: 'IT Equipment Rental',
       offers: {
         '@type': 'AggregateOffer',
+        businessFunction: 'https://schema.org/LeaseOut',
         priceCurrency: 'AED',
         availability: 'https://schema.org/InStock',
       },

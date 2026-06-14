@@ -46,6 +46,7 @@ export default function ProductDetailPage({ params }) {
     url: productUrl,
     offers: {
       '@type': 'AggregateOffer',
+      businessFunction: 'https://schema.org/LeaseOut',
       priceCurrency: 'AED',
       lowPrice: product.rates.daily,
       highPrice: product.rates.monthly,

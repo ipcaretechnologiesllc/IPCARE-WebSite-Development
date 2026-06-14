@@ -18,7 +18,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'IT Consulting',
         description: 'Strategy, assessments, and digital transformation for enterprise clients across UAE and Canada.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -27,7 +27,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'Infrastructure Services',
         description: 'Data centre design, virtualization, hyper-converged infrastructure, and hardware procurement.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -36,7 +36,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'ELV & Physical Security',
         description: 'CCTV, access control, structured cabling, gate barriers, public address, and intercom systems.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -45,7 +45,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'Managed IT Services',
         description: '24/7 monitoring, SLA-backed support, network management, and server operations.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -54,7 +54,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'Cloud Services',
         description: 'Cloud migration, Microsoft 365, AWS, Azure, and backup and disaster recovery.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -63,7 +63,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'Cybersecurity Services',
         description: 'SOC, Zero Trust architecture, compliance, endpoint protection, and privileged access management.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
     {
@@ -72,7 +72,7 @@ const serviceSchema = {
         '@type': 'Service',
         name: 'Email Solutions',
         description: 'Google Workspace, Microsoft 365, professional email hosting, and hybrid email deployments.',
-        provider: { '@type': 'Organization', name: 'IP Care Technologies LLC' },
+        provider: { '@id': 'https://www.ipcare.ae#org' },
       },
     },
   ],
