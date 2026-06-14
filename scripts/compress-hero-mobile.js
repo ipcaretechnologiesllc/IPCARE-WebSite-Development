@@ -20,11 +20,11 @@ async function run() {
   for (const f of files) {
     const src = path.join(rawDir, f)
     const dest = path.join(dir, f)
-    let quality = 80
-    let buf = await sharp(src).resize(1080, 1920, { fit: 'inside', withoutEnlargement: true }).webp({ quality }).toBuffer()
-    while (buf.length >= 180 * 1024 && quality > 40) {
+    let quality = 75
+    let buf = await sharp(src).resize(800, 1422, { fit: 'inside', withoutEnlargement: true }).webp({ quality }).toBuffer()
+    while (buf.length >= 60 * 1024 && quality > 35) {
       quality -= 10
-      buf = await sharp(src).resize(1080, 1920, { fit: 'inside', withoutEnlargement: true }).webp({ quality }).toBuffer()
+      buf = await sharp(src).resize(800, 1422, { fit: 'inside', withoutEnlargement: true }).webp({ quality }).toBuffer()
     }
     fs.writeFileSync(dest, buf)
     const meta = await sharp(buf).metadata()

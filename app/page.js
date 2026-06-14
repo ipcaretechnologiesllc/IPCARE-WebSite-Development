@@ -245,24 +245,29 @@ function HeroCarousel() {
             style={{ width: '100%', height: '100%', maxWidth: '100%' }}
           />
         ) : (
-          HERO_SLIDES.map((slide, i) => (
-            <img
-              key={slide.id}
-              src={slide.mobileBg}
-              alt=""
-              aria-hidden="true"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchPriority={i === 0 ? 'high' : 'auto'}
-              className="absolute inset-0 object-cover"
-              style={{
-                width: '100%',
-                height: '100%',
-                maxWidth: '100%',
-                opacity: i === current ? 1 : 0,
-                transition: 'opacity 0.7s ease-in-out',
-              }}
-            />
-          ))
+          HERO_SLIDES.map((slide, i) => {
+            const len = HERO_SLIDES.length
+            const isAdjacent = i === current || i === (current + 1) % len || i === (current - 1 + len) % len
+            if (!isAdjacent) return null
+            return (
+              <img
+                key={slide.id}
+                src={slide.mobileBg}
+                alt=""
+                aria-hidden="true"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                className="absolute inset-0 object-cover"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: '100%',
+                  opacity: i === current ? 1 : 0,
+                  transition: 'opacity 0.7s ease-in-out',
+                }}
+              />
+            )
+          })
         )}
       </div>
 
