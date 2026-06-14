@@ -22,7 +22,7 @@ function useReveal() {
           if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) }
         })
       },
-      { threshold: 0.10 }
+      { threshold: 0, rootMargin: '0px 0px -10% 0px' }
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
