@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import * as Icons from 'lucide-react'
 import CTAPhoneButtons from './CTAPhoneButtons'
+import CertificationsBand from './CertificationsBand'
 
 /* ── Icon helper ─────────────────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => {
@@ -562,6 +563,11 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           </div>
         </section>
       )}
+
+      {/* ──────────────────────────────────────────────────────────────────
+          7.5. CERTIFICATIONS & COMPLIANCE
+      ────────────────────────────────────────────────────────────────── */}
+      <CertificationsBand />
 
       {/* ──────────────────────────────────────────────────────────────────
           8. RELATED SERVICES, white, service-card style

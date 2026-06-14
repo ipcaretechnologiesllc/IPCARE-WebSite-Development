@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import CertificationsBand from '@/components/site/CertificationsBand'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { articles } from '@/lib/blog-data'
 
@@ -1134,6 +1135,7 @@ const App = () => {
       <HeroCarousel />
       <TrustMarquee />
       <Stats />
+      <CertificationsBand />
       <Services />
       <CyberAdvisory />
       <RentalTeaser />
