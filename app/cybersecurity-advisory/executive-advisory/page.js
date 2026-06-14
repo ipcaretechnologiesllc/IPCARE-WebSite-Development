@@ -1,6 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
+import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
 export const metadata = {
   title: 'Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies',
@@ -106,7 +107,7 @@ export default function ExecutiveAdvisoryPage() {
       <main>
         <ServicePageTemplate
           data={pageData}
-          related={[]}
+          related={advisoryServices.filter((s) => s.slug !== 'executive-advisory').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
           breadcrumb={breadcrumb}
         />
       </main>

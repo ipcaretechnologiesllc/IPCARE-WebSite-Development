@@ -4,6 +4,7 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
 export const metadata = {
   title: 'Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies',
@@ -109,7 +110,7 @@ export default function ZeroTrustPage() {
       <main>
         <ServicePageTemplate
           data={pageData}
-          related={[]}
+          related={advisoryServices.filter((s) => s.slug !== 'zero-trust').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
           breadcrumb={breadcrumb}
         />
       </main>
