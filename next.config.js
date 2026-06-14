@@ -229,12 +229,10 @@ const nextConfig = {
       { source: '/event-it/abu-dhabi-pedal-master', destination: '/event-it/abu-dhabi-padel-master', permanent: true },
 
       // Event slugs that exist in the portfolio data but have no dedicated subpage.
-      // The two National Day editions consolidate into one page; USA Basketball and Eid Al Fitr
-      // route to the portfolio. Redirects catch any external/cached links or old GSC-indexed URLs.
+      // The two National Day editions consolidate into one page. Redirects catch
+      // any external/cached links or old GSC-indexed URLs.
       { source: '/event-it/uae-national-day-48th',    destination: '/event-it/uae-national-day', permanent: true },
       { source: '/event-it/uae-national-day-49th',    destination: '/event-it/uae-national-day', permanent: true },
-      { source: '/event-it/usa-basketball-2024',      destination: '/event-it/portfolio',         permanent: true },
-      { source: '/event-it/eid-al-fitr-concert-2023', destination: '/event-it/portfolio',         permanent: true },
       { source: '/event-it/product-launch',            destination: '/event-it/portfolio',          permanent: true },
       { source: '/event-it/nba-global-games',         destination: '/event-it/nba-abu-dhabi-games', permanent: true },
 
