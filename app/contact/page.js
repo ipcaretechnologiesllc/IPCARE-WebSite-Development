@@ -20,60 +20,11 @@ const breadcrumbSchema = {
   ],
 }
 
-const localBusiness = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'IP Care Technologies: Abu Dhabi',
-    '@id': `${BASE}/#abu-dhabi`,
-    url: BASE,
-    telephone: '+971-2-676-6935',
-    email: 'info@ipcare.ae',
-    image: `${BASE}/ipcare-logo.png`,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Salam Street',
-      postOfficeBoxNumber: '53209',
-      addressLocality: 'Abu Dhabi',
-      addressCountry: 'AE',
-    },
-    geo: { '@type': 'GeoCoordinates', latitude: 24.4947355, longitude: 54.3732241 },
-    openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
-    ],
-    openingHours: 'Mo-Fr 09:00-18:00',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'IP Care Technologies: Toronto',
-    '@id': `${BASE}/#toronto`,
-    url: 'https://www.ipcare.ca',
-    telephone: '+1-416-786-0782',
-    email: 'info@ipcare.ca',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '1 Concorde Gate',
-      addressLocality: 'North York',
-      addressRegion: 'ON',
-      addressCountry: 'CA',
-    },
-    geo: { '@type': 'GeoCoordinates', latitude: 43.5019444, longitude: -79.8344167 },
-    openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
-    ],
-    openingHours: 'Mo-Fr 09:00-18:00',
-  },
-]
-
 export default function ContactPage() {
   preload('/images/pages/contact-bg.webp', { as: 'image', fetchPriority: 'high' })
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}/>
-      {localBusiness.map((lb, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(lb) }}/>
-      ))}
       <Header />
       <ContactClient />
       <Footer />

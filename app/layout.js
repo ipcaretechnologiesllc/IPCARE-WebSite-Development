@@ -133,7 +133,7 @@ export default function RootLayout({ children }) {
     description: 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.',
     contactPoint: [
       { '@type': 'ContactPoint', telephone: '+971-2-676-6935', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'AE', availableLanguage: ['English','Arabic'] },
-      { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'CA', availableLanguage: 'English' },
+      { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ca', areaServed: 'CA', availableLanguage: 'English' },
     ],
     address: [
       { '@type': 'PostalAddress', streetAddress: 'Salam Street', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
@@ -152,7 +152,7 @@ export default function RootLayout({ children }) {
   const localBusinessAbuDhabi = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    '@id': `${BRAND_URL}#abu-dhabi`,
+    '@id': `${BRAND_URL}/#abu-dhabi`,
     name: 'IP Care Technologies: Abu Dhabi',
     parentOrganization: { '@id': `${BRAND_URL}#org` },
     image: `${BRAND_URL}/ipcare-logo.png`,
@@ -168,7 +168,7 @@ export default function RootLayout({ children }) {
       addressLocality: 'Abu Dhabi',
       addressCountry: 'AE',
     },
-    geo: { '@type': 'GeoCoordinates', latitude: 24.4764, longitude: 54.3705 },
+    geo: { '@type': 'GeoCoordinates', latitude: 24.4947355, longitude: 54.3732241 },
     areaServed: [
       { '@type': 'City', name: 'Abu Dhabi' },
       { '@type': 'City', name: 'Dubai' },
@@ -178,7 +178,7 @@ export default function RootLayout({ children }) {
     ],
     knowsAbout: ['Managed IT Services', 'Cybersecurity', 'ELV & Physical Security', 'Cloud Services', 'Event IT Infrastructure', 'IT Equipment Rental', 'NESA Compliance', 'ISO 27001'],
     openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
     sameAs: [
       'https://www.facebook.com/ipcaretech',
@@ -190,14 +190,14 @@ export default function RootLayout({ children }) {
   const localBusinessToronto = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    '@id': 'https://ipcare.ca#toronto',
+    '@id': 'https://ipcare.ca/#toronto',
     name: 'IP Care Technologies: Toronto',
     parentOrganization: { '@id': `${BRAND_URL}#org` },
     image: `${BRAND_URL}/ipcare-logo.png`,
     logo: `${BRAND_URL}/ipcare-logo.png`,
     url: 'https://ipcare.ca',
     telephone: '+1-416-786-0782',
-    email: 'info@ipcare.ae',
+    email: 'info@ipcare.ca',
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
@@ -206,7 +206,7 @@ export default function RootLayout({ children }) {
       addressRegion: 'ON',
       addressCountry: 'CA',
     },
-    geo: { '@type': 'GeoCoordinates', latitude: 43.7299, longitude: -79.3309 },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.5019444, longitude: -79.8344167 },
     areaServed: [
       { '@type': 'City', name: 'Toronto' },
       { '@type': 'City', name: 'Mississauga' },
@@ -216,7 +216,7 @@ export default function RootLayout({ children }) {
     ],
     knowsAbout: ['Managed IT Services', 'Cybersecurity Advisory', 'Cloud Services', 'IT Consulting', 'Microsoft 365', 'Zero Trust'],
     openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
     sameAs: [
       'https://www.facebook.com/ipcaretech',
