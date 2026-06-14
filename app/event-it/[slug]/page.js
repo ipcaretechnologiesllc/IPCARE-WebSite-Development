@@ -85,11 +85,40 @@ export default function EventSubPage({ params }) {
     areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
   }
 
+  // Case-study sub-pages (those with a matching `events` portfolio entry) get an
+  // Article schema with `about: Event`, surfacing the delivery's dates, venue and
+  // organizer for AI/LLM citation, without claiming an upcoming-event rich result.
+  const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
+  const imgSrc = event?.img
+    ? (event.img.startsWith('http') ? event.img : `${BASE}${event.img}`)
+    : `${BASE}/opengraph-image.png`
+  const caseStudySchema = event ? {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: sub.h1,
+    description: sub.metaDescription,
+    image: [imgSrc],
+    author: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/event-it/${params.slug}` },
+    about: {
+      '@type': 'Event',
+      name: event.name,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: { '@type': 'Place', name: event.location },
+      organizer: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    },
+  } : null
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      {caseStudySchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }} />}
       {/* Preload the hero image so the browser fetches it before parsing body */}
       {event?.img && <link rel="preload" as="image" href={event.img} fetchPriority="high" />}
       <Header />
