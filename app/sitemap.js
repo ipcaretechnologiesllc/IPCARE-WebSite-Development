@@ -3,7 +3,7 @@ import { articles } from '@/lib/blog-data'
 import { rentalCategories, getAllProductParams } from '@/lib/rental-data'
 import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
 import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-data'
-import { getAllAdvisorySlugs, kbArticles } from '@/lib/cyber-advisory-data'
+import { kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
@@ -152,14 +152,10 @@ export default function sitemap() {
     entries.push({ url: `${BASE}/event-it/${slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
-  // Cybersecurity Advisory — fixed subroutes + dynamic slugs
+  // Cybersecurity Advisory — fixed subroutes
   const advisoryFixed = ['cloud-security', 'zero-trust', 'executive-advisory', 'security-automation', 'sase']
   for (const slug of advisoryFixed) {
     entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: ADVISORY_SUB_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
-  }
-  const dynamicAdvisory = (getAllAdvisorySlugs() || []).filter(s => !advisoryFixed.includes(s))
-  for (const slug of dynamicAdvisory) {
-    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
   for (const art of kbArticles || []) {
     if (art?.slug) {
