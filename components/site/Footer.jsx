@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
+import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo from './Logo'
 
 const MUTED = '#A0AEBF'
@@ -42,6 +42,7 @@ export default function Footer() {
                 { Ic: FaFacebookF, href: 'https://www.facebook.com/ipcareuae', label: 'Facebook', bg: '#1877F2' },
                 { Ic: FaLinkedinIn, href: 'https://www.linkedin.com/company/ip-care-technologies', label: 'LinkedIn', bg: '#0A66C2' },
                 { Ic: FaInstagram, href: 'https://www.instagram.com/ipcaretechnologies/', label: 'Instagram', bg: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' },
+                { Ic: FaYoutube, href: 'https://www.youtube.com/@IPCARETechnologiesLLC', label: 'YouTube', bg: '#FF0000' },
               ].map(({ Ic, href, label, bg }) => (
                 <a
                   key={label}

@@ -143,6 +143,7 @@ export default function RootLayout({ children }) {
       'https://www.facebook.com/ipcaretech',
       'https://www.linkedin.com/company/ip-care-technologies',
       'https://www.instagram.com/ipcaretech',
+      'https://www.youtube.com/@IPCARETechnologiesLLC',
     ],
   }
 
@@ -184,6 +185,7 @@ export default function RootLayout({ children }) {
       'https://www.facebook.com/ipcaretech',
       'https://www.linkedin.com/company/ip-care-technologies',
       'https://www.instagram.com/ipcaretech',
+      'https://www.youtube.com/@IPCARETechnologiesLLC',
     ],
   }
 
@@ -221,6 +223,7 @@ export default function RootLayout({ children }) {
     sameAs: [
       'https://www.facebook.com/ipcaretech',
       'https://www.linkedin.com/company/ip-care-technologies',
+      'https://www.youtube.com/@IPCARETechnologiesLLC',
     ],
   }
 

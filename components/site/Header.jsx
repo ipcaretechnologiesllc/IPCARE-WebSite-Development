@@ -7,7 +7,7 @@ import {
   ArrowRight, Menu, X, Mail, Phone,
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
 } from 'lucide-react'
-import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
+import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices } from '@/lib/services-nav-data'
 
@@ -65,6 +65,7 @@ const SOCIAL = {
   facebook: 'https://www.facebook.com/ipcareuae',
   linkedin: 'https://www.linkedin.com/company/ip-care-technologies',
   instagram: 'https://www.instagram.com/ipcaretechnologies/',
+  youtube: 'https://www.youtube.com/@IPCARETechnologiesLLC',
 }
 
 export default function Header() {
@@ -144,6 +145,7 @@ export default function Header() {
             <a href={SOCIAL.facebook}  target="_blank" rel="noopener noreferrer" aria-label="Facebook"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={14}/></a>
             <a href={SOCIAL.linkedin}  target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#0A66C2' }}><FaLinkedinIn size={14}/></a>
             <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}><FaInstagram size={14}/></a>
+            <a href={SOCIAL.youtube}   target="_blank" rel="noopener noreferrer" aria-label="YouTube"   className="social-brand inline-flex items-center justify-center text-white" style={{ width: '28px', height: '28px', borderRadius: '9999px', background: '#FF0000' }}><FaYoutube size={14}/></a>
           </div>
         </div>
       </div>
@@ -455,6 +457,7 @@ export default function Header() {
               <a href={SOCIAL.facebook}  target="_blank" rel="noopener noreferrer" aria-label="Facebook"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={20}/></a>
               <a href={SOCIAL.linkedin}  target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#0A66C2' }}><FaLinkedinIn size={20}/></a>
               <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)' }}><FaInstagram size={20}/></a>
+              <a href={SOCIAL.youtube}   target="_blank" rel="noopener noreferrer" aria-label="YouTube"   className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#FF0000' }}><FaYoutube size={20}/></a>
             </div>
           </ul>
         </div>
