@@ -6,10 +6,12 @@
 - [ ] Profile and code-split `_next/static/chunks/1762-030f0643a6e31dad.js` (434KB, ~167KB unused) — identify what's bundled and defer non-critical parts
 
 ## Phase 2: High-Impact Improvements (Weeks 2-3)
-- [ ] Add missing security headers in `next.config.js`: `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`
-- [ ] Defer/lazy-load Google Tag Manager script (160.5KB) until after first interaction or via Partytown
-- [ ] Reduce Total Blocking Time (1,040ms) — break up long main-thread tasks, audit third-party scripts
-- [ ] Review whether `X-Frame-Options: ALLOWALL` + `Access-Control-Allow-Origin: *` (global, `next.config.js:28-35`) are still required; scope to specific routes if only needed for an embed widget
+- [x] Add missing security headers in `next.config.js`: `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`
+- [x] Tighten `X-Frame-Options: ALLOWALL` → `SAMEORIGIN` and CSP `frame-ancestors *` → `'self'` (leftover template default, no embed use case identified)
+- [ ] `Access-Control-Allow-Origin: *` left as-is — likely intentional for the multi-domain setup (`ipcare.ae` / `ipcare.ca` / API). Revisit if/when API auth is added.
+- [ ] Identify contents of the 444KB shared chunk (`1762-*.js`, used on ~20+ pages) — install `@next/bundle-analyzer` and run `ANALYZE=true next build` to get a breakdown before attempting any code-splitting
+- [ ] Defer/lazy-load Google Tag Manager script (160.5KB) — already uses `strategy="afterInteractive"` (best practice); no further action needed unless TBT remains high after other fixes
+- [ ] Reduce Total Blocking Time (1,040ms) — re-measure after Phase 1 image/hero fixes before further main-thread work
 
 ## Phase 3: Content & Authority (Month 2)
 - [ ] Validate full JSON-LD schema graph (9 types) with Rich Results Test after any `lib/*-data.js` content changes
