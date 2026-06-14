@@ -5,7 +5,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
-import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways } from '@/lib/blog-data'
+import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
       url: `${BASE}/blog/${params.slug}`,
       images: [`${a.img}?w=1200&q=85`],
       type: 'article',
-      publishedTime: a.date,
+      publishedTime: toISODate(a.date),
       authors: [a.author],
     },
   }
@@ -65,8 +65,8 @@ export default function ArticlePage({ params }) {
     '@type': 'BlogPosting',
     headline: a.title,
     image: [`${a.img}?w=1200&q=85`],
-    datePublished: a.date,
-    dateModified: a.updatedDate || a.date,
+    datePublished: toISODate(a.date),
+    dateModified: toISODate(a.updatedDate || a.date),
     author: authorSchema,
     publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
     description: a.excerpt,
