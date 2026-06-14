@@ -43,6 +43,21 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Blog](${BASE}/blog): IT and cybersecurity articles
 - [About](${BASE}/about) | [Careers](${BASE}/careers) | [Contact](${BASE}/contact)
 
+## Cornerstone Articles
+- [NESA Compliance in 90 Days: What Actually Moves the Needle](${BASE}/blog/nesa-compliance-90-days): Practical roadmap for UAE NESA/IAS compliance
+- [NESA vs ISO 27001: Where They Overlap, Where They Don't, and Which to Do First](${BASE}/blog/nesa-vs-iso-27001): Comparing the two compliance frameworks for UAE organizations
+- [Inside a NESA Audit: A 5-Day Walkthrough of What Actually Happens](${BASE}/blog/inside-a-nesa-audit): What to expect during a NESA compliance audit
+- [Zero Trust in 2026: A Practical Enterprise Roadmap](${BASE}/blog/zero-trust-practical-guide): Implementing Zero Trust architecture for enterprises
+- [Building Banking-Regulation-Compliant Cloud on Azure UAE North: A Working Architecture](${BASE}/blog/cb-ibr-cloud-azure-uae-north): Data residency and PDPL-aligned Azure architecture for UAE financial services
+- [Choosing a Managed IT Provider in the UAE: 7 Questions to Ask](${BASE}/blog/choosing-managed-it-provider-uae): Evaluation criteria for selecting a managed IT partner
+- [Converged Security: Why ELV and Cyber Should Be One Team](${BASE}/blog/elv-converged-security): The case for unifying physical and cybersecurity teams
+
+## Optional
+- [Cybersecurity Advisory Services](${BASE}/cybersecurity-advisory): Zero Trust, SASE, and cloud security advisory offerings
+- [Event IT Portfolio](${BASE}/event-it/portfolio): Case studies from major events (FIFA, NBA, UFC, EuroLeague)
+- [Rental Categories](${BASE}/rental): Laptops, tablets, networking, CCTV, servers and bundle packages
+- [Careers](${BASE}/careers): Open roles at IP Care Technologies
+
 ## Sitemap
 ${BASE}/sitemap.xml
 `
