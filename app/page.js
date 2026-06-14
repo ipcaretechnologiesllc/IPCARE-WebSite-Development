@@ -221,6 +221,16 @@ function HeroCarousel() {
         media="(max-width: 768px)"
         fetchPriority="high"
       />
+      {/* Preload the desktop hero video poster — it's the LCP element until the
+          <video> has enough data to paint a frame, and is also used directly
+          when reduced-motion is active on desktop. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-poster.webp"
+        media="(min-width: 769px)"
+        fetchPriority="high"
+      />
       {/* ── Persistent background: video on desktop, rotating images on mobile/reduced-motion ── */}
       <div className="absolute inset-0 z-0">
         {!isMobile && !reducedMotion ? (
