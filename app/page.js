@@ -212,6 +212,15 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="IP Care Technologies, Services"
     >
+      {/* Preload the mobile LCP hero image so the browser preloader can fetch it
+          before hydration runs (the <video>/<img> swap below depends on JS-detected isMobile) */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-mobile/hero-m-overall.webp"
+        media="(max-width: 768px)"
+        fetchPriority="high"
+      />
       {/* ── Persistent background: video on desktop, rotating images on mobile/reduced-motion ── */}
       <div className="absolute inset-0 z-0">
         {!isMobile && !reducedMotion ? (

@@ -15,10 +15,18 @@
 
 ## Phase 3: Content & Authority (Month 2)
 - [ ] Validate full JSON-LD schema graph (9 types) with Rich Results Test after any `lib/*-data.js` content changes
-- [ ] Add `llms.txt` at site root describing site purpose/sections for AI crawlers
+- [x] Add `llms.txt` at site root describing site purpose/sections for AI crawlers
 - [ ] Continue closing GSC 404/orphan reports (active cadence observed in recent commits — keep it up)
 
 ## Phase 4: Monitoring & Iteration (Ongoing)
-- [ ] Re-run Lighthouse after Phase 1 fixes to confirm LCP drops from 10.8s toward <2.5s target
+- [x] Re-run Lighthouse after Phase 1 fixes — LCP improved from 10.8s to ~8.1-8.3s (perf score 56→62). The
+  `lcp-discovery-insight` audit flags `requestDiscoverable: false`: the mobile hero image is rendered by a
+  `'use client'` component whose initial SSR output shows the desktop `<video>` (since `isMobile` defaults
+  to `false` before the `useEffect` runs), so the browser preloader can't find the LCP image until after
+  hydration. Added a `<link rel="preload" as="image" media="(max-width: 768px)">` for
+  `hero-m-overall.webp` in `app/page.js` to let the preloader fetch it immediately regardless of JS
+  execution. Still well above the 2.5s "Good" threshold — TTFB (~960ms) and resource load delay (~740ms)
+  remain the largest contributors; further gains would need server-side mobile detection or a
+  static/SSR-rendered hero image.
 - [ ] Set up CrUX/PageSpeed Insights monitoring for field data (lab data only used in this audit)
 - [ ] Periodic sitemap audit as rental/blog/event-it content grows (currently 174 URLs)
