@@ -9,8 +9,7 @@ import {
 } from 'lucide-react'
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
-import { serviceCategories } from '@/lib/services-data'
-import { services as cyberServices } from '@/lib/cyber-advisory-data'
+import { navServiceCategories as serviceCategories, navCyberServices as cyberServices } from '@/lib/services-nav-data'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
 
