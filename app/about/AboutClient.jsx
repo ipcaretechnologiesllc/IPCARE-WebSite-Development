@@ -671,7 +671,14 @@ function Team() {
     {
       initials: 'SB',
       name: 'Shakeel Bhatti',
-      role: 'Business Development Manager',
+      role: 'Event IT Solutions Specialist',
+      subRole: 'Live Network & NOC Operations, Secure Event Networks, Event WiFi, CCTV',
+      bio: 'Event IT specialist with 20+ years of experience delivering live network and NOC operations, secure event networks, Event WiFi, and CCTV for high-profile sports and concert deployments, including FIFA Club World Cup, EuroLeague, and UFC events across the UAE.',
+      stats: [
+        { n: '20+',  l: 'Years' },
+        { n: '11+',  l: 'Major Events' },
+        { n: 'NOC',  l: 'Operations' },
+      ],
       linkedin: 'https://www.linkedin.com/in/shakeelabhatti/',
     },
   ]
@@ -688,7 +695,7 @@ function Team() {
 
   return (
     <section style={{ background: '#F3F4F6', padding: '96px 24px' }}>
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>The People Behind the Work</Eyebrow>
           <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
@@ -696,7 +703,7 @@ function Team() {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {members.map((m, i) => (
             <div
               key={m.name}
