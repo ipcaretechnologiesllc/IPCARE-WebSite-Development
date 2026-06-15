@@ -668,6 +668,12 @@ function Team() {
       bio: 'Network security consultant with hands-on certifications across Fortinet, Palo Alto Networks, and CompTIA Security+, supporting firewall engineering and security operations.',
       linkedin: 'https://www.linkedin.com/in/waseem-a-0a0928172/',
     },
+    {
+      initials: 'SB',
+      name: 'Shakeel Bhatti',
+      role: 'Business Development Manager',
+      linkedin: 'https://www.linkedin.com/in/shakeelabhatti/',
+    },
   ]
 
   const cardBase = {

@@ -23,7 +23,7 @@ export default function ProductCard({ product, categorySlug }) {
           ))}
         </ul>
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {['daily', 'weekly', 'monthly'].map(d => (
+          {['Daily', 'Weekly', 'Monthly'].map(d => (
             <span key={d} className="rental-spec-pill">{d}</span>
           ))}
         </div>
