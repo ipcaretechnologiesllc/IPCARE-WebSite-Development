@@ -4,6 +4,8 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return getAllSubpageParams()
 }

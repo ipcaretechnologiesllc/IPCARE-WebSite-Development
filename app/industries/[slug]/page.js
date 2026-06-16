@@ -5,6 +5,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { industries, getAllIndustrySlugs, getIndustry } from '@/lib/industries-data'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return getAllIndustrySlugs().map((slug) => ({ slug }))
 }

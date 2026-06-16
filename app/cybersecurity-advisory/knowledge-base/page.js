@@ -2,6 +2,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import KBClient from './KBClient'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Cybersecurity Knowledge Base: Palo Alto, Check Point, Fortinet | The Cyber Adviser',
   description: 'Field-tested cybersecurity articles: Palo Alto, Check Point, Fortinet, Zero Trust architecture, SASE, and security automation insights from senior practitioners.',

@@ -3,6 +3,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ContactClient from './ContactClient'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Contact IP Care Technologies | IT Support UAE & Canada',
   description: 'Contact IP Care Technologies, enterprise IT support across UAE and Canada. Abu Dhabi: +971 2 676 6935. We respond within 4 business hours.',

@@ -2,6 +2,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { LegalPage, legalContent } from './shared'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Privacy Policy | IP Care Technologies',
   description: 'IP Care Technologies privacy policy: what data we collect, how we use it, and your rights under UAE PDPL and Canadian PIPEDA.',

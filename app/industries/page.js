@@ -3,6 +3,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import IndustriesClient from './IndustriesClient'
 
+export const revalidate = 3600
+
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 /* ── Industry ItemList JSON-LD — 5 sectors ── */

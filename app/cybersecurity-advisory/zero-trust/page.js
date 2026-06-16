@@ -6,6 +6,8 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies',
   description: 'Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma and NESA compliance.',

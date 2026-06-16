@@ -3,6 +3,8 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'SASE Transformation Consulting UAE & Canada | IP Care Technologies',
   description: 'SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope, SD-WAN integration and remote workforce security.',

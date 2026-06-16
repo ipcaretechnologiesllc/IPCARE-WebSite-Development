@@ -6,6 +6,8 @@ import Footer from '@/components/site/Footer'
 import ProductCard from '@/components/rental/ProductCard'
 import { getCategory, getAllCategorySlugs } from '@/lib/rental-data'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return getAllCategorySlugs().map((category) => ({ category }))
 }

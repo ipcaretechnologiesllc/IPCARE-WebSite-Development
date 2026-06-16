@@ -3,6 +3,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import EventITClient from './EventITClient'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Event IT Services UAE: WiFi, Networks & On-Site Support',
   description:

@@ -7,6 +7,8 @@ import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 
+export const revalidate = 3600
+
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export async function generateStaticParams() {

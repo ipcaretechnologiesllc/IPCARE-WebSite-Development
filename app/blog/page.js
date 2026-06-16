@@ -2,6 +2,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import BlogClient from './BlogClient'
 
+export const revalidate = 3600
+
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export const metadata = {

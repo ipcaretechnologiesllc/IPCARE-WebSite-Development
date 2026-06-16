@@ -3,6 +3,8 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Cloud Security Advisory: Multi-Cloud UAE & Canada | IP Care Technologies',
   description: 'Cloud security advisory for AWS, Azure and GCP in UAE and Canada. Cloud workload protection, CSPM, secure landing zones and cloud-native security architecture.',

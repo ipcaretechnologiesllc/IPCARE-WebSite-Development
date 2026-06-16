@@ -3,6 +3,8 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Security Automation SOAR & XSOAR UAE & Canada | IP Care Technologies',
   description: 'Security automation with Cortex XSOAR and XSIAM in UAE and Canada. SOAR, automated playbooks, incident response automation, SOC efficiency and alert triage.',

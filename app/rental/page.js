@@ -2,6 +2,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import RentalHubClient from './RentalHubClient'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'IT Equipment Rental UAE: Laptops, WiFi & Servers',
   description:

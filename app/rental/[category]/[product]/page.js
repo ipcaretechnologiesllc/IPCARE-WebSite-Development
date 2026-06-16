@@ -7,6 +7,8 @@ import ProductDetailClient from './ProductDetailClient'
 import ProductCard from '@/components/rental/ProductCard'
 import { getProduct, getAllProductParams, getRelatedProducts } from '@/lib/rental-data'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return getAllProductParams()
 }

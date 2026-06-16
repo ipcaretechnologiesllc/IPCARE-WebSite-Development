@@ -3,6 +3,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AboutClient from './AboutClient'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'About IP Care | Enterprise IT Partner, UAE & Canada',
   description:

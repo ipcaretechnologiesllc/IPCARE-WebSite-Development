@@ -4,6 +4,8 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllEventSubSlugs, getEventSubpage, eventServices, events } from '@/lib/event-it-data'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return getAllEventSubSlugs().map((slug) => ({ slug }))
 }
