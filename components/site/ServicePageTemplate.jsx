@@ -144,7 +144,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     sectionContent, // { eyebrow, heading, body, checklist[] }, drives the split section copy
     ctaHeading,     // Bottom CTA H2; default 'Ready to Get Started?'
     ctaSubtext,     // Bottom CTA body; default neutral consultation copy
+    region,         // 'canada' | undefined — drives region-specific credentials, phone and CTA copy
   } = data
+
+  const isCanada = region === 'canada'
+  const effectivePhone = isCanada ? '+1 416 786 0782' : phonePrimary
+  const ctaText = ctaSubtext || "Talk to our UAE-based team for a free consultation and a tailored proposal, typically within 48 hours."
+  const effectiveCtaText = isCanada ? ctaText.replace('Talk to our UAE-based team', 'Talk to our Toronto team') : ctaText
 
   return (
     <>
@@ -318,13 +324,13 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               <Link href="/contact" className="btn-primary">
                 Get a Free Quote <Icons.ArrowRight size={16} />
               </Link>
-              {phonePrimary
+              {effectivePhone
                 ? (
                   <a
-                    href={`tel:${phonePrimary.replace(/\s/g, '')}`}
+                    href={`tel:${effectivePhone.replace(/\s/g, '')}`}
                     className="btn-secondary-pill"
                   >
-                    <Icons.Phone size={14} /> {phonePrimary}
+                    <Icons.Phone size={14} /> {effectivePhone}
                   </a>
                 )
                 : (
@@ -567,7 +573,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       {/* ──────────────────────────────────────────────────────────────────
           7.5. CERTIFICATIONS & COMPLIANCE
       ────────────────────────────────────────────────────────────────── */}
-      <CertificationsBand />
+      <CertificationsBand region={region} />
 
       {/* ──────────────────────────────────────────────────────────────────
           8. RELATED SERVICES, white, service-card style
@@ -675,7 +681,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               className="max-w-xl mx-auto mb-8"
               style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}
             >
-              {ctaSubtext || "Talk to our UAE-based team for a free consultation and a tailored proposal, typically within 48 hours."}
+              {effectiveCtaText}
             </p>
             <CTAPhoneButtons />
           </div>
