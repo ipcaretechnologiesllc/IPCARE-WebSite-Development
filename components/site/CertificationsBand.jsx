@@ -22,11 +22,22 @@ const CANADA_CREDENTIALS = [
   { icon: BadgeCheck,  label: 'Fortinet',              sub: 'Firewall & SASE' },
 ]
 
+const DUBAI_CREDENTIALS = [
+  { icon: Lock,        label: 'UAE PDPL-Aligned',      sub: 'Data Protection Compliance' },
+  { icon: ShieldCheck, label: 'NESA / UAE IAS',         sub: 'Compliance-Aligned Delivery' },
+  { icon: Award,       label: 'ISO 27001',              sub: 'Aligned Security Practices' },
+  { icon: BadgeCheck,  label: 'Microsoft',              sub: 'Certified Partner' },
+  { icon: BadgeCheck,  label: 'AWS',                    sub: 'Certified Partner' },
+  { icon: BadgeCheck,  label: 'Palo Alto Networks',     sub: 'Certified Partner' },
+  { icon: BadgeCheck,  label: 'Cisco',                  sub: 'Certified Partner' },
+  { icon: BadgeCheck,  label: 'Fortinet',               sub: 'Certified Partner' },
+]
+
 /* Reusable trust band — certifications & compliance alignment.
    Used on the homepage and across service pages to close the
    "no visible certifications" trust gap for IT-manager personas. */
 export default function CertificationsBand({ region }) {
-  const CREDENTIALS = region === 'canada' ? CANADA_CREDENTIALS : UAE_CREDENTIALS
+  const CREDENTIALS = region === 'canada' ? CANADA_CREDENTIALS : region === 'dubai' ? DUBAI_CREDENTIALS : UAE_CREDENTIALS
   return (
     <section style={{ background: '#0B1A46', padding: '72px 24px', borderTop: '3px solid #E87722' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
