@@ -27,6 +27,16 @@ const nextConfig = {
     pagesBufferLength: 2,
   },
   async headers() {
+    // Long-lived cache for static media. Next.js serves files in /public with
+    // `Cache-Control: public, max-age=0`, which tells Cloudflare NOT to hold them
+    // at the edge — so every cache miss re-fetches the image from origin, making
+    // the hero and other images load slowly/inconsistently. These explicit headers
+    // let Cloudflare (and browsers) cache the assets for 30 days.
+    // NOTE: filenames are stable (not fingerprinted) — purge the Cloudflare cache
+    // after replacing an image with the same name.
+    const STATIC_MEDIA_CACHE = [
+      { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+    ];
     return [
       {
         source: "/(.*)",
@@ -41,6 +51,11 @@ const nextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         ],
       },
+      { source: "/images/:path*", headers: STATIC_MEDIA_CACHE },
+      { source: "/events/:path*", headers: STATIC_MEDIA_CACHE },
+      { source: "/Rental/:path*", headers: STATIC_MEDIA_CACHE },
+      { source: "/Video/:path*",  headers: STATIC_MEDIA_CACHE },
+      { source: "/icons/:path*",  headers: STATIC_MEDIA_CACHE },
     ];
   },
   // Permanent redirects for legacy PHP URLs from the previous website.

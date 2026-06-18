@@ -242,8 +242,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        {/* Default Google Consent Mode v2 state — set BEFORE gtag loads. Analytics denied until user accepts. */}
-        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});` }} />
+        {/* Default Google Consent Mode v2 state — set BEFORE gtag loads. Analytics denied until user accepts.
+            data-cfasync="false" stops Cloudflare Rocket Loader from deferring this inline script: it must run
+            synchronously in <head> so the consent defaults exist before gtag fires. (Ignored when Rocket Loader is off.) */}
+        <script data-cfasync="false" dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});` }} />
         <link rel="manifest" href="/manifest.webmanifest" />
 
         {/* Path-aware hreflang alternates — rendered here (not via metadata.alternates.languages)

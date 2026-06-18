@@ -143,25 +143,21 @@ const HERO_SLIDES = [
 function HeroCarousel() {
   const [current, setCurrent] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const touchStartX = useRef(null)
   const intervalRef = useRef(null)
 
+  // Track the reduced-motion preference. This is used ONLY to pause the
+  // auto-advance interval — it never branches what DOM is rendered, so the
+  // server and client produce identical markup (no hydration mismatch, which
+  // previously forced React to re-render the whole tree and briefly swallowed
+  // nav clicks). Desktop vs mobile background selection is now pure CSS.
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     setReducedMotion(motionQuery.matches)
     const onMotionChange = (e) => setReducedMotion(e.matches)
     motionQuery.addEventListener('change', onMotionChange)
-
-    return () => {
-      window.removeEventListener('resize', checkMobile)
-      motionQuery.removeEventListener('change', onMotionChange)
-    }
+    return () => motionQuery.removeEventListener('change', onMotionChange)
   }, [])
 
   const goTo = useCallback((idx) => {
@@ -176,12 +172,12 @@ function HeroCarousel() {
     setCurrent((c) => (c - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
   }, [])
 
-  /* Auto-advance every 5 s; pause when mouse is over the carousel */
+  /* Auto-advance every 5 s; pause on hover or when reduced motion is requested */
   useEffect(() => {
-    if (isHovered) return
+    if (isHovered || reducedMotion) return
     intervalRef.current = setInterval(goNext, 5000)
     return () => clearInterval(intervalRef.current)
-  }, [isHovered, goNext])
+  }, [isHovered, reducedMotion, goNext])
 
   /* Keyboard: ArrowLeft / ArrowRight */
   useEffect(() => {
@@ -213,30 +209,18 @@ function HeroCarousel() {
       aria-roledescription="carousel"
       aria-label="IP Care Technologies, Services"
     >
-      {/* Preload the mobile LCP hero image so the browser preloader can fetch it
-          before hydration runs (the <video>/<img> swap below depends on JS-detected isMobile) */}
-      <link
-        rel="preload"
-        as="image"
-        href="/images/hero-mobile/hero-m-overall.webp"
-        media="(max-width: 768px)"
-        fetchPriority="high"
-      />
-      {/* Preload the desktop hero video poster — it's the LCP element until the
-          <video> has enough data to paint a frame, and is also used directly
-          when reduced-motion is active on desktop. */}
-      <link
-        rel="preload"
-        as="image"
-        href="/images/hero-poster.webp"
-        media="(min-width: 769px)"
-        fetchPriority="high"
-      />
-      {/* ── Persistent background: video on desktop, rotating images on mobile/reduced-motion ── */}
+      {/* ── Persistent background ──────────────────────────────────────────
+          Desktop vs mobile is decided purely in CSS (.hero-bg-desktop /
+          .hero-bg-mobile in globals.css), so the correct layer paints on the
+          very first frame — no JS, no flash, and identical server/client markup.
+          The <source media> guards keep the desktop video from ever being
+          fetched on mobile; the preload hints live in app/page.js. */}
       <div className="absolute inset-0 z-0">
-        {!isMobile && !reducedMotion ? (
+        {/* Desktop: looping video. The poster <img> stands in for it under
+            reduced-motion (CSS-toggled, see .hero-bg-video / .hero-bg-poster). */}
+        <div className="hero-bg-desktop absolute inset-0">
           <video
-            className="absolute inset-0 object-cover"
+            className="hero-bg-video absolute inset-0 object-cover"
             style={{ width: '100%', height: '100%', maxWidth: '100%' }}
             autoPlay
             muted
@@ -248,24 +232,21 @@ function HeroCarousel() {
             <source src="/Video/hero.webm" type="video/webm" media="(min-width: 769px)" />
             <source src="/Video/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
           </video>
-        ) : !isMobile ? (
           <img
             src="/images/hero-poster.webp"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 object-cover"
+            loading="lazy"
+            className="hero-bg-poster absolute inset-0 object-cover"
             style={{ width: '100%', height: '100%', maxWidth: '100%' }}
           />
-        ) : reducedMotion ? (
-          <img
-            src="/images/hero-mobile/hero-m-overall.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 object-cover"
-            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
-          />
-        ) : (
-          HERO_SLIDES.map((slide, i) => {
+        </div>
+
+        {/* Mobile: rotating per-service images. Only the active + adjacent
+            slides are mounted to avoid fetching all seven. current starts at 0
+            on both server and client, so the initial markup matches. */}
+        <div className="hero-bg-mobile absolute inset-0">
+          {HERO_SLIDES.map((slide, i) => {
             const len = HERO_SLIDES.length
             const isAdjacent = i === current || i === (current + 1) % len || i === (current - 1 + len) % len
             if (!isAdjacent) return null
@@ -275,8 +256,7 @@ function HeroCarousel() {
                 src={slide.mobileBg}
                 alt=""
                 aria-hidden="true"
-                loading={i === 0 ? 'eager' : 'lazy'}
-                fetchPriority={i === 0 ? 'high' : 'auto'}
+                loading="lazy"
                 className="absolute inset-0 object-cover"
                 style={{
                   width: '100%',
@@ -287,8 +267,8 @@ function HeroCarousel() {
                 }}
               />
             )
-          })
-        )}
+          })}
+        </div>
       </div>
 
       {/* Navy scrim — keeps white text readable while video stays visible */}

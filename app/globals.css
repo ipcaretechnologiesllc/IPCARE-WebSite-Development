@@ -574,6 +574,23 @@ body {
   }
 }
 
+/* Hero background layer switch — done in CSS (not JS) so the correct layer
+   paints on the first frame: no flash, no hydration mismatch, and the desktop
+   video is never fetched on phones. The 769px boundary matches the <source
+   media="(min-width: 769px)"> guards on the video. */
+.hero-bg-desktop { display: none; }
+.hero-bg-mobile  { display: block; }
+@media (min-width: 769px) {
+  .hero-bg-desktop { display: block; }
+  .hero-bg-mobile  { display: none; }
+}
+/* Under reduced-motion, swap the looping video for the static poster image. */
+.hero-bg-poster { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-video  { display: none; }
+  .hero-bg-poster { display: block; }
+}
+
 /* Marquee */
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
