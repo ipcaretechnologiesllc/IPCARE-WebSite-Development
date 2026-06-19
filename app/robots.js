@@ -31,6 +31,7 @@ export default function robots() {
           '/api/',
           '/admin/',
           '/_next/',
+          '/cdn-cgi/',
           '/rental/quote',
           '/unsubscribe',
         ],
