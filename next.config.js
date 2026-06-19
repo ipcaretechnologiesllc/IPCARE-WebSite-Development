@@ -304,6 +304,9 @@ const nextConfig = {
       // Wrong URL prefix — Google indexed these with /services/ prefix
       { source: '/services/event-it/temporary-data-centres', destination: '/event-it/temporary-data-centres', permanent: true },
       { source: '/services/cybersecurity-advisory', destination: '/cybersecurity-advisory', permanent: true },
+      { source: '/services/event-it/:path*', destination: '/event-it/:path*', permanent: true },
+      { source: '/services/cybersecurity-advisory/:path*', destination: '/cybersecurity-advisory/:path*', permanent: true },
+      { source: '/cdn-cgi/l/email-protection', destination: '/contact', permanent: true },
 
       // Dead event slugs — redirect to portfolio
       { source: '/event-it/ufc-fight-night', destination: '/event-it/portfolio', permanent: true },
