@@ -167,6 +167,11 @@ export default function BlogClient() {
 }
 
 function ArticleCard({ a, priority = false }) {
+  const isProductImage = a.imageFit === 'contain'
+  const imageStyle = isProductImage
+    ? { inset: '14px', width: 'calc(100% - 28px)', height: 'calc(100% - 28px)', objectFit: 'contain' }
+    : { inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
+
   return (
     <Link
       href={`/blog/${a.slug}`}
@@ -174,7 +179,7 @@ function ArticleCard({ a, priority = false }) {
       style={{ padding: 0 }}
     >
       {/* Photo — 16:10 aspect, hover zoom */}
-      <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10' }}>
+      <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10', background: isProductImage ? '#fff' : undefined }}>
         <img
           src={`${a.img}?w=600&fm=webp&q=82`}
           alt={a.title}
@@ -183,7 +188,8 @@ function ArticleCard({ a, priority = false }) {
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : 'auto'}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="absolute transition-transform duration-500 group-hover:scale-[1.04]"
+          style={imageStyle}
         />
         <span
           className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2.5 py-1 rounded"

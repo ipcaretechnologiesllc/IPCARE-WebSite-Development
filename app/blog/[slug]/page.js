@@ -11,6 +11,11 @@ export const revalidate = 3600
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
+const imageFitStyle = (article, inset = 14) => {
+  if (article.imageFit !== 'contain') return { inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
+  return { inset: `${inset}px`, width: `calc(100% - ${inset * 2}px)`, height: `calc(100% - ${inset * 2}px)`, objectFit: 'contain' }
+}
+
 export async function generateStaticParams() {
   return getAllArticleSlugs().map(slug => ({ slug }))
 }
@@ -50,6 +55,7 @@ export default function ArticlePage({ params }) {
 
   const authorInfo = getAuthor(a.author)
   const keyTakeaways = getKeyTakeaways(params.slug)
+  const isProductImage = a.imageFit === 'contain'
   // Named experts get Person schema (with jobTitle/worksFor for E-E-A-T); the generic
   // 'IP Care Team' byline falls back to the Organization as author.
   const authorSchema = authorInfo
@@ -123,7 +129,14 @@ export default function ArticlePage({ params }) {
         <section className="px-6 py-12" style={{ background: '#fff' }}>
           <div className="max-w-[720px] mx-auto">
             {/* Hero image — LCP element; eager + preload hint */}
-            <div className="relative rounded-2xl overflow-hidden mb-10" style={{ aspectRatio: '16/9', background: 'linear-gradient(135deg, #E1E8F0 0%, #F4F6FA 100%)' }}>
+            <div
+              className="relative rounded-2xl overflow-hidden mb-10"
+              style={{
+                aspectRatio: '16/9',
+                background: isProductImage ? '#fff' : 'linear-gradient(135deg, #E1E8F0 0%, #F4F6FA 100%)',
+                border: isProductImage ? '1px solid #E1E8F0' : undefined,
+              }}
+            >
               <img
                 src={`${a.img}?w=1200&fm=webp&q=82`}
                 alt={a.title}
@@ -132,7 +145,8 @@ export default function ArticlePage({ params }) {
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute"
+                style={imageFitStyle(a, 24)}
               />
             </div>
 
@@ -216,31 +230,35 @@ export default function ArticlePage({ params }) {
                 {sameCat.length > 0 ? `More on ${a.category}` : 'Related Articles'}
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                {related.map(r => (
-                  <Link
-                    key={r.slug}
-                    href={`/blog/${r.slug}`}
-                    className="service-card group flex flex-col overflow-hidden"
-                    style={{ padding: 0 }}
-                  >
-                    <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10' }}>
-                      <img
-                        src={`${r.img}?w=600&fm=webp&q=82`}
-                        alt={r.title}
-                        width={600}
-                        height={375}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                      <span className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3 className="font-semibold text-base leading-snug mb-2 group-hover:text-[#E87722] transition-colors" style={{ color: '#0B1A46' }}>{r.title}</h3>
-                      <div className="mt-auto mono text-[13px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>{r.date} &bull; {r.readTime}</div>
-                    </div>
-                  </Link>
-                ))}
+                {related.map(r => {
+                  const relatedIsProductImage = r.imageFit === 'contain'
+                  return (
+                    <Link
+                      key={r.slug}
+                      href={`/blog/${r.slug}`}
+                      className="service-card group flex flex-col overflow-hidden"
+                      style={{ padding: 0 }}
+                    >
+                      <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: '16/10', background: relatedIsProductImage ? '#fff' : undefined }}>
+                        <img
+                          src={`${r.img}?w=600&fm=webp&q=82`}
+                          alt={r.title}
+                          width={600}
+                          height={375}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute transition-transform duration-500 group-hover:scale-[1.04]"
+                          style={imageFitStyle(r)}
+                        />
+                        <span className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{r.category}</span>
+                      </div>
+                      <div className="p-5 flex flex-col flex-1">
+                        <h3 className="font-semibold text-base leading-snug mb-2 group-hover:text-[#E87722] transition-colors" style={{ color: '#0B1A46' }}>{r.title}</h3>
+                        <div className="mt-auto mono text-[13px] uppercase tracking-wider" style={{ color: '#94A3B8' }}>{r.date} &bull; {r.readTime}</div>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </section>
