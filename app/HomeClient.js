@@ -993,20 +993,24 @@ function BlogTeaser() {
           <p className="mt-5" style={{ color: '#58595B' }}>Insights from our engineers and advisors.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-5">
-          {posts.map((p, i) => (
-            <Link key={p.slug} href={`/blog/${p.slug}`} className="article-card reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
-              <div className="article-card__media">
-                <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
-                <div className="article-card__media-fade" />
-              </div>
-              <div className="article-card__body">
-                <h3 className="article-card__title">{p.title}</h3>
-                <div className="article-card__date">{p.date}</div>
-                <span className="article-card__cta">Read More <ArrowRight size={14}/></span>
-              </div>
-            </Link>
-          ))}
+          {posts.map((p, i) => {
+            const isProductImage = p.imageFit === 'contain'
+
+            return (
+              <Link key={p.slug} href={`/blog/${p.slug}`} className="article-card reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
+                <div className={`article-card__media${isProductImage ? ' article-card__media--contain' : ''}`}>
+                  <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className={`absolute transition-transform duration-500 group-hover:scale-105 ${isProductImage ? 'article-card__image--contain' : 'inset-0 w-full h-full object-cover'}`}/>
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
+                  <div className="article-card__media-fade" />
+                </div>
+                <div className="article-card__body">
+                  <h3 className="article-card__title">{p.title}</h3>
+                  <div className="article-card__date">{p.date}</div>
+                  <span className="article-card__cta">Read More <ArrowRight size={14}/></span>
+                </div>
+              </Link>
+            )
+          })}
         </div>
         <div className="text-center mt-10 reveal">
           <Link href="/blog" className="btn-primary">Visit Our Knowledge Base <ArrowRight size={16}/></Link>

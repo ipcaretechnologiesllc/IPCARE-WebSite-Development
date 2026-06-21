@@ -313,6 +313,17 @@ body {
   height: 200px;
   overflow: hidden;
 }
+.article-card__media--contain {
+  height: auto;
+  aspect-ratio: 16 / 10;
+  background: #FFFFFF;
+}
+.article-card__image--contain {
+  inset: 14px;
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  object-fit: contain;
+}
 .article-card__media-fade {
   position: absolute;
   inset: 0;
