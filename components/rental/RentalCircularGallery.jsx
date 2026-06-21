@@ -27,7 +27,9 @@ const CATEGORIES = [
 
 const N = CATEGORIES.length
 const ANGLE = 360 / N           // degrees between cards
-const RADIUS = 540              // ring radius (px)
+const RADIUS = 620              // ring radius (px)
+const CARD_W = 288              // card width (px)
+const CARD_H = 396              // card height (px)
 const AUTO_SPEED = 0.12         // deg per frame (~7°/s) — gentle
 const DRAG_SENS = 0.25          // deg per px dragged
 
@@ -90,6 +92,12 @@ export default function RentalCircularGallery() {
     const onMotion = (e) => { reduced.current = e.matches }
     motion.addEventListener('change', onMotion)
 
+    // Only advance the auto-spin while the ring is on screen (cheap CPU/battery
+    // saving). A single persistent rAF keeps drag/arrow response instant.
+    let visible = true
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting }, { threshold: 0 })
+    if (stageRef.current) io.observe(stageRef.current)
+
     let raf
     const apply = () => {
       const ring = ringRef.current
@@ -116,7 +124,7 @@ export default function RentalCircularGallery() {
         const diff = target.current - rotation.current
         if (Math.abs(diff) < 0.15) { rotation.current = target.current; target.current = null }
         else rotation.current += diff * 0.12
-      } else if (!hover.current && !reduced.current) {
+      } else if (!hover.current && !reduced.current && visible) {
         rotation.current += AUTO_SPEED
       }
       apply()
@@ -127,6 +135,7 @@ export default function RentalCircularGallery() {
 
     return () => {
       cancelAnimationFrame(raf)
+      io.disconnect()
       motion.removeEventListener('change', onMotion)
     }
   }, [])
@@ -199,10 +208,10 @@ export default function RentalCircularGallery() {
                 ref={(el) => { cardRefs.current[i] = el }}
                 className="absolute rental-ring-card"
                 style={{
-                  width: 240,
-                  height: 332,
-                  left: -120,
-                  top: -166,
+                  width: CARD_W,
+                  height: CARD_H,
+                  left: -CARD_W / 2,
+                  top: -CARD_H / 2,
                   transform: `rotateY(${i * ANGLE}deg) translateZ(${RADIUS}px)`,
                 }}
               >

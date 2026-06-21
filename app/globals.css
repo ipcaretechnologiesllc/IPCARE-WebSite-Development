@@ -297,8 +297,8 @@ body {
    Stage holds the rotating ring; cards are absolutely centered and pushed
    out on the Z axis by JS. Height reserves space so there is no layout shift. */
 .rental-ring-stage {
-  height: 430px;
-  max-width: 1100px;
+  height: 500px;
+  max-width: 1200px;
 }
 .rental-ring-card { backface-visibility: hidden; }
 .rental-ring-arrow {
