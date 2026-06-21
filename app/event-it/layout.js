@@ -1,4 +1,4 @@
-import { events } from '@/lib/event-it-data'
+import { events, getAllEventSubSlugs } from '@/lib/event-it-data'
 
 export const metadata = {
   title: 'Event IT Infrastructure UAE | WiFi, Data Centres & NOC for Major Events | IP Care',
@@ -18,6 +18,13 @@ export const metadata = {
     description:
       'FIFA, UFC UAE, NBA Abu Dhabi, EuroLeague Final Four 2025, FINA, IIFA, Coldplay, Saadiyat Nights, UAE National Day. High-density WiFi, broadcast LAN, NOC operations.',
   },
+}
+
+const EVENT_SUBPAGE_SLUGS = new Set(getAllEventSubSlugs())
+const eventCanonicalPath = (event) => {
+  if (event.link) return event.link
+  if (EVENT_SUBPAGE_SLUGS.has(event.slug)) return `/event-it/${event.slug}`
+  return '/event-it/portfolio'
 }
 
 const jsonLd = {
@@ -92,7 +99,7 @@ const jsonLd = {
               : ev.img
             : `https://www.ipcare.ae/ipcare-logo.png`,
           organizer: { '@id': 'https://www.ipcare.ae#org' },
-          url: `https://www.ipcare.ae/event-it/${ev.slug}`,
+          url: `https://www.ipcare.ae${eventCanonicalPath(ev)}`,
         },
       })),
     },

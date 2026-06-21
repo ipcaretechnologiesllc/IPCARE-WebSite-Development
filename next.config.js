@@ -123,6 +123,10 @@ const nextConfig = {
       { source: '/terms.php', destination: '/terms', permanent: true },
       { source: '/terms-conditions.php', destination: '/terms', permanent: true },
       { source: '/terms-and-conditions.php', destination: '/terms', permanent: true },
+      { source: '/company-overview.php', destination: '/about', permanent: true },
+      { source: '/leadership-team.php', destination: '/about', permanent: true },
+      { source: '/mission-vision.php', destination: '/about', permanent: true },
+      { source: '/contact-form.php', destination: '/contact', permanent: true },
 
       // ─── IT Consulting ─────────────────────────────────────────────────
       { source: '/it-consulting.php', destination: '/services/it-consulting', permanent: true },
@@ -162,6 +166,7 @@ const nextConfig = {
       { source: '/structured-cabling.php', destination: '/services/elv/structured-cabling', permanent: true },
 
       // ─── Managed IT ────────────────────────────────────────────────────
+      { source: '/managed-it-services-provider-uae.php', destination: '/services/managed-it', permanent: true },
       { source: '/network-management.php', destination: '/services/managed-it/network-management', permanent: true },
       { source: '/network-solutions.php', destination: '/services/managed-it/network-management', permanent: true },
       { source: '/server-management.php', destination: '/services/managed-it/server-management', permanent: true },
@@ -181,6 +186,10 @@ const nextConfig = {
       { source: '/migration.php', destination: '/services/cloud/migration', permanent: true },
       { source: '/backup-recovery.php', destination: '/services/cloud/backup-recovery', permanent: true },
       { source: '/disaster-recovery.php', destination: '/services/cloud/backup-recovery', permanent: true },
+      { source: '/microsoft-365.php', destination: '/services/cloud/microsoft-365', permanent: true },
+      { source: '/cloud-mail.php', destination: '/services/email-solutions', permanent: true },
+      { source: '/cloud-open-exchange.php', destination: '/services/email-solutions/hybrid', permanent: true },
+      { source: '/modern-data-protection.php', destination: '/services/cloud/backup-recovery', permanent: true },
 
       // ─── Cybersecurity (service category) ──────────────────────────────
       { source: '/security-assessment.php', destination: '/services/cybersecurity/security-assessment', permanent: true },
@@ -191,11 +200,13 @@ const nextConfig = {
       { source: '/pam.php', destination: '/services/cybersecurity/pam', permanent: true },
       { source: '/privileged-access.php', destination: '/services/cybersecurity/pam', permanent: true },
       { source: '/email-security.php', destination: '/services/cybersecurity/email-security', permanent: true },
+      { source: '/email-security-email-data-loss-prevention.php', destination: '/services/cybersecurity/email-security', permanent: true },
       { source: '/microsoft-entra.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
       { source: '/microsoft-entra-id.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
       { source: '/azure-ad.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
       { source: '/nesa-compliance.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
       { source: '/nesa.php', destination: '/services/cybersecurity/nesa-compliance', permanent: true },
+      { source: '/compliance-solutions.php', destination: '/services/cybersecurity/compliance', permanent: true },
       { source: '/services/cybersecurity-compliance', destination: '/services/cybersecurity/compliance', permanent: true },
 
       // ─── Cybersecurity Advisory (separate hub) ─────────────────────────
@@ -238,9 +249,17 @@ const nextConfig = {
       // ─── No clean equivalent — route to nearest sensible hub ───────────
       { source: '/mobile-app-development.php', destination: '/services', permanent: true },
       { source: '/web-development.php', destination: '/services', permanent: true },
+      { source: '/web-application-development.php', destination: '/services', permanent: true },
+      { source: '/custom-websites.php', destination: '/services', permanent: true },
+      { source: '/e-commerce-solutions.php', destination: '/services', permanent: true },
       { source: '/digital-marketing.php', destination: '/services', permanent: true },
+      { source: '/sem.php', destination: '/services', permanent: true },
+      { source: '/seo.php', destination: '/services', permanent: true },
       { source: '/telephony.php', destination: '/services/managed-it/network-management', permanent: true },
       { source: '/telephony-solutions.php', destination: '/services/managed-it/network-management', permanent: true },
+      { source: '/cctv-service-provider-uae.php', destination: '/services/elv/cctv-systems', permanent: true },
+      { source: '/structured-cabling-company-uae.php', destination: '/services/elv/structured-cabling', permanent: true },
+      { source: '/audio-video-intercom-system.php', destination: '/services/elv/intercom-systems', permanent: true },
 
       // Internal slug correction — original case-study slug used "pedal" (cycling) before the
       // engagement was correctly identified as "padel" (the racquet sport). 308 preserves any
@@ -254,6 +273,7 @@ const nextConfig = {
       { source: '/event-it/uae-national-day-49th',    destination: '/event-it/uae-national-day', permanent: true },
       { source: '/event-it/product-launch',            destination: '/event-it/portfolio',          permanent: true },
       { source: '/event-it/nba-global-games',         destination: '/event-it/nba-abu-dhabi-games', permanent: true },
+      { source: '/event-it/ufc-fight-night.php',      destination: '/event-it/ufc-uae',             permanent: true },
 
       // Removed blog post — the CCTV cost guide was withdrawn following a positioning
       // change on Dubai physical-security scope. 308 prevents the URL from 404'ing
@@ -309,7 +329,7 @@ const nextConfig = {
       { source: '/cdn-cgi/l/email-protection', destination: '/contact', permanent: true },
 
       // Dead event slugs — redirect to portfolio
-      { source: '/event-it/ufc-fight-night', destination: '/event-it/portfolio', permanent: true },
+      { source: '/event-it/ufc-fight-night', destination: '/event-it/ufc-uae', permanent: true },
       { source: '/event-it/corporate-summit', destination: '/event-it/portfolio', permanent: true },
     ];
   },
