@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
-  Laptop, Tablet, Wifi, Printer, Wrench, ArrowRight, Phone, Mail,
+  ArrowRight, Phone, Mail,
   MapPin, Clock, CheckCircle2, Building2,
   HeartHandshake, Award, Users, Activity, Headphones,
   ChevronLeft, ChevronRight, Globe
@@ -12,6 +12,7 @@ import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CertificationsBand from '@/components/site/CertificationsBand'
+import RentalCircularGallery from '@/components/rental/RentalCircularGallery'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { articles } from '@/lib/blog-data'
 
@@ -682,13 +683,6 @@ function CyberAdvisory() {
 
 /* ---------------- Rental Teaser ---------------- */
 function RentalTeaser() {
-  const items = [
-    { name: 'Laptops', spec: 'Intel i7 / 16GB / SSD', icon: Laptop, img: '/images/home/rental-laptops.webp', href: '/rental/laptops-desktops' },
-    { name: 'iPads & Tablets', spec: 'iPad Pro, Samsung Tab', icon: Tablet, img: '/images/home/rental-tablets.webp', href: '/rental/tablets-ipads' },
-    { name: 'Event WiFi', spec: 'High-density access points', icon: Wifi, img: '/Rental/rental-event-wifi.webp', href: '/rental/event-wifi' },
-    { name: 'Testing Equipment', spec: 'Fluke DSX 5000, OTDR, Splicer', icon: Wrench, img: '/Rental/category-testing-equipment.webp', href: '/rental/testing-equipment' },
-    { name: 'Printers', spec: 'Mono / Colour / MFP', icon: Printer, img: '/Rental/rental-printers.jpg', href: '/rental/printers' },
-  ]
   return (
     <section id="rental" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
@@ -696,48 +690,8 @@ function RentalTeaser() {
           <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>IT Equipment Rental, UAE & Canada</h2>
           <p className="mt-5 max-w-2xl mx-auto" style={{ color: '#58595B' }}>Short-term or long-term, UAE and Canada, delivered, configured and collected. No procurement headaches, no hidden costs.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-5">
-          {items.map((it, i) => (
-            <a
-              key={it.name}
-              href={it.href}
-              className={`group relative rounded-2xl overflow-hidden reveal block rental-card flex flex-col md:col-span-2 lg:col-span-1${i === 3 ? ' md:col-start-2 lg:col-start-auto' : ''}${i === 4 ? ' md:col-start-4 lg:col-start-auto' : ''}`}
-              style={{ transitionDelay: `${i * 80}ms`, background: '#FFFFFF', boxShadow: '0 8px 32px rgba(10,26,70,0.18)' }}
-            >
-              {/* Image */}
-              <div className="relative" style={{ aspectRatio: '4/3' }}>
-                <img
-                  src={it.img}
-                  alt={`${it.name} rental UAE, IP Care Technologies`}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-
-                {/* Orange icon badge — top left */}
-                <div className="rental-card__badge p-2 rounded-xl">
-                  <it.icon size={17} className="text-white" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-5 flex flex-col flex-1">
-                <h4 className="font-bold text-base leading-tight mb-2" style={{ color: '#0B1A46' }}>{it.name}</h4>
-                <p className="text-xs mb-4 leading-snug" style={{ color: '#58595B' }}>{it.spec}</p>
-                <button
-                  className="w-full text-xs font-semibold py-2 px-3 transition-all duration-300 group-hover:brightness-110 mt-auto"
-                  style={{ background: '#E87722', color: '#fff', boxShadow: '0 2px 10px rgba(232,119,34,0.35)', borderRadius: '10px' }}
-                >
-                  Add to Quote
-                </button>
-              </div>
-
-              {/* Orange sweep line on hover */}
-              <div
-                className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"
-                style={{ background: '#E87722' }}
-              />
-            </a>
-          ))}
+        <div className="reveal">
+          <RentalCircularGallery />
         </div>
         <div className="text-center mt-10 reveal">
           <a href="/rental" className="btn-primary">Browse Full Rental Catalogue <ArrowRight size={16}/></a>

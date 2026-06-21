@@ -293,6 +293,39 @@ body {
   display: none;
 }
 
+/* ── Rental categories 3D coverflow ring ─────────────────────────────────
+   Stage holds the rotating ring; cards are absolutely centered and pushed
+   out on the Z axis by JS. Height reserves space so there is no layout shift. */
+.rental-ring-stage {
+  height: 430px;
+  max-width: 1100px;
+}
+.rental-ring-card { backface-visibility: hidden; }
+.rental-ring-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: rgba(11, 26, 70, 0.7);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(10, 26, 70, 0.28);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.rental-ring-arrow:hover { background: #E87722; transform: translateY(-50%) scale(1.06); }
+.rental-ring-arrow:focus-visible { outline: 2px solid #E87722; outline-offset: 2px; }
+.rental-ring-arrow--prev { left: 8px; }
+.rental-ring-arrow--next { right: 8px; }
+@media (min-width: 1280px) {
+  .rental-ring-arrow--prev { left: 24px; }
+  .rental-ring-arrow--next { right: 24px; }
+}
+
 /* ===== Knowledge Base article cards ===== */
 .article-card {
   position: relative;
