@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
     title,
     description,
     alternates: { canonical: `/rental/${params.category}/${params.product}` },
-    openGraph: { title, description, url: `/rental/${params.category}/${params.product}`, images: [p.image + '?w=1200&q=85'] },
+    openGraph: { title, description, url: `/rental/${params.category}/${params.product}`, images: [p.images ? p.images[0] : p.image + '?w=1200&q=85'] },
   }
 }
 
@@ -41,7 +41,7 @@ export default function ProductDetailPage({ params }) {
     name: `${product.brand} ${product.model}`,
     brand: { '@type': 'Brand', name: product.brand },
     description: product.specs.join('. '),
-    image: [product.image + '?w=1200&q=85'],
+    image: product.images ? product.images : [product.image + '?w=1200&q=85'],
     sku: product.slug,
     mpn: product.model,
     category: product.categoryName,

@@ -14,7 +14,9 @@ export default function ProductDetailClient({ product, categorySlug }) {
   const [duration, setDuration] = useState('weekly')
   const [qty, setQty] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
-  const images = [`${product.image}?w=1200&q=85`, `${product.image}?w=1200&q=85&sat=-20`, `${product.image}?w=1200&q=85&sharp=20`]
+  const images = product.images
+    ? product.images
+    : [`${product.image}?w=1200&q=85`, `${product.image}?w=1200&q=85&sat=-20`, `${product.image}?w=1200&q=85&sharp=20`]
 
   return (
     <section className="py-10 md:py-14 px-6" style={{ background: '#F4F6FA' }}>
