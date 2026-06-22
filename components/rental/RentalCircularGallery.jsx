@@ -22,7 +22,7 @@ const CATEGORIES = [
   { name: 'CCTV & Security',       spec: 'Cameras, NVR, screening',      icon: Cctv,    img: '/Rental/category-cctv-security.webp',                           href: '/rental/cctv' },
   { name: 'Testing Equipment',     spec: 'Fluke DSX 5000, OTDR, Splicer',icon: Wrench,  img: '/Rental/category-testing-equipment.webp',                       href: '/rental/testing-equipment' },
   { name: 'Servers & Data',        spec: 'Dell, HPE, Supermicro',        icon: Server,  img: '/Rental/servers-data.webp',                                     href: '/rental/servers' },
-  { name: 'Bundle Packages',       spec: 'Pre-configured event kits',    icon: Package, img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87',  href: '/rental/bundles' },
+  { name: 'Bundle Packages',       spec: 'Pre-configured event kits',    icon: Package, img: '/Rental/bundle-conference-room-pack.webp',                      href: '/rental/bundles' },
 ]
 
 const N = CATEGORIES.length
