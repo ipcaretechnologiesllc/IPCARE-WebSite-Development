@@ -13,7 +13,8 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const ind = getIndustry(params.slug)
   if (!ind) return {}
   return {
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function IndustryDetailPage({ params }) {
+export default async function IndustryDetailPage(props) {
+  const params = await props.params;
   const ind = getIndustry(params.slug)
   if (!ind) notFound()
   const Icon = Icons[ind.icon] || Icons.Building2
@@ -101,7 +103,7 @@ export default function IndustryDetailPage({ params }) {
             <div className="space-y-5">
               {ind.overview.map((p, i) => {
                 if (p.startsWith('— ')) {
-                  return <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{p.replace(/^—\s*/, '').replace(/\s*—\s*$/, '')}</h2>
+                  return <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{p.replace(/^—\s*/, '').replace(/\s*—\s*$/, '')}</h2>;
                 }
                 return <p key={i} className="body-text text-base md:text-lg leading-[1.75]">{p}</p>
               })}
@@ -220,5 +222,5 @@ export default function IndustryDetailPage({ params }) {
       </main>
       <Footer />
     </>
-  )
+  );
 }

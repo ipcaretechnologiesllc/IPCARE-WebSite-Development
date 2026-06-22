@@ -22,7 +22,8 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const a = getArticle(params.slug)
   if (!a) return {}
   return {
@@ -41,7 +42,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function ArticlePage({ params }) {
+export default async function ArticlePage(props) {
+  const params = await props.params;
   const a = getArticle(params.slug)
   if (!a) notFound()
 

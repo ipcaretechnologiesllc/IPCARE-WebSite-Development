@@ -93,7 +93,8 @@ async function enforceRateLimit(request, bucket) {
 }
 
 // ---------- GET ----------
-export async function GET(request, { params }) {
+export async function GET(request, props) {
+  const params = await props.params;
   const path = (params?.path || []).join('/')
   if (path === '' || path === 'health') {
     return jsonOk({ service: 'IP Care Technologies API', time: new Date().toISOString() })
@@ -114,7 +115,8 @@ export async function GET(request, { params }) {
 }
 
 // ---------- POST ----------
-export async function POST(request, { params }) {
+export async function POST(request, props) {
+  const params = await props.params;
   const path = (params?.path || []).join('/')
   const userAgent = (request.headers.get('user-agent') || '').slice(0, 300)
 

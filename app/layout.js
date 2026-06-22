@@ -30,8 +30,8 @@ const HREFLANG_TARGETS = [
   { lang: 'x-default', domain: 'https://www.ipcare.ae' },
 ]
 
-function readHostAndPath() {
-  const h = headers()
+async function readHostAndPath() {
+  const h = await headers()
   const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
   const pathname = h.get('x-pathname') || '/'
   const canonicalBase = CANONICAL_DOMAINS[rawHost] || DEFAULT_CANONICAL
@@ -47,7 +47,7 @@ const SITE_DESC = 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and
 // metadata (which uses RELATIVE `alternates.canonical`) automatically resolves
 // against this dynamic `metadataBase`, so no child page needs to be touched.
 export async function generateMetadata() {
-  const { canonicalBase } = readHostAndPath()
+  const { canonicalBase } = await readHostAndPath()
   return {
     metadataBase: new URL(canonicalBase),
     title: {
@@ -115,8 +115,8 @@ export const viewport = {
   ],
 }
 
-export default function RootLayout({ children }) {
-  const { canonicalBase, pathname } = readHostAndPath()
+export default async function RootLayout({ children }) {
+  const { canonicalBase, pathname } = await readHostAndPath()
 
   // JSON-LD schemas — use the canonical brand domain so search engines see
   // a single authoritative Organization/WebSite entity regardless of which

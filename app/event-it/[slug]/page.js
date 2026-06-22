@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 // level - no page code runs, no risk of a 5xx from an unrecognised slug.
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const sub = getEventSubpage(params.slug)
   if (!sub) return {}
 
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function EventSubPage({ params }) {
+export default async function EventSubPage(props) {
+  const params = await props.params;
   const sub = getEventSubpage(params.slug)
   if (!sub) notFound()
 

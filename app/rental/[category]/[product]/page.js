@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const p = getProduct(params.category, params.product)
   if (!p) return {}
   const title = `${p.brand} ${p.model} Rental UAE & Canada | IP Care Technologies`
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function ProductDetailPage({ params }) {
+export default async function ProductDetailPage(props) {
+  const params = await props.params;
   const product = getProduct(params.category, params.product)
   if (!product) notFound()
   const related = getRelatedProducts(params.category, params.product, 3)

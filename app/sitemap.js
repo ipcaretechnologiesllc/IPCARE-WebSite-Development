@@ -82,8 +82,8 @@ const SITEMAP_EXCLUDE = new Set(['/services/email-solutions/microsoft-365'])
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-export default function sitemap() {
-  const h = headers()
+export default async function sitemap() {
+  const h = await headers()
   const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
   const BASE = (CANONICAL_DOMAINS[rawHost] || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_BASE).replace(/\/$/, '')
 

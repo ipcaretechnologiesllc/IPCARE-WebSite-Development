@@ -12,7 +12,8 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const sub = getSubpage(params.category, params.slug)
   if (!sub) return {}
   return {
@@ -28,7 +29,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function SubPage({ params }) {
+export default async function SubPage(props) {
+  const params = await props.params;
   const sub = getSubpage(params.category, params.slug)
   if (!sub) notFound()
   // Prefer curated relatedLinks defined on the subpage; fall back to auto-generated category list

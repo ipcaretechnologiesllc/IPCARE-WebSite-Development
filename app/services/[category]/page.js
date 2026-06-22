@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const cat = getCategory(params.category)
   if (!cat) return {}
   return {
@@ -30,7 +31,8 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function CategoryPage({ params }) {
+export default async function CategoryPage(props) {
+  const params = await props.params;
   const cat = getCategory(params.category)
   if (!cat) notFound()
   // Prefer curated relatedLinks defined on the category; fall back to auto-generated list
