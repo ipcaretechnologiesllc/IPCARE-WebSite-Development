@@ -7,6 +7,7 @@ import {
   ArrowRight, Menu, X, Mail, Phone,
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
 } from 'lucide-react'
+import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices } from '@/lib/services-nav-data'
@@ -66,6 +67,19 @@ const SOCIAL = {
   linkedin: 'https://www.linkedin.com/company/ip-care-technologies',
   instagram: 'https://www.instagram.com/ipcaretechnologies/',
   youtube: 'https://www.youtube.com/@IPCARETechnologiesLLC',
+}
+
+// Per-item gradient glow + accent color for the 3D flip hover animation
+const NAV_GRADIENTS = {
+  '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.18) 0%, rgba(30,58,138,0.07) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
+  '/about':                  { gradient: 'radial-gradient(circle, rgba(20,184,166,0.18) 0%, rgba(13,148,136,0.07) 50%, rgba(15,118,110,0) 100%)',      accentColor: '#0D9488' },
+  '/services':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
+  '/industries':             { gradient: 'radial-gradient(circle, rgba(34,197,94,0.18) 0%, rgba(22,163,74,0.07) 50%, rgba(21,128,61,0) 100%)',         accentColor: '#16A34A' },
+  '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(239,68,68,0.18) 0%, rgba(220,38,38,0.07) 50%, rgba(185,28,28,0) 100%)',         accentColor: '#DC2626' },
+  '/event-it':               { gradient: 'radial-gradient(circle, rgba(147,51,234,0.18) 0%, rgba(126,34,206,0.07) 50%, rgba(88,28,135,0) 100%)',       accentColor: '#9333EA' },
+  '/rental':                 { gradient: 'radial-gradient(circle, rgba(245,158,11,0.18) 0%, rgba(217,119,6,0.07) 50%, rgba(161,98,7,0) 100%)',         accentColor: '#D97706' },
+  '/blog':                   { gradient: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(79,70,229,0.07) 50%, rgba(67,56,202,0) 100%)',        accentColor: '#6366F1' },
+  '/contact':                { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
 }
 
 export default function Header() {
@@ -184,30 +198,48 @@ export default function Header() {
               height, so there is zero gap between a link's hover zone and
               the dropdown panel that starts at top:100% of the nav. */}
           <ul className="hidden lg:flex items-stretch h-full gap-0.5">
-            {navLinks.map((l) => (
-              <li
-                key={l.label}
-                className="relative flex items-center"
-                onMouseEnter={() => {
-                  if      (l.mega)     { setCyberOpen(false); setEventITOpen(false);  setServicesOpen(true)  }
-                  else if (l.dropdown) { setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)   }
-                  else if (l.cyber)    { setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)   }
-                  else                 { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false)  }
-                }}
-              >
-                <Link
-                  href={l.href}
-                  className={`px-3.5 py-2 text-[14px] font-medium transition-colors flex items-center gap-1 ${
-                    isActive(l.href)
-                      ? 'text-[#E87722] hover:text-[#E87722] font-semibold'
-                      : 'text-[#0D2B55] hover:text-[#E87722]'
-                  }`}
+            {navLinks.map((l) => {
+              const { gradient, accentColor } = NAV_GRADIENTS[l.href] || NAV_GRADIENTS['/services']
+              const active = isActive(l.href)
+              const caret = (l.mega || l.dropdown || l.cyber)
+                ? <ChevronDown size={12} className="opacity-60 flex-shrink-0" />
+                : null
+              return (
+                <li
+                  key={l.label}
+                  className="relative flex items-center"
+                  onMouseEnter={() => {
+                    if      (l.mega)     { setCyberOpen(false); setEventITOpen(false);  setServicesOpen(true)  }
+                    else if (l.dropdown) { setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)   }
+                    else if (l.cyber)    { setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)   }
+                    else                 { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false)  }
+                  }}
                 >
-                  {l.label}
-                  {(l.mega || l.dropdown || l.cyber) && <ChevronDown size={12} className="opacity-60" />}
-                </Link>
-              </li>
-            ))}
+                  <AnimatedNavItem
+                    gradient={gradient}
+                    frontContent={
+                      <Link
+                        href={l.href}
+                        className={`px-3.5 py-2 text-[14px] font-medium flex items-center gap-1 ${
+                          active ? 'text-[#E87722] font-semibold' : 'text-[#0D2B55]'
+                        }`}
+                      >
+                        {l.label}{caret}
+                      </Link>
+                    }
+                    backContent={
+                      <Link
+                        href={l.href}
+                        className="px-3.5 py-2 text-[14px] font-semibold flex items-center gap-1"
+                        style={{ color: active ? '#E87722' : accentColor }}
+                      >
+                        {l.label}{caret}
+                      </Link>
+                    }
+                  />
+                </li>
+              )
+            })}
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
