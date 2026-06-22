@@ -69,17 +69,18 @@ const SOCIAL = {
   youtube: 'https://www.youtube.com/@IPCARETechnologiesLLC',
 }
 
-// Per-item gradient glow + accent color for the 3D flip hover animation
+// Per-item gradient glow + accent color for the 3D flip hover animation.
+// Only brand orange (#E87722) and brand blue shades are used — no off-palette colours.
 const NAV_GRADIENTS = {
-  '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.18) 0%, rgba(30,58,138,0.07) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
-  '/about':                  { gradient: 'radial-gradient(circle, rgba(20,184,166,0.18) 0%, rgba(13,148,136,0.07) 50%, rgba(15,118,110,0) 100%)',      accentColor: '#0D9488' },
-  '/services':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
-  '/industries':             { gradient: 'radial-gradient(circle, rgba(34,197,94,0.18) 0%, rgba(22,163,74,0.07) 50%, rgba(21,128,61,0) 100%)',         accentColor: '#16A34A' },
-  '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(239,68,68,0.18) 0%, rgba(220,38,38,0.07) 50%, rgba(185,28,28,0) 100%)',         accentColor: '#DC2626' },
-  '/event-it':               { gradient: 'radial-gradient(circle, rgba(147,51,234,0.18) 0%, rgba(126,34,206,0.07) 50%, rgba(88,28,135,0) 100%)',       accentColor: '#9333EA' },
-  '/rental':                 { gradient: 'radial-gradient(circle, rgba(245,158,11,0.18) 0%, rgba(217,119,6,0.07) 50%, rgba(161,98,7,0) 100%)',         accentColor: '#D97706' },
-  '/blog':                   { gradient: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(79,70,229,0.07) 50%, rgba(67,56,202,0) 100%)',        accentColor: '#6366F1' },
-  '/contact':                { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
+  '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
+  '/about':                  { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
+  '/services':               { gradient: 'radial-gradient(circle, rgba(26,62,158,0.20) 0%, rgba(21,47,127,0.08) 50%, rgba(15,36,95,0) 100%)',          accentColor: '#1A3E9E' },
+  '/industries':             { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#D06010' },
+  '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
+  '/event-it':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
+  '/rental':                 { gradient: 'radial-gradient(circle, rgba(21,47,127,0.22) 0%, rgba(15,36,95,0.09) 50%, rgba(8,20,52,0) 100%)',            accentColor: '#152F7F' },
+  '/blog':                   { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
+  '/contact':                { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',         accentColor: '#2E64D8' },
 }
 
 export default function Header() {
