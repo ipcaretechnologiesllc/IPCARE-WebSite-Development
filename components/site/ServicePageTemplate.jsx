@@ -144,6 +144,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     sectionContent, // { eyebrow, heading, body, checklist[] }, drives the split section copy
     ctaHeading,     // Bottom CTA H2; default 'Ready to Get Started?'
     ctaSubtext,     // Bottom CTA body; default neutral consultation copy
+    ctaButton,      // Hero CTA button label; default 'Get a Free Quote'
     region,         // 'canada' | undefined — drives region-specific credentials, phone and CTA copy
     menuGroup,      // 'digital-solutions' | undefined — switches credentials band to capability tiles
   } = data
@@ -323,7 +324,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
             {/* CTAs */}
             <div className={`mt-8 flex flex-col sm:flex-row gap-3 reveal ${!heroImage || heroFullBleed ? 'justify-center' : ''}`}>
               <Link href="/contact" className="btn-primary">
-                Get a Free Quote <Icons.ArrowRight size={16} />
+                {ctaButton || 'Get a Free Quote'} <Icons.ArrowRight size={16} />
               </Link>
               {effectivePhone
                 ? (
