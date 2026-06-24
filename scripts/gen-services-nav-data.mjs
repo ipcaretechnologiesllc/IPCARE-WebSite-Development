@@ -21,6 +21,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const navServiceCategories = {}
 for (const [slug, cat] of Object.entries(serviceCategories)) {
+  // Clusters with menuGroup 'digital-solutions' are kept out of the main
+  // Services mega-menu and will be surfaced in a separate Digital Solutions
+  // menu in a later build pass.
+  if (cat.menuGroup === 'digital-solutions') continue
   const subpages = {}
   for (const [subSlug, sub] of Object.entries(cat.subpages || {})) {
     subpages[subSlug] = { h1: sub.h1 }
