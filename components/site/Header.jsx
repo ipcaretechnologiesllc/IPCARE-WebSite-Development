@@ -5,14 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   ArrowRight, Menu, X, Mail, Phone,
-  Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield, ChevronDown
+  Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, ChevronDown
 } from 'lucide-react'
 import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
-import { navServiceCategories as serviceCategories, navCyberServices as cyberServices } from '@/lib/services-nav-data'
+import { navServiceCategories as serviceCategories, navCyberServices as cyberServices, navDigitalSolutionsCategories as digitalSolutionsCategories } from '@/lib/services-nav-data'
 
-const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, TrendingUp, AtSign, Shield }
+const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield }
 
 // Custom display labels for navigation mega-menu (shorter, no location suffix)
 const navLabels = {
@@ -75,7 +75,7 @@ const NAV_GRADIENTS = {
   '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/about':                  { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/services':               { gradient: 'radial-gradient(circle, rgba(26,62,158,0.20) 0%, rgba(21,47,127,0.08) 50%, rgba(15,36,95,0) 100%)',          accentColor: '#1A3E9E' },
-  '/industries':             { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#D06010' },
+  '/services/web-development': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',   accentColor: '#2E64D8' },
   '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/event-it':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/rental':                 { gradient: 'radial-gradient(circle, rgba(21,47,127,0.22) 0%, rgba(15,36,95,0.09) 50%, rgba(8,20,52,0) 100%)',            accentColor: '#152F7F' },
@@ -87,6 +87,7 @@ export default function Header() {
   const pathname = usePathname()
   const [mobileOpen,   setMobileOpen]   = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [digitalOpen,  setDigitalOpen]  = useState(false)
   const [eventITOpen,  setEventITOpen]  = useState(false)
   const [cyberOpen,    setCyberOpen]    = useState(false)
   const navRef = useRef(null)
@@ -103,6 +104,7 @@ export default function Header() {
   // where Next.js reuses the instance (e.g. shallow routing).
   useEffect(() => {
     setServicesOpen(false)
+    setDigitalOpen(false)
     setEventITOpen(false)
     setCyberOpen(false)
     setMobileOpen(false)
@@ -128,18 +130,18 @@ export default function Header() {
   // ─── Close helpers ────────────────────────────────────────────────────────
   // No timers. The nav's own onMouseLeave is the single reliable close trigger
   // (see the <nav> element below for the architectural explanation).
-  const closeAll = () => { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false) }
+  const closeAll = () => { setServicesOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
 
   const navLinks = [
-    { label: 'Home',           href: '/' },
-    { label: 'About',          href: '/about' },
-    { label: 'Services',       href: '/services',              mega: true },
-    { label: 'Industries',     href: '/industries' },
-    { label: 'Cyber Advisory', href: '/cybersecurity-advisory', cyber: true },
-    { label: 'Event IT',       href: '/event-it',              dropdown: true },
-    { label: 'Rental Hub',     href: '/rental' },
-    { label: 'Blog',           href: '/blog' },
-    { label: 'Contact',        href: '/contact' },
+    { label: 'Home',              href: '/' },
+    { label: 'About',             href: '/about' },
+    { label: 'Services',          href: '/services',               mega: true },
+    { label: 'Digital Solutions', href: '/services/web-development', digital: true },
+    { label: 'Cyber Advisory',    href: '/cybersecurity-advisory',  cyber: true },
+    { label: 'Event IT',          href: '/event-it',               dropdown: true },
+    { label: 'Rental Hub',        href: '/rental' },
+    { label: 'Blog',              href: '/blog' },
+    { label: 'Contact',           href: '/contact' },
   ]
 
   // Ordered list for mega-menu grid
@@ -202,7 +204,7 @@ export default function Header() {
             {navLinks.map((l) => {
               const { gradient, accentColor } = NAV_GRADIENTS[l.href] || NAV_GRADIENTS['/services']
               const active = isActive(l.href)
-              const caret = (l.mega || l.dropdown || l.cyber)
+              const caret = (l.mega || l.dropdown || l.cyber || l.digital)
                 ? <ChevronDown size={12} className="opacity-60 flex-shrink-0" />
                 : null
               return (
@@ -210,10 +212,11 @@ export default function Header() {
                   key={l.label}
                   className="relative flex items-center"
                   onMouseEnter={() => {
-                    if      (l.mega)     { setCyberOpen(false); setEventITOpen(false);  setServicesOpen(true)  }
-                    else if (l.dropdown) { setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)   }
-                    else if (l.cyber)    { setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)   }
-                    else                 { setServicesOpen(false); setEventITOpen(false); setCyberOpen(false)  }
+                    if      (l.mega)     { setDigitalOpen(false); setCyberOpen(false); setEventITOpen(false); setServicesOpen(true)  }
+                    else if (l.digital)  { setServicesOpen(false); setCyberOpen(false); setEventITOpen(false); setDigitalOpen(true)  }
+                    else if (l.dropdown) { setDigitalOpen(false); setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)  }
+                    else if (l.cyber)    { setDigitalOpen(false); setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)  }
+                    else                 { setServicesOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
                   }}
                 >
                   <AnimatedNavItem
@@ -354,6 +357,92 @@ export default function Header() {
                 >
                   View All Services <ArrowRight size={13}/>
                 </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Digital Solutions Mega Menu ─────────────────────────────────
+            Same architecture as Services: absolute inside sticky nav,
+            data-driven from navDigitalSolutionsCategories, onClick={closeAll}
+            on every Link. Today the panel shows one cluster (Web Development);
+            additional clusters appear automatically as their pages are built.
+        ─────────────────────────────────────────────────────────────────── */}
+        {digitalOpen && (
+          <div
+            className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
+            style={{ top: '100%' }}
+          >
+            <div
+              className="w-full py-10 px-12"
+              style={{
+                maxWidth:     '1280px',
+                background:   '#ffffff',
+                borderLeft:   '1px solid #E5E7EB',
+                borderRight:  '1px solid #E5E7EB',
+                borderBottom: '1px solid #E5E7EB',
+                borderRadius: '0 0 14px 14px',
+                boxShadow:    '0 24px 60px -15px rgba(8,20,52,0.25)',
+                maxHeight:    'calc(100vh - 120px)',
+                overflowY:    'auto',
+              }}
+            >
+              <div className="grid grid-cols-3 xl:grid-cols-4 gap-10">
+                {Object.entries(digitalSolutionsCategories).map(([slug, cat]) => {
+                  const Ic = iconMap[cat.icon] || Code2
+                  return (
+                    <div key={slug} className="space-y-2.5">
+                      <Link
+                        href={`/services/${slug}`}
+                        onClick={closeAll}
+                        className="flex gap-2.5 p-2.5 -ml-2.5 rounded-lg hover:bg-[#E87722]/8 transition-colors group"
+                      >
+                        <Ic className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
+                        <div>
+                          <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">{cat.name}</div>
+                          <div className="text-[#6B7280] text-[11.5px] mt-0.5">{cat.short}</div>
+                        </div>
+                      </Link>
+                      {cat.subpages && Object.keys(cat.subpages).length > 0 && (
+                        <ul className="ml-7 space-y-1.5 border-l pl-3" style={{ borderColor: '#E5E7EB' }}>
+                          {Object.entries(cat.subpages).map(([subSlug, sub]) => (
+                            <li key={subSlug}>
+                              <Link
+                                href={`/services/${slug}/${subSlug}`}
+                                onClick={closeAll}
+                                className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block"
+                              >
+                                {sub.h1}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )
+                })}
+
+                {/* CTA card — same pattern as Services mega-menu */}
+                <div
+                  className="col-span-2 xl:col-span-1 p-5 flex flex-col justify-between"
+                  style={{
+                    background:   'linear-gradient(135deg, #F3F6FC 0%, #EAEFF9 100%)',
+                    borderRadius: '10px',
+                    border:       '1px solid #E5E7EB',
+                  }}
+                >
+                  <div>
+                    <div className="text-[#0D2B55] text-[15px] font-semibold leading-snug">Ready to build something?</div>
+                    <div className="text-[#6B7280] text-[13px] mt-1.5">Talk to our development team.</div>
+                  </div>
+                  <Link
+                    href="/contact"
+                    onClick={closeAll}
+                    className="inline-flex items-center gap-1.5 text-[#E87722] font-medium text-[13px] mt-3 hover:gap-2 transition-all"
+                  >
+                    Contact Us <ArrowRight size={14}/>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

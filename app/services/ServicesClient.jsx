@@ -166,7 +166,7 @@ function Hero() {
    2. SERVICES GRID, white cards on #F4F6FA bg
 ═══════════════════════════════════════════════ */
 function ServicesGrid() {
-  const cats = Object.entries(serviceCategories)
+  const cats = Object.entries(serviceCategories).filter(([, c]) => c.menuGroup !== 'digital-solutions')
 
   const cardBase = {
     background: '#FFFFFF',

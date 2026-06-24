@@ -145,6 +145,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     ctaHeading,     // Bottom CTA H2; default 'Ready to Get Started?'
     ctaSubtext,     // Bottom CTA body; default neutral consultation copy
     region,         // 'canada' | undefined — drives region-specific credentials, phone and CTA copy
+    menuGroup,      // 'digital-solutions' | undefined — switches credentials band to capability tiles
   } = data
 
   const isCanada = region === 'canada'
@@ -573,7 +574,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       {/* ──────────────────────────────────────────────────────────────────
           7.5. CERTIFICATIONS & COMPLIANCE
       ────────────────────────────────────────────────────────────────── */}
-      <CertificationsBand region={region} />
+      <CertificationsBand region={region} menuGroup={menuGroup} />
 
       {/* ──────────────────────────────────────────────────────────────────
           8. RELATED SERVICES, white, service-card style
