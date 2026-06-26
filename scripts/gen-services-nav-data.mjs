@@ -27,7 +27,7 @@ for (const [slug, cat] of Object.entries(serviceCategories)) {
   if (cat.menuGroup === 'digital-solutions') continue
   const subpages = {}
   for (const [subSlug, sub] of Object.entries(cat.subpages || {})) {
-    subpages[subSlug] = { h1: sub.h1 }
+    subpages[subSlug] = { h1: sub.navLabel || sub.h1 }
   }
   navServiceCategories[slug] = {
     name: cat.name,
@@ -48,7 +48,7 @@ for (const [slug, cat] of Object.entries(serviceCategories)) {
   if (cat.menuGroup !== 'digital-solutions') continue
   const subpages = {}
   for (const [subSlug, sub] of Object.entries(cat.subpages || {})) {
-    subpages[subSlug] = { h1: sub.h1 }
+    subpages[subSlug] = { h1: sub.navLabel || sub.h1 }
   }
   navDigitalSolutionsCategories[slug] = {
     name: cat.name,

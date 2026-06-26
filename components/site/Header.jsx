@@ -98,6 +98,26 @@ export default function Header() {
     return pathname === href || pathname.startsWith(href + '/')
   }
 
+  // Slugs whose cluster has menuGroup === 'digital-solutions' (e.g. 'web-development').
+  // Derived from the imported nav data so new clusters get the right highlight automatically.
+  const digitalSolutionsSlugs = Object.keys(digitalSolutionsCategories)
+
+  // 'Services' is active on /services/* only when the cluster is NOT a digital-solutions cluster.
+  const isServicesActive = () => {
+    if (!pathname) return false
+    if (pathname === '/services') return true
+    if (!pathname.startsWith('/services/')) return false
+    const clusterSlug = pathname.split('/')[2]
+    return !digitalSolutionsSlugs.includes(clusterSlug)
+  }
+
+  // 'Digital Solutions' is active when on any digital-solutions cluster page or subpage.
+  const isDigitalSolutionsActive = () => {
+    if (!pathname) return false
+    const clusterSlug = pathname.split('/')[2]
+    return !!clusterSlug && digitalSolutionsSlugs.includes(clusterSlug)
+  }
+
   // ─── Safety net: close everything on route change ─────────────────────────
   // Each page.js renders its own <Header>, so the component remounts on
   // navigation and state already resets. This effect handles the edge case
@@ -203,7 +223,11 @@ export default function Header() {
           <ul className="hidden lg:flex items-stretch h-full gap-0.5">
             {navLinks.map((l) => {
               const { gradient, accentColor } = NAV_GRADIENTS[l.href] || NAV_GRADIENTS['/services']
-              const active = isActive(l.href)
+              const active = l.mega
+                ? isServicesActive()
+                : l.digital
+                  ? isDigitalSolutionsActive()
+                  : isActive(l.href)
               const caret = (l.mega || l.dropdown || l.cyber || l.digital)
                 ? <ChevronDown size={12} className="opacity-60 flex-shrink-0" />
                 : null
