@@ -75,7 +75,7 @@ const NAV_GRADIENTS = {
   '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/about':                  { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/services':               { gradient: 'radial-gradient(circle, rgba(26,62,158,0.20) 0%, rgba(21,47,127,0.08) 50%, rgba(15,36,95,0) 100%)',          accentColor: '#1A3E9E' },
-  '/services/web-development': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',   accentColor: '#2E64D8' },
+  '/services/digital-solutions': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',   accentColor: '#2E64D8' },
   '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/event-it':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/rental':                 { gradient: 'radial-gradient(circle, rgba(21,47,127,0.22) 0%, rgba(15,36,95,0.09) 50%, rgba(8,20,52,0) 100%)',            accentColor: '#152F7F' },
@@ -106,14 +106,16 @@ export default function Header() {
   const isServicesActive = () => {
     if (!pathname) return false
     if (pathname === '/services') return true
+    if (pathname === '/services/digital-solutions') return false
     if (!pathname.startsWith('/services/')) return false
     const clusterSlug = pathname.split('/')[2]
     return !digitalSolutionsSlugs.includes(clusterSlug)
   }
 
-  // 'Digital Solutions' is active when on any digital-solutions cluster page or subpage.
+  // 'Digital Solutions' is active when on /services/digital-solutions or any digital-solutions cluster page/subpage.
   const isDigitalSolutionsActive = () => {
     if (!pathname) return false
+    if (pathname === '/services/digital-solutions') return true
     const clusterSlug = pathname.split('/')[2]
     return !!clusterSlug && digitalSolutionsSlugs.includes(clusterSlug)
   }
@@ -156,7 +158,7 @@ export default function Header() {
     { label: 'Home',              href: '/' },
     { label: 'About',             href: '/about' },
     { label: 'Services',          href: '/services',               mega: true },
-    { label: 'Digital Solutions', href: '/services/web-development', digital: true },
+    { label: 'Digital Solutions', href: '/services/digital-solutions', digital: true },
     { label: 'Cyber Advisory',    href: '/cybersecurity-advisory',  cyber: true },
     { label: 'Event IT',          href: '/event-it',               dropdown: true },
     { label: 'Rental Hub',        href: '/rental' },
