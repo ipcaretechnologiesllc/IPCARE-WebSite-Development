@@ -46,6 +46,18 @@ const DIGITAL_SOLUTIONS_UAE = [
   { icon: Headphones,   label: '24/7 Support',                sub: 'We stay on after launch' },
 ]
 
+// Capability tiles for digital-solutions cluster pages (Canada).
+const DIGITAL_SOLUTIONS_CANADA = [
+  { icon: Clock,        label: '15+ Years Experience',        sub: 'Serving Canadian businesses since 2011' },
+  { icon: CheckSquare,  label: '500+ Projects Delivered',     sub: 'Across Canada and beyond' },
+  { icon: Users,        label: '200+ Clients Served',         sub: 'From SMEs to enterprise' },
+  { icon: Code2,        label: 'In-House Development Team',   sub: 'No outsourcing, no middlemen' },
+  { icon: Layers,       label: 'React, Next.js & Node.js',    sub: 'Modern stack, production-ready' },
+  { icon: Search,       label: 'SEO-Ready Architecture',      sub: 'Search-structured from day one' },
+  { icon: ShieldCheck,  label: 'Secure by Design',            sub: 'HTTPS, hardening, safe data handling' },
+  { icon: Headphones,   label: '24/7 Support',                sub: 'We stay on after launch' },
+]
+
 /* Reusable trust band — certifications & compliance alignment.
    Used on the homepage and across service pages to close the
    "no visible certifications" trust gap for IT-manager personas.
@@ -55,10 +67,7 @@ export default function CertificationsBand({ region, menuGroup }) {
   const isDigital = menuGroup === 'digital-solutions'
 
   if (isDigital) {
-    // Today only UAE digital-solutions pages exist.
-    // When region === 'canada' variants are built, add a DIGITAL_SOLUTIONS_CANADA
-    // set here and select it the same way the standard branch selects CANADA_CREDENTIALS.
-    const tiles = DIGITAL_SOLUTIONS_UAE
+    const tiles = region === 'canada' ? DIGITAL_SOLUTIONS_CANADA : DIGITAL_SOLUTIONS_UAE
 
     return (
       <section style={{ background: '#0B1A46', padding: '72px 24px', borderTop: '3px solid #E87722' }}>
