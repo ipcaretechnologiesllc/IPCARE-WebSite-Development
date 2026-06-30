@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 
@@ -63,6 +63,55 @@ function renderH1(h1, accent) {
       <span style={{ color: '#E87722' }}>{accent}</span>
       {h1.slice(i + accent.length)}
     </>
+  )
+}
+
+/* FAQ accordion — explicit state, all items collapsed by default (openIndex
+   starts at null). Question/answer colours are hard-coded dark-on-light so
+   neither state can ever render invisible text. */
+function FAQAccordion({ faqs }) {
+  const [openIndex, setOpenIndex] = useState(null)
+
+  return (
+    <div className="space-y-3">
+      {faqs.map((f, i) => {
+        const isOpen = openIndex === i
+        return (
+          <div
+            key={i}
+            className="reveal"
+            style={{
+              background: BG_WHITE,
+              borderRadius: '14px',
+              borderTop: '3px solid #E87722',
+              boxShadow: '0 4px 20px rgba(10,26,70,0.07)',
+              overflow: 'hidden',
+              transitionDelay: `${i * 55}ms`,
+            }}
+          >
+            <button
+              type="button"
+              aria-expanded={isOpen}
+              onClick={() => setOpenIndex(isOpen ? null : i)}
+              className="w-full text-left cursor-pointer flex items-center justify-between gap-4"
+              style={{ padding: '20px 24px', background: 'transparent', border: 'none' }}
+            >
+              <h3 className="font-semibold text-base" style={{ color: '#0D2B55' }}>{f.q}</h3>
+              <Icons.Plus
+                size={18}
+                className="flex-shrink-0 transition-transform duration-200"
+                style={{ color: '#E87722', transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+            {isOpen && (
+              <div style={{ padding: '0 24px 20px', borderTop: '1px solid #EEF1F5' }}>
+                <p className="text-sm leading-relaxed pt-4" style={{ color: '#333F50' }}>{f.a}</p>
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
@@ -292,34 +341,7 @@ export default function ProductPageTemplate({ data }) {
               <Eyebrow>Questions & Answers</Eyebrow>
               <SectionHeading>Frequently Asked Questions</SectionHeading>
             </div>
-            <div className="space-y-3">
-              {faqs.map((f, i) => (
-                <details
-                  key={i}
-                  className="reveal group"
-                  style={{
-                    background: BG_WHITE,
-                    borderRadius: '14px',
-                    borderTop: '3px solid #E87722',
-                    boxShadow: '0 4px 20px rgba(10,26,70,0.07)',
-                    overflow: 'hidden',
-                    transitionDelay: `${i * 55}ms`,
-                  }}
-                >
-                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4" style={{ padding: '20px 24px' }}>
-                    <h3 className="font-semibold text-base" style={{ color: T_NAV }}>{f.q}</h3>
-                    <Icons.Plus
-                      size={18}
-                      className="flex-shrink-0 group-open:rotate-45 transition-transform duration-200"
-                      style={{ color: '#E87722' }}
-                    />
-                  </summary>
-                  <div style={{ padding: '0 24px 20px', borderTop: '1px solid #EEF1F5' }}>
-                    <p className="text-sm leading-relaxed pt-4" style={{ color: T_BODY }}>{f.a}</p>
-                  </div>
-                </details>
-              ))}
-            </div>
+            <FAQAccordion faqs={faqs} />
           </div>
         </section>
       )}
