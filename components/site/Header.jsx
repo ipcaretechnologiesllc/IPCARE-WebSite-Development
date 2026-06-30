@@ -11,6 +11,7 @@ import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices, navDigitalSolutionsCategories as digitalSolutionsCategories } from '@/lib/services-nav-data'
+import { products } from '@/lib/products-data'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield }
 
@@ -169,6 +170,13 @@ export default function Header() {
   // Ordered list for mega-menu grid
   // Row 1: IT / Infra / Managed / Cyber  →  Row 2: Cloud / ELV / Email  + CTA slot
   const servicesOrder = ['it-consulting', 'infrastructure', 'managed-it', 'cybersecurity', 'cloud', 'elv', 'email-solutions']
+
+  // Products link list for the Digital Solutions mega-menu, data-driven so new
+  // products appear automatically without further Header edits.
+  const productNavItems = [
+    { label: 'All Products', href: '/products' },
+    ...Object.entries(products).map(([slug, p]) => ({ label: p.h1Accent || p.h1, href: `/products/${slug}` })),
+  ]
 
   return (
     <>
@@ -470,6 +478,25 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
+
+              {/* Products — separate row below the cluster columns, keeps the
+                  3-column grid + CTA card untouched. Data-driven from
+                  lib/products-data.js so new products appear automatically. */}
+              <div className="mt-8 pt-6 flex items-center gap-6 flex-wrap" style={{ borderTop: '1px solid #E5E7EB' }}>
+                <span className="text-[#0D2B55] text-[14px] font-semibold flex-shrink-0">Products</span>
+                <div className="flex items-center gap-5 flex-wrap">
+                  {productNavItems.map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      onClick={closeAll}
+                      className="text-[#4B5563] text-[12.5px] font-medium hover:text-[#E87722] transition-colors"
+                    >
+                      {p.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -598,7 +625,16 @@ export default function Header() {
           </div>
           <ul className="flex-1 flex flex-col items-center justify-start gap-6 px-6 pt-10 pb-8 overflow-y-auto">
             {navLinks.map((l) => (
-              <li key={l.label}><Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link></li>
+              <li key={l.label} className="flex flex-col items-center">
+                <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link>
+                {l.digital && (
+                  <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
+                    {productNavItems.map((p) => (
+                      <Link key={p.href} href={p.href} onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">{p.label}</Link>
+                    ))}
+                  </div>
+                )}
+              </li>
             ))}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
             <div className="flex items-center gap-4 mt-6">
