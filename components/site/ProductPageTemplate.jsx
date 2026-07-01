@@ -144,6 +144,7 @@ export default function ProductPageTemplate({ data }) {
     overview, capabilities, industries,
     whyTitle, why, faqs,
     primaryCta, secondaryCta,
+    overviewTitle, whyEyebrow, ctaTitle, ctaSubtext,
   } = data
 
   return (
@@ -246,7 +247,7 @@ export default function ProductPageTemplate({ data }) {
 
             <div className="flex-1 min-w-0 reveal" style={{ transitionDelay: '80ms' }}>
               <Eyebrow>Overview</Eyebrow>
-              <SectionHeading centered={false}>What CrewForce360 Does</SectionHeading>
+              <SectionHeading centered={false}>{overviewTitle || `What ${h1Accent} Does`}</SectionHeading>
               <div className="mt-6 space-y-4" style={{ color: T_BODY, fontSize: '0.9375rem', lineHeight: 1.7 }}>
                 {overview?.map((p, i) => <p key={i}>{p}</p>)}
               </div>
@@ -319,7 +320,7 @@ export default function ProductPageTemplate({ data }) {
               className="rounded-2xl p-8 md:p-12"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)' }}
             >
-              <Eyebrow>Why CrewForce360</Eyebrow>
+              <Eyebrow>{whyEyebrow || `WHY ${(h1Accent || '').toUpperCase()}`}</Eyebrow>
               <h2 className="text-white font-bold mb-6" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', letterSpacing: '-0.02em' }}>
                 {whyTitle}
               </h2>
@@ -356,10 +357,10 @@ export default function ProductPageTemplate({ data }) {
             style={{ background: 'rgba(232,119,34,0.10)', border: '1px solid rgba(232,119,34,0.30)' }}
           >
             <h2 className="text-white font-bold mb-4" style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}>
-              See CrewForce360 in action
+              {ctaTitle || `See ${h1Accent} in Action`}
             </h2>
             <p className="max-w-xl mx-auto mb-8" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}>
-              Talk to our team for a walkthrough of CrewForce360 on your own field operations.
+              {ctaSubtext || `Talk to our team about ${h1Accent} for your business.`}
             </p>
             <div className="flex justify-center">
               <CtaLink cta={primaryCta} className="btn-primary" />
