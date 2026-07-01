@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   ArrowRight, Menu, X, Mail, Phone,
-  Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, ChevronDown
+  Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, ChevronDown,
+  Terminal, BrainCircuit
 } from 'lucide-react'
 import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
@@ -13,7 +14,7 @@ import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices, navDigitalSolutionsCategories as digitalSolutionsCategories } from '@/lib/services-nav-data'
 import { products } from '@/lib/products-data'
 
-const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield }
+const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, Terminal, BrainCircuit }
 
 // Custom display labels for navigation mega-menu (shorter, no location suffix)
 const navLabels = {
