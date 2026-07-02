@@ -56,7 +56,7 @@ function Counter({ end, suffix = '', duration = 1600 }) {
   return <span ref={ref} className="stat-num text-4xl md:text-5xl">{val.toLocaleString()}{suffix}</span>
 }
 
-/* ---------------- Hero Carousel (7 slides) ---------------- */
+/* ---------------- Hero Carousel (8 slides) ---------------- */
 const HERO_SLIDES = [
   {
     id: 0,
@@ -138,6 +138,18 @@ const HERO_SLIDES = [
     bg: '/images/hero-desktop/hero-cloud.webp',
     mobileBg: '/images/hero-mobile/hero-m-cloud.webp',
     cta: { primary: { label: 'Explore Cloud Services', href: '/services/cloud' }, secondary: { label: 'Book a Cloud Review', href: '/contact' } },
+  },
+  {
+    id: 7,
+    service: 'Digital Solutions',
+    icon: Globe,
+    headline: 'Custom ',
+    headlineAccent: 'Web, Software & AI',
+    headlineSuffix: ', Built In-House',
+    description: 'Websites, web apps, custom software, and AI-driven tools, designed and built by our in-house team in Abu Dhabi across React, Next.js, Node.js, .NET, and Flutter.',
+    bg: '/images/services/digital-solutions-hero.webp',
+    mobileBg: '/images/services/digital-solutions-hero.webp',
+    cta: { primary: { label: 'Explore Digital Solutions', href: '/services/digital-solutions' }, secondary: { label: 'Start Your Project', href: '/contact' } },
   },
 ]
 
