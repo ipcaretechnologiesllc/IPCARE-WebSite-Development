@@ -16,8 +16,8 @@ import { getAllIndustrySlugs } from '@/lib/industries-data'
 const CANONICAL_DOMAINS = {
   'ipcare.ae':       'https://www.ipcare.ae',
   'www.ipcare.ae':   'https://www.ipcare.ae',
-  'ipcare.ca':       'https://ipcare.ca',
-  'www.ipcare.ca':   'https://ipcare.ca',
+  'ipcare.ca':       'https://www.ipcare.ca',
+  'www.ipcare.ca':   'https://www.ipcare.ca',
   'ipcares.com':     'https://www.ipcare.ae',
   'www.ipcares.com': 'https://www.ipcare.ae',
 }

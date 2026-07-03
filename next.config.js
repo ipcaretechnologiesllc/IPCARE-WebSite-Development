@@ -82,6 +82,18 @@ const nextConfig = {
         destination: 'https://www.ipcare.ae/:path*',
         permanent: true,
       },
+      // www.ipcare.ca is the single canonical host for the Canada site.
+      // Non-www ipcare.ca 308s to www.ipcare.ca. This mirrors a redirect that's
+      // also configured at the Vercel domain level, but is duplicated here so
+      // the canonical/sitemap/hreflang strategy in app/layout.js, app/sitemap.js,
+      // app/robots.js, and app/llms.txt/route.js is backed by a real 308 even if
+      // a request ever reaches this app directly for the apex host.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'ipcare.ca' }],
+        destination: 'https://www.ipcare.ca/:path*',
+        permanent: true,
+      },
 
       // Office / location pages → unified Contact page (which has both Abu Dhabi + Toronto offices)
       { source: '/office-location.php', destination: '/contact', permanent: true },

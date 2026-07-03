@@ -15,8 +15,8 @@ const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'
 const CANONICAL_DOMAINS = {
   'ipcare.ae':       'https://www.ipcare.ae',
   'www.ipcare.ae':   'https://www.ipcare.ae',
-  'ipcare.ca':       'https://ipcare.ca',
-  'www.ipcare.ca':   'https://ipcare.ca',
+  'ipcare.ca':       'https://www.ipcare.ca',
+  'www.ipcare.ca':   'https://www.ipcare.ca',
   'ipcares.com':     'https://www.ipcare.ae',
   'www.ipcares.com': 'https://www.ipcare.ae',
 }
@@ -26,7 +26,7 @@ const DEFAULT_CANONICAL = 'https://www.ipcare.ae'
 // always redirects to ipcare.ae — Google should index the destinations only.
 const HREFLANG_TARGETS = [
   { lang: 'en-AE',     domain: 'https://www.ipcare.ae' },
-  { lang: 'en-CA',     domain: 'https://ipcare.ca' },
+  { lang: 'en-CA',     domain: 'https://www.ipcare.ca' },
   { lang: 'x-default', domain: 'https://www.ipcare.ae' },
 ]
 
@@ -192,12 +192,12 @@ export default async function RootLayout({ children }) {
   const localBusinessToronto = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    '@id': 'https://ipcare.ca/#toronto',
+    '@id': 'https://www.ipcare.ca/#toronto',
     name: 'IP Care Technologies: Toronto',
     parentOrganization: { '@id': `${BRAND_URL}#org` },
     image: `${BRAND_URL}/ipcare-logo.png`,
     logo: `${BRAND_URL}/ipcare-logo.png`,
-    url: 'https://ipcare.ca',
+    url: 'https://www.ipcare.ca',
     telephone: '+1-416-786-0782',
     email: 'info@ipcare.ca',
     priceRange: '$$',
