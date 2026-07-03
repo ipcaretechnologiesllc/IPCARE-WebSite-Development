@@ -304,6 +304,14 @@ const nextConfig = {
       { source: '/rental/testing-equipment/ekahau-sidekick-2', destination: '/rental/testing-equipment', permanent: true },
       { source: '/rental/testing-equipment/keysight-n9914b',   destination: '/rental/testing-equipment', permanent: true },
       { source: '/rental/testing-equipment/ixia-perfectstorm-40', destination: '/rental/testing-equipment', permanent: true },
+      { source: '/rental/testing-equipment/fluke-dsx-8000',    destination: '/rental/testing-equipment', permanent: true },
+      { source: '/rental/event-wifi/meraki-mr57',              destination: '/rental/event-wifi',         permanent: true },
+      { source: '/rental/cctv/axis-p5676-le',                  destination: '/rental/cctv',                permanent: true },
+      { source: '/rental/printers/brother-hl-l3295cdw',        destination: '/rental/printers',            permanent: true },
+
+      // Malformed/artifact URL (stray trailing "$", likely a broken template link crawled from
+      // an old page). No corresponding content — safety-net redirect to home.
+      { source: '/$', destination: '/', permanent: true },
 
       // ─── Legacy WordPress .html pages ────────────────────────────────────────
       // Specific destinations for pages that have a meaningful equivalent.
