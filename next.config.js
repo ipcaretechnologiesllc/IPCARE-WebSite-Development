@@ -208,6 +208,7 @@ const nextConfig = {
       { source: '/endpoint-protection.php', destination: '/services/cybersecurity/endpoint-protection', permanent: true },
       { source: '/pam.php', destination: '/services/cybersecurity/pam', permanent: true },
       { source: '/privileged-access.php', destination: '/services/cybersecurity/pam', permanent: true },
+      { source: '/privileged-access-management.php', destination: '/services/cybersecurity/pam', permanent: true },
       { source: '/email-security.php', destination: '/services/cybersecurity/email-security', permanent: true },
       { source: '/email-security-email-data-loss-prevention.php', destination: '/services/cybersecurity/email-security', permanent: true },
       { source: '/microsoft-entra.php', destination: '/services/cybersecurity/microsoft-entra-id', permanent: true },
