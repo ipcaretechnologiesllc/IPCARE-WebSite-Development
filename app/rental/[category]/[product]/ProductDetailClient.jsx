@@ -24,13 +24,13 @@ export default function ProductDetailClient({ product, categorySlug }) {
         {/* Gallery */}
         <div className="lg:col-span-3">
           <div className="overflow-hidden aspect-[4/3] relative mb-4 rounded-2xl" style={{ background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.08)', boxShadow: '0 8px 32px rgba(10,26,70,0.10)' }}>
-            <img src={images[activeImage]} alt={`${product.brand} ${product.model}`} className="w-full h-full object-cover"/>
+            <img src={images[activeImage]} alt={`${product.brand} ${product.model}`} className="w-full h-full object-contain p-6"/>
             <span className="absolute top-4 left-4 mono text-[11px] uppercase tracking-widest px-2.5 py-1 rounded" style={{ background: '#E87722', color: '#fff' }}>{product.brand}</span>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {images.map((img, i) => (
               <button key={i} onClick={() => setActiveImage(i)} className={`aspect-[4/3] rounded-lg overflow-hidden transition ${activeImage === i ? 'ring-2 ring-[#E87722]' : 'opacity-70 hover:opacity-100'}`} style={{ background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.08)' }}>
-                <img src={img} alt="" className="w-full h-full object-cover"/>
+                <img src={img} alt="" className="w-full h-full object-contain p-2"/>
               </button>
             ))}
           </div>
