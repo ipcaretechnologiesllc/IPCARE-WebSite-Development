@@ -58,3 +58,7 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 ### Path aliases
 
 `@/*` maps to repo root (see `jsconfig.json`): `@/components/*`, `@/lib/*`, `@/app/*`, `@/hooks/*`.
+
+## Documentation lookups
+
+Whenever a task involves code generation, API integration, SDK usage, framework setup, authentication, payment, database, deployment, or configuration, use Context7 to check the latest official documentation before writing or modifying code.
