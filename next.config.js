@@ -293,6 +293,10 @@ const nextConfig = {
       // Must sit ABOVE the catch-all so the specific rule wins.
       { source: '/privileged.access.management.php', destination: '/services/cybersecurity/pam', permanent: true },
 
+      // Dot-notation variant of the technology-strategy URL (technology.strategy vs technology-strategy).
+      // Must sit ABOVE the catch-all so the specific rule wins.
+      { source: '/technology.strategy.php', destination: '/services/it-consulting/technology-strategy', permanent: true },
+
       // Catch-all: any other .php URL → home (safety net so visitors never see a 404 on legacy links)
       { source: '/:slug(.+)\\.php', destination: '/', permanent: true },
 
