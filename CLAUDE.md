@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Marketing/corporate website for **IP Care Technologies** (managed IT, cybersecurity, cloud, ELV, event IT, and equipment rental), built with Next.js 14 (App Router, JS not TS), Tailwind CSS, and shadcn/ui (Radix) components.
+Marketing/corporate website for **IP Care Technologies** (managed IT, cybersecurity, cloud, ELV, event IT, delivery portfolio, and equipment rental), built with Next.js 15 (App Router, JS not TS), Tailwind CSS, and shadcn/ui (Radix) components.
 
 ## Commands
 
@@ -12,6 +12,8 @@ Marketing/corporate website for **IP Care Technologies** (managed IT, cybersecur
 - `yarn dev:no-reload` / `yarn dev:webpack` — alternate dev server invocations without the memory flag
 - `yarn build` — production build (`output: 'standalone'`)
 - `yarn start` — run the production build
+
+- Windows preview fallback used successfully in Codex: `node node_modules/next/dist/bin/next dev --hostname 0.0.0.0 --port 3010` from the repo root, preferably in a visible terminal so the process stays alive.
 
 There is no lint/test script configured in `package.json`. `tests/` and `test_reports/` only contain placeholder files.
 
@@ -28,6 +30,8 @@ This single deployment serves multiple hostnames (`www.ipcare.ae`, `ipcare.ca`, 
 When adding new routes or changing URL structure, add a corresponding entry to `redirects()` in `next.config.js` if an old URL needs to map to it.
 
 ### Content data modules (`lib/*-data.js`)
+
+Portfolio content now lives in `lib/portfolio-data.js`. The unified `/portfolio` delivery proof page combines major event records from `lib/event-it-data.js` with enterprise project records, then exposes filters for project type, industry, and service. Keep exact project spellings, years, and photos under content QA when source material is incomplete.
 
 Most page content (rental products/categories, services, industries, blog posts, careers, partners, cyber-advisory, event-it) lives in plain JS data files under `lib/` rather than a CMS or database — e.g. `lib/rental-data.js` exports `rentalCategories`, each with `products` built via a `P(...)` factory (slug, brand, model, specs, fullSpecs, rates, image). Dynamic routes like `app/rental/[category]/page.js`, `app/services/[category]/page.js`, `app/industries/[slug]/page.js`, `app/blog/[slug]/page.js`, `app/cybersecurity-advisory/[slug]/page.js`, `app/event-it/[slug]/page.js` read from these data modules to generate static params and metadata.
 
@@ -54,6 +58,13 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 - `components/global/` — cross-cutting widgets rendered from the root layout: `Analytics`, `CookieBanner`, `WhatsAppButton`, `CallNowButton`.
 - `components/rental/` — rental cart/quote flow: `CartContext` (provider), `CartButton`, `CartDrawer`, `AddToQuoteButton`; `RentalShell` (in root layout) wraps the app to provide cart context site-wide.
 - `components/ui/` — shadcn/ui primitives (Radix-based), configured via `components.json` (style `new-york`, no TS, `cssVariables: true`, path aliases `@/components`, `@/lib`, `@/hooks`, `@/ui`).
+
+### Portfolio experience
+
+- `/portfolio` is implemented with `app/portfolio/page.js` plus the client-side filter UI in `app/portfolio/PortfolioClient.js`.
+- `components/site/Header.jsx` includes a Portfolio dropdown with links to full portfolio, major events, enterprise projects, and ELV/security filtered views.
+- `app/HomeClient.js` includes a small `DeliveryProofStrip` before Cyber Advisory. Do not replace or materially change the existing homepage `EventsPortfolio` section unless explicitly requested.
+- `app/sitemap.js` and `app/llms.txt/route.js` include the `/portfolio` route for discovery and AI-readable site context.
 
 ### Path aliases
 
