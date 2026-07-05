@@ -8,22 +8,22 @@ export const revalidate = 3600
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export const metadata = {
-  title: 'IT, ELV & Event Infrastructure Projects UAE | IP Care',
+  title: 'Enterprise ELV & Infrastructure Projects UAE | IP Care',
   description:
-    'Explore IP Care Technologies delivery portfolio across major events, hotels, schools, arenas, towers, oil and gas, CCTV, access control, structured cabling, fiber and system integration projects.',
+    'Explore IP Care Technologies delivery portfolio across hotels, schools, arenas, towers, oil and gas, CCTV, access control, structured cabling, fiber and system integration projects.',
   alternates: { canonical: '/portfolio' },
   openGraph: {
-    title: 'IT, ELV & Event Infrastructure Projects UAE | IP Care',
+    title: 'Enterprise ELV & Infrastructure Projects UAE | IP Care',
     description:
-      'Project proof across major events, enterprise facilities, ELV, CCTV, access control, structured cabling and full-system infrastructure delivery.',
+      'Project proof across enterprise facilities, ELV, CCTV, access control, structured cabling and full-system infrastructure delivery.',
     url: '/portfolio',
     type: 'website',
     images: [{ url: '/images/hero-desktop/hero-overall.webp', width: 1200, height: 630, alt: 'IP Care Technologies delivery portfolio' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IT, ELV & Event Infrastructure Projects UAE | IP Care',
-    description: 'Major event, enterprise facility, ELV, CCTV and infrastructure project proof from IP Care Technologies.',
+    title: 'Enterprise ELV & Infrastructure Projects UAE | IP Care',
+    description: 'Enterprise facility, ELV, CCTV and infrastructure project proof from IP Care Technologies.',
   },
 }
 
@@ -42,7 +42,7 @@ const portfolioSchema = {
   '@id': `${BASE}/portfolio#webpage`,
   name: 'IP Care Technologies Delivery Portfolio',
   description:
-    'A unified delivery portfolio covering major event IT, enterprise facilities, ELV, CCTV, access control, structured cabling, fiber and network infrastructure projects.',
+    'A unified delivery portfolio covering enterprise facilities, ELV, CCTV, access control, structured cabling, fiber and network infrastructure projects.',
   url: `${BASE}/portfolio`,
   publisher: { '@id': `${BASE}#org` },
   mainEntity: {

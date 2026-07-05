@@ -31,7 +31,7 @@ When adding new routes or changing URL structure, add a corresponding entry to `
 
 ### Content data modules (`lib/*-data.js`)
 
-Portfolio content now lives in `lib/portfolio-data.js`. The unified `/portfolio` delivery proof page combines major event records from `lib/event-it-data.js` with enterprise project records, then exposes filters for project type, industry, and service. Keep exact project spellings, years, and photos under content QA when source material is incomplete.
+Portfolio content now lives in `lib/portfolio-data.js`. The unified `/portfolio` delivery proof page is for enterprise facilities, ELV/security, structured cabling, fiber and network infrastructure projects only. Major event case studies stay in the dedicated Event IT section. Keep exact project spellings, years, and photos under content QA when source material is incomplete.
 
 Most page content (rental products/categories, services, industries, blog posts, careers, partners, cyber-advisory, event-it) lives in plain JS data files under `lib/` rather than a CMS or database — e.g. `lib/rental-data.js` exports `rentalCategories`, each with `products` built via a `P(...)` factory (slug, brand, model, specs, fullSpecs, rates, image). Dynamic routes like `app/rental/[category]/page.js`, `app/services/[category]/page.js`, `app/industries/[slug]/page.js`, `app/blog/[slug]/page.js`, `app/cybersecurity-advisory/[slug]/page.js`, `app/event-it/[slug]/page.js` read from these data modules to generate static params and metadata.
 
@@ -62,7 +62,7 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 ### Portfolio experience
 
 - `/portfolio` is implemented with `app/portfolio/page.js` plus the client-side filter UI in `app/portfolio/PortfolioClient.js`.
-- `components/site/Header.jsx` includes a Portfolio dropdown with links to full portfolio, major events, enterprise projects, and ELV/security filtered views.
+- `components/site/Header.jsx` includes a Portfolio dropdown with links to full portfolio, enterprise projects, ELV/security and structured cabling filtered views.
 - `app/HomeClient.js` includes a small `DeliveryProofStrip` before Cyber Advisory. Do not replace or materially change the existing homepage `EventsPortfolio` section unless explicitly requested.
 - `app/sitemap.js` and `app/llms.txt/route.js` include the `/portfolio` route for discovery and AI-readable site context.
 

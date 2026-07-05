@@ -37,7 +37,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 
 ## Other sections
 - [Industries](${BASE}/industries): Sector-specific IT solutions
-- [Delivery Portfolio](${BASE}/portfolio): Unified project proof across major events, enterprise facilities, ELV, CCTV, access control, structured cabling and infrastructure
+- [Delivery Portfolio](${BASE}/portfolio): Unified project proof across enterprise facilities, ELV, CCTV, access control, structured cabling and infrastructure
 - [IT Equipment Rental](${BASE}/rental): Short and long-term rental of laptops, servers, networking, and AV equipment
 - [Event IT](${BASE}/event-it): On-site IT support and equipment for events
 - [Partners](${BASE}/partners): Technology partners and vendor relationships
@@ -55,7 +55,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 
 ## Optional
 - [Cybersecurity Advisory Services](${BASE}/cybersecurity-advisory): Zero Trust, SASE, and cloud security advisory offerings
-- [Delivery Portfolio](${BASE}/portfolio): Major event, enterprise facility and ELV delivery proof
+- [Delivery Portfolio](${BASE}/portfolio): Enterprise facility, ELV and infrastructure delivery proof
 - [Event IT Portfolio](${BASE}/event-it/portfolio): Case studies from major events (FIFA, NBA, UFC, EuroLeague)
 - [Rental Categories](${BASE}/rental): Laptops, tablets, networking, CCTV, servers and bundle packages
 - [Careers](${BASE}/careers): Open roles at IP Care Technologies

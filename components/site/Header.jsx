@@ -534,7 +534,7 @@ export default function Header() {
                 <Briefcase className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
                 <div>
                   <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">Delivery Portfolio</div>
-                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Enterprise projects, major events and installed infrastructure proof</div>
+                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Enterprise facilities, ELV and installed infrastructure proof</div>
                 </div>
               </Link>
 
@@ -543,9 +543,9 @@ export default function Header() {
                 style={{ borderColor: '#E5E7EB' }}
               >
                 <Link href="/portfolio" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Full Portfolio</Link>
-                <Link href="/portfolio?category=major-events" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Major Events</Link>
                 <Link href="/portfolio?category=enterprise" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Enterprise Projects</Link>
                 <Link href="/portfolio?service=cctv-access-control" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">ELV &amp; Security</Link>
+                <Link href="/portfolio?service=structured-cabling" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Structured Cabling</Link>
               </div>
 
               <div className="mt-6 pt-4 flex items-center justify-between gap-4" style={{ borderTop: '1px solid #E5E7EB' }}>
@@ -687,9 +687,9 @@ export default function Header() {
                 <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link>
                 {l.portfolio && (
                   <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
-                    <Link href="/portfolio?category=major-events" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Major Events</Link>
                     <Link href="/portfolio?category=enterprise" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Enterprise Projects</Link>
                     <Link href="/portfolio?service=cctv-access-control" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">ELV &amp; Security</Link>
+                    <Link href="/portfolio?service=structured-cabling" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Structured Cabling</Link>
                   </div>
                 )}
                 {l.digital && (

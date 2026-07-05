@@ -539,11 +539,6 @@ function Services() {
 function DeliveryProofStrip() {
   const proofColumns = [
     {
-      icon: Calendar,
-      title: 'Major Events',
-      text: 'FIFA, UFC, NBA, EuroLeague, Coldplay and IIFA-scale delivery.',
-    },
-    {
       icon: Building2,
       title: 'Enterprise Facilities',
       text: 'Hotels, schools, malls, towers, arenas and commercial sites.',
@@ -559,7 +554,7 @@ function DeliveryProofStrip() {
     <section className="px-6 py-12" style={{ background: '#FFFFFF', borderBottom: '1px solid #E5EAF2' }}>
       <div className="max-w-[1400px] mx-auto">
         <div
-          className="reveal grid gap-8 lg:grid-cols-[1.05fr_1.35fr_auto] lg:items-center"
+          className="reveal grid gap-8 lg:grid-cols-[1.05fr_1fr_auto] lg:items-center"
           style={{
             background: 'linear-gradient(135deg, #F7F9FD 0%, #FFFFFF 100%)',
             border: '1px solid #E1E7F0',
@@ -574,14 +569,14 @@ function DeliveryProofStrip() {
               Delivery Proof
             </div>
             <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
-              Trusted Across Events, Enterprise Facilities &amp; ELV Projects
+              Trusted Across Enterprise Facilities &amp; ELV Projects
             </h2>
             <p className="mt-3 text-sm md:text-base leading-7" style={{ color: '#4B5563' }}>
-              One accountable engineering team for live operations, facility systems and handover-ready infrastructure.
+              One accountable engineering team for facility systems and handover-ready infrastructure.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2">
             {proofColumns.map((item) => (
               <div key={item.title} className="flex gap-3">
                 <span className="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center" style={{ background: '#0B1A46', color: '#FFFFFF' }}>

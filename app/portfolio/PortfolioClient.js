@@ -5,7 +5,6 @@ import Link from 'next/link'
 import {
   ArrowRight,
   Building2,
-  Calendar,
   CheckCircle2,
   Filter,
   MapPin,
@@ -23,8 +22,6 @@ import {
 } from '@/lib/portfolio-data'
 
 const categoryParamMap = {
-  'major-events': { type: 'Major Events' },
-  events: { type: 'Major Events' },
   enterprise: { type: 'Enterprise Facilities' },
   'enterprise-projects': { type: 'Enterprise Facilities' },
   'elv-security': { type: 'ELV & Security' },
@@ -50,9 +47,6 @@ const serviceParamMap = {
   'structured-cabling': 'Structured Cabling & Fiber',
   fiber: 'Structured Cabling & Fiber',
   'structured-cabling-fiber': 'Structured Cabling & Fiber',
-  'event-it': 'Event IT',
-  wifi: 'High-Density WiFi',
-  'event-wifi': 'High-Density WiFi',
   network: 'Network Infrastructure',
   infrastructure: 'Network Infrastructure',
 }
@@ -286,10 +280,10 @@ export default function PortfolioClient() {
                 Delivery Portfolio
               </div>
               <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
-                Mission-critical IT, ELV and event infrastructure delivered across UAE.
+                Enterprise facilities, ELV and infrastructure projects delivered across UAE.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-white/80 md:text-lg">
-                From global event operations to hotels, schools, arenas, towers, retail spaces and industrial sites, IP Care turns past delivery into practical proof for your next project.
+                From hotels, schools, arenas, towers, retail spaces and industrial sites, IP Care turns past delivery into practical proof for your next facility project.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/contact" className="btn-primary">
@@ -313,11 +307,11 @@ export default function PortfolioClient() {
       </section>
 
       <section className="border-b border-[#DFE6F1] bg-white px-6 py-12">
-        <div className="mx-auto grid max-w-[1400px] gap-4 md:grid-cols-3">
+        <div className="mx-auto grid max-w-[980px] gap-4 md:grid-cols-2">
           {portfolioPillars.map((pillar) => (
             <div key={pillar.title} className="rounded-xl border border-[#E1E7F0] bg-[#F8FAFD] p-6">
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-[#0B1A46] text-white">
-                {pillar.title === 'Major Events' ? <Calendar size={20} /> : pillar.title === 'Enterprise Facilities' ? <Building2 size={20} /> : <ShieldCheck size={20} />}
+                {pillar.title === 'Enterprise Facilities' ? <Building2 size={20} /> : <ShieldCheck size={20} />}
               </div>
               <h2 className="text-xl font-extrabold text-[#0B1A46]">{pillar.title}</h2>
               <p className="mt-3 text-sm leading-6 text-[#475467]">{pillar.text}</p>
@@ -333,11 +327,11 @@ export default function PortfolioClient() {
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#E87722]">Featured Proof</p>
               <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight text-[#0B1A46] md:text-5xl">
-                Enterprise and event delivery that reduces buyer doubt.
+                Facility and infrastructure delivery that reduces buyer doubt.
               </h2>
             </div>
             <p className="max-w-md text-sm leading-7 text-[#5B6475]">
-              Featured projects are intentionally mixed: live-event pressure, facility infrastructure, CCTV, cabling and access control. That is the real IP Care story.
+              Featured projects are intentionally focused on facility infrastructure, CCTV, cabling, access control and network backbone. That is the practical IP Care delivery story.
             </p>
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
@@ -415,7 +409,7 @@ export default function PortfolioClient() {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#FFB37B]">Next Project</p>
             <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
-              Planning CCTV, ELV, structured cabling, access control or event IT?
+              Planning CCTV, ELV, structured cabling, access control or network infrastructure?
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">
               Bring IP Care in early and get a practical deployment plan from engineers who understand site work, live operations and long-term support.
