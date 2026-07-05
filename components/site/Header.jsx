@@ -77,6 +77,7 @@ const NAV_GRADIENTS = {
   '/':                       { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/about':                  { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/services':               { gradient: 'radial-gradient(circle, rgba(26,62,158,0.20) 0%, rgba(21,47,127,0.08) 50%, rgba(15,36,95,0) 100%)',          accentColor: '#1A3E9E' },
+  '/portfolio':              { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/services/digital-solutions': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',   accentColor: '#2E64D8' },
   '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/event-it':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
@@ -89,6 +90,7 @@ export default function Header() {
   const pathname = usePathname()
   const [mobileOpen,   setMobileOpen]   = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [portfolioOpen, setPortfolioOpen] = useState(false)
   const [digitalOpen,  setDigitalOpen]  = useState(false)
   const [eventITOpen,  setEventITOpen]  = useState(false)
   const [cyberOpen,    setCyberOpen]    = useState(false)
@@ -128,6 +130,7 @@ export default function Header() {
   // where Next.js reuses the instance (e.g. shallow routing).
   useEffect(() => {
     setServicesOpen(false)
+    setPortfolioOpen(false)
     setDigitalOpen(false)
     setEventITOpen(false)
     setCyberOpen(false)
@@ -154,12 +157,13 @@ export default function Header() {
   // ─── Close helpers ────────────────────────────────────────────────────────
   // No timers. The nav's own onMouseLeave is the single reliable close trigger
   // (see the <nav> element below for the architectural explanation).
-  const closeAll = () => { setServicesOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
+  const closeAll = () => { setServicesOpen(false); setPortfolioOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
 
   const navLinks = [
     { label: 'Home',              href: '/' },
     { label: 'About',             href: '/about' },
     { label: 'Services',          href: '/services',               mega: true },
+    { label: 'Portfolio',         href: '/portfolio',              portfolio: true },
     { label: 'Digital Solutions', href: '/services/digital-solutions', digital: true },
     { label: 'Cyber Advisory',    href: '/cybersecurity-advisory',  cyber: true },
     { label: 'Event IT',          href: '/event-it',               dropdown: true },
@@ -239,7 +243,7 @@ export default function Header() {
                 : l.digital
                   ? isDigitalSolutionsActive()
                   : isActive(l.href)
-              const caret = (l.mega || l.dropdown || l.cyber || l.digital)
+              const caret = (l.mega || l.dropdown || l.cyber || l.digital || l.portfolio)
                 ? <ChevronDown size={12} className="opacity-60 flex-shrink-0" />
                 : null
               return (
@@ -247,11 +251,12 @@ export default function Header() {
                   key={l.label}
                   className="relative flex items-center"
                   onMouseEnter={() => {
-                    if      (l.mega)     { setDigitalOpen(false); setCyberOpen(false); setEventITOpen(false); setServicesOpen(true)  }
-                    else if (l.digital)  { setServicesOpen(false); setCyberOpen(false); setEventITOpen(false); setDigitalOpen(true)  }
-                    else if (l.dropdown) { setDigitalOpen(false); setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)  }
-                    else if (l.cyber)    { setDigitalOpen(false); setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)  }
-                    else                 { setServicesOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
+                    if      (l.mega)      { setPortfolioOpen(false); setDigitalOpen(false); setCyberOpen(false); setEventITOpen(false); setServicesOpen(true)  }
+                    else if (l.portfolio) { setServicesOpen(false); setDigitalOpen(false); setCyberOpen(false); setEventITOpen(false); setPortfolioOpen(true)  }
+                    else if (l.digital)   { setServicesOpen(false); setPortfolioOpen(false); setCyberOpen(false); setEventITOpen(false); setDigitalOpen(true)  }
+                    else if (l.dropdown)  { setPortfolioOpen(false); setDigitalOpen(false); setCyberOpen(false); setServicesOpen(false); setEventITOpen(true)  }
+                    else if (l.cyber)     { setPortfolioOpen(false); setDigitalOpen(false); setServicesOpen(false); setEventITOpen(false); setCyberOpen(true)  }
+                    else                  { setServicesOpen(false); setPortfolioOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
                   }}
                 >
                   <AnimatedNavItem
@@ -502,10 +507,64 @@ export default function Header() {
           </div>
         )}
 
-        {/* ── Event IT Dropdown ────────────────────────────────────────────
+        {/* ── Portfolio Dropdown ────────────────────────────────────────────
             Same architecture: absolute inside sticky nav, no panel-level
             hover handlers, onClick={closeAll} on every Link.
         ─────────────────────────────────────────────────────────────────── */}
+        {portfolioOpen && (
+          <div
+            className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
+            style={{ top: '100%' }}
+          >
+            <div
+              className="w-full py-8 px-8"
+              style={{
+                maxWidth:     '560px',
+                background:   '#ffffff',
+                borderLeft:   '1px solid #E5E7EB',
+                borderRight:  '1px solid #E5E7EB',
+                borderBottom: '1px solid #E5E7EB',
+                borderRadius: '0 0 14px 14px',
+                boxShadow:    '0 24px 60px -15px rgba(8,20,52,0.25)',
+              }}
+            >
+              <Link
+                href="/portfolio"
+                onClick={closeAll}
+                className="flex gap-2.5 p-2.5 -ml-2.5 rounded-lg hover:bg-[#E87722]/10 transition-colors group"
+              >
+                <Briefcase className="text-[#E87722] mt-0.5 flex-shrink-0" size={18}/>
+                <div>
+                  <div className="text-[#0D2B55] text-[14px] font-semibold leading-tight group-hover:text-[#E87722] transition-colors">Delivery Portfolio</div>
+                  <div className="text-[#6B7280] text-[11.5px] mt-0.5">Enterprise projects, major events and installed infrastructure proof</div>
+                </div>
+              </Link>
+
+              <div
+                className="grid grid-cols-2 gap-x-6 gap-y-2 ml-7 mt-2 border-l pl-3"
+                style={{ borderColor: '#E5E7EB' }}
+              >
+                <Link href="/portfolio" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Full Portfolio</Link>
+                <Link href="/portfolio?category=major-events" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Major Events</Link>
+                <Link href="/portfolio?category=enterprise" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">Enterprise Projects</Link>
+                <Link href="/portfolio?service=cctv-access-control" onClick={closeAll} className="text-[#4B5563] text-[12px] hover:text-[#E87722] transition-colors block py-0.5">ELV &amp; Security</Link>
+              </div>
+
+              <div className="mt-6 pt-4 flex items-center justify-between gap-4" style={{ borderTop: '1px solid #E5E7EB' }}>
+                <div className="text-[#6B7280] text-[12px]">Filter proof by service, industry or project type.</div>
+                <Link
+                  href="/contact"
+                  onClick={closeAll}
+                  className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all whitespace-nowrap"
+                >
+                  Discuss a Project <ArrowRight size={14}/>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Event IT Dropdown */}
         {eventITOpen && (
           <div
             className="hidden lg:flex absolute left-0 right-0 z-40 justify-center px-6"
@@ -628,6 +687,13 @@ export default function Header() {
             {navLinks.map((l) => (
               <li key={l.label} className="flex flex-col items-center">
                 <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link>
+                {l.portfolio && (
+                  <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
+                    <Link href="/portfolio?category=major-events" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Major Events</Link>
+                    <Link href="/portfolio?category=enterprise" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Enterprise Projects</Link>
+                    <Link href="/portfolio?service=cctv-access-control" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">ELV &amp; Security</Link>
+                  </div>
+                )}
                 {l.digital && (
                   <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
                     {productNavItems.map((p) => (

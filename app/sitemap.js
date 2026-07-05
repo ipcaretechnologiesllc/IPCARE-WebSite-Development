@@ -48,6 +48,7 @@ const HUB_DATES = {
   '/':                                     '2026-05-10',
   '/about':                                '2025-01-01',
   '/services':                             '2025-03-01',
+  '/portfolio':                            '2026-07-05',
   '/rental':                               '2025-03-01',
   '/event-it':                             '2025-05-25',
   '/event-it/portfolio':                   '2025-05-25',
@@ -111,6 +112,7 @@ export default async function sitemap() {
   const hubs = [
     ['/about', P_HUB, 'monthly'],
     ['/services', P_HUB, 'weekly'],
+    ['/portfolio', P_HUB, 'monthly'],
     ['/rental', P_HUB, 'weekly'],
     ['/event-it', P_HUB, 'weekly'],
     ['/event-it/portfolio', P_HUB, 'monthly'],

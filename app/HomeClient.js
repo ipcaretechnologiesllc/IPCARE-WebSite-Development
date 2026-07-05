@@ -535,6 +535,75 @@ function Services() {
   )
 }
 
+/* ---------------- Delivery Proof Strip ---------------- */
+function DeliveryProofStrip() {
+  const proofColumns = [
+    {
+      icon: Calendar,
+      title: 'Major Events',
+      text: 'FIFA, UFC, NBA, EuroLeague, Coldplay and IIFA-scale delivery.',
+    },
+    {
+      icon: Building2,
+      title: 'Enterprise Facilities',
+      text: 'Hotels, schools, malls, towers, arenas and commercial sites.',
+    },
+    {
+      icon: ShieldCheck,
+      title: 'ELV & Infrastructure',
+      text: 'CCTV, access control, structured cabling, fiber and network backbone.',
+    },
+  ]
+
+  return (
+    <section className="px-6 py-12" style={{ background: '#FFFFFF', borderBottom: '1px solid #E5EAF2' }}>
+      <div className="max-w-[1400px] mx-auto">
+        <div
+          className="reveal grid gap-8 lg:grid-cols-[1.05fr_1.35fr_auto] lg:items-center"
+          style={{
+            background: 'linear-gradient(135deg, #F7F9FD 0%, #FFFFFF 100%)',
+            border: '1px solid #E1E7F0',
+            borderRadius: '16px',
+            boxShadow: '0 18px 44px rgba(11,26,70,0.08)',
+            padding: 'clamp(24px, 4vw, 38px)',
+          }}
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 text-[#E87722] text-xs font-bold uppercase tracking-[0.22em] mb-3">
+              <CheckCircle2 size={15} />
+              Delivery Proof
+            </div>
+            <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
+              Trusted Across Events, Enterprise Facilities &amp; ELV Projects
+            </h2>
+            <p className="mt-3 text-sm md:text-base leading-7" style={{ color: '#4B5563' }}>
+              One accountable engineering team for live operations, facility systems and handover-ready infrastructure.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {proofColumns.map((item) => (
+              <div key={item.title} className="flex gap-3">
+                <span className="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center" style={{ background: '#0B1A46', color: '#FFFFFF' }}>
+                  <item.icon size={19} />
+                </span>
+                <span>
+                  <strong className="block text-sm font-bold" style={{ color: '#0B1A46' }}>{item.title}</strong>
+                  <span className="block mt-1 text-sm leading-6" style={{ color: '#5B6475' }}>{item.text}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <Link href="/portfolio" className="btn-primary justify-center whitespace-nowrap">
+            View Delivery Portfolio <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ---------------- Stats / Why choose us ---------------- */
 function Stats() {
   const stats = [
@@ -1087,6 +1156,7 @@ const App = () => {
       <Stats />
       <CertificationsBand />
       <Services />
+      <DeliveryProofStrip />
       <CyberAdvisory />
       <RentalTeaser />
       <EventsPortfolio />
