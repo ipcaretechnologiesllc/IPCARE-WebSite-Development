@@ -82,7 +82,6 @@ const NAV_GRADIENTS = {
   '/cybersecurity-advisory': { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',        accentColor: '#2E64D8' },
   '/event-it':               { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/rental':                 { gradient: 'radial-gradient(circle, rgba(21,47,127,0.22) 0%, rgba(15,36,95,0.09) 50%, rgba(8,20,52,0) 100%)',            accentColor: '#152F7F' },
-  '/blog':                   { gradient: 'radial-gradient(circle, rgba(232,119,34,0.22) 0%, rgba(208,96,16,0.09) 50%, rgba(180,75,10,0) 100%)',        accentColor: '#E87722' },
   '/contact':                { gradient: 'radial-gradient(circle, rgba(46,100,216,0.20) 0%, rgba(30,58,138,0.08) 50%, rgba(15,29,69,0) 100%)',         accentColor: '#2E64D8' },
 }
 
@@ -163,12 +162,11 @@ export default function Header() {
     { label: 'Home',              href: '/' },
     { label: 'About',             href: '/about' },
     { label: 'Services',          href: '/services',               mega: true },
-    { label: 'Portfolio',         href: '/portfolio',              portfolio: true },
     { label: 'Digital Solutions', href: '/services/digital-solutions', digital: true },
     { label: 'Cyber Advisory',    href: '/cybersecurity-advisory',  cyber: true },
     { label: 'Event IT',          href: '/event-it',               dropdown: true },
     { label: 'Rental Hub',        href: '/rental' },
-    { label: 'Blog',              href: '/blog' },
+    { label: 'Portfolio',         href: '/portfolio',              portfolio: true },
     { label: 'Contact',           href: '/contact' },
   ]
 

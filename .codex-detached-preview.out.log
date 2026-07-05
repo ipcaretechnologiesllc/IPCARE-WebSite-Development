@@ -1,0 +1,14 @@
+   ▲ Next.js 15.5.18
+   - Local:        http://localhost:3010
+   - Network:      http://0.0.0.0:3010
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 5.7s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 514ms (115 modules)
+ ○ Compiling /portfolio ...
+ ✓ Compiled / in 19.2s (4755 modules)
+ GET / 200 in 12157ms
+ ✓ Compiled in 2.4s (2276 modules)
+ GET /portfolio 200 in 1061ms
