@@ -300,8 +300,9 @@ export default function PortfolioClient() {
           <div className="mx-auto max-w-[900px] text-center">
             <div className="section-eyebrow">Delivery Portfolio</div>
             <h1 className="mx-auto max-w-[900px] text-4xl font-extrabold leading-[1.12] md:text-6xl">
-              Enterprise facilities, ELV and <span className="text-[#E87722]">infrastructure projects</span>
-              delivered across UAE.
+              Enterprise Facilities, ELV and{' '}
+              <span className="text-[#E87722]">Infrastructure Projects</span>{' '}
+              Delivered
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/80 md:text-lg">
               From hotels, schools, arenas, towers, retail spaces and industrial sites, IP Care turns past delivery into practical proof for your next facility project.
