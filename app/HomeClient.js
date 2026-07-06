@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   ShieldCheck, Server, Lock, Network, Cable, Cloud, Calendar,
   ArrowRight, Phone, Mail,
-  MapPin, Clock, CheckCircle2, Building2,
+  MapPin, Clock, CheckCircle2, Building2, Landmark,
   HeartHandshake, Award, Users, Activity, Headphones,
   ChevronLeft, ChevronRight, Globe
 } from 'lucide-react'
@@ -15,6 +15,7 @@ import CertificationsBand from '@/components/site/CertificationsBand'
 import RentalCircularGallery from '@/components/rental/RentalCircularGallery'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { articles } from '@/lib/blog-data'
+import { featuredPortfolioProjects } from '@/lib/portfolio-data'
 
 /* ---------------- IntersectionObserver reveal hook ---------------- */
 function useReveal() {
@@ -537,24 +538,15 @@ function Services() {
 
 /* ---------------- Delivery Proof Strip ---------------- */
 function DeliveryProofStrip() {
-  const proofColumns = [
-    {
-      icon: Building2,
-      title: 'Enterprise Facilities',
-      text: 'Hotels, schools, malls, towers, arenas and commercial sites.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'ELV & Infrastructure',
-      text: 'CCTV, access control, structured cabling, fiber and network backbone.',
-    },
-  ]
+  const cardBg = 'linear-gradient(155deg, #16295C 0%, #0B1A46 100%)'
+  const cardShadow = '0 8px 20px rgba(11,26,70,0.28), inset 0 1px 0 rgba(255,255,255,0.06)'
+  const cardShadowHover = '0 14px 28px rgba(11,26,70,0.38), inset 0 1px 0 rgba(255,255,255,0.08)'
 
   return (
     <section className="px-6 py-12" style={{ background: '#FFFFFF', borderBottom: '1px solid #E5EAF2' }}>
       <div className="max-w-[1400px] mx-auto">
         <div
-          className="reveal grid gap-8 lg:grid-cols-[1.05fr_1fr_auto] lg:items-center"
+          className="reveal"
           style={{
             background: 'linear-gradient(135deg, #F7F9FD 0%, #FFFFFF 100%)',
             border: '1px solid #E1E7F0',
@@ -563,36 +555,69 @@ function DeliveryProofStrip() {
             padding: 'clamp(24px, 4vw, 38px)',
           }}
         >
-          <div>
-            <div className="inline-flex items-center gap-2 text-[#E87722] text-xs font-bold uppercase tracking-[0.22em] mb-3">
-              <CheckCircle2 size={15} />
-              Delivery Proof
-            </div>
-            <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
-              Trusted Across Enterprise Facilities &amp; ELV Projects
-            </h2>
-            <p className="mt-3 text-sm md:text-base leading-7" style={{ color: '#4B5563' }}>
-              One accountable engineering team for facility systems and handover-ready infrastructure.
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {proofColumns.map((item) => (
-              <div key={item.title} className="flex gap-3">
-                <span className="flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center" style={{ background: '#0B1A46', color: '#FFFFFF' }}>
-                  <item.icon size={19} />
-                </span>
-                <span>
-                  <strong className="block text-sm font-bold" style={{ color: '#0B1A46' }}>{item.title}</strong>
-                  <span className="block mt-1 text-sm leading-6" style={{ color: '#5B6475' }}>{item.text}</span>
-                </span>
+          <div className="flex flex-wrap items-end justify-between gap-5 mb-6">
+            <div>
+              <div className="inline-flex items-center gap-2 text-[#E87722] text-xs font-bold uppercase tracking-[0.22em] mb-3">
+                <CheckCircle2 size={15} />
+                Delivery Proof
               </div>
-            ))}
+              <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
+                Trusted Across Enterprise Facilities &amp; ELV Projects
+              </h2>
+              <p className="mt-3 text-sm md:text-base leading-7" style={{ color: '#4B5563' }}>
+                One accountable engineering team for facility systems and handover-ready infrastructure.
+              </p>
+            </div>
+
+            <Link href="/portfolio" className="btn-primary justify-center whitespace-nowrap flex-shrink-0">
+              View Delivery Portfolio <ArrowRight size={16} />
+            </Link>
           </div>
 
-          <Link href="/portfolio" className="btn-primary justify-center whitespace-nowrap">
-            View Delivery Portfolio <ArrowRight size={16} />
-          </Link>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {featuredPortfolioProjects.map((project, i) => {
+              const isEnterprise = project.type === 'Enterprise Facilities'
+              const Icon = isEnterprise ? Landmark : ShieldCheck
+              const categoryLabel = isEnterprise ? 'Enterprise' : 'ELV'
+              return (
+                <Link
+                  key={project.slug}
+                  href="/portfolio"
+                  className="reveal proof-card block"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  <div
+                    className="h-full flex flex-col justify-between"
+                    style={{
+                      borderRadius: '12px',
+                      padding: '14px 12px',
+                      minHeight: '104px',
+                      background: cardBg,
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      boxShadow: cardShadow,
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)'
+                      e.currentTarget.style.boxShadow = cardShadowHover
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                      e.currentTarget.style.boxShadow = cardShadow
+                    }}
+                  >
+                    <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.08em]" style={{ color: '#E87722' }}>
+                      <Icon size={12} />
+                      {categoryLabel}
+                    </span>
+                    <span className="block mt-2 text-[13px] font-extrabold leading-tight text-white">{project.name}</span>
+                    <span className="block mt-1 text-[10px]" style={{ color: 'rgba(255,255,255,0.55)' }}>{project.location}</span>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

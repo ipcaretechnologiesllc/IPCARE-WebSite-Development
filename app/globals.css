@@ -603,6 +603,8 @@ body {
   * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
+.proof-card:focus-visible { outline: 2px solid #E87722; outline-offset: 2px; }
+
 /* Hero — shortened on md+ so the trust ticker peeks above the fold */
 .hero-section {
   height: calc(100vh - 108px);
