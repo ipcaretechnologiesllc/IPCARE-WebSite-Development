@@ -181,6 +181,37 @@ export default function Header() {
     ...Object.entries(products).map(([slug, p]) => ({ label: p.h1Accent || p.h1, href: `/products/${slug}` })),
   ]
 
+  // ─── Mobile submenu chip data ───────────────────────────────────────────
+  // Same source data as the desktop mega-menus, condensed to one flat list
+  // of chips per top-level nav item (mobile has no room for a 4-column grid).
+  const servicesSubItems = servicesOrder
+    .filter((slug) => serviceCategories[slug])
+    .map((slug) => ({ label: navLabels[slug]?._category || serviceCategories[slug].name, href: `/services/${slug}` }))
+
+  const eventITSubItems = [
+    { label: 'Major Events Portfolio',     href: '/event-it/portfolio' },
+    { label: 'High-Density Event WiFi',    href: '/event-it/event-wifi' },
+    { label: 'Temporary Data Centres',     href: '/event-it/temporary-data-centres' },
+    { label: 'Event CCTV & Security',      href: '/event-it/event-cctv' },
+  ]
+
+  const cyberSubItems = cyberServices.map((s) => ({ label: s.name, href: `/cybersecurity-advisory/${s.slug}` }))
+
+  const portfolioSubItems = [
+    { label: 'Enterprise Projects',   href: '/portfolio?category=enterprise' },
+    { label: 'ELV & Security',        href: '/portfolio?service=cctv-access-control' },
+    { label: 'Structured Cabling',    href: '/portfolio?service=structured-cabling' },
+  ]
+
+  const mobileSubItems = (l) => {
+    if (l.mega)      return servicesSubItems
+    if (l.digital)   return productNavItems
+    if (l.dropdown)  return eventITSubItems
+    if (l.cyber)     return cyberSubItems
+    if (l.portfolio) return portfolioSubItems
+    return null
+  }
+
   return (
     <>
       {/* Top info strip — slim blue band */}
@@ -682,25 +713,28 @@ export default function Header() {
             <button onClick={() => setMobileOpen(false)} className="text-[#0D2B55]" aria-label="Close menu"><X size={26}/></button>
           </div>
           <ul className="flex-1 flex flex-col items-center justify-start gap-6 px-6 pt-10 pb-8 overflow-y-auto">
-            {navLinks.map((l) => (
-              <li key={l.label} className="flex flex-col items-center">
-                <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link>
-                {l.portfolio && (
-                  <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
-                    <Link href="/portfolio?category=enterprise" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Enterprise Projects</Link>
-                    <Link href="/portfolio?service=cctv-access-control" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">ELV &amp; Security</Link>
-                    <Link href="/portfolio?service=structured-cabling" onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">Structured Cabling</Link>
-                  </div>
-                )}
-                {l.digital && (
-                  <div className="flex items-center gap-4 -mt-1 mb-1.5 flex-wrap justify-center">
-                    {productNavItems.map((p) => (
-                      <Link key={p.href} href={p.href} onClick={() => setMobileOpen(false)} className="text-[#6B7280] text-sm font-medium hover:text-[#E87722]">{p.label}</Link>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
+            {navLinks.map((l) => {
+              const subItems = mobileSubItems(l)
+              return (
+                <li key={l.label} className="flex flex-col items-center w-full">
+                  <Link href={l.href} onClick={() => setMobileOpen(false)} className="text-[#0D2B55] text-2xl font-semibold hover:text-[#E87722] inline-block py-2.5">{l.label}</Link>
+                  {subItems && subItems.length > 0 && (
+                    <div className="flex items-center gap-2.5 -mt-1 mb-2 flex-wrap justify-center max-w-[340px]">
+                      {subItems.map((p) => (
+                        <Link
+                          key={p.href}
+                          href={p.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="text-[#0D2B55] text-[13px] font-semibold px-4 py-2.5 rounded-full border border-[#E87722]/35 bg-[#E87722]/10 active:bg-[#E87722] active:text-white active:border-[#E87722] transition-colors"
+                        >
+                          {p.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              )
+            })}
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">Contact Us <ArrowRight size={16}/></Link>
             <div className="flex items-center gap-4 mt-6">
               <a href={SOCIAL.facebook}  target="_blank" rel="noopener noreferrer" aria-label="Facebook"  className="social-brand inline-flex items-center justify-center text-white" style={{ width: '40px', height: '40px', borderRadius: '9999px', background: '#1877F2' }}><FaFacebookF size={20}/></a>
