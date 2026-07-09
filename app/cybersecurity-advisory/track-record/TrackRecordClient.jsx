@@ -132,6 +132,18 @@ export default function TrackRecordClient() {
           borderBottom: '3px solid #E87722',
         }}
       >
+        <img
+          src="/images/pages/cyber-advisory-track-record-bg.webp"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 65% 75% at 50% 45%, rgba(11,26,70,0.72) 0%, rgba(11,26,70,0.42) 55%, rgba(11,26,70,0.22) 100%)' }}
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
@@ -159,8 +171,8 @@ export default function TrackRecordClient() {
           <div className="mx-auto max-w-[920px] text-center">
             <div className="section-eyebrow">Canada Delivery Track Record</div>
             <h1 className="mx-auto max-w-[920px] text-4xl font-extrabold leading-[1.12] md:text-6xl">
-              Palo Alto &amp; Prisma Access delivery for{' '}
-              <span className="text-[#E87722]">enterprise and government</span>{' '}
+              Palo Alto &amp; Prisma Access Delivery for{' '}
+              <span className="text-[#E87722]">Enterprise and Government</span>{' '}
               in Canada
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/80 md:text-lg">

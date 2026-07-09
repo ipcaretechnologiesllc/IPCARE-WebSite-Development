@@ -74,6 +74,7 @@ export default function TrackRecordPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+      <link rel="preload" as="image" href="/images/pages/cyber-advisory-track-record-bg.webp" fetchPriority="high" />
       <Header />
       <TrackRecordClient />
       <Footer />
