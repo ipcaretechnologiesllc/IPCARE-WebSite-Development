@@ -31,6 +31,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [IT Consulting](${BASE}/services/it-consulting): Technology strategy, IT assessment, digital transformation
 - [Cybersecurity Services](${BASE}/services/cybersecurity): Endpoint protection, email security, incident response, security assessments
 - [Cybersecurity Advisory](${BASE}/cybersecurity-advisory): NESA compliance, Zero Trust advisory, privileged access management
+- [Canada Cybersecurity Delivery Track Record](${BASE}/cybersecurity-advisory/track-record): Anonymized Palo Alto, Prisma Access/SASE, Panorama-to-Strata Cloud Manager, Prisma AIRS and IT/OT segmentation engagements for enterprise and government clients in Canada
 - [Cloud Services](${BASE}/services/cloud): Cloud migration, Microsoft 365, Google Workspace, hybrid email
 - [Infrastructure Services](${BASE}/services/infrastructure): Data centre management, virtualization, hardware procurement
 - [ELV & Physical Security](${BASE}/services/elv): CCTV, access control, automatic gate barriers, audio/video intercom, public address systems
@@ -55,6 +56,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 
 ## Optional
 - [Cybersecurity Advisory Services](${BASE}/cybersecurity-advisory): Zero Trust, SASE, and cloud security advisory offerings
+- [Canada Delivery Track Record](${BASE}/cybersecurity-advisory/track-record): Proof of Palo Alto and Prisma Access delivery for regulated enterprise and government in Canada (anonymized)
 - [Delivery Portfolio](${BASE}/portfolio): Enterprise facility, ELV and infrastructure delivery proof
 - [Event IT Portfolio](${BASE}/event-it/portfolio): Case studies from major events (FIFA, NBA, UFC, EuroLeague)
 - [Rental Categories](${BASE}/rental): Laptops, tablets, networking, CCTV, servers and bundle packages

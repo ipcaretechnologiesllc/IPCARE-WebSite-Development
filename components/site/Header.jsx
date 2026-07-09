@@ -195,7 +195,10 @@ export default function Header() {
     { label: 'Event CCTV & Security',      href: '/event-it/event-cctv' },
   ]
 
-  const cyberSubItems = cyberServices.map((s) => ({ label: s.name, href: `/cybersecurity-advisory/${s.slug}` }))
+  const cyberSubItems = [
+    ...cyberServices.map((s) => ({ label: s.name, href: `/cybersecurity-advisory/${s.slug}` })),
+    { label: 'Delivery Track Record', href: '/cybersecurity-advisory/track-record' },
+  ]
 
   const portfolioSubItems = [
     { label: 'Enterprise Projects',   href: '/portfolio?category=enterprise' },
@@ -690,8 +693,15 @@ export default function Header() {
                 ))}
               </div>
 
-              {/* Knowledge Base — footer separator link */}
-              <div className="mt-6 pt-4" style={{ borderTop: '1px solid #E5E7EB' }}>
+              {/* Footer separator links */}
+              <div className="mt-6 pt-4 flex flex-wrap items-center gap-x-6 gap-y-2" style={{ borderTop: '1px solid #E5E7EB' }}>
+                <Link
+                  href="/cybersecurity-advisory/track-record"
+                  onClick={closeAll}
+                  className="inline-flex items-center gap-1.5 text-[#E87722] font-semibold text-sm hover:gap-2 transition-all"
+                >
+                  Delivery Track Record <ArrowRight size={14}/>
+                </Link>
                 <Link
                   href="/cybersecurity-advisory/knowledge-base"
                   onClick={closeAll}

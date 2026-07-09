@@ -823,6 +823,24 @@ function CaseStudies() {
           ))}
         </div>
 
+        {/* Track record teaser → dedicated Canada delivery page */}
+        <div className="reveal" style={{ textAlign: 'center', marginTop: '48px' }}>
+          <Link
+            href="/cybersecurity-advisory/track-record"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '13px 26px', borderRadius: '30px', fontSize: '14px', fontWeight: 700,
+              background: '#E87722', color: '#FFFFFF', textDecoration: 'none',
+              boxShadow: '0 8px 24px rgba(232,119,34,0.28)',
+            }}
+          >
+            View the full Canada delivery track record <ArrowRight size={16} />
+          </Link>
+          <p style={{ color: '#6B7280', fontSize: '13px', marginTop: '14px' }}>
+            15+ anonymized Palo Alto, Prisma Access &amp; Strata Cloud Manager engagements
+          </p>
+        </div>
+
         <style>{`@media (max-width: 768px) { .cs-grid { grid-template-columns: 1fr !important; } }`}</style>
       </div>
     </section>

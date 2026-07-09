@@ -71,6 +71,7 @@ const ADVISORY_SUB_DATES = {
   'executive-advisory':   '2025-01-01',
   'security-automation':  '2025-03-01',
   'sase':                 '2025-03-01',
+  'track-record':         '2026-07-09',
 }
 
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
@@ -155,7 +156,7 @@ export default async function sitemap() {
   }
 
   // Cybersecurity Advisory — fixed subroutes
-  const advisoryFixed = ['cloud-security', 'zero-trust', 'executive-advisory', 'security-automation', 'sase']
+  const advisoryFixed = ['cloud-security', 'zero-trust', 'executive-advisory', 'security-automation', 'sase', 'track-record']
   for (const slug of advisoryFixed) {
     entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: ADVISORY_SUB_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
