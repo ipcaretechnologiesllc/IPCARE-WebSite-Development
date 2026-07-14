@@ -4,11 +4,16 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
   ArrowRight,
+  ArrowUpRight,
+  Award,
+  BadgeCheck,
   CheckCircle2,
   Cloud,
   Globe2,
   MapPin,
+  Minus,
   Network,
+  Plus,
   Search,
   Server,
   ShieldCheck,
@@ -17,7 +22,10 @@ import {
 import {
   cyberCapabilities,
   cyberDeliveryStats,
+  cyberFaqs,
+  cyberPractitioner,
   cyberProjects,
+  cyberRelatedLinks,
   featuredCyberProjects,
 } from '@/lib/cyber-advisory-data'
 
@@ -93,32 +101,43 @@ function ProjectCard({ project }) {
   )
 }
 
-function FeaturedEngagementCard({ project }) {
+function FeaturedEngagementCard({ project, index }) {
   const primary = capabilityMap[project.capabilities[0]]
   return (
-    <article id={project.id} className="service-card group flex h-full scroll-mt-24 flex-col p-7">
-      <div className="mb-5 flex items-center justify-between gap-3">
-        <div className="service-card__icon flex h-12 w-12 items-center justify-center text-[#E87722]">
-          <CapabilityIcon id={project.capabilities[0]} />
+    <article id={project.id} className="service-card group grid scroll-mt-24 overflow-hidden md:grid-cols-[38fr_62fr]">
+      {/* Left rail — navy, carries identity + tech */}
+      <div className="relative flex flex-col justify-between gap-6 bg-[#0B1A46] p-7">
+        <div className="flex items-start justify-between">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-[#E87722]">
+            <CapabilityIcon id={project.capabilities[0]} />
+          </div>
+          <span className="text-4xl font-extrabold leading-none text-white/15">
+            {String(index + 1).padStart(2, '0')}
+          </span>
         </div>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1A46] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white">
-          <MapPin size={12} />
-          {project.region}
-        </span>
+        <div>
+          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#E87722] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white">
+            <MapPin size={12} />
+            {project.region}
+          </div>
+          <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">{primary?.label}</div>
+          <h3 className="mt-2 text-2xl font-extrabold leading-tight text-white">{project.descriptor}</h3>
+          <p className="mt-1.5 text-sm font-semibold text-white/55">{project.industry}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tech.map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-white/80"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">
-        <CheckCircle2 size={14} />
-        {primary?.label}
-      </div>
-      <h3 className="text-xl font-extrabold leading-tight text-[#0B1A46]">{project.descriptor}</h3>
-      <p className="mt-1.5 text-sm font-semibold text-[#667085]">{project.industry}</p>
-
-      <div className="mt-4">
-        <TechPills tech={project.tech} />
-      </div>
-
-      <div className="mt-5 space-y-4">
+      {/* Right — Situation / Approach / Outcome narrative */}
+      <div className="flex flex-col gap-4 p-7 md:p-8">
         <div>
           <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#0B1A46]">Situation</div>
           <p className="mt-1.5 text-sm leading-6 text-[#475467]">{project.narrative.situation}</p>
@@ -127,10 +146,7 @@ function FeaturedEngagementCard({ project }) {
           <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#0B1A46]">Approach</div>
           <p className="mt-1.5 text-sm leading-6 text-[#475467]">{project.narrative.approach}</p>
         </div>
-      </div>
-
-      <div className="mt-auto pt-5">
-        <div className="rounded-lg border border-[#E5EAF3] bg-[#F4F6FA] p-4">
+        <div className="mt-auto rounded-lg border border-[#E5EAF3] bg-[#F4F6FA] p-4">
           <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">Outcome</div>
           <p className="mt-2 text-sm leading-6 text-[#475467]">{project.narrative.outcome}</p>
         </div>
@@ -142,6 +158,7 @@ function FeaturedEngagementCard({ project }) {
 export default function TrackRecordClient() {
   const [capabilityFilter, setCapabilityFilter] = useState('All')
   const [query, setQuery] = useState('')
+  const [openFaq, setOpenFaq] = useState(0)
 
   const filteredProjects = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
@@ -247,9 +264,18 @@ export default function TrackRecordClient() {
         </div>
       </section>
 
+      {/* ── Trust strip ──────────────────────────────────────────────────── */}
+      <section className="border-b border-[#DFE6F1] bg-white px-6 py-5">
+        <div className="mx-auto flex max-w-[1100px] flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#5B6475]">
+          <span className="inline-flex items-center gap-2"><BadgeCheck size={15} className="text-[#E87722]" /> PCNSE-Certified Delivery</span>
+          <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-[#E87722]" /> Palo Alto &amp; Prisma Specialized</span>
+          <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-[#E87722]" /> Operating in Canada Since 2011</span>
+        </div>
+      </section>
+
       {/* ── Featured Engagements ─────────────────────────────────────────── */}
       <section className="px-6 py-20">
-        <div className="mx-auto max-w-[1400px]">
+        <div className="mx-auto max-w-[1180px]">
           <div className="mx-auto mb-12 max-w-[820px] text-center">
             <div className="section-eyebrow">Featured Engagements</div>
             <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
@@ -260,10 +286,54 @@ export default function TrackRecordClient() {
               anonymized, still without client-identifying detail.
             </p>
           </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {featuredCyberProjects.map((project) => (
-              <FeaturedEngagementCard key={project.id} project={project} />
+          <div className="space-y-6">
+            {featuredCyberProjects.map((project, index) => (
+              <FeaturedEngagementCard key={project.id} project={project} index={index} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Practitioner / expertise ─────────────────────────────────────── */}
+      <section className="border-t border-[#DFE6F1] bg-white px-6 py-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mx-auto mb-10 max-w-[820px] text-center">
+            <div className="section-eyebrow">Who Delivers This</div>
+            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+              Led by a Canada-Based Palo Alto Specialist
+            </h2>
+          </div>
+          <div className="service-card mx-auto grid max-w-[900px] overflow-hidden md:grid-cols-[260px_1fr]">
+            <div className="flex flex-col items-center justify-center gap-4 bg-[#0B1A46] p-8 text-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#E87722] text-2xl font-extrabold text-white">
+                {cyberPractitioner.initials}
+              </div>
+              <div>
+                <div className="text-lg font-extrabold text-white">{cyberPractitioner.name}</div>
+                <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#E87722]">
+                  {cyberPractitioner.title}
+                </div>
+                <div className="mt-2 inline-flex items-center gap-1 text-xs text-white/60">
+                  <MapPin size={12} /> {cyberPractitioner.location}
+                </div>
+              </div>
+            </div>
+            <div className="p-7 md:p-8">
+              <p className="text-[15px] leading-8 text-[#4B5563]">{cyberPractitioner.bio}</p>
+              <div className="mt-6">
+                <div className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[#0B1A46]">Certifications</div>
+                <div className="flex flex-wrap gap-2">
+                  {cyberPractitioner.certifications.map((cert) => (
+                    <span
+                      key={cert}
+                      className="inline-flex items-center gap-1 rounded-md border border-[#E87722]/25 bg-[#E87722]/10 px-2.5 py-1 text-xs font-semibold text-[#B95812]"
+                    >
+                      <Award size={12} /> {cert}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -375,6 +445,65 @@ export default function TrackRecordClient() {
             >
               Request the Full Case Study Under NDA <ArrowRight size={16} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-[860px]">
+          <div className="mb-10 text-center">
+            <div className="section-eyebrow">FAQ</div>
+            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+              Common Questions
+            </h2>
+          </div>
+          <div className="space-y-3">
+            {cyberFaqs.map((faq, i) => {
+              const open = openFaq === i
+              return (
+                <div key={faq.q} className="service-card overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(open ? -1 : i)}
+                    aria-expanded={open}
+                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  >
+                    <span className="text-[15px] font-bold text-[#0B1A46]">{faq.q}</span>
+                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#E87722]/10 text-[#E87722]">
+                      {open ? <Minus size={16} /> : <Plus size={16} />}
+                    </span>
+                  </button>
+                  <div className={`px-6 pb-5 ${open ? 'block' : 'hidden'}`}>
+                    <p className="text-sm leading-7 text-[#475467]">{faq.a}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Related capabilities ─────────────────────────────────────────── */}
+      <section className="border-t border-[#DFE6F1] bg-white px-6 py-16">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-8 text-center">
+            <div className="section-eyebrow">Related Capabilities</div>
+            <h2 className="text-2xl font-extrabold leading-tight text-[#0B1A46] md:text-3xl">
+              Explore the Advisory Practice
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {cyberRelatedLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="service-card group flex items-center justify-between gap-3 p-5 text-[#0B1A46]"
+              >
+                <span className="text-sm font-bold">{link.label}</span>
+                <ArrowUpRight size={18} className="flex-shrink-0 text-[#E87722] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import TrackRecordClient from './TrackRecordClient'
-import { cyberProjects, cyberCapabilities } from '@/lib/cyber-advisory-data'
+import { cyberProjects, cyberCapabilities, cyberFaqs, cyberPractitioner } from '@/lib/cyber-advisory-data'
 
 export const revalidate = 3600
 
@@ -71,11 +71,39 @@ const collectionSchema = {
   },
 }
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: cyberFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+}
+
+const practitionerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: cyberPractitioner.name,
+  jobTitle: cyberPractitioner.title,
+  description: cyberPractitioner.bio,
+  address: { '@type': 'PostalAddress', addressLocality: 'Milton', addressRegion: 'Ontario', addressCountry: 'CA' },
+  knowsAbout: ['Palo Alto Networks', 'Prisma Access', 'SASE', 'Strata Cloud Manager', 'Firewall Migration'],
+  hasCredential: cyberPractitioner.certifications.map((cert) => ({
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'certification',
+    name: cert,
+  })),
+  worksFor: { '@id': `${BASE}#org` },
+}
+
 export default function TrackRecordPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(practitionerSchema) }} />
       <link rel="preload" as="image" href="/images/pages/cyber-advisory-track-record-bg.webp" fetchPriority="high" />
       <Header />
       <TrackRecordClient />
