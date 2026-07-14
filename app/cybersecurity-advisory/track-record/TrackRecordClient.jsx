@@ -274,14 +274,33 @@ export default function TrackRecordClient() {
       </section>
 
       {/* ── Featured Engagements ─────────────────────────────────────────── */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-[1180px]">
+      <section
+        className="relative overflow-hidden px-6 py-20"
+        style={{
+          background: 'linear-gradient(135deg, #0B1A46 0%, #1E3A8A 100%)',
+          borderTop: '3px solid #E87722',
+          borderBottom: '3px solid #E87722',
+        }}
+      >
+        <img
+          src="/images/pages/cyber-advisory-track-record-featured-bg.webp"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-40"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(135deg, rgba(11,26,70,0.88) 0%, rgba(30,58,138,0.82) 100%)' }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1180px]">
           <div className="mx-auto mb-12 max-w-[820px] text-center">
             <div className="section-eyebrow">Featured Engagements</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
-              Three Deployments in Depth
+            <h2 className="text-3xl font-extrabold leading-tight text-white md:text-4xl">
+              Three Deployments in <span className="text-[#E87722]">Depth</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#667085]">
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">
               A closer look at how three of these engagements were scoped and delivered — still
               anonymized, still without client-identifying detail.
             </p>
