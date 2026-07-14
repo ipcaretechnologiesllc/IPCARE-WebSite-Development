@@ -18,6 +18,7 @@ import {
   cyberCapabilities,
   cyberDeliveryStats,
   cyberProjects,
+  featuredCyberProjects,
 } from '@/lib/cyber-advisory-data'
 
 const iconMap = {
@@ -86,6 +87,52 @@ function ProjectCard({ project }) {
         <div className="rounded-lg border border-[#E5EAF3] bg-[#F4F6FA] p-4">
           <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">Outcome</div>
           <p className="mt-2 text-sm leading-6 text-[#475467]">{project.outcome}</p>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function FeaturedEngagementCard({ project }) {
+  const primary = capabilityMap[project.capabilities[0]]
+  return (
+    <article id={project.id} className="service-card group flex h-full scroll-mt-24 flex-col p-7">
+      <div className="mb-5 flex items-center justify-between gap-3">
+        <div className="service-card__icon flex h-12 w-12 items-center justify-center text-[#E87722]">
+          <CapabilityIcon id={project.capabilities[0]} />
+        </div>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1A46] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white">
+          <MapPin size={12} />
+          {project.region}
+        </span>
+      </div>
+
+      <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">
+        <CheckCircle2 size={14} />
+        {primary?.label}
+      </div>
+      <h3 className="text-xl font-extrabold leading-tight text-[#0B1A46]">{project.descriptor}</h3>
+      <p className="mt-1.5 text-sm font-semibold text-[#667085]">{project.industry}</p>
+
+      <div className="mt-4">
+        <TechPills tech={project.tech} />
+      </div>
+
+      <div className="mt-5 space-y-4">
+        <div>
+          <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#0B1A46]">Situation</div>
+          <p className="mt-1.5 text-sm leading-6 text-[#475467]">{project.narrative.situation}</p>
+        </div>
+        <div>
+          <div className="text-xs font-bold uppercase tracking-[0.14em] text-[#0B1A46]">Approach</div>
+          <p className="mt-1.5 text-sm leading-6 text-[#475467]">{project.narrative.approach}</p>
+        </div>
+      </div>
+
+      <div className="mt-auto pt-5">
+        <div className="rounded-lg border border-[#E5EAF3] bg-[#F4F6FA] p-4">
+          <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">Outcome</div>
+          <p className="mt-2 text-sm leading-6 text-[#475467]">{project.narrative.outcome}</p>
         </div>
       </div>
     </article>
@@ -200,6 +247,27 @@ export default function TrackRecordClient() {
         </div>
       </section>
 
+      {/* ── Featured Engagements ─────────────────────────────────────────── */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="mx-auto mb-12 max-w-[820px] text-center">
+            <div className="section-eyebrow">Featured Engagements</div>
+            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+              Three Deployments in Depth
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#667085]">
+              A closer look at how three of these engagements were scoped and delivered — still
+              anonymized, still without client-identifying detail.
+            </p>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {featuredCyberProjects.map((project) => (
+              <FeaturedEngagementCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Filter bar ───────────────────────────────────────────────────── */}
       <section id="track-grid" className="border-b border-[#DFE6F1] bg-white px-6 py-10">
         <div className="mx-auto max-w-[1400px]">
@@ -300,6 +368,14 @@ export default function TrackRecordClient() {
             defenses. We withhold client names as a matter of professional discipline. Verifiable
             references can be provided under NDA during a scoped conversation.
           </p>
+          <div className="mt-7">
+            <Link
+              href="/contact?topic=case-study-request&source=track-record"
+              className="btn-primary"
+            >
+              Request the Full Case Study Under NDA <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 

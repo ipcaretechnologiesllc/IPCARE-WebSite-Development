@@ -60,7 +60,9 @@ const collectionSchema = {
       item: {
         '@type': 'CreativeWork',
         name: `${project.descriptor} — ${capabilityMap[project.capabilities[0]] || 'Cybersecurity'}`,
-        description: project.scope,
+        description: project.featured
+          ? `${project.narrative.situation} ${project.narrative.outcome}`
+          : project.scope,
         about: [project.industry, ...(project.tech || [])],
         provider: { '@id': `${BASE}#org` },
         locationCreated: { '@type': 'Country', name: 'Canada' },

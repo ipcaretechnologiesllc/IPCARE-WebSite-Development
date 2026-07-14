@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
@@ -22,6 +22,21 @@ export default function ContactClient() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [err, setErr] = useState('')
+
+  // Prefills the form when arriving from the Cyber Advisory track-record page's
+  // "Request the Full Case Study Under NDA" link — a query-param hand-off into
+  // the existing contact pipeline rather than a separate gated-content form.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('topic') !== 'case-study-request') return
+    setForm((f) => ({
+      ...f,
+      service: 'Cybersecurity',
+      message:
+        f.message ||
+        "I'd like to request more detail on a Canada cybersecurity engagement referenced on the Delivery Track Record page, under NDA if needed.",
+    }))
+  }, [])
 
   async function submit(e) {
     e.preventDefault()
