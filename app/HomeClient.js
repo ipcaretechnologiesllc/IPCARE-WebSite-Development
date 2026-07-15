@@ -479,8 +479,15 @@ function TrustMarquee() {
           }}
         />
 
+        {/* Screen-reader copy — the visible track below repeats this list 4x
+            purely for the seamless scroll effect, so it's aria-hidden to
+            avoid announcing every event name 4 times over. */}
+        <ul className="sr-only">
+          {events.map((event) => <li key={event}>{event}</li>)}
+        </ul>
+
         {/* Marquee Track */}
-        <div className="marquee-track">
+        <div className="marquee-track" aria-hidden="true">
           {[...events, ...events, ...events, ...events].map((event, i) => (
             <div key={i} className="flex-shrink-0 flex items-center">
               <span
@@ -666,7 +673,7 @@ function Stats() {
     >
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="text-center mb-14 reveal">
-          <h2 className="text-white text-3xl md:text-4xl font-bold">Enterprise IT Services We Deliver</h2>
+          <h2 className="text-white text-3xl md:text-4xl font-bold">20 Years of Enterprise Delivery, By the Numbers</h2>
           <p className="mt-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)' }}>
             Real numbers from two decades of live enterprise delivery.
           </p>

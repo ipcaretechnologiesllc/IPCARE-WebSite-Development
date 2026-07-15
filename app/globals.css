@@ -594,6 +594,7 @@ body {
 }
 
 .glass-pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
   padding: 8px 18px;
@@ -608,6 +609,13 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 .glass-pill.active, .glass-pill:hover { background: #E87722; border-color: #E87722; color: #ffffff; }
+/* Visual height is ~33px; expand the tappable area to the 44px minimum
+   without affecting flex gap/wrap (::before is out of layout flow). */
+.glass-pill::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+}
 
 /* Filter pills on light backgrounds (e.g. Major Events Powered) */
 .filter-pill-light {

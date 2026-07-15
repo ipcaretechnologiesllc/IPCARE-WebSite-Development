@@ -39,7 +39,7 @@ async function readHostAndPath() {
 }
 
 const SITE_NAME = 'IP Care Technologies'
-const SITE_TITLE = 'Enterprise IT Solutions & Managed Services | IP Care Technologies'
+const SITE_TITLE = 'Enterprise IT & Managed Services | IP Care Technologies'
 const SITE_DESC = 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and Equipment Rental, trusted by leading organisations since 2003.'
 
 // ─── Dynamic metadata — host-aware canonicals ────────────────────────────────
