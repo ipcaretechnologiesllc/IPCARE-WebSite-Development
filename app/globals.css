@@ -144,6 +144,23 @@ body {
   font-weight: 500;
 }
 
+/* ===== Cybersecurity Advisory two-column layout =====
+   Pure CSS breakpoint (matches the hero's .hero-bg-desktop/.hero-bg-mobile
+   approach) so server and client render identical markup — no JS-computed
+   isMobile state, no post-mount layout jump. */
+#cyber-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  #cyber-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+
 /* ===== Cybersecurity Advisory stat cards ===== */
 .cyber-stat-card {
   background: #FFFFFF;
@@ -283,6 +300,21 @@ body {
 .testimonial-dot--active {
   background: #E87722;
   transform: scale(1.25);
+}
+
+/* Expand touch target for small carousel dot indicators to the ~44px
+   minimum (WCAG 2.5.5 / Material touch guidelines) without enlarging
+   their visual size or disturbing flex gap/spacing — an invisible
+   ::before overlay, not a layout box. */
+.hero-dot,
+.testimonial-dot {
+  position: relative;
+}
+.hero-dot::before,
+.testimonial-dot::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
 }
 
 .no-scrollbar {

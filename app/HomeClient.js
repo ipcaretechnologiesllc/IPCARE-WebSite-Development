@@ -393,7 +393,7 @@ function HeroCarousel() {
             aria-label={`Go to ${slide.service}`}
             onClick={() => goTo(i)}
             tabIndex={0}
-            className="rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
+            className="hero-dot rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
             style={{
               width: i === current ? 26 : 8,
               height: 8,
@@ -717,29 +717,10 @@ function CyberAdvisory() {
     { n: '50+', l: 'Enterprise Engagements' },
     { n: '99.9%', l: 'Deployment Success' },
   ]
-  // Force the two-column layout via inline styles — external CSS / Tailwind
-  // arbitrary utilities have failed to apply on this wrapper twice, so we
-  // bypass external rules entirely. Inline styles outrank any class-based CSS.
-  const [isMobile, setIsMobile] = useState(false)
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
   return (
     <section className="relative py-24 px-6 overflow-hidden">
       <div className="max-w-[1200px] mx-auto relative">
-        <div
-          id="cyber-grid"
-          className="reveal"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1.2fr) minmax(0, 1fr)',
-            gap: isMobile ? '32px' : '48px',
-            alignItems: 'center',
-          }}
-        >
+        <div id="cyber-grid" className="reveal">
           {/* Left column 55% */}
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
