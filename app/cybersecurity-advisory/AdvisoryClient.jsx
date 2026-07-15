@@ -662,10 +662,11 @@ function KnowledgeBase() {
 
         <div className="kb-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', alignItems: 'stretch' }}>
           {filtered.map((a, i) => (
-            <article
-              key={a.title}
+            <Link
+              key={a.slug || a.title}
+              href={a.slug ? `/cybersecurity-advisory/knowledge-base/${a.slug}` : '/cybersecurity-advisory/knowledge-base'}
               className="reveal"
-              style={{ ...cardBase, transitionDelay: `${i * 60}ms`, cursor: 'pointer' }}
+              style={{ ...cardBase, transitionDelay: `${i * 60}ms`, cursor: 'pointer', textDecoration: 'none' }}
               onMouseEnter={hoverOn} onMouseLeave={hoverOff}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -695,7 +696,7 @@ function KnowledgeBase() {
                   Read <ArrowRight size={12} />
                 </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 

@@ -32,6 +32,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Cybersecurity Services](${BASE}/services/cybersecurity): Endpoint protection, email security, incident response, security assessments
 - [Cybersecurity Advisory](${BASE}/cybersecurity-advisory): NESA compliance, Zero Trust advisory, privileged access management
 - [Canada Cybersecurity Delivery Track Record](${BASE}/cybersecurity-advisory/track-record): Anonymized Palo Alto, Prisma Access/SASE, Panorama-to-Strata Cloud Manager, Prisma AIRS and IT/OT segmentation engagements for enterprise and government clients in Canada
+- [Cybersecurity Knowledge Base](${BASE}/cybersecurity-advisory/knowledge-base): Vendor-current engineering guides on Palo Alto, Check Point, Fortinet, Zero Trust, SASE and security automation
 - [Cloud Services](${BASE}/services/cloud): Cloud migration, Microsoft 365, Google Workspace, hybrid email
 - [Infrastructure Services](${BASE}/services/infrastructure): Data centre management, virtualization, hardware procurement
 - [ELV & Physical Security](${BASE}/services/elv): CCTV, access control, automatic gate barriers, audio/video intercom, public address systems
@@ -53,6 +54,13 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Building Banking-Regulation-Compliant Cloud on Azure UAE North: A Working Architecture](${BASE}/blog/cb-ibr-cloud-azure-uae-north): Data residency and PDPL-aligned Azure architecture for UAE financial services
 - [Choosing a Managed IT Provider in the UAE: 7 Questions to Ask](${BASE}/blog/choosing-managed-it-provider-uae): Evaluation criteria for selecting a managed IT partner
 - [Converged Security: Why ELV and Cyber Should Be One Team](${BASE}/blog/elv-converged-security): The case for unifying physical and cybersecurity teams
+
+## Cybersecurity Engineering Guides (Knowledge Base)
+- [Prisma Access HA Design Patterns at Scale](${BASE}/cybersecurity-advisory/knowledge-base/prisma-access-ha-design-patterns): Resilient Prisma Access design — redundant service connections, mobile-user failover and routing symmetry
+- [Zero Trust Network Access vs. VPN: When to Migrate](${BASE}/cybersecurity-advisory/knowledge-base/ztna-vs-vpn-when-to-migrate): A decision framework for moving from remote-access VPN to ZTNA
+- [Check Point R81.20 → R82 Upgrade Playbook](${BASE}/cybersecurity-advisory/knowledge-base/check-point-r82-upgrade-playbook): Low-risk method for upgrading Check Point management and gateways
+- [Designing a Multi-Vendor SASE Strategy](${BASE}/cybersecurity-advisory/knowledge-base/multi-vendor-sase-strategy): Single-vendor vs best-of-breed SASE, boundaries and integration debt
+- [Reducing MTTR with SOAR: 6 Proven Patterns](${BASE}/cybersecurity-advisory/knowledge-base/reducing-mttr-with-soar): Six SOAR patterns that measurably cut mean time to respond
 
 ## Optional
 - [Cybersecurity Advisory Services](${BASE}/cybersecurity-advisory): Zero Trust, SASE, and cloud security advisory offerings
