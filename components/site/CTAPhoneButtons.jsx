@@ -12,15 +12,15 @@ import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
  */
 export default function CTAPhoneButtons() {
   return (
-    <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-3 justify-center">
-      <Link href="/contact" className="btn-primary">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 justify-center">
+      <Link href="/contact" className="btn-primary whitespace-nowrap">
         Get a Free Quote <ArrowRight size={16} />
       </Link>
-      <a href="tel:+971506828290" className="btn-ghost">
+      <a href="tel:+971506828290" className="btn-ghost whitespace-nowrap">
         <UAEFlag /><span className="ml-1 mr-1.5">UAE</span>
         <Phone size={14} className="mr-1" /> +971 50 6828290
       </a>
-      <a href="tel:+14167860782" className="btn-ghost">
+      <a href="tel:+14167860782" className="btn-ghost whitespace-nowrap">
         <CanadaFlag /><span className="ml-1 mr-1.5">Canada</span>
         <Phone size={14} className="mr-1" /> +1 416 786 0782
       </a>
