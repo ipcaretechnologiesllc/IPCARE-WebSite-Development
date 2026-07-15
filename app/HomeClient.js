@@ -358,20 +358,20 @@ function HeroCarousel() {
 
                 {/* CTAs — per-slide, defined in HERO_SLIDES */}
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a
+                  <Link
                     href={slide.cta.primary.href}
                     className="btn-primary w-full sm:w-auto justify-center"
                     style={{ padding: '15px 32px', fontSize: '15px' }}
                   >
                     {slide.cta.primary.label} <ArrowRight size={17} />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href={slide.cta.secondary.href}
                     className="btn-secondary-pill w-full sm:w-auto justify-center"
                     style={{ padding: '15px 32px', fontSize: '15px' }}
                   >
                     {slide.cta.secondary.label}
-                  </a>
+                  </Link>
                 </div>
 
               </div>
@@ -548,9 +548,9 @@ function Services() {
               </div>
               <h3 className="service-card__title text-xl mb-2">{s.name}</h3>
               <p className="service-card__desc text-sm leading-relaxed mb-5">{s.d}</p>
-              <a href={s.link} className="service-card__cta inline-flex items-center gap-1.5 font-semibold text-sm px-4 py-2">
+              <Link href={s.link} className="service-card__cta inline-flex items-center gap-1.5 font-semibold text-sm px-4 py-2">
                 Learn More <ArrowRight size={13}/>
-              </a>
+              </Link>
             </div>
           ))}
         </div>
@@ -766,7 +766,7 @@ function CyberAdvisory() {
               ))}
             </div>
 
-            <a href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></a>
+            <Link href="/cybersecurity-advisory" className="btn-primary">Explore Cybersecurity Advisory <ArrowRight size={16}/></Link>
           </div>
 
           {/* Right column 45% — 2x2 stats */}
@@ -799,7 +799,7 @@ function RentalTeaser() {
           <RentalCircularGallery />
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="/rental" className="btn-primary">Browse Full Rental Catalogue <ArrowRight size={16}/></a>
+          <Link href="/rental" className="btn-primary">Browse Full Rental Catalogue <ArrowRight size={16}/></Link>
         </div>
       </div>
     </section>
@@ -849,7 +849,7 @@ function EventsPortfolio() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
-            <a key={ev.slug} href={`/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
+            <Link key={ev.slug} href={`/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
               <img src={ev.img} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -857,11 +857,11 @@ function EventsPortfolio() {
                 <h3 className="text-white text-lg font-semibold leading-snug">{ev.name}</h3>
                 <p className="text-white/70 text-xs mt-1">{ev.loc}</p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
         <div className="text-center mt-10 reveal">
-          <a href="/event-it/portfolio" className="btn-primary">View Full Portfolio <ArrowRight size={16}/></a>
+          <Link href="/event-it/portfolio" className="btn-primary">View Full Portfolio <ArrowRight size={16}/></Link>
         </div>
       </div>
     </section>
@@ -900,7 +900,7 @@ function About() {
             ))}
           </div>
           <div className="flex flex-wrap gap-4 mt-6">
-            <a href="/contact" className="btn-primary">Talk to Our Team <ArrowRight size={16}/></a>
+            <Link href="/contact" className="btn-primary">Talk to Our Team <ArrowRight size={16}/></Link>
             <Link href="/about" className="btn-ghost-light">Our Story <ArrowRight size={16}/></Link>
           </div>
         </div>
@@ -1110,7 +1110,7 @@ const FAQS = [
   },
   {
     q: 'Where does IP Care Technologies operate?',
-    a: 'IP Care Technologies operates from offices in Abu Dhabi, UAE and Toronto, Canada, serving enterprise and government clients across Abu Dhabi, Dubai, Sharjah, Al Ain, and the wider UAE, as well as Canada.',
+    a: 'IP Care Technologies operates from offices in Abu Dhabi, UAE and Toronto, Canada, serving enterprise and government clients across Abu Dhabi, Dubai, Sharjah, Al Ain, and the wider UAE, as well as Canada. We also deliver enterprise IT and event infrastructure engagements across the wider GCC, including Qatar and Saudi Arabia.',
   },
   {
     q: 'Does IP Care Technologies provide event IT infrastructure?',
@@ -1171,6 +1171,7 @@ function OfficesCTA() {
               <div className="flex items-center gap-2"><Globe size={14} className="text-[#E87722] flex-shrink-0"/><a href="https://www.ipcare.ae" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">www.ipcare.ae</a></div>
               <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>Salam Street, P.O. Box 53209, Abu Dhabi, UAE</span></div>
             </div>
+            <div className="mt-3 text-white/55 text-xs">Delivering enterprise IT &amp; event infrastructure across the GCC — Qatar, Saudi Arabia &amp; beyond.</div>
           </div>
           <div>
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm mb-3"><CanadaFlag/> CANADA</div>
