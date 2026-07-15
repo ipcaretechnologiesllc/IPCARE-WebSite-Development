@@ -6,7 +6,7 @@ import {
   ArrowRight, Phone, Mail,
   MapPin, Clock, CheckCircle2, Building2, Landmark,
   HeartHandshake, Award, Users, Activity, Headphones,
-  ChevronLeft, ChevronRight, Globe
+  ChevronLeft, ChevronRight, Globe, Pause, Play
 } from 'lucide-react'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
@@ -158,6 +158,7 @@ function HeroCarousel() {
   const [current, setCurrent] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
   const intervalRef = useRef(null)
 
@@ -186,12 +187,13 @@ function HeroCarousel() {
     setCurrent((c) => (c - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
   }, [])
 
-  /* Auto-advance every 5 s; pause on hover or when reduced motion is requested */
+  /* Auto-advance every 5 s; pause on hover, when reduced motion is requested,
+     or when the user has hit the persistent pause toggle (WCAG 2.2.2). */
   useEffect(() => {
-    if (isHovered || reducedMotion) return
+    if (isHovered || reducedMotion || isPaused) return
     intervalRef.current = setInterval(goNext, 5000)
     return () => clearInterval(intervalRef.current)
-  }, [isHovered, reducedMotion, goNext])
+  }, [isHovered, reducedMotion, isPaused, goNext])
 
   /* Keyboard: ArrowLeft / ArrowRight */
   useEffect(() => {
@@ -378,30 +380,51 @@ function HeroCarousel() {
         )
       })}
 
-      {/* ── Dot indicators ── */}
-      <div
-        className="absolute bottom-7 left-0 right-0 z-30 flex items-center justify-center gap-3"
-        role="tablist"
-        aria-label="Service slide navigation"
-      >
-        {HERO_SLIDES.map((slide, i) => (
-          <button
-            key={i}
-            type="button"
-            role="tab"
-            aria-selected={i === current}
-            aria-label={`Go to ${slide.service}`}
-            onClick={() => goTo(i)}
-            tabIndex={0}
-            className="hero-dot rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
-            style={{
-              width: i === current ? 26 : 8,
-              height: 8,
-              background: i === current ? '#E87722' : 'rgba(255,255,255,0.38)',
-              boxShadow: i === current ? '0 0 12px rgba(232,119,34,0.65)' : 'none',
-            }}
-          />
-        ))}
+      {/* ── Dot indicators + persistent pause control ── */}
+      <div className="absolute bottom-7 left-0 right-0 z-30 flex items-center justify-center gap-4">
+        <div
+          className="flex items-center gap-3"
+          role="tablist"
+          aria-label="Service slide navigation"
+        >
+          {HERO_SLIDES.map((slide, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={i === current}
+              aria-label={`Go to ${slide.service}`}
+              onClick={() => goTo(i)}
+              tabIndex={0}
+              className="hero-dot rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
+              style={{
+                width: i === current ? 26 : 8,
+                height: 8,
+                background: i === current ? '#E87722' : 'rgba(255,255,255,0.38)',
+                boxShadow: i === current ? '0 0 12px rgba(232,119,34,0.65)' : 'none',
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Persistent pause/play toggle — hover-to-pause doesn't help touch or
+            keyboard users, so this is the actual WCAG 2.2.2 control. */}
+        <button
+          type="button"
+          aria-pressed={isPaused}
+          aria-label={isPaused ? 'Play slide auto-advance' : 'Pause slide auto-advance'}
+          onClick={() => setIsPaused((p) => !p)}
+          className="hero-pause-btn flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
+          style={{
+            width: 32,
+            height: 32,
+            background: 'rgba(11,26,70,0.5)',
+            border: '1px solid rgba(255,255,255,0.35)',
+            color: '#FFFFFF',
+          }}
+        >
+          {isPaused ? <Play size={13} strokeWidth={2.4} /> : <Pause size={13} strokeWidth={2.4} />}
+        </button>
       </div>
     </section>
   )
@@ -932,6 +955,7 @@ function Testimonials() {
   const trackRef = useRef(null)
   const [current, setCurrent] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   const goTo = useCallback((idx) => {
     const total = quotes.length
@@ -944,11 +968,13 @@ function Testimonials() {
     setCurrent(next)
   }, [quotes.length])
 
+  /* Auto-advance every 6 s; pause on hover or the persistent toggle below
+     (hover alone doesn't help touch/keyboard users — WCAG 2.2.2). */
   useEffect(() => {
-    if (isHovered) return
+    if (isHovered || isPaused) return
     const t = setInterval(() => goTo(current + 1), 6000)
     return () => clearInterval(t)
-  }, [isHovered, current, goTo])
+  }, [isHovered, isPaused, current, goTo])
 
   return (
     <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
@@ -998,16 +1024,36 @@ function Testimonials() {
           </button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
-          {quotes.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Go to testimonial ${i + 1}`}
-              onClick={() => goTo(i)}
-              className={`testimonial-dot${current === i ? ' testimonial-dot--active' : ''}`}
-            />
-          ))}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center gap-2">
+            {quotes.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to testimonial ${i + 1}`}
+                onClick={() => goTo(i)}
+                className={`testimonial-dot${current === i ? ' testimonial-dot--active' : ''}`}
+              />
+            ))}
+          </div>
+
+          {/* Persistent pause/play toggle — see HeroCarousel for rationale */}
+          <button
+            type="button"
+            aria-pressed={isPaused}
+            aria-label={isPaused ? 'Play testimonial auto-advance' : 'Pause testimonial auto-advance'}
+            onClick={() => setIsPaused((p) => !p)}
+            className="hero-pause-btn flex items-center justify-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
+            style={{
+              width: 28,
+              height: 28,
+              background: 'rgba(11,26,70,0.08)',
+              border: '1px solid rgba(11,26,70,0.25)',
+              color: '#0B1A46',
+            }}
+          >
+            {isPaused ? <Play size={12} strokeWidth={2.4} /> : <Pause size={12} strokeWidth={2.4} />}
+          </button>
         </div>
       </div>
     </section>

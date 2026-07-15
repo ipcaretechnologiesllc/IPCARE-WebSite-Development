@@ -317,6 +317,22 @@ body {
   inset: -18px;
 }
 
+/* Persistent pause/play toggle (hero + testimonials autoplay, WCAG 2.2.2) —
+   same invisible hit-area technique, sized so the 28-32px visual button
+   reaches the 44px touch-target minimum. */
+.hero-pause-btn {
+  position: relative;
+  flex-shrink: 0;
+}
+.hero-pause-btn::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+.hero-pause-btn:hover {
+  filter: brightness(1.2);
+}
+
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
