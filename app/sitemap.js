@@ -5,6 +5,7 @@ import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
 import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-data'
 import { kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
+import { isUaeOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
 // serves a sitemap listing only its own URLs:
@@ -88,6 +89,9 @@ export default async function sitemap() {
   const h = await headers()
   const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
   const BASE = (CANONICAL_DOMAINS[rawHost] || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_BASE).replace(/\/$/, '')
+  // UAE-only content cross-canonicalizes to ipcare.ae (see lib/seo-region.js) — a
+  // non-canonical URL should not appear in the ipcare.ca sitemap.
+  const isCaSitemap = BASE === 'https://www.ipcare.ca'
 
   // Build event slug → endDate lookup from the portfolio events array.
   const eventEndDateMap = {}
@@ -134,6 +138,7 @@ export default async function sitemap() {
   for (const { category, slug } of getAllSubpageParams() || []) {
     const path = `/services/${category}/${slug}`
     if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
+    if (isCaSitemap && isUaeOnlyServiceSubpage(category, slug)) continue  // canonicalizes to ipcare.ae
     entries.push({ url: `${BASE}${path}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
@@ -169,6 +174,7 @@ export default async function sitemap() {
 
   // Blog — articles (use real publish date as lastmod)
   for (const a of articles || []) {
+    if (isCaSitemap && isUaeOnlyBlogSlug(a.slug)) continue  // canonicalizes to ipcare.ae
     const lastMod = parseBlogDate(a.date) || now
     entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }

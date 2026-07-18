@@ -3,6 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
+import { isUaeOnlyServiceSubpage, isCaRequest } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -16,10 +17,16 @@ export async function generateMetadata(props) {
   const params = await props.params;
   const sub = getSubpage(params.category, params.slug)
   if (!sub) return {}
+  // UAE-only service subpages are duplicated onto ipcare.ca; cross-canonicalize to the
+  // ipcare.ae original there so Google stops treating both copies as duplicates.
+  // See lib/seo-region.js.
+  const canonical = (isUaeOnlyServiceSubpage(params.category, params.slug) && await isCaRequest())
+    ? `https://www.ipcare.ae/services/${params.category}/${params.slug}`
+    : `/services/${params.category}/${params.slug}`
   return {
     title: sub.title,
     description: sub.metaDescription,
-    alternates: { canonical: `/services/${params.category}/${params.slug}` },
+    alternates: { canonical },
     openGraph: {
       title: sub.title,
       description: sub.metaDescription,
