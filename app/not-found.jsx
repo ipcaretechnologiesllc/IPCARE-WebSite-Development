@@ -2,7 +2,11 @@ import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 
-export const metadata = { title: 'Page Not Found (404) | IP Care Technologies' }
+export const metadata = {
+  title: 'Page Not Found (404) | IP Care Technologies',
+  robots: { index: false, follow: false },
+  alternates: {},
+}
 
 export default function NotFound() {
   return (
