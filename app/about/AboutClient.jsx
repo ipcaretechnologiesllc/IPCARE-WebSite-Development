@@ -609,7 +609,7 @@ function TwoRegions() {
               </div>
             </div>
             <div>
-              <div style={rowItem}><MapPin size={15} style={iconStyle} /><span>Consumers Road, North York, ON</span></div>
+              <div style={rowItem}><MapPin size={15} style={iconStyle} /><span>40 Wynford Drive, Suite 200B, North York, ON</span></div>
               <div style={rowItem}><Mail size={15} style={iconStyle} /><span>info@ipcare.ca</span></div>
               <div style={rowItem}>
                 <Globe size={15} style={iconStyle} />

@@ -1187,7 +1187,7 @@ function OfficesCTA() {
               <div className="flex items-center gap-2"><Phone size={14} className="text-[#E87722] flex-shrink-0"/><span>+1 416 786 0782</span></div>
               <div className="flex items-center gap-2"><Mail size={14} className="text-[#E87722] flex-shrink-0"/><span>info@ipcare.ca</span></div>
               <div className="flex items-center gap-2"><Globe size={14} className="text-[#E87722] flex-shrink-0"/><a href="https://www.ipcare.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">www.ipcare.ca</a></div>
-              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>1 Concorde Gate, North York, ON, Canada</span></div>
+              <div className="flex items-start gap-2"><MapPin size={14} className="text-[#E87722] mt-0.5 flex-shrink-0"/><span>40 Wynford Drive, Suite 200B, North York, ON, Canada</span></div>
             </div>
           </div>
           <div className="text-center md:text-right md:border-l md:border-white/15 md:pl-10">

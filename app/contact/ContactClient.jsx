@@ -255,7 +255,7 @@ export default function ContactClient() {
                 <div className="section-eyebrow">Toronto, Canada</div>
               </div>
               <iframe
-                src="https://maps.google.com/maps?q=43.5019444,-79.8344167&z=14&output=embed"
+                src="https://maps.google.com/maps?q=43.7242816,-79.3357412&z=15&output=embed"
                 title="IP Care Technologies Toronto office map"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

@@ -137,7 +137,7 @@ export default async function RootLayout({ children }) {
     ],
     address: [
       { '@type': 'PostalAddress', streetAddress: 'Salam Street', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
-      { '@type': 'PostalAddress', streetAddress: '1 Concorde Gate', addressLocality: 'North York', addressRegion: 'ON', addressCountry: 'CA' },
+      { '@type': 'PostalAddress', streetAddress: '40 Wynford Drive, Suite 200B', addressLocality: 'North York', addressRegion: 'ON', postalCode: 'M3C 1J5', addressCountry: 'CA' },
     ],
     sameAs: [
       'https://www.facebook.com/ipcaretech',
@@ -203,12 +203,13 @@ export default async function RootLayout({ children }) {
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '1 Concorde Gate',
+      streetAddress: '40 Wynford Drive, Suite 200B',
       addressLocality: 'North York',
       addressRegion: 'ON',
+      postalCode: 'M3C 1J5',
       addressCountry: 'CA',
     },
-    geo: { '@type': 'GeoCoordinates', latitude: 43.5019444, longitude: -79.8344167 },
+    geo: { '@type': 'GeoCoordinates', latitude: 43.7242816, longitude: -79.3357412 },
     areaServed: [
       { '@type': 'City', name: 'Toronto' },
       { '@type': 'City', name: 'Mississauga' },
