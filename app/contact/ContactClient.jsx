@@ -208,7 +208,7 @@ export default function ContactClient() {
                 city="Toronto"
                 phone="+1 416 786 0782"
                 email="info@ipcare.ca"
-                address="1 Concorde Gate, North York, ON, Canada"
+                address="40 Wynford Drive, Suite 200B, North York, ON, Canada"
                 hours="Monday - Friday, 9:00 AM - 6:00 PM (EST)"
               />
 
