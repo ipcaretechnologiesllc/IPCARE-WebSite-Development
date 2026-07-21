@@ -570,7 +570,6 @@ function Services() {
 function DeliveryProofStrip() {
   const cardBg = 'linear-gradient(155deg, #16295C 0%, #0B1A46 100%)'
   const cardShadow = '0 8px 20px rgba(11,26,70,0.28), inset 0 1px 0 rgba(255,255,255,0.06)'
-  const cardShadowHover = '0 14px 28px rgba(11,26,70,0.38), inset 0 1px 0 rgba(255,255,255,0.08)'
 
   return (
     <section className="px-6 py-12" style={{ background: '#FFFFFF', borderBottom: '1px solid #E5EAF2' }}>
@@ -594,6 +593,7 @@ function DeliveryProofStrip() {
               <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
                 Trusted Across Enterprise Facilities &amp; ELV Projects
               </h2>
+              <span className="proof-accent" aria-hidden="true" />
               <p className="mt-3 text-sm md:text-base leading-7" style={{ color: '#4B5563' }}>
                 One accountable engineering team for facility systems and handover-ready infrastructure.
               </p>
@@ -617,7 +617,7 @@ function DeliveryProofStrip() {
                   style={{ transitionDelay: `${i * 60}ms` }}
                 >
                   <div
-                    className="h-full flex flex-col justify-between"
+                    className="proof-tile h-full flex flex-col justify-between"
                     style={{
                       borderRadius: '12px',
                       padding: '14px 12px',
@@ -625,20 +625,11 @@ function DeliveryProofStrip() {
                       background: cardBg,
                       border: '1px solid rgba(255,255,255,0.06)',
                       boxShadow: cardShadow,
-                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                       cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)'
-                      e.currentTarget.style.boxShadow = cardShadowHover
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0) scale(1)'
-                      e.currentTarget.style.boxShadow = cardShadow
                     }}
                   >
                     <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.08em]" style={{ color: '#E87722' }}>
-                      <Icon size={12} />
+                      <Icon size={12} className="proof-icon" />
                       {categoryLabel}
                     </span>
                     <span className="block mt-2 text-[13px] font-extrabold leading-tight text-white">{project.name}</span>

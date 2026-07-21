@@ -661,6 +661,60 @@ body {
 
 .proof-card:focus-visible { outline: 2px solid #E87722; outline-offset: 2px; }
 
+/* Delivery Proof — motion & depth polish */
+.proof-accent {
+  display: block;
+  height: 3px;
+  width: 0;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #E87722 0%, #F59E4B 100%);
+  transition: width .7s cubic-bezier(.22,.61,.36,1) .15s;
+}
+.reveal.is-visible .proof-accent { width: 44px; }
+
+.proof-card .proof-tile {
+  position: relative;
+  overflow: hidden;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  will-change: transform;
+}
+/* Slight scale-up on the entrance stagger for a more deliberate feel */
+.reveal.proof-card { transform: translateY(20px) scale(.96); }
+.reveal.proof-card.is-visible { transform: translateY(0) scale(1); }
+
+/* Diagonal sheen sweep on hover */
+.proof-card .proof-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.14) 50%, transparent 100%);
+  transform: translateX(-160%) skewX(-18deg);
+  pointer-events: none;
+}
+.proof-card:hover .proof-tile::after { animation: proof-sheen .8s ease forwards; }
+@keyframes proof-sheen {
+  0%   { transform: translateX(-160%) skewX(-18deg); }
+  100% { transform: translateX(360%) skewX(-18deg); }
+}
+
+.proof-card:hover .proof-tile {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(232,119,34,0.55) !important;
+  box-shadow: 0 16px 30px rgba(11,26,70,0.40), 0 0 0 1px rgba(232,119,34,0.25), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+.proof-card .proof-icon { transition: transform .28s ease; }
+.proof-card:hover .proof-icon { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.proof-card { transform: none !important; }
+  .proof-accent { width: 44px !important; transition: none !important; }
+  .proof-card:hover .proof-tile::after { animation: none !important; }
+}
+
 /* Hero — shortened on md+ so the trust ticker peeks above the fold */
 .hero-section {
   height: calc(100vh - 108px);
