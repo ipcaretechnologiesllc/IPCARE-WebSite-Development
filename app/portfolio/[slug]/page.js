@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, ChevronRight, MapPin, AlertTriangle, Layers, CheckCircle2 } from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
-import CaseStudyGallery from './CaseStudyGallery'
+import CaseStudyWork from './CaseStudyWork'
 import { getCaseStudy, getCaseStudySlugs } from '@/lib/portfolio-data'
 
 export const revalidate = 3600
@@ -68,7 +68,7 @@ export default async function CaseStudyPage(props) {
   if (!project) notFound()
 
   const poster = project.poster || project.image
-  const gallery = project.gallery || []
+  const workBreakdown = project.workBreakdown || []
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -169,21 +169,21 @@ export default async function CaseStudyPage(props) {
           </div>
         </section>
 
-        {/* Team gallery */}
-        {gallery.length > 0 && (
+        {/* Scope-of-work breakdown with on-site photos */}
+        {workBreakdown.length > 0 && (
           <section className="border-t border-[#E5EAF3] bg-[#F7F9FC]">
             <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
-              <div className="mb-8 max-w-2xl">
+              <div className="mb-10 max-w-2xl">
                 <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">On site with our team</div>
                 <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
                   Real delivery, real engineers
                 </h2>
                 <p className="mt-3 text-[15px] leading-7 text-[#475467]">
-                  Our engineering team on the ground at {project.name} — one accountable team across security,
-                  cabling and infrastructure.
+                  The work at {project.name}, discipline by discipline — CCTV, structured cabling and access
+                  control, delivered on the ground by one accountable IP Care team.
                 </p>
               </div>
-              <CaseStudyGallery images={gallery} />
+              <CaseStudyWork blocks={workBreakdown} />
             </div>
           </section>
         )}
