@@ -95,6 +95,38 @@ function ServiceLinks({ services, compact = false }) {
   )
 }
 
+function detailHref(project) {
+  return project.caseStudy ? `/portfolio/${project.slug}` : project.relatedHref
+}
+
+function CardMedia({ project, eager = false }) {
+  if (project.video) {
+    return (
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster={project.poster || project.image}
+        aria-label={project.imageAlt}
+        className="motion-reduce:hidden absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      >
+        <source src={project.video} type="video/mp4" />
+      </video>
+    )
+  }
+  return (
+    <img
+      src={project.image}
+      alt={project.imageAlt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+    />
+  )
+}
+
 function FeaturedCard({ project, index }) {
   return (
     <article
@@ -102,13 +134,16 @@ function FeaturedCard({ project, index }) {
       style={{ transitionDelay: `${index * 50}ms` }}
     >
       <div className="relative min-h-[240px] overflow-hidden bg-[#0B1A46]">
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          loading={index < 2 ? 'eager' : 'lazy'}
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-        />
+        {/* Reduced-motion fallback: poster still shown when the video is hidden */}
+        {project.video && (
+          <img
+            src={project.poster || project.image}
+            alt={project.imageAlt}
+            aria-hidden="true"
+            className="motion-safe:hidden absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+        <CardMedia project={project} eager={index < 2} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A46]/65 via-[#0B1A46]/20 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-[#E87722] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white">
@@ -140,7 +175,7 @@ function FeaturedCard({ project, index }) {
           <p className="mt-2 text-sm leading-6 text-[#475467]">{project.outcome}</p>
         </div>
         <div className="mt-auto pt-5">
-          <Link href={project.relatedHref} className="service-card__cta inline-flex min-h-11 items-center gap-2 px-4 py-2 text-sm font-bold">
+          <Link href={detailHref(project)} className="service-card__cta inline-flex min-h-11 items-center gap-2 px-4 py-2 text-sm font-bold">
             View Details <ArrowRight size={15} />
           </Link>
         </div>
@@ -191,7 +226,7 @@ function ProjectCard({ project }) {
           <ServiceLinks services={project.services} compact />
         </div>
         <div className="mt-auto pt-5">
-          <Link href={project.relatedHref} className="service-card__cta inline-flex min-h-11 items-center gap-2 px-4 py-2 text-sm font-bold">
+          <Link href={detailHref(project)} className="service-card__cta inline-flex min-h-11 items-center gap-2 px-4 py-2 text-sm font-bold">
             View Details <ArrowRight size={14} />
           </Link>
         </div>

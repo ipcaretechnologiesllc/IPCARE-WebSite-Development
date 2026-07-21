@@ -5,6 +5,7 @@ import { serviceCategories, getAllSubpageParams } from '@/lib/services-data'
 import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-data'
 import { kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
+import { caseStudyProjects } from '@/lib/portfolio-data'
 import { isUaeOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
@@ -177,6 +178,11 @@ export default async function sitemap() {
     if (isCaSitemap && isUaeOnlyBlogSlug(a.slug)) continue  // canonicalizes to ipcare.ae
     const lastMod = parseBlogDate(a.date) || now
     entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
+  }
+
+  // Portfolio — project case-study detail pages
+  for (const project of caseStudyProjects || []) {
+    entries.push({ url: `${BASE}/portfolio/${project.slug}`, lastModified: HUB_DATES['/portfolio'] || '2026-07-05', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Industries — sector pages
