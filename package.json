@@ -60,7 +60,7 @@
         "react-resizable-panels": "^3.0.3",
         "recharts": "^2.15.3",
         "resend": "^6.12.4",
-        "sharp": "^0.34.5",
+        "sharp": "^0.35.3",
         "sonner": "^2.0.5",
         "tailwind-merge": "^3.3.1",
         "tailwindcss-animate": "^1.0.7",
@@ -78,9 +78,11 @@
     },
     "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
     "overrides": {
-        "postcss": "^8.5.10"
+        "postcss": "^8.5.10",
+        "sharp": "^0.35.3"
     },
     "resolutions": {
-        "postcss": "^8.5.10"
+        "postcss": "^8.5.10",
+        "sharp": "^0.35.3"
     }
 }
