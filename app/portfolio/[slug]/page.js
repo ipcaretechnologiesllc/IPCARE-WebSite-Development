@@ -328,8 +328,10 @@ export default async function CaseStudyPage(props) {
                           </tr>
                         </thead>
                         <tbody>
-                          {group.items.map((row) => (
-                            <tr key={row.item} className="border-b border-[#F0F3F8] last:border-0">
+                          {/* Keyed by index: a schedule can legitimately repeat the
+                              same work item at different quantities. */}
+                          {group.items.map((row, rowIndex) => (
+                            <tr key={`${row.item}-${rowIndex}`} className="border-b border-[#F0F3F8] last:border-0">
                               <td className="px-5 py-3 leading-6 text-[#344054]">{row.item}</td>
                               <td className="whitespace-nowrap px-5 py-3 text-right font-semibold text-[#0B1A46] tabular-nums">
                                 {row.qty}
