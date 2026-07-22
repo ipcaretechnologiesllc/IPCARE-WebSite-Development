@@ -71,6 +71,7 @@ export default async function CaseStudyPage(props) {
   if (!project) notFound()
 
   const poster = project.poster || project.image
+  const posterLandscape = project.posterAspect === '16/10'
   const workBreakdown = project.workBreakdown || []
   const facts = project.facts || []
   const stats = project.stats || []
@@ -99,9 +100,11 @@ export default async function CaseStudyPage(props) {
     about: [project.industry, project.type, ...(project.services || []).map((item) => item.label)],
     provider: { '@id': `${BASE}#org` },
     ...(project.deliveredYear ? { dateCreated: project.deliveredYear } : {}),
-    ...(techStack.length
-      ? { keywords: [...new Set(techStack.map((group) => group.vendor))].join(', ') }
-      : {}),
+    // Labour-scope projects carry no vendors, so guard against an all-undefined set.
+    ...(() => {
+      const vendors = [...new Set(techStack.map((group) => group.vendor).filter(Boolean))]
+      return vendors.length ? { keywords: vendors.join(', ') } : {}
+    })(),
   }
 
   return (
@@ -173,12 +176,16 @@ export default async function CaseStudyPage(props) {
                 </div>
               </div>
 
-              <div className="w-full">
+              {/* Site photography is overwhelmingly portrait and modest in
+                  resolution, so a portrait poster is framed to its source size
+                  rather than stretched across the column and upscaled.
+                  Opt a project into a wide poster with posterAspect: '16/10'. */}
+              <div className={`w-full ${posterLandscape ? '' : 'max-w-[340px] justify-self-center lg:justify-self-end'}`}>
                 <div className="overflow-hidden rounded-2xl bg-[#08123a] shadow-2xl ring-1 ring-white/15">
                   <img
                     src={poster}
                     alt={project.imageAlt}
-                    className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
+                    className={`w-full object-cover ${posterLandscape ? 'aspect-[4/3] sm:aspect-[16/10]' : 'aspect-[4/5]'}`}
                   />
                 </div>
                 {project.imageCaption && (
@@ -276,13 +283,15 @@ export default async function CaseStudyPage(props) {
           <section className="border-t border-[#E5EAF3] bg-[#F7F9FC]">
             <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
               <div className="mb-10 max-w-2xl">
-                <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#B95812]">Technical summary</div>
+                <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#B95812]">
+                  {project.techStackEyebrow || 'Technical summary'}
+                </div>
                 <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
-                  What was installed
+                  {project.techStackTitle || 'What was installed'}
                 </h2>
                 <p className="mt-3 text-[15px] leading-7 text-[#475467]">
-                  The delivered equipment schedule, system by system — tier-one hardware specified for a facility
-                  that has to run every day.
+                  {project.techStackIntro ||
+                    'The delivered equipment schedule, system by system — tier-one hardware specified for a facility that has to run every day.'}
                 </p>
               </div>
 
@@ -292,20 +301,25 @@ export default async function CaseStudyPage(props) {
                     key={group.system}
                     className="overflow-hidden rounded-xl border border-[#E5EAF3] bg-white shadow-sm"
                   >
+                    {/* Vendor badge is omitted on labour/installation scopes,
+                        where there is no supplied equipment to attribute. */}
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E5EAF3] bg-[#0B1A46] px-5 py-4">
                       <h3 className="text-sm font-extrabold uppercase tracking-[0.1em] text-white">{group.system}</h3>
-                      <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-[#F5A96A]">
-                        {group.vendor}
-                      </span>
+                      {group.vendor && (
+                        <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.1em] text-[#F5A96A]">
+                          {group.vendor}
+                        </span>
+                      )}
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-[14px]">
                         <caption className="sr-only">
-                          {group.system} equipment supplied and installed at {project.name}
+                          {group.system} {project.techStackCaption || 'equipment supplied and installed'} at{' '}
+                          {project.name}
                         </caption>
                         <thead>
                           <tr className="border-b border-[#E5EAF3] text-[11px] uppercase tracking-[0.12em] text-[#667085]">
-                            <th scope="col" className="px-5 py-3 font-bold">Item</th>
+                            <th scope="col" className="px-5 py-3 font-bold">{project.techStackItemLabel || 'Item'}</th>
                             <th scope="col" className="px-5 py-3 text-right font-bold">Qty</th>
                           </tr>
                         </thead>

@@ -7,6 +7,8 @@ import {
   Fingerprint,
   Network,
   BatteryCharging,
+  Server,
+  Waypoints,
   CheckCircle2,
   Check,
   X,
@@ -16,7 +18,7 @@ import {
 
 // Explicit map keeps the client bundle tree-shaken (a barrel `import * as`
 // pulls the whole icon set in). Add new scope icons here as needed.
-const SCOPE_ICONS = { Cctv, Cable, Fingerprint, Network, BatteryCharging }
+const SCOPE_ICONS = { Cctv, Cable, Fingerprint, Network, BatteryCharging, Server, Waypoints }
 
 const pad = (n) => String(n).padStart(2, '0')
 
