@@ -182,8 +182,12 @@ export default async function CaseStudyPage(props) {
                   Opt a project into a wide poster with posterAspect: '16/10'. */}
               <div className={`w-full ${posterLandscape ? '' : 'max-w-[340px] justify-self-center lg:justify-self-end'}`}>
                 <div className="overflow-hidden rounded-2xl bg-[#08123a] shadow-2xl ring-1 ring-white/15">
+                  {/* The poster is the LCP element, so serve a smaller file to
+                      narrow viewports where one is provided. */}
                   <img
                     src={poster}
+                    srcSet={project.posterSrcSet}
+                    sizes={project.posterSrcSet ? '(min-width: 1024px) 560px, 100vw' : undefined}
                     alt={project.imageAlt}
                     className={`w-full object-cover ${posterLandscape ? 'aspect-[4/3] sm:aspect-[16/10]' : 'aspect-[4/5]'}`}
                   />
