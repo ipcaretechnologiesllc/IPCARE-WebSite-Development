@@ -1,11 +1,24 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { Cctv, Cable, Fingerprint, CheckCircle2, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import {
+  Cctv,
+  Cable,
+  Fingerprint,
+  Network,
+  BatteryCharging,
+  CheckCircle2,
+  Check,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
 
 // Explicit map keeps the client bundle tree-shaken (a barrel `import * as`
 // pulls the whole icon set in). Add new scope icons here as needed.
-const SCOPE_ICONS = { Cctv, Cable, Fingerprint }
+const SCOPE_ICONS = { Cctv, Cable, Fingerprint, Network, BatteryCharging }
+
+const pad = (n) => String(n).padStart(2, '0')
 
 export default function CaseStudyWork({ blocks = [] }) {
   // Flatten every photo across scope blocks so the lightbox can page through
@@ -54,44 +67,102 @@ export default function CaseStudyWork({ blocks = [] }) {
       {decorated.map((block, blockIndex) => {
         const Icon = SCOPE_ICONS[block.icon] || CheckCircle2
         const reverse = blockIndex % 2 === 1
-        const single = block.photos.length <= 1
+        const specs = block.specs || []
+        const count = block.photos.length
+        const hasPhotos = count > 0
+        const single = count === 1
+        // Every site photo is portrait, so no layout here may force a landscape
+        // crop. A trio goes 3-across from sm up: stacking it any wider leaves the
+        // media column roughly 1,150px tall against much shorter copy.
+        const trio = count >= 3
+        let gridCols = 'grid-cols-2'
+        if (single) gridCols = 'grid-cols-1'
+        else if (trio) gridCols = 'grid-cols-1 sm:grid-cols-3'
+        // Splits into two columns at lg, not md: at tablet widths a half-width
+        // media column leaves a photo trio at ~87px per thumbnail.
         return (
-          <div key={block.scope} className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
-            {/* Photos */}
-            <div className={reverse ? 'md:order-last' : ''}>
-              <div className={`grid gap-4 ${single ? 'mx-auto max-w-[260px] grid-cols-1 sm:mx-0' : 'grid-cols-2'}`}>
-                {block.photos.map((photo, photoIndex) => {
-                  const idx = block.start + photoIndex
-                  return (
-                    <button
-                      key={photo.src}
-                      type="button"
-                      onClick={() => setActive(idx)}
-                      aria-label={`Enlarge photo: ${photo.alt}`}
-                      className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-[#0B1A46] ring-1 ring-[#E5EAF3] transition hover:ring-[#E87722] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722]"
-                    >
-                      <img
-                        src={photo.src}
-                        alt={photo.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                      />
-                      <span className="absolute inset-0 bg-gradient-to-t from-[#0B1A46]/40 to-transparent opacity-0 transition group-hover:opacity-100" />
-                    </button>
-                  )
-                })}
-              </div>
+          <div key={block.scope} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+            {/* Media — on-site photos, or an equipment panel where no photo exists */}
+            <div className={reverse ? 'lg:order-last' : ''}>
+              {hasPhotos ? (
+                <div className={`grid gap-4 ${gridCols}`}>
+                  {block.photos.map((photo, photoIndex) => {
+                    const idx = block.start + photoIndex
+                    const shape = single ? 'aspect-[4/3] sm:aspect-[4/5]' : 'aspect-[3/4]'
+                    return (
+                      <button
+                        key={photo.src}
+                        type="button"
+                        onClick={() => setActive(idx)}
+                        aria-label={`Enlarge photo: ${photo.alt}`}
+                        className={`group relative overflow-hidden rounded-2xl bg-[#0B1A46] shadow-sm ring-1 ring-[#E5EAF3] transition hover:shadow-lg hover:ring-[#E87722] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] ${shape}`}
+                      >
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                        <span className="absolute inset-0 bg-gradient-to-t from-[#0B1A46]/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+                      </button>
+                    )
+                  })}
+                </div>
+              ) : (
+                <div className="relative overflow-hidden rounded-2xl bg-[#0B1A46] p-7 shadow-lg ring-1 ring-white/10 sm:p-8">
+                  {/* Faint blueprint grid keeps the panel from reading as an empty box */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                      backgroundSize: '28px 28px',
+                    }}
+                  />
+                  <div className="relative">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#E87722] text-white">
+                      <Icon size={20} />
+                    </div>
+                    <div className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#F5A96A]">
+                      Equipment &amp; configuration
+                    </div>
+                    <ul className="mt-4 space-y-3">
+                      {specs.map((spec) => (
+                        <li key={spec} className="flex gap-3 text-[14px] leading-6 text-white/85">
+                          <Check size={16} className="mt-1 shrink-0 text-[#E87722]" aria-hidden="true" />
+                          <span>{spec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Copy */}
             <div>
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#E87722]/10 text-[#E87722]">
-                <Icon size={20} />
+              <div className="flex items-center gap-3">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#E87722]/10 text-[#B95812]">
+                  <Icon size={20} />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#667085] tabular-nums">
+                  Scope {pad(blockIndex + 1)} / {pad(decorated.length)}
+                </span>
               </div>
-              <div className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#E87722]">Scope of work</div>
-              <h3 className="mt-1 text-xl font-extrabold leading-tight text-[#0B1A46] sm:text-2xl">{block.scope}</h3>
+              <h3 className="mt-4 text-xl font-extrabold leading-tight text-[#0B1A46] sm:text-2xl">{block.scope}</h3>
               <p className="mt-3 text-[15px] leading-7 text-[#475467]">{block.blurb}</p>
+              {hasPhotos && specs.length > 0 && (
+                <ul className="mt-5 space-y-2.5 border-t border-[#E5EAF3] pt-5">
+                  {specs.map((spec) => (
+                    <li key={spec} className="flex gap-2.5 text-[14px] leading-6 text-[#344054]">
+                      <Check size={16} className="mt-1 shrink-0 text-[#B95812]" aria-hidden="true" />
+                      <span>{spec}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         )
