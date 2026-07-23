@@ -6,6 +6,7 @@ import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-da
 import { kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
 import { caseStudyProjects } from '@/lib/portfolio-data'
+import { products } from '@/lib/products-data'
 import { isUaeOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
@@ -51,6 +52,7 @@ const HUB_DATES = {
   '/about':                                '2025-01-01',
   '/services':                             '2025-03-01',
   '/portfolio':                            '2026-07-05',
+  '/products':                             '2026-07-23',
   '/rental':                               '2025-03-01',
   '/event-it':                             '2025-05-25',
   '/event-it/portfolio':                   '2025-05-25',
@@ -132,7 +134,18 @@ export default async function sitemap() {
   ]
   for (const [p, pri, ch] of hubs) entries.push({ url: `${BASE}${p}`, lastModified: HUB_DATES[p] || now, changeFrequency: ch, priority: pri })
 
+  // Products — software products built by IP Care (CrewForce360, DocPilot).
+  // These routes build and return 200 and are linked from the Header nav, but were
+  // never added here or to llms.txt, so Google was never told they exist.
+  entries.push({ url: `${BASE}/products`, lastModified: HUB_DATES['/products'], changeFrequency: 'monthly', priority: P_CATEGORY })
+  for (const slug of Object.keys(products || {})) {
+    entries.push({ url: `${BASE}/products/${slug}`, lastModified: HUB_DATES['/products'], changeFrequency: 'monthly', priority: P_DETAIL })
+  }
+
   // Services — categories + subpages
+  // /services/digital-solutions is a standalone page (not part of serviceCategories),
+  // so the loop below never emitted it. Same orphaning as /products above.
+  entries.push({ url: `${BASE}/services/digital-solutions`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   for (const slug of Object.keys(serviceCategories || {})) {
     entries.push({ url: `${BASE}/services/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }

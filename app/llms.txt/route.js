@@ -37,8 +37,14 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Infrastructure Services](${BASE}/services/infrastructure): Data centre management, virtualization, hardware procurement
 - [ELV & Physical Security](${BASE}/services/elv): CCTV, access control, automatic gate barriers, audio/video intercom, public address systems
 
+## Software Products
+- [Products](${BASE}/products): Software products built in-house by IP Care Technologies
+- [CrewForce360](${BASE}/products/crewforce360): Field workforce operations platform with GPS-verified attendance
+- [DocPilot](${BASE}/products/docpilot): Document and compliance platform tracking gate pass, vehicle, machinery, employee and company document expiry
+
 ## Other sections
 - [Industries](${BASE}/industries): Sector-specific IT solutions
+- [Digital Solutions](${BASE}/services/digital-solutions): Web, software and AI development services
 - [Delivery Portfolio](${BASE}/portfolio): Unified project proof across enterprise facilities, ELV, CCTV, access control, structured cabling and infrastructure
 - [IT Equipment Rental](${BASE}/rental): Short and long-term rental of laptops, servers, networking, and AV equipment
 - [Event IT](${BASE}/event-it): On-site IT support and equipment for events
