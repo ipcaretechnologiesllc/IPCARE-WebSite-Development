@@ -99,12 +99,14 @@ export async function generateMetadata() {
       locale: 'en_US',
       type: 'website',
     },
+    // `creator`/`site` previously pointed at @ipcaretech, which is not an account IP Care
+    // owns — attributing the site to a handle we don't control is worse than omitting it.
+    // The card type stays: it still controls how links preview when other people share
+    // them on X, which works fine without a publisher handle.
     twitter: {
       card: 'summary_large_image',
       title: SITE_TITLE,
       description: 'Enterprise IT Solutions UAE & Canada',
-      creator: '@ipcaretech',
-      site: '@ipcaretech',
     },
     robots: {
       index: true,
