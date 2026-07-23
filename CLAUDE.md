@@ -27,6 +27,8 @@ There is no lint/test script configured in `package.json`. `tests/` and `test_re
 
 Allow **5–10 minutes** after pushing before verifying — a check immediately after `git push` will still show the old build. Both `www.ipcare.ae` and `www.ipcare.ca` are served by Hostinger (the apex hosts redirect at the platform level, before the Next.js app runs).
 
+**A site-wide `HTTP 503 "Service Unavailable — the server is temporarily busy"` shortly after a push is normal, not a code fault.** Applying a build on Hostinger requires **stopping and restarting the Node process**, and during that restart the origin serves 503 across *every* route (confirmed: `/`, `/rental`, `/api/health` all 503 at once). If the 503 is site-wide it is the restart window — wait and re-check. A 503 on one route while others serve 200 would be different and worth investigating. Do not interpret the restart 503 as a broken deploy or start rolling anything back; the local `next build` passing 256/256 is the signal the code is fine.
+
 Three caching layers can each serve stale content after a deploy — check all three before suspecting the code:
 1. **Cloudflare edge** — sits in front of Hostinger and has been observed caching HTML despite `no-store` from the origin. Fix: "Purge Everything" in the Cloudflare dashboard.
 2. **Next.js ISR at the origin** — most routes export `revalidate = 3600`, and the Hostinger redeploy does not appear to clear `.next/cache`. A page can serve pre-deploy HTML for up to an hour until a request triggers background regeneration. A `?cb=1` query string bypasses this and is a useful diagnostic: fresh-with-query + stale-without-query means ISR staleness, not a bug.
