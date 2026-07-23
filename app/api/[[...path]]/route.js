@@ -38,16 +38,41 @@ async function getDb() {
 }
 
 // ---------- CORS ----------
-const cors = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-}
-export async function OPTIONS() { return new NextResponse(null, { status: 204, headers: cors }) }
+// Previously `Access-Control-Allow-Origin: *`, which let any website on the internet
+// read this API's responses from a visitor's browser. The forms that call this route
+// are all same-origin, so an explicit allowlist costs nothing and closes that hole.
+// Same-origin requests don't need CORS headers at all — the browser permits them
+// regardless — so omitting the header for unknown origins is the correct default.
+const ALLOWED_ORIGINS = new Set([
+  'https://www.ipcare.ae',
+  'https://www.ipcare.ca',
+])
 
-function jsonOk(data, init) { return NextResponse.json({ ok: true, ...data }, { headers: cors, ...init }) }
-function jsonErr(error, status = 400, extra = {}) {
-  return NextResponse.json({ ok: false, error, ...extra }, { status, headers: cors })
+function corsHeaders(request) {
+  const headers = {
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    // Responses differ by Origin — without this, a shared cache could serve one
+    // origin's CORS headers to another.
+    'Vary': 'Origin',
+  }
+  const origin = request?.headers?.get('origin') || ''
+  if (!origin) return headers
+  const allowed = ALLOWED_ORIGINS.has(origin) ||
+    (process.env.NODE_ENV !== 'production' && /^https?:\/\/localhost(:\d+)?$/.test(origin))
+  if (allowed) headers['Access-Control-Allow-Origin'] = origin
+  return headers
+}
+
+export async function OPTIONS(request) {
+  return new NextResponse(null, { status: 204, headers: corsHeaders(request) })
+}
+
+function jsonOk(request, data, init) {
+  return NextResponse.json({ ok: true, ...data }, { headers: corsHeaders(request), ...init })
+}
+function jsonErr(request, error, status = 400, extra = {}) {
+  return NextResponse.json({ ok: false, error, ...extra }, { status, headers: corsHeaders(request) })
 }
 
 // ---------- Helpers ----------
@@ -86,10 +111,30 @@ async function enforceRateLimit(request, bucket) {
   if (!rl.ok) {
     return {
       ip,
-      response: jsonErr('too-many-requests', 429, { retryAfter: rl.retryAfterSec }),
+      response: jsonErr(request, 'too-many-requests', 429, { retryAfter: rl.retryAfterSec }),
     }
   }
   return { ip, response: null }
+}
+
+// Length-independent comparison so a wrong token can't be recovered by timing responses.
+function safeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false
+  let diff = 0
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  return diff === 0
+}
+
+// `GET /api/rental/quotes` reads customer names, companies and email addresses out of
+// the leads collection. It previously had NO authentication — it was live and returning
+// real lead data to anyone who asked. It now requires a bearer token, and when
+// ADMIN_API_TOKEN is unset it reports 404 (fail closed, and doesn't advertise itself).
+function isAuthorizedAdmin(request) {
+  const expected = process.env.ADMIN_API_TOKEN
+  if (!expected) return false
+  const auth = request.headers.get('authorization') || ''
+  const token = auth.startsWith('Bearer ') ? auth.slice(7).trim() : ''
+  return safeEqual(token, expected)
 }
 
 // ---------- GET ----------
@@ -97,21 +142,23 @@ export async function GET(request, props) {
   const params = await props.params;
   const path = (params?.path || []).join('/')
   if (path === '' || path === 'health') {
-    return jsonOk({ service: 'IP Care Technologies API', time: new Date().toISOString() })
+    return jsonOk(request, { service: 'IP Care Technologies API', time: new Date().toISOString() })
   }
   if (path === 'rental/quotes') {
+    if (!isAuthorizedAdmin(request)) return jsonErr(request, 'not-found', 404)
     try {
       const db = await getDb()
       const docs = await db.collection('leads').find(
         { type: { $in: ['rental-quote', 'quote', 'contact'] } },
         { projection: { _id: 0, id: 1, reference: 1, type: 1, 'customer.fullName': 1, 'customer.company': 1, 'customer.email': 1, createdAt: 1, status: 1 } }
       ).sort({ createdAt: -1 }).limit(100).toArray()
-      return jsonOk({ count: docs.length, leads: docs })
+      return jsonOk(request, { count: docs.length, leads: docs })
     } catch (e) {
-      return jsonErr(e.message, 500)
+      console.error('[api] rental/quotes error:', e)
+      return jsonErr(request, 'server-error', 500)
     }
   }
-  return jsonErr('not-found', 404)
+  return jsonErr(request, 'not-found', 404)
 }
 
 // ---------- POST ----------
@@ -130,7 +177,7 @@ export async function POST(request, props) {
 
     if (isCareers && contentType.includes('multipart/form-data')) {
       const formData = await request.formData().catch(() => null)
-      if (!formData) return jsonErr('invalid-form-data', 400)
+      if (!formData) return jsonErr(request, 'invalid-form-data', 400)
 
       body = {
         name: formData.get('name'),
@@ -141,13 +188,13 @@ export async function POST(request, props) {
       }
       const file = formData.get('cv')
       if (file && typeof file !== 'string' && file.size > 0) {
-        if (file.size > MAX_PDF_BYTES) return jsonErr('file-too-large', 413, { maxBytes: MAX_PDF_BYTES })
+        if (file.size > MAX_PDF_BYTES) return jsonErr(request, 'file-too-large', 413, { maxBytes: MAX_PDF_BYTES })
         if (!(file.type === 'application/pdf' || (file.name || '').toLowerCase().endsWith('.pdf'))) {
-          return jsonErr('invalid-file-type', 400)
+          return jsonErr(request, 'invalid-file-type', 400)
         }
         const ab = await file.arrayBuffer()
         const buf = Buffer.from(ab)
-        if (!isValidPdfMagic(buf)) return jsonErr('invalid-pdf-signature', 400)
+        if (!isValidPdfMagic(buf)) return jsonErr(request, 'invalid-pdf-signature', 400)
         pdfAttachment = {
           filename: (file.name || 'cv.pdf').replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 80),
           size: file.size,
@@ -166,12 +213,12 @@ export async function POST(request, props) {
       if (response) return response
 
       const clean = sanitizeForm(body, { email: { type: 'email' }, source: { type: 'text', maxLen: 40, allowNewlines: false } })
-      if (!clean.email) return jsonErr('invalid-email', 400)
+      if (!clean.email) return jsonErr(request, 'invalid-email', 400)
 
       const db = await getDb()
       const coll = db.collection('newsletter_subscribers')
       const existing = await coll.findOne({ email: clean.email }, { projection: { _id: 1 } })
-      if (existing) return jsonOk({ duplicate: true })
+      if (existing) return jsonOk(request, { duplicate: true })
 
       const token = uuidv4().replace(/-/g, '')
       const doc = {
@@ -188,16 +235,15 @@ export async function POST(request, props) {
       const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'}/unsubscribe?token=${token}`
       const welcome = tplNewsletterWelcome({ unsubscribeUrl })
       const r = await sendMail({ to: clean.email, subject: welcome.subject, html: welcome.html, replyTo: INFO_EMAIL, categories: ['newsletter', 'welcome'] })
-      return jsonOk({ emailSent: r.ok, mocked: !!r.mocked })
+      return jsonOk(request, { emailSent: r.ok, mocked: !!r.mocked })
     }
 
     // =====================================================================
     // CONTACT — info@ipcare.ae + auto-reply. reCAPTCHA verified.
     // =====================================================================
     if (path === 'contact') {
-      console.log('[contact-debug] handler reached, env check:', { hasResend: !!process.env.RESEND_API_KEY, hasRecaptchaSecret: !!process.env.RECAPTCHA_SECRET_KEY, threshold: process.env.RECAPTCHA_THRESHOLD, hasContactToEmail: !!process.env.CONTACT_TO_EMAIL, mongoUrlSet: !!process.env.MONGO_URL, baseUrlSet: !!process.env.NEXT_PUBLIC_BASE_URL, nodeEnv: process.env.NODE_ENV })
       const { ip, response } = await enforceRateLimit(request, 'contact')
-      if (response) { console.log('[contact-debug] rate-limited, returning early'); return response }
+      if (response) return response
 
       const clean = sanitizeForm(body, {
         name: { type: 'text', maxLen: 120, allowNewlines: false },
@@ -210,39 +256,31 @@ export async function POST(request, props) {
         tab: { type: 'text', maxLen: 20, allowNewlines: false },
       })
       if (!clean.name || !clean.email || !clean.company || !clean.phone) {
-        console.log('[contact-debug] missing-required-fields:', { hasName: !!clean.name, hasEmail: !!clean.email, hasCompany: !!clean.company, hasPhone: !!clean.phone })
-        return jsonErr('missing-required-fields', 400)
+        return jsonErr(request, 'missing-required-fields', 400)
       }
-      console.log('[contact-debug] sanitized OK, fields present')
 
       // reCAPTCHA v3
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'contact', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
       console.log(`[recaptcha] action=contact score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
-      console.log('[contact-debug] captcha full result:', JSON.stringify(captcha))
-      if (!captcha.ok) { console.log('[contact-debug] captcha rejected, returning 400'); return jsonErr('captcha-failed', 400, { captcha }) }
+      if (!captcha.ok) return jsonErr(request, 'captcha-failed', 400)
 
       const reference = newContactReference()
-      console.log('[contact-debug] reference generated:', reference)
       const db = await getDb()
-      console.log('[contact-debug] db connected')
       const doc = {
         id: uuidv4(), reference, type: 'contact', ...clean,
         createdAt: new Date().toISOString(), ipAddress: ip, userAgent,
         recaptchaScore: captcha.score, recaptchaBypassed: !!captcha.bypassed,
       }
       await db.collection('leads').insertOne(doc)
-      console.log('[contact-debug] lead inserted into MongoDB')
 
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
       const teamRes = await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['contact', 'team'] })
-      console.log('[contact-debug] team email result:', JSON.stringify(teamRes))
       const auto = clean.tab === 'rental'
         ? tplContactRentalAutoReply({ name: clean.name })
         : tplContactAutoReply({ name: clean.name })
       const autoRes = await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
-      console.log('[contact-debug] auto-reply result:', JSON.stringify(autoRes))
 
-      return jsonOk({ reference, recaptchaScore: captcha.score })
+      return jsonOk(request, { reference })
     }
 
     // =====================================================================
@@ -267,12 +305,12 @@ export async function POST(request, props) {
         source: { type: 'text', maxLen: 60, allowNewlines: false },
       })
       if (!clean.fullName || !clean.email || !clean.company || !clean.phone || !clean.startDate || !clean.endDate || !clean.location) {
-        return jsonErr('missing-required-fields', 400)
+        return jsonErr(request, 'missing-required-fields', 400)
       }
 
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'rental_quote', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
       console.log(`[recaptcha] action=rental_quote score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
-      if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
+      if (!captcha.ok) return jsonErr(request, 'captcha-failed', 400)
 
       // Sanitise and limit items array.
       // Cart items arrive as { product: { brand, model, slug, ... }, duration, quantity, ... }
@@ -302,7 +340,7 @@ export async function POST(request, props) {
       const auto = tplRentalQuoteAutoReply({ reference, fullName: clean.fullName })
       await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['rental-quote', 'auto-reply'] })
 
-      return jsonOk({ reference, recaptchaScore: captcha.score })
+      return jsonOk(request, { reference })
     }
 
     // =====================================================================
@@ -318,11 +356,11 @@ export async function POST(request, props) {
         role: { type: 'text', maxLen: 160, allowNewlines: false },
         cover: { type: 'text', maxLen: 5000, allowNewlines: true },
       })
-      if (!clean.name || !clean.email || !clean.role) return jsonErr('missing-required-fields', 400)
+      if (!clean.name || !clean.email || !clean.role) return jsonErr(request, 'missing-required-fields', 400)
 
       const captcha = await verifyRecaptchaToken(body.recaptchaToken, { action: 'careers', threshold: RECAPTCHA_THRESHOLD, remoteip: ip })
       console.log(`[recaptcha] action=careers score=${captcha.score} threshold=${RECAPTCHA_THRESHOLD} ok=${captcha.ok} ip=${ip}${captcha.bypassed ? ' (bypassed)' : ''}${captcha.error ? ' error=' + captcha.error : ''}`)
-      if (!captcha.ok) return jsonErr('captcha-failed', 400, { captcha })
+      if (!captcha.ok) return jsonErr(request, 'captcha-failed', 400)
 
       const reference = `JOB-${Date.now().toString().slice(-10)}`
       const db = await getDb()
@@ -353,22 +391,15 @@ export async function POST(request, props) {
       const auto = tplCareerAutoReply({ name: clean.name, role: clean.role })
       await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: HR_EMAIL, categories: ['careers', 'auto-reply'] })
 
-      return jsonOk({ reference, cvReceived: !!pdfAttachment, cvSize: pdfAttachment?.size || null, recaptchaScore: captcha.score })
+      return jsonOk(request, { reference, cvReceived: !!pdfAttachment, cvSize: pdfAttachment?.size || null })
     }
 
-    return jsonErr('not-found', 404)
+    return jsonErr(request, 'not-found', 404)
   } catch (e) {
-    console.error('[api] route error:', e)
-    try {
-      // Full error dump: includes name, message, stack, cause, statusCode, and every enumerable + non-enumerable prop
-      const dump = { name: e?.name, message: e?.message, stack: e?.stack, cause: e?.cause }
-      for (const k of Object.getOwnPropertyNames(e || {})) {
-        if (!(k in dump)) dump[k] = e[k]
-      }
-      console.error('[contact-debug] FULL ERROR:', JSON.stringify(dump, (k, v) => v instanceof Error ? { name: v.name, message: v.message, stack: v.stack } : v))
-    } catch (logErr) {
-      console.error('[contact-debug] failed to serialize error:', logErr?.message, 'raw:', String(e))
-    }
-    return jsonErr(e.message || 'server-error', 500)
+    // Log the detail server-side; return a generic string to the client. Previously
+    // `e.message` was sent to the browser, which can leak Mongo connection details,
+    // internal hostnames and driver internals to anyone who can trigger an error.
+    console.error('[api] route error:', path, e)
+    return jsonErr(request, 'server-error', 500)
   }
 }

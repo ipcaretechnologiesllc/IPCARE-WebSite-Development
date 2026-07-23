@@ -80,6 +80,13 @@ agenthub/agents/youtube/db
 # 2026-07-23-hero-loading-performance-design.md)
 public/images/services/_originals/
 public/Video/_originals/
+# Same intent as the two rules above, but this folder was missed — its 7 files
+# (~58 MB of 8-9 MB source webp) were tracked AND publicly served at
+# /images/hero-mobile/raw/*, confirmed reachable in production.
+public/images/hero-mobile/raw/
+
+# Search Console exports — contain query/performance data, not for the repo
+GSC/
 
 # Brainstorming visual companion session files
 .superpowers/

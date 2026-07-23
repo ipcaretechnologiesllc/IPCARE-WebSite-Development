@@ -40,9 +40,12 @@ const nextConfig = {
         headers: [
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Content-Security-Policy", value: "frame-ancestors 'self'; upgrade-insecure-requests" },
-          { key: "Access-Control-Allow-Origin", value: process.env.CORS_ORIGINS || "*" },
-          { key: "Access-Control-Allow-Methods", value: "GET, POST, PUT, DELETE, OPTIONS" },
-          { key: "Access-Control-Allow-Headers", value: "*" },
+          // NOTE: the site-wide Access-Control-* headers were removed here. They applied
+          // `Access-Control-Allow-Origin: *` to EVERY response (HTML pages included), which
+          // let any third-party site read this origin's responses from a visitor's browser.
+          // Nothing on the site needs cross-origin reads: the forms are same-origin, and
+          // same-origin requests never consult CORS. The API route sets its own headers
+          // from an explicit allowlist — see app/api/[[...path]]/route.js `corsHeaders()`.
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
