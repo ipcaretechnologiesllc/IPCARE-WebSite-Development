@@ -150,7 +150,7 @@ export default async function ProductDetailPage(props) {
                 ))}
 
                 {product.content.usedFor?.length > 0 && (
-                  <div className="mt-8 mb-10">
+                  <div className="mt-8 mb-6">
                     <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Typical deployments</h2>
                     <ul className="space-y-2">
                       {product.content.usedFor.map((u) => (
@@ -160,6 +160,19 @@ export default async function ProductDetailPage(props) {
                         </li>
                       ))}
                     </ul>
+                  </div>
+                )}
+
+                {/* Deep-dive article for this specific product, where one exists. Several
+                    testing-equipment items have a dedicated blog post that previously had
+                    no link from the rental page it belongs to. */}
+                {product.content.readMore && (
+                  <div className="mb-10 rounded-lg p-5" style={{ background: '#F4F6FA', borderLeft: '3px solid #E87722' }}>
+                    <div className="mono text-[11px] uppercase tracking-widest mb-2" style={{ color: '#58595B' }}>Further reading</div>
+                    <Link href={product.content.readMore.href} className="font-semibold hover:underline inline-flex items-center gap-1.5" style={{ color: '#0B1A46' }}>
+                      {product.content.readMore.label}
+                      <Icons.ArrowRight size={15} className="text-[#E87722]"/>
+                    </Link>
                   </div>
                 )}
               </>
