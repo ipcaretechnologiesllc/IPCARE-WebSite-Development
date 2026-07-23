@@ -161,6 +161,7 @@ function HeroCarousel() {
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
   const intervalRef = useRef(null)
+  const videoRef = useRef(null)
 
   // Track the reduced-motion preference. This is used ONLY to pause the
   // auto-advance interval — it never branches what DOM is rendered, so the
@@ -173,6 +174,45 @@ function HeroCarousel() {
     const onMotionChange = (e) => setReducedMotion(e.matches)
     motionQuery.addEventListener('change', onMotionChange)
     return () => motionQuery.removeEventListener('change', onMotionChange)
+  }, [])
+
+  /* Desktop background video: fetched and started from JS, never by `autoPlay`.
+     `autoPlay` overrides preload="none"/"metadata", so the browser pulls the whole
+     file straight away and it competes with the LCP poster, the fonts and the JS
+     bundle. Deferring to idle lets the poster win the race to first paint.
+
+     This also stops the video downloading on phones. The `media` attribute on a
+     <source> is only honoured inside <picture> — inside <video> Chrome and Firefox
+     ignore it, so the CSS that hides .hero-bg-desktop did NOT prevent the fetch.
+     The matchMedia guard below does.
+
+     This effect only mutates DOM properties and calls media methods — it never
+     branches what React renders, so server and client markup stay identical (a
+     mismatch here previously forced a full re-render that swallowed nav clicks). */
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    // Matches the 769px boundary in .hero-bg-desktop / .hero-bg-mobile.
+    if (!window.matchMedia('(min-width: 769px)').matches) return
+    // Under reduced motion CSS shows the poster instead — don't fetch the video.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const start = () => {
+      video.preload = 'auto'
+      video.load()
+      // Rejects when a browser refuses programmatic playback; the poster stays up.
+      video.play().catch(() => {})
+    }
+
+    const idle = typeof window.requestIdleCallback === 'function'
+    const handle = idle
+      ? window.requestIdleCallback(start, { timeout: 2000 })
+      : window.setTimeout(start, 1200)
+
+    return () => {
+      if (idle) window.cancelIdleCallback(handle)
+      else window.clearTimeout(handle)
+    }
   }, [])
 
   const goTo = useCallback((idx) => {
@@ -235,18 +275,22 @@ function HeroCarousel() {
         {/* Desktop: looping video. The poster <img> stands in for it under
             reduced-motion (CSS-toggled, see .hero-bg-video / .hero-bg-poster). */}
         <div className="hero-bg-desktop absolute inset-0">
+          {/* No autoPlay and preload="none" by design — the effect above starts
+              this once the page is idle, and only on desktop without reduced
+              motion. The <source media> guards were removed: browsers ignore
+              `media` on a <source> inside <video>, so they never did anything. */}
           <video
+            ref={videoRef}
             className="hero-bg-video absolute inset-0 object-cover"
             style={{ width: '100%', height: '100%', maxWidth: '100%' }}
-            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             poster="/images/hero-poster.webp"
           >
-            <source src="/Video/hero.webm" type="video/webm" media="(min-width: 769px)" />
-            <source src="/Video/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
+            <source src="/Video/hero.webm" type="video/webm" />
+            <source src="/Video/hero.mp4" type="video/mp4" />
           </video>
           <img
             src="/images/hero-poster.webp"

@@ -75,6 +75,12 @@ agenthub/agents/youtube/db
 # Build caches
 .cache/
 
+# Pre-optimisation media originals — kept locally so an asset can be
+# re-encoded from source, never deployed (see docs/superpowers/specs/
+# 2026-07-23-hero-loading-performance-design.md)
+public/images/services/_originals/
+public/Video/_originals/
+
 # Brainstorming visual companion session files
 .superpowers/
 
