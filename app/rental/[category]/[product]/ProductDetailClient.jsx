@@ -53,10 +53,22 @@ export default function ProductDetailClient({ product, categorySlug }) {
               {DURATIONS.map((d) => (
                 <button key={d.key} onClick={() => setDuration(d.key)} className={`px-3 py-3 rounded-lg text-center transition ${duration === d.key ? 'bg-[#E87722] border-[#E87722] text-white' : ''}`} style={duration === d.key ? {} : { background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.12)', color: '#0B1A46' }}>
                   <div className="text-sm font-semibold">{d.label}</div>
+                  {/* The rate was previously sent to Google in Product/AggregateOffer JSON-LD but
+                      never rendered, so the page marked up a price no visitor could see. That
+                      breaches Google's structured-data guidelines (marked-up content must be
+                      visible) and left searchers on "…rental price" queries with no answer —
+                      these pages sit at position 28-30 with near-zero clicks. */}
+                  {product.rates?.[d.key] != null && (
+                    <div className="mono text-[13px] font-bold mt-1">AED {product.rates[d.key].toLocaleString('en-AE')}</div>
+                  )}
                   <div className="mono text-[10px] opacity-75">{d.sub}</div>
                 </button>
               ))}
             </div>
+            <p className="mt-3 text-[11px] leading-relaxed" style={{ color: '#58595B' }}>
+              Indicative rates per unit, excluding VAT. Delivery and setup are included.
+              Final pricing is scoped per project and confirmed on your quote.
+            </p>
             <details className="mt-3">
               <summary className="mono text-[11px] text-[#E87722] cursor-pointer uppercase tracking-widest hover:underline">Custom date range ↗</summary>
               <div className="grid grid-cols-2 gap-2 mt-3">

@@ -71,10 +71,24 @@ export default async function CategoryPage(props) {
     })),
   }
 
+  // FAQ schema is generated from the same cat.content.faqs the page renders below, so the
+  // markup can never describe content that isn't visible — the mismatch that had these
+  // pages sending prices to Google that no visitor could see.
+  const faqSchema = cat.content?.faqs?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: cat.content.faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  } : null
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Header />
       <main>
         <div className="max-w-[1400px] mx-auto px-6 pt-6">
@@ -112,6 +126,50 @@ export default async function CategoryPage(props) {
             </div>
           </div>
         </section>
+
+        {/* Long-form category content — rendered only for categories that define it. */}
+        {cat.content && (
+          <section className="py-16 px-6" style={{ background: '#FFFFFF' }}>
+            <div className="max-w-[820px] mx-auto">
+              {cat.content.intro && (
+                <p className="text-lg leading-relaxed mb-10" style={{ color: '#0B1A46' }}>{cat.content.intro}</p>
+              )}
+
+              {cat.content.sections?.map((s) => (
+                <div key={s.h2} className="mb-10">
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{s.h2}</h2>
+                  {s.body.map((p, i) => (
+                    <p key={i} className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{p}</p>
+                  ))}
+                </div>
+              ))}
+
+              {cat.content.caseStudy && (
+                <div className="mb-10 rounded-xl p-6 md:p-8" style={{ background: '#F4F6FA', borderLeft: '3px solid #E87722' }}>
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{cat.content.caseStudy.h2}</h2>
+                  <p className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{cat.content.caseStudy.body}</p>
+                  {cat.content.caseStudy.href && (
+                    <Link href={cat.content.caseStudy.href} className="mono text-[12px] uppercase tracking-widest text-[#E87722] hover:underline inline-flex items-center gap-1">
+                      {cat.content.caseStudy.linkLabel || 'Read more'} <Icons.ArrowRight size={13}/>
+                    </Link>
+                  )}
+                </div>
+              )}
+
+              {cat.content.faqs?.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
+                  {cat.content.faqs.map(({ q, a }) => (
+                    <details key={q} className="mb-3 rounded-lg p-4" style={{ background: '#F4F6FA' }}>
+                      <summary className="font-semibold cursor-pointer" style={{ color: '#0B1A46' }}>{q}</summary>
+                      <p className="leading-relaxed mt-3" style={{ color: '#58595B' }}>{a}</p>
+                    </details>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Related categories */}
         <section className="py-12 px-6" style={{ background: '#F4F6FA' }}>

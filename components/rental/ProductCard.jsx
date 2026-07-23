@@ -22,6 +22,18 @@ export default function ProductCard({ product, categorySlug }) {
             <li key={i} className="text-xs flex items-start gap-2" style={{ color: '#58595B' }}><Icons.Check size={12} className="text-[#E87722] mt-0.5 flex-shrink-0"/> {s}</li>
           ))}
         </ul>
+        {/* The category page's ItemList schema publishes lowPrice/highPrice for every
+            product, but the card showed no price at all — the same visible-content
+            mismatch that was on the product detail pages. Showing the daily rate keeps
+            the markup honest and answers the "…rental price" intent that brings people
+            to these pages in the first place. */}
+        {product.rates?.daily != null && (
+          <div className="mb-4">
+            <span className="mono text-[11px] uppercase tracking-widest" style={{ color: '#58595B' }}>From </span>
+            <span className="font-bold text-lg" style={{ color: '#0B1A46' }}>AED {product.rates.daily.toLocaleString('en-AE')}</span>
+            <span className="text-xs" style={{ color: '#58595B' }}> / day</span>
+          </div>
+        )}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {['Daily', 'Weekly', 'Monthly'].map(d => (
             <span key={d} className="rental-spec-pill">{d}</span>
