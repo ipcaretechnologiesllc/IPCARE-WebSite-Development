@@ -162,10 +162,10 @@ export default async function RootLayout({ children }) {
       { '@type': 'PostalAddress', streetAddress: '40 Wynford Drive, Suite 200B', addressLocality: 'North York', addressRegion: 'ON', postalCode: 'M3C 1J5', addressCountry: 'CA' },
     ],
     sameAs: [
-      'https://www.facebook.com/ipcaretech',
+      'https://www.facebook.com/ipcareuae',
       'https://www.linkedin.com/company/ip-care-technologies',
       'https://www.instagram.com/ipcaretech',
-      'https://www.youtube.com/@IPCARETechnologiesLLC',
+      'https://www.youtube.com/@IPCARETechnologies',
     ],
   }
 
@@ -204,10 +204,10 @@ export default async function RootLayout({ children }) {
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
     sameAs: [
-      'https://www.facebook.com/ipcaretech',
+      'https://www.facebook.com/ipcareuae',
       'https://www.linkedin.com/company/ip-care-technologies',
       'https://www.instagram.com/ipcaretech',
-      'https://www.youtube.com/@IPCARETechnologiesLLC',
+      'https://www.youtube.com/@IPCARETechnologies',
     ],
   }
 
@@ -244,9 +244,9 @@ export default async function RootLayout({ children }) {
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
     sameAs: [
-      'https://www.facebook.com/ipcaretech',
+      'https://www.facebook.com/ipcareuae',
       'https://www.linkedin.com/company/ip-care-technologies',
-      'https://www.youtube.com/@IPCARETechnologiesLLC',
+      'https://www.youtube.com/@IPCARETechnologies',
     ],
   }
 
