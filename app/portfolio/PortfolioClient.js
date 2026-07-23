@@ -116,6 +116,22 @@ function CardMedia({ project, eager = false }) {
       </video>
     )
   }
+  // Client marks are contained on a light panel rather than cropped to the
+  // frame: object-cover would slice a logo's edges off and fight the navy
+  // background these cards use for photography.
+  if (project.imageIsLogo) {
+    return (
+      <div className="absolute inset-0 bg-white">
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-contain p-8 transition duration-700 group-hover:scale-105 sm:p-10"
+        />
+      </div>
+    )
+  }
   return (
     <img
       src={project.image}
@@ -188,13 +204,8 @@ function ProjectCard({ project }) {
   return (
     <article className="service-card group flex h-full flex-col">
       <div className="relative aspect-[16/10] overflow-hidden bg-[#0B1A46]">
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-        />
+        {/* Shares CardMedia with the featured cards so logo handling stays in one place */}
+        <CardMedia project={project} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A46]/75 via-transparent to-transparent" />
         <div className="absolute left-4 top-4 rounded bg-[#E87722] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white">
           {project.industry}
