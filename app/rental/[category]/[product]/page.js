@@ -20,7 +20,12 @@ export async function generateMetadata(props) {
   const p = getProduct(params.category, params.product)
   if (!p) return {}
   const title = `${p.brand} ${p.model} Rental UAE & Canada | IP Care Technologies`
-  const description = `Rent ${p.brand} ${p.model} in UAE and Canada. ${p.specs[0]}. Daily, weekly and monthly rates. Delivery and setup included.`
+  // Day-rate-only products must not advertise weekly/monthly rates in the snippet Google
+  // shows — the page no longer offers them.
+  const rateLine = p.rates?.monthly != null
+    ? 'Daily, weekly and monthly rates.'
+    : `Day rate AED ${p.rates?.daily}.`
+  const description = `Rent ${p.brand} ${p.model} in UAE and Canada. ${p.specs[0]}. ${rateLine} Delivery and setup included.`
   return {
     title,
     description,
@@ -37,6 +42,16 @@ export default async function ProductDetailPage(props) {
 
   const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
   const productUrl = `${BASE}/rental/${params.category}/${params.product}`
+
+  // Only the rental bands this product is actually priced for. Testing instruments are
+  // day-rate only; everything else carries all three. Drives both the schema below and
+  // keeps it consistent with the duration selector the visitor sees.
+  const ratedBands = [
+    { key: 'daily',   days: 1,  name: 'Daily rental rate' },
+    { key: 'weekly',  days: 7,  name: 'Weekly rental rate' },
+    { key: 'monthly', days: 30, name: 'Monthly rental rate' },
+  ].filter((b) => product.rates?.[b.key] != null)
+    .map((b) => ({ ...b, price: product.rates[b.key] }))
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -52,9 +67,12 @@ export default async function ProductDetailPage(props) {
       '@type': 'AggregateOffer',
       businessFunction: 'https://schema.org/LeaseOut',
       priceCurrency: 'AED',
-      lowPrice: product.rates.daily,
-      highPrice: product.rates.monthly,
-      offerCount: 3,
+      // Day-rate-only products (testing instruments) have no weekly/monthly figure, so
+      // derive these from whatever bands actually exist rather than assuming all three.
+      // Publishing highPrice from an undefined monthly rate would emit invalid markup.
+      lowPrice: ratedBands[0].price,
+      highPrice: ratedBands[ratedBands.length - 1].price,
+      offerCount: ratedBands.length,
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       url: productUrl,
@@ -63,11 +81,13 @@ export default async function ProductDetailPage(props) {
         { '@type': 'Country', name: 'United Arab Emirates' },
         { '@type': 'Country', name: 'Canada' },
       ],
-      priceSpecification: [
-        { '@type': 'UnitPriceSpecification', price: product.rates.daily,   priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'DAY' },   name: 'Daily rental rate' },
-        { '@type': 'UnitPriceSpecification', price: product.rates.weekly,  priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 7, unitCode: 'DAY' },   name: 'Weekly rental rate' },
-        { '@type': 'UnitPriceSpecification', price: product.rates.monthly, priceCurrency: 'AED', referenceQuantity: { '@type': 'QuantitativeValue', value: 30, unitCode: 'DAY' },  name: 'Monthly rental rate' },
-      ],
+      priceSpecification: ratedBands.map((b) => ({
+        '@type': 'UnitPriceSpecification',
+        price: b.price,
+        priceCurrency: 'AED',
+        referenceQuantity: { '@type': 'QuantitativeValue', value: b.days, unitCode: 'DAY' },
+        name: b.name,
+      })),
     },
   }
 
@@ -81,7 +101,9 @@ export default async function ProductDetailPage(props) {
     },
     {
       q: 'What is the minimum rental period?',
-      a: 'One day. Daily, weekly and monthly rates are available, and the weekly and monthly bands offer better value on anything running beyond a few days. Rates shown are indicative, per unit and exclude VAT.',
+      a: product.rates?.monthly != null
+        ? 'One day. Daily, weekly and monthly rates are available, and the weekly and monthly bands offer better value on anything running beyond a few days. Rates shown are indicative, per unit and exclude VAT.'
+        : 'One day, and this item is quoted on a day rate. For longer commissioning or handover phases, contact us and we will price the full period against your project rather than billing day by day. Rates shown are indicative, per unit and exclude VAT.',
     },
     {
       q: 'How quickly can this be delivered?',

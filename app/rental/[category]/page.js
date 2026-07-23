@@ -61,9 +61,11 @@ export default async function CategoryPage(props) {
           '@type': 'AggregateOffer',
           businessFunction: 'https://schema.org/LeaseOut',
           priceCurrency: 'AED',
+          // Day-rate-only products have no monthly figure — fall back through the bands
+          // that exist rather than emitting an undefined highPrice.
           lowPrice: p.rates.daily,
-          highPrice: p.rates.monthly,
-          offerCount: 3,
+          highPrice: p.rates.monthly ?? p.rates.weekly ?? p.rates.daily,
+          offerCount: [p.rates.daily, p.rates.weekly, p.rates.monthly].filter((r) => r != null).length,
           availability: 'https://schema.org/InStock',
           seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.' },
         },

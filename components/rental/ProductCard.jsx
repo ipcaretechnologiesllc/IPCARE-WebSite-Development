@@ -34,10 +34,15 @@ export default function ProductCard({ product, categorySlug }) {
             <span className="text-xs" style={{ color: '#58595B' }}> / day</span>
           </div>
         )}
+        {/* Only show bands the product is actually priced for — testing instruments are
+            day-rate only, and advertising a weekly pill with no weekly rate behind it
+            sends the visitor to a selector that doesn't offer it. */}
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {['Daily', 'Weekly', 'Monthly'].map(d => (
-            <span key={d} className="rental-spec-pill">{d}</span>
-          ))}
+          {[['daily', 'Daily'], ['weekly', 'Weekly'], ['monthly', 'Monthly']]
+            .filter(([k]) => product.rates?.[k] != null)
+            .map(([k, label]) => (
+              <span key={k} className="rental-spec-pill">{label}</span>
+            ))}
         </div>
         <AddToQuoteButton product={p} size="sm"/>
       </div>

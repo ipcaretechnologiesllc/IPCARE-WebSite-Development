@@ -11,7 +11,14 @@ const DURATIONS = [
 ]
 
 export default function ProductDetailClient({ product, categorySlug }) {
-  const [duration, setDuration] = useState('weekly')
+  // Some products are day-rate only (testing instruments), so weekly/monthly may not
+  // exist. Default to weekly where it does, otherwise the first band that's priced —
+  // a hardcoded 'weekly' would otherwise be sent to the quote cart as a duration the
+  // product has no rate for.
+  const availableDurations = DURATIONS.filter((d) => product.rates?.[d.key] != null)
+  const [duration, setDuration] = useState(
+    availableDurations.some((d) => d.key === 'weekly') ? 'weekly' : (availableDurations[0]?.key || 'daily')
+  )
   const [qty, setQty] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
   const images = product.images
@@ -49,8 +56,8 @@ export default function ProductDetailClient({ product, categorySlug }) {
           {/* Duration selector */}
           <div className="mt-8">
             <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: '#58595B' }}>Rental Duration</div>
-            <div className="grid grid-cols-3 gap-2">
-              {DURATIONS.map((d) => (
+            <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.max(1, availableDurations.length)}, minmax(0, 1fr))` }}>
+              {availableDurations.map((d) => (
                 <button key={d.key} onClick={() => setDuration(d.key)} className={`px-3 py-3 rounded-lg text-center transition ${duration === d.key ? 'bg-[#E87722] border-[#E87722] text-white' : ''}`} style={duration === d.key ? {} : { background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.12)', color: '#0B1A46' }}>
                   <div className="text-sm font-semibold">{d.label}</div>
                   {/* The rate was previously sent to Google in Product/AggregateOffer JSON-LD but
