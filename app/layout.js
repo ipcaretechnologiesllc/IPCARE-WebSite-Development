@@ -1,6 +1,7 @@
 import { headers } from 'next/headers'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { SAME_AS, SAME_AS_SOCIAL_ONLY } from '@/lib/social-links'
 import { isUaeOnlyPath } from '@/lib/seo-region'
 import RentalShell from '@/components/rental/RentalShell'
 import CookieBanner from '@/components/global/CookieBanner'
@@ -161,12 +162,7 @@ export default async function RootLayout({ children }) {
       { '@type': 'PostalAddress', streetAddress: 'Salam Street', postOfficeBoxNumber: '53209', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
       { '@type': 'PostalAddress', streetAddress: '40 Wynford Drive, Suite 200B', addressLocality: 'North York', addressRegion: 'ON', postalCode: 'M3C 1J5', addressCountry: 'CA' },
     ],
-    sameAs: [
-      'https://www.facebook.com/ipcareuae',
-      'https://www.linkedin.com/company/ip-care-technologies',
-      'https://www.instagram.com/ipcaretech',
-      'https://www.youtube.com/@IPCARETechnologies',
-    ],
+    sameAs: SAME_AS,
   }
 
   // LocalBusiness entries — one per physical office. Each is linked back to
@@ -203,12 +199,7 @@ export default async function RootLayout({ children }) {
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
-    sameAs: [
-      'https://www.facebook.com/ipcareuae',
-      'https://www.linkedin.com/company/ip-care-technologies',
-      'https://www.instagram.com/ipcaretech',
-      'https://www.youtube.com/@IPCARETechnologies',
-    ],
+    sameAs: SAME_AS,
   }
 
   const localBusinessToronto = {
@@ -243,11 +234,7 @@ export default async function RootLayout({ children }) {
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
     ],
-    sameAs: [
-      'https://www.facebook.com/ipcareuae',
-      'https://www.linkedin.com/company/ip-care-technologies',
-      'https://www.youtube.com/@IPCARETechnologies',
-    ],
+    sameAs: SAME_AS_SOCIAL_ONLY,
   }
 
   const websiteSchema = {

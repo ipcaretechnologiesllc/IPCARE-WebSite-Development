@@ -12,6 +12,7 @@ import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices, navDigitalSolutionsCategories as digitalSolutionsCategories } from '@/lib/services-nav-data'
+import { SOCIAL_LINKS } from '@/lib/social-links'
 import { products } from '@/lib/products-data'
 
 const iconMap = { Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, Terminal, BrainCircuit, Megaphone, Globe, Layers }
@@ -64,12 +65,7 @@ const navLabels = {
   },
 }
 
-const SOCIAL = {
-  facebook: 'https://www.facebook.com/ipcareuae',
-  linkedin: 'https://www.linkedin.com/company/ip-care-technologies',
-  instagram: 'https://www.instagram.com/ipcaretechnologies/',
-  youtube: 'https://www.youtube.com/@IPCARETechnologiesLLC',
-}
+const SOCIAL = SOCIAL_LINKS
 
 // Per-item gradient glow + accent color for the 3D flip hover animation.
 // Only brand orange (#E87722) and brand blue shades are used — no off-palette colours.
