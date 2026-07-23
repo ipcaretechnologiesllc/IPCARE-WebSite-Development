@@ -71,31 +71,36 @@ export default async function ProductDetailPage(props) {
     },
   }
 
+  // Single source for the FAQs: rendered below AND fed to FAQPage schema. Previously
+  // this schema existed with four questions that appeared nowhere on the page, which
+  // breaches Google's requirement that marked-up content be visible to users.
+  const faqs = [
+    {
+      q: `What's included when I rent the ${product.brand} ${product.model}?`,
+      a: `Rental of the ${product.brand} ${product.model} includes delivery, collection and setup across the UAE and Canada, plus standard accessories and configuration to your requirements. Technical support is included for the duration of the rental. MDM enrolment, locked stands and tethers, standby spare units, a dedicated on-site engineer and damage waiver are quoted separately.`,
+    },
+    {
+      q: 'What is the minimum rental period?',
+      a: 'One day. Daily, weekly and monthly rates are available, and the weekly and monthly bands offer better value on anything running beyond a few days. Rates shown are indicative, per unit and exclude VAT.',
+    },
+    {
+      q: 'How quickly can this be delivered?',
+      a: 'Plan on one to two days between confirmed order and delivery across the UAE. That window is the pre-delivery configuration work: imaging, enrolment and lockdown are completed before dispatch rather than at your site. Larger quantities or upcountry locations may need longer, so share your dates early.',
+    },
+    {
+      q: 'Is technical support included during the rental period?',
+      a: 'Yes. Setup and ongoing technical support are included for all rental equipment, with replacement options available in case of a fault. A dedicated on-site engineer for the duration of an event is available and quoted separately.',
+    },
+  ]
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `What's included when I rent the ${product.brand} ${product.model}?`,
-        acceptedAnswer: { '@type': 'Answer', text: `Rental of the ${product.brand} ${product.model} includes delivery, setup, and collection across the UAE and Canada, plus standard accessories and configuration to your requirements. Support is available for the duration of the rental period.` },
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the minimum rental period?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Daily, weekly, and monthly rates are available, with daily rental as the minimum period. Longer-term rentals receive better rates, as shown in the pricing above.' },
-      },
-      {
-        '@type': 'Question',
-        name: 'How quickly can this be delivered?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Delivery timelines depend on quantity, location, and current stock availability. Contact our team with your dates and location for a confirmed delivery schedule.' },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is technical support included during the rental period?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Yes. IP Care Technologies provides setup and ongoing technical support for all rental equipment, with replacement options available in case of a fault.' },
-      },
-    ],
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
   }
 
   const breadcrumbSchema = {
@@ -129,6 +134,56 @@ export default async function ProductDetailPage(props) {
         </div>
 
         <ProductDetailClient product={product} categorySlug={params.category}/>
+
+        {/* Deployment detail + FAQs. The prose block renders only for products that
+            define content in lib/rental-data.js; the FAQs render for every product,
+            since their schema was already being emitted with nothing visible. */}
+        <section className="py-14 md:py-16 px-6" style={{ background: '#FFFFFF' }}>
+          <div className="max-w-[820px] mx-auto">
+            {product.content && (
+              <>
+                <h2 className="text-2xl font-bold mb-5" style={{ color: '#0B1A46' }}>
+                  Renting the {product.brand} {product.model}
+                </h2>
+                {product.content.body?.map((p, i) => (
+                  <p key={i} className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{p}</p>
+                ))}
+
+                {product.content.usedFor?.length > 0 && (
+                  <div className="mt-8 mb-10">
+                    <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Typical deployments</h2>
+                    <ul className="space-y-2">
+                      {product.content.usedFor.map((u) => (
+                        <li key={u} className="flex items-start gap-2.5" style={{ color: '#58595B' }}>
+                          <Icons.Check size={16} className="text-[#E87722] mt-1 flex-shrink-0"/>
+                          <span>{u}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
+
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
+            {faqs.map(({ q, a }) => (
+              <details key={q} className="mb-3 rounded-lg p-4" style={{ background: '#F4F6FA' }}>
+                <summary className="font-semibold cursor-pointer" style={{ color: '#0B1A46' }}>{q}</summary>
+                <p className="leading-relaxed mt-3" style={{ color: '#58595B' }}>{a}</p>
+              </details>
+            ))}
+
+            <p className="mt-8 text-sm" style={{ color: '#58595B' }}>
+              See all{' '}
+              <Link href={`/rental/${params.category}`} className="text-[#E87722] hover:underline">
+                {product.categoryName.toLowerCase()} available for rental
+              </Link>
+              , or{' '}
+              <Link href="/contact" className="text-[#E87722] hover:underline">talk to our team</Link>{' '}
+              about a specific deployment.
+            </p>
+          </div>
+        </section>
 
         {/* Related products */}
         <section className="py-16 md:py-20 px-6" style={{ background: '#F4F6FA' }}>
