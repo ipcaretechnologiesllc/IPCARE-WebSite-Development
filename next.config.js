@@ -311,6 +311,8 @@ const nextConfig = {
       { source: '/rental/testing-equipment/fluke-dsx-8000',    destination: '/rental/testing-equipment', permanent: true },
       { source: '/rental/event-wifi/meraki-mr57',              destination: '/rental/event-wifi',         permanent: true },
       { source: '/rental/cctv/axis-p5676-le',                  destination: '/rental/cctv',                permanent: true },
+      { source: '/rental/cctv/milestone-xprotect',            destination: '/rental/cctv',                permanent: true },
+      { source: '/rental/cctv/flir-fc-644-id',                destination: '/rental/cctv',                permanent: true },
       { source: '/rental/printers/brother-hl-l3295cdw',        destination: '/rental/printers',            permanent: true },
 
       // Malformed/artifact URL (stray trailing "$", likely a broken template link crawled from
