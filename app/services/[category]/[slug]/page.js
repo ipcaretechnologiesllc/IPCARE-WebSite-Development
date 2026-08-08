@@ -62,17 +62,30 @@ export default async function SubPage(props) {
       { '@type': 'ListItem', position: 4, name: sub.h1, item: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + `/services/${params.category}/${params.slug}` },
     ],
   }
+  // Location subpages (icon: 'MapPin' — the same discriminator lib/services-data.js's
+  // getSubpage() uses) previously all got identical schema: provider hardcoded to the UAE
+  // "L.L.C." entity at ipcare.ae, areaServed hardcoded to UAE + Canada regardless of which
+  // city the page is actually about. That told search engines a page titled "IT Consulting
+  // Toronto" is delivered by a UAE company across both countries — actively working against
+  // the local-relevance signal that page needs, and equally wrong the other way for UAE city
+  // pages (Dubai, Abu Dhabi) claiming to also serve Canada. Generic, non-location subpages
+  // (technology-strategy, managed-it, etc.) are genuinely offered UAE-wide and Canada-wide as
+  // one practice, so they keep the original dual-country areaServed — only city pages narrow.
+  const isLocationPage = sub.icon === 'MapPin'
+  const isTorontoSub = isLocationPage && sub.region === 'canada'
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: sub.h1,
     description: sub.metaDescription,
-    provider: {
-      '@type': 'Organization',
-      name: 'IP Care Technologies L.L.C.',
-      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'),
-    },
-    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    provider: isTorontoSub
+      ? { '@id': 'https://www.ipcare.ca/#toronto' }
+      : { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') },
+    areaServed: isTorontoSub
+      ? [{ '@type': 'City', name: 'Toronto' }, { '@type': 'AdministrativeArea', name: 'Ontario' }, { '@type': 'Country', name: 'Canada' }]
+      : isLocationPage
+        ? [{ '@type': 'Country', name: 'United Arab Emirates' }]
+        : [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
   }
 
   return (
