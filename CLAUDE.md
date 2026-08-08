@@ -23,11 +23,11 @@ There is no lint/test script configured in `package.json`. `tests/` and `test_re
 
 **Pushing to `main` auto-deploys to production.** Hostinger's GitHub integration is configured on Hostinger's side — there is no `.github/workflows/`, no `vercel.json`, and no deploy script in this repo, so *nothing in the codebase reveals that a pipeline exists*. Do not conclude from their absence that a push won't deploy.
 
-`origin` has two push URLs, so a single `git push origin main` reaches both remotes. There are no feature branches; work goes directly to `main`.
+`origin` has two push URLs, so a single `git push origin main` reaches both remotes — **`ipcare.ae` and `ipcare.ca` are two separate Hostinger accounts**, each independently cloning and building the same codebase from its own remote. There is no Vercel involved anywhere in production (verified 2026-08-08 directly against Cloudflare DNS for both zones — no `vercel-dns.com`/`*.vercel.app` entries on either). There are no feature branches; work goes directly to `main`.
 
-Allow **5–10 minutes** after pushing before verifying — a check immediately after `git push` will still show the old build. Both `www.ipcare.ae` and `www.ipcare.ca` are served by Hostinger (the apex hosts redirect at the platform level, before the Next.js app runs).
+Allow **5–10 minutes** after pushing before verifying — a check immediately after `git push` will still show the old build. Both `www.ipcare.ae` and `www.ipcare.ca` are served by Hostinger (the apex hosts redirect at the platform level, before the Next.js app runs). See "Hosting & DNS topology" below for how each domain resolves through Cloudflare to its own Hostinger account.
 
-**A site-wide `HTTP 503 "Service Unavailable — the server is temporarily busy"` shortly after a push is normal, not a code fault.** Applying a build on Hostinger requires **stopping and restarting the Node process**, and during that restart the origin serves 503 across *every* route (confirmed: `/`, `/rental`, `/api/health` all 503 at once). If the 503 is site-wide it is the restart window — wait and re-check. A 503 on one route while others serve 200 would be different and worth investigating. Do not interpret the restart 503 as a broken deploy or start rolling anything back; the local `next build` passing 256/256 is the signal the code is fine.
+**A site-wide `HTTP 503 "Service Unavailable — the server is temporarily busy"` shortly after a push is normal, not a code fault.** Applying a build on Hostinger requires **stopping and restarting the Node process**, and during that restart the origin serves 503 across *every* route on **that account** (confirmed: `/`, `/rental`, `/api/health` all 503 at once). Because the two domains are separate Hostinger accounts, a restart on one does not 503 the other — check both independently rather than assuming a clean domain rules out a deploy-in-progress. If the 503 is site-wide *for that domain* it is the restart window — wait and re-check. A 503 on one route while others serve 200 (on the same domain) would be different and worth investigating. Do not interpret the restart 503 as a broken deploy or start rolling anything back; the local `next build` passing 256/256 is the signal the code is fine.
 
 Three caching layers can each serve stale content after a deploy — check all three before suspecting the code:
 1. **Cloudflare edge** — sits in front of Hostinger and has been observed caching HTML despite `no-store` from the origin. Fix: "Purge Everything" in the Cloudflare dashboard.
@@ -36,9 +36,19 @@ Three caching layers can each serve stale content after a deploy — check all t
 
 ## Architecture
 
+### Hosting & DNS topology
+
+**Two independent Hostinger accounts, not one shared deployment** — `ipcare.ae` and `ipcare.ca` are separate accounts, each auto-deploying the same codebase from its own git remote (see Deployment above). There is no Vercel anywhere in production; both zones sit behind **Cloudflare** (proxied/orange-cloud) in front of Hostinger, confirmed directly against each zone's DNS records on 2026-08-08.
+
+The two zones use different DNS strategies at Hostinger, which is normal but worth knowing when debugging either one:
+- **`ipcare.ae`** — raw `A` records. Main site (`ipcare.ae`, `www.ipcare.ae`, `docvault.ipcare.ae`) → `45.13.255.161`, proxied. A separate cluster of service subdomains (`cpanel`, `mail`, `webmail`, `webdisk`, `whm`, `autoconfig`, `autodiscover`) → `50.116.93.239`, deliberately **DNS-only (unproxied)** because mail clients and cPanel are accessed directly against those hostnames — do not recommend proxying them, it would break those connections. `ftp.ipcare.ae` is a DNS-only CNAME to `ipcare.ae` itself; Cloudflare flags it as leaking the real origin IP behind the proxied A record, which is correct, but proxying it would very likely break FTP (Cloudflare's proxy doesn't tunnel raw FTP on Free/Pro), and the origin IP is already discoverable via the mail/cPanel records anyway — left as-is by design, not an oversight.
+- **`ipcare.ca`** — CNAME-flattened to Hostinger's managed CDN: `ipcare.ca` and `www.ipcare.ca` both → `*.cdn.hstgr.net`, proxied. Mail is fully on Hostinger's own mail service (`mx1`/`mx2.hostinger.com`, `hostingermail-*` DKIM) rather than self-hosted — a cleaner, more managed setup than `.ae`'s.
+- `docpilot.ipcare.ae` CNAMEs to `docpilot-frontend-*.onrender.com` — a **separate product (Render-hosted)**, unrelated to this repo beyond the `/products/docpilot` marketing page.
+- `ipcare.ae` layers two mail-sending services in DNS (Brevo DKIM + Resend DKIM) alongside cPanel's own mail; only Resend (`lib/server/resend.js`) is used by this codebase — Brevo is a separate/legacy tool, not called from app code.
+
 ### Multi-domain canonicalization
 
-This single deployment serves multiple hostnames (`www.ipcare.ae`, `ipcare.ca`, legacy `ipcares.com`/`ipcare.ae`). Two layers work together:
+The same codebase runs on both Hostinger accounts and still needs multi-hostname logic within each: legacy/redirect hostnames (bare apex, `ipcares.com`) must resolve correctly regardless of which account handles the request, and the canonical/hreflang logic below auto-detects the serving domain from the `Host` header rather than assuming which account it's running on. Two layers work together:
 
 - `next.config.js` `redirects()` — host-based 308 redirects for legacy domains (`ipcare.ae`, `ipcares.com` → `www.ipcare.ae`), plus a large block of permanent redirects mapping legacy `.php`/`.html`/WordPress URLs to current routes.
 - `middleware.js` — does NOT redirect; its sole job is to inject `x-pathname` into request headers so `app/layout.js` can build path-aware hreflang tags. Skips `api/`, `_next/static`, and static asset extensions.

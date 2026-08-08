@@ -314,10 +314,13 @@ const nextConfig = {
       { source: '/rental/cctv/milestone-xprotect',            destination: '/rental/cctv',                permanent: true },
       { source: '/rental/cctv/flir-fc-644-id',                destination: '/rental/cctv',                permanent: true },
       { source: '/rental/printers/brother-hl-l3295cdw',        destination: '/rental/printers',            permanent: true },
+      { source: '/rental/event-wifi/peplink-balance-two',      destination: '/rental/event-wifi',          permanent: true },
+      { source: '/rental/cctv/hanwha-xno-c9083r',               destination: '/rental/cctv',                permanent: true },
 
-      // Malformed/artifact URL (stray trailing "$", likely a broken template link crawled from
+      // Malformed/artifact URLs (stray trailing "$"/"&", likely broken template links crawled from
       // an old page). No corresponding content — safety-net redirect to home.
       { source: '/$', destination: '/', permanent: true },
+      { source: '/&', destination: '/', permanent: true },
 
       // ─── Legacy WordPress .html pages ────────────────────────────────────────
       // Specific destinations for pages that have a meaningful equivalent.
