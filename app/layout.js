@@ -239,16 +239,16 @@ export default async function RootLayout({ children }) {
     sameAs: SAME_AS_SOCIAL_ONLY,
   }
 
+  // No `potentialAction`/SearchAction here: /blog's search box is client-side state
+  // only (BlogClient.jsx) and never reads a `q` query param, so a SearchAction target
+  // would advertise a URL that doesn't actually filter results. Googlebot was crawling
+  // the literal, unresolved `{search_term_string}` placeholder as a real URL
+  // (`/blog?q={search_term_string}`), showing up in GSC as duplicate/redirect noise.
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_NAME,
     url: BRAND_URL,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${BRAND_URL}/blog?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   }
 
   return (
