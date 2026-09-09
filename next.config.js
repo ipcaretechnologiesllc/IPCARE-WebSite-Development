@@ -127,6 +127,10 @@ const nextConfig = {
       { source: '/google-workspace.php', destination: '/services/email-solutions/google-workspace', permanent: true },
       { source: '/security-assessment.php', destination: '/services/cybersecurity/security-assessment', permanent: true },
       { source: '/blog', has: [{ type: 'query', key: 's' }], destination: '/blog', permanent: true },
+      // Retired SearchAction used to advertise /blog?q={search_term_string} — the schema was
+      // dropped (see app/layout.js) but Google still crawls the literal placeholder URL it
+      // remembers, and it serves a live 200 (duplicate content, no redirect). Force it clean.
+      { source: '/blog', has: [{ type: 'query', key: 'q' }], destination: '/blog', permanent: true },
       { source: '/careers.php', destination: '/careers', permanent: true },
       { source: '/career.php', destination: '/careers', permanent: true },
       { source: '/partners.php', destination: '/partners', permanent: true },
