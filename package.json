@@ -50,7 +50,7 @@
         "input-otp": "^1.4.2",
         "lucide-react": "^0.516.0",
         "mongodb": "^6.6.0",
-        "next": "15.5.21",
+        "next": "15.5.25",
         "next-themes": "^0.4.6",
         "react": "^19.2.7",
         "react-day-picker": "^9.7.0",
@@ -60,7 +60,7 @@
         "react-resizable-panels": "^3.0.3",
         "recharts": "^2.15.3",
         "resend": "^6.12.4",
-        "sharp": "^0.35.3",
+        "sharp": "^0.35.4",
         "sonner": "^2.0.5",
         "tailwind-merge": "^3.3.1",
         "tailwindcss-animate": "^1.0.7",
@@ -71,7 +71,7 @@
     "devDependencies": {
         "@next/bundle-analyzer": "^16.2.9",
         "autoprefixer": "^10.4.19",
-        "eslint-config-next": "15.5.21",
+        "eslint-config-next": "15.5.25",
         "globals": "^16.2.0",
         "postcss": "^8.5.18",
         "tailwindcss": "^3.4.1"
@@ -79,7 +79,7 @@
     "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
     "overrides": {
         "postcss": "^8.5.18",
-        "sharp": "^0.35.3",
+        "sharp": "^0.35.4",
         "brace-expansion@<1.1.17": "1.1.18",
         "brace-expansion@>=4.0.0 <5.0.8": "5.0.9",
         "nanoid": "^3.3.17",
@@ -87,7 +87,7 @@
     },
     "resolutions": {
         "postcss": "^8.5.18",
-        "sharp": "^0.35.3",
+        "sharp": "^0.35.4",
         "brace-expansion": "5.0.9",
         "nanoid": "^3.3.17",
         "js-yaml": "^4.3.1"
