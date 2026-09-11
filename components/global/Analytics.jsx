@@ -12,7 +12,7 @@
 //   ipcare_cookie_consent  = 'accepted' | 'rejected'
 //   ipcare_cookie_prefs    = JSON { analytics: bool, marketing: bool, ... }
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Script from 'next/script'
 
 const LS_KEY = 'ipcare_cookie_consent'
@@ -60,16 +60,27 @@ function pushConsentUpdate({ analytics, marketing }) {
 // ships in every build, every environment.
 const GA4_MEASUREMENT_ID = 'G-YY2Q2629E7'
 
+// Microsoft Clarity project ID for IP Care Technologies.
+// Clarity does session recording + heatmaps, which is more privacy-sensitive
+// than GA4 pageviews, so — unlike gtag.js — its script is only injected once
+// the visitor has granted the "analytics" cookie category (see CookieBanner.jsx),
+// instead of loading unconditionally and relying on a consent-mode signal.
+const CLARITY_PROJECT_ID = 'ygqq3ktlb0'
+
 export default function Analytics() {
   // Allow env var to override the hardcoded ID (useful for staging / different GA4 properties)
   const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID
+  const [analyticsGranted, setAnalyticsGranted] = useState(false)
 
   useEffect(() => {
-    if (!measurementId) return
-
-    // On mount, sync any previously-stored consent state to gtag.
-    const apply = () => pushConsentUpdate(readConsent())
-    // Small delay so gtag has a chance to load before first update.
+    // On mount, sync any previously-stored consent state to gtag + Clarity gating.
+    const apply = () => {
+      const consent = readConsent()
+      pushConsentUpdate(consent)
+      setAnalyticsGranted(consent.analytics)
+    }
+    setAnalyticsGranted(readConsent().analytics)
+    // Small delay so gtag has a chance to load before first consent update.
     const t = setTimeout(apply, 300)
 
     const onStorage = (e) => {
@@ -86,28 +97,40 @@ export default function Analytics() {
     }
   }, [measurementId])
 
-  if (!measurementId) return null
-
   return (
     <>
-      {/* Load gtag.js on every page so Google can detect the tag and collect
-          Consent Mode v2 cookieless pings. Storage categories remain DENIED
-          (set in layout.js) until the visitor accepts via the Cookie Banner. */}
-      <Script
-        id="ga4-src"
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-      />
-      <Script id="ga4-init" strategy="afterInteractive">{`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', '${measurementId}', {
-          anonymize_ip: true,
-          send_page_view: true
-        });
-      `}</Script>
+      {measurementId && (
+        <>
+          {/* Load gtag.js on every page so Google can detect the tag and collect
+              Consent Mode v2 cookieless pings. Storage categories remain DENIED
+              (set in layout.js) until the visitor accepts via the Cookie Banner. */}
+          <Script
+            id="ga4-src"
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+          />
+          <Script id="ga4-init" strategy="afterInteractive">{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${measurementId}', {
+              anonymize_ip: true,
+              send_page_view: true
+            });
+          `}</Script>
+        </>
+      )}
+
+      {CLARITY_PROJECT_ID && analyticsGranted && (
+        <Script id="ms-clarity" strategy="afterInteractive">{`
+          (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");
+        `}</Script>
+      )}
     </>
   )
 }
