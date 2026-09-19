@@ -290,13 +290,19 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           */}
           <div className={heroImage && !heroFullBleed ? 'max-w-[700px]' : 'max-w-[840px] mx-auto text-center'}>
 
-            {/* Eyebrow pill */}
+            {/* Eyebrow pill.
+                The pill's own rgba(232,119,34,0.12) fill composites over the #1E3A8A
+                hero to about #36417E, and #E87722 on that measures only 3.20:1 — under
+                the 4.5:1 AA floor for this 12px/600 label. #FFA46B clears it at 4.87:1
+                there and 7.56:1 on the navy heroes, so it is safe on either.
+                Measured against the composited pill fill, not the raw hero colour —
+                checking against #1E3A8A alone reads 3.50:1 and understates the problem. */}
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 reveal"
               style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}
             >
-              {icon && <Ic name={icon} size={14} className="text-[#E87722]" />}
-              <span className="text-[#E87722] text-xs font-semibold uppercase tracking-wider">
+              {icon && <Ic name={icon} size={14} className="text-[#FFA46B]" />}
+              <span className="text-[#FFA46B] text-xs font-semibold uppercase tracking-wider">
                 {eyebrow || 'IP Care Enterprise Service'}
               </span>
             </div>
