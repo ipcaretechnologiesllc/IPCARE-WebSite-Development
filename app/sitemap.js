@@ -6,6 +6,7 @@ import { getAllEventSubSlugs, events as eventPortfolio } from '@/lib/event-it-da
 import { kbArticles } from '@/lib/cyber-advisory-data'
 import { getAllIndustrySlugs } from '@/lib/industries-data'
 import { caseStudyProjects } from '@/lib/portfolio-data'
+import { narrativeCaseStudies, caseStudyPath } from '@/lib/case-studies-data'
 import { products } from '@/lib/products-data'
 import { isUaeOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
 
@@ -52,6 +53,7 @@ const HUB_DATES = {
   '/about':                                '2025-01-01',
   '/services':                             '2025-03-01',
   '/portfolio':                            '2026-07-05',
+  '/case-studies':                         '2026-09-19',
   '/products':                             '2026-07-23',
   '/rental':                               '2025-03-01',
   '/event-it':                             '2025-05-25',
@@ -121,6 +123,7 @@ export default async function sitemap() {
     ['/about', P_HUB, 'monthly'],
     ['/services', P_HUB, 'weekly'],
     ['/portfolio', P_HUB, 'monthly'],
+    ['/case-studies', P_HUB, 'monthly'],
     ['/rental', P_HUB, 'weekly'],
     ['/event-it', P_HUB, 'weekly'],
     ['/event-it/portfolio', P_HUB, 'monthly'],
@@ -196,6 +199,14 @@ export default async function sitemap() {
   // Portfolio — project case-study detail pages
   for (const project of caseStudyProjects || []) {
     entries.push({ url: `${BASE}/portfolio/${project.slug}`, lastModified: HUB_DATES['/portfolio'] || '2026-07-05', changeFrequency: 'monthly', priority: P_DETAIL })
+  }
+
+  // Narrative case studies — hung off their parent service subpage. They inherit
+  // that parent's UAE-only treatment, so a UAE-only parent keeps its children out
+  // of the ipcare.ca sitemap too (see lib/seo-region.js).
+  for (const study of narrativeCaseStudies || []) {
+    if (isCaSitemap && isUaeOnlyServiceSubpage(study.category, study.parent)) continue
+    entries.push({ url: `${BASE}${caseStudyPath(study)}`, lastModified: study.datePublished || '2026-09-19', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Industries — sector pages

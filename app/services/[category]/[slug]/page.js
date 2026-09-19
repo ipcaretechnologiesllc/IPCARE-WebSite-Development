@@ -4,6 +4,7 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
 import { isUaeOnlyServiceSubpage, isCaRequest } from '@/lib/seo-region'
+import { getCaseStudiesForSubpage, toCaseStudyCard } from '@/lib/case-studies-data'
 
 export const revalidate = 3600
 
@@ -42,6 +43,11 @@ export default async function SubPage(props) {
   if (!sub) notFound()
   // Prefer curated relatedLinks defined on the subpage; fall back to auto-generated category list
   const related = sub.relatedLinks || getRelatedServices(params.category, 3)
+
+  // Narrative case studies are attached here rather than copied into
+  // lib/services-data.js, so the study's own data module stays the single
+  // source of its title and summary. Empty for every subpage that has none.
+  const caseStudies = getCaseStudiesForSubpage(params.category, params.slug).map(toCaseStudyCard)
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -96,7 +102,7 @@ export default async function SubPage(props) {
       <Header />
       <main>
         <ServicePageTemplate
-          data={sub}
+          data={caseStudies.length ? { ...sub, caseStudies } : sub}
           related={related}
           breadcrumb={[
             { label: sub.parentName, href: `/services/${params.category}` },

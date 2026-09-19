@@ -147,6 +147,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     ctaButton,      // Hero CTA button label; default 'Get a Free Quote'
     region,         // 'canada' | undefined — drives region-specific credentials, phone and CTA copy
     menuGroup,      // 'digital-solutions' | undefined — switches credentials band to capability tiles
+    caseStudies,    // [{ href, tag, title, summary }] — narrative proof for this service,
+                    // sourced from lib/case-studies-data.js. Omit for no section.
   } = data
 
   const isCanada = region === 'canada'
@@ -576,6 +578,46 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           7.5. CERTIFICATIONS & COMPLIANCE
       ────────────────────────────────────────────────────────────────── */}
       <CertificationsBand region={region} menuGroup={menuGroup} />
+
+      {/* ──────────────────────────────────────────────────────────────────
+          7.6. CASE STUDIES, light grey — narrative proof for this service.
+          Additive and opt-in: subpages without a `caseStudies` array render
+          exactly as before. Entries come from lib/case-studies-data.js.
+          Grey, not white: section 8 below is white, and two adjacent white
+          sections merge into one block and break the page's alternation.
+      ────────────────────────────────────────────────────────────────── */}
+      {caseStudies?.length > 0 && (
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[1100px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>Proof</Eyebrow>
+              <SectionHeading>Case Studies</SectionHeading>
+            </div>
+            <div className={`grid gap-6 ${caseStudies.length === 1 ? 'max-w-[760px] mx-auto' : 'md:grid-cols-2'}`}>
+              {caseStudies.map((cs, i) => (
+                <Link
+                  key={cs.href}
+                  href={cs.href}
+                  className="service-card p-7 block group reveal"
+                  style={{ transitionDelay: `${i * 75}ms` }}
+                >
+                  <span
+                    className="inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase mb-4"
+                    style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#E87722' }}
+                  >
+                    {cs.tag}
+                  </span>
+                  <h3 className="service-card__title text-base mb-2">{cs.title}</h3>
+                  <p className="service-card__desc text-sm mb-5 leading-relaxed">{cs.summary}</p>
+                  <span className="service-card__cta inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2">
+                    Read the case study <Icons.ArrowRight size={13} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ──────────────────────────────────────────────────────────────────
           8. RELATED SERVICES, white, service-card style

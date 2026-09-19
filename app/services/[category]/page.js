@@ -5,6 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { serviceCategories, getAllCategorySlugs, getCategory, getRelatedServices } from '@/lib/services-data'
+import { getCaseStudiesForCategory, toCaseStudyCard } from '@/lib/case-studies-data'
 
 export const revalidate = 3600
 
@@ -38,6 +39,11 @@ export default async function CategoryPage(props) {
   // Prefer curated relatedLinks defined on the category; fall back to auto-generated list
   const related = cat.relatedLinks || getRelatedServices(params.category, 3)
   const subpages = cat.subpages ? Object.entries(cat.subpages) : []
+
+  // Surface every narrative case study in this category on the hub, so the
+  // proof is reachable from the category page and not only from the one
+  // subpage it hangs off. Sourced from lib/case-studies-data.js.
+  const caseStudies = getCaseStudiesForCategory(params.category).map(toCaseStudyCard)
   // Location/city pages (icon:'MapPin') are standalone SEO pages — kept out of the main
   // spoke grid, but surfaced in their own "Where we deliver" band below so each city page
   // gets a crawlable internal link from its parent hub (prevents canonical consolidation).
@@ -97,7 +103,7 @@ export default async function CategoryPage(props) {
       <Header />
       <main>
         <ServicePageTemplate
-          data={cat}
+          data={caseStudies.length ? { ...cat, caseStudies } : cat}
           related={related}
           breadcrumb={[{ label: cat.name }]}
           spokeGrid={(spokeEntries.length > 0 || locationEntries.length > 0) ? (

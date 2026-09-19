@@ -46,6 +46,7 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Industries](${BASE}/industries): Sector-specific IT solutions
 - [Digital Solutions](${BASE}/services/digital-solutions): Web, software and AI development services
 - [Delivery Portfolio](${BASE}/portfolio): Unified project proof across enterprise facilities, ELV, CCTV, access control, structured cabling and infrastructure
+- [Case Studies](${BASE}/case-studies): Index of every IP Care case study — enterprise ICT and ELV delivery, major-event IT, and cybersecurity incident response
 - [IT Equipment Rental](${BASE}/rental): Short and long-term rental of laptops, servers, networking, and AV equipment
 - [Event IT](${BASE}/event-it): On-site IT support and equipment for events
 - [Partners](${BASE}/partners): Technology partners and vendor relationships
@@ -72,6 +73,8 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Cybersecurity Advisory Services](${BASE}/cybersecurity-advisory): Zero Trust, SASE, and cloud security advisory offerings
 - [Canada Delivery Track Record](${BASE}/cybersecurity-advisory/track-record): Proof of Palo Alto and Prisma Access delivery for regulated enterprise and government in Canada (anonymized)
 - [Delivery Portfolio](${BASE}/portfolio): Enterprise facility, ELV and infrastructure delivery proof
+- [Case Studies Index](${BASE}/case-studies): All case studies in one place, across delivery, events and cybersecurity
+- [Session Hijacking Incident Response Case Study](${BASE}/services/cybersecurity/incident-response/case-study-session-theft): How infostealer malware stole a live browser session and bypassed both password and MFA, and how IP Care investigated, rebuilt and hardened the endpoint
 - [Event IT Portfolio](${BASE}/event-it/portfolio): Case studies from major events (FIFA, NBA, UFC, EuroLeague)
 - [Rental Categories](${BASE}/rental): Laptops, tablets, networking, CCTV, servers and bundle packages
 - [Careers](${BASE}/careers): Open roles at IP Care Technologies
