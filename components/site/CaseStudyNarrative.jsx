@@ -11,7 +11,8 @@ import { ChevronRight, ArrowRight, ShieldAlert, Monitor, KeyRound, ServerCog, Ch
 // has — hence a separate component rather than a variant flag on that one.
 
 const NAVY = '#0B1A46'
-const ORANGE = '#E87722'
+const ORANGE = '#E87722'            // backgrounds, bars, icons, and orange on navy
+const ORANGE_TEXT = '#B25409'       // small orange TEXT on white/grey (WCAG AA) — see globals.css
 const BLUE = '#0066B3'
 const BODY = '#4B5563'
 const MUTED = '#6B7280'
@@ -24,7 +25,7 @@ function Eyebrow({ children, onDark = false }) {
   return (
     <p
       className="text-[12px] font-bold uppercase mb-3"
-      style={{ letterSpacing: '0.16em', color: onDark ? '#FF9455' : ORANGE }}
+      style={{ letterSpacing: '0.16em', color: onDark ? '#FF9455' : ORANGE_TEXT }}
     >
       {children}
     </p>
@@ -54,7 +55,14 @@ function Heading({ children }) {
   )
 }
 
-const METRIC_TONE = { navy: NAVY, orange: ORANGE, blue: BLUE }
+
+// Same scroll-reveal the rest of the site uses (ServicePageTemplate, ProductPageTemplate,
+// AboutClient all run this identical observer). Sections ship with .reveal (opacity 0) and
+// get .is-visible as they enter the viewport. globals.css disables the whole effect under
+// prefers-reduced-motion. This component is therefore a client component, matching how every
+// other templated page on the site is built.
+
+const METRIC_TONE = { navy: NAVY, orange: ORANGE_TEXT, blue: BLUE }
 
 export default function CaseStudyNarrative({ study, breadcrumb }) {
   const {
@@ -218,7 +226,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
                     style={{ border: `3px solid ${BLUE}` }}
                     aria-hidden="true"
                   />
-                  <div className="text-[12px] font-bold uppercase" style={{ letterSpacing: '0.1em', color: ORANGE }}>
+                  <div className="text-[12px] font-bold uppercase" style={{ letterSpacing: '0.1em', color: ORANGE_TEXT }}>
                     {event.when}
                   </div>
                   <div className="mt-0.5 font-semibold" style={{ color: NAVY }}>{event.what}</div>

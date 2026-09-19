@@ -42,7 +42,7 @@ const BG_GREY  = '#F4F6FA'
 /* ── Reusable section-eyebrow (light version) ────────────────────────────── */
 function Eyebrow({ children }) {
   return (
-    <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#E87722', marginBottom: '12px' }}>
+    <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#B25409', marginBottom: '12px' }}>
       {children}
     </p>
   )
@@ -603,7 +603,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                 >
                   <span
                     className="inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase mb-4"
-                    style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#E87722' }}
+                    style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#B25409' }}
                   >
                     {cs.tag}
                   </span>

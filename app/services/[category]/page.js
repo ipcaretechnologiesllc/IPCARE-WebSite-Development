@@ -112,7 +112,7 @@ export default async function CategoryPage(props) {
             <section style={{ background: '#F4F6FA', padding: '72px 24px' }}>
               <div className="max-w-[1400px] mx-auto">
                 <div className="text-center mb-12">
-                  <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#E87722', marginBottom: '12px' }}>
+                  <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#B25409', marginBottom: '12px' }}>
                     Explore
                   </p>
                   <h2 style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
@@ -143,7 +143,7 @@ export default async function CategoryPage(props) {
             <section style={{ background: '#FFFFFF', padding: '64px 24px' }}>
               <div className="max-w-[1100px] mx-auto">
                 <div className="text-center mb-10">
-                  <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#E87722', marginBottom: '12px' }}>
+                  <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#B25409', marginBottom: '12px' }}>
                     Service Areas
                   </p>
                   <h2 style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>

@@ -5,6 +5,14 @@
 :root {
   --brand-orange:       #E87722;
   --brand-orange-hover: #D06010;
+  /* Accessible orange for TEXT on white/light-grey backgrounds. --brand-orange
+     (#E87722) measures only 2.96:1 on white and 2.74:1 on #F4F6FA, below the WCAG
+     AA 4.5:1 floor, and nearly all orange text on this site is 12px uppercase.
+     #B25409 clears AA on white (5.04:1), the grey tint #F4F6FA (4.66:1) and the
+     warm callout tint #FDF2EE (4.59:1). Keep --brand-orange for
+     backgrounds, accent bars, icons and any orange on the navy sections, where it
+     already passes at 5.67:1. */
+  --brand-orange-text: #B25409;
   --brand-navy:         #0B1A46;  /* darkest — ticker + footer */
   --brand-blue:         #1E3A8A;  /* primary section background */
 
