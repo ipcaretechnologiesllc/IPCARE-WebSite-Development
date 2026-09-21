@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronRight, ArrowRight, ShieldAlert, Monitor, KeyRound, ServerCog, Check } from 'lucide-react'
 
@@ -56,18 +59,37 @@ function Heading({ children }) {
 }
 
 
-// NO scroll-reveal here, unlike ServicePageTemplate and the other templated pages.
-// Several attempts to add it failed for a reason that is NOT this component's fault:
-// on this page an element carrying both `reveal` and `is-visible`, with no inline
-// style and prefers-reduced-motion off, still computes to opacity 0 — even though
-// `.reveal.is-visible { opacity: 1 }` exists in the served CSS at higher specificity
-// than `.reveal`. The same rules work on the service pages, so this looks like a
-// cascade-layer conflict specific to how this route's CSS is assembled.
-// Investigate that before re-adding the animation; do not just re-apply .reveal.
+// Scroll-reveal, identical to ServicePageTemplate / ProductPageTemplate / AboutClient.
+// Sections ship with .reveal (opacity 0) and gain .is-visible as they enter the
+// viewport; globals.css disables the effect entirely under prefers-reduced-motion.
+//
+// Testing note, because this cost a lot of time: an automated browser whose page is
+// hidden (document.visibilityState === 'hidden') never fires IntersectionObserver and
+// defers style recalculation, so every .reveal element reads opacity 0 and
+// getComputedStyle returns stale values even with .is-visible applied. That looks
+// exactly like a broken animation and is not one. Verify reveals in a visible window.
+
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal')
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) }
+        })
+      },
+      { threshold: 0, rootMargin: '0px 0px -10% 0px' }
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+}
 
 const METRIC_TONE = { navy: NAVY, orange: ORANGE_TEXT, blue: BLUE }
 
 export default function CaseStudyNarrative({ study, breadcrumb }) {
+  useReveal()
+
   const {
     eyebrow, h1, lede, facts = [], metrics = [],
     situation, challenge, timeline, approach, findings, results, faq,
@@ -179,7 +201,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
           disputed spend amount and is withheld; these four stand on their own. */}
       {metrics.length > 0 && (
         <section style={{ background: TINT, padding: '56px 24px' }}>
-          <div className="max-w-[1140px] mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="max-w-[1140px] mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-4 reveal">
             {metrics.map((metric) => (
               <div key={metric.label} className="service-card p-6">
                 <div
@@ -202,7 +224,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
       {/* ── Situation & challenge ─────────────────────────────────────────── */}
       <section style={{ background: '#FFFFFF', padding: '72px 24px' }}>
-        <div className="max-w-[1140px] mx-auto grid gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="max-w-[1140px] mx-auto grid gap-10 lg:grid-cols-2 lg:gap-14 reveal">
           <div>
             <Eyebrow>{situation.eyebrow}</Eyebrow>
             <Heading>{situation.heading}</Heading>
@@ -234,7 +256,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
           and nothing here should pin the incident to a date. */}
       {timeline?.events?.length > 0 && (
         <section style={{ background: TINT, padding: '72px 24px' }}>
-          <div className="max-w-[1140px] mx-auto">
+          <div className="max-w-[1140px] mx-auto reveal">
             <Eyebrow>{timeline.eyebrow}</Eyebrow>
             <Heading>{timeline.heading}</Heading>
             <ol className="mt-9 border-l-2" style={{ borderColor: LINE }}>
@@ -263,7 +285,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
       {/* ── Approach ──────────────────────────────────────────────────────── */}
       <section style={{ background: '#FFFFFF', padding: '72px 24px' }}>
-        <div className="max-w-[1140px] mx-auto">
+        <div className="max-w-[1140px] mx-auto reveal">
           <Eyebrow>{approach.eyebrow}</Eyebrow>
           <Heading>{approach.heading}</Heading>
           <p className="mt-4 max-w-[62ch] text-[1.08rem]" style={{ color: NAVY, lineHeight: 1.7 }}>{approach.lede}</p>
@@ -287,7 +309,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
       {/* ── Findings ──────────────────────────────────────────────────────── */}
       <section style={{ background: TINT, padding: '72px 24px' }}>
-        <div className="max-w-[1140px] mx-auto">
+        <div className="max-w-[1140px] mx-auto reveal">
           <Eyebrow>{findings.eyebrow}</Eyebrow>
           <Heading>{findings.heading}</Heading>
           <p className="mt-4 max-w-[62ch] text-[1.08rem]" style={{ color: NAVY, lineHeight: 1.7 }}>{findings.lede}</p>
@@ -341,7 +363,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
       {/* ── Results ───────────────────────────────────────────────────────── */}
       <section style={{ background: '#FFFFFF', padding: '72px 24px' }}>
-        <div className="max-w-[1140px] mx-auto">
+        <div className="max-w-[1140px] mx-auto reveal">
           <Eyebrow>{results.eyebrow}</Eyebrow>
           <Heading>{results.heading}</Heading>
 
@@ -380,7 +402,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
           page's five — both emit FAQPage schema. */}
       {faq?.items?.length > 0 && (
         <section style={{ background: TINT, padding: '72px 24px' }}>
-          <div className="max-w-[880px] mx-auto">
+          <div className="max-w-[880px] mx-auto reveal">
             <Eyebrow>{faq.eyebrow}</Eyebrow>
             <Heading>{faq.heading}</Heading>
             <div className="mt-7" style={{ borderTop: `1px solid ${LINE}` }}>
@@ -410,7 +432,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
       {/* ── Related services ──────────────────────────────────────────────── */}
       {related.length > 0 && (
         <section style={{ background: '#FFFFFF', padding: '72px 24px' }}>
-          <div className="max-w-[1140px] mx-auto">
+          <div className="max-w-[1140px] mx-auto reveal">
             <Eyebrow>Related services</Eyebrow>
             <Heading>How we can help</Heading>
             <div className={`mt-8 grid gap-5 ${related.length % 4 === 0 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
@@ -439,7 +461,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
       {/* ── CTA + footnote ────────────────────────────────────────────────── */}
       <section style={{ background: '#FFFFFF', padding: '0 24px 72px' }}>
-        <div className="max-w-[1140px] mx-auto">
+        <div className="max-w-[1140px] mx-auto reveal">
           <div
             className="flex flex-col items-start gap-6 rounded-2xl p-8 lg:flex-row lg:items-center lg:justify-between lg:p-11"
             style={{ background: ORANGE }}
