@@ -120,7 +120,17 @@ export default async function EventSubPage(props) {
       endDate: event.endDate,
       eventStatus: 'https://schema.org/EventScheduled',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      location: { '@type': 'Place', name: event.location },
+      location: {
+        '@type': 'Place',
+        name: event.location,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: event.location.split(',')[0].trim(),
+          addressCountry: 'AE',
+        },
+      },
+      image: imgSrc,
+      description: event.tech,
       ...rightsHolderField,
     },
   } : null
