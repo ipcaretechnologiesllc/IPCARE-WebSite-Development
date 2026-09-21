@@ -56,11 +56,14 @@ function Heading({ children }) {
 }
 
 
-// Same scroll-reveal the rest of the site uses (ServicePageTemplate, ProductPageTemplate,
-// AboutClient all run this identical observer). Sections ship with .reveal (opacity 0) and
-// get .is-visible as they enter the viewport. globals.css disables the whole effect under
-// prefers-reduced-motion. This component is therefore a client component, matching how every
-// other templated page on the site is built.
+// NO scroll-reveal here, unlike ServicePageTemplate and the other templated pages.
+// Several attempts to add it failed for a reason that is NOT this component's fault:
+// on this page an element carrying both `reveal` and `is-visible`, with no inline
+// style and prefers-reduced-motion off, still computes to opacity 0 — even though
+// `.reveal.is-visible { opacity: 1 }` exists in the served CSS at higher specificity
+// than `.reveal`. The same rules work on the service pages, so this looks like a
+// cascade-layer conflict specific to how this route's CSS is assembled.
+// Investigate that before re-adding the animation; do not just re-apply .reveal.
 
 const METRIC_TONE = { navy: NAVY, orange: ORANGE_TEXT, blue: BLUE }
 
@@ -81,6 +84,21 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
         className="relative overflow-hidden"
         style={{ background: `linear-gradient(135deg, #17436A 0%, ${NAVY} 45%, #081B2E 100%)` }}
       >
+        {/* Hero photograph. Every other page on the site is image-led; a text-and-SVG
+            hero was the main reason this page read as a different theme. Scrim below
+            keeps the left column at the same contrast the bare gradient gave it. */}
+        <img
+          src="/images/services/incident-response-uae.webp"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover hidden md:block"
+        />
+        <div
+          className="absolute inset-0 hidden md:block"
+          aria-hidden="true"
+          style={{ background: 'linear-gradient(90deg, rgba(11,26,70,0.96) 0%, rgba(11,26,70,0.92) 35%, rgba(11,26,70,0.70) 70%, rgba(8,27,46,0.55) 100%)' }}
+        />
+
         <div className="absolute inset-0 pointer-events-none hidden md:block" aria-hidden="true">
           <svg viewBox="0 0 1440 620" preserveAspectRatio="xMaxYMid slice" className="w-full h-full">
             <g stroke="#4E82B8" strokeOpacity=".35" fill="#6FA3D6" fillOpacity=".45">
@@ -114,7 +132,12 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
             ))}
           </nav>
 
-          <Eyebrow onDark>{eyebrow}</Eyebrow>
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
+            style={{ background: 'rgba(232,119,34,0.12)', border: '1px solid rgba(232,119,34,0.35)' }}
+          >
+            <span className="text-[#FFA46B] text-xs font-semibold uppercase tracking-wider">{eyebrow}</span>
+          </div>
           <h1
             className="text-white font-extrabold max-w-[19ch]"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', lineHeight: 1.15, letterSpacing: '-0.02em' }}
@@ -158,7 +181,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
         <section style={{ background: TINT, padding: '56px 24px' }}>
           <div className="max-w-[1140px] mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {metrics.map((metric) => (
-              <div key={metric.label} className="rounded-2xl bg-white p-6" style={{ border: `1px solid ${LINE}` }}>
+              <div key={metric.label} className="service-card p-6">
                 <div
                   className="font-extrabold"
                   style={{
@@ -247,7 +270,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
 
           <ol className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {approach.steps.map((step, i) => (
-              <li key={step.title} className="rounded-2xl bg-white p-6" style={{ border: `1px solid ${LINE}` }}>
+              <li key={step.title} className="service-card p-6">
                 <div
                   className="mb-3.5 flex h-9 w-9 items-center justify-center rounded-full font-bold text-white"
                   style={{ background: NAVY, border: `2px solid ${ORANGE}` }}
