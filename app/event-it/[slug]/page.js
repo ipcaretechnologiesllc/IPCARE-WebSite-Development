@@ -96,6 +96,14 @@ export default async function EventSubPage(props) {
   const imgSrc = event?.img
     ? (event.img.startsWith('http') ? event.img : `${BASE}${event.img}`)
     : `${BASE}/opengraph-image.png`
+  // IP Care delivers event IT infrastructure for these events as a vendor, not as
+  // organizer - only attribute organizer/performer to the real rights holder
+  // (event.rightsHolder) when it's known, never to IP Care itself.
+  const rightsHolderField = event?.rightsHolder
+    ? event.rightsHolder.type === 'Organization'
+      ? { organizer: { '@type': 'Organization', name: event.rightsHolder.name } }
+      : { performer: { '@type': event.rightsHolder.type, name: event.rightsHolder.name } }
+    : {}
   const caseStudySchema = event ? {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -113,7 +121,7 @@ export default async function EventSubPage(props) {
       eventStatus: 'https://schema.org/EventScheduled',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: { '@type': 'Place', name: event.location },
-      organizer: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+      ...rightsHolderField,
     },
   } : null
 
