@@ -21,18 +21,18 @@ There is no lint/test script configured in `package.json`. `tests/` and `test_re
 
 ## Deployment
 
-**As of 2026-09-10, the website is live only on `ipcare.ae`.** `ipcare.ca` is not an active production deployment right now — do not check it, curl it, or treat it as a second live domain when verifying a deploy. Everything below that references `ipcare.ca` is historical/dual-domain context kept for when (if) it comes back; treat `ipcare.ae` as the only real target until told otherwise.
+**The website is hosted only on `www.ipcare.ae`.** `ipcare.ca` is not hosted right now (it may be re-hosted in future) — do not check it, curl it, or treat it as a production domain until told otherwise.
 
 **Pushing to `main` auto-deploys to production.** Hostinger's GitHub integration is configured on Hostinger's side — there is no `.github/workflows/`, no `vercel.json`, and no deploy script in this repo, so *nothing in the codebase reveals that a pipeline exists*. Do not conclude from their absence that a push won't deploy.
 
-`origin` still has two push URLs left over from when both domains were live, so a single `git push origin main` still reaches both remotes — historically **`ipcare.ae` and `ipcare.ca` were two separate Hostinger accounts**, each independently cloning and building the same codebase from its own remote. There is no Vercel involved anywhere in production (verified 2026-08-08 directly against Cloudflare DNS for both zones — no `vercel-dns.com`/`*.vercel.app` entries on either). There are no feature branches; work goes directly to `main`.
+`origin` has two push URLs (`github-first`, `github-second`), so a single `git push origin main` reaches both GitHub remotes; the second is a leftover from the retired `.ca` Hostinger account and is harmless. There is no Vercel involved in production. There are no feature branches; work goes directly to `main`.
 
 Allow **5–10 minutes** after pushing before verifying — a check immediately after `git push` will still show the old build. `www.ipcare.ae` is served by Hostinger (the apex host redirects at the platform level, before the Next.js app runs). See "Hosting & DNS topology" below for the DNS path.
 
 **A site-wide `HTTP 503 "Service Unavailable — the server is temporarily busy"` shortly after a push is normal, not a code fault.** Applying a build on Hostinger requires **stopping and restarting the Node process**, and during that restart the origin serves 503 across *every* route (confirmed: `/`, `/rental`, `/api/health` all 503 at once). If the 503 is site-wide it is the restart window — wait and re-check. A 503 on one route while others serve 200 would be different and worth investigating. Do not interpret the restart 503 as a broken deploy or start rolling anything back; the local `next build` passing 256/256 is the signal the code is fine.
 
 Three caching layers can each serve stale content after a deploy — check all three before suspecting the code:
-1. **Cloudflare edge** — sits in front of Hostinger and has been observed caching HTML despite `no-store` from the origin. Fix: "Purge Everything" in the Cloudflare dashboard.
+1. **Cloudflare edge** — Cache Rule "Cache HTML pages" caches HTML at the edge. **Purge Everything after every deploy**, or edges keep serving the previous build, whose HTML references CSS/JS chunks that no longer exist at the origin.
 2. **Next.js ISR at the origin** — most routes export `revalidate = 3600`, and the Hostinger redeploy does not appear to clear `.next/cache`. A page can serve pre-deploy HTML for up to an hour until a request triggers background regeneration. A `?cb=1` query string bypasses this and is a useful diagnostic: fresh-with-query + stale-without-query means ISR staleness, not a bug.
 3. **Stale-while-revalidate** — the first request after a stale window returns stale and only the *next* one is fresh. Always verify twice.
 
@@ -40,21 +40,24 @@ Three caching layers can each serve stale content after a deploy — check all t
 
 ### Hosting & DNS topology
 
-**Currently live on `ipcare.ae` only** (as of 2026-09-10) — `ipcare.ca` is not an active production target; do not verify against it. Historically these were **two independent Hostinger accounts, not one shared deployment**, each auto-deploying the same codebase from its own git remote (see Deployment above), and that historical detail is kept below in case `.ca` is reactivated. There is no Vercel anywhere in production; both zones sit behind **Cloudflare** (proxied/orange-cloud) in front of Hostinger, confirmed directly against each zone's DNS records on 2026-08-08.
+The site is a single Hostinger account (Node app behind LiteSpeed) with **Cloudflare** (proxied, Free plan) in front. Smart Tiered Cache is on (upper tier SIN, secondary HKG).
 
-The two zones use different DNS strategies at Hostinger, which is normal but worth knowing when debugging either one:
+**Static media caching is set in Cloudflare, not `next.config.js`.** LiteSpeed serves `/public` files before Next.js runs, so the `headers()` cache rules in `next.config.js` never reach them — they arrive with no `Cache-Control`. Cache Rule "Cache static assets" matches `/_next/static/` or image/video/font extensions, Edge TTL 1 month (ignore origin), Browser TTL 7 days. Filenames aren't fingerprinted: after replacing an image under the same name, purge that URL.
+
+DNS for `ipcare.ae`:
 - **`ipcare.ae`** — raw `A` records. Main site (`ipcare.ae`, `www.ipcare.ae`, `docvault.ipcare.ae`) → `45.13.255.161`, proxied. A separate cluster of service subdomains (`cpanel`, `mail`, `webmail`, `webdisk`, `whm`, `autoconfig`, `autodiscover`) → `50.116.93.239`, deliberately **DNS-only (unproxied)** because mail clients and cPanel are accessed directly against those hostnames — do not recommend proxying them, it would break those connections. `ftp.ipcare.ae` was a DNS-only CNAME to `ipcare.ae` itself, which Cloudflare flagged as leaking the real origin IP behind the proxied A record — now proxied (2026-08-08) since FTP on this host is confirmed unused. If FTP connectivity ever needs to work here again, un-proxy it first (Cloudflare's proxy doesn't tunnel raw FTP on Free/Pro plans).
-- **`ipcare.ca`** — CNAME-flattened to Hostinger's managed CDN: `ipcare.ca` and `www.ipcare.ca` both → `*.cdn.hstgr.net`, proxied. Mail is fully on Hostinger's own mail service (`mx1`/`mx2.hostinger.com`, `hostingermail-*` DKIM) rather than self-hosted — a cleaner, more managed setup than `.ae`'s.
 - `docpilot.ipcare.ae` CNAMEs to `docpilot-frontend-*.onrender.com` — a **separate product (Render-hosted)**, unrelated to this repo beyond the `/products/docpilot` marketing page.
 - `ipcare.ae` layers two mail-sending services in DNS (Brevo DKIM + Resend DKIM) alongside cPanel's own mail; only Resend (`lib/server/resend.js`) is used by this codebase — Brevo is a separate/legacy tool, not called from app code.
 
-### Multi-domain canonicalization
+### Canonical & hreflang
 
-The same codebase runs on both Hostinger accounts. Since each account builds its own copy, the serving domain is fixed **at build time** by `NEXT_PUBLIC_BASE_URL` (`SITE_URL` in `lib/seo-region.js`; unset = `https://www.ipcare.ae`). **If `ipcare.ca` is reactivated, set `NEXT_PUBLIC_BASE_URL=https://www.ipcare.ca` on that Hostinger account** or it will canonicalize to `.ae`. Three layers work together:
+The canonical base is fixed **at build time** by `NEXT_PUBLIC_BASE_URL` (`SITE_URL` in `lib/seo-region.js`; unset = `https://www.ipcare.ae`). Layers:
 
 - `next.config.js` `redirects()` — host-based 308 redirects for legacy domains (`ipcare.ae`, `ipcares.com` → `www.ipcare.ae`), plus a large block of permanent redirects mapping legacy `.php`/`.html`/WordPress URLs to current routes.
-- `app/layout.js` static `metadata` — `metadataBase: new URL(SITE_URL)`. Child pages use **relative** `alternates.canonical`, which resolves against this base — so child pages never need host-specific logic. `isCaSite()` (also build-time) drives the UAE-only cross-canonicals on `.ca`.
-- `components/site/HreflangLinks.jsx` — Client Component in the root layout `<head>` that emits per-path hreflang (`en-AE`, `en-CA`, `x-default`) from `usePathname()`; it resolves during static prerendering, so the tags are in the server HTML.
+- `app/layout.js` static `metadata` — `metadataBase: new URL(SITE_URL)`. Child pages use **relative** `alternates.canonical`, which resolves against this base.
+- `components/site/HreflangLinks.jsx` — Client Component in the root layout `<head>` that emits per-path hreflang from `usePathname()`; it resolves during static prerendering, so the tags are in the server HTML.
+
+**`.ca` code is kept deliberately — do not remove it.** `ipcare.ca` isn't hosted now but may be re-hosted in future (user decision, 2026-09-23). `HreflangLinks.jsx` still emits an `en-CA` alternate for `www.ipcare.ca`; `isCaSite()`/`isUaeOnlyPath()` in `lib/seo-region.js`, the `.ca` branches in `app/sitemap.js`, `app/robots.js`, `app/llms.txt/route.js`, and the `ipcare.ca` redirect in `next.config.js` all stay. **To re-host `.ca`:** deploy a separate build with `NEXT_PUBLIC_BASE_URL=https://www.ipcare.ca` — canonical base and `isCaSite()` are build-time, so a `.ca` build without it would canonicalize to `.ae`.
 
 **Never call `headers()`/`cookies()` in the root layout, a page, or `generateMetadata`.** Until 2026-09-23 the layout read `headers()` for the Host and a middleware-injected `x-pathname`; that opted every route out of static rendering, so all ~256 pages were server-rendered per request (2–7s TTFB on Hostinger on a Cloudflare miss) and every `revalidate = 3600` was dead. `middleware.js` was deleted with that change. `robots.js`, `sitemap.js` and `llms.txt` still read the Host — they are separate dynamic routes and don't affect pages. After any layout/metadata change, check `next build` output still shows pages as `○`/`●`, not `ƒ`.
 
@@ -112,7 +115,7 @@ Cybersecurity, advisory and consulting case studies do **not** go in `/portfolio
 
 - **Route:** `app/services/[category]/[slug]/[study]/page.js` — a **fourth level under `/services`**, which exists only for these. `dynamicParams = false` plus `generateStaticParams()` from `getNarrativeCaseStudyParams()` means the data module's whitelist is the entire route space; every other `/services/a/b/c` URL 404s. Nothing else in the repo hints this depth exists.
 - **Adding one** is a data entry in `lib/case-studies-data.js` plus nothing else. Both `app/services/[category]/page.js` and `app/services/[category]/[slug]/page.js` call `getCaseStudiesForCategory()` / `getCaseStudiesForSubpage()` and spread a `caseStudies` array onto the `ServicePageTemplate` data, which renders an opt-in proof block (section 7.6). Subpages without case studies render exactly as before.
-- **`lib/seo-region.js` `isUaeOnlyPath()` handles 4-segment service paths** so a case study inherits its parent subpage's UAE-only canonical treatment. `/services/cybersecurity/incident-response` is on that list, so its children cross-canonicalize to ipcare.ae and stay out of the ipcare.ca sitemap. Keep the 3- and 4-segment branches in sync.
+- **`lib/seo-region.js` `isUaeOnlyPath()` handles 4-segment service paths** so a case study inherits its parent subpage's UAE-only treatment (no hreflang alternates). Keep the 3- and 4-segment branches in sync.
 - **`/case-studies`** (`app/case-studies/page.js`) is a master index that **links out** to every case study wherever it lives — `/portfolio/*`, `/event-it/*` and these — and deliberately duplicates none of their content. It is a directory, not a second portfolio. Only `fifa-club-world-cup` has a built `/event-it/[slug]` route, so that entry is gated on `getEventSubpage()` to avoid listing a 404.
 - **Content QA:** the session-theft study is published with client consent on an anonymized basis. No AED figures, no calendar dates (timeline is relative days), and the client is generalized to "UAE SME" — sector, emirate and spend amounts together would identify them. Do not reintroduce any of those from the source proposal in `D:\ICT\ICT Propossals\Proposals\S Clinic UAE`. The 4-page source PDF there is footer-stamped **Confidential** and must not be published as a download.
 
@@ -126,12 +129,12 @@ Whenever a task involves code generation, API integration, SDK usage, framework 
 
 ## SEO / Search Console tooling
 
-A local `google-seo-mcp` MCP server (community, GSC+GA4+CrUX+Lighthouse+schema+migration-audit suite, ~100 tools under `mcp__google-seo-mcp__*`) is registered user-scoped on the dev machine, covering both `sc-domain:ipcare.ae` and `sc-domain:ipcare.ca` via a read-only service account. Check `/mcp` and try it before asking the user for Search Console screenshots or exports. Note: the site is currently live only on `ipcare.ae` (see Deployment) — the `ipcare.ca` GSC property still exists and can still be queried, but isn't an active production domain right now.
+A local `google-seo-mcp` MCP server (community, GSC+GA4+CrUX+Lighthouse+schema+migration-audit suite, ~100 tools under `mcp__google-seo-mcp__*`) is registered user-scoped on the dev machine, covering `sc-domain:ipcare.ae` via a read-only service account (a `sc-domain:ipcare.ca` property also exists but that domain is no longer hosted — ignore it). Check `/mcp` and try it before asking the user for Search Console screenshots or exports.
 
 - `gsc_site_snapshot(site_url, days)` auto-compares the last N days vs the prior N-day period — the default tool for "what changed this week/month" questions.
 - `gsc_inspect_url` reflects Google's **last crawl** of a URL, not its live server response. After shipping a redirect/404 fix, confirm it server-side first (`curl -I`) — a stale "Not found (404)" from GSC right after deploy is expected lag, not a failed fix.
 - The classic GSC **Index Coverage report** (Valid/Excluded/Error page counts, the "Why pages aren't indexed" UI panel) is **not exposed by the Search Console API** — no MCP tool can return it. For that data, ask the user to export/screenshot the Search Console UI, or check individual URLs one at a time with `gsc_inspect_url`.
-- `history_save_snapshot`/`history_diff` exist for saving named snapshots and diffing them later, but no snapshots have been saved yet for either property — week-over-week comparisons currently rely on `gsc_site_snapshot`'s built-in prior-period math.
+- `history_save_snapshot`/`history_diff` exist for saving named snapshots and diffing them later, but no snapshots have been saved yet — week-over-week comparisons currently rely on `gsc_site_snapshot`'s built-in prior-period math.
 
 
 ## Project Skill Usage Policy
