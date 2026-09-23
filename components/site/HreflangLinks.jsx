@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { isUaeOnlyPath } from '@/lib/seo-region'
+import { isUaeOnlyPath, CA_SITE_LIVE } from '@/lib/seo-region'
 
 // Path-aware hreflang alternates, rendered in the root layout's <head>.
 //
@@ -13,9 +13,13 @@ import { isUaeOnlyPath } from '@/lib/seo-region'
 // Rendered as raw <link> tags rather than metadata.alternates.languages because
 // Next.js shallow-merges `metadata.alternates`, so any child page that sets its own
 // `alternates.canonical` would otherwise wipe out the languages map.
+//
+// The en-CA entry is dropped while ipcare.ca is not hosted (CA_SITE_LIVE in
+// lib/seo-region.js): an alternate pointing at a domain that serves nothing can never
+// return the reciprocal tag. en-AE + x-default still self-reference, which is valid.
 const HREFLANG_TARGETS = [
   { lang: 'en-AE',     domain: 'https://www.ipcare.ae' },
-  { lang: 'en-CA',     domain: 'https://www.ipcare.ca' },
+  ...(CA_SITE_LIVE ? [{ lang: 'en-CA', domain: 'https://www.ipcare.ca' }] : []),
   { lang: 'x-default', domain: 'https://www.ipcare.ae' },
 ]
 

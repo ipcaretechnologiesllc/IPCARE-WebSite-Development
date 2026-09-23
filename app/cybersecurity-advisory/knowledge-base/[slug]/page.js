@@ -30,7 +30,8 @@ export async function generateMetadata(props) {
   const a = getKbArticle(params.slug)
   if (!a) return {}
   return {
-    title: a.seoTitle || `${a.title} | IP Care Cyber Advisory`,
+    // Same length rule as blog posts: drop to "| IP Care" when the long suffix won't fit.
+    title: a.seoTitle || (`${a.title} | IP Care Cyber Advisory`.length <= 60 ? `${a.title} | IP Care Cyber Advisory` : `${a.title} | IP Care`),
     description: a.excerpt,
     alternates: { canonical: `/cybersecurity-advisory/knowledge-base/${a.slug}` },
     openGraph: {

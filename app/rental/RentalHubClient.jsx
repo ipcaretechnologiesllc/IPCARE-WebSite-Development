@@ -7,6 +7,7 @@ import { rentalCategories, getFeaturedProducts } from '@/lib/rental-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 
 /* ── Icon helper ─────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Package; return <C {...rest}/> }
@@ -57,7 +58,9 @@ const CATEGORY_ALT = {
 const WHY_ITEMS = [
   { icon: 'Truck',   t: 'Delivery & Setup Included',    d: 'White-glove delivery, rack-and-stack and full configuration, not a hidden extra like other vendors.' },
   { icon: 'Wrench',  t: 'Experienced Engineers On-Site', d: 'Our engineers stay through your event or project, not just for handover.' },
-  { icon: 'Globe2',  t: 'UAE + Canada Coverage',        d: 'One partner, two regions, consistent SLA and support. Dubai, Abu Dhabi, Toronto, Vancouver.' },
+  isCaSite()
+    ? { icon: 'Globe2',  t: 'UAE + Canada Coverage',        d: 'One partner, two regions, consistent SLA and support. Dubai, Abu Dhabi, Toronto, Vancouver.' }
+    : { icon: 'MapPin',  t: 'Dubai & Abu Dhabi Coverage',   d: 'Abu Dhabi-based team delivering across Abu Dhabi, Dubai, Sharjah, Al Ain and the wider UAE, with one SLA.' },
   { icon: 'Award',   t: '20+ Years, 500+ Projects',     d: 'Deep vendor relationships since 2003, real stock, real rates, no broker mark-ups.' },
 ]
 
@@ -110,7 +113,7 @@ export default function RentalHubClient() {
             style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
           >
             IT <span className="text-[#E87722]">Equipment Rental</span><br />
-            UAE and Canada
+            {RENTAL_REGION.short}
           </h1>
           <p className="body-text mt-5 text-base md:text-lg reveal">
             Short-term and long-term rentals. Delivery and setup included. Experienced engineers on-site.
@@ -207,7 +210,7 @@ export default function RentalHubClient() {
               Most-Requested Items
             </h2>
             <p className="mt-2 text-sm max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.8)' }}>
-              In stock and ready to ship across UAE and Canada. Daily, weekly and monthly rates.
+              In stock and ready to ship across {isCaSite() ? 'UAE and Canada' : 'Dubai, Abu Dhabi and the UAE'}. Daily, weekly and monthly rates.
             </p>
           </div>
 

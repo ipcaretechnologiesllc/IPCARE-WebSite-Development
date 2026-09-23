@@ -5,7 +5,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductDetailClient from './ProductDetailClient'
 import ProductCard from '@/components/rental/ProductCard'
-import { getProduct, getAllProductParams, getRelatedProducts } from '@/lib/rental-data'
+import { getProduct, getAllProductParams, getRelatedProducts, productSeo } from '@/lib/rental-data'
+import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -19,13 +20,22 @@ export async function generateMetadata(props) {
   const params = await props.params;
   const p = getProduct(params.category, params.product)
   if (!p) return {}
-  const title = `${p.brand} ${p.model} Rental UAE & Canada | IP Care Technologies`
+  // "<Product> Rental Dubai & Abu Dhabi | IP Care" when it fits the ~60-character snippet,
+  // otherwise "<Product> Rental UAE | IP Care". The old "Rental UAE & Canada | IP Care
+  // Technologies" suffix alone was 44 characters, so long model names were cut off.
+  const name = `${p.brand} ${p.model}`
+  const cityTitle = `${name} Rental Dubai & Abu Dhabi | IP Care`
+  const templateTitle = isCaSite()
+    ? `${name} Rental UAE & Canada | IP Care Technologies`
+    : cityTitle.length <= 60 ? cityTitle : `${name} Rental UAE | IP Care`
+  const seo = productSeo[params.product] || {}
+  const title = seo.title || templateTitle
   // Day-rate-only products must not advertise weekly/monthly rates in the snippet Google
   // shows — the page no longer offers them.
   const rateLine = p.rates?.monthly != null
     ? 'Daily, weekly and monthly rates.'
     : `Day rate AED ${p.rates?.daily}.`
-  const description = `Rent ${p.brand} ${p.model} in UAE and Canada. ${p.specs[0]}. ${rateLine} Delivery and setup included.`
+  const description = seo.description || `Rent ${name} in ${RENTAL_REGION.prose}. ${p.specs[0]}. ${rateLine} Delivery and setup included.`
   return {
     title,
     description,
@@ -78,8 +88,10 @@ export default async function ProductDetailPage(props) {
       url: productUrl,
       seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
       areaServed: [
+        { '@type': 'City', name: 'Dubai' },
+        { '@type': 'City', name: 'Abu Dhabi' },
         { '@type': 'Country', name: 'United Arab Emirates' },
-        { '@type': 'Country', name: 'Canada' },
+        ...(isCaSite() ? [{ '@type': 'Country', name: 'Canada' }] : []),
       ],
       priceSpecification: ratedBands.map((b) => ({
         '@type': 'UnitPriceSpecification',
@@ -97,7 +109,7 @@ export default async function ProductDetailPage(props) {
   const faqs = [
     {
       q: `What's included when I rent the ${product.brand} ${product.model}?`,
-      a: `Rental of the ${product.brand} ${product.model} includes delivery, collection and setup across the UAE and Canada, plus standard accessories and configuration to your requirements. Technical support is included for the duration of the rental. MDM enrolment, locked stands and tethers, standby spare units, a dedicated on-site engineer and damage waiver are quoted separately.`,
+      a: `Rental of the ${product.brand} ${product.model} includes delivery, collection and setup across ${isCaSite() ? 'the UAE and Canada' : 'Dubai, Abu Dhabi and the wider UAE'}, plus standard accessories and configuration to your requirements. Technical support is included for the duration of the rental. MDM enrolment, locked stands and tethers, standby spare units, a dedicated on-site engineer and damage waiver are quoted separately.`,
     },
     {
       q: 'What is the minimum rental period?',

@@ -3,6 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import DigitalSolutionsClient from './DigitalSolutionsClient'
 import { srcSetFor } from '@/lib/responsive-image'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -20,11 +21,11 @@ const breadcrumbSchema = {
 
 export const metadata = {
   title: 'Digital Solutions UAE: Web, Software & AI Development | IP Care',
-  description: 'Custom websites, web apps, software, and AI-driven tools built by our in-house team in Abu Dhabi. React, Next.js, Node.js, .NET, and Flutter. Serving UAE and Canada.',
+  description: uaeFocus('Custom websites, web apps, software, and AI-driven tools built by our in-house team in Abu Dhabi. React, Next.js, Node.js, .NET, and Flutter. Serving UAE and Canada.'),
   alternates: { canonical: '/services/digital-solutions' },
   openGraph: {
     title: 'Digital Solutions UAE: Web, Software & AI Development | IP Care',
-    description: 'Custom websites, web apps, software, and AI-driven tools built by our in-house team in Abu Dhabi. React, Next.js, Node.js, .NET, and Flutter. Serving UAE and Canada.',
+    description: uaeFocus('Custom websites, web apps, software, and AI-driven tools built by our in-house team in Abu Dhabi. React, Next.js, Node.js, .NET, and Flutter. Serving UAE and Canada.'),
     url: '/services/digital-solutions',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Digital solutions: web development, software and AI, IP Care Technologies' }],

@@ -34,8 +34,10 @@ export async function generateMetadata(props) {
     ? `https://www.ipcare.ae/blog/${params.slug}`
     : `/blog/${params.slug}`
   return {
-    title: a.seoTitle || `${a.title} | IP Care Technologies Blog`,
-    description: a.excerpt,
+    // The 28-character "| IP Care Technologies Blog" suffix pushed most titles past the
+    // ~60 characters Google shows; fall back to "| IP Care" when the long form won't fit.
+    title: a.seoTitle || (`${a.title} | IP Care Technologies Blog`.length <= 60 ? `${a.title} | IP Care Technologies Blog` : `${a.title} | IP Care`),
+    description: a.seoDescription || a.excerpt,
     alternates: { canonical },
     openGraph: {
       title: a.title,

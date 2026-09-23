@@ -2,15 +2,16 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies',
-  description: 'Executive cybersecurity advisory in UAE and Canada. CISO advisory, board-level security strategy, risk communication, cyber risk quantification and investment alignment.',
+  title: uaeFocus('Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies'),
+  description: uaeFocus('Executive cybersecurity advisory in UAE and Canada. CISO advisory, board-level security strategy, risk communication, cyber risk quantification and investment alignment.'),
   alternates: { canonical: '/cybersecurity-advisory/executive-advisory' },
   openGraph: {
-    title: 'Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies',
+    title: uaeFocus('Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies'),
     description: 'Executive cybersecurity advisory. CISO advisory, board-level strategy, risk communication and security programme development.',
     url: '/cybersecurity-advisory/executive-advisory',
     type: 'website',
@@ -18,7 +19,7 @@ export const metadata = {
 }
 
 const pageData = {
-  h1: 'Executive Cybersecurity Advisory UAE & Canada',
+  h1: uaeFocus('Executive Cybersecurity Advisory UAE & Canada'),
   h1Accent: 'Executive Cybersecurity Advisory',
   icon: 'Briefcase',
   hero: 'Board-level security strategy, translate cyber risk to business outcomes.',

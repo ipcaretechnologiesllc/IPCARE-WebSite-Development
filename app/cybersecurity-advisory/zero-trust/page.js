@@ -5,23 +5,24 @@ import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies',
-  description: 'Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma and NESA compliance.',
+  title: uaeFocus('Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies'),
+  description: uaeFocus('Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma and NESA compliance.'),
   alternates: { canonical: '/cybersecurity-advisory/zero-trust' },
   openGraph: {
-    title: 'Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies',
-    description: 'Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma.',
+    title: uaeFocus('Zero Trust Architecture Consulting UAE & Canada | IP Care Technologies'),
+    description: uaeFocus('Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma.'),
     url: '/cybersecurity-advisory/zero-trust',
     type: 'website',
   },
 }
 
 const pageData = {
-  h1: 'Zero Trust Architecture Consulting UAE & Canada',
+  h1: uaeFocus('Zero Trust Architecture Consulting UAE & Canada'),
   h1Accent: 'Zero Trust Architecture',
   icon: 'Shield',
   hero: 'Never trust, always verify, implement Zero Trust architecture for modern enterprise security.',

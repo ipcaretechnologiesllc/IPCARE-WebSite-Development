@@ -2,23 +2,24 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'SASE Transformation Consulting UAE & Canada | IP Care Technologies',
-  description: 'SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope, SD-WAN integration and remote workforce security.',
+  title: uaeFocus('SASE Transformation Consulting UAE & Canada | IP Care Technologies'),
+  description: uaeFocus('SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope, SD-WAN integration and remote workforce security.'),
   alternates: { canonical: '/cybersecurity-advisory/sase' },
   openGraph: {
-    title: 'SASE Transformation Consulting UAE & Canada | IP Care Technologies',
-    description: 'SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope and cloud-delivered security.',
+    title: uaeFocus('SASE Transformation Consulting UAE & Canada | IP Care Technologies'),
+    description: uaeFocus('SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope and cloud-delivered security.'),
     url: '/cybersecurity-advisory/sase',
     type: 'website',
   },
 }
 
 const pageData = {
-  h1: 'SASE Transformation Consulting UAE & Canada',
+  h1: uaeFocus('SASE Transformation Consulting UAE & Canada'),
   h1Accent: 'SASE Transformation',
   icon: 'Cloud',
   hero: 'Secure Access Service Edge, cloud-delivered security for the distributed enterprise.',

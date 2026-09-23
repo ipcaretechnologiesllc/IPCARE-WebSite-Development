@@ -1,12 +1,13 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CareersClient from './CareersClient'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Careers at IP Care Technologies: Join Our Team | UAE & Canada',
-  description: 'Join IP Care Technologies. Opportunities across cybersecurity, networking, cloud, event IT and business development in UAE and Canada.',
+  title: uaeFocus('Careers at IP Care Technologies: Join Our Team | UAE & Canada'),
+  description: uaeFocus('Join IP Care Technologies. Opportunities across cybersecurity, networking, cloud, event IT and business development in UAE and Canada.'),
   alternates: { canonical: '/careers' },
 }
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { useCart } from './CartContext'
 import RFQModal from './RFQModal'
+import { RENTAL_REGION } from '@/lib/seo-region'
 
 const DURATION_LABEL = { daily: 'Daily', weekly: 'Weekly', monthly: 'Monthly' }
 
@@ -81,7 +82,7 @@ export default function CartDrawer() {
           <footer className="border-t border-white/10 px-5 py-4 space-y-2">
             <button onClick={() => setShowRFQ(true)} className="btn-primary w-full justify-center">Submit Quote Request <Icons.ArrowRight size={15}/></button>
             <button onClick={() => setShowConfirmClear(true)} className="w-full text-white/50 hover:text-red-400 text-xs mono uppercase tracking-widest py-2">Clear Cart</button>
-            <p className="text-center text-[11px] text-white/40 mono">UAE &amp; Canada · Delivery &amp; Setup · Technical Support</p>
+            <p className="text-center text-[11px] text-white/40 mono">{RENTAL_REGION.short} · Delivery &amp; Setup · Technical Support</p>
           </footer>
         )}
       </aside>

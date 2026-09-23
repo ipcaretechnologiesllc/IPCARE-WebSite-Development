@@ -1,6 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -8,11 +9,11 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
 export const metadata = {
   title: 'Cyber Advisory UAE: Zero Trust, SASE & Security',
-  description: 'Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.',
+  description: uaeFocus('Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.'),
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
     title: 'Cyber Advisory UAE: Zero Trust, SASE & Security',
-    description: 'Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.',
+    description: uaeFocus('Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.'),
     url: '/cybersecurity-advisory',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Cyber advisory, Zero Trust, SASE and security architecture by IP Care' }],

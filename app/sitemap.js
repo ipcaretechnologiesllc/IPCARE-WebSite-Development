@@ -8,7 +8,7 @@ import { getAllIndustrySlugs } from '@/lib/industries-data'
 import { caseStudyProjects } from '@/lib/portfolio-data'
 import { narrativeCaseStudies, caseStudyPath } from '@/lib/case-studies-data'
 import { products } from '@/lib/products-data'
-import { isUaeOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
+import { isUaeOnlyServiceSubpage, isCaOnlyServiceSubpage, isUaeOnlyBlogSlug } from '@/lib/seo-region'
 
 // Per-domain canonical base. The sitemap MUST be host-aware so each domain
 // serves a sitemap listing only its own URLs:
@@ -156,6 +156,7 @@ export default async function sitemap() {
     const path = `/services/${category}/${slug}`
     if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
     if (isCaSitemap && isUaeOnlyServiceSubpage(category, slug)) continue  // canonicalizes to ipcare.ae
+    if (!isCaSitemap && isCaOnlyServiceSubpage(category, slug)) continue  // Toronto pages: noindex on ipcare.ae
     entries.push({ url: `${BASE}${path}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 

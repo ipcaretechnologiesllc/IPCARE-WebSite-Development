@@ -4,7 +4,8 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductCard from '@/components/rental/ProductCard'
-import { getCategory, getAllCategorySlugs } from '@/lib/rental-data'
+import { getCategory, getAllCategorySlugs, getCrossListedProducts } from '@/lib/rental-data'
+import { RENTAL_REGION } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -32,6 +33,13 @@ export default async function CategoryPage(props) {
   if (!cat) notFound()
 
   const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
+  // Every product shown on this page, as { product, categorySlug }: the category's own,
+  // then any cross-listed from elsewhere (e.g. the iMac on /rental/macbooks), which keep
+  // their home category so cards and schema point at the one canonical product URL.
+  const listed = [
+    ...cat.products.map((product) => ({ product, categorySlug: params.category })),
+    ...getCrossListedProducts(params.category).map((product) => ({ product, categorySlug: product.categorySlug })),
+  ]
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -44,19 +52,19 @@ export default async function CategoryPage(props) {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `${cat.name} for rent in UAE & Canada`,
+    name: `${cat.name} for rent in ${RENTAL_REGION.short}`,
     itemListOrder: 'https://schema.org/ItemListUnordered',
-    numberOfItems: cat.products.length,
-    itemListElement: cat.products.map((p, i) => ({
+    numberOfItems: listed.length,
+    itemListElement: listed.map(({ product: p, categorySlug }, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `${BASE}/rental/${params.category}/${p.slug}`,
+      url: `${BASE}/rental/${categorySlug}/${p.slug}`,
       item: {
         '@type': 'Product',
         name: `${p.brand} ${p.model}`,
         brand: { '@type': 'Brand', name: p.brand },
         image: p.image + '?w=1200&q=85',
-        url: `${BASE}/rental/${params.category}/${p.slug}`,
+        url: `${BASE}/rental/${categorySlug}/${p.slug}`,
         offers: {
           '@type': 'AggregateOffer',
           businessFunction: 'https://schema.org/LeaseOut',
@@ -107,7 +115,7 @@ export default async function CategoryPage(props) {
         <section className="py-14 md:py-16 px-6">
           <div className="max-w-[1200px] mx-auto text-center">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{cat.keyword}</div>
-            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.name} Rental, <span className="text-[#E87722]">UAE &amp; Canada</span></h1>
+            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.name} Rental, <span className="text-[#E87722]">{RENTAL_REGION.short}</span></h1>
             <p className="body-text mt-5 max-w-2xl mx-auto">{cat.description}</p>
           </div>
         </section>
@@ -116,14 +124,14 @@ export default async function CategoryPage(props) {
         <section className="pb-24 px-6" style={{ background: '#F4F6FA', paddingTop: '56px' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <div className="mono text-xs" style={{ color: '#58595B' }}>{cat.products.length} products</div>
+              <div className="mono text-xs" style={{ color: '#58595B' }}>{listed.length} products</div>
               <div className="flex gap-2">
                 <Link href="/rental" className="filter-pill-light" style={{ background: '#E87722', borderColor: '#E87722', color: '#ffffff' }}>All Categories</Link>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {cat.products.map((p) => (
-                <ProductCard key={p.slug} product={p} categorySlug={params.category}/>
+              {listed.map(({ product, categorySlug }) => (
+                <ProductCard key={`${categorySlug}/${product.slug}`} product={product} categorySlug={categorySlug}/>
               ))}
             </div>
           </div>

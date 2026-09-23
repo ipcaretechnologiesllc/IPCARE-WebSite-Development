@@ -3,6 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import IndustriesClient from './IndustriesClient'
 import { srcSetFor } from '@/lib/responsive-image'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -80,7 +81,7 @@ const industrySchema = {
         '@type': 'Service',
         name: 'Construction & Field Services IT',
         url: `${BASE}/services/infrastructure`,
-        description: 'Rugged connectivity across remote sites, mobile workforce management, and field infrastructure for construction and field operations in the UAE and Canada.',
+        description: uaeFocus('Rugged connectivity across remote sites, mobile workforce management, and field infrastructure for construction and field operations in the UAE and Canada.'),
         provider: { '@id': 'https://www.ipcare.ae#org' },
         areaServed: [
           { '@type': 'Country', name: 'United Arab Emirates' },
@@ -102,11 +103,11 @@ const breadcrumbSchema = {
 
 export const metadata = {
   title: 'Industry IT Solutions UAE: Healthcare, Banking & More',
-  description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
+  description: uaeFocus('Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.'),
   alternates: { canonical: '/industries' },
   openGraph: {
     title: 'Industry IT Solutions UAE: Healthcare, Banking & More',
-    description: 'Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.',
+    description: uaeFocus('Sector-specific IT in UAE and Canada: healthcare, banking, government (NESA), events and construction. 20+ years regulated delivery.'),
     url: '/industries',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Industry IT solutions, IP Care Technologies' }],

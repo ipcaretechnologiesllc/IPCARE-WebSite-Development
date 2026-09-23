@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { SAME_AS, SAME_AS_SOCIAL_ONLY } from '@/lib/social-links'
-import { SITE_URL } from '@/lib/seo-region'
+import { SITE_URL, isCaSite, uaeFocus } from '@/lib/seo-region'
 import HreflangLinks from '@/components/site/HreflangLinks'
 import RentalShell from '@/components/rental/RentalShell'
 import CookieBanner from '@/components/global/CookieBanner'
@@ -60,7 +60,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
-    description: 'Enterprise IT Solutions UAE & Canada',
+    description: uaeFocus('Enterprise IT Solutions UAE & Canada'),
   },
   robots: {
     index: true,
@@ -106,7 +106,11 @@ export default function RootLayout({ children }) {
     url: BRAND_URL,
     logo: `${BRAND_URL}/ipcare-logo.png`,
     foundingDate: '2003',
-    description: 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.',
+    // The .ae build leads with the UAE; both offices stay in address/contactPoint below
+    // because they are real, so the entity itself is unchanged.
+    description: isCaSite()
+      ? 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.'
+      : 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event IT Infrastructure & Equipment Rental in Abu Dhabi, Dubai and across the UAE since 2003.',
     contactPoint: [
       { '@type': 'ContactPoint', telephone: '+971-2-676-6935', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'AE', availableLanguage: ['English','Arabic'] },
       { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ca', areaServed: 'CA', availableLanguage: 'English' },
@@ -203,7 +207,7 @@ export default function RootLayout({ children }) {
   }
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang={isCaSite() ? 'en-CA' : 'en-AE'} className={inter.variable}>
       <head>
         {/* Default Google Consent Mode v2 state — set BEFORE gtag loads. Analytics denied until user accepts.
             data-cfasync="false" stops Cloudflare Rocket Loader from deferring this inline script: it must run
@@ -217,7 +221,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessAbuDhabi) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessToronto) }} />
+        {/* Toronto LocalBusiness only on the .ca build. On ipcare.ae it put a Canadian storefront
+            on every UAE page; the Organization above still lists the Toronto office. */}
+        {isCaSite() && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessToronto) }} />}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <RentalShell>{children}</RentalShell>
         <CookieBanner />

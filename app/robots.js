@@ -27,10 +27,12 @@ export default async function robots() {
       {
         userAgent: '*',
         allow: ['/'],
+        // No '/_next/' here: it blocked Googlebot from the CSS and JS chunks it needs to
+        // render pages, so Google saw them unstyled. Google's guidance is to leave page
+        // resources crawlable; /_next/static is public build output with nothing to hide.
         disallow: [
           '/api/',
           '/admin/',
-          '/_next/',
           '/cdn-cgi/',
           '/rental/quote',
           '/unsubscribe',

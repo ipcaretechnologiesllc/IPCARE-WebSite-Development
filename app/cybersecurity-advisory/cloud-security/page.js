@@ -2,15 +2,16 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Cloud Security Advisory: Multi-Cloud UAE & Canada | IP Care Technologies',
-  description: 'Cloud security advisory for AWS, Azure and GCP in UAE and Canada. Cloud workload protection, CSPM, secure landing zones and cloud-native security architecture.',
+  title: uaeFocus('Cloud Security Advisory: Multi-Cloud UAE & Canada | IP Care Technologies'),
+  description: uaeFocus('Cloud security advisory for AWS, Azure and GCP in UAE and Canada. Cloud workload protection, CSPM, secure landing zones and cloud-native security architecture.'),
   alternates: { canonical: '/cybersecurity-advisory/cloud-security' },
   openGraph: {
-    title: 'Cloud Security Advisory: Multi-Cloud UAE & Canada | IP Care Technologies',
+    title: uaeFocus('Cloud Security Advisory: Multi-Cloud UAE & Canada | IP Care Technologies'),
     description: 'Cloud security advisory for AWS, Azure and GCP. Cloud workload protection, CSPM and secure landing zones.',
     url: '/cybersecurity-advisory/cloud-security',
     type: 'website',
@@ -18,7 +19,7 @@ export const metadata = {
 }
 
 const pageData = {
-  h1: 'Cloud Security Advisory: Multi-Cloud UAE & Canada',
+  h1: uaeFocus('Cloud Security Advisory: Multi-Cloud UAE & Canada'),
   h1Accent: 'Cloud Security Advisory',
   icon: 'Cloud',
   hero: 'Secure your cloud estate, from landing zones to workload protection.',

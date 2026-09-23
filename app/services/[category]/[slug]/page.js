@@ -3,7 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
-import { isUaeOnlyServiceSubpage, isCaSite } from '@/lib/seo-region'
+import { isUaeOnlyServiceSubpage, isCaOnlyServiceSubpage, isCaSite } from '@/lib/seo-region'
 import { getCaseStudiesForSubpage, toCaseStudyCard } from '@/lib/case-studies-data'
 
 export const revalidate = 3600
@@ -24,10 +24,13 @@ export async function generateMetadata(props) {
   const canonical = (isUaeOnlyServiceSubpage(params.category, params.slug) && isCaSite())
     ? `https://www.ipcare.ae/services/${params.category}/${params.slug}`
     : `/services/${params.category}/${params.slug}`
+  // Toronto pages stay reachable on ipcare.ae but out of its index — see lib/seo-region.js.
+  const noindex = isCaOnlyServiceSubpage(params.category, params.slug) && !isCaSite()
   return {
     title: sub.title,
     description: sub.metaDescription,
     alternates: { canonical },
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: sub.title,
       description: sub.metaDescription,

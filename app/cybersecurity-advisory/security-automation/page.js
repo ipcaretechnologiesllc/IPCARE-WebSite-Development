@@ -2,15 +2,16 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Security Automation SOAR & XSOAR UAE & Canada | IP Care Technologies',
-  description: 'Security automation with Cortex XSOAR and XSIAM in UAE and Canada. SOAR, automated playbooks, incident response automation, SOC efficiency and alert triage.',
+  title: uaeFocus('Security Automation SOAR & XSOAR UAE & Canada | IP Care Technologies'),
+  description: uaeFocus('Security automation with Cortex XSOAR and XSIAM in UAE and Canada. SOAR, automated playbooks, incident response automation, SOC efficiency and alert triage.'),
   alternates: { canonical: '/cybersecurity-advisory/security-automation' },
   openGraph: {
-    title: 'Security Automation SOAR & XSOAR UAE & Canada | IP Care Technologies',
+    title: uaeFocus('Security Automation SOAR & XSOAR UAE & Canada | IP Care Technologies'),
     description: 'Security automation with Cortex XSOAR and XSIAM. SOAR, automated playbooks and incident response automation.',
     url: '/cybersecurity-advisory/security-automation',
     type: 'website',
@@ -18,7 +19,7 @@ export const metadata = {
 }
 
 const pageData = {
-  h1: 'Security Automation SOAR & XSOAR UAE & Canada',
+  h1: uaeFocus('Security Automation SOAR & XSOAR UAE & Canada'),
   h1Accent: 'Security Automation',
   icon: 'Zap',
   hero: 'Automate security operations, from alert to response in seconds.',

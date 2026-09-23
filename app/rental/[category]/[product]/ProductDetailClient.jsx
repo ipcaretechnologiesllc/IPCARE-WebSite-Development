@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import * as Icons from 'lucide-react'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
+import { RENTAL_REGION } from '@/lib/seo-region'
 
 const DURATIONS = [
   { key: 'daily', label: 'Daily', sub: '24 hours' },
@@ -102,7 +103,7 @@ export default function ProductDetailClient({ product, categorySlug }) {
 
           {/* Delivery note */}
           <div className="mt-6 p-4 rounded-xl space-y-2" style={{ background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.08)', boxShadow: '0 8px 32px rgba(10,26,70,0.08)' }}>
-            <div className="text-sm flex items-start gap-2" style={{ color: '#0B1A46' }}><Icons.Truck size={14} className="text-[#E87722] mt-0.5"/>Available <strong>UAE &amp; Canada</strong></div>
+            <div className="text-sm flex items-start gap-2" style={{ color: '#0B1A46' }}><Icons.Truck size={14} className="text-[#E87722] mt-0.5"/>Available <strong>{RENTAL_REGION.short}</strong></div>
             <div className="text-sm flex items-start gap-2" style={{ color: '#0B1A46' }}><Icons.Wrench size={14} className="text-[#E87722] mt-0.5"/><strong>Delivery &amp; Setup</strong> included</div>
             <div className="text-sm flex items-start gap-2" style={{ color: '#0B1A46' }}><Icons.Headphones size={14} className="text-[#E87722] mt-0.5"/><strong>Technical Support</strong> during rental</div>
           </div>

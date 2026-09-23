@@ -1,8 +1,9 @@
+import { uaeFocus } from '@/lib/seo-region'
 export default function manifest() {
   return {
     name: 'IP Care Technologies',
     short_name: 'IP Care',
-    description: 'Enterprise IT, Cybersecurity, Event Infrastructure & Equipment Rental — UAE & Canada.',
+    description: uaeFocus('Enterprise IT, Cybersecurity, Event Infrastructure & Equipment Rental — UAE & Canada.'),
     start_url: '/',
     display: 'standalone',
     background_color: '#0F245F',

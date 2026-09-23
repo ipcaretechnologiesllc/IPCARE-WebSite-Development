@@ -1,18 +1,19 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import RentalHubClient from './RentalHubClient'
+import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
+const HUB_DESCRIPTION = `IT equipment rental in ${RENTAL_REGION.prose}: laptops, MacBooks, iPads, event WiFi, servers and CCTV. Delivery, setup and certified engineers included.`
+
 export const metadata = {
-  title: 'IT Equipment Rental UAE: Laptops, WiFi & Servers',
-  description:
-    'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
+  title: 'IT Equipment Rental Dubai & Abu Dhabi: Laptops, WiFi & Servers',
+  description: HUB_DESCRIPTION,
   alternates: { canonical: '/rental' },
   openGraph: {
-    title: 'IT Equipment Rental UAE: Laptops, WiFi & Servers',
-    description:
-      'IT equipment rental in UAE and Canada: laptops, event WiFi, servers, CCTV and networking gear. Delivery, setup and certified engineers included.',
+    title: 'IT Equipment Rental Dubai & Abu Dhabi: Laptops, WiFi & Servers',
+    description: HUB_DESCRIPTION,
     url: '/rental',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'IT equipment rental UAE, IP Care Technologies' }],
@@ -25,14 +26,16 @@ const jsonLd = {
     {
       '@type': 'Service',
       '@id': 'https://www.ipcare.ae/rental',
-      name: 'IT Equipment Rental UAE & Canada',
+      name: `IT Equipment Rental ${RENTAL_REGION.short}`,
       description:
-        'Short-term and long-term IT equipment rental in UAE and Canada, laptops, event WiFi, servers, CCTV, networking gear and bundle packages, with delivery, setup and on-site engineers.',
+        `Short-term and long-term IT equipment rental in ${RENTAL_REGION.prose}, laptops, event WiFi, servers, CCTV, networking gear and bundle packages, with delivery, setup and on-site engineers.`,
       url: 'https://www.ipcare.ae/rental',
       provider: { '@id': 'https://www.ipcare.ae#org' },
       areaServed: [
+        { '@type': 'City', name: 'Dubai' },
+        { '@type': 'City', name: 'Abu Dhabi' },
         { '@type': 'Country', name: 'United Arab Emirates' },
-        { '@type': 'Country', name: 'Canada' },
+        ...(isCaSite() ? [{ '@type': 'Country', name: 'Canada' }] : []),
       ],
       serviceType: 'IT Equipment Rental',
       offers: {
