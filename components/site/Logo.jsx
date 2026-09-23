@@ -13,7 +13,9 @@ const LOGO_RATIO = 1448 / 556
  *  - tile: boolean     -> wrap in a white rounded tile so original-color logo reads
  *                         cleanly on any background (recommended for header/footer)
  */
-export default function Logo({ size = 36, variant = 'color', tile = false, className = '' }) {
+// loading: pass 'lazy' for below-the-fold logos (the footer) — otherwise React
+// preloads every SSR'd <img> in the page <head>, footer included.
+export default function Logo({ size = 36, variant = 'color', tile = false, className = '', loading }) {
   const filterStyle = variant === 'white' ? { filter: 'brightness(0) invert(1)' } : {}
 
   const img = (
@@ -21,6 +23,7 @@ export default function Logo({ size = 36, variant = 'color', tile = false, class
       src={LOGO_URL}
       srcSet={LOGO_SRCSET}
       sizes={`${Math.round(size * LOGO_RATIO)}px`}
+      loading={loading}
       alt="IP Care Technologies"
       style={{ height: size, maxHeight: size, width: 'auto', ...filterStyle }}
       className="object-contain block"

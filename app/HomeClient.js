@@ -193,7 +193,7 @@ function HeroCarousel() {
     if (!video) return
     // Matches the 769px boundary in .hero-bg-desktop / .hero-bg-mobile.
     if (!window.matchMedia('(min-width: 769px)').matches) return
-    // Under reduced motion CSS shows the poster instead — don't fetch the video.
+    // Under reduced motion CSS hides the video and the poster <img> shows — don't fetch it.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const start = () => {
@@ -268,12 +268,26 @@ function HeroCarousel() {
           Desktop vs mobile is decided purely in CSS (.hero-bg-desktop /
           .hero-bg-mobile in globals.css), so the correct layer paints on the
           very first frame — no JS, no flash, and identical server/client markup.
-          The <source media> guards keep the desktop video from ever being
-          fetched on mobile; the preload hints live in app/page.js. */}
+          The desktop video is only started by the effect above on wide
+          screens; the preload hints live in app/page.js. */}
       <div className="absolute inset-0 z-0">
-        {/* Desktop: looping video. The poster <img> stands in for it under
-            reduced-motion (CSS-toggled, see .hero-bg-video / .hero-bg-poster). */}
+        {/* Desktop: the poster <img> is the permanent backdrop and the looping
+            video sits on top of it. The <video> deliberately has no `poster`
+            attribute: browsers fetch a poster even inside a display:none
+            parent, so phones were downloading this 78 KB desktop image. A lazy
+            <img> in a display:none parent is never fetched. Until its first
+            frame the video paints nothing, so the image shows through; under
+            reduced motion CSS hides the video (.hero-bg-video) and the image
+            is all that shows. */}
         <div className="hero-bg-desktop absolute inset-0">
+          <img
+            src="/images/hero-poster.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="absolute inset-0 object-cover"
+            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
+          />
           {/* No autoPlay and preload="none" by design — the effect above starts
               this once the page is idle, and only on desktop without reduced
               motion. The <source media> guards were removed: browsers ignore
@@ -286,19 +300,10 @@ function HeroCarousel() {
             loop
             playsInline
             preload="none"
-            poster="/images/hero-poster.webp"
           >
             <source src="/Video/hero.webm" type="video/webm" />
             <source src="/Video/hero.mp4" type="video/mp4" />
           </video>
-          <img
-            src="/images/hero-poster.webp"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="hero-bg-poster absolute inset-0 object-cover"
-            style={{ width: '100%', height: '100%', maxWidth: '100%' }}
-          />
         </div>
 
         {/* Mobile: rotating per-service images. Only the active + adjacent

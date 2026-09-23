@@ -748,11 +748,10 @@ body {
   .hero-bg-desktop { display: block; }
   .hero-bg-mobile  { display: none; }
 }
-/* Under reduced-motion, swap the looping video for the static poster image. */
-.hero-bg-poster { display: none; }
+/* Under reduced-motion, hide the looping video; the poster <img> beneath it
+   (always rendered in .hero-bg-desktop) is what shows. */
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-video  { display: none; }
-  .hero-bg-poster { display: block; }
 }
 
 /* Marquee */

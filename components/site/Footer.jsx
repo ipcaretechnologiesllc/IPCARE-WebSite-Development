@@ -41,7 +41,7 @@ export default function Footer() {
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 mb-12 ${SHOW_UAE_LOCATIONS ? 'lg:grid-cols-[26fr_17fr_14fr_22fr_21fr]' : 'lg:grid-cols-[30fr_20fr_20fr_30fr]'}`}>
           {/* Column 1 — Brand */}
           <div>
-            <Logo size={56} variant="white" />
+            <Logo size={56} variant="white" loading="lazy" />
             <p className="mt-5 text-sm leading-relaxed" style={{ color: MUTED }}>
               Enterprise IT solutions, cybersecurity, event infrastructure and equipment rental. Trusted since 2003.
             </p>
