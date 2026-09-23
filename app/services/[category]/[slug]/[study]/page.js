@@ -3,7 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CaseStudyNarrative from '@/components/site/CaseStudyNarrative'
 import { getNarrativeCaseStudy, getNarrativeCaseStudyParams } from '@/lib/case-studies-data'
-import { isUaeOnlyServiceSubpage, isCaRequest } from '@/lib/seo-region'
+import { isUaeOnlyServiceSubpage, isCaSite } from '@/lib/seo-region'
 
 // Fourth level under /services. This depth exists ONLY for narrative case
 // studies hung off a parent service subpage — dynamicParams = false means the
@@ -35,7 +35,7 @@ export async function generateMetadata(props) {
   // incident-response cross-canonicalizes to ipcare.ae, and a child that
   // self-canonicalized on .ca would re-create the duplicate-content split that
   // lib/seo-region.js exists to close.
-  const canonical = (isUaeOnlyServiceSubpage(params.category, params.slug) && await isCaRequest())
+  const canonical = (isUaeOnlyServiceSubpage(params.category, params.slug) && isCaSite())
     ? `https://www.ipcare.ae${path}`
     : path
 

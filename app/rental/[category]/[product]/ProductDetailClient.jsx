@@ -23,7 +23,7 @@ export default function ProductDetailClient({ product, categorySlug }) {
   const [activeImage, setActiveImage] = useState(0)
   const images = product.images
     ? product.images
-    : [`${product.image}?w=1200&q=85`, `${product.image}?w=1200&q=85&sat=-20`, `${product.image}?w=1200&q=85&sharp=20`]
+    : [`${product.image}?w=1200&fm=webp&q=82`, `${product.image}?w=1200&fm=webp&q=82&sat=-20`, `${product.image}?w=1200&fm=webp&q=82&sharp=20`]
 
   return (
     <section className="py-10 md:py-14 px-6" style={{ background: '#F4F6FA' }}>

@@ -1,8 +1,8 @@
-import { headers } from 'next/headers'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { SAME_AS, SAME_AS_SOCIAL_ONLY } from '@/lib/social-links'
-import { isUaeOnlyPath } from '@/lib/seo-region'
+import { SITE_URL } from '@/lib/seo-region'
+import HreflangLinks from '@/components/site/HreflangLinks'
 import RentalShell from '@/components/rental/RentalShell'
 import CookieBanner from '@/components/global/CookieBanner'
 import Analytics from '@/components/global/Analytics'
@@ -10,124 +10,77 @@ import Analytics from '@/components/global/Analytics'
 const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
 
 // ─── Canonical domain strategy ────────────────────────────────────────────────
-// Each request's incoming `host` header maps to ONE canonical domain.
-// `ipcares.com` is the legacy domain — it 308-redirects at the edge to ipcare.ae
-// (see next.config.js), but if a request still arrives here we canonicalise it
-// to ipcare.ae anyway so any cached/proxied HTML still points to the right place.
-const CANONICAL_DOMAINS = {
-  'ipcare.ae':       'https://www.ipcare.ae',
-  'www.ipcare.ae':   'https://www.ipcare.ae',
-  'ipcare.ca':       'https://www.ipcare.ca',
-  'www.ipcare.ca':   'https://www.ipcare.ca',
-  'ipcares.com':     'https://www.ipcare.ae',
-  'www.ipcares.com': 'https://www.ipcare.ae',
-}
-const DEFAULT_CANONICAL = 'https://www.ipcare.ae'
-
-// Per-domain hreflang regions. ipcares.com is intentionally absent because it
-// always redirects to ipcare.ae — Google should index the destinations only.
-const HREFLANG_TARGETS = [
-  { lang: 'en-AE',     domain: 'https://www.ipcare.ae' },
-  { lang: 'en-CA',     domain: 'https://www.ipcare.ca' },
-  { lang: 'x-default', domain: 'https://www.ipcare.ae' },
-]
-
-async function readHostAndPath() {
-  const h = await headers()
-  const rawHost = (h.get('x-forwarded-host') || h.get('host') || '').toLowerCase().split(':')[0]
-  const pathname = h.get('x-pathname') || '/'
-  const canonicalBase = CANONICAL_DOMAINS[rawHost] || DEFAULT_CANONICAL
-  return { rawHost, pathname, canonicalBase }
-}
-
-// Build the hreflang set for a path.
-//
-// Google requires every hreflang target to be canonical and self-referencing. UAE-only
-// routes break that: on ipcare.ca they canonicalize back to ipcare.ae (lib/seo-region.js),
-// so emitting an `en-CA` alternate for them pointed hreflang at a URL that declares itself
-// non-canonical. Google discards clusters with that contradiction, which left the .ca copy
-// free to compete with .ae for UAE queries — visible in GSC as ipcare.ca ranking for
-// "event wifi rental uae", "event wifi rental dubai" and "elv security systems uae".
-//
-// For those routes we emit no alternates at all: there is only one canonical version, so
-// there is no pair to declare, and canonical alone is the correct and sufficient signal.
-//
-// Trailing slash: the home path must not produce "https://www.ipcare.ae//". Everywhere
-// else the href has to match the canonical and sitemap forms exactly — a hreflang target
-// that differs from the canonical by a trailing slash is a different URL to Google.
-function buildHreflangs(pathname) {
-  if (isUaeOnlyPath(pathname)) return []
-  const suffix = pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
-  return HREFLANG_TARGETS.map(({ lang, domain }) => ({ lang, href: `${domain}${suffix}` }))
-}
+// metadataBase is fixed per deployment at BUILD time (SITE_URL, from
+// NEXT_PUBLIC_BASE_URL) instead of being read from the request's Host header.
+// Reading headers() here opted the entire app out of static rendering, so every
+// page was server-rendered on every request. Each Hostinger account builds its own
+// copy, so a build-time value is still per-domain. Legacy hosts (apex, ipcares.com)
+// 308 to the canonical host in next.config.js before reaching this code.
+// Hreflang tags are rendered by components/site/HreflangLinks.jsx.
 
 const SITE_NAME = 'IP Care Technologies'
 const SITE_TITLE = 'Enterprise IT & Managed Services | IP Care Technologies'
 const SITE_DESC = 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and Equipment Rental, trusted by leading organisations since 2003.'
 
-// ─── Dynamic metadata — host-aware canonicals ────────────────────────────────
-// Replaces the previous static `metadata` export. Every existing child-page
-// metadata (which uses RELATIVE `alternates.canonical`) automatically resolves
-// against this dynamic `metadataBase`, so no child page needs to be touched.
-export async function generateMetadata() {
-  const { canonicalBase } = await readHostAndPath()
-  return {
-    metadataBase: new URL(canonicalBase),
-    title: {
-      default: SITE_TITLE,
-      // Pages already include the brand suffix in their own title strings,
-      // so the template is a pass-through to avoid "… | IP Care | IP Care" duplication.
-      template: '%s',
-    },
+// ─── Site-wide metadata ──────────────────────────────────────────────────────
+// Every child page's RELATIVE `alternates.canonical` resolves against this
+// `metadataBase`, so no child page needs host-specific logic.
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    // Pages already include the brand suffix in their own title strings,
+    // so the template is a pass-through to avoid "… | IP Care | IP Care" duplication.
+    template: '%s',
+  },
+  description: SITE_DESC,
+  applicationName: SITE_NAME,
+  authors: [{ name: 'IP Care Technologies L.L.C.' }],
+  keywords: [
+    'IT services UAE', 'Managed IT Abu Dhabi', 'Cybersecurity UAE', 'SASE UAE',
+    'Zero Trust', 'Event IT Infrastructure', 'Equipment Rental UAE', 'Laptop Rental Dubai',
+    'IT consulting UAE', 'Data center UAE', 'Event WiFi Dubai', 'IP Care',
+  ],
+  category: 'technology',
+  creator: 'IP Care Technologies',
+  publisher: 'IP Care Technologies',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: SITE_TITLE,
     description: SITE_DESC,
-    applicationName: SITE_NAME,
-    authors: [{ name: 'IP Care Technologies L.L.C.' }],
-    keywords: [
-      'IT services UAE', 'Managed IT Abu Dhabi', 'Cybersecurity UAE', 'SASE UAE',
-      'Zero Trust', 'Event IT Infrastructure', 'Equipment Rental UAE', 'Laptop Rental Dubai',
-      'IT consulting UAE', 'Data center UAE', 'Event WiFi Dubai', 'IP Care',
+    url: '/',
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    type: 'website',
+  },
+  // `creator`/`site` previously pointed at @ipcaretech, which is not an account IP Care
+  // owns — attributing the site to a handle we don't control is worse than omitting it.
+  // The card type stays: it still controls how links preview when other people share
+  // them on X, which works fine without a publisher handle.
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: 'Enterprise IT Solutions UAE & Canada',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  manifest: '/manifest.webmanifest',
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icons/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icons/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
-    category: 'technology',
-    creator: 'IP Care Technologies',
-    publisher: 'IP Care Technologies',
-    alternates: { canonical: '/' },
-    openGraph: {
-      title: SITE_TITLE,
-      description: SITE_DESC,
-      url: '/',
-      siteName: SITE_NAME,
-      locale: 'en_US',
-      type: 'website',
-    },
-    // `creator`/`site` previously pointed at @ipcaretech, which is not an account IP Care
-    // owns — attributing the site to a handle we don't control is worse than omitting it.
-    // The card type stays: it still controls how links preview when other people share
-    // them on X, which works fine without a publisher handle.
-    twitter: {
-      card: 'summary_large_image',
-      title: SITE_TITLE,
-      description: 'Enterprise IT Solutions UAE & Canada',
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
-    },
-    manifest: '/manifest.webmanifest',
-    icons: {
-      icon: [
-        { url: '/icon.png', type: 'image/png', sizes: '32x32' },
-        { url: '/icons/icon-192.png', type: 'image/png', sizes: '192x192' },
-        { url: '/icons/icon-512.png', type: 'image/png', sizes: '512x512' },
-      ],
-      shortcut: ['/icon.png'],
-      apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
-    },
-    verification: {
-      // Add Google Search Console / Bing verification tokens here when available
-      // google: 'xxxxxxxxxxxxxxxxxxxxxxxx',
-    },
-  }
+    shortcut: ['/icon.png'],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  verification: {
+    // Add Google Search Console / Bing verification tokens here when available
+    // google: 'xxxxxxxxxxxxxxxxxxxxxxxx',
+  },
 }
 
 export const viewport = {
@@ -140,9 +93,7 @@ export const viewport = {
   ],
 }
 
-export default async function RootLayout({ children }) {
-  const { canonicalBase, pathname } = await readHostAndPath()
-
+export default function RootLayout({ children }) {
   // JSON-LD schemas — use the canonical brand domain so search engines see
   // a single authoritative Organization/WebSite entity regardless of which
   // domain mirror the request landed on.
@@ -260,13 +211,8 @@ export default async function RootLayout({ children }) {
         <script data-cfasync="false" dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});` }} />
         <link rel="manifest" href="/manifest.webmanifest" />
 
-        {/* Path-aware hreflang alternates — rendered here (not via metadata.alternates.languages)
-            because Next.js shallow-merges `metadata.alternates`, so any child page that sets its
-            own `alternates.canonical` would otherwise wipe out the languages map. Rendering them
-            as raw <link> tags guarantees they appear on every page. */}
-        {buildHreflangs(pathname).map(({ lang, href }) => (
-          <link key={lang} rel="alternate" hrefLang={lang} href={href} />
-        ))}
+        {/* Path-aware hreflang alternates — see components/site/HreflangLinks.jsx. */}
+        <HreflangLinks />
       </head>
       <body className={inter.className}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />

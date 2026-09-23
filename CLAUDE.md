@@ -50,11 +50,13 @@ The two zones use different DNS strategies at Hostinger, which is normal but wor
 
 ### Multi-domain canonicalization
 
-The same codebase runs on both Hostinger accounts and still needs multi-hostname logic within each: legacy/redirect hostnames (bare apex, `ipcares.com`) must resolve correctly regardless of which account handles the request, and the canonical/hreflang logic below auto-detects the serving domain from the `Host` header rather than assuming which account it's running on. Two layers work together:
+The same codebase runs on both Hostinger accounts. Since each account builds its own copy, the serving domain is fixed **at build time** by `NEXT_PUBLIC_BASE_URL` (`SITE_URL` in `lib/seo-region.js`; unset = `https://www.ipcare.ae`). **If `ipcare.ca` is reactivated, set `NEXT_PUBLIC_BASE_URL=https://www.ipcare.ca` on that Hostinger account** or it will canonicalize to `.ae`. Three layers work together:
 
 - `next.config.js` `redirects()` — host-based 308 redirects for legacy domains (`ipcare.ae`, `ipcares.com` → `www.ipcare.ae`), plus a large block of permanent redirects mapping legacy `.php`/`.html`/WordPress URLs to current routes.
-- `middleware.js` — does NOT redirect; its sole job is to inject `x-pathname` into request headers so `app/layout.js` can build path-aware hreflang tags. Skips `api/`, `_next/static`, and static asset extensions.
-- `app/layout.js` `generateMetadata()` — reads `host`/`x-forwarded-host` and `x-pathname`, maps the host to a canonical base via `CANONICAL_DOMAINS`, sets `metadataBase` accordingly, and emits per-domain hreflang (`en-AE`, `en-CA`, `x-default`). Child pages use **relative** `alternates.canonical`, which resolves against this dynamic base — so child pages never need host-specific logic.
+- `app/layout.js` static `metadata` — `metadataBase: new URL(SITE_URL)`. Child pages use **relative** `alternates.canonical`, which resolves against this base — so child pages never need host-specific logic. `isCaSite()` (also build-time) drives the UAE-only cross-canonicals on `.ca`.
+- `components/site/HreflangLinks.jsx` — Client Component in the root layout `<head>` that emits per-path hreflang (`en-AE`, `en-CA`, `x-default`) from `usePathname()`; it resolves during static prerendering, so the tags are in the server HTML.
+
+**Never call `headers()`/`cookies()` in the root layout, a page, or `generateMetadata`.** Until 2026-09-23 the layout read `headers()` for the Host and a middleware-injected `x-pathname`; that opted every route out of static rendering, so all ~256 pages were server-rendered per request (2–7s TTFB on Hostinger on a Cloudflare miss) and every `revalidate = 3600` was dead. `middleware.js` was deleted with that change. `robots.js`, `sitemap.js` and `llms.txt` still read the Host — they are separate dynamic routes and don't affect pages. After any layout/metadata change, check `next build` output still shows pages as `○`/`●`, not `ƒ`.
 
 When adding new routes or changing URL structure, add a corresponding entry to `redirects()` in `next.config.js` if an old URL needs to map to it.
 

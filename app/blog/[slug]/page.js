@@ -6,7 +6,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
-import { isUaeOnlyBlogSlug, isCaRequest } from '@/lib/seo-region'
+import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
@@ -30,7 +30,7 @@ export async function generateMetadata(props) {
   // UAE-only regulatory content (NESA) is duplicated onto ipcare.ca; cross-canonicalize
   // to the ipcare.ae original there so Google stops treating both copies as duplicates.
   // See lib/seo-region.js.
-  const canonical = (isUaeOnlyBlogSlug(params.slug) && await isCaRequest())
+  const canonical = (isUaeOnlyBlogSlug(params.slug) && isCaSite())
     ? `https://www.ipcare.ae/blog/${params.slug}`
     : `/blog/${params.slug}`
   return {

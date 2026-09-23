@@ -14,7 +14,7 @@ import {
  * ------------------------------------------------------------------ */
 const CATEGORIES = [
   { name: 'Laptops & Desktops',    spec: 'Intel i7 / 16GB / SSD',        icon: Laptop,  img: '/images/home/rental-laptops.webp',                              href: '/rental/laptops-desktops' },
-  { name: 'MacBook & Mac',         spec: 'MacBook Pro, Air, Mac mini',   icon: Laptop,  img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853',  href: '/rental/macbooks' },
+  { name: 'MacBook & Mac',         spec: 'MacBook Pro, Air, Mac mini',   icon: Laptop,  img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&fm=webp&q=82',  href: '/rental/macbooks' },
   { name: 'iPads & Tablets',       spec: 'iPad Pro, Samsung Tab',        icon: Tablet,  img: '/images/home/rental-tablets.webp',                              href: '/rental/tablets-ipads' },
   { name: 'Printers & Peripherals',spec: 'Mono / Colour / MFP',          icon: Printer, img: '/Rental/rental-printers.jpg',                                   href: '/rental/printers' },
   { name: 'Event WiFi & Routers',  spec: 'High-density access points',   icon: Wifi,    img: '/Rental/rental-event-wifi.webp',                                href: '/rental/event-wifi' },
