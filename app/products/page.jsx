@@ -3,6 +3,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { products } from '@/lib/products-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -124,6 +125,7 @@ export default function ProductsHubPage() {
                     <div className="w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
                       <img
                         src={p.heroImage}
+                        {...responsive(p.heroImage, SIZES.third)}
                         alt={p.heroImageAlt || p.h1Accent || p.h1}
                         loading="lazy"
                         decoding="async"

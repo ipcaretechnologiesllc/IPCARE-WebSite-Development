@@ -947,3 +947,55 @@ body {
   padding-top: 96px !important;
   padding-bottom: 96px !important;
 }
+
+/* ── Desktop nav flip + glow (components/site/NavFlipItem.jsx) ──────────────
+   CSS port of the framer-motion AnimatedNavItem, which shipped ~40 KB gzipped
+   of JS on every page for this one hover effect. Same end states: front face
+   rotateX(-90deg)/opacity 0 about its bottom edge, back face rotateX(90deg)→0
+   about its top edge, glow opacity 0→1 and scale .8→2. Timings approximate the
+   original springs: the flip was critically damped (stiffness 100, damping 20,
+   settles ~0.6s); the glow scale spring (300/25) overshoots slightly.
+   Scoped to (hover: hover) like framer's whileHover, so taps don't stick. */
+.nav-flip {
+  position: relative;
+  overflow: visible;
+  perspective: 600px;
+}
+.nav-flip__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 0.75rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+.nav-flip__front,
+.nav-flip__back {
+  z-index: 10;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.22, 0.3, 0.2, 1), opacity 0.7s cubic-bezier(0.22, 0.3, 0.2, 1);
+}
+.nav-flip__front {
+  position: relative;
+  transform-origin: center bottom;
+}
+.nav-flip__back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center top;
+  transform: rotateX(90deg);
+  opacity: 0;
+}
+@media (hover: hover) {
+  .nav-flip:hover .nav-flip__glow  { opacity: 1; transform: scale(2); }
+  .nav-flip:hover .nav-flip__front { opacity: 0; transform: rotateX(-90deg); }
+  .nav-flip:hover .nav-flip__back  { opacity: 1; transform: rotateX(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-flip__glow, .nav-flip__front, .nav-flip__back { transition: none; }
+}

@@ -19,7 +19,7 @@ import sharp from 'sharp'
 
 const WIDTHS = [480, 960]
 const MIN_BYTES = 60 * 1024 // smaller files aren't worth a variant
-const HEADROOM = 1.3        // only make a variant if the source is 30%+ wider
+const HEADROOM = 1.2        // only make a variant if the source is 20%+ wider
 const QUALITY = 78
 const SKIP = [/\/_originals\//, /^public\/images\/hero-(mobile|desktop)\//, /^public\/(icons|favicon)/, /-\d+w\.webp$/]
 

@@ -3,13 +3,14 @@
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import AddToQuoteButton from './AddToQuoteButton'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 export default function ProductCard({ product, categorySlug }) {
   const p = { ...product, categorySlug }
   return (
     <div className="rental-product-card overflow-hidden group flex flex-col h-full">
       <Link href={`/rental/${categorySlug}/${product.slug}`} className="relative block h-60 overflow-hidden" style={{ background: '#ffffff' }}>
-        <img src={product.image.startsWith('http') ? `${product.image}?w=600&q=80` : product.image} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-3"/>
+        <img src={product.image.startsWith('http') ? `${product.image}?w=600&q=80` : product.image} {...responsive(product.image, SIZES.card)} alt={`${product.brand} ${product.model}`} loading="lazy" className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-3"/>
         <div className="absolute top-3 left-3 mono text-[13px] uppercase tracking-widest px-2 py-1 rounded" style={{ background: '#E87722', border: 'none', color: '#ffffff' }}>{product.brand}</div>
       </Link>
 

@@ -5,6 +5,7 @@ import {
   Laptop, Tablet, Printer, Wifi, Network, Cctv, Wrench, Server, Package,
   ChevronLeft, ChevronRight,
 } from 'lucide-react'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ------------------------------------------------------------------ *
  * All 10 rental categories (mirrors lib/rental-data.js). Images reuse
@@ -48,6 +49,7 @@ function Card({ cat, onClick }) {
       <div className="relative" style={{ aspectRatio: '4/3' }}>
         <img
           src={cat.img}
+          {...responsive(cat.img, '300px')}
           alt={`${cat.name} rental UAE, IP Care Technologies`}
           loading="lazy"
           draggable="false"

@@ -8,7 +8,7 @@ import {
   Server, Lock, Cable, Calendar, Network, Cloud, Briefcase, Code, Code2, TrendingUp, AtSign, Shield, ChevronDown,
   Terminal, BrainCircuit, Megaphone, Globe, Layers
 } from 'lucide-react'
-import { AnimatedNavItem } from '@/components/ui/hover-gradient-nav-bar'
+import NavFlipItem from './NavFlipItem'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import Logo, { UAEFlag, CanadaFlag } from './Logo'
 import { navServiceCategories as serviceCategories, navCyberServices as cyberServices, navDigitalSolutionsCategories as digitalSolutionsCategories } from '@/lib/services-nav-data'
@@ -287,7 +287,7 @@ export default function Header() {
                     else                  { setServicesOpen(false); setPortfolioOpen(false); setDigitalOpen(false); setEventITOpen(false); setCyberOpen(false) }
                   }}
                 >
-                  <AnimatedNavItem
+                  <NavFlipItem
                     gradient={gradient}
                     frontContent={
                       <Link

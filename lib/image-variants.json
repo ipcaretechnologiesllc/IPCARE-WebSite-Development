@@ -2,13 +2,15 @@
  "/Rental/category-testing-equipment.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/Rental/servers-data.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/events/abu-dhabi-padel-master.webp": {
@@ -39,7 +41,8 @@
  "/events/euroleague-supercup-2026-team.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/events/euroleague-supercup-2026.webp": {
@@ -234,7 +237,8 @@
  "/images/pages/cyber-advisory-section.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/pages/cyber-advisory-track-record-bg.webp": {
@@ -261,7 +265,8 @@
  "/images/pages/industries-section.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/pages/rental-hero.webp": {
@@ -288,7 +293,8 @@
  "/images/portfolio/emirates-driving-school/exterior.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/portfolio/emirates-private-school/exterior.webp": {
@@ -373,7 +379,8 @@
  "/images/services/ai-solutions-uae-section.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/api-systems-integration-uae-hero.webp": {
@@ -400,7 +407,8 @@
  "/images/services/cloud-migration-what-we-migrate.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/cloud-services-abu-dhabi.webp": {
@@ -427,7 +435,8 @@
  "/images/services/cloud-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/custom-software-development-uae-hero.webp": {
@@ -447,7 +456,8 @@
  "/images/services/cybersecurity-abu-dhabi-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/cybersecurity-abu-dhabi.webp": {
@@ -467,7 +477,8 @@
  "/images/services/cybersecurity-dubai-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/cybersecurity-dubai.webp": {
@@ -487,7 +498,8 @@
  "/images/services/cybersecurity-what-we-protect.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/data-backup-recovery-uae.webp": {
@@ -500,7 +512,8 @@
  "/images/services/data-backup-recovery-what-we-protect.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/data-centre-management-hero.webp": {
@@ -513,7 +526,8 @@
  "/images/services/data-centre-management-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/digital-marketing-abu-dhabi-hero.webp": {
@@ -547,7 +561,8 @@
  "/images/services/digital-transformation-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/digital-transformation.webp": {
@@ -609,7 +624,8 @@
  "/images/services/email-security-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/email-solutions-abu-dhabi.webp": {
@@ -629,7 +645,8 @@
  "/images/services/endpoint-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/enterprise-application-development-uae-hero.webp": {
@@ -656,13 +673,15 @@
  "/images/services/incident-response-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/infrastructure-abu-dhabi-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/infrastructure-abu-dhabi.webp": {
@@ -675,7 +694,8 @@
  "/images/services/infrastructure-dubai-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/infrastructure-dubai.webp": {
@@ -702,7 +722,8 @@
  "/images/services/infrastructure-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/intercom-uae.webp": {
@@ -715,7 +736,8 @@
  "/images/services/it-assessment-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/it-consulting-abu-dhabi.webp": {
@@ -735,7 +757,8 @@
  "/images/services/it-consulting-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/it-support-helpdesk-uae.webp": {
@@ -748,7 +771,8 @@
  "/images/services/it-support-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/managed-it-services-abu-dhabi.webp": {
@@ -775,7 +799,8 @@
  "/images/services/managed-it-what-we-manage.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/microsoft-365-services-uae.webp": {
@@ -788,7 +813,8 @@
  "/images/services/microsoft-365-what-we-secure.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/microsoft-entra-id-uae.webp": {
@@ -801,7 +827,8 @@
  "/images/services/microsoft-entra-id-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/mobile-app-development-uae-hero.webp": {
@@ -814,7 +841,8 @@
  "/images/services/mobile-app-development-uae-section.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/network-management-uae.webp": {
@@ -827,7 +855,8 @@
  "/images/services/network-management-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/pam-uae.webp": {
@@ -840,7 +869,8 @@
  "/images/services/pam-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/public-address-uae.webp": {
@@ -867,7 +897,8 @@
  "/images/services/security-assessment-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/server-management-uae.webp": {
@@ -880,7 +911,8 @@
  "/images/services/server-management-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/sla-uae.webp": {
@@ -893,7 +925,8 @@
  "/images/services/sla-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/software-development-abu-dhabi-hero.webp": {
@@ -927,7 +960,8 @@
  "/images/services/software-development-uae-section.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/structured-cabling-uae.webp": {
@@ -940,7 +974,8 @@
  "/images/services/structured-cabling-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/technology-strategy.webp": {
@@ -953,7 +988,8 @@
  "/images/services/virtualization-what-we-cover.webp": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  },
  "/images/services/web-application-development-uae-hero.webp": {
@@ -1001,7 +1037,8 @@
  "/og-default.png": {
   "w": 1200,
   "v": [
-   480
+   480,
+   960
   ]
  }
 }

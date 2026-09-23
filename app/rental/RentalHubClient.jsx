@@ -156,6 +156,7 @@ export default function RentalHubClient() {
                       const photo = CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8'
                       return photo.startsWith('http') ? `${photo}?w=900&fm=webp&q=82` : photo
                     })()}
+                    {...responsive(CATEGORY_PHOTOS[slug] || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8', SIZES.third)}
                     alt={CATEGORY_ALT[slug] || `${c.name} rental UAE, IP Care`}
                     width={900}
                     height={563}
@@ -377,7 +378,7 @@ function LightProductCard({ product: p, categorySlug, delay = 0, compact = false
         style={{ height: imgHeight, background: '#F8F9FC' }}
       >
         <img
-          src={p.image.startsWith('http') ? `${p.image}?w=600&fm=webp&q=82` : p.image}
+          src={p.image.startsWith('http') ? `${p.image}?w=600&fm=webp&q=82` : p.image} {...responsive(p.image, SIZES.card)}
           alt={`${p.brand} ${p.model} rental, IP Care Technologies`}
           width={600}
           height={200}

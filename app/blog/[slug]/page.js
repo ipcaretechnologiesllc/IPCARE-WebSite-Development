@@ -7,6 +7,10 @@ import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
+import { srcSetFor } from '@/lib/responsive-image'
+
+// The article hero column is max-w-[720px] inside px-6 padding.
+const HERO_SIZES = '(min-width: 768px) 720px, calc(100vw - 48px)'
 import { BLOG_CATEGORY_TO_SERVICE, CITY_SERVICE_LABELS, UAE_CITIES, cityServiceHref } from '@/lib/uae-locations'
 
 export const revalidate = 3600
@@ -58,7 +62,8 @@ export default async function ArticlePage(props) {
   if (!a) notFound()
 
   // Preload the article hero (the LCP element) so it doesn't pop in after first paint.
-  preload(`${a.img}?w=1200&fm=webp&q=82`, { as: 'image', fetchPriority: 'high' })
+  // imageSrcSet must match the <img> below, or phones fetch both files.
+  preload(`${a.img}?w=1200&fm=webp&q=82`, { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor(a.img), imageSizes: HERO_SIZES })
 
   // Same-category articles first, then fill from others
   const sameCat = articles.filter(x => x.slug !== params.slug && x.category === a.category)
@@ -151,6 +156,8 @@ export default async function ArticlePage(props) {
             >
               <img
                 src={`${a.img}?w=1200&fm=webp&q=82`}
+                srcSet={srcSetFor(a.img)}
+                sizes={HERO_SIZES}
                 alt={a.title}
                 width={1200}
                 height={675}
