@@ -15,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 // Explicit map keeps the client bundle tree-shaken (a barrel `import * as`
 // pulls the whole icon set in). Add new scope icons here as needed.
@@ -100,7 +101,7 @@ export default function CaseStudyWork({ blocks = [] }) {
                         className={`group relative overflow-hidden rounded-2xl bg-[#0B1A46] shadow-sm ring-1 ring-[#E5EAF3] transition hover:shadow-lg hover:ring-[#E87722] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] ${shape}`}
                       >
                         <img
-                          src={photo.src}
+                          src={photo.src} {...responsive(photo.src, SIZES.third)}
                           alt={photo.alt}
                           loading="lazy"
                           decoding="async"

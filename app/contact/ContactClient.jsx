@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
 
@@ -70,7 +71,7 @@ export default function ContactClient() {
       <section style={{ backgroundImage: `url("${HERO_LQIP}"), linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)`, backgroundSize: 'cover, cover', backgroundPosition: 'center, center', backgroundRepeat: 'no-repeat, no-repeat', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
         {/* Background image */}
         <img
-          src="/images/pages/contact-bg.webp"
+          src="/images/pages/contact-bg.webp" {...responsive("/images/pages/contact-bg.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"

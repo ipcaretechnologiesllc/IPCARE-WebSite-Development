@@ -5,6 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CaseStudyWork from './CaseStudyWork'
 import { getCaseStudy, getCaseStudySlugs } from '@/lib/portfolio-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -118,7 +119,7 @@ export default async function CaseStudyPage(props) {
         <section className="relative overflow-hidden bg-[#0B1A46]">
           {/* Ambient blurred backdrop — blur hides source resolution and adds depth */}
           <div className="absolute inset-0" aria-hidden="true">
-            <img src={poster} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" />
+            <img src={poster} {...responsive(poster, SIZES.half)} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-2xl" />
             <div className="absolute inset-0 bg-gradient-to-br from-[#0B1A46] via-[#0B1A46]/85 to-[#0B1A46]/70" />
           </div>
 
@@ -185,7 +186,7 @@ export default async function CaseStudyPage(props) {
                   {/* The poster is the LCP element, so serve a smaller file to
                       narrow viewports where one is provided. */}
                   <img
-                    src={poster}
+                    src={poster} {...responsive(poster, SIZES.half)}
                     srcSet={project.posterSrcSet}
                     sizes={project.posterSrcSet ? '(min-width: 1024px) 560px, 100vw' : undefined}
                     alt={project.imageAlt}

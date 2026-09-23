@@ -5,6 +5,7 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { events, eventServices, partners, capabilityStats } from '@/lib/event-it-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Wifi
@@ -40,7 +41,7 @@ function Hero() {
     >
       {/* Hero photo - subject RIGHT, dark zone LEFT carries H1 */}
       <img
-        src="/images/event-it/event-it-hero.webp"
+        src="/images/event-it/event-it-hero.webp" {...responsive("/images/event-it/event-it-hero.webp", SIZES.full)}
         alt="Event IT infrastructure UAE"
         loading="eager"
         fetchPriority="high"
@@ -157,7 +158,7 @@ function EventsPortfolio() {
             >
               <div className="aspect-[4/3] relative overflow-hidden">
                 <img
-                  src={ev.img}
+                  src={ev.img} {...responsive(ev.img, SIZES.card)}
                   alt={`${ev.name}, event IT infrastructure by IP Care`}
                   width={600}
                   height={450}

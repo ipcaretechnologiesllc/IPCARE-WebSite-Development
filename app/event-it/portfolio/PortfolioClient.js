@@ -7,9 +7,10 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import * as Icons from 'lucide-react'
+import { responsive, SIZES, srcSetFor } from '@/lib/responsive-image'
 
 export default function EventPortfolioPage() {
-  preload('/images/event-it/portfolio-hero.webp', { as: 'image', fetchPriority: 'high' })
+  preload('/images/event-it/portfolio-hero.webp', { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor('/images/event-it/portfolio-hero.webp'), imageSizes: '100vw' })
   const [activeFilter, setActiveFilter] = useState('All')
   const [videoModal, setVideoModal] = useState(null)
 
@@ -59,7 +60,7 @@ export default function EventPortfolioPage() {
         <section className="relative py-20 md:py-28 px-6 overflow-hidden" style={{ background: '#0B1A46' }}>
           {/* Hero photo - full-bleed, edge to edge */}
           <img
-            src="/images/event-it/portfolio-hero.webp"
+            src="/images/event-it/portfolio-hero.webp" {...responsive("/images/event-it/portfolio-hero.webp", SIZES.full)}
             alt="Event IT portfolio Abu Dhabi"
             loading="eager"
             fetchPriority="high"
@@ -124,7 +125,7 @@ export default function EventPortfolioPage() {
                     <div className="aspect-[4/3] relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(232,119,34,0.15) 0%, rgba(27,108,168,0.15) 100%)' }}>
                       {event.img ? (
                         <img
-                          src={event.img}
+                          src={event.img} {...responsive(event.img, SIZES.card)}
                           alt={event.name}
                           width={480}
                           height={360}

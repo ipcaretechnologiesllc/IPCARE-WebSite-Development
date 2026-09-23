@@ -2,6 +2,7 @@ import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ContactClient from './ContactClient'
+import { srcSetFor } from '@/lib/responsive-image'
 
 export const revalidate = 3600
 
@@ -23,7 +24,7 @@ const breadcrumbSchema = {
 }
 
 export default function ContactPage() {
-  preload('/images/pages/contact-bg.webp', { as: 'image', fetchPriority: 'high' })
+  preload('/images/pages/contact-bg.webp', { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor('/images/pages/contact-bg.webp'), imageSizes: '100vw' })
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}/>

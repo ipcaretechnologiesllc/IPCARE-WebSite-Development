@@ -6,6 +6,7 @@ import * as Icons from 'lucide-react'
 import { rentalCategories, getFeaturedProducts } from '@/lib/rental-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ── Icon helper ─────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Package; return <C {...rest}/> }
@@ -79,7 +80,7 @@ export default function RentalHubClient() {
       >
         {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
         <img
-          src="/images/pages/rental-hero.webp"
+          src="/images/pages/rental-hero.webp" {...responsive("/images/pages/rental-hero.webp", SIZES.full)}
           alt="Event IT equipment rental Abu Dhabi"
           loading="eager"
           fetchPriority="high"

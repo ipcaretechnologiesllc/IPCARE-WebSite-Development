@@ -6,6 +6,7 @@ import * as Icons from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
 import { serviceCategories } from '@/lib/services-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ── IntersectionObserver reveal (same as About page) ── */
 function useReveal() {
@@ -84,7 +85,7 @@ function Hero() {
     }}>
       {/* Background image */}
       <img
-        src="/images/pages/services-bg.webp"
+        src="/images/pages/services-bg.webp" {...responsive("/images/pages/services-bg.webp", SIZES.full)}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover object-center"

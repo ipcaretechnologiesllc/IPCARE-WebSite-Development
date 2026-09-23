@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import TrackRecordClient from './TrackRecordClient'
 import { cyberProjects, cyberCapabilities, cyberFaqs, cyberPractitioner } from '@/lib/cyber-advisory-data'
+import { srcSetFor } from '@/lib/responsive-image'
 
 export const revalidate = 3600
 
@@ -104,7 +105,7 @@ export default function TrackRecordPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(practitionerSchema) }} />
-      <link rel="preload" as="image" href="/images/pages/cyber-advisory-track-record-bg.webp" fetchPriority="high" />
+      <link rel="preload" as="image" href="/images/pages/cyber-advisory-track-record-bg.webp" imageSrcSet={srcSetFor('/images/pages/cyber-advisory-track-record-bg.webp')} imageSizes="100vw" fetchPriority="high" />
       <Header />
       <TrackRecordClient />
       <Footer />

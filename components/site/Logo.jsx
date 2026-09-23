@@ -1,4 +1,10 @@
 const LOGO_URL = '/ipcare-logo.png'
+// The PNG is 1448×556 (68 KB) but is drawn ~36–56px tall. These .webp copies
+// let the browser fetch roughly the drawn size (-240w is a one-off export;
+// -480w/-960w come from scripts/gen-responsive-images.mjs). The PNG stays the
+// src fallback and is what the JSON-LD in app/layout.js points to.
+const LOGO_SRCSET = '/ipcare-logo-240w.webp 240w, /ipcare-logo-480w.webp 480w, /ipcare-logo-960w.webp 960w, /ipcare-logo.png 1448w'
+const LOGO_RATIO = 1448 / 556
 
 /**
  * Logo component
@@ -13,6 +19,8 @@ export default function Logo({ size = 36, variant = 'color', tile = false, class
   const img = (
     <img
       src={LOGO_URL}
+      srcSet={LOGO_SRCSET}
+      sizes={`${Math.round(size * LOGO_RATIO)}px`}
       alt="IP Care Technologies"
       style={{ height: size, maxHeight: size, width: 'auto', ...filterStyle }}
       className="object-contain block"

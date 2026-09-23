@@ -11,6 +11,7 @@ import {
 import * as Icons from 'lucide-react'
 import { platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const Ic = ({ name, ...rest }) => {
   const C = Icons[name] || Icons.Shield
@@ -88,7 +89,7 @@ function Hero() {
     }}>
       {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
       <img
-        src="/images/pages/cyber-advisory-hero.webp"
+        src="/images/pages/cyber-advisory-hero.webp" {...responsive("/images/pages/cyber-advisory-hero.webp", SIZES.full)}
         alt="Cybersecurity advisory Abu Dhabi"
         loading="eager"
         fetchPriority="high"
@@ -786,7 +787,7 @@ function CaseStudies() {
               {/* Image */}
               <div style={{ position: 'relative', height: '220px', overflow: 'hidden', flexShrink: 0 }}>
                 <img
-                  src={c.img}
+                  src={c.img} {...responsive(c.img, SIZES.third)}
                   alt={`${c.title}, case study`}
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}

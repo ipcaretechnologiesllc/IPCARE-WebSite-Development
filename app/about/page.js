@@ -2,6 +2,7 @@ import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AboutClient from './AboutClient'
+import { srcSetFor } from '@/lib/responsive-image'
 
 export const revalidate = 3600
 
@@ -21,7 +22,7 @@ export const metadata = {
 }
 
 export default function AboutPage() {
-  preload('/images/pages/about-bg.webp', { as: 'image', fetchPriority: 'high' })
+  preload('/images/pages/about-bg.webp', { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor('/images/pages/about-bg.webp'), imageSizes: '100vw' })
   return (
     <>
       <Header />

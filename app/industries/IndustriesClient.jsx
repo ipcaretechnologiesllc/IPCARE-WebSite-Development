@@ -7,6 +7,7 @@ import {
   Activity, Building2, Landmark, Calendar, HardHat,
 } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ── IntersectionObserver reveal (same pattern as About/Services) ── */
 function useReveal() {
@@ -199,7 +200,7 @@ function Hero() {
     }}>
       {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
       <img
-        src="/images/pages/industries-hero.webp"
+        src="/images/pages/industries-hero.webp" {...responsive("/images/pages/industries-hero.webp", SIZES.full)}
         alt="IT services across UAE industries Abu Dhabi"
         loading="eager"
         fetchPriority="high"

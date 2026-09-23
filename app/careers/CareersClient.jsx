@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { jobs } from '@/lib/careers-data'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const MAX_CV_BYTES = 5 * 1024 * 1024
 
@@ -113,7 +114,7 @@ export default function CareersClient() {
       {/* ── HERO, navy, full-bleed photo ─────────────────────────────────── */}
       <section style={{ background: '#1E3A8A', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
         <img
-          src="/images/pages/careers-bg.webp"
+          src="/images/pages/careers-bg.webp" {...responsive("/images/pages/careers-bg.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"

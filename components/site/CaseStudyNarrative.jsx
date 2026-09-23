@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronRight, ArrowRight, ShieldAlert, Monitor, KeyRound, ServerCog, Check } from 'lucide-react'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 // Presentation layer for narrative (non-physical) case studies — see
 // lib/case-studies-data.js for the data contract.
@@ -110,7 +111,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
             hero was the main reason this page read as a different theme. Scrim below
             keeps the left column at the same contrast the bare gradient gave it. */}
         <img
-          src="/images/services/incident-response-uae.webp"
+          src="/images/services/incident-response-uae.webp" {...responsive("/images/services/incident-response-uae.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover hidden md:block"

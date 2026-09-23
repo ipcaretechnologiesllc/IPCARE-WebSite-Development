@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Phone, Mail, Globe, MapPin, Clock, Star, Handshake, ShieldCheck, Lightbulb, Users, Globe2, Linkedin } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 // Tiny inlined blur-up placeholder (LQIP) of about-bg.webp — paints on the first
 // frame with zero network so the bright hero never flashes navy before it decodes.
@@ -61,7 +62,7 @@ function Hero() {
     }}>
       {/* Background image */}
       <img
-        src="/images/pages/about-bg.webp"
+        src="/images/pages/about-bg.webp" {...responsive("/images/pages/about-bg.webp", SIZES.full)}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover object-center"
@@ -174,7 +175,7 @@ function Story() {
             aspectRatio: '4/5',
           }}>
             <img
-              src="/images/about/about-promise.webp"
+              src="/images/about/about-promise.webp" {...responsive("/images/about/about-promise.webp", SIZES.half)}
               alt="IP Care Technologies enterprise IT operations"
               loading="eager"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}

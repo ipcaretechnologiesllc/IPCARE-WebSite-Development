@@ -19,6 +19,7 @@ import {
   portfolioProjects,
   portfolioStats,
 } from '@/lib/portfolio-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const categoryParamMap = {
   enterprise: { type: 'Enterprise Facilities' },
@@ -123,7 +124,7 @@ function CardMedia({ project, eager = false }) {
     return (
       <div className="absolute inset-0 bg-white">
         <img
-          src={project.image}
+          src={project.image} {...responsive(project.image, SIZES.third)}
           alt={project.imageAlt}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
@@ -134,7 +135,7 @@ function CardMedia({ project, eager = false }) {
   }
   return (
     <img
-      src={project.image}
+      src={project.image} {...responsive(project.image, SIZES.third)}
       alt={project.imageAlt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
@@ -153,7 +154,7 @@ function FeaturedCard({ project, index }) {
         {/* Reduced-motion fallback: poster still shown when the video is hidden */}
         {project.video && (
           <img
-            src={project.poster || project.image}
+            src={project.poster || project.image} {...responsive(project.poster || project.image, SIZES.third)}
             alt={project.imageAlt}
             aria-hidden="true"
             className="motion-safe:hidden absolute inset-0 h-full w-full object-cover"
@@ -311,7 +312,7 @@ export default function PortfolioClient() {
         }}
       >
         <img
-          src="/images/pages/services-bg.webp"
+          src="/images/pages/services-bg.webp" {...responsive("/images/pages/services-bg.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           fetchPriority="high"

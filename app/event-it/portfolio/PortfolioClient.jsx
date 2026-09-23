@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { events } from '@/lib/event-it-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 function useReveal() {
   useEffect(() => {
@@ -85,7 +86,7 @@ export default function PortfolioClient() {
               <div className="grid lg:grid-cols-5 gap-0">
                 <div className="relative lg:col-span-2 aspect-[4/3] lg:aspect-auto overflow-hidden">
                   <img
-                    src={ev.img}
+                    src={ev.img} {...responsive(ev.img, SIZES.card)}
                     alt={ev.name}
                     width={640}
                     height={480}

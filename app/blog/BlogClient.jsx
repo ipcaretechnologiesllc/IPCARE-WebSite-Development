@@ -6,6 +6,7 @@ import * as Icons from 'lucide-react'
 import { articles } from '@/lib/blog-data'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 function useReveal() {
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function BlogClient() {
       <section style={{ background: '#0B1A46', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
         {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
         <img
-          src="/images/pages/blog-hero.webp"
+          src="/images/pages/blog-hero.webp" {...responsive("/images/pages/blog-hero.webp", SIZES.full)}
           alt="IP Care IT insights Abu Dhabi"
           loading="eager"
           fetchPriority="high"

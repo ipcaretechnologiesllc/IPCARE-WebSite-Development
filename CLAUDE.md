@@ -44,6 +44,8 @@ The site is a single Hostinger account (Node app behind LiteSpeed) with **Cloudf
 
 **Static media caching is set in Cloudflare, not `next.config.js`.** LiteSpeed serves `/public` files before Next.js runs, so the `headers()` cache rules in `next.config.js` never reach them — they arrive with no `Cache-Control`. Cache Rule "Cache static assets" matches `/_next/static/` or image/video/font extensions, Edge TTL 1 month (ignore origin), Browser TTL 7 days. Filenames aren't fingerprinted: after replacing an image under the same name, purge that URL.
 
+**Responsive image variants.** `images.unoptimized: true` means nothing resizes images at request time, so large `/public` images have committed `-480w.webp` / `-960w.webp` siblings made by `node scripts/gen-responsive-images.mjs`, listed in `lib/image-variants.json`. `responsive(src, SIZES.x)` / `srcSetFor(src)` from `lib/responsive-image.js` turn that into `srcSet`/`sizes` (and build Unsplash `?w=` srcsets). After adding or replacing a large image, re-run the script and commit the variants + JSON — it only processes git-tracked files, so commit the original first. A hero that is preloaded must pass the same `imageSrcSet`/`imageSizes` to `preload()`, or phones download the full file *and* the variant.
+
 DNS for `ipcare.ae`:
 - **`ipcare.ae`** — raw `A` records. Main site (`ipcare.ae`, `www.ipcare.ae`, `docvault.ipcare.ae`) → `45.13.255.161`, proxied. A separate cluster of service subdomains (`cpanel`, `mail`, `webmail`, `webdisk`, `whm`, `autoconfig`, `autodiscover`) → `50.116.93.239`, deliberately **DNS-only (unproxied)** because mail clients and cPanel are accessed directly against those hostnames — do not recommend proxying them, it would break those connections. `ftp.ipcare.ae` was a DNS-only CNAME to `ipcare.ae` itself, which Cloudflare flagged as leaking the real origin IP behind the proxied A record — now proxied (2026-08-08) since FTP on this host is confirmed unused. If FTP connectivity ever needs to work here again, un-proxy it first (Cloudflare's proxy doesn't tunnel raw FTP on Free/Pro plans).
 - `docpilot.ipcare.ae` CNAMEs to `docpilot-frontend-*.onrender.com` — a **separate product (Render-hosted)**, unrelated to this repo beyond the `/products/docpilot` marketing page.
@@ -106,7 +108,7 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 
 - `/portfolio` is implemented with `app/portfolio/page.js` plus the client-side filter UI in `app/portfolio/PortfolioClient.js`.
 - `components/site/Header.jsx` includes a Portfolio dropdown with links to full portfolio, enterprise projects, ELV/security and structured cabling filtered views.
-- `app/HomeClient.js` includes a small `DeliveryProofStrip` before Cyber Advisory. Do not replace or materially change the existing homepage `EventsPortfolio` section unless explicitly requested.
+- `app/HomeClient.js` includes a small `DeliveryProofStrip` before Cyber Advisory. Its projects and the `BlogTeaser` posts are picked in the server `app/page.js` and passed as props — do not import `lib/blog-data.js` (~90 KB gzipped of article bodies) or `lib/portfolio-data.js` into `HomeClient`, or they ship to every homepage visitor. Do not replace or materially change the existing homepage `EventsPortfolio` section unless explicitly requested.
 - `app/sitemap.js` and `app/llms.txt/route.js` include the `/portfolio` route for discovery and AI-readable site context.
 
 ### Narrative case studies (non-physical engagements)

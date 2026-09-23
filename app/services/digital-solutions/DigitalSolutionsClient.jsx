@@ -6,6 +6,7 @@ import * as Icons from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
 import { serviceCategories } from '@/lib/services-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 function useReveal() {
   useEffect(() => {
@@ -55,7 +56,7 @@ function Hero() {
       alignItems: 'center',
     }}>
       <img
-        src="/images/services/digital-solutions-hero.webp"
+        src="/images/services/digital-solutions-hero.webp" {...responsive("/images/services/digital-solutions-hero.webp", SIZES.full)}
         alt="Open-plan digital studio with screens showing web, app, and AI work"
         className="absolute inset-0 w-full h-full object-cover object-center"
         style={{ zIndex: 0 }}

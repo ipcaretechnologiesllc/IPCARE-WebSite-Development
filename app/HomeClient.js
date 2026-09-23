@@ -14,8 +14,7 @@ import Footer from '@/components/site/Footer'
 import CertificationsBand from '@/components/site/CertificationsBand'
 import RentalCircularGallery from '@/components/rental/RentalCircularGallery'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
-import { articles } from '@/lib/blog-data'
-import { featuredPortfolioProjects } from '@/lib/portfolio-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ---------------- IntersectionObserver reveal hook ---------------- */
 function useReveal() {
@@ -576,7 +575,7 @@ function Services() {
     <section id="services" className="relative overflow-hidden py-24 md:py-28 px-6">
       {/* Background image */}
       <img
-        src="/images/pages/services-bg.webp"
+        src="/images/pages/services-bg.webp" {...responsive("/images/pages/services-bg.webp", SIZES.full)}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover object-center"
@@ -611,7 +610,7 @@ function Services() {
 }
 
 /* ---------------- Delivery Proof Strip ---------------- */
-function DeliveryProofStrip() {
+function DeliveryProofStrip({ projects }) {
   const cardBg = 'linear-gradient(155deg, #16295C 0%, #0B1A46 100%)'
   const cardShadow = '0 8px 20px rgba(11,26,70,0.28), inset 0 1px 0 rgba(255,255,255,0.06)'
 
@@ -649,7 +648,7 @@ function DeliveryProofStrip() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {featuredPortfolioProjects.map((project, i) => {
+            {projects.map((project, i) => {
               const isEnterprise = project.type === 'Enterprise Facilities'
               const Icon = isEnterprise ? Landmark : ShieldCheck
               const categoryLabel = isEnterprise ? 'Enterprise' : 'ELV'
@@ -892,7 +891,7 @@ function EventsPortfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
             <Link key={ev.slug} href={`/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
-              <img src={ev.img} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <img src={ev.img} {...responsive(ev.img, SIZES.card)} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
@@ -952,7 +951,7 @@ function About() {
             style={{ borderRadius: '16px', boxShadow: '0 20px 60px rgba(10, 26, 70, 0.15)', aspectRatio: '4 / 5' }}
           >
             <img
-              src="/images/about/about-feature.webp"
+              src="/images/about/about-feature.webp" {...responsive("/images/about/about-feature.webp", SIZES.half)}
               alt="Enterprise IT infrastructure, IP Care Technologies"
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
@@ -1103,12 +1102,9 @@ function Testimonials() {
 }
 
 /* ---------------- Blog Teaser ---------------- */
-function BlogTeaser() {
-  // Show the three most recent articles, sorted by date.
-  const posts = [...articles]
-    .map(a => ({ ...a, _ts: new Date(a.date).getTime() }))
-    .sort((a, b) => b._ts - a._ts)
-    .slice(0, 3)
+// posts: the three most recent articles, picked in app/page.js so the full
+// blog-data module (article bodies) stays out of the client bundle.
+function BlogTeaser({ posts }) {
   return (
     <section id="blog" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
@@ -1236,7 +1232,7 @@ function OfficesCTA() {
 }
 
 /* ---------------- MAIN APP ---------------- */
-const App = () => {
+const App = ({ latestPosts, featuredProjects }) => {
   useReveal()
   return (
     <main>
@@ -1246,13 +1242,13 @@ const App = () => {
       <Stats />
       <CertificationsBand />
       <Services />
-      <DeliveryProofStrip />
+      <DeliveryProofStrip projects={featuredProjects} />
       <CyberAdvisory />
       <RentalTeaser />
       <EventsPortfolio />
       <About />
       <Testimonials />
-      <BlogTeaser />
+      <BlogTeaser posts={latestPosts} />
       <FAQ />
       <OfficesCTA />
       <Footer />

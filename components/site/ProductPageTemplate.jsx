@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ── Scroll-reveal hook (same pattern as ServicePageTemplate) ───────────── */
 function useReveal() {
@@ -170,7 +171,7 @@ export default function ProductPageTemplate({ data }) {
       <section className="relative overflow-hidden" style={{ background: '#1E3A8A', borderBottom: '3px solid #E87722' }}>
         {heroImage && (
           <img
-            src={heroImage}
+            src={heroImage} {...responsive(heroImage, SIZES.full)}
             alt={heroImageAlt || h1}
             loading="eager"
             fetchPriority="high"
@@ -236,7 +237,7 @@ export default function ProductPageTemplate({ data }) {
                 style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(10,26,70,0.14)', aspectRatio: '4/3' }}
               >
                 <img
-                  src={sectionImage}
+                  src={sectionImage} {...responsive(sectionImage, SIZES.half)}
                   alt={sectionImageAlt || h1}
                   loading="lazy"
                   decoding="async"

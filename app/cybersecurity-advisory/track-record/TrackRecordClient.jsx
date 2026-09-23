@@ -28,6 +28,7 @@ import {
   cyberRelatedLinks,
   featuredCyberProjects,
 } from '@/lib/cyber-advisory-data'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
 const iconMap = {
   Globe2,
@@ -197,7 +198,7 @@ export default function TrackRecordClient() {
         }}
       >
         <img
-          src="/images/pages/cyber-advisory-track-record-bg.webp"
+          src="/images/pages/cyber-advisory-track-record-bg.webp" {...responsive("/images/pages/cyber-advisory-track-record-bg.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           fetchPriority="high"
@@ -283,7 +284,7 @@ export default function TrackRecordClient() {
         }}
       >
         <img
-          src="/images/pages/cyber-advisory-track-record-featured-bg.webp"
+          src="/images/pages/cyber-advisory-track-record-featured-bg.webp" {...responsive("/images/pages/cyber-advisory-track-record-featured-bg.webp", SIZES.full)}
           alt=""
           aria-hidden="true"
           loading="lazy"
