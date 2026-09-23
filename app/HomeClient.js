@@ -476,7 +476,7 @@ function HeroCarousel() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'USA BASKETBALL 2024', 'UFC UAE 2020-26', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'ABU DHABI PADEL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'EUROLEAGUE SUPERCUP 2026', 'USA BASKETBALL 2024', 'UFC UAE 2020-26', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'ABU DHABI PADEL MASTER']
   return (
     <section
       className="relative overflow-hidden"
@@ -855,6 +855,7 @@ function EventsPortfolio() {
     { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020-2026', region: 'Sports', img: '/events/ufc-uae.webp' },
     { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: '/events/nba-abu-dhabi-games.webp' },
     { slug: 'euroleague-final-four-2025', name: 'EuroLeague Final Four 2025', loc: 'Etihad Arena, Abu Dhabi • 23-25 May 2025', region: 'Sports', img: '/events/euroleague-final-four-2025.webp' },
+    { slug: 'euroleague-supercup-2026', name: 'EuroLeague SuperCup 2026', loc: 'Etihad Arena, Abu Dhabi • 18-19 Sep 2026', region: 'Sports', img: '/events/euroleague-supercup-2026.webp' },
     { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: '/events/fina-world-swimming-championship.webp' },
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: '/events/wba-light-heavyweight-championship.webp' },
@@ -863,7 +864,6 @@ function EventsPortfolio() {
     { slug: 'abu-dhabi-padel-master', name: 'Abu Dhabi Padel Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: '/events/abu-dhabi-padel-master.webp' },
     { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: '/events/coldplay-world-tour.webp' },
     { slug: 'saadiyat-nights', name: 'Saadiyat Nights', loc: 'Saadiyat Island, Abu Dhabi • 2024, 2025', region: 'Concerts', img: '/events/saadiyat-nights.webp' },
-    { slug: 'iifa-awards', name: 'IIFA Awards', loc: 'Yas Island, Abu Dhabi • 2022, 2023, 2024', region: 'Concerts', img: '/events/iifa-awards.webp' },
     { slug: 'ya-salam-after-race-concert', name: 'Ya Salam After Race Concert', loc: 'Yas Island, Abu Dhabi • 2019-2024', region: 'Concerts', img: '/events/ya-salam-after-race-concert.webp' },
     { slug: 'uae-national-day-48th', name: 'UAE National Day: 48th Edition', loc: 'Zayed Sports City, UAE • Dec 2019', region: 'National', img: '/events/uae-national-day-48th.webp' },
     { slug: 'uae-national-day-49th', name: 'UAE National Day: 49th Edition', loc: 'Al Jubail Mangrove Park, Abu Dhabi • Dec 2020', region: 'National', img: '/events/uae-national-day-49th.webp' },
