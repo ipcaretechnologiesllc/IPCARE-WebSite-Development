@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { articles } from '@/lib/blog-data'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { responsive, SIZES } from '@/lib/responsive-image'
@@ -20,7 +19,9 @@ function useReveal() {
   }, [])
 }
 
-export default function BlogClient() {
+// articles: card fields only, picked in app/blog/page.js so the article bodies
+// in lib/blog-data.js (~90 KB gzipped) stay out of the client bundle.
+export default function BlogClient({ articles }) {
   useReveal()
   const [filter, setFilter] = useState('All')
   const [query, setQuery] = useState('')

@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
-import { serviceCategories } from '@/lib/services-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 /* ── IntersectionObserver reveal (same as About page) ── */
 function useReveal() {
@@ -42,7 +42,7 @@ function Eyebrow({ children }) {
 
 /* ── Lucide icon renderer ── */
 const Ic = ({ name, ...rest }) => {
-  const C = Icons[name] || Icons.Server
+  const C = ICONS[name] || Icons.Server
   return <C {...rest} />
 }
 
@@ -166,8 +166,8 @@ function Hero() {
 /* ════════════════════════════════════════════════
    2. SERVICES GRID, white cards on #F4F6FA bg
 ═══════════════════════════════════════════════ */
-function ServicesGrid() {
-  const cats = Object.entries(serviceCategories).filter(([, c]) => c.menuGroup !== 'digital-solutions')
+// cats: from getServiceGridEntries() in app/services/page.js (server-side).
+function ServicesGrid({ cats }) {
 
   const cardBase = {
     background: '#FFFFFF',
@@ -390,12 +390,12 @@ function CTAStrip() {
 /* ════════════════════════════════════════════════
    ROOT EXPORT
 ═══════════════════════════════════════════════ */
-export default function ServicesClient() {
+export default function ServicesClient({ categories }) {
   useReveal()
   return (
     <main>
       <Hero />
-      <ServicesGrid />
+      <ServicesGrid cats={categories} />
       <CTAStrip />
     </main>
   )

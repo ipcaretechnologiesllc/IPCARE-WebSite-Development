@@ -2,6 +2,7 @@ import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import DigitalSolutionsClient from './DigitalSolutionsClient'
+import { getServiceGridEntries } from '@/lib/services-grid'
 import { srcSetFor } from '@/lib/responsive-image'
 import { uaeFocus } from '@/lib/seo-region'
 
@@ -41,7 +42,7 @@ export default function DigitalSolutionsHub() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Header />
-      <DigitalSolutionsClient />
+      <DigitalSolutionsClient categories={getServiceGridEntries({ digitalSolutions: true })} />
       <Footer />
     </>
   )

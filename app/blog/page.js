@@ -1,6 +1,11 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import BlogClient from './BlogClient'
+import { articles } from '@/lib/blog-data'
+
+const articleCards = articles.map(({ slug, title, excerpt, category, date, readTime, author, img, imageFit }) => (
+  { slug, title, excerpt, category, date, readTime, author: author ?? null, img, imageFit: imageFit ?? null }
+))
 import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
@@ -38,7 +43,7 @@ export default function BlogPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }} />
       <Header />
-      <BlogClient />
+      <BlogClient articles={articleCards} />
       <Footer />
     </>
   )

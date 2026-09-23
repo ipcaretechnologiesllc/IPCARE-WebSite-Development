@@ -7,10 +7,11 @@ import * as Icons from 'lucide-react'
 import CTAPhoneButtons from './CTAPhoneButtons'
 import CertificationsBand from './CertificationsBand'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 /* ── Icon helper ─────────────────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => {
-  const C = Icons[name] || Icons.Check
+  const C = ICONS[name] || Icons.Check
   return <C {...rest} />
 }
 

@@ -5,6 +5,7 @@ import * as Icons from 'lucide-react'
 import { jobs } from '@/lib/careers-data'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 const MAX_CV_BYTES = 5 * 1024 * 1024
 
@@ -29,7 +30,7 @@ const valuePillars = [
   { icon: 'Rocket', t: 'Impact', d: 'Work on projects that matter, at scale.' },
   { icon: 'Globe2', t: 'Reach', d: 'UAE, Canada and global event delivery.' },
 ]
-const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Award; return <C {...rest}/> }
+const Ic = ({ name, ...rest }) => { const C = ICONS[name] || Icons.Award; return <C {...rest}/> }
 
 function Eyebrow({ children }) {
   return <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#E87722', marginBottom: '12px' }}>{children}</p>

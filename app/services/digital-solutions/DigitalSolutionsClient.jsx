@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
-import { serviceCategories } from '@/lib/services-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 function useReveal() {
   useEffect(() => {
@@ -39,7 +39,7 @@ function Eyebrow({ children }) {
 }
 
 const Ic = ({ name, ...rest }) => {
-  const C = Icons[name] || Icons.Code2
+  const C = ICONS[name] || Icons.Code2
   return <C {...rest} />
 }
 
@@ -128,8 +128,8 @@ function Hero() {
   )
 }
 
-function DigitalSolutionsGrid() {
-  const cats = Object.entries(serviceCategories).filter(([, c]) => c.menuGroup === 'digital-solutions')
+// cats: from getServiceGridEntries() in app/services/digital-solutions/page.js (server-side).
+function DigitalSolutionsGrid({ cats }) {
 
   const cardBase = {
     background: '#FFFFFF',
@@ -332,12 +332,12 @@ function CTAStrip() {
   )
 }
 
-export default function DigitalSolutionsClient() {
+export default function DigitalSolutionsClient({ categories }) {
   useReveal()
   return (
     <main>
       <Hero />
-      <DigitalSolutionsGrid />
+      <DigitalSolutionsGrid cats={categories} />
       <CTAStrip />
     </main>
   )

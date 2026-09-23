@@ -12,9 +12,10 @@ import * as Icons from 'lucide-react'
 import { platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 const Ic = ({ name, ...rest }) => {
-  const C = Icons[name] || Icons.Shield
+  const C = ICONS[name] || Icons.Shield
   return <C {...rest} />
 }
 

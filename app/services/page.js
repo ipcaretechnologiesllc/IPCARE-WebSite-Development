@@ -2,6 +2,7 @@ import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicesClient from './ServicesClient'
+import { getServiceGridEntries } from '@/lib/services-grid'
 import { srcSetFor } from '@/lib/responsive-image'
 import { uaeFocus } from '@/lib/seo-region'
 
@@ -117,7 +118,7 @@ export default function ServicesHub() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Header />
-      <ServicesClient />
+      <ServicesClient categories={getServiceGridEntries({ digitalSolutions: false })} />
       <Footer />
     </>
   )

@@ -104,6 +104,10 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 - `components/rental/` — rental cart/quote flow: `CartContext` (provider), `CartButton`, `CartDrawer`, `AddToQuoteButton`; `RentalShell` (in root layout) wraps the app to provide cart context site-wide.
 - `components/ui/` — shadcn/ui primitives (Radix-based), configured via `components.json` (style `new-york`, no TS, `cssVariables: true`, path aliases `@/components`, `@/lib`, `@/hooks`, `@/ui`).
 
+**Client bundle rules** (each of these once shipped 150–300 KB of unneeded JS per page):
+- **Never look up a lucide icon by string with `import * as Icons` + `Icons[name]` in a client component** — a dynamic lookup can't be tree-shaken, so it ships all ~1,500 icons. Use `ICONS[name]` from `lib/icon-map.js`, which `scripts/gen-icon-map.mjs` regenerates in `prebuild` from every icon name written as a string in `app/`, `components/`, `lib/`. Static `Icons.ArrowRight` access is fine. Server components (e.g. `app/industries/[slug]/page.js`) may keep `Icons[name]` — it never reaches the browser.
+- **Don't import the big `lib/*-data.js` modules into a `'use client'` file** (`services-data` ~780 KB, `blog-data` ~310 KB, `event-it-data` ~310 KB of source). Pick the fields in the server `page.js` and pass them as props — see `app/page.js`, `app/blog/page.js`, `app/event-it/page.js`, `lib/services-grid.js`. After changes, check the build's "First Load JS" column: normal pages are ~165–210 kB.
+
 ### Portfolio experience
 
 - `/portfolio` is implemented with `app/portfolio/page.js` plus the client-side filter UI in `app/portfolio/PortfolioClient.js`.

@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { events, eventServices, partners, capabilityStats } from '@/lib/event-it-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { ICONS } from '@/lib/icon-map'
 
 const Ic = ({ name, ...rest }) => {
-  const C = Icons[name] || Icons.Wifi
+  const C = ICONS[name] || Icons.Wifi
   return <C {...rest} />
 }
 
@@ -111,7 +111,7 @@ function Hero() {
 }
 
 /* ============ 2. EVENTS PORTFOLIO ============ */
-function EventsPortfolio() {
+function EventsPortfolio({ events }) {
   const [filter, setFilter] = useState('All Events')
   const tabs = ['All Events', 'Sports', 'Concerts', 'National']
   const filtered = filter === 'All Events' ? events : events.filter((e) => e.category === filter)
@@ -205,7 +205,7 @@ function EventsPortfolio() {
 }
 
 /* ============ 3. END-TO-END SERVICES ============ */
-function Services() {
+function Services({ eventServices }) {
   return (
     <section className="py-20 md:py-24 px-6" style={{ background: '#1E3A8A' }}>
       <div className="max-w-[1300px] mx-auto">
@@ -336,7 +336,7 @@ function StepCard({ step }) {
 }
 
 /* ============ 5. CAPABILITY STATS (keep on navy) ============ */
-function CapabilityStats() {
+function CapabilityStats({ capabilityStats }) {
   return (
     <section
       className="py-20 px-6 relative overflow-hidden"
@@ -378,7 +378,7 @@ function CapabilityStats() {
 }
 
 /* ============ 6. TECHNOLOGY WE DEPLOY (keep on navy) ============ */
-function Technology() {
+function Technology({ partners }) {
   return (
     <section
       className="py-16 px-6"
@@ -458,16 +458,18 @@ function CTAStrip() {
 }
 
 /* ============ PAGE ROOT ============ */
-export default function EventITClient() {
+// Data comes from app/event-it/page.js (server) so the event detail-page copy
+// in lib/event-it-data.js (~300 KB of source) stays out of the client bundle.
+export default function EventITClient({ events, eventServices, partners, capabilityStats }) {
   useReveal()
   return (
     <main>
       <Hero />
-      <EventsPortfolio />
-      <Services />
+      <EventsPortfolio events={events} />
+      <Services eventServices={eventServices} />
       <HowItWorks />
-      <CapabilityStats />
-      <Technology />
+      <CapabilityStats capabilityStats={capabilityStats} />
+      <Technology partners={partners} />
       <CTAStrip />
     </main>
   )

@@ -8,9 +8,10 @@ import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
+import { ICONS } from '@/lib/icon-map'
 
 /* ── Icon helper ─────────────────────────────────────────────── */
-const Ic = ({ name, ...rest }) => { const C = Icons[name] || Icons.Package; return <C {...rest}/> }
+const Ic = ({ name, ...rest }) => { const C = ICONS[name] || Icons.Package; return <C {...rest}/> }
 
 /* ── Scroll-reveal hook ──────────────────────────────────────── */
 function useReveal() {
