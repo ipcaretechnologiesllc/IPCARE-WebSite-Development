@@ -81,7 +81,7 @@ function Hero() {
         </h1>
 
         <p className="body-text mt-6 text-base md:text-lg max-w-2xl">
-          Trusted on FIFA Club World Cup, UFC UAE (2020-2025), NBA Abu Dhabi Games, EuroLeague
+          Trusted on FIFA Club World Cup, UFC UAE (2020-2026), NBA Abu Dhabi Games, EuroLeague
           Final Four 2025 (first outside Europe), FINA World Swimming, IIFA Awards, Coldplay,
           Saadiyat Nights and the UAE Official National Day events. From temporary WiFi for
           60,000 fans to broadcast-grade data centres, deployed at speed.

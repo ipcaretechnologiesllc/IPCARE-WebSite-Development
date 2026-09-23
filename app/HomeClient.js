@@ -476,7 +476,7 @@ function HeroCarousel() {
 
 /* ---------------- Trust Marquee ---------------- */
 function TrustMarquee() {
-  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'USA BASKETBALL 2024', 'UFC UAE 2020-25', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'ABU DHABI PADEL MASTER']
+  const events = ['FIFA CLUB WORLD CUP', 'EUROLEAGUE FINAL FOUR 2025', 'USA BASKETBALL 2024', 'UFC UAE 2020-26', 'NBA ABU DHABI', 'FINA WORLD SWIMMING', 'WBA WORLD CHAMPIONSHIP', 'WORLD TENNIS LEAGUE', 'MUBADALA ABU DHABI OPEN', 'IIFA AWARDS', 'COLDPLAY', 'SAADIYAT NIGHTS', 'YA SALAM AFTER RACE CONCERT', 'UAE NATIONAL DAY 48TH', 'UAE NATIONAL DAY 49TH', 'ABU DHABI PADEL MASTER']
   return (
     <section
       className="relative overflow-hidden"
@@ -852,7 +852,7 @@ function RentalTeaser() {
 function EventsPortfolio() {
   const events = [
     { slug: 'fifa-club-world-cup', name: 'FIFA Club World Cup', loc: 'Abu Dhabi, UAE • 2022', region: 'Sports', img: '/events/fifa-club-world-cup.webp' },
-    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020-2025', region: 'Sports', img: '/events/ufc-uae.webp' },
+    { slug: 'ufc-uae', name: 'UFC Events in UAE', loc: 'Yas Island, Abu Dhabi • 2020-2026', region: 'Sports', img: '/events/ufc-uae.webp' },
     { slug: 'nba-abu-dhabi-games', name: 'NBA Abu Dhabi Games', loc: 'Etihad Arena • 2022, 2023, 2024, 2025', region: 'Sports', img: '/events/nba-abu-dhabi-games.webp' },
     { slug: 'euroleague-final-four-2025', name: 'EuroLeague Final Four 2025', loc: 'Etihad Arena, Abu Dhabi • 23-25 May 2025', region: 'Sports', img: '/events/euroleague-final-four-2025.webp' },
     { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },

@@ -149,6 +149,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
     menuGroup,      // 'digital-solutions' | undefined — switches credentials band to capability tiles
     caseStudies,    // [{ href, tag, title, summary }] — narrative proof for this service,
                     // sourced from lib/case-studies-data.js. Omit for no section.
+    eventTimeline,  // { eyebrow, heading, intro, groups: [{ year, items: [{ name, date, venue, latest }] }] }
+                    // — year-grouped delivery record for recurring event series (e.g. UFC UAE).
   } = data
 
   const isCanada = region === 'canada'
@@ -370,6 +372,63 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           </div>
         </div>
       </section>
+
+      {/* ──────────────────────────────────────────────────────────────────
+          2.5. EVENT TIMELINE, light grey, year-grouped delivery record.
+          Opt-in via `eventTimeline`; pages without it render as before.
+          Grey sits between the white overview and white features; don't
+          combine with `sectionImage` (also grey) on the same page.
+      ────────────────────────────────────────────────────────────────── */}
+      {eventTimeline?.groups?.length > 0 && (
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[1000px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>{eventTimeline.eyebrow || 'Delivery Record'}</Eyebrow>
+              <SectionHeading>{eventTimeline.heading}</SectionHeading>
+              {eventTimeline.intro && (
+                <p className="mt-4 text-sm max-w-[640px] mx-auto leading-relaxed" style={{ color: T_BODY }}>
+                  {eventTimeline.intro}
+                </p>
+              )}
+            </div>
+            <div className="space-y-8">
+              {eventTimeline.groups.map((g) => (
+                <div key={g.year} className="grid md:grid-cols-[96px_1fr] gap-3 md:gap-6 reveal">
+                  <div className="font-bold text-2xl md:pt-3" style={{ color: '#E87722' }}>{g.year}</div>
+                  <ul className="space-y-2.5">
+                    {g.items.map((it) => (
+                      <li
+                        key={it.name}
+                        className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 px-5 py-3.5 rounded-xl"
+                        style={{
+                          background: BG_WHITE,
+                          boxShadow: '0 2px 10px rgba(10,26,70,0.06)',
+                          borderLeft: `3px solid ${it.latest ? '#E87722' : 'rgba(10,26,70,0.12)'}`,
+                        }}
+                      >
+                        <span className="font-semibold text-[0.9375rem] flex-1 min-w-0" style={{ color: T_NAV }}>
+                          {it.name}
+                          {it.latest && (
+                            <span
+                              className="ml-2 align-middle inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold uppercase"
+                              style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#B25409' }}
+                            >
+                              Latest
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-sm sm:text-right sm:w-[260px] flex-shrink-0" style={{ color: T_BODY }}>
+                          <time>{it.date}</time> · {it.venue}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ──────────────────────────────────────────────────────────────────
           3. IMAGE + TEXT SPLIT, data-driven via sectionContent; renders
