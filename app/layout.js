@@ -19,8 +19,16 @@ const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'
 // Hreflang tags are rendered by components/site/HreflangLinks.jsx.
 
 const SITE_NAME = 'IP Care Technologies'
-const SITE_TITLE = 'Enterprise IT & Managed Services | IP Care Technologies'
-const SITE_DESC = 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and Equipment Rental, trusted by leading organisations since 2003.'
+// Homepage title/description (also the default for any page without its own). On the .ae
+// build they lead with Abu Dhabi: the homepage already ranks ~6 for "system integrators in
+// abu dhabi" and Google UAE autocomplete shows "it companies / it solutions company in abu
+// dhabi", but the old title named no place at all. "IP Care" stays for brand searches.
+const SITE_TITLE = isCaSite()
+  ? 'Enterprise IT & Managed Services | IP Care Technologies'
+  : 'IT Solutions & System Integrator in Abu Dhabi, UAE | IP Care'
+const SITE_DESC = isCaSite()
+  ? 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and Equipment Rental, trusted by leading organisations since 2003.'
+  : 'Abu Dhabi-based IT solutions provider and system integrator since 2003: managed IT, cybersecurity, ELV, event IT and IT rental across Dubai and the UAE.'
 
 // ─── Site-wide metadata ──────────────────────────────────────────────────────
 // Every child page's RELATIVE `alternates.canonical` resolves against this
