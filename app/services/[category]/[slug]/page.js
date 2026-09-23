@@ -54,7 +54,9 @@ export default async function SubPage(props) {
   const caseStudies = getCaseStudiesForSubpage(params.category, params.slug).map(toCaseStudyCard)
   // Dubai / Abu Dhabi pages only (null for every other slug): real local projects, the
   // Abu Dhabi office and links to the sibling city pages. See lib/local-proof.js.
-  const localProof = getLocalProof(params.category, params.slug)
+  // Pages that aren't named after a city can opt in with `localProofCity` (and narrow
+  // the projects with `localProofService`), e.g. /services/elv/cctv-installation-abu-dhabi.
+  const localProof = getLocalProof(params.category, sub.localProofCity || params.slug, sub.localProofService)
 
   const faqSchema = {
     '@context': 'https://schema.org',

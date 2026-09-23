@@ -80,6 +80,16 @@ const ADVISORY_SUB_DATES = {
   'track-record':         '2026-07-09',
 }
 
+// Real last-change dates for service subpages, keyed by subpage slug (applies across
+// categories). 2026-09-23: Dubai / Abu Dhabi pages gained the local-proof section and
+// the CCTV Abu Dhabi page was added — dated so Google recrawls them. Everything else
+// keeps the original 2025-03-01.
+const SUBPAGE_DATES = {
+  'dubai':                        '2026-09-23',
+  'abu-dhabi':                    '2026-09-23',
+  'cctv-installation-abu-dhabi':  '2026-09-23',
+}
+
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
 // Exclude the redirect source so only the canonical URL appears in the sitemap.
 const SITEMAP_EXCLUDE = new Set(['/services/email-solutions/microsoft-365'])
@@ -157,7 +167,7 @@ export default async function sitemap() {
     if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
     if (isCaSitemap && isUaeOnlyServiceSubpage(category, slug)) continue  // canonicalizes to ipcare.ae
     if (!isCaSitemap && isCaOnlyServiceSubpage(category, slug)) continue  // Toronto pages: noindex on ipcare.ae
-    entries.push({ url: `${BASE}${path}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}${path}`, lastModified: SUBPAGE_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Rental — categories + products
