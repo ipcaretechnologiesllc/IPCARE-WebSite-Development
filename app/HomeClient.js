@@ -859,7 +859,7 @@ function EventsPortfolio() {
     { slug: 'usa-basketball-2024', name: 'USA Basketball Showcase 2024', loc: 'Etihad Arena, Abu Dhabi • 2024', region: 'Sports', img: '/events/usa-basketball-2024.webp' },
     { slug: 'fina-world-swimming-championship', name: 'FINA World Swimming Championship', loc: 'Etihad Arena, Abu Dhabi • 2021', region: 'Sports', img: '/events/fina-world-swimming-championship.webp' },
     { slug: 'wba-light-heavyweight-championship', name: 'WBA Light Heavyweight Championship', loc: 'Etihad Arena, Abu Dhabi • 2022', region: 'Sports', img: '/events/wba-light-heavyweight-championship.webp' },
-    { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai • 2022, 2023', region: 'Sports', img: '/events/world-tennis-league.webp' },
+    { slug: 'world-tennis-league', name: 'World Tennis League', loc: 'Coca-Cola Arena, Dubai & Etihad Arena, Abu Dhabi • 2022, 2023', region: 'Sports', img: '/events/world-tennis-league.webp' },
     { slug: 'mubadala-abu-dhabi-open', name: 'Mubadala Abu Dhabi Open', loc: 'Zayed Sports City • Annual', region: 'Sports', img: '/events/mubadala-abu-dhabi-open.webp' },
     { slug: 'abu-dhabi-padel-master', name: 'Abu Dhabi Padel Master', loc: 'Hudayriat Island • 2023', region: 'Sports', img: '/events/abu-dhabi-padel-master.webp' },
     { slug: 'coldplay-world-tour', name: 'Coldplay World Tour', loc: 'Zayed Sports City, Abu Dhabi • 2024', region: 'Concerts', img: '/events/coldplay-world-tour.webp' },
