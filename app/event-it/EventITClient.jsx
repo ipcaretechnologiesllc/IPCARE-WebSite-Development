@@ -155,15 +155,16 @@ function EventsPortfolio() {
                 transitionDelay: `${i * 60}ms`,
               }}
             >
-              <div className="h-40 relative overflow-hidden">
+              <div className="aspect-[4/3] relative overflow-hidden">
                 <img
                   src={ev.img}
                   alt={`${ev.name}, event IT infrastructure by IP Care`}
                   width={600}
-                  height={400}
+                  height={450}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   fetchPriority={i === 0 ? 'high' : 'auto'}
                   decoding="async"
+                  style={{ objectPosition: ev.imgPos || 'center' }}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
