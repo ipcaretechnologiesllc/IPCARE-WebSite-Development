@@ -5,6 +5,7 @@ import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
 import { isUaeOnlyServiceSubpage, isCaOnlyServiceSubpage, isCaSite } from '@/lib/seo-region'
 import { getCaseStudiesForSubpage, toCaseStudyCard } from '@/lib/case-studies-data'
+import { getLocalProof } from '@/lib/local-proof'
 
 export const revalidate = 3600
 
@@ -51,6 +52,9 @@ export default async function SubPage(props) {
   // lib/services-data.js, so the study's own data module stays the single
   // source of its title and summary. Empty for every subpage that has none.
   const caseStudies = getCaseStudiesForSubpage(params.category, params.slug).map(toCaseStudyCard)
+  // Dubai / Abu Dhabi pages only (null for every other slug): real local projects, the
+  // Abu Dhabi office and links to the sibling city pages. See lib/local-proof.js.
+  const localProof = getLocalProof(params.category, params.slug)
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -105,7 +109,7 @@ export default async function SubPage(props) {
       <Header />
       <main>
         <ServicePageTemplate
-          data={caseStudies.length ? { ...sub, caseStudies } : sub}
+          data={{ ...sub, ...(caseStudies.length ? { caseStudies } : {}), ...(localProof ? { localProof } : {}) }}
           related={related}
           breadcrumb={[
             { label: sub.parentName, href: `/services/${params.category}` },

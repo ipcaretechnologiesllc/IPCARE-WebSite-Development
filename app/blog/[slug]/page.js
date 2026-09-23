@@ -7,6 +7,7 @@ import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
+import { BLOG_CATEGORY_TO_SERVICE, CITY_SERVICE_LABELS, UAE_CITIES, cityServiceHref } from '@/lib/uae-locations'
 
 export const revalidate = 3600
 
@@ -195,6 +196,28 @@ export default async function ArticlePage(props) {
                 return <p key={i} className="text-base md:text-lg leading-[1.75]" style={{ color: '#374151' }}>{b.p}</p>
               })}
             </article>
+
+            {/* Dubai / Abu Dhabi service links for posts whose topic maps to a city service
+                (lib/uae-locations.js). Contextual links into the city pages, which had
+                one internal link each. .ae build only. */}
+            {!isCaSite() && BLOG_CATEGORY_TO_SERVICE[a.category] && (() => {
+              const service = BLOG_CATEGORY_TO_SERVICE[a.category]
+              return (
+                <nav className="mt-10 p-6 rounded-2xl" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }} aria-label={`${CITY_SERVICE_LABELS[service]} in Dubai and Abu Dhabi`}>
+                  <div className="mono text-[12px] uppercase tracking-widest mb-2" style={{ color: '#E87722' }}>Working in the UAE?</div>
+                  <p className="text-base mb-4" style={{ color: '#374151' }}>
+                    IP Care&apos;s Abu Dhabi-based team delivers {CITY_SERVICE_LABELS[service]} for organisations across Abu Dhabi and Dubai.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {Object.entries(UAE_CITIES).map(([city, cityName]) => (
+                      <Link key={city} href={cityServiceHref(service, city)} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold bg-white border border-[#E1E8F0] hover:border-[#E87722] hover:text-[#E87722] transition" style={{ color: '#0B1A46' }}>
+                        {CITY_SERVICE_LABELS[service]} in {cityName} <Icons.ArrowRight size={13} aria-hidden="true" />
+                      </Link>
+                    ))}
+                  </div>
+                </nav>
+              )
+            })()}
 
             {/* Share bar */}
             <div className="mt-12 pt-8 flex items-center gap-3 flex-wrap" style={{ borderTop: '1px solid #E5E7EB' }}>

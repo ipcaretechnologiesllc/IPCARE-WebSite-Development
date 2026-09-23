@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
 import { SOCIAL_LINKS } from '@/lib/social-links'
 import Logo from './Logo'
+import { UAE_FOOTER_LINKS } from '@/lib/uae-locations'
+import { isCaSite } from '@/lib/seo-region'
 
 const MUTED = '#A0AEBF'
 
@@ -23,6 +25,11 @@ const company = [
   { label: 'Contact', href: '/contact' },
 ]
 
+// Dubai / Abu Dhabi service pages linked from every page on the .ae build — they had
+// one internal link each and sat in "Crawled - currently not indexed". See
+// lib/uae-locations.js. The .ca build keeps the original four columns.
+const SHOW_UAE_LOCATIONS = !isCaSite()
+
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
@@ -31,7 +38,7 @@ export default function Footer() {
       style={{ background: '#0B1A46', borderTop: '3px solid #E87722' }}
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[30fr_20fr_20fr_30fr] gap-10 lg:gap-12 mb-12">
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 mb-12 ${SHOW_UAE_LOCATIONS ? 'lg:grid-cols-[26fr_17fr_14fr_22fr_21fr]' : 'lg:grid-cols-[30fr_20fr_20fr_30fr]'}`}>
           {/* Column 1 — Brand */}
           <div>
             <Logo size={56} variant="white" />
@@ -90,7 +97,21 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — Get in Touch */}
+          {/* Column 4 — Dubai & Abu Dhabi service pages (.ae only) */}
+          {SHOW_UAE_LOCATIONS && (
+            <div>
+              <h4 className="footer-heading">Dubai &amp; Abu Dhabi</h4>
+              <ul className="space-y-2 text-sm" style={{ color: MUTED }}>
+                {UAE_FOOTER_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="footer-link">{l.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Column 5 — Get in Touch */}
           <div>
             <h4 className="footer-heading">Get in Touch</h4>
             <p className="text-sm leading-relaxed" style={{ color: MUTED }}>

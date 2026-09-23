@@ -152,6 +152,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                     // sourced from lib/case-studies-data.js. Omit for no section.
     eventTimeline,  // { eyebrow, heading, intro, groups: [{ year, items: [{ name, date, venue, latest }] }] }
                     // — year-grouped delivery record for recurring event series (e.g. UFC UAE).
+    localProof,     // Dubai / Abu Dhabi pages only — built by lib/local-proof.js:
+                    // { cityName, heading, intro, projects[], office, siblings[], otherCity }
   } = data
 
   const isCanada = region === 'canada'
@@ -680,6 +682,88 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                   </span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ──────────────────────────────────────────────────────────────────
+          7.7. LOCAL PROOF, light grey — Dubai / Abu Dhabi pages only.
+          Real projects with their recorded locations, the Abu Dhabi office and
+          links to the same city's other service pages. These city pages were
+          "Crawled - currently not indexed" with one internal link each; this
+          gives them evidence and links. Skipped when caseStudies already put a
+          grey section here, so the grey/white alternation holds.
+      ────────────────────────────────────────────────────────────────── */}
+      {localProof && (
+        <section style={{ background: caseStudies?.length ? BG_WHITE : BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[1200px] mx-auto">
+            <div className="text-center mb-10 reveal">
+              <Eyebrow>Local Delivery</Eyebrow>
+              <SectionHeading>{localProof.heading}</SectionHeading>
+              <p className="text-base leading-relaxed max-w-[680px] mx-auto mt-4" style={{ color: '#58595B' }}>{localProof.intro}</p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 mb-10">
+              {localProof.projects.map((p, i) => {
+                const body = (
+                  <>
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <span
+                        className="inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase"
+                        style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#B25409' }}
+                      >
+                        {p.tag}
+                      </span>
+                      {p.href && <Icons.ArrowUpRight size={16} className="text-[#E87722] flex-shrink-0" aria-hidden="true" />}
+                    </div>
+                    <h3 className="service-card__title text-base mb-1">{p.name}</h3>
+                    <div className="text-xs font-semibold mb-3 flex items-center gap-1.5" style={{ color: '#0B1A46' }}>
+                      <Icons.MapPin size={12} className="text-[#E87722]" aria-hidden="true" /> {p.location}
+                    </div>
+                    {p.detail && <p className="service-card__desc text-sm leading-relaxed">{p.detail}</p>}
+                  </>
+                )
+                return p.href ? (
+                  <Link key={p.key} href={p.href} className="service-card p-6 block group reveal" style={{ transitionDelay: `${i * 60}ms` }}>{body}</Link>
+                ) : (
+                  <div key={p.key} className="service-card p-6 reveal" style={{ transitionDelay: `${i * 60}ms` }}>{body}</div>
+                )
+              })}
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-[1fr_2fr]">
+              <div className="service-card p-6 reveal">
+                <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: '#E87722' }}>Head Office</div>
+                <div className="font-semibold mb-1" style={{ color: '#0B1A46' }}>{localProof.office.name}</div>
+                <address className="not-italic text-sm leading-relaxed mb-4" style={{ color: '#58595B' }}>
+                  {localProof.office.street}, {localProof.office.poBox}<br />{localProof.office.city}
+                </address>
+                <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                  <a href={localProof.office.phoneHref} className="inline-flex items-center gap-1.5 text-[#E87722] hover:underline">
+                    <Icons.Phone size={14} aria-hidden="true" /> {localProof.office.phone}
+                  </a>
+                  <a href={localProof.office.mapsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#E87722] hover:underline">
+                    <Icons.Map size={14} aria-hidden="true" /> View on Google Maps
+                  </a>
+                </div>
+              </div>
+
+              <nav className="service-card p-6 reveal" aria-label={`Other IP Care services in ${localProof.cityName}`}>
+                <div className="mono text-[11px] uppercase tracking-widest mb-3" style={{ color: '#E87722' }}>More in {localProof.cityName}</div>
+                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                  {localProof.siblings.map((s) => (
+                    <li key={s.href}>
+                      <Link href={s.href} className="hover:text-[#E87722] hover:underline" style={{ color: '#0B1A46' }}>{s.label}</Link>
+                    </li>
+                  ))}
+                  {localProof.otherCity && (
+                    <li>
+                      <Link href={localProof.otherCity.href} className="font-semibold text-[#E87722] hover:underline">{localProof.otherCity.label} →</Link>
+                    </li>
+                  )}
+                </ul>
+              </nav>
             </div>
           </div>
         </section>
