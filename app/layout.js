@@ -162,7 +162,7 @@ export default function RootLayout({ children }) {
     ],
     knowsAbout: ['Managed IT Services', 'Cybersecurity', 'ELV & Physical Security', 'Cloud Services', 'Event IT Infrastructure', 'IT Equipment Rental', 'NESA Compliance', 'ISO 27001'],
     openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '18:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '18:00' },
     ],
     sameAs: SAME_AS,
   }

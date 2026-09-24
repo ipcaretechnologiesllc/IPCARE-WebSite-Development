@@ -591,7 +591,7 @@ function TwoRegions() {
                   www.ipcare.ae
                 </a>
               </div>
-              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Sun-Fri 9AM-6PM</span></div>
+              <div style={rowItem}><Clock size={15} style={iconStyle} /><span>Mon-Sat 9AM-6PM</span></div>
             </div>
           </div>
 

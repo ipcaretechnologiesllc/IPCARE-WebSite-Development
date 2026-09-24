@@ -199,7 +199,7 @@ export default function ContactClient() {
                 phone="+971 2 676 6935"
                 email="info@ipcare.ae"
                 address="Salam Street, P.O. Box 53209, Abu Dhabi, UAE"
-                hours="Monday - Friday, 9:00 AM - 6:00 PM (GST)"
+                hours="Monday - Saturday, 9:00 AM - 6:00 PM (GST)"
               />
 
               {/* Toronto office */}
