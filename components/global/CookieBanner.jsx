@@ -81,7 +81,7 @@ export default function CookieBanner() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2" style={{ flexShrink: 0 }}>
           <button
             onClick={() => commit('accepted', { essential: true, analytics: true, marketing: true })}
-            style={{ background: '#E87722', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', fontWeight: 600, fontSize: '14px', border: 'none', cursor: 'pointer' }}
+            style={{ background: '#C2570C', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', fontWeight: 600, fontSize: '14px', border: 'none', cursor: 'pointer' }}
           >
             Accept All
           </button>

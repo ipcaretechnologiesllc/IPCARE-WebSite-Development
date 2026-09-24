@@ -448,7 +448,9 @@ function HeroCarousel() {
       {/* ── Dot indicators + persistent pause control ── */}
       <div className="absolute bottom-7 left-0 right-0 z-30 flex items-center justify-center gap-4">
         <div
-          className="flex items-center gap-3"
+          // gap-1: each dot now carries 8px of transparent padding (a 24px tap
+          // target, Lighthouse/WCAG 2.5.8), so the visible spacing stays ~the same.
+          className="flex items-center gap-1"
           role="tablist"
           aria-label="Service slide navigation"
         >
@@ -463,10 +465,16 @@ function HeroCarousel() {
               tabIndex={0}
               className="hero-dot rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E87722] focus-visible:ring-offset-1"
               style={{
+                // Content box = the visible dot (26x8 / 8x8); padding widens the
+                // tap target to 24px without changing what's drawn.
+                boxSizing: 'content-box',
+                padding: 8,
+                backgroundClip: 'content-box',
                 width: i === current ? 26 : 8,
                 height: 8,
-                background: i === current ? '#E87722' : 'rgba(255,255,255,0.38)',
-                boxShadow: i === current ? '0 0 12px rgba(232,119,34,0.65)' : 'none',
+                backgroundColor: i === current ? '#E87722' : 'rgba(255,255,255,0.38)',
+                // drop-shadow follows the painted dot; a box-shadow would outline the padded box.
+                filter: i === current ? 'drop-shadow(0 0 6px rgba(232,119,34,0.65))' : 'none',
               }}
             />
           ))}
@@ -621,7 +629,7 @@ function Services() {
               <h3 className="service-card__title text-xl mb-2">{s.name}</h3>
               <p className="service-card__desc text-sm leading-relaxed mb-5">{s.d}</p>
               <Link href={s.link} className="service-card__cta inline-flex items-center gap-1.5 font-semibold text-sm px-4 py-2">
-                Learn More <ArrowRight size={13}/>
+                Learn More<span className="sr-only"> about {s.name}</span> <ArrowRight size={13}/>
               </Link>
             </div>
           ))}
@@ -916,7 +924,7 @@ function EventsPortfolio() {
               <img src={ev.img} {...responsive(ev.img, SIZES.card)} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
-                <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#E87722', color: '#fff' }}>{ev.region}</span>
+                <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#C2570C', color: '#fff' }}>{ev.region}</span>
                 <h3 className="text-white text-lg font-semibold leading-snug">{ev.name}</h3>
                 <p className="text-white/70 text-xs mt-1">{ev.loc}</p>
               </div>
@@ -1142,7 +1150,7 @@ function BlogTeaser({ posts }) {
               <Link key={p.slug} href={`/blog/${p.slug}`} className="article-card reveal group" style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className={`article-card__media${isProductImage ? ' article-card__media--contain' : ''}`}>
                   <img src={`${p.img}?w=800&q=80`} alt={p.title} loading="lazy" className={`absolute transition-transform duration-500 group-hover:scale-105 ${isProductImage ? 'article-card__image--contain' : 'inset-0 w-full h-full object-cover'}`}/>
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold" style={{ background: '#E87722', color: '#fff' }}>{p.category}</span>
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold" style={{ background: '#C2570C', color: '#fff' }}>{p.category}</span>
                   <div className="article-card__media-fade" />
                 </div>
                 <div className="article-card__body">
