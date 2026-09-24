@@ -107,7 +107,8 @@ MongoDB connection is lazily cached (`getDb()`); `MONGO_URL`/`DB_NAME` are only 
 **Client bundle rules** (each of these once shipped 150–300 KB of unneeded JS per page):
 - **Never look up a lucide icon by string with `import * as Icons` + `Icons[name]` in a client component** — a dynamic lookup can't be tree-shaken, so it ships all ~1,500 icons. Use `ICONS[name]` from `lib/icon-map.js`, which `scripts/gen-icon-map.mjs` regenerates in `prebuild` from every icon name written as a string in `app/`, `components/`, `lib/`. Static `Icons.ArrowRight` access is fine. Server components (e.g. `app/industries/[slug]/page.js`) may keep `Icons[name]` — it never reaches the browser.
 - **Don't import the big `lib/*-data.js` modules into a `'use client'` file** (`services-data` ~780 KB, `blog-data` ~310 KB, `event-it-data` ~310 KB of source). Pick the fields in the server `page.js` and pass them as props — see `app/page.js`, `app/blog/page.js`, `app/event-it/page.js`, `lib/services-grid.js`. After changes, check the build's "First Load JS" column: normal pages are ~165–210 kB.
-- **No `framer-motion` in site-wide components.** The desktop nav flip/glow is pure CSS (`components/site/NavFlipItem.jsx` + `.nav-flip` in `globals.css`); the old framer version cost ~40 KB gzipped on every page. `components/ui/hover-gradient-nav-bar.jsx` is the unused original demo — nothing imports it.
+- **No `framer-motion` in site-wide components.** The desktop nav flip/glow is pure CSS (`components/site/NavFlipItem.jsx` + `.nav-flip` in `globals.css`); the old framer version cost ~40 KB gzipped on every page, and `framer-motion` has been uninstalled.
+- **`gtag.js` loads with `strategy="lazyOnload"`** (`components/global/Analytics.jsx`): it is ~176 KB gzipped, more than the site's own JS. Keep the inline `ga4-init` script `afterInteractive` so consent defaults and the queued page_view exist early.
 
 ### Portfolio experience
 

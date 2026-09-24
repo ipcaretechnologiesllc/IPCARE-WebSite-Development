@@ -103,10 +103,17 @@ export default function Analytics() {
         <>
           {/* Load gtag.js on every page so Google can detect the tag and collect
               Consent Mode v2 cookieless pings. Storage categories remain DENIED
-              (set in layout.js) until the visitor accepts via the Cookie Banner. */}
+              (set in layout.js) until the visitor accepts via the Cookie Banner.
+              lazyOnload (2026-09-24): gtag.js is ~176 KB gzipped — more than all of
+              the site's own JS — and afterInteractive also preloaded it in <head>,
+              where it competed with the LCP image on phones. It now loads in idle
+              time after the page's own resources. The inline ga4-init below stays
+              afterInteractive, so dataLayer, gtag() and the page_view config exist
+              early and are simply processed when gtag.js arrives. Trade-off:
+              visitors who leave within ~1-2s of load may not be counted. */}
           <Script
             id="ga4-src"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
           />
           <Script id="ga4-init" strategy="afterInteractive">{`
