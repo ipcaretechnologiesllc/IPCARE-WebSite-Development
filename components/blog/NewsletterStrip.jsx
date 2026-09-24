@@ -2,6 +2,7 @@
 
 import React, { Component, useState } from 'react'
 import * as Icons from 'lucide-react'
+import { postWithRetry } from '@/lib/post-with-retry'
 
 // ErrorBoundary — silently hides the strip if anything throws; never blocks the page
 class NewsletterErrorBoundary extends Component {
@@ -39,11 +40,11 @@ function NewsletterStripInner() {
       setSubmitting(true)
       let ok = false
       try {
-        const res = await fetch('/api/newsletter/subscribe', {
+        const res = await postWithRetry('/api/newsletter/subscribe', () => ({
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: trimmed, source: 'blog_page' }),
-        })
+        }))
         if (res && res.ok) ok = true
         else if (res && res.status === 404) setErr("Newsletter signup isn't available right now. Please try again later.")
         else setErr('Subscription failed, please try again.')

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
+import { postWithRetry } from '@/lib/post-with-retry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
@@ -46,12 +47,11 @@ export default function ContactClient() {
     if (!form.agree) { setErr('Please agree to the privacy policy before continuing.'); return }
     setSubmitting(true)
     try {
-      const recaptchaToken = await getRecaptchaToken('contact')
-      const res = await fetch('/api/contact', {
+      const res = await postWithRetry('/api/contact', async () => ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, tab, recaptchaToken }),
-      })
+        body: JSON.stringify({ ...form, tab, recaptchaToken: await getRecaptchaToken('contact') }),
+      }))
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh the page and try again.')

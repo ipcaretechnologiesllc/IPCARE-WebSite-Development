@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { jobs } from '@/lib/careers-data'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
+import { postWithRetry } from '@/lib/post-with-retry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -86,15 +87,16 @@ export default function CareersClient() {
     if (!form.name || !form.email || !form.role) { setErr('Please complete required fields.'); return }
     setSubmitting(true)
     try {
-      const recaptchaToken = await getRecaptchaToken('careers')
-      const fd = new FormData()
-      fd.append('name', form.name)
-      fd.append('email', form.email)
-      fd.append('role', form.role)
-      fd.append('cover', form.cover)
-      fd.append('recaptchaToken', recaptchaToken)
-      if (cv) fd.append('cv', cv, cv.name)
-      const res = await fetch('/api/careers/apply', { method: 'POST', body: fd })
+      const res = await postWithRetry('/api/careers/apply', async () => {
+        const fd = new FormData()
+        fd.append('name', form.name)
+        fd.append('email', form.email)
+        fd.append('role', form.role)
+        fd.append('cover', form.cover)
+        fd.append('recaptchaToken', await getRecaptchaToken('careers'))
+        if (cv) fd.append('cv', cv, cv.name)
+        return { method: 'POST', body: fd }
+      })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh and try again.')

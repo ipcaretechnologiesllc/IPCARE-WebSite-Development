@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import * as Icons from 'lucide-react'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
+import { postWithRetry } from '@/lib/post-with-retry'
 
 export default function RFQModal({ onClose, onSuccess, items }) {
   const [form, setForm] = useState({
@@ -26,12 +27,11 @@ export default function RFQModal({ onClose, onSuccess, items }) {
     if (!form.agree) { setError('Please accept the terms to continue.'); return }
     setSubmitting(true)
     try {
-      const recaptchaToken = await getRecaptchaToken('rental_quote')
-      const res = await fetch('/api/rental/quote', {
+      const res = await postWithRetry('/api/rental/quote', async () => ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, phone: `${form.phoneCountry} ${form.phone}`, items, recaptchaToken }),
-      })
+        body: JSON.stringify({ ...form, phone: `${form.phoneCountry} ${form.phone}`, items, recaptchaToken: await getRecaptchaToken('rental_quote') }),
+      }))
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed')     setError('Security check failed. Please refresh the page and try again.')
