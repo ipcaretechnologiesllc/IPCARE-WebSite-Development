@@ -84,6 +84,24 @@ public/Video/_originals/
 # (~58 MB of 8-9 MB source webp) were tracked AND publicly served at
 # /images/hero-mobile/raw/*, confirmed reachable in production.
 public/images/hero-mobile/raw/
+# Source files for portfolio/event images whose processed copies are tracked
+# (e.g. yas-driving-academy/work-5.jpeg -> work-5.webp, "Euroleage Super Cup
+# 2026.webp" -> euroleague-supercup-2026.webp). Nothing references these;
+# kept locally only. The title-case folders hold client source shots for
+# the slug folders (e.g. "Emirates Private School/" -> emirates-private-school/).
+public/images/portfolio/Abu Dhabi Masjid/
+public/images/portfolio/Al Bani/
+public/images/portfolio/Al Masaood/
+public/images/portfolio/Alba Tec/
+public/images/portfolio/Emirates Driving/
+public/images/portfolio/Emirates Private School/
+public/images/portfolio/Family Development Foundation/
+public/images/portfolio/Royal Internation/
+public/images/portfolio/Sands Hotel/
+public/images/portfolio/Trianon Hotel/
+public/images/portfolio/yas-driving-academy/work-5.jpeg
+public/images/portfolio/yas-driving-academy/client-logo.png
+public/events/Euroleage Super Cup 2026.webp
 
 # Search Console exports — contain query/performance data, not for the repo
 GSC/

@@ -1,9 +1,7 @@
-import { preload } from 'react-dom'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicesClient from './ServicesClient'
 import { getServiceGridEntries } from '@/lib/services-grid'
-import { srcSetFor } from '@/lib/responsive-image'
 import { uaeFocus } from '@/lib/seo-region'
 
 export const revalidate = 3600
@@ -106,9 +104,11 @@ export const metadata = {
 }
 
 export default function ServicesHub() {
-  preload('/images/pages/services-bg.webp', { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor('/images/pages/services-bg.webp'), imageSizes: '100vw' })
   return (
     <>
+      {/* No hero preload here: React preloads the hero <img> (fetchPriority="high")
+          in this page's HTML itself. Don't add react-dom preload() — it also rides in
+          Next's link-prefetch payload, so every page linking here downloaded this hero. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}

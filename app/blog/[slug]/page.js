@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { preload } from 'react-dom'
 import { notFound } from 'next/navigation'
 import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
@@ -61,10 +60,6 @@ export default async function ArticlePage(props) {
   const a = getArticle(params.slug)
   if (!a) notFound()
 
-  // Preload the article hero (the LCP element) so it doesn't pop in after first paint.
-  // imageSrcSet must match the <img> below, or phones fetch both files.
-  preload(`${a.img}?w=1200&fm=webp&q=82`, { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor(a.img), imageSizes: HERO_SIZES })
-
   // Same-category articles first, then fill from others
   const sameCat = articles.filter(x => x.slug !== params.slug && x.category === a.category)
   const others  = articles.filter(x => x.slug !== params.slug && x.category !== a.category)
@@ -112,6 +107,9 @@ export default async function ArticlePage(props) {
 
   return (
     <>
+      {/* No hero preload here: React preloads the eager, fetchPriority="high" hero <img>
+          (with its srcset) in this page's HTML. Don't add react-dom preload() — it also
+          rides in Next's link-prefetch payload, so every page linking here downloaded it. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
