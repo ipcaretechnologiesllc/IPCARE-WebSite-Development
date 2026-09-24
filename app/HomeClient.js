@@ -1096,7 +1096,8 @@ function Testimonials() {
         </div>
 
         <div className="flex items-center justify-center gap-4 mt-8">
-          <div className="flex items-center gap-2">
+          {/* gap-0: each dot's 7px padding already spaces them (24px tap targets). */}
+          <div className="flex items-center">
             {quotes.map((_, i) => (
               <button
                 key={i}

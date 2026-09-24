@@ -296,17 +296,22 @@ body {
 }
 
 .testimonial-dot {
+  /* Visible dot = the 10px content box; 7px transparent padding makes the
+     element itself a 24px tap target (Lighthouse/WCAG 2.5.8 measure the
+     element box and ignore the ::before overlay below). */
+  box-sizing: content-box;
   width: 10px;
   height: 10px;
+  padding: 7px;
+  background-clip: content-box;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.35);
   border: none;
   cursor: pointer;
-  padding: 0;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .testimonial-dot--active {
-  background: #E87722;
+  background-color: #E87722;
   transform: scale(1.25);
 }
 
