@@ -314,13 +314,18 @@ function HeroCarousel() {
             const len = HERO_SLIDES.length
             const isAdjacent = i === current || i === (current + 1) % len || i === (current - 1 + len) % len
             if (!isAdjacent) return null
-            return (
+            const img = (
               <img
                 key={slide.id}
                 src={slide.mobileBg}
                 alt=""
                 aria-hidden="true"
-                loading="lazy"
+                // Slide 0 is the mobile LCP image: eager + high priority so it paints
+                // with the first frame. When it was lazy, the paint waited for the
+                // lazy-load check and collided with gtag.js (lazyOnload) running —
+                // PageSpeed mobile LCP went 3.0s -> 5.2s. The rest stay lazy.
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : undefined}
                 className="absolute inset-0 object-cover"
                 style={{
                   width: '100%',
@@ -330,6 +335,18 @@ function HeroCarousel() {
                   transition: 'opacity 0.7s ease-in-out',
                 }}
               />
+            )
+            if (i !== 0) return img
+            // An eager <img> is fetched even under display:none, so on desktop the
+            // <source> swaps in a 1x1 inline GIF (media IS honoured inside <picture>,
+            // unlike <video>). React also skips its automatic <head> preload for an
+            // <img> inside <picture> — the media-guarded preload in app/page.js stays
+            // the only hint.
+            return (
+              <picture key={slide.id}>
+                <source media="(min-width: 769px)" srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                {img}
+              </picture>
             )
           })}
         </div>
