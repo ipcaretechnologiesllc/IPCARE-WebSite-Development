@@ -22,10 +22,12 @@ const SITE_NAME = 'IP Care Technologies'
 // Homepage title/description (also the default for any page without its own). On the .ae
 // build they lead with Abu Dhabi: the homepage already ranks ~6 for "system integrators in
 // abu dhabi" and Google UAE autocomplete shows "it companies / it solutions company in abu
-// dhabi", but the old title named no place at all. "IP Care" stays for brand searches.
+// dhabi", but the old title named no place at all. The brand leads because Google was
+// already rewriting the old "… | IP Care" title to this exact form on desktop, and on
+// mobile brand searches cut it down to just "IP Care".
 const SITE_TITLE = isCaSite()
   ? 'Enterprise IT & Managed Services | IP Care Technologies'
-  : 'IT Solutions & System Integrator in Abu Dhabi, UAE | IP Care'
+  : 'IP Care: IT Solutions & System Integrator in Abu Dhabi, UAE'
 const SITE_DESC = isCaSite()
   ? 'Managed IT, Cybersecurity, Cloud, Event IT Infrastructure and Equipment Rental, trusted by leading organisations since 2003.'
   : 'Abu Dhabi-based IT solutions provider and system integrator since 2003: managed IT, cybersecurity, ELV, event IT and IT rental across Dubai and the UAE.'
