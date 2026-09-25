@@ -745,7 +745,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                     <Icons.Phone size={14} aria-hidden="true" /> {localProof.office.phone}
                   </a>
                   <a href={localProof.office.mapsHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[#E87722] hover:underline">
-                    <Icons.Map size={14} aria-hidden="true" /> View on Google Maps
+                    <Icons.Map size={14} aria-hidden="true" /> Get directions
                   </a>
                 </div>
               </div>

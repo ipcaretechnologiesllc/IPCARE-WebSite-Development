@@ -6,6 +6,7 @@ import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { GBP_DIRECTIONS_URL, GBP_MAP_EMBED_URL } from '@/lib/social-links'
 
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
 
@@ -242,13 +243,23 @@ export default function ContactClient() {
                 <div className="section-eyebrow">Abu Dhabi, UAE</div>
               </div>
               <iframe
-                src="https://maps.google.com/maps?q=24.4947355,54.3732241&z=16&output=embed"
+                src={GBP_MAP_EMBED_URL}
                 title="IP Care Technologies Abu Dhabi office map"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 frameBorder="0"
                 style={{ width: '100%', height: '300px', display: 'block' }}
               />
+              <div className="px-6 py-4">
+                <a
+                  href={GBP_DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  <Icons.Navigation size={14} aria-hidden="true" /> Get directions
+                </a>
+              </div>
             </div>
 
             <div className="bg-white rounded-2xl overflow-hidden" style={{ boxShadow: '0 8px 32px rgba(10,26,70,0.12)' }}>

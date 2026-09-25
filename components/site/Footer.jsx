@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from 'react-icons/fa'
-import { SOCIAL_LINKS } from '@/lib/social-links'
+import { SOCIAL_LINKS, GBP_DIRECTIONS_URL } from '@/lib/social-links'
 import Logo from './Logo'
 import { UAE_FOOTER_LINKS } from '@/lib/uae-locations'
 import { isCaSite } from '@/lib/seo-region'
@@ -120,6 +120,13 @@ export default function Footer() {
             <Link href="/contact" className="btn-primary mt-4">
               Contact Us <span aria-hidden="true">→</span>
             </Link>
+            {SHOW_UAE_LOCATIONS && (
+              <p className="mt-4 text-sm">
+                <a href={GBP_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="footer-link">
+                  Get directions to our Abu Dhabi office
+                </a>
+              </p>
+            )}
           </div>
         </div>
 
