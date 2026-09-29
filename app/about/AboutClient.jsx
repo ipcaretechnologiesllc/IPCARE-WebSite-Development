@@ -157,7 +157,7 @@ function Story() {
               because our clients don&apos;t switch off at 5pm.
             </p>
             <p>
-              We&apos;re certified partners of Microsoft, Palo Alto Networks, Cisco, Fortinet, and AWS.
+              We&apos;re <Link href="/partners" style={{ color: '#E87722', textDecoration: 'underline' }}>certified partners</Link> of Microsoft, Palo Alto Networks, Cisco, Fortinet, and AWS.
               Behind every engagement is a team of engineers, architects, and advisors who take pride in
               craft, not just contracts.
             </p>

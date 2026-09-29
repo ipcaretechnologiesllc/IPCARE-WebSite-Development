@@ -5,7 +5,7 @@ import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 
 export const revalidate = 3600
 
-const HUB_DESCRIPTION = `IT equipment rental in ${RENTAL_REGION.prose}: laptops, MacBooks, iPads, event WiFi, servers and CCTV. Delivery, setup and certified engineers included.`
+const HUB_DESCRIPTION = `IT equipment rental in ${RENTAL_REGION.prose}: laptops, MacBooks, iPads, event WiFi, servers and CCTV. Delivered and set up by certified engineers.`
 
 export const metadata = {
   title: 'IT Equipment Rental Dubai & Abu Dhabi: Laptops, WiFi & Servers',

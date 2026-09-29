@@ -36,7 +36,16 @@ export async function generateMetadata(props) {
   const rateLine = p.rates?.monthly != null
     ? 'Daily, weekly and monthly rates.'
     : `Day rate AED ${p.rates?.daily}.`
-  const description = seo.description || `Rent ${name} in ${RENTAL_REGION.prose}. ${p.specs[0]}. ${rateLine} Delivery and setup included.`
+  // Google cuts snippets at ~160 characters, so fall back to shorter wordings (short region
+  // name, then only the spec's first clause, then no spec) until the sentence fits.
+  const leadSpec = p.specs[0].split(/ · | — |, /)[0]
+  const descriptions = [
+    `Rent ${name} in ${RENTAL_REGION.prose}. ${p.specs[0]}. ${rateLine} Delivery and setup included.`,
+    `Rent ${name} in ${RENTAL_REGION.short}. ${p.specs[0]}. ${rateLine} Delivery and setup included.`,
+    `Rent ${name} in ${RENTAL_REGION.short}. ${leadSpec}. ${rateLine} Delivery and setup included.`,
+    `Rent ${name} in ${RENTAL_REGION.short}. ${rateLine} Delivery and setup included.`,
+  ]
+  const description = seo.description || descriptions.find((d) => d.length <= 160) || descriptions.at(-1)
   return {
     title,
     description,

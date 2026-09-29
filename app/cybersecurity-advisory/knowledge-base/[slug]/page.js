@@ -33,11 +33,12 @@ export async function generateMetadata(props) {
   return {
     // Same length rule as blog posts: drop to "| IP Care" when the long suffix won't fit.
     title: a.seoTitle || (`${a.title} | IP Care Cyber Advisory`.length <= 60 ? `${a.title} | IP Care Cyber Advisory` : `${a.title} | IP Care`),
-    description: a.excerpt,
+    // seoDescription is the ≤160-character snippet; the longer excerpt stays on the article cards.
+    description: a.seoDescription || a.excerpt,
     alternates: { canonical: `/cybersecurity-advisory/knowledge-base/${a.slug}` },
     openGraph: {
       title: a.title,
-      description: a.excerpt,
+      description: a.seoDescription || a.excerpt,
       url: `${BASE}/cybersecurity-advisory/knowledge-base/${a.slug}`,
       type: 'article',
       publishedTime: toISO(a.date),

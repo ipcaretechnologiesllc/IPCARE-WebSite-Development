@@ -9,7 +9,7 @@ export const revalidate = 3600
 
 export const metadata = {
   title: uaeFocus('Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies'),
-  description: uaeFocus('Executive cybersecurity advisory in UAE and Canada. CISO advisory, board-level security strategy, risk communication, cyber risk quantification and investment alignment.'),
+  description: uaeFocus('Executive cybersecurity advisory in UAE and Canada: CISO advisory, board-level security strategy, cyber risk quantification and investment alignment.'),
   alternates: { canonical: '/cybersecurity-advisory/executive-advisory' },
   openGraph: {
     title: uaeFocus('Executive Cybersecurity Advisory UAE & Canada | IP Care Technologies'),
@@ -107,7 +107,7 @@ export default function ExecutiveAdvisoryPage() {
       <main>
         <ServicePageTemplate
           data={pageData}
-          related={advisoryServices.filter((s) => s.slug !== 'executive-advisory').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
+          related={advisoryServices.filter((s) => s.slug !== 'executive-advisory').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, href: `/cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
           breadcrumb={breadcrumb}
         />
       </main>

@@ -5,8 +5,8 @@ import KBClient from './KBClient'
 export const revalidate = 3600
 
 export const metadata = {
-  title: 'Cybersecurity Knowledge Base: Palo Alto, Check Point, Fortinet | The Cyber Adviser',
-  description: 'Field-tested cybersecurity articles: Palo Alto, Check Point, Fortinet, Zero Trust architecture, SASE, and security automation insights from senior practitioners.',
+  title: 'Cybersecurity Knowledge Base: Palo Alto, Check Point | IP Care',
+  description: 'Field-tested cybersecurity guides on Palo Alto, Check Point, Fortinet, Zero Trust, SASE and security automation, written by senior practitioners.',
   alternates: { canonical: '/cybersecurity-advisory/knowledge-base' },
   openGraph: {
     title: 'Cybersecurity Knowledge Base: The Cyber Adviser',

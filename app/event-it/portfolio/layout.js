@@ -2,8 +2,8 @@
 // The page itself is a client component; this layout provides server-side metadata.
 
 export const metadata = {
-  title: 'Event IT Portfolio: FIFA, UFC, NBA Abu Dhabi, EuroLeague Final Four 2025, FINA, IIFA, Coldplay | IP Care',
-  description: 'IP Care event IT portfolio. FIFA Club World Cup, UFC Events in UAE (2020-2026), NBA Abu Dhabi Games (2022-2025), EuroLeague Final Four 2025 (first-ever outside Europe), FINA World Swimming, WBA World Championship, World Tennis League, Mubadala Abu Dhabi Open, Abu Dhabi Padel Master, UAE National Day, Ya Salam After Race Concert, IIFA Awards, Saadiyat Nights and Coldplay.',
+  title: 'Event IT Portfolio: FIFA, UFC, NBA & EuroLeague | IP Care',
+  description: 'Event IT delivered by IP Care: FIFA Club World Cup, UFC, NBA Abu Dhabi, EuroLeague Final Four, IIFA Awards, Coldplay and UAE National Day.',
   alternates: { canonical: '/event-it/portfolio' },
   openGraph: {
     title: 'Event IT Portfolio: IP Care Technologies',

@@ -61,7 +61,7 @@ export default async function EventSubPage(props) {
   const related = eventServices
     .filter((s) => s.slug !== params.slug && ['event-wifi', 'temporary-data-centres', 'event-cctv'].includes(s.slug))
     .slice(0, 3)
-    .map((s) => ({ slug: `event-it/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))
+    .map((s) => ({ slug: `event-it/${s.slug}`, href: `/event-it/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))
 
   const faqSchema = {
     '@context': 'https://schema.org',

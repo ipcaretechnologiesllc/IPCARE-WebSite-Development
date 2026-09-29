@@ -20,6 +20,7 @@ const company = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Partners', href: '/partners' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
@@ -140,6 +141,8 @@ export default function Footer() {
             <Link href="/privacy-policy" className="footer-link">Privacy Policy</Link>
             <span aria-hidden="true">&middot;</span>
             <Link href="/terms" className="footer-link">Terms of Use</Link>
+            <span aria-hidden="true">&middot;</span>
+            <Link href="/cookie-policy" className="footer-link">Cookie Policy</Link>
           </div>
         </div>
       </div>

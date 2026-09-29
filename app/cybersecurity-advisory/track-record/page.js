@@ -16,7 +16,7 @@ const capabilityMap = cyberCapabilities.reduce((acc, cap) => {
 export const metadata = {
   title: 'Palo Alto & Prisma Access Delivery in Canada | IP Care',
   description:
-    'Anonymized track record of enterprise and government cybersecurity delivery in Canada: Palo Alto firewall deployments and migrations, Prisma Access / SASE, Panorama to Strata Cloud Manager, Prisma AIRS and IT/OT segmentation.',
+    'Anonymized cybersecurity delivery for enterprise and government in Canada: Palo Alto firewalls, Prisma Access, Strata Cloud Manager and IT/OT segmentation.',
   alternates: { canonical: '/cybersecurity-advisory/track-record' },
   openGraph: {
     title: 'Palo Alto & Prisma Access Delivery in Canada | IP Care',

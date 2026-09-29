@@ -107,7 +107,7 @@ export default function SecurityAutomationPage() {
       <main>
         <ServicePageTemplate
           data={pageData}
-          related={advisoryServices.filter((s) => s.slug !== 'security-automation').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
+          related={advisoryServices.filter((s) => s.slug !== 'security-automation').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, href: `/cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
           breadcrumb={breadcrumb}
         />
       </main>

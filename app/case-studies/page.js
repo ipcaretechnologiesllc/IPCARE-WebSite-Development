@@ -29,7 +29,7 @@ const TINT = '#F4F6FA'
 export const metadata = {
   title: 'Case Studies — Delivery & Incident Response Proof | IP Care',
   description:
-    'Every IP Care case study in one place: enterprise ICT and ELV delivery, major-event IT infrastructure, and cybersecurity incident response — with the scope, the method and the outcome for each.',
+    'Every IP Care case study in one place: enterprise ICT and ELV delivery, major-event IT and cybersecurity incident response, with scope and outcomes.',
   alternates: { canonical: '/case-studies' },
   openGraph: {
     title: 'Case Studies — Delivery & Incident Response Proof | IP Care',

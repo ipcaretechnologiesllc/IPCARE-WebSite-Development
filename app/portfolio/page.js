@@ -10,7 +10,7 @@ const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 export const metadata = {
   title: 'Enterprise ELV & Infrastructure Projects UAE | IP Care',
   description:
-    'Explore IP Care Technologies delivery portfolio across hotels, schools, arenas, towers, oil and gas, CCTV, access control, structured cabling, fiber and system integration projects.',
+    'IP Care delivery portfolio: hotels, schools, arenas, towers and oil and gas sites, with CCTV, access control, structured cabling and fiber projects.',
   alternates: { canonical: '/portfolio' },
   openGraph: {
     title: 'Enterprise ELV & Infrastructure Projects UAE | IP Care',
