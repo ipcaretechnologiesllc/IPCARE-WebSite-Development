@@ -5,7 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductDetailClient from './ProductDetailClient'
 import ProductCard from '@/components/rental/ProductCard'
-import { getProduct, getAllProductParams, getRelatedProducts, productSeo } from '@/lib/rental-data'
+import { getProduct, getAllProductParams, getRelatedProducts, resolveProductRefs, productSeo } from '@/lib/rental-data'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
 
@@ -58,7 +58,11 @@ export default async function ProductDetailPage(props) {
   const params = await props.params;
   const product = getProduct(params.category, params.product)
   if (!product) notFound()
-  const related = getRelatedProducts(params.category, params.product, 3)
+  // A product filed outside its natural family (the iMac under laptops) names its own
+  // related items, so its page links to other Macs rather than the first Dell and HP.
+  const related = product.content?.related
+    ? resolveProductRefs(product.content.related)
+    : getRelatedProducts(params.category, params.product, 3)
 
   const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
   const productUrl = `${BASE}/rental/${params.category}/${params.product}`
@@ -116,26 +120,30 @@ export default async function ProductDetailPage(props) {
   // Single source for the FAQs: rendered below AND fed to FAQPage schema. Previously
   // this schema existed with four questions that appeared nowhere on the page, which
   // breaches Google's requirement that marked-up content be visible to users.
-  const faqs = [
-    {
-      q: `What's included when I rent the ${product.brand} ${product.model}?`,
-      a: `Rental of the ${product.brand} ${product.model} includes delivery, collection and setup across ${isCaSite() ? 'the UAE and Canada' : 'Dubai, Abu Dhabi and the wider UAE'}, plus standard accessories and configuration to your requirements. Technical support is included for the duration of the rental. MDM enrolment, locked stands and tethers, standby spare units, a dedicated on-site engineer and damage waiver are quoted separately.`,
-    },
-    {
-      q: 'What is the minimum rental period?',
-      a: product.rates?.monthly != null
-        ? 'One day. Daily, weekly and monthly rates are available, and the weekly and monthly bands offer better value on anything running beyond a few days. Rates shown are indicative, per unit and exclude VAT.'
-        : 'One day, and this item is quoted on a day rate. For longer commissioning or handover phases, contact us and we will price the full period against your project rather than billing day by day. Rates shown are indicative, per unit and exclude VAT.',
-    },
-    {
-      q: 'How quickly can this be delivered?',
-      a: 'Plan on one to two days between confirmed order and delivery across the UAE. That window is the pre-delivery configuration work: imaging, enrolment and lockdown are completed before dispatch rather than at your site. Larger quantities or upcountry locations may need longer, so share your dates early.',
-    },
-    {
-      q: 'Is technical support included during the rental period?',
-      a: 'Yes. Setup and ongoing technical support are included for all rental equipment, with replacement options available in case of a fault. A dedicated on-site engineer for the duration of an event is available and quoted separately.',
-    },
-  ]
+  const includedFaq = {
+    q: `What's included when I rent the ${product.brand} ${product.model}?`,
+    a: `Rental of the ${product.brand} ${product.model} includes delivery, collection and setup across ${isCaSite() ? 'the UAE and Canada' : 'Dubai, Abu Dhabi and the wider UAE'}, plus standard accessories and configuration to your requirements. Technical support is included for the duration of the rental. MDM enrolment, locked stands and tethers, standby spare units, a dedicated on-site engineer and damage waiver are quoted separately.`,
+  }
+  const minimumPeriodFaq = {
+    q: 'What is the minimum rental period?',
+    a: product.rates?.monthly != null
+      ? 'One day. Daily, weekly and monthly rates are available, and the weekly and monthly bands offer better value on anything running beyond a few days. Rates shown are indicative, per unit and exclude VAT.'
+      : 'One day, and this item is quoted on a day rate. For longer commissioning or handover phases, contact us and we will price the full period against your project rather than billing day by day. Rates shown are indicative, per unit and exclude VAT.',
+  }
+  const deliveryFaq = {
+    q: 'How quickly can this be delivered?',
+    a: 'Plan on one to two days between confirmed order and delivery across the UAE. That window is the pre-delivery configuration work: imaging, enrolment and lockdown are completed before dispatch rather than at your site. Larger quantities or upcountry locations may need longer, so share your dates early.',
+  }
+  const supportFaq = {
+    q: 'Is technical support included during the rental period?',
+    a: 'Yes. Setup and ongoing technical support are included for all rental equipment, with replacement options available in case of a fault. A dedicated on-site engineer for the duration of an event is available and quoted separately.',
+  }
+  // Every product page carried the same four FAQs, which made sibling pages (iPad Pro vs
+  // iPad Air) near-duplicates. Products with their own FAQs lead with them and keep only
+  // the two generic answers that still differ per item: rental period and lead time.
+  const faqs = product.content?.faqs?.length
+    ? [...product.content.faqs, minimumPeriodFaq, deliveryFaq]
+    : [includedFaq, minimumPeriodFaq, deliveryFaq, supportFaq]
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -251,7 +259,7 @@ export default async function ProductDetailPage(props) {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {related.map((r) => (
-                <ProductCard key={r.slug} product={r} categorySlug={params.category}/>
+                <ProductCard key={r.slug} product={r} categorySlug={r.categorySlug}/>
               ))}
             </div>
           </div>
