@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import IndustriesClient from './IndustriesClient'
 import { uaeFocus } from '@/lib/seo-region'
+import { serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -23,10 +24,7 @@ const industrySchema = {
         url: `${BASE}/industries/healthcare`,
         description: 'Hospital and clinic IT aligned with UAE healthcare data regulations, national health information exchange integration, medical device security, and 24/7 clinical support across the UAE.',
         provider: { '@id': 'https://www.ipcare.ae#org' },
-        areaServed: [
-          { '@type': 'Country', name: 'United Arab Emirates' },
-          { '@type': 'Country', name: 'Canada' },
-        ],
+        areaServed: serviceCountries(),
       },
     },
     {
@@ -38,10 +36,7 @@ const industrySchema = {
         url: `${BASE}/industries/banking`,
         description: 'Compliance-aligned cloud and managed SOC, financial-services regulator cyber risk management, payment systems integration for UAE-licensed banks and financial services firms.',
         provider: { '@id': 'https://www.ipcare.ae#org' },
-        areaServed: [
-          { '@type': 'Country', name: 'United Arab Emirates' },
-          { '@type': 'Country', name: 'Canada' },
-        ],
+        areaServed: serviceCountries(),
       },
     },
     {
@@ -81,10 +76,7 @@ const industrySchema = {
         url: `${BASE}/services/infrastructure`,
         description: uaeFocus('Rugged connectivity across remote sites, mobile workforce management, and field infrastructure for construction and field operations in the UAE and Canada.'),
         provider: { '@id': 'https://www.ipcare.ae#org' },
-        areaServed: [
-          { '@type': 'Country', name: 'United Arab Emirates' },
-          { '@type': 'Country', name: 'Canada' },
-        ],
+        areaServed: serviceCountries(),
       },
     },
   ],

@@ -6,6 +6,7 @@ import Footer from '@/components/site/Footer'
 import ProductCard from '@/components/rental/ProductCard'
 import { getCategory, getAllCategorySlugs, getCrossListedProducts } from '@/lib/rental-data'
 import { RENTAL_REGION } from '@/lib/seo-region'
+import { ORG_REF, schemaImage } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -63,7 +64,7 @@ export default async function CategoryPage(props) {
         '@type': 'Product',
         name: `${p.brand} ${p.model}`,
         brand: { '@type': 'Brand', name: p.brand },
-        image: p.image + '?w=1200&q=85',
+        image: schemaImage(p.image),
         url: `${BASE}/rental/${categorySlug}/${p.slug}`,
         offers: {
           '@type': 'AggregateOffer',
@@ -75,7 +76,7 @@ export default async function CategoryPage(props) {
           highPrice: p.rates.monthly ?? p.rates.weekly ?? p.rates.daily,
           offerCount: [p.rates.daily, p.rates.weekly, p.rates.monthly].filter((r) => r != null).length,
           availability: 'https://schema.org/InStock',
-          seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.' },
+          seller: ORG_REF,
         },
       },
     })),

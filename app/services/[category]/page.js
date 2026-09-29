@@ -6,6 +6,7 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { serviceCategories, getAllCategorySlugs, getCategory, getRelatedServices } from '@/lib/services-data'
 import { getCaseStudiesForCategory, toCaseStudyCard } from '@/lib/case-studies-data'
+import { ORG_REF, serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -74,12 +75,8 @@ export default async function CategoryPage(props) {
     name: cat.name,
     description: cat.metaDescription,
     serviceType: cat.name,
-    provider: {
-      '@type': 'Organization',
-      name: 'IP Care Technologies L.L.C.',
-      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'),
-    },
-    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    provider: ORG_REF,
+    areaServed: serviceCountries(),
     url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + `/services/${params.category}`,
     hasOfferCatalog: subpages.length > 0 ? {
       '@type': 'OfferCatalog',

@@ -3,6 +3,7 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
+import { ORG_REF, serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -92,12 +93,8 @@ export default function SecurityAutomationPage() {
     name: pageData.h1,
     description: pageData.hero,
     serviceType: 'Cybersecurity Advisory',
-    provider: {
-      '@type': 'Organization',
-      name: 'IP Care Technologies L.L.C.',
-      url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'),
-    },
-    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    provider: ORG_REF,
+    areaServed: serviceCountries(),
     url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') + '/cybersecurity-advisory/security-automation',
   }
 

@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductPageTemplate from '@/components/site/ProductPageTemplate'
 import { getProduct } from '@/lib/products-data'
+import { ORG_REF } from '@/lib/schema'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -30,8 +31,8 @@ export default function CrewForce360Page() {
     operatingSystem: 'Web, iOS, Android',
     description: data.tagline,
     url: 'https://www.crewforce360.com/',
-    creator: { '@type': 'Organization', name: 'IP Care Technologies' },
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies' },
+    creator: ORG_REF,
+    publisher: ORG_REF,
   }
 
   const breadcrumbSchema = {

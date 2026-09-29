@@ -1,4 +1,6 @@
 import { events, getAllEventSubSlugs } from '@/lib/event-it-data'
+import { isCaSite } from '@/lib/seo-region'
+import { ORG_REF } from '@/lib/schema'
 
 export const metadata = {
   title: 'Event IT Infrastructure UAE | WiFi, Data Centres & NOC for Major Events | IP Care',
@@ -37,23 +39,10 @@ const jsonLd = {
       description:
         'Enterprise event IT infrastructure across UAE: high-density WiFi, temporary data centres, structured cabling, CCTV, point-to-point wireless links and 24/7 NOC operations.',
       url: 'https://www.ipcare.ae/event-it',
-      provider: {
-        '@type': 'LocalBusiness',
-        name: 'IP Care Technologies L.L.C.',
-        url: 'https://www.ipcare.ae',
-        telephone: '+971506828290',
-        email: 'info@ipcare.ae',
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Salam Street',
-          postOfficeBoxNumber: '53209',
-          addressLocality: 'Abu Dhabi',
-          addressCountry: 'AE',
-        },
-      },
+      provider: ORG_REF,
       areaServed: [
         { '@type': 'Country', name: 'United Arab Emirates', sameAs: 'https://www.wikidata.org/wiki/Q878' },
-        { '@type': 'Country', name: 'Canada', sameAs: 'https://www.wikidata.org/wiki/Q16' },
+        ...(isCaSite() ? [{ '@type': 'Country', name: 'Canada', sameAs: 'https://www.wikidata.org/wiki/Q16' }] : []),
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',

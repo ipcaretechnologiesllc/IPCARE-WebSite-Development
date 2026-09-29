@@ -4,6 +4,7 @@ import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllSubpageParams, getSubpage, getRelatedServices } from '@/lib/services-data'
 import { isUaeOnlyServiceSubpage, isCaOnlyServiceSubpage, isCaSite } from '@/lib/seo-region'
+import { ORG_REF, UAE_COUNTRY, serviceCountries } from '@/lib/schema'
 import { getCaseStudiesForSubpage, toCaseStudyCard } from '@/lib/case-studies-data'
 import { getLocalProof } from '@/lib/local-proof'
 
@@ -84,8 +85,8 @@ export default async function SubPage(props) {
   // Toronto" is delivered by a UAE company across both countries — actively working against
   // the local-relevance signal that page needs, and equally wrong the other way for UAE city
   // pages (Dubai, Abu Dhabi) claiming to also serve Canada. Generic, non-location subpages
-  // (technology-strategy, managed-it, etc.) are genuinely offered UAE-wide and Canada-wide as
-  // one practice, so they keep the original dual-country areaServed — only city pages narrow.
+  // (technology-strategy, managed-it, etc.) are offered as one practice, so they list the
+  // countries this build serves (UAE only on .ae, both on .ca) — only city pages narrow.
   const isLocationPage = sub.icon === 'MapPin'
   const isTorontoSub = isLocationPage && sub.region === 'canada'
   const serviceSchema = {
@@ -93,14 +94,15 @@ export default async function SubPage(props) {
     '@type': 'Service',
     name: sub.h1,
     description: sub.metaDescription,
-    provider: isTorontoSub
+    // The #toronto node is only emitted on the .ca build (app/layout.js), so .ae links the Organization.
+    provider: isTorontoSub && isCaSite()
       ? { '@id': 'https://www.ipcare.ca/#toronto' }
-      : { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') },
+      : ORG_REF,
     areaServed: isTorontoSub
       ? [{ '@type': 'City', name: 'Toronto' }, { '@type': 'AdministrativeArea', name: 'Ontario' }, { '@type': 'Country', name: 'Canada' }]
       : isLocationPage
-        ? [{ '@type': 'Country', name: 'United Arab Emirates' }]
-        : [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+        ? [UAE_COUNTRY]
+        : serviceCountries(),
   }
 
   return (

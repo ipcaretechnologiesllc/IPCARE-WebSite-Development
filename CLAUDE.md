@@ -129,6 +129,15 @@ Cybersecurity, advisory and consulting case studies do **not** go in `/portfolio
 - **`/case-studies`** (`app/case-studies/page.js`) is a master index that **links out** to every case study wherever it lives — `/portfolio/*`, `/event-it/*` and these — and deliberately duplicates none of their content. It is a directory, not a second portfolio. Only `fifa-club-world-cup` has a built `/event-it/[slug]` route, so that entry is gated on `getEventSubpage()` to avoid listing a 404.
 - **Content QA:** the session-theft study is published with client consent on an anonymized basis. No AED figures, no calendar dates (timeline is relative days), and the client is generalized to "UAE SME" — sector, emirate and spend amounts together would identify them. Do not reintroduce any of those from the source proposal in `D:\ICT\ICT Propossals\Proposals\S Clinic UAE`. The 4-page source PDF there is footer-stamped **Confidential** and must not be published as a download.
 
+### Structured data (JSON-LD)
+
+The Organization (`@id` `https://www.ipcare.ae#org`), the Abu Dhabi `ProfessionalService` and the `WebSite` nodes are declared once in `app/layout.js`; pages add their own blocks. Use the helpers in `lib/schema.js` when writing page schema:
+- **`ORG_REF`** for every provider/publisher/author/seller/creator/worksFor that is IP Care — never a fresh inline `{ '@type': 'Organization', name: ... }`, which reads as a second, unlinked company.
+- **`schemaImage(src)`** for every `image`: JSON-LD is not resolved by `metadataBase`, so a `/public` path was published as a relative URL Google can't fetch (hit 36 rental products and 6 blog posts until 2026-09-29).
+- **`serviceCountries()`** for country-level `areaServed`: UAE only on the .ae build, UAE + Canada on a .ca build. Toronto location pages and the Canadian track-record case study list Canada deliberately.
+
+FAQ rich results are no longer shown for business sites, but keep `FAQPage` markup generated from the same array the page renders — it must never describe content that isn't visible.
+
 ### Path aliases
 
 `@/*` maps to repo root (see `jsconfig.json`): `@/components/*`, `@/lib/*`, `@/app/*`, `@/hooks/*`.

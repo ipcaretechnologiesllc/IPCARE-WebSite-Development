@@ -3,6 +3,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { getAllEventSubSlugs, getEventSubpage, eventServices, events } from '@/lib/event-it-data'
+import { ORG_REF, serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -85,8 +86,8 @@ export default async function EventSubPage(props) {
     '@type': 'Service',
     name: sub.h1,
     description: sub.metaDescription,
-    provider: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae') },
-    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }, { '@type': 'Country', name: 'Canada' }],
+    provider: ORG_REF,
+    areaServed: serviceCountries(),
   }
 
   // Case-study sub-pages (those with a matching `events` portfolio entry) get an
@@ -110,8 +111,8 @@ export default async function EventSubPage(props) {
     headline: sub.h1,
     description: sub.metaDescription,
     image: [imgSrc],
-    author: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    author: ORG_REF,
+    publisher: ORG_REF,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/event-it/${params.slug}` },
     about: {
       '@type': 'Event',

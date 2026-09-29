@@ -7,6 +7,7 @@ import ProductDetailClient from './ProductDetailClient'
 import ProductCard from '@/components/rental/ProductCard'
 import { getProduct, getAllProductParams, getRelatedProducts, productSeo } from '@/lib/rental-data'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
+import { ORG_REF, schemaImage } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -68,7 +69,7 @@ export default async function ProductDetailPage(props) {
     name: `${product.brand} ${product.model}`,
     brand: { '@type': 'Brand', name: product.brand },
     description: product.specs.join('. '),
-    image: product.images ? product.images : [product.image + '?w=1200&q=85'],
+    image: (product.images || [product.image]).map(schemaImage),
     sku: product.slug,
     mpn: product.model,
     category: product.categoryName,
@@ -86,7 +87,7 @@ export default async function ProductDetailPage(props) {
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/NewCondition',
       url: productUrl,
-      seller: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+      seller: ORG_REF,
       areaServed: [
         { '@type': 'City', name: 'Dubai' },
         { '@type': 'City', name: 'Abu Dhabi' },

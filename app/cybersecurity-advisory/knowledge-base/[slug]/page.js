@@ -5,6 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import { kbArticles, getKbArticle, getKbSlugs } from '@/lib/cyber-advisory-data'
+import { ORG_REF } from '@/lib/schema'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -64,8 +65,8 @@ export default async function KnowledgeBaseArticlePage(props) {
     datePublished: toISO(a.date),
     dateModified: toISO(a.updatedDate || a.date),
     // Honest authorship: house byline maps to the organization, not a named person.
-    author: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    author: ORG_REF,
+    publisher: ORG_REF,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/cybersecurity-advisory/knowledge-base/${a.slug}` },
     articleSection: a.category,
   }

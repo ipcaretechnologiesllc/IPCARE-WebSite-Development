@@ -7,6 +7,7 @@ import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
 import { srcSetFor } from '@/lib/responsive-image'
+import { ORG_REF, schemaImage } from '@/lib/schema'
 
 // The article hero column is max-w-[720px] inside px-6 padding.
 const HERO_SIZES = '(min-width: 768px) 720px, calc(100vw - 48px)'
@@ -75,20 +76,20 @@ export default async function ArticlePage(props) {
         '@type': 'Person',
         name: authorInfo.name,
         jobTitle: authorInfo.jobTitle,
-        worksFor: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+        worksFor: ORG_REF,
         ...(authorInfo.url ? { url: authorInfo.url, sameAs: [authorInfo.url] } : {}),
       }
-    : { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE }
+    : ORG_REF
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: a.title,
-    image: [`${a.img}?w=1200&q=85`],
+    image: [schemaImage(a.img)],
     datePublished: toISODate(a.date),
     dateModified: toISODate(a.updatedDate || a.date),
     author: authorSchema,
-    publisher: { '@type': 'Organization', name: 'IP Care Technologies L.L.C.', url: BASE },
+    publisher: ORG_REF,
     description: a.excerpt,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE}/blog/${params.slug}` },
   }

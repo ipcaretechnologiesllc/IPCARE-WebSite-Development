@@ -7,6 +7,7 @@ const articleCards = articles.map(({ slug, title, excerpt, category, date, readT
   { slug, title, excerpt, category, date, readTime, author: author ?? null, img, imageFit: imageFit ?? null }
 ))
 import { uaeFocus } from '@/lib/seo-region'
+import { ORG_REF } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -31,11 +32,7 @@ const blogSchema = {
   name: 'IP Care Technologies IT Knowledge Base',
   description: 'Expert articles on enterprise IT, cybersecurity, cloud, networking, and managed services.',
   url: `${BASE}/blog`,
-  publisher: {
-    '@type': 'Organization',
-    name: 'IP Care Technologies L.L.C.',
-    url: BASE,
-  },
+  publisher: ORG_REF,
 }
 
 export default function BlogPage() {

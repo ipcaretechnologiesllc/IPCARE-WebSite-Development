@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import AdvisoryClient from './AdvisoryClient'
 import { uaeFocus } from '@/lib/seo-region'
+import { serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -35,10 +36,7 @@ const advisorySchema = {
   name: 'The Cyber Adviser: Cybersecurity Advisory',
   description: 'Enterprise cybersecurity advisory: Zero Trust architecture, SASE transformation, cloud security, executive advisory and security automation.',
   provider: { '@id': 'https://www.ipcare.ae#org' },
-  areaServed: [
-    { '@type': 'Country', name: 'United Arab Emirates' },
-    { '@type': 'Country', name: 'Canada' },
-  ],
+  areaServed: serviceCountries(),
   serviceType: [
     'Zero Trust Architecture',
     'SASE Transformation',
