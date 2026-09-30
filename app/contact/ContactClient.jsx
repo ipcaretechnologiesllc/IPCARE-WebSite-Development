@@ -5,6 +5,7 @@ import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
+import { trackLead } from '@/lib/analytics'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { GBP_DIRECTIONS_URL, GBP_MAP_EMBED_URL } from '@/lib/social-links'
 
@@ -61,6 +62,7 @@ export default function ContactClient() {
         setSubmitting(false)
         return
       }
+      trackLead('contact', { enquiry_type: tab, service: form.service || '(none)' })
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again.') }
     setSubmitting(false)

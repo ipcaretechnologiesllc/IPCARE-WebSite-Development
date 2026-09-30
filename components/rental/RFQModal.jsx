@@ -4,6 +4,7 @@ import { useState } from 'react'
 import * as Icons from 'lucide-react'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
+import { trackLead } from '@/lib/analytics'
 
 export default function RFQModal({ onClose, onSuccess, items }) {
   const [form, setForm] = useState({
@@ -42,6 +43,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
         setSubmitting(false)
         return
       }
+      trackLead('rental_quote', { item_count: Array.isArray(items) ? items.length : 0 })
       setReference(data.reference || '')
       setSubmitted(true)
       setTimeout(() => { onSuccess?.() }, 3200)

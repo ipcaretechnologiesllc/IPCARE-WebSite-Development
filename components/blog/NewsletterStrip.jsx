@@ -3,6 +3,7 @@
 import React, { Component, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { postWithRetry } from '@/lib/post-with-retry'
+import { trackEvent } from '@/lib/analytics'
 
 // ErrorBoundary — silently hides the strip if anything throws; never blocks the page
 class NewsletterErrorBoundary extends Component {
@@ -51,7 +52,10 @@ function NewsletterStripInner() {
       } catch {
         setErr('Could not reach the server. Please try again later.')
       }
-      if (ok) setSubmitted(true)
+      if (ok) {
+        trackEvent('sign_up', { method: 'newsletter' })
+        setSubmitted(true)
+      }
     } catch {
       setErr('Something went wrong. Please try again later.')
     } finally {

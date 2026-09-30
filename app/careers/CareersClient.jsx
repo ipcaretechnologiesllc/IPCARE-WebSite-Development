@@ -5,6 +5,7 @@ import * as Icons from 'lucide-react'
 import { jobs } from '@/lib/careers-data'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
+import { trackEvent } from '@/lib/analytics'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -107,6 +108,7 @@ export default function CareersClient() {
         setSubmitting(false)
         return
       }
+      trackEvent('job_application', { role: form.role, has_cv: !!cv })
       setSubmitted(true)
     } catch { setErr('Submission failed. Please try again.') }
     setSubmitting(false)
