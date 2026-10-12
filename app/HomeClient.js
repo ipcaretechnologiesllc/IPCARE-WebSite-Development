@@ -12,6 +12,7 @@ import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CertificationsBand from '@/components/site/CertificationsBand'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import RentalCircularGallery from '@/components/rental/RentalCircularGallery'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
 import { responsive, SIZES } from '@/lib/responsive-image'
@@ -1271,6 +1272,7 @@ const App = ({ latestPosts, featuredProjects }) => {
       <Header />
       <HeroCarousel />
       <TrustMarquee />
+      <QuickEnquiry source="homepage" />
       <Stats />
       <CertificationsBand />
       <Services />

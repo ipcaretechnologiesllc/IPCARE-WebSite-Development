@@ -14,6 +14,7 @@
 
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
+import { trackEvent } from '@/lib/analytics'
 
 const LS_KEY = 'ipcare_cookie_consent'
 const LS_PREFS = 'ipcare_cookie_prefs'
@@ -67,6 +68,16 @@ const GA4_MEASUREMENT_ID = 'G-YY2Q2629E7'
 // instead of loading unconditionally and relying on a consent-mode signal.
 const CLARITY_PROJECT_ID = 'ygqq3ktlb0'
 
+// Click-to-contact links → GA4 event name. Matched by one delegated listener below, so
+// every WhatsApp / phone / email link is counted wherever it is rendered (floating
+// buttons, header, CTA bands, blog bodies) without wiring each link separately.
+function contactEventFor(href) {
+  if (href.startsWith('tel:')) return 'phone_click'
+  if (href.startsWith('mailto:')) return 'email_click'
+  if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|chat\.whatsapp\.com)\//i.test(href)) return 'whatsapp_click'
+  return null
+}
+
 export default function Analytics() {
   // Allow env var to override the hardcoded ID (useful for staging / different GA4 properties)
   const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID
@@ -96,6 +107,24 @@ export default function Analytics() {
       window.removeEventListener('ipcare:consent-updated', onCustom)
     }
   }, [measurementId])
+
+  useEffect(() => {
+    // Capture phase, so a handler that stops propagation can't hide the click.
+    const onClick = (e) => {
+      const a = e.target instanceof Element ? e.target.closest('a[href]') : null
+      if (!a) return
+      const href = a.getAttribute('href') || ''
+      const name = contactEventFor(href)
+      if (!name) return
+      trackEvent(name, {
+        link_url: href.split('?')[0],
+        link_text: (a.getAttribute('aria-label') || a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100),
+        page_path: window.location.pathname,
+      })
+    }
+    document.addEventListener('click', onClick, true)
+    return () => document.removeEventListener('click', onClick, true)
+  }, [])
 
   return (
     <>

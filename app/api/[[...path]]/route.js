@@ -254,8 +254,17 @@ export async function POST(request, props) {
         service: { type: 'text', maxLen: 80, allowNewlines: false },
         message: { type: 'text', maxLen: 3000, allowNewlines: true },
         tab: { type: 'text', maxLen: 20, allowNewlines: false },
+        source: { type: 'text', maxLen: 40, allowNewlines: false },
       })
-      if (!clean.name || !clean.email || !clean.company || !clean.phone) {
+      // tab 'quick' is the call-back form (components/site/QuickEnquiry.jsx): name + phone
+      // only, so email and company are optional there and the auto-reply is skipped.
+      const quick = clean.tab === 'quick'
+      if (quick) {
+        if (!clean.name || clean.phone.replace(/\D/g, '').length < 7) {
+          return jsonErr(request, 'missing-required-fields', 400)
+        }
+        clean.message = clean.message || `Call back requested via the quick enquiry form (${clean.source || 'website'}).`
+      } else if (!clean.name || !clean.email || !clean.company || !clean.phone) {
         return jsonErr(request, 'missing-required-fields', 400)
       }
 
@@ -274,11 +283,13 @@ export async function POST(request, props) {
       await db.collection('leads').insertOne(doc)
 
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
-      const teamRes = await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['contact', 'team'] })
-      const auto = clean.tab === 'rental'
-        ? tplContactRentalAutoReply({ name: clean.name })
-        : tplContactAutoReply({ name: clean.name })
-      const autoRes = await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
+      const teamRes = await sendMail({ to: INFO_EMAIL, subject: quick ? `CALL BACK: ${team.subject}` : team.subject, html: team.html, replyTo: clean.email || undefined, categories: ['contact', 'team'] })
+      if (clean.email) {
+        const auto = clean.tab === 'rental'
+          ? tplContactRentalAutoReply({ name: clean.name })
+          : tplContactAutoReply({ name: clean.name })
+        await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
+      }
 
       return jsonOk(request, { reference })
     }
