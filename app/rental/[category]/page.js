@@ -116,7 +116,9 @@ export default async function CategoryPage(props) {
         <section className="py-14 md:py-16 px-6">
           <div className="max-w-[1200px] mx-auto text-center">
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">{cat.keyword}</div>
-            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.name} Rental, <span className="text-[#E87722]">{RENTAL_REGION.short}</span></h1>
+            {/* `h1` overrides the generated "<name> Rental" wording where the category's
+                display name doesn't match how people search for it (see rental-data.js). */}
+            <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.h1 || `${cat.name} Rental`}, <span className="text-[#E87722]">{RENTAL_REGION.short}</span></h1>
             <p className="body-text mt-5 max-w-2xl mx-auto">{cat.description}</p>
           </div>
         </section>
@@ -152,6 +154,27 @@ export default async function CategoryPage(props) {
                   {s.body.map((p, i) => (
                     <p key={i} className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{p}</p>
                   ))}
+                  {s.table && (
+                    <div className="overflow-x-auto mt-6 rounded-lg" style={{ border: '1px solid #E2E6EE' }}>
+                      <table className="w-full min-w-[640px] text-sm text-left">
+                        {s.table.caption && <caption className="sr-only">{s.table.caption}</caption>}
+                        <thead style={{ background: '#F4F6FA', color: '#0B1A46' }}>
+                          <tr>
+                            {s.table.columns.map((c) => <th key={c} scope="col" className="px-4 py-3 font-semibold">{c}</th>)}
+                          </tr>
+                        </thead>
+                        <tbody style={{ color: '#58595B' }}>
+                          {s.table.rows.map((row) => (
+                            <tr key={row[0]} style={{ borderTop: '1px solid #E2E6EE' }}>
+                              {row.map((cell, i) => i === 0
+                                ? <th key={i} scope="row" className="px-4 py-3 font-semibold" style={{ color: '#0B1A46' }}>{cell}</th>
+                                : <td key={i} className="px-4 py-3">{cell}</td>)}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
                 </div>
               ))}
 
@@ -159,6 +182,15 @@ export default async function CategoryPage(props) {
                 <div className="mb-10 rounded-xl p-6 md:p-8" style={{ background: '#F4F6FA', borderLeft: '3px solid #E87722' }}>
                   <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{cat.content.caseStudy.h2}</h2>
                   <p className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{cat.content.caseStudy.body}</p>
+                  {cat.content.caseStudy.links?.length > 0 && (
+                    <ul className="flex flex-wrap gap-2 mb-5">
+                      {cat.content.caseStudy.links.map((l) => (
+                        <li key={l.href}>
+                          <Link href={l.href} className="filter-pill-light">{l.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   {cat.content.caseStudy.href && (
                     <Link href={cat.content.caseStudy.href} className="mono text-[12px] uppercase tracking-widest text-[#E87722] hover:underline inline-flex items-center gap-1">
                       {cat.content.caseStudy.linkLabel || 'Read more'} <Icons.ArrowRight size={13}/>
