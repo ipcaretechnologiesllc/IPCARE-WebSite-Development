@@ -51,15 +51,15 @@ function parseKbDate(str) {
 const HUB_DATES = {
   '/':                                     '2026-05-10',
   '/about':                                '2025-01-01',
-  '/services':                             '2025-03-01',
+  '/services':                             '2026-09-23',
   '/portfolio':                            '2026-07-05',
   '/case-studies':                         '2026-09-19',
   '/products':                             '2026-07-23',
   '/rental':                               '2026-10-12',  // Abu Dhabi/Dubai computer rental section
   '/event-it':                             '2025-05-25',
   '/event-it/portfolio':                   '2025-05-25',
-  '/cybersecurity-advisory':               '2025-06-01',
-  '/cybersecurity-advisory/knowledge-base':'2025-06-01',
+  '/cybersecurity-advisory':               '2026-10-12',  // lists the newest KB articles
+  '/cybersecurity-advisory/knowledge-base':'2026-10-12',  // Harmony SASE guide added
   '/blog':                                 '2026-05-10',
   '/industries':                           '2025-01-01',
   '/partners':                             '2025-01-01',
@@ -72,23 +72,105 @@ const HUB_DATES = {
 
 // Advisory sub-page static dates (service pages, not time-sensitive articles)
 const ADVISORY_SUB_DATES = {
-  'cloud-security':       '2025-03-01',
-  'zero-trust':           '2025-03-01',
-  'executive-advisory':   '2025-01-01',
-  'security-automation':  '2025-03-01',
+  'cloud-security':       '2026-09-29',  // related-service links fixed
+  'zero-trust':           '2026-09-29',
+  'executive-advisory':   '2026-09-29',
+  'security-automation':  '2026-09-29',
   'sase':                 '2026-10-12',  // Check Point Harmony SASE added
-  'track-record':         '2026-07-09',
+  'track-record':         '2026-09-29',  // description rewritten
 }
 
-// Real last-change dates for service subpages, keyed by subpage slug (applies across
-// categories). 2026-09-23: Dubai / Abu Dhabi pages gained the local-proof section and
-// the CCTV Abu Dhabi page was added — dated so Google recrawls them. Everything else
-// keeps the original 2025-03-01.
-const SUBPAGE_DATES = {
-  'dubai':                        '2026-09-23',
-  'abu-dhabi':                    '2026-09-23',
-  'cctv-installation-abu-dhabi':  '2026-09-23',
-  'access-control':               '2026-10-12',  // coworking FAQ
+// Last real content change per service category and subpage, keyed 'category' or
+// 'category/subpage'. Derived 2026-10-12 from the git history of lib/services-data.js
+// (comment-only edits ignored), raised to 2026-09-23 for Dubai / Abu Dhabi pages and
+// the CCTV Abu Dhabi page (local-proof section, lib/local-proof.js) and to 2026-09-29
+// for Cybersecurity and Incident Response (case studies, lib/case-studies-data.js).
+// Bump an entry when that page's visible content changes. Toronto pages are omitted:
+// they are excluded from the ipcare.ae sitemap and fall back to the default on .ca.
+const SERVICE_DATES = {
+  'ai-solutions':                                            '2026-06-29',
+  'ai-solutions/abu-dhabi':                                  '2026-09-23',
+  'ai-solutions/ai-chatbots-virtual-assistants':             '2026-09-09',
+  'ai-solutions/ai-integration-custom-models':               '2026-09-09',
+  'ai-solutions/ai-voice-agents':                            '2026-09-09',
+  'ai-solutions/business-process-automation':                '2026-09-09',
+  'ai-solutions/document-data-intelligence':                 '2026-06-29',
+  'ai-solutions/dubai':                                      '2026-09-23',
+  'cloud':                                                   '2026-06-26',
+  'cloud/abu-dhabi':                                         '2026-09-23',
+  'cloud/backup-recovery':                                   '2026-06-26',
+  'cloud/dubai':                                             '2026-09-23',
+  'cloud/microsoft-365':                                     '2026-09-09',
+  'cloud/migration':                                         '2026-06-26',
+  'cybersecurity':                                           '2026-09-29',
+  'cybersecurity/abu-dhabi':                                 '2026-09-23',
+  'cybersecurity/compliance':                                '2026-06-26',
+  'cybersecurity/dubai':                                     '2026-09-23',
+  'cybersecurity/email-security':                            '2026-09-09',
+  'cybersecurity/endpoint-protection':                       '2026-09-29',
+  'cybersecurity/incident-response':                         '2026-09-29',
+  'cybersecurity/microsoft-entra-id':                        '2026-06-26',
+  'cybersecurity/nesa-compliance':                           '2026-09-29',
+  'cybersecurity/pam':                                       '2026-06-26',
+  'cybersecurity/security-assessment':                       '2026-06-26',
+  'digital-marketing':                                       '2026-07-01',
+  'digital-marketing/abu-dhabi':                             '2026-09-29',
+  'digital-marketing/dubai':                                 '2026-09-23',
+  'digital-marketing/email-marketing':                       '2026-07-01',
+  'digital-marketing/sem-ppc':                               '2026-07-01',
+  'digital-marketing/seo-services':                          '2026-09-29',
+  'digital-marketing/social-media-marketing':                '2026-07-01',
+  'elv':                                                     '2026-06-26',
+  'elv/abu-dhabi':                                           '2026-09-23',
+  'elv/access-control':                                      '2026-10-12',
+  'elv/cctv-installation-abu-dhabi':                         '2026-09-23',
+  'elv/cctv-systems':                                        '2026-06-26',
+  'elv/dubai':                                               '2026-09-23',
+  'elv/gate-barriers':                                       '2026-06-26',
+  'elv/intercom-systems':                                    '2026-06-26',
+  'elv/public-address-systems':                              '2026-06-26',
+  'elv/structured-cabling':                                  '2026-06-26',
+  'email-solutions':                                         '2026-06-26',
+  'email-solutions/abu-dhabi':                               '2026-09-23',
+  'email-solutions/dubai':                                   '2026-09-23',
+  'email-solutions/email-hosting':                           '2026-06-10',
+  'email-solutions/google-workspace':                        '2026-06-10',
+  'email-solutions/hybrid':                                  '2026-06-10',
+  'infrastructure':                                          '2026-06-26',
+  'infrastructure/abu-dhabi':                                '2026-09-23',
+  'infrastructure/data-centre-management':                   '2026-06-10',
+  'infrastructure/dubai':                                    '2026-09-23',
+  'infrastructure/hardware-procurement':                     '2026-06-10',
+  'infrastructure/virtualization':                           '2026-06-10',
+  'it-consulting':                                           '2026-08-24',
+  'it-consulting/abu-dhabi':                                 '2026-09-23',
+  'it-consulting/digital-transformation':                    '2026-06-26',
+  'it-consulting/dubai':                                     '2026-09-23',
+  'it-consulting/it-assessment':                             '2026-08-24',
+  'it-consulting/technology-strategy':                       '2026-08-24',
+  'managed-it':                                              '2026-06-26',
+  'managed-it/abu-dhabi':                                    '2026-09-23',
+  'managed-it/dubai':                                        '2026-09-23',
+  'managed-it/it-support-helpdesk':                          '2026-06-26',
+  'managed-it/network-management':                           '2026-06-26',
+  'managed-it/server-management':                            '2026-06-26',
+  'managed-it/sla':                                          '2026-09-29',
+  'software-development':                                    '2026-07-01',
+  'software-development/abu-dhabi':                          '2026-09-23',
+  'software-development/api-systems-integration':            '2026-06-29',
+  'software-development/custom-software-development':        '2026-06-29',
+  'software-development/dubai':                              '2026-09-23',
+  'software-development/enterprise-application-development': '2026-06-29',
+  'software-development/mobile-app-development':             '2026-06-29',
+  'software-development/saas-cloud-product-development':     '2026-06-29',
+  'web-development':                                         '2026-07-01',
+  'web-development/abu-dhabi':                               '2026-09-23',
+  'web-development/cms-portal-development':                  '2026-06-30',
+  'web-development/custom-website-development':              '2026-06-30',
+  'web-development/dubai':                                   '2026-09-23',
+  'web-development/ecommerce-development':                   '2026-06-30',
+  'web-development/web-application-development':             '2026-06-30',
+  'web-development/website-care-maintenance':                '2026-06-29',
 }
 
 // Rental lastmod. Every rental category and product page shows its rates, and all rates
@@ -180,16 +262,16 @@ export default async function sitemap() {
   // Services — categories + subpages
   // /services/digital-solutions is a standalone page (not part of serviceCategories),
   // so the loop below never emitted it. Same orphaning as /products above.
-  entries.push({ url: `${BASE}/services/digital-solutions`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+  entries.push({ url: `${BASE}/services/digital-solutions`, lastModified: '2026-09-23', changeFrequency: 'monthly', priority: P_CATEGORY })
   for (const slug of Object.keys(serviceCategories || {})) {
-    entries.push({ url: `${BASE}/services/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/services/${slug}`, lastModified: SERVICE_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, slug } of getAllSubpageParams() || []) {
     const path = `/services/${category}/${slug}`
     if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
     if (isCaSitemap && isUaeOnlyServiceSubpage(category, slug)) continue  // canonicalizes to ipcare.ae
     if (!isCaSitemap && isCaOnlyServiceSubpage(category, slug)) continue  // Toronto pages: noindex on ipcare.ae
-    entries.push({ url: `${BASE}${path}`, lastModified: SUBPAGE_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}${path}`, lastModified: SERVICE_DATES[`${category}/${slug}`] || '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Rental — categories + products
