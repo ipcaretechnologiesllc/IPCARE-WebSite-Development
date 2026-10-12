@@ -136,6 +136,14 @@ export default async function ArticlePage(props) {
               <span>{a.author}</span>
               <span>&bull;</span>
               <span>{a.date}</span>
+              {/* Matches the dateModified emitted in the BlogPosting schema above; shown
+                  only for posts edited after publishing. */}
+              {a.updatedDate && a.updatedDate !== a.date && (
+                <>
+                  <span>&bull;</span>
+                  <span style={{ color: 'rgba(255,255,255,0.85)' }}>Updated {a.updatedDate}</span>
+                </>
+              )}
               <span>&bull;</span>
               <span className="flex items-center gap-1"><Icons.Clock size={13} />{a.readTime}</span>
             </div>
