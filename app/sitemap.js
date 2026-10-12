@@ -55,7 +55,7 @@ const HUB_DATES = {
   '/portfolio':                            '2026-07-05',
   '/case-studies':                         '2026-09-19',
   '/products':                             '2026-07-23',
-  '/rental':                               '2025-03-01',
+  '/rental':                               '2026-10-08',  // shows rates; all rates changed
   '/event-it':                             '2025-05-25',
   '/event-it/portfolio':                   '2025-05-25',
   '/cybersecurity-advisory':               '2025-06-01',
@@ -88,6 +88,18 @@ const SUBPAGE_DATES = {
   'dubai':                        '2026-09-23',
   'abu-dhabi':                    '2026-09-23',
   'cctv-installation-abu-dhabi':  '2026-09-23',
+}
+
+// Rental lastmod. Every rental category and product page shows its rates, and all rates
+// changed on 2026-10-08, so that is the floor for the whole section. RENTAL_DATES holds
+// later per-page edits, keyed by category slug or 'category/product'. Bump these when a
+// rental page's visible content changes: a date that never moves tells Google nothing.
+const RENTAL_LASTMOD = '2026-10-08'
+const RENTAL_DATES = {
+  'event-wifi':                        '2026-10-12',
+  'macbooks':                          '2026-10-12',
+  'laptops-desktops':                  '2026-10-12',
+  'laptops-desktops/apple-imac-24-m4': '2026-10-12',
 }
 
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
@@ -172,10 +184,10 @@ export default async function sitemap() {
 
   // Rental — categories + products
   for (const slug of Object.keys(rentalCategories || {})) {
-    entries.push({ url: `${BASE}/rental/${slug}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/rental/${slug}`, lastModified: RENTAL_DATES[slug] || RENTAL_LASTMOD, changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, product } of getAllProductParams() || []) {
-    entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}/rental/${category}/${product}`, lastModified: RENTAL_DATES[`${category}/${product}`] || RENTAL_LASTMOD, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Event IT — only slugs that have a built subpage (getAllEventSubSlugs = Object.keys(subpages)).
