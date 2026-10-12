@@ -189,6 +189,8 @@ const INDUSTRY_DATES = {
 const RENTAL_LASTMOD = '2026-10-08'
 const RENTAL_DATES = {
   'event-wifi':                        '2026-10-12',
+  'servers':                           '2026-10-12',
+  'servers/dell-r740':                 '2026-10-12',
   'macbooks':                          '2026-10-12',
   'laptops-desktops':                  '2026-10-12',
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',

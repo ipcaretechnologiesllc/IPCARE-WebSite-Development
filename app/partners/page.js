@@ -1,6 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import PartnersClient from './PartnersClient'
+import PartnerDetail from './PartnerDetail'
 
 export const revalidate = 3600
 
@@ -11,5 +12,5 @@ export const metadata = {
 }
 
 export default function PartnersPage() {
-  return (<><Header /><PartnersClient /><Footer /></>)
+  return (<><Header /><PartnersClient detail={<PartnerDetail />} /><Footer /></>)
 }

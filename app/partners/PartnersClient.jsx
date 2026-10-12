@@ -14,7 +14,7 @@ function useReveal() {
   }, [])
 }
 
-export default function PartnersClient() {
+export default function PartnersClient({ detail }) {
   useReveal()
   const [filter, setFilter] = useState('All')
   const cats = ['All', 'Cybersecurity', 'Networking', 'Cloud']
@@ -47,6 +47,9 @@ export default function PartnersClient() {
           </div>
         </div>
       </section>
+
+      {detail}
+
 
       <section className="py-16 px-6">
         <div className="max-w-[1100px] mx-auto rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
