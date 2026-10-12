@@ -103,6 +103,13 @@ const RENTAL_DATES = {
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',
   'tablets-ipads':                     '2026-10-12',
   'printers':                          '2026-10-12',
+  // Testing instruments and the testing-kit bundle repriced 2026-10-12.
+  'testing-equipment':                          '2026-10-12',
+  'testing-equipment/fluke-dsx-5000':           '2026-10-12',
+  'testing-equipment/afl-noyes-m210-otdr':      '2026-10-12',
+  'testing-equipment/fiber-splicing-machine':   '2026-10-12',
+  'bundles':                                    '2026-10-12',
+  'bundles/network-testing-kit':                '2026-10-12',
 }
 
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
