@@ -182,43 +182,6 @@ const INDUSTRY_DATES = {
   'government': '2026-09-29',
 }
 
-// Blog posts edited after publishing: last content change, from the git history of
-// lib/blog-data.js (comment-only and date: edits ignored; 2026-09-29 entries are mostly
-// search title/description rewrites, 2026-10-08 entries body corrections). Posts not
-// listed use their publish date. Bump an entry when a post's visible content changes.
-const BLOG_UPDATED = {
-  'sd-wan-vs-mpls-uae-enterprises':              '2026-09-29',
-  'ztna-vs-vpn-remote-access':                   '2026-09-29',
-  'network-segmentation-enterprise-event':       '2026-09-29',
-  'vcount-ultima-ai-people-counter-rental-uae':  '2026-09-29',
-  'fluke-dsx-5000-rental-uae':                   '2026-09-29',
-  'afl-noyes-m210-otdr-rental-uae':              '2026-09-29',
-  'fusion-splicer-rental-uae':                   '2026-09-29',
-  'malaffi-integration-playbook':                '2026-09-29',
-  'cb-ibr-cloud-azure-uae-north':                '2026-10-08',
-  'federal-grade-azure-uae-north':               '2026-10-08',
-  'zero-trust-practical-guide':                  '2026-10-08',
-  'stadium-wifi-72-hours':                       '2026-09-29',
-  'finops-azure-cut-spend':                      '2026-10-08',
-  'sase-vendor-evaluation':                      '2026-10-08',
-  'wifi-7-real-world':                           '2026-10-08',
-  'laptop-rental-vs-buy':                        '2026-10-08',
-  'elv-converged-security':                      '2026-09-29',
-  'ipcare-nba-toronto':                          '2026-10-08',
-  'xsiam-vs-legacy-siem':                        '2026-10-08',
-  'choosing-managed-it-provider-uae':            '2026-09-29',
-  'nesa-compliance-90-days':                     '2026-06-14',
-  'nesa-vs-iso-27001':                           '2026-10-08',
-  'inside-a-nesa-audit':                         '2026-10-08',
-  'nesa-188-controls-checklist':                 '2026-10-08',
-  'why-vendor-continuity-wins-event-it':         '2026-10-08',
-  'league-standards-vs-improvised-builds':       '2026-10-08',
-  'planning-it-for-international-awards-event':  '2026-09-29',
-  'event-wifi-pricing-reality':                  '2026-09-29',
-  'ipad-kiosk-deployment-playbook':              '2026-10-08',
-  'aws-vs-azure-uae-enterprises':                '2026-10-08',
-}
-
 // Rental lastmod. Every rental category and product page shows its rates, and all rates
 // changed on 2026-10-08, so that is the floor for the whole section. RENTAL_DATES holds
 // later per-page edits, keyed by category slug or 'category/product'. Bump these when a
@@ -353,7 +316,8 @@ export default async function sitemap() {
   // Blog — articles (use real publish date as lastmod)
   for (const a of articles || []) {
     if (isCaSitemap && isUaeOnlyBlogSlug(a.slug)) continue  // canonicalizes to ipcare.ae
-    const lastMod = BLOG_UPDATED[a.slug] || parseBlogDate(a.date) || now
+    // updatedDate (lib/blog-data.js) is the last content change; falls back to the publish date.
+    const lastMod = parseBlogDate(a.updatedDate || a.date) || now
     entries.push({ url: `${BASE}/blog/${a.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 

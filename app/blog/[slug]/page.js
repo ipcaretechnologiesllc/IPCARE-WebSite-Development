@@ -51,6 +51,7 @@ export async function generateMetadata(props) {
       images: [`${a.img}?w=1200&q=85`],
       type: 'article',
       publishedTime: toISODate(a.date),
+      modifiedTime: toISODate(a.updatedDate || a.date),
       authors: [a.author],
     },
   }
