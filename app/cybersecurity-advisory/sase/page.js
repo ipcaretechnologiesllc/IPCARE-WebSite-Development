@@ -1,7 +1,9 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ServicePageTemplate from '@/components/site/ServicePageTemplate'
-import { services as advisoryServices } from '@/lib/cyber-advisory-data'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { services as advisoryServices, kbArticles } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
 
@@ -66,6 +68,42 @@ const pageData = {
   ],
 }
 
+// Knowledge-base guides whose pillar is this page (Harmony SASE, Prisma Access HA,
+// multi-vendor SASE). They linked here but this page never linked back. Rendered on the
+// server and passed into the template's spokeGrid slot, between the FAQ and the CTA band.
+const sasePillarGuides = kbArticles.filter((a) => a.pillar?.href === '/cybersecurity-advisory/sase')
+
+function SaseGuides() {
+  if (!sasePillarGuides.length) return null
+  return (
+    <section style={{ background: '#FFFFFF', padding: '72px 24px' }}>
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-center mb-12">
+          <div className="section-eyebrow">Further Reading</div>
+          <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>SASE Guides from Our Advisory Team</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sasePillarGuides.map((a) => (
+            <Link key={a.slug} href={`/cybersecurity-advisory/knowledge-base/${a.slug}`} className="service-card p-7 block group">
+              <span
+                className="inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase mb-4"
+                style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#B25409' }}
+              >
+                {a.category}
+              </span>
+              <h3 className="service-card__title text-base mb-2">{a.title}</h3>
+              <p className="service-card__desc text-sm mb-5 leading-relaxed">{a.excerpt}</p>
+              <span className="service-card__cta inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2">
+                Read the guide <ArrowRight size={13} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function SASEPage() {
   const breadcrumb = [
     { label: 'Cybersecurity Advisory', href: '/cybersecurity-advisory' },
@@ -114,6 +152,7 @@ export default function SASEPage() {
           data={pageData}
           related={advisoryServices.filter((s) => s.slug !== 'sase').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, href: `/cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}
           breadcrumb={breadcrumb}
+          spokeGrid={<SaseGuides />}
         />
       </main>
       <Footer />
