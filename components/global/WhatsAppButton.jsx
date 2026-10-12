@@ -1,10 +1,27 @@
 'use client'
 
+const WA_NUMBER = '971506828290'
+const GENERIC_MSG = "Hi, I'm interested in IP Care Technologies services."
+
+// Names the page the visitor is on, so the team sees what they were looking at
+// (e.g. a rental category) before replying. Built at click time because the
+// button lives in the root layout and stays mounted across navigations.
+function pageMessage() {
+  const { pathname, origin } = window.location
+  if (pathname === '/') return GENERIC_MSG
+  const topic = document.title.split(' | ')[0].trim()
+  return topic
+    ? `Hi, I'm interested in: ${topic}\n${origin}${pathname}`
+    : `${GENERIC_MSG}\n${origin}${pathname}`
+}
+
 export default function WhatsAppButton() {
-  const msg = encodeURIComponent("Hi, I'm interested in IP Care Technologies services.")
   return (
     <a
-      href={`https://wa.me/971506828290?text=${msg}`}
+      href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(GENERIC_MSG)}`}
+      onClick={(e) => {
+        try { e.currentTarget.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pageMessage())}` } catch {}
+      }}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

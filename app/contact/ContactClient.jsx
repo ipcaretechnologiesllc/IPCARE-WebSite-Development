@@ -58,7 +58,8 @@ export default function ContactClient() {
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh the page and try again.')
         else if (data.error === 'too-many-requests') setErr('Too many submissions from your IP. Please try again in a few minutes.')
-        else setErr('Submission failed, please try again.')
+        else if (data.error === 'delivery-failed') setErr("We couldn't deliver your enquiry. Please call +971 2 676 6935 or WhatsApp +971 50 682 8290.")
+        else setErr('Submission failed, please try again or call +971 2 676 6935.')
         setSubmitting(false)
         return
       }

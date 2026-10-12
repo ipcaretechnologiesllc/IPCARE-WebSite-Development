@@ -31,7 +31,9 @@ const RL_WINDOW_MS = 10 * 60 * 1000
 let cachedClient = null
 async function getDb() {
   if (cachedClient) return cachedClient.db(process.env.DB_NAME || 'ipcare')
-  const client = new MongoClient(process.env.MONGO_URL)
+  // Fail fast: lead emails are already sent before the insert, so a slow or unreachable
+  // cluster should cost the visitor a few seconds, not the driver's 30s default.
+  const client = new MongoClient(process.env.MONGO_URL, { serverSelectionTimeoutMS: 8000 })
   await client.connect()
   cachedClient = client
   return client.db(process.env.DB_NAME || 'ipcare')
@@ -97,6 +99,29 @@ function newContactReference() {
   let rand = ''
   for (let i = 0; i < 6; i++) rand += alphabet[Math.floor(Math.random() * alphabet.length)]
   return `CN-${y}${m}${day}-${rand}`
+}
+
+// Lead delivery: the team email is what reaches a person, so it is sent first and retried
+// once; the Mongo record is a backup copy that must never block it. Until 2026-10-12 the
+// insert ran first, so a Mongo outage threw before any email went out: the lead was lost
+// and the visitor saw "Submission failed". Returns mailed=false only when both email
+// attempts failed — callers then return an error so the visitor calls or retries instead
+// of believing the enquiry arrived (nobody reads the Mongo copy day to day).
+async function deliverLead({ kind, reference, mail, collection, doc }) {
+  let res = await sendMail(mail)
+  if (!res.ok) {
+    console.error(`[lead] ${kind} ${reference}: team email failed, retrying:`, res.error || res.status)
+    await new Promise((r) => setTimeout(r, 1000))
+    res = await sendMail(mail)
+    if (!res.ok) console.error(`[lead] ${kind} ${reference}: team email failed twice:`, res.error || res.status)
+  }
+  try {
+    const db = await getDb()
+    await db.collection(collection).insertOne({ ...doc, teamEmailSent: res.ok })
+  } catch (e) {
+    console.error(`[lead] ${kind} ${reference}: DB save failed (team email ${res.ok ? 'sent' : 'NOT sent'}):`, e)
+  }
+  return { mailed: res.ok }
 }
 
 // PDF magic bytes: %PDF-  =>  0x25 0x50 0x44 0x46 0x2D
@@ -274,16 +299,18 @@ export async function POST(request, props) {
       if (!captcha.ok) return jsonErr(request, 'captcha-failed', 400)
 
       const reference = newContactReference()
-      const db = await getDb()
       const doc = {
         id: uuidv4(), reference, type: 'contact', ...clean,
         createdAt: new Date().toISOString(), ipAddress: ip, userAgent,
         recaptchaScore: captcha.score, recaptchaBypassed: !!captcha.bypassed,
       }
-      await db.collection('leads').insertOne(doc)
-
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
-      const teamRes = await sendMail({ to: INFO_EMAIL, subject: quick ? `CALL BACK: ${team.subject}` : team.subject, html: team.html, replyTo: clean.email || undefined, categories: ['contact', 'team'] })
+      const { mailed } = await deliverLead({
+        kind: 'contact', reference, collection: 'leads', doc,
+        mail: { to: INFO_EMAIL, subject: quick ? `CALL BACK: ${team.subject}` : team.subject, html: team.html, replyTo: clean.email || undefined, categories: ['contact', 'team'] },
+      })
+      if (!mailed) return jsonErr(request, 'delivery-failed', 502)
+
       if (clean.email) {
         const auto = clean.tab === 'rental'
           ? tplContactRentalAutoReply({ name: clean.name })
@@ -337,17 +364,19 @@ export async function POST(request, props) {
       }))
 
       const reference = newRentalReference()
-      const db = await getDb()
       const doc = {
         id: uuidv4(), reference, type: 'rental-quote',
         customer: clean, items, ipAddress: ip, userAgent,
         recaptchaScore: captcha.score, recaptchaBypassed: !!captcha.bypassed,
         createdAt: new Date().toISOString(), status: 'new',
       }
-      await db.collection('leads').insertOne(doc)
-
       const team = tplRentalQuoteTeam({ reference, ...clean, items, ipAddress: ip, userAgent })
-      await sendMail({ to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['rental-quote', 'team'] })
+      const { mailed } = await deliverLead({
+        kind: 'rental-quote', reference, collection: 'leads', doc,
+        mail: { to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['rental-quote', 'team'] },
+      })
+      if (!mailed) return jsonErr(request, 'delivery-failed', 502)
+
       const auto = tplRentalQuoteAutoReply({ reference, fullName: clean.fullName })
       await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['rental-quote', 'auto-reply'] })
 
@@ -374,8 +403,7 @@ export async function POST(request, props) {
       if (!captcha.ok) return jsonErr(request, 'captcha-failed', 400)
 
       const reference = `JOB-${Date.now().toString().slice(-10)}`
-      const db = await getDb()
-      await db.collection('career_applications').insertOne({
+      const doc = {
         id: uuidv4(), reference,
         ...clean,
         cvFileName: pdfAttachment?.filename || null,
@@ -384,7 +412,7 @@ export async function POST(request, props) {
         ipAddress: ip, userAgent,
         recaptchaScore: captcha.score, recaptchaBypassed: !!captcha.bypassed,
         createdAt: new Date().toISOString(),
-      })
+      }
 
       const teamAttachments = pdfAttachment ? [{
         content: pdfAttachment.buffer.toString('base64'),
@@ -398,7 +426,12 @@ export async function POST(request, props) {
         cvFileName: pdfAttachment?.filename, cvSize: pdfAttachment?.size,
         ipAddress: ip, userAgent,
       })
-      await sendMail({ to: HR_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, attachments: teamAttachments, categories: ['careers', 'team'] })
+      const { mailed } = await deliverLead({
+        kind: 'careers', reference, collection: 'career_applications', doc,
+        mail: { to: HR_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, attachments: teamAttachments, categories: ['careers', 'team'] },
+      })
+      if (!mailed) return jsonErr(request, 'delivery-failed', 502)
+
       const auto = tplCareerAutoReply({ name: clean.name, role: clean.role })
       await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: HR_EMAIL, categories: ['careers', 'auto-reply'] })
 

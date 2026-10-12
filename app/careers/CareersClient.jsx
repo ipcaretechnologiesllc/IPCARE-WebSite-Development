@@ -102,6 +102,7 @@ export default function CareersClient() {
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed') setErr('Security check failed. Please refresh and try again.')
         else if (data.error === 'too-many-requests') setErr('Too many submissions from your IP. Please try again in a few minutes.')
+        else if (data.error === 'delivery-failed') setErr("We couldn't deliver your application. Please email your CV to hr@ipcare.ae.")
         else if (data.error === 'file-too-large') setErr('CV exceeds 5 MB limit. Please compress and retry.')
         else if (data.error === 'invalid-pdf-signature' || data.error === 'invalid-file-type') setErr('The uploaded file is not a valid PDF.')
         else setErr('Submission failed. Please try again or email hr@ipcare.ae.')

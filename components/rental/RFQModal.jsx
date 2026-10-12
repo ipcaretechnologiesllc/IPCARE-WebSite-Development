@@ -37,6 +37,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
       if (!res.ok || !data.ok) {
         if (data.error === 'captcha-failed')     setError('Security check failed. Please refresh the page and try again.')
         else if (data.error === 'too-many-requests') setError('Too many submissions from your IP. Please try again in a few minutes.')
+        else if (data.error === 'delivery-failed') setError("We couldn't deliver your enquiry. Please call +971 2 676 6935 or WhatsApp +971 50 682 8290.")
         else if (data.error === 'cart-is-empty') setError('Your quote cart is empty. Please add items before submitting.')
         else if (typeof data.error === 'string' && data.error.length < 120) setError(data.error)
         else setError('Something went wrong, please try again or call +971 2 676 6935.')
