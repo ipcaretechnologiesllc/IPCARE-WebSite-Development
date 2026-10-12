@@ -163,7 +163,8 @@ export default function Header() {
     { label: 'Event IT',          href: '/event-it',               dropdown: true },
     { label: 'Rental Hub',        href: '/rental' },
     { label: 'Portfolio',         href: '/portfolio',              portfolio: true },
-    { label: 'Contact',           href: '/contact' },
+    // No plain "Contact" item: the "Contact Us" button beside the nav (and in the mobile
+    // menu) already links to /contact, so a text link here just duplicated it.
   ]
 
   // Ordered list for mega-menu grid
