@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import RentalHubClient from './RentalHubClient'
@@ -66,6 +67,44 @@ const jsonLd = {
   ],
 }
 
+// "computer rental abu dhabi" put /rental at position 19 in the 28 days to 2026-10-09 (UAE)
+// while the homepage ranked 3.3 for it: the hub never said "computer rental" or described
+// Abu Dhabi delivery. Rendered here on the server and passed into the client hub, so the
+// copy is in the HTML without adding to the client bundle. UAE build only.
+const LOCAL_LINKS = [
+  { href: '/rental/laptops-desktops', label: 'Laptop & desktop rental' },
+  { href: '/rental/macbooks',         label: 'MacBook & iMac rental' },
+  { href: '/rental/tablets-ipads',    label: 'iPad rental' },
+  { href: '/rental/printers',         label: 'Printer rental' },
+]
+
+function LocalRentalSection() {
+  if (isCaSite()) return null
+  return (
+    <section className="py-16 md:py-20 px-6" style={{ background: '#F4F6FA' }}>
+      <div className="max-w-[900px] mx-auto text-center">
+        <div className="section-eyebrow">Abu Dhabi &amp; Dubai</div>
+        <h2 className="font-bold text-3xl md:text-4xl mb-6" style={{ color: '#0B1A46' }}>
+          Computer Rental in Abu Dhabi and Dubai
+        </h2>
+        <p className="text-base md:text-lg leading-relaxed mb-4" style={{ color: '#4A5568' }}>
+          Our rental team is based in Abu Dhabi, so laptops, desktops, MacBooks, iPads and printers are delivered, set up and collected across Abu Dhabi, Al Ain and Dubai, and on to Sharjah and the rest of the UAE. Plan on one to two days between confirmed order and delivery, whichever emirate the office, training room or event is in.
+        </p>
+        <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: '#4A5568' }}>
+          Computers are configured before they ship: imaged to your build, joined to your domain or enrolled in your MDM, so they are ready on day one rather than a setup job on your floor.
+        </p>
+        <ul className="flex flex-wrap justify-center gap-2">
+          {LOCAL_LINKS.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} className="filter-pill-light">{l.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
 export default function RentalHubPage() {
   return (
     <>
@@ -74,7 +113,7 @@ export default function RentalHubPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header />
-      <RentalHubClient />
+      <RentalHubClient localSection={<LocalRentalSection />} />
       <Footer />
     </>
   )

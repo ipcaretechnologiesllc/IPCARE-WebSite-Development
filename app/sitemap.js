@@ -55,7 +55,7 @@ const HUB_DATES = {
   '/portfolio':                            '2026-07-05',
   '/case-studies':                         '2026-09-19',
   '/products':                             '2026-07-23',
-  '/rental':                               '2026-10-08',  // shows rates; all rates changed
+  '/rental':                               '2026-10-12',  // Abu Dhabi/Dubai computer rental section
   '/event-it':                             '2025-05-25',
   '/event-it/portfolio':                   '2025-05-25',
   '/cybersecurity-advisory':               '2025-06-01',
@@ -76,7 +76,7 @@ const ADVISORY_SUB_DATES = {
   'zero-trust':           '2025-03-01',
   'executive-advisory':   '2025-01-01',
   'security-automation':  '2025-03-01',
-  'sase':                 '2025-03-01',
+  'sase':                 '2026-10-12',  // Check Point Harmony SASE added
   'track-record':         '2026-07-09',
 }
 
@@ -88,6 +88,7 @@ const SUBPAGE_DATES = {
   'dubai':                        '2026-09-23',
   'abu-dhabi':                    '2026-09-23',
   'cctv-installation-abu-dhabi':  '2026-09-23',
+  'access-control':               '2026-10-12',  // coworking FAQ
 }
 
 // Rental lastmod. Every rental category and product page shows its rates, and all rates
@@ -100,6 +101,8 @@ const RENTAL_DATES = {
   'macbooks':                          '2026-10-12',
   'laptops-desktops':                  '2026-10-12',
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',
+  'tablets-ipads':                     '2026-10-12',
+  'printers':                          '2026-10-12',
 }
 
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.

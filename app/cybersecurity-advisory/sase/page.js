@@ -7,9 +7,13 @@ import { ORG_REF, serviceCountries } from '@/lib/schema'
 
 export const revalidate = 3600
 
+// "check point harmony sase uae" (and "... dubai", "... pricing uae") sat at position 15-31
+// in the 28 days to 2026-10-09, landing on the /cybersecurity-advisory hub only because its
+// partner list says "Harmony". This page never named Check Point, though IP Care is a
+// Check Point partner, so it now does in the description, overview and an FAQ.
 export const metadata = {
   title: uaeFocus('SASE Transformation Consulting UAE & Canada | IP Care Technologies'),
-  description: uaeFocus('SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope, SD-WAN integration and remote workforce security.'),
+  description: uaeFocus('SASE consulting in UAE and Canada: Palo Alto Prisma Access, Check Point Harmony SASE, Netskope and Zscaler, with SD-WAN and Zero Trust access.'),
   alternates: { canonical: '/cybersecurity-advisory/sase' },
   openGraph: {
     title: uaeFocus('SASE Transformation Consulting UAE & Canada | IP Care Technologies'),
@@ -29,7 +33,7 @@ const pageData = {
   heroFullBleed: true,
   overview: [
     'SASE (Secure Access Service Edge) converges networking and security into a single cloud-delivered service. It eliminates the complexity of multiple appliances, VPNs and point solutions, delivering consistent security for users anywhere, on any device.',
-    'IP Care designs and deploys SASE architectures with Palo Alto Prisma Access, Netskope and Zscaler. We integrate SD-WAN for intelligent routing, Zero Trust access control, cloud firewall, DLP and advanced threat prevention. All delivered from the cloud edge.',
+    'IP Care designs and deploys SASE architectures with Palo Alto Prisma Access, Check Point Harmony SASE, Netskope and Zscaler. We integrate SD-WAN for intelligent routing, Zero Trust access control, cloud firewall, DLP and advanced threat prevention. All delivered from the cloud edge.',
     'Our SASE transformations cover assessment, architecture, pilot deployment, migration planning and managed operations, typically delivered over 4-12 months.',
   ],
   features: [
@@ -54,9 +58,10 @@ const pageData = {
   ],
   industries: ['Banking', 'Retail', 'Professional Services', 'Technology', 'Government', 'Healthcare'],
   faqs: [
-    { q: 'What is the difference between SASE and traditional VPN?', a: 'VPN backhau ls traffic through a central data centre, adding latency. SASE delivers security at the cloud edge closest to users, with better performance for SaaS and cloud applications. It also integrates Zero Trust access control that VPN lacks.' },
+    { q: 'What is the difference between SASE and traditional VPN?', a: 'VPN backhauls traffic through a central data centre, adding latency. SASE delivers security at the cloud edge closest to users, with better performance for SaaS and cloud applications. It also integrates Zero Trust access control that VPN lacks.' },
     { q: 'How long does a SASE transformation take?', a: 'Typical engagements run 4-12 months depending on organization size, number of locations and complexity. We deliver in waves with immediate value from early adopters.' },
     { q: 'Can SASE replace our existing firewalls?', a: 'For most use cases, yes. SASE platforms like Prisma Access deliver cloud firewall capabilities that match or exceed traditional perimeter firewalls. However, some enterprises maintain hybrid models with on-prem firewalls for data centre workloads.' },
+    { q: 'Do you deploy Check Point Harmony SASE in the UAE?', a: 'Yes. IP Care is a Check Point partner, and Harmony SASE, the platform Check Point built on its 2023 acquisition of Perimeter 81, is one of the SASE platforms we evaluate and deploy for UAE organisations. It combines Zero Trust network access, a secure web gateway and firewall-as-a-service, and it is a natural candidate where Check Point Quantum firewalls are already in place, because threat prevention and policy stay with one vendor. As with any platform, we confirm the points of presence your users will connect through, the data-handling terms and the licensing model during design, rather than assuming them.' },
     { q: 'Is SASE suitable for UAE organizations with data residency requirements?', a: 'Yes. Prisma Access and Netskope have UAE-region presence to support data residency requirements. We design SASE architectures that align with UAE PDPL and NESA regulations.' },
   ],
 }

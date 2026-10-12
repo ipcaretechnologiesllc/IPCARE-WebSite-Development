@@ -68,7 +68,8 @@ const WHY_ITEMS = [
 /* ════════════════════════════════════════════════════════════════
    PAGE COMPONENT
 ════════════════════════════════════════════════════════════════ */
-export default function RentalHubClient() {
+// `localSection` is server-rendered by app/rental/page.js and slotted in before the CTA strip.
+export default function RentalHubClient({ localSection = null }) {
   useReveal()
 
   return (
@@ -327,6 +328,8 @@ export default function RentalHubClient() {
           </div>
         </div>
       </section>
+
+      {localSection}
 
       {/* ── CTA STRIP ────────────────────────────────────────── */}
       <section
