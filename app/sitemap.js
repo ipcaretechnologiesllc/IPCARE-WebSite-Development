@@ -49,25 +49,25 @@ function parseKbDate(str) {
 
 // Static lastmod dates for hub/category pages (real deploy/refresh dates, not build time).
 const HUB_DATES = {
-  '/':                                     '2026-05-10',
-  '/about':                                '2025-01-01',
+  '/':                                     '2026-10-12',
+  '/about':                                '2026-09-24',
   '/services':                             '2026-09-23',
   '/portfolio':                            '2026-07-05',
   '/case-studies':                         '2026-09-19',
   '/products':                             '2026-07-23',
   '/rental':                               '2026-10-12',  // Abu Dhabi/Dubai computer rental section
-  '/event-it':                             '2025-05-25',
-  '/event-it/portfolio':                   '2025-05-25',
+  '/event-it':                             '2026-10-07',
+  '/event-it/portfolio':                   '2026-10-07',
   '/cybersecurity-advisory':               '2026-10-12',  // lists the newest KB articles
   '/cybersecurity-advisory/knowledge-base':'2026-10-12',  // Harmony SASE guide added
-  '/blog':                                 '2026-05-10',
+  '/blog':                                 '2026-10-08',
   '/industries':                           '2026-09-23',  // description rewritten
-  '/partners':                             '2025-01-01',
-  '/careers':                              '2025-04-01',
-  '/contact':                              '2025-01-01',
-  '/terms':                                '2024-01-01',
-  '/privacy-policy':                       '2024-01-01',
-  '/cookie-policy':                        '2024-01-01',
+  '/partners':                             '2026-06-10',
+  '/careers':                              '2026-09-23',
+  '/contact':                              '2026-09-25',
+  '/terms':                                '2026-04-21',
+  '/privacy-policy':                       '2026-06-11',
+  '/cookie-policy':                        '2026-04-21',
 }
 
 // Advisory sub-page static dates (service pages, not time-sensitive articles)
@@ -273,14 +273,14 @@ export default async function sitemap() {
   // so the loop below never emitted it. Same orphaning as /products above.
   entries.push({ url: `${BASE}/services/digital-solutions`, lastModified: '2026-09-23', changeFrequency: 'monthly', priority: P_CATEGORY })
   for (const slug of Object.keys(serviceCategories || {})) {
-    entries.push({ url: `${BASE}/services/${slug}`, lastModified: SERVICE_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/services/${slug}`, lastModified: SERVICE_DATES[slug] || '2026-09-23', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const { category, slug } of getAllSubpageParams() || []) {
     const path = `/services/${category}/${slug}`
     if (SITEMAP_EXCLUDE.has(path)) continue  // Fix 2.3: skip redirect source
     if (isCaSitemap && isUaeOnlyServiceSubpage(category, slug)) continue  // canonicalizes to ipcare.ae
     if (!isCaSitemap && isCaOnlyServiceSubpage(category, slug)) continue  // Toronto pages: noindex on ipcare.ae
-    entries.push({ url: `${BASE}${path}`, lastModified: SERVICE_DATES[`${category}/${slug}`] || '2025-03-01', changeFrequency: 'monthly', priority: P_DETAIL })
+    entries.push({ url: `${BASE}${path}`, lastModified: SERVICE_DATES[`${category}/${slug}`] || '2026-09-23', changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Rental — categories + products
@@ -295,20 +295,21 @@ export default async function sitemap() {
   // Previously this also looped over the raw `events` array, which emitted 4 slugs that exist
   // in the portfolio data but have no page route — causing live sitemap 404s. Removed that loop.
   // Lastmod: use the event's endDate when slug matches a portfolio event; fall back to service-page
-  // launch estimate ('2025-06-01') for service sub-pages (event-wifi, temporary-data-centres, event-cctv).
+  // 2026-09-29 floor for service sub-pages (event-wifi, temporary-data-centres, event-cctv).
   for (const slug of getAllEventSubSlugs() || []) {
-    const lastMod = eventEndDateMap[slug] || '2025-06-01'
+    // event end dates predate the pages' last content edits (links/schema 2026-09-29; UFC and SuperCup rewrites 2026-10-07)
+    const lastMod = [eventEndDateMap[slug], '2026-09-29'].filter(Boolean).sort().pop()
     entries.push({ url: `${BASE}/event-it/${slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
   }
 
   // Cybersecurity Advisory — fixed subroutes
   const advisoryFixed = ['cloud-security', 'zero-trust', 'executive-advisory', 'security-automation', 'sase', 'track-record']
   for (const slug of advisoryFixed) {
-    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: ADVISORY_SUB_DATES[slug] || '2025-03-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/cybersecurity-advisory/${slug}`, lastModified: ADVISORY_SUB_DATES[slug] || '2026-09-29', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
   for (const art of kbArticles || []) {
     if (art?.slug) {
-      const lastMod = parseKbDate(art.date) || '2025-06-01'
+      const lastMod = [parseKbDate(art.updatedDate || art.date), '2026-07-15'].sort().pop()
       entries.push({ url: `${BASE}/cybersecurity-advisory/knowledge-base/${art.slug}`, lastModified: lastMod, changeFrequency: 'monthly', priority: P_DETAIL })
     }
   }
@@ -336,12 +337,12 @@ export default async function sitemap() {
 
   // Industries — sector pages
   for (const slug of getAllIndustrySlugs() || []) {
-    entries.push({ url: `${BASE}/industries/${slug}`, lastModified: INDUSTRY_DATES[slug] || '2025-01-01', changeFrequency: 'monthly', priority: P_CATEGORY })
+    entries.push({ url: `${BASE}/industries/${slug}`, lastModified: INDUSTRY_DATES[slug] || '2026-09-23', changeFrequency: 'monthly', priority: P_CATEGORY })
   }
 
   // Legal
   const legal = ['/terms', '/privacy-policy', '/cookie-policy']
-  for (const p of legal) entries.push({ url: `${BASE}${p}`, lastModified: HUB_DATES[p] || '2024-01-01', changeFrequency: 'yearly', priority: P_LEGAL })
+  for (const p of legal) entries.push({ url: `${BASE}${p}`, lastModified: HUB_DATES[p] || '2026-06-11', changeFrequency: 'yearly', priority: P_LEGAL })
 
   // Dedupe by url (last wins)
   const map = new Map()
