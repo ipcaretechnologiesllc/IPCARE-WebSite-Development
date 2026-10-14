@@ -320,6 +320,9 @@ const nextConfig = {
       { source: '/rental/printers/brother-hl-l3295cdw',        destination: '/rental/printers',            permanent: true },
       { source: '/rental/event-wifi/peplink-balance-two',      destination: '/rental/event-wifi',          permanent: true },
       { source: '/rental/cctv/hanwha-xno-c9083r',               destination: '/rental/cctv',                permanent: true },
+      // Networking switches renamed 2026-10-14: the old slugs named models we never stocked.
+      { source: '/rental/networking/aruba-cx-6300m-48g',       destination: '/rental/networking/aruba-1930-48g', permanent: true },
+      { source: '/rental/networking/cisco-c9300-48',           destination: '/rental/networking/aruba-1930-24g', permanent: true },
 
       // Malformed/artifact URLs (stray trailing "$"/"&", likely broken template links crawled from
       // an old page). No corresponding content — safety-net redirect to home.
