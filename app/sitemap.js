@@ -188,7 +188,7 @@ const INDUSTRY_DATES = {
 // rental page's visible content changes: a date that never moves tells Google nothing.
 const RENTAL_LASTMOD = '2026-10-08'
 const RENTAL_DATES = {
-  'event-wifi':                        '2026-10-12',
+  'event-wifi':                        '2026-10-14',
   'servers':                           '2026-10-12',
   'servers/dell-r740':                 '2026-10-12',
   'macbooks':                          '2026-10-12',
@@ -209,13 +209,14 @@ const RENTAL_DATES = {
   'laptops-desktops/lenovo-thinkpad-x1-carbon':     '2026-10-13',
   'laptops-desktops/dell-optiplex-7020':            '2026-10-13',
   'event-wifi/aruba-ap-635-wifi6e':                 '2026-10-13',
-  'event-wifi/unifi-u6-pro':                        '2026-10-13',
+  'event-wifi/unifi-u6-pro':                        '2026-10-14',
+  'event-wifi/unifi-uap-ac-pro':                    '2026-10-14',
   'event-wifi/ruckus-r770-wifi7':                   '2026-10-13',
   'event-wifi/unifi-e7':                            '2026-10-13',
   'event-wifi/ubiquiti-udm-pro-max':                '2026-10-13',
   'event-wifi/fortigate-200e':                      '2026-10-13',
-  'networking':                                     '2026-10-13',
-  'networking/aruba-cx-6300m-48g':                  '2026-10-13',
+  'networking':                                     '2026-10-14',
+  'networking/aruba-cx-6300m-48g':                  '2026-10-14',
   'networking/cisco-c9300-48':                      '2026-10-13',
   'networking/fortinet-fortigate-100f':             '2026-10-13',
   'networking/palo-alto-pa-440':                    '2026-10-13',
