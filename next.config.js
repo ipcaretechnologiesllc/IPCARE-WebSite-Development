@@ -323,6 +323,8 @@ const nextConfig = {
       // Networking switches renamed 2026-10-14: the old slugs named models we never stocked.
       { source: '/rental/networking/aruba-cx-6300m-48g',       destination: '/rental/networking/aruba-1930-48g', permanent: true },
       { source: '/rental/networking/cisco-c9300-48',           destination: '/rental/networking/aruba-1930-24g', permanent: true },
+      // FortiGate 100F withdrawn 2026-10-14; the 100D is the nearest firewall still in stock.
+      { source: '/rental/networking/fortinet-fortigate-100f',  destination: '/rental/networking/fortigate-100d', permanent: true },
 
       // Malformed/artifact URLs (stray trailing "$"/"&", likely broken template links crawled from
       // an old page). No corresponding content — safety-net redirect to home.
