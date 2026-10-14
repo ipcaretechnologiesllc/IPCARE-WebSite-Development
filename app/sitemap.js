@@ -203,6 +203,26 @@ const RENTAL_DATES = {
   'testing-equipment/fiber-splicing-machine':   '2026-10-12',
   'bundles':                                    '2026-10-12',
   'bundles/network-testing-kit':                '2026-10-12',
+  // Product write-ups added 2026-10-13 (laptops, event WiFi, networking, bundles).
+  'laptops-desktops/dell-latitude-5450':            '2026-10-13',
+  'laptops-desktops/hp-elitebook-845-g11':          '2026-10-13',
+  'laptops-desktops/lenovo-thinkpad-x1-carbon':     '2026-10-13',
+  'laptops-desktops/dell-optiplex-7020':            '2026-10-13',
+  'event-wifi/aruba-ap-635-wifi6e':                 '2026-10-13',
+  'event-wifi/unifi-u6-pro':                        '2026-10-13',
+  'event-wifi/ruckus-r770-wifi7':                   '2026-10-13',
+  'event-wifi/unifi-e7':                            '2026-10-13',
+  'event-wifi/ubiquiti-udm-pro-max':                '2026-10-13',
+  'event-wifi/fortigate-200e':                      '2026-10-13',
+  'networking':                                     '2026-10-13',
+  'networking/aruba-cx-6300m-48g':                  '2026-10-13',
+  'networking/cisco-c9300-48':                      '2026-10-13',
+  'networking/fortinet-fortigate-100f':             '2026-10-13',
+  'networking/palo-alto-pa-440':                    '2026-10-13',
+  'networking/juniper-ex4400-24p':                  '2026-10-13',
+  'networking/netgear-m4350-48x4v':                 '2026-10-13',
+  'bundles/event-10-person':                        '2026-10-13',
+  'bundles/conference-room-pack':                   '2026-10-13',
 }
 
 // /services/email-solutions/microsoft-365 is a 308 redirect to /services/cloud/microsoft-365.
