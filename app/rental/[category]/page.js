@@ -143,7 +143,7 @@ export default async function CategoryPage(props) {
 
         {/* Call-back form for visitors who'd rather describe the job than build a quote cart.
             Rental category pages are the site's main organic entry point. */}
-        <QuickEnquiry variant="rental" source="rental-category" context={cat.name} sectionStyle={{ paddingTop: 0, paddingBottom: '72px' }} />
+        <QuickEnquiry variant="rental" source="rental-category" context={cat.name} equipmentOptions={[...new Set(listed.map(({ product }) => `${product.brand} ${product.model}`))]} sectionStyle={{ paddingTop: 0, paddingBottom: '72px' }} />
 
         {/* Long-form category content — rendered only for categories that define it. */}
         {cat.content && (

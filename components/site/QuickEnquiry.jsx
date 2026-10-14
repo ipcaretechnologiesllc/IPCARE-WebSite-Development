@@ -44,7 +44,7 @@ const VARIANTS = {
   rental: {
     eyebrow: 'Rental Quote By Phone',
     heading: <>Need It Fast? <span className="text-[#E87722]">Get A Quote By Phone</span></>,
-    sub: <>Tell Us The Equipment, Quantity And Dates. Our Rental Team Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
+    sub: <>Tap What You Need. Our Rental Team Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
     points: [
       { I: Truck, text: 'Delivery & Setup Included' },
       { I: Headphones, text: 'Technical Support During Your Rental' },
@@ -76,10 +76,44 @@ export function serviceForPath(pathname = '') {
   return SERVICE_BY_PATH.find(([re]) => re.test(pathname))?.[1] || ''
 }
 
-export default function QuickEnquiry({ source = 'homepage', variant = 'general', context = '', defaultService = '', sectionStyle }) {
+// Rental quick picks — one tap each, all optional, tap again to clear.
+const QTY_OPTIONS = ['1–5', '6–20', '21–50', '50+']
+const PERIOD_OPTIONS = ['1 day', '2–3 days', '1 week', '1 month+']
+const START_OPTIONS = ['This week', 'Next week', 'Later']
+const NOT_SURE = 'Mix / Not sure'
+
+function Chips({ label, options, value, onChange }) {
+  return (
+    <div>
+      <div className="mono text-[11px] uppercase tracking-widest mb-1.5" style={{ color: '#0B1A46' }}>{label}</div>
+      <div className="flex flex-wrap gap-1.5 sm:gap-2" role="group" aria-label={label}>
+        {options.map((o) => {
+          const on = value === o
+          return (
+            <button
+              key={o} type="button" aria-pressed={on}
+              onClick={() => onChange(on ? '' : o)}
+              className="px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[13px] font-medium transition-colors"
+              style={on
+                ? { background: '#E87722', border: '1.5px solid #E87722', color: '#fff' }
+                : { background: '#fff', border: '1.5px solid #D8DEE9', color: '#0B1A46' }}
+            >
+              {o}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// Rental props: `equipment` (product page: the item is fixed and shown, not picked) or
+// `equipmentOptions` (category page: a dropdown of that category's products).
+export default function QuickEnquiry({ source = 'homepage', variant = 'general', context = '', defaultService = '', equipment = '', equipmentOptions = [], sectionStyle }) {
   const v = VARIANTS[variant] || VARIANTS.general
   const rental = variant === 'rental'
-  const [form, setForm] = useState({ name: '', phone: '', service: defaultService, need: '' })
+  const [form, setForm] = useState({ name: '', phone: '', service: defaultService, need: '', item: '', qty: '', period: '', start: '' })
+  const pick = (key) => (val) => setForm(f => ({ ...f, [key]: val }))
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [err, setErr] = useState('')
@@ -101,7 +135,17 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
           phone: form.phone,
           service: rental ? 'Equipment Rental' : form.service,
           message: rental
-            ? [form.need.trim(), `Page: ${context || 'Rental'} (${window.location.pathname})`].filter(Boolean).join('\n\n')
+            ? [
+                ...[
+                  ['Equipment', equipment || form.item],
+                  ['Quantity', form.qty],
+                  ['Rental period', form.period],
+                  ['Needed from', form.start],
+                  ['Notes', form.need.trim()],
+                ].filter(([, val]) => val).map(([k, val]) => `${k}: ${val}`),
+                '',
+                `Page: ${context || 'Rental'} (${window.location.pathname})`,
+              ].join('\n').trim()
             : context ? `Page: ${context} (${window.location.pathname})` : '',
           tab: 'quick', source, recaptchaToken: await getRecaptchaToken('contact'),
         }),
@@ -122,7 +166,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
   }
 
   return (
-    <section className="px-6" style={{ background: '#F4F6FA', paddingTop: '56px', paddingBottom: '56px', ...sectionStyle }} aria-labelledby="quick-enquiry-heading">
+    <section className="px-4 sm:px-6" style={{ background: '#F4F6FA', paddingTop: '56px', paddingBottom: '56px', ...sectionStyle }} aria-labelledby="quick-enquiry-heading">
       <div
         className="max-w-[1200px] mx-auto rounded-2xl overflow-hidden grid lg:grid-cols-[5fr_7fr]"
         style={{ borderTop: '3px solid #E87722', boxShadow: '0 12px 40px rgba(10,26,70,0.14)' }}
@@ -159,7 +203,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
         </div>
 
         {/* ── Right: form ─────────────────────────────────────────────── */}
-        <div className="bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+        <div className="bg-white p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
           {submitted ? (
             <div className="text-center py-8" role="status">
               <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.4)' }}>
@@ -189,15 +233,38 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                 </div>
               </div>
               {rental ? (
-                <div>
-                  <Label htmlFor="qe-need">Equipment, Quantity & Dates</Label>
-                  <input
-                    id="qe-need" type="text" name="need" maxLength={300}
-                    placeholder={context ? `e.g. 5 × ${context}, 3 days, Dubai Marina` : 'e.g. 10 laptops, 3 days, Dubai Marina'}
-                    value={form.need} onChange={e => setForm(f => ({ ...f, need: e.target.value }))}
-                    className={inputClass} style={inputStyle}
-                  />
-                </div>
+                <>
+                  {equipment ? (
+                    <div className="text-sm px-3.5 py-2.5 rounded-lg" style={{ background: '#F4F6FA', border: '1.5px solid #E1E8F0', color: '#0B1A46' }}>
+                      <span className="mono text-[11px] uppercase tracking-widest mr-2" style={{ color: '#58595B' }}>Quote for</span>
+                      <strong>{equipment}</strong>
+                    </div>
+                  ) : equipmentOptions.length > 0 && (
+                    <div>
+                      <Label htmlFor="qe-item">Equipment</Label>
+                      <select
+                        id="qe-item" name="item" value={form.item} onChange={e => pick('item')(e.target.value)}
+                        className={inputClass} style={{ ...inputStyle, color: form.item ? '#0B1A46' : '#6B7280' }}
+                      >
+                        <option value="">Select equipment</option>
+                        {equipmentOptions.map(o => <option key={o} value={o} style={{ color: '#0B1A46' }}>{o}</option>)}
+                        <option value={NOT_SURE} style={{ color: '#0B1A46' }}>{NOT_SURE}</option>
+                      </select>
+                    </div>
+                  )}
+                  <Chips label="Quantity" options={QTY_OPTIONS} value={form.qty} onChange={pick('qty')} />
+                  <Chips label="Rental Period" options={PERIOD_OPTIONS} value={form.period} onChange={pick('period')} />
+                  <Chips label="Needed From" options={START_OPTIONS} value={form.start} onChange={pick('start')} />
+                  <div>
+                    <Label htmlFor="qe-need">Anything Else? (Optional)</Label>
+                    <input
+                      id="qe-need" type="text" name="need" maxLength={300}
+                      placeholder="e.g. delivery location, specs, exact dates"
+                      value={form.need} onChange={e => pick('need')(e.target.value)}
+                      className={inputClass} style={inputStyle}
+                    />
+                  </div>
+                </>
               ) : (
                 <div>
                   <Label htmlFor="qe-service">What Do You Need?</Label>

@@ -188,7 +188,7 @@ export default async function ProductDetailPage(props) {
 
         <ProductDetailClient product={product} categorySlug={params.category}/>
 
-        <QuickEnquiry variant="rental" source="rental-product" context={`${product.brand} ${product.model}`} />
+        <QuickEnquiry variant="rental" source="rental-product" context={`${product.brand} ${product.model}`} equipment={`${product.brand} ${product.model}`} />
 
         {/* Deployment detail + FAQs. The prose block renders only for products that
             define content in lib/rental-data.js; the FAQs render for every product,
