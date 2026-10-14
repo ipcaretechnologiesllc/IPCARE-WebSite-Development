@@ -4,6 +4,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductCard from '@/components/rental/ProductCard'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getCategory, getAllCategorySlugs, getCrossListedProducts } from '@/lib/rental-data'
 import { RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
@@ -124,7 +125,7 @@ export default async function CategoryPage(props) {
         </section>
 
         {/* Products */}
-        <section className="pb-24 px-6" style={{ background: '#F4F6FA', paddingTop: '56px' }}>
+        <section className="pb-14 px-6" style={{ background: '#F4F6FA', paddingTop: '56px' }}>
           <div className="max-w-[1400px] mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div className="mono text-xs" style={{ color: '#58595B' }}>{listed.length} products</div>
@@ -139,6 +140,10 @@ export default async function CategoryPage(props) {
             </div>
           </div>
         </section>
+
+        {/* Call-back form for visitors who'd rather describe the job than build a quote cart.
+            Rental category pages are the site's main organic entry point. */}
+        <QuickEnquiry variant="rental" source="rental-category" context={cat.name} sectionStyle={{ paddingTop: 0, paddingBottom: '72px' }} />
 
         {/* Long-form category content — rendered only for categories that define it. */}
         {cat.content && (

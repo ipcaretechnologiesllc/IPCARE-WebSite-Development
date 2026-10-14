@@ -515,6 +515,11 @@ body {
   .floating-btn-whatsapp { position: fixed !important; bottom: 88px !important; }
 }
 
+/* Hide the floating WhatsApp/Call buttons while the quote cart or quote form is open —
+   at z-index 9999 they sat on top of the cart's Submit Quote Request button.
+   !important beats the components' inline display:flex. */
+body:has([data-hides-floating]) .floating-btn { display: none !important; }
+
 /* ===== Mobile-only: enlarge small service-card sub-links to ~44px tap height ===== */
 @media (max-width: 640px) {
   .service-subitem-link {

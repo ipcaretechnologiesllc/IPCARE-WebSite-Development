@@ -289,7 +289,7 @@ export async function POST(request, props) {
           return jsonErr(request, 'missing-required-fields', 400)
         }
         clean.message = clean.message || `Call back requested via the quick enquiry form (${clean.source || 'website'}).`
-      } else if (!clean.name || !clean.email || !clean.company || !clean.phone) {
+      } else if (!clean.name || !clean.email || !clean.phone) {
         return jsonErr(request, 'missing-required-fields', 400)
       }
 
@@ -342,7 +342,7 @@ export async function POST(request, props) {
         requirements: { type: 'text', maxLen: 3000, allowNewlines: true },
         source: { type: 'text', maxLen: 60, allowNewlines: false },
       })
-      if (!clean.fullName || !clean.email || !clean.company || !clean.phone || !clean.startDate || !clean.endDate || !clean.location) {
+      if (!clean.fullName || !clean.email || !clean.phone || !clean.startDate || !clean.endDate) {
         return jsonErr(request, 'missing-required-fields', 400)
       }
 

@@ -45,7 +45,7 @@ export default function ContactClient() {
   async function submit(e) {
     e.preventDefault()
     setErr('')
-    if (!form.name || !form.company || !form.email || !form.phone) { setErr('Please complete required fields.'); return }
+    if (!form.name || !form.email || !form.phone) { setErr('Please complete required fields.'); return }
     if (!form.agree) { setErr('Please agree to the privacy policy before continuing.'); return }
     setSubmitting(true)
     try {
@@ -140,7 +140,7 @@ export default function ContactClient() {
                 <form onSubmit={submit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <F label="Name *"    v={form.name}    on={v => setForm(f => ({...f, name:v}))}/>
-                    <F label="Company *" v={form.company} on={v => setForm(f => ({...f, company:v}))}/>
+                    <F label="Company"   v={form.company} on={v => setForm(f => ({...f, company:v}))}/>
                     <F label="Email *"   type="email" v={form.email} on={v => setForm(f => ({...f, email:v}))}/>
                     <F label="Phone *"   v={form.phone}   on={v => setForm(f => ({...f, phone:v}))}/>
                   </div>

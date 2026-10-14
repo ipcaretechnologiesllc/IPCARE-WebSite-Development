@@ -5,6 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ProductDetailClient from './ProductDetailClient'
 import ProductCard from '@/components/rental/ProductCard'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getProduct, getAllProductParams, getRelatedProducts, resolveProductRefs, productSeo } from '@/lib/rental-data'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
@@ -186,6 +187,8 @@ export default async function ProductDetailPage(props) {
         </div>
 
         <ProductDetailClient product={product} categorySlug={params.category}/>
+
+        <QuickEnquiry variant="rental" source="rental-product" context={`${product.brand} ${product.model}`} />
 
         {/* Deployment detail + FAQs. The prose block renders only for products that
             define content in lib/rental-data.js; the FAQs render for every product,

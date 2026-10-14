@@ -4,10 +4,15 @@
 // too much friction. Posts to the same /api/contact pipeline with tab: 'quick', which the
 // API accepts without email/company; rate limit and reCAPTCHA apply exactly as for /contact.
 // reCAPTCHA's script is only fetched on submit, so this adds no load-time weight.
+//
+// variant 'rental' (rental category + product pages): the third field is free text for
+// equipment, quantity and dates, the service is fixed to Equipment Rental, and `context`
+// (category or product name) plus the page path are appended to the message so the
+// team's CALL BACK email says exactly what the visitor was looking at.
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, PhoneCall, ShieldCheck, Headphones, Award } from 'lucide-react'
+import { ArrowRight, Check, PhoneCall, ShieldCheck, Headphones, Award, Truck, MapPin } from 'lucide-react'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
 import { trackLead } from '@/lib/analytics'
@@ -23,11 +28,30 @@ const NEEDS = [
   'Other',
 ]
 
-const POINTS = [
-  { I: ShieldCheck, text: 'No-Obligation Consultation' },
-  { I: Award, text: '20+ Years Of Enterprise Delivery' },
-  { I: Headphones, text: '24/7 Support Across The UAE & GCC' },
-]
+const VARIANTS = {
+  general: {
+    eyebrow: 'Request A Call Back',
+    heading: <>Tell Us What <span className="text-[#E87722]">You Need</span></>,
+    sub: <>An Engineer Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
+    points: [
+      { I: ShieldCheck, text: 'No-Obligation Consultation' },
+      { I: Award, text: '20+ Years Of Enterprise Delivery' },
+      { I: Headphones, text: '24/7 Support Across The UAE & GCC' },
+    ],
+  },
+  // Points reuse claims the rental hub already makes ("Delivery & Setup Included",
+  // technical support, Dubai & Abu Dhabi) — don't add new promises here.
+  rental: {
+    eyebrow: 'Rental Quote By Phone',
+    heading: <>Need It Fast? <span className="text-[#E87722]">Get A Quote By Phone</span></>,
+    sub: <>Tell Us The Equipment, Quantity And Dates. Our Rental Team Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
+    points: [
+      { I: Truck, text: 'Delivery & Setup Included' },
+      { I: Headphones, text: 'Technical Support During Your Rental' },
+      { I: MapPin, text: 'Serving Dubai & Abu Dhabi' },
+    ],
+  },
+}
 
 const inputStyle = { background: '#fff', border: '1.5px solid #D8DEE9', color: '#0B1A46' }
 const inputClass = 'w-full px-3.5 py-3 rounded-lg text-sm focus:outline-none focus:border-[#E87722] focus:ring-[3px] focus:ring-[#E87722]/15 transition-colors'
@@ -38,8 +62,10 @@ const Label = ({ htmlFor, children }) => (
   </label>
 )
 
-export default function QuickEnquiry({ source = 'homepage' }) {
-  const [form, setForm] = useState({ name: '', phone: '', service: '' })
+export default function QuickEnquiry({ source = 'homepage', variant = 'general', context = '', sectionStyle }) {
+  const v = VARIANTS[variant] || VARIANTS.general
+  const rental = variant === 'rental'
+  const [form, setForm] = useState({ name: '', phone: '', service: '', need: '' })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [err, setErr] = useState('')
@@ -56,7 +82,15 @@ export default function QuickEnquiry({ source = 'homepage' }) {
       const res = await postWithRetry('/api/contact', async () => ({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, tab: 'quick', source, recaptchaToken: await getRecaptchaToken('contact') }),
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          service: rental ? 'Equipment Rental' : form.service,
+          message: rental
+            ? [form.need.trim(), `Page: ${context || 'Rental'} (${window.location.pathname})`].filter(Boolean).join('\n\n')
+            : '',
+          tab: 'quick', source, recaptchaToken: await getRecaptchaToken('contact'),
+        }),
       }))
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.ok) {
@@ -67,14 +101,14 @@ export default function QuickEnquiry({ source = 'homepage' }) {
         setSubmitting(false)
         return
       }
-      trackLead('quick_enquiry', { enquiry_type: 'quick', service: form.service || '(none)', source })
+      trackLead('quick_enquiry', { enquiry_type: 'quick', service: rental ? 'Equipment Rental' : (form.service || '(none)'), source })
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again or call +971 2 676 6935.') }
     setSubmitting(false)
   }
 
   return (
-    <section className="px-6" style={{ background: '#F4F6FA', paddingTop: '56px', paddingBottom: '56px' }} aria-labelledby="quick-enquiry-heading">
+    <section className="px-6" style={{ background: '#F4F6FA', paddingTop: '56px', paddingBottom: '56px', ...sectionStyle }} aria-labelledby="quick-enquiry-heading">
       <div
         className="max-w-[1200px] mx-auto rounded-2xl overflow-hidden grid lg:grid-cols-[5fr_7fr]"
         style={{ borderTop: '3px solid #E87722', boxShadow: '0 12px 40px rgba(10,26,70,0.14)' }}
@@ -89,16 +123,16 @@ export default function QuickEnquiry({ source = 'homepage' }) {
           <div className="relative">
             <div className="flex items-center gap-2 mb-4" style={{ color: '#E87722' }}>
               <PhoneCall size={15} aria-hidden="true" />
-              <span className="mono text-[11px] uppercase tracking-widest font-bold">Request A Call Back</span>
+              <span className="mono text-[11px] uppercase tracking-widest font-bold">{v.eyebrow}</span>
             </div>
             <h2 id="quick-enquiry-heading" className="font-extrabold text-white mb-3" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', lineHeight: 1.15 }}>
-              Tell Us What <span className="text-[#E87722]">You Need</span>
+              {v.heading}
             </h2>
             <p className="sm:mb-7" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1.02rem', lineHeight: 1.5 }}>
-              An Engineer Calls You Back Within <strong className="text-white">4 Business Hours</strong>.
+              {v.sub}
             </p>
             <ul className="hidden sm:block space-y-3">
-              {POINTS.map(({ I, text }) => (
+              {v.points.map(({ I, text }) => (
                 <li key={text} className="flex items-center gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.88)' }}>
                   <span className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(232,119,34,0.14)', border: '1px solid rgba(232,119,34,0.35)' }}>
                     <I size={15} style={{ color: '#E87722' }} aria-hidden="true" />
@@ -118,7 +152,7 @@ export default function QuickEnquiry({ source = 'homepage' }) {
                 <Check size={28} style={{ color: '#16a34a' }} />
               </div>
               <h3 className="font-bold text-2xl mb-2" style={{ color: '#0B1A46' }}>Thank You, We Have Your Request</h3>
-              <p style={{ color: '#4A5878' }}>Our team will call you within 4 business hours (UAE 09:00-18:00).</p>
+              <p style={{ color: '#4A5878' }}>Our {rental ? 'rental ' : ''}team will call you within 4 business hours (UAE 09:00-18:00).</p>
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="space-y-4">
@@ -140,16 +174,28 @@ export default function QuickEnquiry({ source = 'homepage' }) {
                   />
                 </div>
               </div>
-              <div>
-                <Label htmlFor="qe-service">What Do You Need?</Label>
-                <select
-                  id="qe-service" name="service" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
-                  className={inputClass} style={{ ...inputStyle, color: form.service ? '#0B1A46' : '#6B7280' }}
-                >
-                  <option value="">Select a service</option>
-                  {NEEDS.map(n => <option key={n} value={n} style={{ color: '#0B1A46' }}>{n}</option>)}
-                </select>
-              </div>
+              {rental ? (
+                <div>
+                  <Label htmlFor="qe-need">Equipment, Quantity & Dates</Label>
+                  <input
+                    id="qe-need" type="text" name="need" maxLength={300}
+                    placeholder={context ? `e.g. 5 × ${context}, 3 days, Dubai Marina` : 'e.g. 10 laptops, 3 days, Dubai Marina'}
+                    value={form.need} onChange={e => setForm(f => ({ ...f, need: e.target.value }))}
+                    className={inputClass} style={inputStyle}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Label htmlFor="qe-service">What Do You Need?</Label>
+                  <select
+                    id="qe-service" name="service" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                    className={inputClass} style={{ ...inputStyle, color: form.service ? '#0B1A46' : '#6B7280' }}
+                  >
+                    <option value="">Select a service</option>
+                    {NEEDS.map(n => <option key={n} value={n} style={{ color: '#0B1A46' }}>{n}</option>)}
+                  </select>
+                </div>
+              )}
               {err && (
                 <div className="text-red-600 text-sm p-3 rounded-lg" role="alert" style={{ background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.25)' }}>{err}</div>
               )}

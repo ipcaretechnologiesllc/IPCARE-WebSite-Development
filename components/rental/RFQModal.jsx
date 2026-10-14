@@ -22,7 +22,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
   async function submit(e) {
     e.preventDefault()
     setError('')
-    if (!form.fullName || !form.company || !form.email || !form.phone || !form.startDate || !form.endDate || !form.location) {
+    if (!form.fullName || !form.email || !form.phone || !form.startDate || !form.endDate) {
       setError('Please complete all required fields.'); return
     }
     if (!form.agree) { setError('Please accept the terms to continue.'); return }
@@ -56,7 +56,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+    <div data-hides-floating className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
       <div className="relative w-full max-w-2xl my-8 glass-card" style={{ background: 'rgba(11,26,70,0.97)' }}>
         <header className="flex items-center justify-between px-6 py-5 border-b border-white/10">
           <div>
@@ -80,7 +80,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
           <form onSubmit={submit} className="p-6 space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Full Name *" value={form.fullName} onChange={v => set('fullName', v)} />
-              <Field label="Company *" value={form.company} onChange={v => set('company', v)} />
+              <Field label="Company" value={form.company} onChange={v => set('company', v)} />
               <Field label="Email *" type="email" value={form.email} onChange={v => set('email', v)} />
               <div>
                 <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Phone *</label>
@@ -124,7 +124,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
             </div>
 
             <div>
-              <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Delivery Location *</label>
+              <label className="mono text-[11px] text-white/70 uppercase tracking-widest block mb-1.5">Delivery Location</label>
               <textarea value={form.location} onChange={e => set('location', e.target.value)} rows={2} className="w-full px-3 py-2.5 rounded-lg text-white text-sm focus:outline-none focus:border-[#E87722]" style={inputStyle} placeholder="Venue name, address, city"/>
             </div>
 
