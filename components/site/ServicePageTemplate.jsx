@@ -4,8 +4,10 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import * as Icons from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import CTAPhoneButtons from './CTAPhoneButtons'
 import CertificationsBand from './CertificationsBand'
+import QuickEnquiry, { serviceForPath } from './QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -128,6 +130,7 @@ function renderH1(h1, accent) {
 ══════════════════════════════════════════════════════════════════════════ */
 export default function ServicePageTemplate({ data, related, breadcrumb, spokeGrid }) {
   useReveal()
+  const pathname = usePathname()
 
   const {
     h1, hero, overview, features, benefits, process, industries, faqs, icon,
@@ -857,6 +860,12 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
           parent passes the spokeGrid prop (backwards-compatible no-op).
       ────────────────────────────────────────────────────────────────── */}
       {spokeGrid}
+
+      {/* Call-back form (name, phone, need) for visitors who won't go on to /contact.
+          Skipped on Toronto pages: its copy and promises are UAE-specific. */}
+      {!isCanada && (
+        <QuickEnquiry source={pathname?.startsWith('/event-it') ? 'event-it-page' : 'service-page'} context={h1} defaultService={serviceForPath(pathname)} />
+      )}
 
       {/* ──────────────────────────────────────────────────────────────────
           10. BOTTOM CTA BAND, navy, orange border top (matches home OfficesCTA)

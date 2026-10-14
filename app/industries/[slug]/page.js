@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { industries, getAllIndustrySlugs, getIndustry } from '@/lib/industries-data'
 
 export const revalidate = 3600
@@ -179,6 +180,8 @@ export default async function IndustryDetailPage(props) {
             </div>
           </section>
         )}
+
+        <QuickEnquiry source="industry-page" context={`${ind.name} industry`} />
 
         {/* CTA */}
         <section className="py-16 px-6">

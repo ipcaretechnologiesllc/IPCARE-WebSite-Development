@@ -62,10 +62,24 @@ const Label = ({ htmlFor, children }) => (
   </label>
 )
 
-export default function QuickEnquiry({ source = 'homepage', variant = 'general', context = '', sectionStyle }) {
+// Pre-selects the service dropdown from the page path on service / Event IT pages.
+// Unlisted paths (consulting, digital solutions, ...) leave it for the visitor to pick.
+const SERVICE_BY_PATH = [
+  [/^\/event-it/, 'Event IT & Temporary Infrastructure'],
+  [/^\/services\/managed-it/, 'Managed IT Services'],
+  [/^\/(services\/cybersecurity|cybersecurity-advisory)/, 'Cybersecurity'],
+  [/^\/services\/cloud/, 'Cloud Services'],
+  [/^\/services\/elv/, 'CCTV & Access Control'],
+  [/^\/services\/infrastructure/, 'Structured Cabling & Networks'],
+]
+export function serviceForPath(pathname = '') {
+  return SERVICE_BY_PATH.find(([re]) => re.test(pathname))?.[1] || ''
+}
+
+export default function QuickEnquiry({ source = 'homepage', variant = 'general', context = '', defaultService = '', sectionStyle }) {
   const v = VARIANTS[variant] || VARIANTS.general
   const rental = variant === 'rental'
-  const [form, setForm] = useState({ name: '', phone: '', service: '', need: '' })
+  const [form, setForm] = useState({ name: '', phone: '', service: defaultService, need: '' })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [err, setErr] = useState('')
@@ -88,7 +102,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
           service: rental ? 'Equipment Rental' : form.service,
           message: rental
             ? [form.need.trim(), `Page: ${context || 'Rental'} (${window.location.pathname})`].filter(Boolean).join('\n\n')
-            : '',
+            : context ? `Page: ${context} (${window.location.pathname})` : '',
           tab: 'quick', source, recaptchaToken: await getRecaptchaToken('contact'),
         }),
       }))
