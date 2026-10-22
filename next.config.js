@@ -325,6 +325,9 @@ const nextConfig = {
       { source: '/rental/networking/cisco-c9300-48',           destination: '/rental/networking/aruba-1930-24g', permanent: true },
       // FortiGate 100F withdrawn 2026-10-14; the 100D is the nearest firewall still in stock.
       { source: '/rental/networking/fortinet-fortigate-100f',  destination: '/rental/networking/fortigate-100d', permanent: true },
+      // Search Console showed this longer slug for the R82 playbook returning 404 (2026-10-22).
+      { source: '/cybersecurity-advisory/knowledge-base/check-point-r81-20-to-r82-upgrade-playbook',
+        destination: '/cybersecurity-advisory/knowledge-base/check-point-r82-upgrade-playbook', permanent: true },
 
       // Malformed/artifact URLs (stray trailing "$"/"&", likely broken template links crawled from
       // an old page). No corresponding content — safety-net redirect to home.
