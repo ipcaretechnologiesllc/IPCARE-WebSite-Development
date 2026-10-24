@@ -113,6 +113,23 @@ function FeatureCard({ icon, title, desc, delay = 0, href }) {
 
 /* Wraps the first occurrence of `accent` within `h1` in an orange span;
    falls back to plain text when accent is absent or not a substring. */
+// Turns "[label](/path)" inside data-file text into internal links, so authority
+// copy can link related pages in context. Plain text passes through unchanged.
+function renderInline(text) {
+  if (typeof text !== 'string' || !text.includes('](')) return text
+  const out = []
+  const re = /\[([^\]]+)\]\((\/[^)\s]*)\)/g
+  let last = 0
+  let m
+  while ((m = re.exec(text))) {
+    if (m.index > last) out.push(text.slice(last, m.index))
+    out.push(<Link key={m.index} href={m[2]} className="font-semibold text-[#B25409] underline underline-offset-2 hover:text-[#E87722]">{m[1]}</Link>)
+    last = m.index + m[0].length
+  }
+  if (last < text.length) out.push(text.slice(last))
+  return out
+}
+
 function renderH1(h1, accent) {
   if (!accent || !h1.includes(accent)) return h1
   const i = h1.indexOf(accent)
@@ -158,7 +175,21 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                     // — year-grouped delivery record for recurring event series (e.g. UFC UAE).
     localProof,     // Dubai / Abu Dhabi pages only — built by lib/local-proof.js:
                     // { cityName, heading, intro, projects[], office, siblings[], otherCity }
+    // Authority sections (section 6.5), all optional — rendered after the process steps:
+    engagementModels, // { heading, intro, models: [{ name, tag, summary, points[] }], note }
+    regulations,      // { heading, intro, items: [{ name, body }] }, only frameworks we deliver against
+    guide,            // { eyebrow, heading, intro, sections: [{ h, p: [] }] }; paragraphs may hold [label](/path) links
   } = data
+
+  // Section 6.5 alternates grey/white after the white process section; the industries
+  // band then takes whichever colour keeps the alternation (the navy certifications band follows it).
+  const authoritySections = [
+    engagementModels?.models?.length > 0 && 'models',
+    regulations?.items?.length > 0 && 'regulations',
+    guide?.sections?.length > 0 && 'guide',
+  ].filter(Boolean)
+  const authorityBg = (key) => (authoritySections.indexOf(key) % 2 === 0 ? BG_GREY : BG_WHITE)
+  const industriesBg = authoritySections.length % 2 === 1 ? BG_WHITE : BG_GREY
 
   const isCanada = region === 'canada'
   const effectivePhone = isCanada ? '+1 416 786 0782' : phonePrimary
@@ -619,10 +650,105 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       )}
 
       {/* ──────────────────────────────────────────────────────────────────
-          7. WHO IT'S FOR, light grey, orange pill tags
+          6.5. AUTHORITY SECTIONS, opt-in per page: engagement models,
+          UAE regulations and a long-form guide. Pages without these fields
+          render exactly as before.
+      ────────────────────────────────────────────────────────────────── */}
+      {authoritySections.includes('models') && (
+        <section style={{ background: authorityBg('models'), padding: '72px 24px' }}>
+          <div className="max-w-[1200px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>Engagement Models</Eyebrow>
+              <SectionHeading>{engagementModels.heading}</SectionHeading>
+              {engagementModels.intro && (
+                <p className="text-base leading-relaxed max-w-[720px] mx-auto mt-4" style={{ color: T_BODY }}>{engagementModels.intro}</p>
+              )}
+            </div>
+            <div className={`grid gap-6 ${engagementModels.models.length === 3 ? 'lg:grid-cols-3' : 'md:grid-cols-2'}`}>
+              {engagementModels.models.map((m, i) => (
+                <div key={m.name} className="service-card p-7 reveal flex flex-col" style={{ transitionDelay: `${i * 75}ms` }}>
+                  {m.tag && (
+                    <span
+                      className="inline-flex w-fit rounded-full px-3 py-1 text-[11px] font-bold uppercase mb-4"
+                      style={{ letterSpacing: '0.1em', background: 'rgba(232,119,34,0.10)', color: '#B25409' }}
+                    >
+                      {m.tag}
+                    </span>
+                  )}
+                  <h3 className="font-bold text-lg mb-2" style={{ color: T_NAV }}>{m.name}</h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: T_BODY }}>{m.summary}</p>
+                  <ul className="space-y-2 mt-auto">
+                    {m.points.map((pt) => (
+                      <li key={pt} className="flex gap-2 text-sm" style={{ color: T_BODY }}>
+                        <Icons.Check size={16} className="text-[#E87722] flex-shrink-0 mt-0.5" aria-hidden="true" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            {engagementModels.note && (
+              <p className="text-sm text-center max-w-[760px] mx-auto mt-8 reveal" style={{ color: T_BODY }}>{renderInline(engagementModels.note)}</p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {authoritySections.includes('regulations') && (
+        <section style={{ background: authorityBg('regulations'), padding: '72px 24px' }}>
+          <div className="max-w-[1100px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>UAE Regulations</Eyebrow>
+              <SectionHeading>{regulations.heading}</SectionHeading>
+              {regulations.intro && (
+                <p className="text-base leading-relaxed max-w-[720px] mx-auto mt-4" style={{ color: T_BODY }}>{regulations.intro}</p>
+              )}
+            </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {regulations.items.map((r, i) => (
+                <div key={r.name} className="service-card p-7 reveal" style={{ transitionDelay: `${i * 75}ms` }}>
+                  <h3 className="font-bold text-base mb-2" style={{ color: T_NAV }}>{r.name}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: T_BODY }}>{renderInline(r.body)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {authoritySections.includes('guide') && (
+        <section style={{ background: authorityBg('guide'), padding: '72px 24px' }}>
+          <article className="max-w-[780px] mx-auto">
+            <div className="mb-10 reveal">
+              <Eyebrow>{guide.eyebrow || 'Buyer\'s Guide'}</Eyebrow>
+              <SectionHeading centered={false}>{guide.heading}</SectionHeading>
+              {guide.intro && (
+                <p className="text-base md:text-lg leading-relaxed mt-4" style={{ color: T_BODY }}>{renderInline(guide.intro)}</p>
+              )}
+            </div>
+            <div className="space-y-8">
+              {guide.sections.map((s) => (
+                <div key={s.h}>
+                  <h3 className="font-bold text-xl mb-3" style={{ color: T_NAV }}>{s.h}</h3>
+                  <div className="space-y-4">
+                    {s.p.map((para, j) => (
+                      <p key={j} className="text-base leading-[1.75]" style={{ color: T_BODY }}>{renderInline(para)}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+        </section>
+      )}
+
+      {/* ──────────────────────────────────────────────────────────────────
+          7. WHO IT'S FOR, light grey (white after an odd number of section-6.5
+          blocks), orange pill tags
       ────────────────────────────────────────────────────────────────── */}
       {industries?.length > 0 && (
-        <section style={{ background: BG_GREY, padding: '64px 24px' }}>
+        <section style={{ background: industriesBg, padding: '64px 24px' }}>
           <div className="max-w-[1000px] mx-auto text-center reveal">
             <Eyebrow>Who It's For</Eyebrow>
             <SectionHeading>Industries We Serve</SectionHeading>
