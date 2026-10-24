@@ -32,7 +32,7 @@ const VARIANTS = {
   general: {
     eyebrow: 'Request A Call Back',
     heading: <>Tell Us What <span className="text-[#E87722]">You Need</span></>,
-    sub: <>An Engineer Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
+    sub: <>A Solutions Specialist Calls You Back Within <strong className="text-white">4 Business Hours</strong>.</>,
     points: [
       { I: ShieldCheck, text: 'No-Obligation Consultation' },
       { I: Award, text: '20+ Years Of Enterprise Delivery' },
