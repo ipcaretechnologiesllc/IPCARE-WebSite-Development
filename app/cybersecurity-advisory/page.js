@@ -8,13 +8,19 @@ export const revalidate = 3600
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
+// Search Console, UAE, 28 days to 2026-10-21: the page shows for "zero trust dubai" (11.6),
+// "zero trust uae" (7.0) and "ztna dubai" but had 0 clicks from 143 impressions, so the
+// title leads with Zero Trust and the city.
+const TITLE = 'Zero Trust & SASE Advisory Dubai, UAE | IP Care'
+const DESCRIPTION = uaeFocus('Zero Trust, ZTNA and SASE advisory in Dubai and across UAE and Canada from Palo Alto, Fortinet and Check Point certified engineers. Architecture, roadmap, migration.')
+
 export const metadata = {
-  title: 'Cyber Advisory UAE: Zero Trust, SASE & Security',
-  description: uaeFocus('Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.'),
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/cybersecurity-advisory' },
   openGraph: {
-    title: 'Cyber Advisory UAE: Zero Trust, SASE & Security',
-    description: uaeFocus('Cybersecurity advisory across UAE and Canada: Zero Trust, SASE, cloud security and executive advisory. Vendor-certified: Palo Alto, Fortinet, Check Point.'),
+    title: TITLE,
+    description: DESCRIPTION,
     url: '/cybersecurity-advisory',
     type: 'website',
     images: [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Cyber advisory, Zero Trust, SASE and security architecture by IP Care' }],

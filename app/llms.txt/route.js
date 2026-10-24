@@ -79,6 +79,9 @@ IP Care Technologies provides end-to-end IT services for organizations of all si
 - [Rental Categories](${BASE}/rental): Laptops, tablets, networking, CCTV, servers and bundle packages
 - [Careers](${BASE}/careers): Open roles at IP Care Technologies
 
+## Full reference
+- [llms-full.txt](${BASE}/llms-full.txt): Every service with its FAQs, rental items with rates, event IT record, case studies and article summaries in one file
+
 ## Sitemap
 ${BASE}/sitemap.xml
 `
