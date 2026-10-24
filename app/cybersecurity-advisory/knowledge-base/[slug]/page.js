@@ -4,6 +4,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { kbArticles, getKbArticle, getKbSlugs } from '@/lib/cyber-advisory-data'
 import { ORG_REF } from '@/lib/schema'
 
@@ -202,6 +203,8 @@ export default async function KnowledgeBaseArticlePage(props) {
             </div>
           </section>
         )}
+
+        <QuickEnquiry source="kb-article" context={a.title} defaultService="Cybersecurity" />
 
         {/* ── CONSULTATION CTA ─────────────────────────────────────────── */}
         <section className="px-6 py-16" style={{ background: '#fff' }}>

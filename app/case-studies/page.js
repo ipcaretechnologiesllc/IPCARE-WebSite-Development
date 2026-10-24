@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ChevronRight, ArrowRight } from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { caseStudyProjects, portfolioStats } from '@/lib/portfolio-data'
 import { narrativeCaseStudies, caseStudyPath } from '@/lib/case-studies-data'
 import { getEventSubpage } from '@/lib/event-it-data'
@@ -256,6 +257,8 @@ export default function CaseStudiesPage() {
             </div>
           </div>
         </section>
+
+        <QuickEnquiry source="case-studies" context="Case studies index" />
       </main>
 
       <Footer />

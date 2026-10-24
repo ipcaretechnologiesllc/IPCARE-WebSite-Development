@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -470,6 +471,7 @@ export default function EventITClient({ events, eventServices, partners, capabil
       <HowItWorks />
       <CapabilityStats capabilityStats={capabilityStats} />
       <Technology partners={partners} />
+      <QuickEnquiry source="event-it-hub" context="Event IT hub" defaultService="Event IT & Temporary Infrastructure" />
       <CTAStrip />
     </main>
   )

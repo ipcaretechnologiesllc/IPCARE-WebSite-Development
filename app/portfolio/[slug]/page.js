@@ -4,6 +4,7 @@ import { ArrowRight, ChevronRight, MapPin, ShieldCheck } from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CaseStudyWork from './CaseStudyWork'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getCaseStudy, getCaseStudySlugs } from '@/lib/portfolio-data'
 import { responsive, SIZES } from '@/lib/responsive-image'
 
@@ -348,6 +349,8 @@ export default async function CaseStudyPage(props) {
             </div>
           </section>
         )}
+
+        <QuickEnquiry source="portfolio-project" context={`Portfolio: ${project.name}`} />
 
         {/* Handover + CTA */}
         <section className="bg-[#0B1A46]">

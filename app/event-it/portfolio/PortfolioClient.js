@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import * as Icons from 'lucide-react'
 import { responsive, SIZES, srcSetFor } from '@/lib/responsive-image'
 
@@ -177,6 +178,8 @@ export default function EventPortfolioPage() {
             )}
           </div>
         </section>
+
+        <QuickEnquiry source="event-it-portfolio" context="Event IT portfolio" defaultService="Event IT & Temporary Infrastructure" />
 
         {/* Bottom CTA */}
         <section style={{

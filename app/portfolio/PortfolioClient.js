@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import {
   featuredPortfolioProjects,
   portfolioFilters,
@@ -478,6 +479,8 @@ export default function PortfolioClient() {
           )}
         </div>
       </section>
+
+      <QuickEnquiry source="portfolio" context="Delivery portfolio" />
 
       <section
         className="px-6 py-20 text-white"

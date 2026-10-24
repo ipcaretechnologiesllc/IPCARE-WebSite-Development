@@ -7,6 +7,7 @@ import {
   Activity, Building2, Landmark, Calendar, HardHat,
 } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 
 /* ── IntersectionObserver reveal (same pattern as About/Services) ── */
@@ -385,6 +386,7 @@ export default function IndustriesClient() {
     <main>
       <Hero />
       <IndustriesGrid />
+      <QuickEnquiry source="industries-hub" context="Industries hub" />
       <CTAStrip />
     </main>
   )

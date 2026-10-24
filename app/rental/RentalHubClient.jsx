@@ -6,6 +6,7 @@ import * as Icons from 'lucide-react'
 import { rentalCategories, getFeaturedProducts } from '@/lib/rental-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import AddToQuoteButton from '@/components/rental/AddToQuoteButton'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 import { ICONS } from '@/lib/icon-map'
@@ -330,6 +331,9 @@ export default function RentalHubClient({ localSection = null }) {
       </section>
 
       {localSection}
+
+      {/* Call-back form: the hub lists categories, not products, so the visitor picks one. */}
+      <QuickEnquiry variant="rental" source="rental-hub" context="Rental hub" equipmentOptions={Object.values(rentalCategories).map(c => c.name)} />
 
       {/* ── CTA STRIP ────────────────────────────────────────── */}
       <section

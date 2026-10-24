@@ -5,6 +5,7 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { ArrowRight } from 'lucide-react'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -396,6 +397,7 @@ export default function ServicesClient({ categories }) {
     <main>
       <Hero />
       <ServicesGrid cats={categories} />
+      <QuickEnquiry source="services-hub" context="Services hub" />
       <CTAStrip />
     </main>
   )

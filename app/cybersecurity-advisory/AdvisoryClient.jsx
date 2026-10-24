@@ -11,6 +11,7 @@ import {
 import * as Icons from 'lucide-react'
 import { platforms, services, trackRecord, tools, kbArticles, caseStudies } from '@/lib/cyber-advisory-data'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
 
@@ -945,6 +946,7 @@ export default function AdvisoryClient() {
       <Tools />
       <KnowledgeBase />
       <CaseStudies />
+      <QuickEnquiry source="advisory-hub" context="Cybersecurity advisory" defaultService="Cybersecurity" />
       <BottomCTA />
     </main>
   )

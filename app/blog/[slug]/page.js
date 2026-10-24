@@ -4,6 +4,7 @@ import * as Icons from 'lucide-react'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
+import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
 import { srcSetFor } from '@/lib/responsive-image'
@@ -16,6 +17,20 @@ import { BLOG_CATEGORY_TO_SERVICE, CITY_SERVICE_LABELS, UAE_CITIES, cityServiceH
 export const revalidate = 3600
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
+
+// Pre-selects the call-back form's "What do you need?" from the article's category.
+// Values must match NEEDS in components/site/QuickEnquiry.jsx; unlisted categories (News) leave it blank.
+const BLOG_CATEGORY_TO_NEED = {
+  'Cybersecurity': 'Cybersecurity',
+  'Government IT': 'Cybersecurity',
+  'Managed IT': 'Managed IT Services',
+  'Banking IT': 'Managed IT Services',
+  'Healthcare IT': 'Managed IT Services',
+  'Networking': 'Structured Cabling & Networks',
+  'ELV & Security': 'CCTV & Access Control',
+  'Event IT': 'Event IT & Temporary Infrastructure',
+  'Rentals': 'Equipment Rental',
+}
 
 const imageFitStyle = (article, inset = 14) => {
   if (article.imageFit !== 'contain') return { inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
@@ -270,6 +285,8 @@ export default async function ArticlePage(props) {
             </div>
           </div>
         </section>
+
+        <QuickEnquiry source="blog-article" context={a.title} defaultService={BLOG_CATEGORY_TO_NEED[a.category] || ''} sectionStyle={{ background: '#fff', paddingTop: 0 }} />
 
         {/* ── RELATED ARTICLES ────────────────────────────────────────── */}
         {related.length > 0 && (
