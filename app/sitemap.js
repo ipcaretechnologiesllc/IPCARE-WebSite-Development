@@ -53,11 +53,11 @@ const HUB_DATES = {
   '/about':                                '2026-09-24',
   '/services':                             '2026-09-23',
   '/portfolio':                            '2026-07-05',
-  '/case-studies':                         '2026-09-19',
+  '/case-studies':                         '2026-10-26',
   '/products':                             '2026-07-23',
   '/rental':                               '2026-10-12',  // Abu Dhabi/Dubai computer rental section
   '/event-it':                             '2026-10-07',
-  '/event-it/portfolio':                   '2026-10-07',
+  '/event-it/portfolio':                   '2026-10-26',
   '/cybersecurity-advisory':               '2026-10-12',  // lists the newest KB articles
   '/cybersecurity-advisory/knowledge-base':'2026-10-12',  // Harmony SASE guide added
   '/blog':                                 '2026-10-08',

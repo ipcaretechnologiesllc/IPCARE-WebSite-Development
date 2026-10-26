@@ -82,6 +82,19 @@ function buildEntries() {
       }]
     : []
 
+  const ufc333 = getEventSubpage('ufc-333')
+  if (ufc333) {
+    events.push({
+      href: '/event-it/ufc-333',
+      title: 'UFC 333: Volkanovski vs. Evloev',
+      summary:
+        'Wi-Fi 7 on 10G fiber uplinks, four independent segmented networks and an extended media footprint at Etihad Arena, Abu Dhabi.',
+      tag: 'Event IT',
+      meta: 'Etihad Arena, Abu Dhabi · 2026',
+      group: 'Major events',
+    })
+  }
+
   return [...security, ...delivery, ...events]
 }
 

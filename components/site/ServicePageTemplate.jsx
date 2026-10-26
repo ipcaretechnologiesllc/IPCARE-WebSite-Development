@@ -173,6 +173,8 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                     // sourced from lib/case-studies-data.js. Omit for no section.
     eventTimeline,  // { eyebrow, heading, intro, groups: [{ year, items: [{ name, date, venue, latest }] }] }
                     // — year-grouped delivery record for recurring event series (e.g. UFC UAE).
+    photoGallery,   // { eyebrow, heading, intro, photos: [{ src, alt, caption, pos }] }
+                    // — on-site delivery photos (e.g. UFC 333). Omit for no section.
     localProof,     // Dubai / Abu Dhabi pages only — built by lib/local-proof.js:
                     // { cityName, heading, intro, projects[], office, siblings[], otherCity }
     // Authority sections (section 6.5), all optional — rendered after the process steps:
@@ -462,6 +464,50 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
                     ))}
                   </ul>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ──────────────────────────────────────────────────────────────────
+          2.6. PHOTO GALLERY, light grey, on-site delivery photos.
+          Opt-in via `photoGallery`; pages without it render as before.
+          Same grey slot as the event timeline, so don't combine the two.
+      ────────────────────────────────────────────────────────────────── */}
+      {photoGallery?.photos?.length > 0 && (
+        <section style={{ background: BG_GREY, padding: '72px 24px' }}>
+          <div className="max-w-[1100px] mx-auto">
+            <div className="text-center mb-12 reveal">
+              <Eyebrow>{photoGallery.eyebrow || 'On Site'}</Eyebrow>
+              <SectionHeading>{photoGallery.heading}</SectionHeading>
+              {photoGallery.intro && (
+                <p className="mt-4 text-sm max-w-[640px] mx-auto leading-relaxed" style={{ color: T_BODY }}>
+                  {photoGallery.intro}
+                </p>
+              )}
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {photoGallery.photos.map((p) => (
+                <figure
+                  key={p.src}
+                  className="reveal overflow-hidden rounded-2xl"
+                  style={{ background: BG_WHITE, boxShadow: '0 2px 10px rgba(10,26,70,0.06)' }}
+                >
+                  <img
+                    src={p.src} {...responsive(p.src, SIZES.third)}
+                    alt={p.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full object-cover"
+                    style={{ aspectRatio: '4 / 3', objectPosition: p.pos || 'center' }}
+                  />
+                  {p.caption && (
+                    <figcaption className="px-5 py-4 text-sm leading-relaxed" style={{ color: T_BODY }}>
+                      {p.caption}
+                    </figcaption>
+                  )}
+                </figure>
               ))}
             </div>
           </div>
