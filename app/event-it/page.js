@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import EventITClient from './EventITClient'
 import { events, eventServices, partners, capabilityStats } from '@/lib/event-it-data'
+import { eventsItemListSchema } from '@/lib/event-it-schema'
 
 export const revalidate = 3600
 
@@ -23,6 +24,10 @@ export const metadata = {
 export default function EventITPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsItemListSchema) }}
+      />
       {/* No hero preload here: React preloads the hero <img> (fetchPriority="high")
           in this page's HTML itself. Don't add react-dom preload() — it also rides in
           Next's link-prefetch payload, so every page linking here downloaded this hero. */}
