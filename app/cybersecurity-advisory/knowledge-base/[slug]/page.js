@@ -5,6 +5,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
+import RelatedOnSite from '@/components/site/RelatedOnSite'
+import { KB_LINKS, rotateFrom } from '@/lib/related-links'
 import { kbArticles, getKbArticle, getKbSlugs } from '@/lib/cyber-advisory-data'
 import { ORG_REF } from '@/lib/schema'
 
@@ -54,10 +56,11 @@ export default async function KnowledgeBaseArticlePage(props) {
   const a = getKbArticle(params.slug)
   if (!a) notFound()
 
-  // Related: same category first, then fill from others — 3 total
-  const sameCat = kbArticles.filter((x) => x.slug !== a.slug && x.category === a.category)
-  const others = kbArticles.filter((x) => x.slug !== a.slug && x.category !== a.category)
-  const related = [...sameCat, ...others].slice(0, 3)
+  // Related: same category first, then fill from others — 3 total. Both start after this
+  // article and wrap round (rotateFrom) so each article is linked from a few others.
+  const rotated = rotateFrom(kbArticles, a.slug, kbArticles.length - 1)
+  const sameCat = rotated.filter((x) => x.category === a.category)
+  const related = [...sameCat.slice(0, 1), ...rotated.filter((x) => x !== sameCat[0])].slice(0, 3)
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -164,6 +167,8 @@ export default async function KnowledgeBaseArticlePage(props) {
                 </Link>
               </div>
             )}
+
+            <RelatedOnSite links={KB_LINKS[a.slug]} />
 
             {/* Practice / author box — honest house credit */}
             <div className="mt-12 rounded-2xl p-6 md:p-7 flex items-start gap-4" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>

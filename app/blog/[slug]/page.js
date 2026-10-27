@@ -5,6 +5,8 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import NewsletterStrip from '@/components/blog/NewsletterStrip'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
+import RelatedOnSite from '@/components/site/RelatedOnSite'
+import { BLOG_LINKS, rotateFrom } from '@/lib/related-links'
 import { articles, getArticle, getAllArticleSlugs, getAuthor, getKeyTakeaways, toISODate } from '@/lib/blog-data'
 import { isUaeOnlyBlogSlug, isCaSite } from '@/lib/seo-region'
 import { srcSetFor } from '@/lib/responsive-image'
@@ -77,10 +79,13 @@ export default async function ArticlePage(props) {
   const a = getArticle(params.slug)
   if (!a) notFound()
 
-  // Same-category articles first, then fill from others
-  const sameCat = articles.filter(x => x.slug !== params.slug && x.category === a.category)
-  const others  = articles.filter(x => x.slug !== params.slug && x.category !== a.category)
-  const related = [...sameCat, ...others].slice(0, 3)
+  // One same-category article, then the next articles after this one (wrapping round), so
+  // every article is linked from at least a couple of others instead of the same first three
+  // being linked from everywhere. A pure same-category preference left single-category
+  // posts (Healthcare IT, News) with no article linking to them.
+  const rotated = rotateFrom(articles, params.slug, articles.length - 1)
+  const sameCat = rotated.filter(x => x.category === a.category)
+  const related = [...sameCat.slice(0, 1), ...rotated.filter(x => x !== sameCat[0])].slice(0, 3)
 
   const authorInfo = getAuthor(a.author)
   const keyTakeaways = getKeyTakeaways(params.slug)
@@ -248,6 +253,8 @@ export default async function ArticlePage(props) {
                 </nav>
               )
             })()}
+
+            <RelatedOnSite links={BLOG_LINKS[params.slug]} />
 
             {/* Share bar */}
             <div className="mt-12 pt-8 flex items-center gap-3 flex-wrap" style={{ borderTop: '1px solid #E5E7EB' }}>
