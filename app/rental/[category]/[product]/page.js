@@ -65,6 +65,11 @@ export default async function ProductDetailPage(props) {
     ? resolveProductRefs(product.content.related)
     : getRelatedProducts(params.category, params.product, 3)
 
+  // "Pairs well with" entries whose target product exists; see pairsWith in lib/rental-data.js.
+  const pairs = (product.content?.pairsWith || [])
+    .map((p) => ({ ...p, item: getProduct(p.category, p.slug) }))
+    .filter((p) => p.item)
+
   const BASE = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae')
   const productUrl = `${BASE}/rental/${params.category}/${params.product}`
 
@@ -240,6 +245,22 @@ export default async function ProductDetailPage(props) {
                 <p className="leading-relaxed mt-3" style={{ color: '#58595B' }}>{a}</p>
               </details>
             ))}
+
+            {pairs.length > 0 && (
+              <div className="mt-10">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Pairs well with</h2>
+                <ul className="space-y-3">
+                  {pairs.map(({ category, slug, note, item }) => (
+                    <li key={slug} className="leading-relaxed" style={{ color: '#58595B' }}>
+                      <Link href={`/rental/${category}/${slug}`} className="font-semibold hover:underline" style={{ color: '#0B1A46' }}>
+                        {item.brand} {item.model}
+                      </Link>
+                      {': '}{note}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <p className="mt-8 text-sm" style={{ color: '#58595B' }}>
               See all{' '}
