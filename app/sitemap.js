@@ -223,7 +223,7 @@ const RENTAL_DATES = {
   'networking/fortigate-501e':                      '2026-10-14',
   'networking/palo-alto-pa-440':                    '2026-10-13',
   'networking/unifi-usw-24-poe':                    '2026-10-27',
-  'networking/netgear-m4350-48x4v':                 '2026-10-13',
+  'networking/unifi-usw-48-poe':                    '2026-10-27',
   'bundles/event-10-person':                        '2026-10-13',
   'bundles/conference-room-pack':                   '2026-10-13',
 }
