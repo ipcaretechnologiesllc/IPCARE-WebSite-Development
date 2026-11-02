@@ -121,6 +121,21 @@ export default async function CategoryPage(props) {
                 display name doesn't match how people search for it (see rental-data.js). */}
             <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight max-w-3xl mx-auto">{cat.h1 || `${cat.name} Rental`}, <span className="text-[#E87722]">{RENTAL_REGION.short}</span></h1>
             <p className="body-text mt-5 max-w-2xl mx-auto">{cat.description}</p>
+            {/* Above-the-fold contact route. The site-wide click listener in Analytics.jsx
+                counts these as whatsapp_click / phone_click with this page as the topic. */}
+            <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <a
+                href={`https://wa.me/971506828290?text=${encodeURIComponent(`Hi, I'd like a rental quote for: ${cat.name}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary whitespace-nowrap"
+              >
+                <Icons.MessageCircle size={16} className="mr-2" /> Get a quote on WhatsApp
+              </a>
+              <a href="tel:+971506828290" className="btn-ghost whitespace-nowrap">
+                <Icons.Phone size={14} className="mr-2" /> Call +971 50 6828290
+              </a>
+            </div>
           </div>
         </section>
 
