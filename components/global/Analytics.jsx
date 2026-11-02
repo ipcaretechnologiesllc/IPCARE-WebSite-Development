@@ -120,6 +120,8 @@ export default function Analytics() {
         link_url: href.split('?')[0],
         link_text: (a.getAttribute('aria-label') || a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100),
         page_path: window.location.pathname,
+        // Page title minus the brand suffix, so a rental/service page names the product being asked about.
+        topic: (document.title || '').split(' | ')[0].trim().slice(0, 100),
       })
     }
     document.addEventListener('click', onClick, true)
