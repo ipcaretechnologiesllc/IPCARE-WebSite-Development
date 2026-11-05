@@ -39,6 +39,21 @@ const collectionSchema = {
   url: `${BASE}/products`,
 }
 
+// The hub is a listing of the product pages, so it declares them as an ItemList (Ahrefs:
+// "Category page missing ItemList schema"). Built from the same `products` object that
+// renders the cards, so the markup can never describe a product that is not shown.
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Products built by IP Care',
+  itemListElement: Object.entries(products).map(([slug, p], i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.h1Accent || p.h1,
+    url: `${BASE}/products/${slug}`,
+  })),
+}
+
 function renderH1(h1, accent) {
   if (!accent || !h1.includes(accent)) return h1
   const i = h1.indexOf(accent)
@@ -60,6 +75,7 @@ export default function ProductsHubPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <Header />
       <main>
         {/* Breadcrumb */}
