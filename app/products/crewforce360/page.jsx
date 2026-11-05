@@ -33,6 +33,29 @@ export default function CrewForce360Page() {
     operatingSystem: 'Web, iOS, Android',
     description: data.tagline,
     url: 'https://www.crewforce360.com/',
+    // Starter and Professional only: Enterprise is priced to order, so it has no price to
+    // state. These mirror the "How much does CrewForce360 cost?" FAQ on this page and the
+    // plans at crewforce360.com/pricing; update all three together.
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Starter',
+        description: 'Up to 50 staff members, billed monthly, 14-day free trial.',
+        price: '199',
+        priceCurrency: 'USD',
+        url: 'https://www.crewforce360.com/pricing',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Professional',
+        description: 'Up to 150 staff members, billed monthly, 14-day free trial.',
+        price: '499',
+        priceCurrency: 'USD',
+        url: 'https://www.crewforce360.com/pricing',
+        availability: 'https://schema.org/InStock',
+      },
+    ],
     creator: ORG_REF,
     publisher: ORG_REF,
   }
