@@ -7,6 +7,7 @@ import { isUaeOnlyServiceSubpage, isCaOnlyServiceSubpage, isCaSite } from '@/lib
 import { ORG_REF, UAE_COUNTRY, serviceCountries } from '@/lib/schema'
 import { getCaseStudiesForSubpage, toCaseStudyCard } from '@/lib/case-studies-data'
 import { getLocalProof } from '@/lib/local-proof'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -38,6 +39,7 @@ export async function generateMetadata(props) {
       description: sub.metaDescription,
       url: `/services/${params.category}/${params.slug}`,
       type: 'website',
+      images: OG_IMAGES,
     },
   }
 }

@@ -28,9 +28,15 @@ export default function ProductDetailClient({ product, categorySlug }) {
   )
   const [qty, setQty] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
+  // The three gallery slots are tonal variants of one photo, made with Unsplash's `sat`/`sharp`
+  // params. Local /public images ignore those params, so adding them there only published
+  // extra duplicate image URLs (flagged as "more than three parameters in URL") for the same
+  // file. Local images keep their clean path; only remote Unsplash photos get the variants.
   const images = product.images
     ? product.images
-    : [`${product.image}?w=1200&fm=webp&q=82`, `${product.image}?w=1200&fm=webp&q=82&sat=-20`, `${product.image}?w=1200&fm=webp&q=82&sharp=20`]
+    : product.image.startsWith('http')
+      ? [`${product.image}?w=1200&fm=webp&q=82`, `${product.image}?w=1200&fm=webp&q=82&sat=-20`, `${product.image}?w=1200&fm=webp&q=82&sharp=20`]
+      : [product.image, product.image, product.image]
 
   return (
     <section className="py-10 md:py-14 px-6" style={{ background: '#F4F6FA' }}>

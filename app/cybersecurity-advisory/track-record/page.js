@@ -3,6 +3,7 @@ import Footer from '@/components/site/Footer'
 import TrackRecordClient from './TrackRecordClient'
 import { cyberProjects, cyberCapabilities, cyberFaqs, cyberPractitioner } from '@/lib/cyber-advisory-data'
 import { srcSetFor } from '@/lib/responsive-image'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -24,6 +25,7 @@ export const metadata = {
       'Proven Palo Alto, Prisma Access and Strata Cloud Manager delivery for regulated enterprise and government clients across Canada. Anonymized by design.',
     url: '/cybersecurity-advisory/track-record',
     type: 'website',
+    images: OG_IMAGES,
   },
   twitter: {
     card: 'summary_large_image',

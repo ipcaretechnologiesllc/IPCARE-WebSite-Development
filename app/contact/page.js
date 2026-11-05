@@ -2,6 +2,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import ContactClient from './ContactClient'
 import { uaeFocus } from '@/lib/seo-region'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -9,6 +10,13 @@ export const metadata = {
   title: uaeFocus('Contact IP Care Technologies | IT Support UAE & Canada'),
   description: uaeFocus('Contact IP Care Technologies, enterprise IT support across UAE and Canada. Abu Dhabi: +971 2 676 6935. We respond within 4 business hours.'),
   alternates: { canonical: '/contact' },
+  openGraph: {
+    title: uaeFocus('Contact IP Care Technologies | IT Support UAE & Canada'),
+    description: uaeFocus('Contact IP Care Technologies, enterprise IT support across UAE and Canada. Abu Dhabi: +971 2 676 6935. We respond within 4 business hours.'),
+    url: '/contact',
+    type: 'website',
+    images: OG_IMAGES,
+  },
 }
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'

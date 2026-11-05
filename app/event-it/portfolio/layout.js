@@ -1,6 +1,8 @@
 // Metadata wrapper for /event-it/portfolio.
 // The page itself is a client component; this layout provides server-side metadata.
 
+import { OG_IMAGES } from '@/lib/og'
+
 export const metadata = {
   title: 'Event IT Portfolio: FIFA, UFC, NBA & EuroLeague | IP Care',
   description: 'Event IT delivered by IP Care: FIFA Club World Cup, UFC, NBA Abu Dhabi, EuroLeague Final Four, IIFA Awards, Coldplay and UAE National Day.',
@@ -10,6 +12,7 @@ export const metadata = {
     description: 'Major events powered by IP Care: FIFA, UFC, NBA Abu Dhabi, EuroLeague Final Four 2025, FINA, IIFA, Coldplay, Saadiyat Nights and UAE National Day.',
     url: '/event-it/portfolio',
     type: 'website',
+    images: OG_IMAGES,
   },
   twitter: {
     card: 'summary_large_image',

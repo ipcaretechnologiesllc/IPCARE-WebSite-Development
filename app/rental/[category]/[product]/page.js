@@ -9,6 +9,7 @@ import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getProduct, getAllProductParams, getRelatedProducts, resolveProductRefs, productSeo } from '@/lib/rental-data'
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -51,7 +52,7 @@ export async function generateMetadata(props) {
     title,
     description,
     alternates: { canonical: `/rental/${params.category}/${params.product}` },
-    openGraph: { title, description, url: `/rental/${params.category}/${params.product}`, images: [p.images ? p.images[0] : p.image + '?w=1200&q=85'] },
+    openGraph: { title, description, url: `/rental/${params.category}/${params.product}`, type: 'website', images: [p.images ? p.images[0] : p.image + '?w=1200&q=85'] },
   }
 }
 

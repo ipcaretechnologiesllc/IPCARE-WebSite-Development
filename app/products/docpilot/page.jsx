@@ -3,6 +3,7 @@ import Footer from '@/components/site/Footer'
 import ProductPageTemplate from '@/components/site/ProductPageTemplate'
 import { getProduct } from '@/lib/products-data'
 import { ORG_REF } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -17,6 +18,7 @@ export const metadata = {
     description: "DocPilot is IP Care's document and compliance platform: track gate pass, vehicle, machinery, employee, and company document expiry in one place.",
     url: '/products/docpilot',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

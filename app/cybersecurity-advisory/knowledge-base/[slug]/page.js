@@ -9,6 +9,7 @@ import RelatedOnSite from '@/components/site/RelatedOnSite'
 import { KB_LINKS, rotateFrom } from '@/lib/related-links'
 import { kbArticles, getKbArticle, getKbSlugs } from '@/lib/cyber-advisory-data'
 import { ORG_REF } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -44,6 +45,7 @@ export async function generateMetadata(props) {
       description: a.seoDescription || a.excerpt,
       url: `${BASE}/cybersecurity-advisory/knowledge-base/${a.slug}`,
       type: 'article',
+      images: OG_IMAGES,
       publishedTime: toISO(a.date),
       modifiedTime: toISO(a.updatedDate || a.date),
       authors: [a.author],

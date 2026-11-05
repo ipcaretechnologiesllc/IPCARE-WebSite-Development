@@ -1,6 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import KBClient from './KBClient'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -12,6 +13,8 @@ export const metadata = {
     title: 'Cybersecurity Knowledge Base: The Cyber Adviser',
     description: 'Field-tested articles on enterprise security architecture and vendor-specific engineering.',
     url: '/cybersecurity-advisory/knowledge-base',
+    type: 'website',
+    images: OG_IMAGES,
   },
 }
 

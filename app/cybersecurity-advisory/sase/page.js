@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { services as advisoryServices, kbArticles } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -22,6 +23,7 @@ export const metadata = {
     description: uaeFocus('SASE transformation consulting in UAE and Canada. Secure Access Service Edge with Prisma Access, Netskope and cloud-delivered security.'),
     url: '/cybersecurity-advisory/sase',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

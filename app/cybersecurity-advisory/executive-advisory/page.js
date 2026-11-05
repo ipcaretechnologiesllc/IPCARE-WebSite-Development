@@ -4,6 +4,7 @@ import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -16,6 +17,7 @@ export const metadata = {
     description: 'Executive cybersecurity advisory. CISO advisory, board-level strategy, risk communication and security programme development.',
     url: '/cybersecurity-advisory/executive-advisory',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

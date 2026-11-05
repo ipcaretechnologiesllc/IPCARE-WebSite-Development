@@ -1,6 +1,7 @@
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { LegalPage, legalContent } from './shared'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -8,6 +9,13 @@ export const metadata = {
   title: 'Privacy Policy | IP Care Technologies',
   description: 'IP Care Technologies privacy policy: what data we collect, how we use it, and your rights under UAE PDPL and Canadian PIPEDA.',
   alternates: { canonical: '/privacy-policy' },
+  openGraph: {
+    title: 'Privacy Policy | IP Care Technologies',
+    description: 'IP Care Technologies privacy policy: what data we collect, how we use it, and your rights under UAE PDPL and Canadian PIPEDA.',
+    url: '/privacy-policy',
+    type: 'website',
+    images: OG_IMAGES,
+  },
   robots: { index: true, follow: true },
 }
 

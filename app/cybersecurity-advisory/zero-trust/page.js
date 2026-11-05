@@ -7,6 +7,7 @@ import * as Icons from 'lucide-react'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -19,6 +20,7 @@ export const metadata = {
     description: uaeFocus('Zero Trust architecture consulting in UAE and Canada. Never trust always verify, micro-segmentation, identity-driven access with Palo Alto Prisma.'),
     url: '/cybersecurity-advisory/zero-trust',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

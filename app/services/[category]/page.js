@@ -7,6 +7,7 @@ import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { serviceCategories, getAllCategorySlugs, getCategory, getRelatedServices } from '@/lib/services-data'
 import { getCaseStudiesForCategory, toCaseStudyCard } from '@/lib/case-studies-data'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -29,6 +30,7 @@ export async function generateMetadata(props) {
       description: cat.metaDescription,
       url: `/services/${params.category}`,
       type: 'website',
+      images: OG_IMAGES,
     },
   }
 }

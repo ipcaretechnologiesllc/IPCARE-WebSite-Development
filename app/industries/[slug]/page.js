@@ -5,6 +5,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { industries, getAllIndustrySlugs, getIndustry } from '@/lib/industries-data'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -27,6 +28,7 @@ export async function generateMetadata(props) {
       description: ind.metaDescription,
       url: `/industries/${params.slug}`,
       type: 'website',
+      images: OG_IMAGES,
     },
   }
 }

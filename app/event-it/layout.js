@@ -1,5 +1,6 @@
 import { isCaSite } from '@/lib/seo-region'
 import { ORG_REF } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const metadata = {
   title: 'Event IT Infrastructure UAE | WiFi, Data Centres & NOC for Major Events | IP Care',
@@ -12,6 +13,7 @@ export const metadata = {
       'High-density event WiFi, temporary data centres, CCTV and 24/7 NOC for FIFA, UFC, NBA Abu Dhabi, EuroLeague Final Four 2025, FINA, IIFA, Coldplay, Saadiyat Nights and UAE National Day.',
     url: 'https://www.ipcare.ae/event-it',
     type: 'website',
+    images: OG_IMAGES,
   },
   twitter: {
     card: 'summary_large_image',

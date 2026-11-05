@@ -4,6 +4,7 @@ import ServicePageTemplate from '@/components/site/ServicePageTemplate'
 import { services as advisoryServices } from '@/lib/cyber-advisory-data'
 import { uaeFocus } from '@/lib/seo-region'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -16,6 +17,7 @@ export const metadata = {
     description: 'Cloud security advisory for AWS, Azure and GCP. Cloud workload protection, CSPM and secure landing zones.',
     url: '/cybersecurity-advisory/cloud-security',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

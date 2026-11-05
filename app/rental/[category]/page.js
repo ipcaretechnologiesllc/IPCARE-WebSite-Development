@@ -8,6 +8,7 @@ import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getCategory, getAllCategorySlugs, getCrossListedProducts } from '@/lib/rental-data'
 import { RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 export const revalidate = 3600
 
@@ -25,7 +26,7 @@ export async function generateMetadata(props) {
     title: cat.title,
     description: cat.metaDescription,
     alternates: { canonical: `/rental/${params.category}` },
-    openGraph: { title: cat.title, description: cat.metaDescription, url: `/rental/${params.category}` },
+    openGraph: { title: cat.title, description: cat.metaDescription, url: `/rental/${params.category}`, type: 'website', images: OG_IMAGES },
   }
 }
 

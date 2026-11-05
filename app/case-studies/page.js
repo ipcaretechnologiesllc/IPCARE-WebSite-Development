@@ -6,6 +6,7 @@ import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { caseStudyProjects, portfolioStats } from '@/lib/portfolio-data'
 import { narrativeCaseStudies, caseStudyPath } from '@/lib/case-studies-data'
 import { getEventSubpage } from '@/lib/event-it-data'
+import { OG_IMAGES } from '@/lib/og'
 
 // Master proof index. This page LISTS case studies and links out to wherever
 // each one already lives — it never duplicates their content.
@@ -38,6 +39,7 @@ export const metadata = {
       'Enterprise ICT and ELV delivery, major-event IT infrastructure and cybersecurity incident response — IP Care case studies in one index.',
     url: `${BASE}/case-studies`,
     type: 'website',
+    images: OG_IMAGES,
   },
   twitter: {
     card: 'summary_large_image',

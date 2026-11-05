@@ -3,6 +3,7 @@ import Footer from '@/components/site/Footer'
 import ProductPageTemplate from '@/components/site/ProductPageTemplate'
 import { getProduct } from '@/lib/products-data'
 import { ORG_REF } from '@/lib/schema'
+import { OG_IMAGES } from '@/lib/og'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -17,6 +18,7 @@ export const metadata = {
     description: "CrewForce360 is IP Care Technologies' field workforce platform: GPS-verified attendance, geofence check-ins, project-linked shifts, payroll-ready records.",
     url: '/products/crewforce360',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 

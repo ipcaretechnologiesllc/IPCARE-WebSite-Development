@@ -4,6 +4,7 @@ import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import { products } from '@/lib/products-data'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { OG_IMAGES } from '@/lib/og'
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'
 
@@ -18,6 +19,7 @@ export const metadata = {
     description: 'Software products built by IP Care Technologies, including CrewForce360, our field workforce operations platform with GPS-verified attendance.',
     url: '/products',
     type: 'website',
+    images: OG_IMAGES,
   },
 }
 
