@@ -58,10 +58,29 @@ export default async function EventSubPage(props) {
   const event = (events || []).find((e) => e.slug === params.slug)
 
   // Related = other event services
-  const related = eventServices
+  const relatedServices = eventServices
     .filter((s) => s.slug !== params.slug && ['event-wifi', 'temporary-data-centres', 'event-cctv'].includes(s.slug))
     .slice(0, 3)
     .map((s) => ({ slug: `event-it/${s.slug}`, href: `/event-it/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))
+
+  // A concert case study also links to the next concert case study in the list (wrapping
+  // round), so each one is reachable from a sibling and not only from the /event-it hub.
+  // Ahrefs flagged /event-it/eid-al-fitr-concert-2023 for having a single internal link.
+  const concerts = (events || []).filter((e) => e.category === 'Concerts' && getEventSubpage(e.slug))
+  const concertIdx = concerts.findIndex((e) => e.slug === params.slug)
+  const nextConcert = concertIdx >= 0 && concerts.length > 1 ? concerts[(concertIdx + 1) % concerts.length] : null
+  const related = nextConcert
+    ? [
+        ...relatedServices,
+        {
+          slug: `event-it/${nextConcert.slug}`,
+          href: `/event-it/${nextConcert.slug}`,
+          name: `${nextConcert.name} ${nextConcert.year}`,
+          short: getEventSubpage(nextConcert.slug).metaDescription,
+          icon: 'Music',
+        },
+      ]
+    : relatedServices
 
   const faqSchema = {
     '@context': 'https://schema.org',

@@ -20,6 +20,11 @@ const company = [
   { label: 'About Us', href: '/about' },
   { label: 'Industries', href: '/industries' },
   { label: 'Case Studies', href: '/case-studies' },
+  // The two product pages were linked only from the /products hub (the header menu is
+  // client-rendered, so it is not in the crawled HTML). Hardcoded rather than imported
+  // from lib/products-data.js to keep that data module out of this component.
+  { label: 'CrewForce360', href: '/products/crewforce360' },
+  { label: 'DocPilot', href: '/products/docpilot' },
   { label: 'Partners', href: '/partners' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
