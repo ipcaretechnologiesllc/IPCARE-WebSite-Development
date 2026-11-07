@@ -78,6 +78,36 @@ function contactEventFor(href) {
   return null
 }
 
+// Phone / WhatsApp / email taps are also logged to the leads sheet via /api/track (see
+// app/api/track/route.js). Staff devices opt out: open any page with ?internal=1 once and the
+// browser remembers it (?internal=0 undoes it). Only the sheet log is skipped; GA4 is unchanged.
+const INTERNAL_KEY = 'ipcare_internal'
+const TAP_ACTION = { phone_click: 'phone', whatsapp_click: 'whatsapp', email_click: 'email' }
+
+function isInternalDevice() {
+  try { return localStorage.getItem(INTERNAL_KEY) === '1' } catch { return false }
+}
+
+function applyInternalParam() {
+  try {
+    const v = new URLSearchParams(window.location.search).get('internal')
+    if (v === '1') localStorage.setItem(INTERNAL_KEY, '1')
+    else if (v === '0') localStorage.removeItem(INTERNAL_KEY)
+  } catch {}
+}
+
+function logTapToSheet(action, href, text) {
+  if (!action || isInternalDevice()) return
+  try {
+    fetch('/api/track', {
+      method: 'POST',
+      keepalive: true, // survives the navigation a tel: / WhatsApp tap can cause
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, page: window.location.pathname, target: href.split('?')[0], text }),
+    }).catch(() => {})
+  } catch {}
+}
+
 export default function Analytics() {
   // Allow env var to override the hardcoded ID (useful for staging / different GA4 properties)
   const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID
@@ -109,6 +139,7 @@ export default function Analytics() {
   }, [measurementId])
 
   useEffect(() => {
+    applyInternalParam()
     // Capture phase, so a handler that stops propagation can't hide the click.
     const onClick = (e) => {
       const a = e.target instanceof Element ? e.target.closest('a[href]') : null
@@ -116,9 +147,11 @@ export default function Analytics() {
       const href = a.getAttribute('href') || ''
       const name = contactEventFor(href)
       if (!name) return
+      const linkText = (a.getAttribute('aria-label') || a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+      logTapToSheet(TAP_ACTION[name], href, linkText)
       trackEvent(name, {
         link_url: href.split('?')[0],
-        link_text: (a.getAttribute('aria-label') || a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100),
+        link_text: linkText,
         page_path: window.location.pathname,
         // Page title minus the brand suffix, so a rental/service page names the product being asked about.
         topic: (document.title || '').split(' | ')[0].trim().slice(0, 100),

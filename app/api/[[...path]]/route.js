@@ -5,6 +5,7 @@ import { sanitizeForm, sanitizeText, sanitizeEmail, escapeHtml } from '@/lib/ser
 import { rateLimit, getClientIp } from '@/lib/server/ratelimit'
 import { verifyRecaptchaToken } from '@/lib/server/recaptcha'
 import { sendMail } from '@/lib/server/resend'
+import { sendRows, contactRow, rentalRow, careerRow, newsletterRow } from '@/lib/server/leads-sheet'
 import {
   tplContactTeam, tplContactAutoReply, tplContactRentalAutoReply,
   tplRentalQuoteTeam, tplRentalQuoteAutoReply,
@@ -107,7 +108,11 @@ function newContactReference() {
 // and the visitor saw "Submission failed". Returns mailed=false only when both email
 // attempts failed — callers then return an error so the visitor calls or retries instead
 // of believing the enquiry arrived (nobody reads the Mongo copy day to day).
-async function deliverLead({ kind, reference, mail, collection, doc }) {
+async function deliverLead({ kind, reference, mail, collection, doc, sheetRows }) {
+  // Google Sheet row, started in parallel with the email and awaited (capped) before returning
+  // so it completes regardless of how the host treats work after the response. It never throws
+  // and never changes the outcome; see lib/server/leads-sheet.js.
+  const sheetP = sheetRows ? sendRows(sheetRows) : null
   let res = await sendMail(mail)
   if (!res.ok) {
     console.error(`[lead] ${kind} ${reference}: team email failed, retrying:`, res.error || res.status)
@@ -121,6 +126,7 @@ async function deliverLead({ kind, reference, mail, collection, doc }) {
   } catch (e) {
     console.error(`[lead] ${kind} ${reference}: DB save failed (team email ${res.ok ? 'sent' : 'NOT sent'}):`, e)
   }
+  if (sheetP) await Promise.race([sheetP, new Promise((r) => setTimeout(r, 4000))])
   return { mailed: res.ok }
 }
 
@@ -256,6 +262,7 @@ export async function POST(request, props) {
         unsubscribeToken: token,
       }
       await coll.insertOne(doc)
+      await sendRows([newsletterRow({ email: clean.email, source: doc.source, createdAt: doc.subscribedAt })])
 
       const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.ipcare.ae'}/unsubscribe?token=${token}`
       const welcome = tplNewsletterWelcome({ unsubscribeUrl })
@@ -307,6 +314,7 @@ export async function POST(request, props) {
       const team = tplContactTeam({ ...clean, reference, ipAddress: ip, userAgent })
       const { mailed } = await deliverLead({
         kind: 'contact', reference, collection: 'leads', doc,
+        sheetRows: [contactRow({ ...clean, reference, createdAt: doc.createdAt })],
         mail: { to: INFO_EMAIL, subject: quick ? `CALL BACK: ${team.subject}` : team.subject, html: team.html, replyTo: clean.email || undefined, categories: ['contact', 'team'] },
       })
       if (!mailed) return jsonErr(request, 'delivery-failed', 502)
@@ -373,6 +381,7 @@ export async function POST(request, props) {
       const team = tplRentalQuoteTeam({ reference, ...clean, items, ipAddress: ip, userAgent })
       const { mailed } = await deliverLead({
         kind: 'rental-quote', reference, collection: 'leads', doc,
+        sheetRows: [rentalRow({ ...clean, reference, items, createdAt: doc.createdAt })],
         mail: { to: INFO_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, categories: ['rental-quote', 'team'] },
       })
       if (!mailed) return jsonErr(request, 'delivery-failed', 502)
@@ -428,6 +437,7 @@ export async function POST(request, props) {
       })
       const { mailed } = await deliverLead({
         kind: 'careers', reference, collection: 'career_applications', doc,
+        sheetRows: [careerRow({ ...clean, reference, cvReceived: !!pdfAttachment, createdAt: doc.createdAt })],
         mail: { to: HR_EMAIL, subject: team.subject, html: team.html, replyTo: clean.email, attachments: teamAttachments, categories: ['careers', 'team'] },
       })
       if (!mailed) return jsonErr(request, 'delivery-failed', 502)
