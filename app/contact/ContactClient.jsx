@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react'
 import * as Icons from 'lucide-react'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
+import EnquirySuccessCard from '@/components/site/EnquirySuccessCard'
 import { getRecaptchaToken, isRecaptchaConfigured } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
 import { trackLead } from '@/lib/analytics'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { GBP_DIRECTIONS_URL, GBP_MAP_EMBED_URL } from '@/lib/social-links'
 
+const EMPTY_FORM = { name: '', company: '', email: '', phone: '', country: 'UAE', service: '', message: '', agree: false }
 const SERVICES = ['Managed IT Services', 'Cybersecurity', 'Cloud Services', 'Event IT', 'Equipment Rental', 'ELV & Security', 'IT Consulting', 'Other']
 
 // Tiny inlined blur-up placeholder (LQIP) of contact-bg.webp — paints on the first
@@ -22,10 +24,19 @@ const HERO_LQIP = 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAwBQCdASogAB
 
 export default function ContactClient() {
   const [tab, setTab] = useState('general')
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', country: 'UAE', service: '', message: '', agree: false })
+  const [form, setForm] = useState(EMPTY_FORM)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [reference, setReference] = useState('')
   const [err, setErr] = useState('')
+
+  // "Send another enquiry" on the thank-you card: back to a blank form.
+  function resetForm() {
+    setForm(EMPTY_FORM)
+    setReference('')
+    setErr('')
+    setSubmitted(false)
+  }
 
   // Prefills the form when arriving from the Cyber Advisory track-record page's
   // "Request the Full Case Study Under NDA" link — a query-param hand-off into
@@ -64,6 +75,7 @@ export default function ContactClient() {
         return
       }
       trackLead('contact', { enquiry_type: tab, service: form.service || '(none)', source: 'contact-page' })
+      setReference(data.reference || '')
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again.') }
     setSubmitting(false)
@@ -101,7 +113,17 @@ export default function ContactClient() {
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">
 
-            {/* ── FORM CARD ──────────────────────────────────────────────── */}
+            {/* ── FORM CARD / THANK-YOU CARD ─────────────────────────────── */}
+            {submitted ? (
+              <EnquirySuccessCard
+                title={`Thank you${form.name.trim() ? ', ' + form.name.trim().split(/\s+/)[0] : ''}!`}
+                message={tab === 'rental'
+                  ? "We've received your rental enquiry. Our team will reply within 4 business hours with availability and pricing."
+                  : "We've received your message. Our team will reply within 4 business hours."}
+                reference={reference}
+                onReset={resetForm}
+              />
+            ) : (
             <div className="bg-white rounded-2xl" style={{ borderTop: '3px solid #E87722', boxShadow: '0 8px 32px rgba(10,26,70,0.12)', padding: '36px' }}>
               {/* Tab toggle */}
               <div className="flex gap-2 mb-6 flex-wrap">
@@ -128,16 +150,7 @@ export default function ContactClient() {
                 {tab === 'general' ? 'Get Immediate Support' : 'Request a Rental Quote'}
               </h2>
 
-              {submitted ? (
-                <div className="text-center py-10">
-                  <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.4)' }}>
-                    <Icons.Check size={28} style={{ color: '#16a34a' }} />
-                  </div>
-                  <h3 className="font-bold text-2xl mb-2" style={{ color: '#0B1A46' }}>Message sent!</h3>
-                  <p style={{ color: '#4A5878' }}>We&apos;ll reply within 4 business hours.</p>
-                </div>
-              ) : (
-                <form onSubmit={submit} className="space-y-4">
+              <form onSubmit={submit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <F label="Name *"    v={form.name}    on={v => setForm(f => ({...f, name:v}))}/>
                     <F label="Company"   v={form.company} on={v => setForm(f => ({...f, company:v}))}/>
@@ -188,9 +201,9 @@ export default function ContactClient() {
                   <button type="submit" disabled={submitting} className="btn-primary w-full justify-center disabled:opacity-60">
                     {submitting ? 'Sending…' : <>Send Message <Icons.ArrowRight size={14}/></>}
                   </button>
-                </form>
-              )}
+              </form>
             </div>
+            )}
 
             {/* ── RIGHT COLUMN ─────────────────────────────────────────────── */}
             <div className="flex flex-col gap-5">

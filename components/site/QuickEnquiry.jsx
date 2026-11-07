@@ -12,7 +12,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, PhoneCall, ShieldCheck, Headphones, Award, Truck, MapPin } from 'lucide-react'
+import { ArrowRight, PhoneCall, ShieldCheck, Headphones, Award, Truck, MapPin } from 'lucide-react'
+import EnquirySuccessCard from '@/components/site/EnquirySuccessCard'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
 import { trackLead } from '@/lib/analytics'
@@ -116,7 +117,17 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
   const pick = (key) => (val) => setForm(f => ({ ...f, [key]: val }))
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [reference, setReference] = useState('')
   const [err, setErr] = useState('')
+
+  // "Send another request" on the thank-you card: back to a blank form (keeps the
+  // page-driven defaults such as the pre-selected service).
+  function resetForm() {
+    setForm({ name: '', phone: '', service: defaultService, need: '', item: '', qty: '', period: '', start: '' })
+    setReference('')
+    setErr('')
+    setSubmitted(false)
+  }
 
   async function submit(e) {
     e.preventDefault()
@@ -160,6 +171,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
         return
       }
       trackLead('quick_enquiry', { enquiry_type: 'quick', service: rental ? 'Equipment Rental' : (form.service || '(none)'), source })
+      setReference(data.reference || '')
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again or call +971 2 676 6935.') }
     setSubmitting(false)
@@ -167,6 +179,18 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
 
   return (
     <section className="px-4 sm:px-6" style={{ background: '#F4F6FA', paddingTop: '56px', paddingBottom: '56px', ...sectionStyle }} aria-labelledby="quick-enquiry-heading">
+      {submitted ? (
+        <div className="max-w-[760px] mx-auto">
+          <EnquirySuccessCard
+            title="Thank You, We Have Your Request"
+            message={`Our ${rental ? 'rental ' : ''}team will call you within 4 business hours (UAE 09:00-18:00).`}
+            reference={reference}
+            referenceHint="Quote this reference if you call or WhatsApp us about this request."
+            onReset={resetForm}
+            resetLabel="Send Another Request"
+          />
+        </div>
+      ) : (
       <div
         className="max-w-[1200px] mx-auto rounded-2xl overflow-hidden grid lg:grid-cols-[5fr_7fr]"
         style={{ borderTop: '3px solid #E87722', boxShadow: '0 12px 40px rgba(10,26,70,0.14)' }}
@@ -204,15 +228,6 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
 
         {/* ── Right: form ─────────────────────────────────────────────── */}
         <div className="bg-white p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
-          {submitted ? (
-            <div className="text-center py-8" role="status">
-              <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.4)' }}>
-                <Check size={28} style={{ color: '#16a34a' }} />
-              </div>
-              <h3 className="font-bold text-2xl mb-2" style={{ color: '#0B1A46' }}>Thank You, We Have Your Request</h3>
-              <p style={{ color: '#4A5878' }}>Our {rental ? 'rental ' : ''}team will call you within 4 business hours (UAE 09:00-18:00).</p>
-            </div>
-          ) : (
             <form onSubmit={submit} noValidate className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -287,9 +302,9 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                 By submitting, you agree to our <Link href="/privacy-policy" className="underline hover:text-[#E87722]">privacy policy</Link> and to be contacted about this enquiry. Protected by reCAPTCHA.
               </p>
             </form>
-          )}
         </div>
       </div>
+      )}
     </section>
   )
 }

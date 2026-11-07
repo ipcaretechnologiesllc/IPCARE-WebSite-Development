@@ -5,6 +5,7 @@ import * as Icons from 'lucide-react'
 import { getRecaptchaToken } from '@/lib/recaptcha-client'
 import { postWithRetry } from '@/lib/post-with-retry'
 import { trackLead } from '@/lib/analytics'
+import EnquirySuccessCard from '@/components/site/EnquirySuccessCard'
 
 export default function RFQModal({ onClose, onSuccess, items }) {
   const [form, setForm] = useState({
@@ -47,12 +48,32 @@ export default function RFQModal({ onClose, onSuccess, items }) {
       trackLead('rental_quote', { item_count: Array.isArray(items) ? items.length : 0, source: 'rental-cart' })
       setReference(data.reference || '')
       setSubmitted(true)
-      setTimeout(() => { onSuccess?.() }, 3200)
     } catch (err) {
       setError('Could not reach the server. Please try again or call +971 2 676 6935.')
     } finally {
       setSubmitting(false)
     }
+  }
+
+  // Success: the form is replaced by a standalone thank-you card with the reference.
+  // It stays until the user clicks Done (which clears the quote cart via onSuccess), so
+  // there is time to read and copy the reference.
+  if (submitted) {
+    return (
+      <div data-hides-floating className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+        <div className="relative w-full max-w-lg my-8">
+          <EnquirySuccessCard
+            variant="dark"
+            title="Quote request received!"
+            message={<>Thanks. We&apos;ll reply to <span className="text-white font-semibold">{form.email}</span> within <span className="text-[#E87722] font-semibold">1 business day</span> with a tailored quote.</>}
+            reference={reference}
+            referenceHint="A copy of this reference is also in your confirmation email."
+            onDone={() => onSuccess?.()}
+            showHome={false}
+          />
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -66,17 +87,6 @@ export default function RFQModal({ onClose, onSuccess, items }) {
           <button onClick={onClose} className="text-white/60 hover:text-white" aria-label="Close"><Icons.X size={22}/></button>
         </header>
 
-        {submitted ? (
-          <div className="p-10 text-center">
-            <div className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.5)' }}>
-              <Icons.Check size={28} className="text-green-400"/>
-            </div>
-            <h3 className="text-white text-2xl font-bold mb-3">Quote request received!</h3>
-            <p className="body-text mb-3">Thanks. We&apos;ll reply to <span className="text-white">{form.email}</span> within <span className="text-[#E87722] font-semibold">1 business day</span> with a tailored quote.</p>
-            <p className="mono text-xs text-white/50 mb-6">Reference: <span className="text-white/80">{reference || 'pending'}</span></p>
-            <p className="body-text text-sm">Need it sooner? Call us: <a href="tel:+97126766935" className="text-[#E87722] hover:underline">+971 2 676 6935</a></p>
-          </div>
-        ) : (
           <form onSubmit={submit} className="p-6 space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Full Name *" value={form.fullName} onChange={v => set('fullName', v)} />
@@ -171,7 +181,6 @@ export default function RFQModal({ onClose, onSuccess, items }) {
               <button type="submit" disabled={submitting} className="btn-primary disabled:opacity-60">{submitting ? <>Submitting... <Icons.Loader2 size={14} className="animate-spin"/></> : <>Submit Quote Request <Icons.ArrowRight size={14}/></>}</button>
             </div>
           </form>
-        )}
       </div>
     </div>
   )

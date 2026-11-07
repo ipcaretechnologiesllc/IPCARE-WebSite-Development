@@ -313,8 +313,8 @@ export async function POST(request, props) {
 
       if (clean.email) {
         const auto = clean.tab === 'rental'
-          ? tplContactRentalAutoReply({ name: clean.name })
-          : tplContactAutoReply({ name: clean.name })
+          ? tplContactRentalAutoReply({ name: clean.name, reference })
+          : tplContactAutoReply({ name: clean.name, reference })
         await sendMail({ to: clean.email, subject: auto.subject, html: auto.html, replyTo: INFO_EMAIL, categories: ['contact', 'auto-reply'] })
       }
 
