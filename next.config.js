@@ -51,12 +51,42 @@ const nextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         ],
       },
+      // RFC 8288 Link header so agents can find the machine-readable entry points from the
+      // homepage response alone.
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value: [
+              '</llms.txt>; rel="describedby"; type="text/plain"',
+              '</index.md>; rel="alternate"; type="text/markdown"',
+              '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+              '</.well-known/mcp/server-card.json>; rel="mcp-server-card"; type="application/json"',
+            ].join(", "),
+          },
+          { key: "Vary", value: "Accept" },
+        ],
+      },
       { source: "/images/:path*", headers: STATIC_MEDIA_CACHE },
       { source: "/events/:path*", headers: STATIC_MEDIA_CACHE },
       { source: "/Rental/:path*", headers: STATIC_MEDIA_CACHE },
       { source: "/Video/:path*",  headers: STATIC_MEDIA_CACHE },
       { source: "/icons/:path*",  headers: STATIC_MEDIA_CACHE },
     ];
+  },
+  // Content negotiation: `Accept: text/markdown` on the homepage gets the Markdown summary.
+  // Browsers send text/html first and never match this. The page itself stays static.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          has: [{ type: 'header', key: 'accept', value: '(?:.*,)?\\s*text/markdown.*' }],
+          destination: '/index.md',
+        },
+      ],
+    };
   },
   // Permanent redirects for legacy PHP URLs from the previous website.
   // 301 preserves SEO equity from any external backlinks / search index entries.

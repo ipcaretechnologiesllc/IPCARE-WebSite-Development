@@ -6,6 +6,7 @@ import HreflangLinks from '@/components/site/HreflangLinks'
 import RentalShell from '@/components/rental/RentalShell'
 import CookieBanner from '@/components/global/CookieBanner'
 import Analytics from '@/components/global/Analytics'
+import WebMcp from '@/components/global/WebMcp'
 
 const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
 
@@ -121,6 +122,10 @@ export default function RootLayout({ children }) {
     description: isCaSite()
       ? 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event Infrastructure & Equipment Rental in UAE & Canada.'
       : 'Enterprise IT Solutions, Managed Services, Cybersecurity, Event IT Infrastructure & Equipment Rental in Abu Dhabi, Dubai and across the UAE since 2003.',
+    // Top-level telephone/email so an agent reading only the Organization node can answer
+    // "how do I contact them" without descending into contactPoint (UAE number leads).
+    telephone: '+971-2-676-6935',
+    email: 'info@ipcare.ae',
     contactPoint: [
       { '@type': 'ContactPoint', telephone: '+971-2-676-6935', contactType: 'customer service', email: 'info@ipcare.ae', areaServed: 'AE', availableLanguage: ['English','Arabic'] },
       { '@type': 'ContactPoint', telephone: '+1-416-786-0782', contactType: 'customer service', email: 'info@ipcare.ca', areaServed: 'CA', availableLanguage: 'English' },
@@ -238,6 +243,7 @@ export default function RootLayout({ children }) {
         <RentalShell>{children}</RentalShell>
         <CookieBanner />
         <Analytics />
+        <WebMcp />
       </body>
     </html>
   )
