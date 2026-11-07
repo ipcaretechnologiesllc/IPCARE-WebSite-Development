@@ -13,8 +13,9 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Check, Copy, ArrowRight, Home, Phone } from 'lucide-react'
+import { Check, Copy, ArrowRight, Home, Phone, Mail } from 'lucide-react'
 
+const EMAIL = 'info@ipcare.ae'
 const PHONE_TEL = 'tel:+97126766935'
 const WHATSAPP_URL = 'https://wa.me/971506828290'
 // Same glyph as the floating WhatsApp button (components/global/WhatsAppButton.jsx).
@@ -34,6 +35,8 @@ export default function EnquirySuccessCard({
   showUrgent = true,
 }) {
   const dark = variant === 'dark'
+  // With a reference the email opens pre-titled, so a reply can be matched to the sheet row.
+  const emailHref = reference ? `mailto:${EMAIL}?subject=${encodeURIComponent(`Enquiry ${reference}`)}` : `mailto:${EMAIL}`
   const pathname = usePathname()
   const cardRef = useRef(null)
   const [copied, setCopied] = useState(false)
@@ -115,8 +118,8 @@ export default function EnquirySuccessCard({
       {showUrgent && (
         <div className="mt-7 pt-6 text-sm" style={{ borderTop: `1px solid ${c.divider}`, color: c.text }}>
           <div className="mb-4">Urgent? Reach us directly:</div>
-          {/* Same round buttons as the floating Call / WhatsApp buttons (CallNowButton, WhatsAppButton). */}
-          <div className="flex items-start justify-center gap-10">
+          {/* Call / WhatsApp match the floating buttons (CallNowButton, WhatsAppButton); Email is the third. */}
+          <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-5">
             <a href={PHONE_TEL} aria-label="Call us on +971 2 676 6935" className="group flex flex-col items-center gap-2 no-underline">
               <span
                 className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
@@ -136,6 +139,16 @@ export default function EnquirySuccessCard({
               </span>
               <span className="font-semibold" style={{ color: c.title }}>WhatsApp</span>
               <span className="mono text-xs" style={{ color: c.hint }}>+971 50 682 8290</span>
+            </a>
+            <a href={emailHref} aria-label={`Email us at ${EMAIL}`} className="group flex flex-col items-center gap-2 no-underline">
+              <span
+                className="flex items-center justify-center transition-transform duration-200 group-hover:scale-105"
+                style={{ width: 56, height: 56, borderRadius: 9999, background: '#0B1A46', border: dark ? '2px solid rgba(255,255,255,0.35)' : '2px solid #0B1A46', boxShadow: '0 4px 12px rgba(0,0,0,0.25)' }}
+              >
+                <Mail size={24} color="#FFFFFF" strokeWidth={2} aria-hidden="true" />
+              </span>
+              <span className="font-semibold" style={{ color: c.title }}>Email us</span>
+              <span className="mono text-xs" style={{ color: c.hint }}>{EMAIL}</span>
             </a>
           </div>
         </div>
