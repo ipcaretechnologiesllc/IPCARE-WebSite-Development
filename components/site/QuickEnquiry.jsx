@@ -170,7 +170,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
         setSubmitting(false)
         return
       }
-      trackLead('quick_enquiry', { enquiry_type: 'quick', service: rental ? 'Equipment Rental' : (form.service || '(none)'), source })
+      trackLead('quick_enquiry', { enquiry_type: 'quick', service: rental ? 'Equipment Rental' : (form.service || '(none)'), lead_source: source })
       setReference(data.reference || '')
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again or call +971 2 676 6935.') }

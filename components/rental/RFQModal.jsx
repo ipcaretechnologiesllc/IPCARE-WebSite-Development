@@ -45,7 +45,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
         setSubmitting(false)
         return
       }
-      trackLead('rental_quote', { item_count: Array.isArray(items) ? items.length : 0, source: 'rental-cart' })
+      trackLead('rental_quote', { item_count: Array.isArray(items) ? items.length : 0, lead_source: 'rental-cart' })
       setReference(data.reference || '')
       setSubmitted(true)
     } catch (err) {

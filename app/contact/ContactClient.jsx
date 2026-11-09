@@ -74,7 +74,7 @@ export default function ContactClient() {
         setSubmitting(false)
         return
       }
-      trackLead('contact', { enquiry_type: tab, service: form.service || '(none)', source: 'contact-page' })
+      trackLead('contact', { enquiry_type: tab, service: form.service || '(none)', lead_source: 'contact-page' })
       setReference(data.reference || '')
       setSubmitted(true)
     } catch { setErr('Submission failed, please try again.') }
