@@ -168,6 +168,69 @@ export default function ProductsHubPage() {
             </div>
           </div>
         </section>
+
+        {/* Product detail: rendered from the same `products` data as the cards, so the hub carries
+            real content (it was ~45 words, which Google left as "Crawled - currently not indexed"). */}
+        <section className="bg-white">
+          <div className="max-w-[1100px] mx-auto px-6 py-16 space-y-16">
+            <div className="max-w-[760px]">
+              <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>
+                Software built in-house, used on real operations
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                IP Care Technologies has delivered IT, ELV and event technology across the UAE for 20+ years. These products came out of
+                that work: each one solves an operational problem we kept seeing on projects, and each is built and supported by our own team.
+              </p>
+            </div>
+
+            {entries.map(([slug, p]) => (
+              <article key={slug} id={slug} className="grid md:grid-cols-5 gap-8">
+                <div className="md:col-span-2">
+                  <h3 className="text-xl font-bold" style={{ color: '#0B1A46' }}>{p.h1}</h3>
+                  <p className="mt-2 text-sm font-semibold" style={{ color: '#E87722' }}>{p.tagline}</p>
+                  {p.overview.map((para, i) => (
+                    <p key={i} className="mt-4 text-sm leading-relaxed text-slate-600">{para}</p>
+                  ))}
+                  <Link
+                    href={`/products/${slug}`}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
+                    style={{ color: '#E87722' }}
+                  >
+                    Full {p.h1Accent || p.h1} overview <ArrowRight size={14} />
+                  </Link>
+                </div>
+                <div className="md:col-span-3 grid sm:grid-cols-2 gap-x-8 gap-y-5">
+                  <div className="sm:col-span-2">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500">Key capabilities</h4>
+                  </div>
+                  {p.capabilities.map((c) => (
+                    <div key={c.label}>
+                      <p className="text-sm font-semibold" style={{ color: '#0B1A46' }}>{c.label}</p>
+                      <p className="text-sm text-slate-600">{c.desc}</p>
+                    </div>
+                  ))}
+                  <div className="sm:col-span-2">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500">Built for</h4>
+                    <p className="mt-2 text-sm text-slate-600">{p.industries.join(' · ')}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+
+            <div className="rounded-2xl p-8" style={{ background: '#F4F6FB', border: '1px solid #E2E8F0' }}>
+              <h3 className="text-xl font-bold" style={{ color: '#0B1A46' }}>Need custom software instead?</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 max-w-[720px]">
+                Our engineering team also builds bespoke software for UAE businesses: web and mobile applications, SaaS platforms and integrations.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold" style={{ color: '#E87722' }}>
+                <Link href="/services/software-development">Software development</Link>
+                <Link href="/services/web-development">Web development</Link>
+                <Link href="/services/ai-solutions">AI solutions</Link>
+                <Link href="/contact">Talk to our team</Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
