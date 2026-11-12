@@ -8,16 +8,16 @@ Marketing/corporate website for **IP Care Technologies** (managed IT, cybersecur
 
 ## Commands
 
-- `yarn dev` — start dev server on `0.0.0.0:3000` (with increased Node memory; watcher polls every 2s — see `next.config.js`)
-- `yarn dev:no-reload` / `yarn dev:webpack` — alternate dev server invocations without the memory flag
-- `yarn build` — production build (`output: 'standalone'`)
-- `yarn start` — run the production build
+- `npm run dev` — start dev server on `0.0.0.0:3000` (with increased Node memory; watcher polls every 2s — see `next.config.js`)
+- `npm run dev:no-reload` / `npm run dev:webpack` — alternate dev server invocations without the memory flag
+- `npm run build` — production build (`output: 'standalone'`)
+- `npm start` — run the production build
 
 - Windows preview fallback used successfully in Codex: `node node_modules/next/dist/bin/next dev --hostname 0.0.0.0 --port 3010` from the repo root, preferably in a visible terminal so the process stays alive.
 
 There is no lint/test script configured in `package.json`. `tests/` and `test_reports/` only contain placeholder files.
 
-**`yarn` may not be on PATH on the Windows dev machine.** `npm run build` runs the identical `prebuild` + `build` scripts and does not touch `yarn.lock`.
+**Use npm, not yarn.** `package-lock.json` is the only lockfile and production installs from it; `yarn install` would ignore it and resolve every `^` range afresh (see Deployment).
 
 ## Deployment
 
@@ -25,7 +25,7 @@ There is no lint/test script configured in `package.json`. `tests/` and `test_re
 
 **Pushing to `main` auto-deploys to production.** Hostinger's GitHub integration is configured on Hostinger's side — there is no `.github/workflows/`, no `vercel.json`, and no deploy script in this repo, so *nothing in the codebase reveals that a pipeline exists*. Do not conclude from their absence that a push won't deploy.
 
-**Hostinger installs dependencies with npm from `package-lock.json`.** The site's Node build setting was switched from yarn to npm on 2026-11-12. Before that it ran `yarn install` with no `yarn.lock`, so the lockfile was ignored and every `^` range in `package.json` floated to its newest release on each deploy: on 2026-11-10 that pulled `postcss-selector-parser` 7.2.0, which made Tailwind emit `.md\\\:block` instead of `.md\:block`, so desktop visitors got the mobile layout until it was pinned. Keep `package-lock.json` committed and in sync with `package.json`, and pin security fixes in `overrides` (npm reads that; `resolutions` only matters to yarn). The stored Hostinger build setting picks the package manager, not the `packageManager: yarn@…` field. To see what production actually installed, read the build log with the Hostinger MCP `hosting_get-deployment`.
+**Hostinger installs dependencies with npm from `package-lock.json`.** The site's Node build setting was switched from yarn to npm on 2026-11-12. Before that it ran `yarn install` with no `yarn.lock`, so the lockfile was ignored and every `^` range in `package.json` floated to its newest release on each deploy: on 2026-11-10 that pulled `postcss-selector-parser` 7.2.0, which made Tailwind emit `.md\\\:block` instead of `.md\:block`, so desktop visitors got the mobile layout until it was pinned. Keep `package-lock.json` committed and in sync with `package.json`, and pin security fixes in `overrides` (npm reads that; `resolutions` only matters to yarn). The stored Hostinger build setting picks the package manager. `package.json` used to declare `packageManager: yarn@1.22.22`; it was removed on 2026-11-12 so Hostinger's auto-detection can't fall back to yarn if the site is ever set up again. To see what production actually installed, read the build log with the Hostinger MCP `hosting_get-deployment`.
 
 `origin` has two push URLs (`github-first`, `github-second`), so a single `git push origin main` reaches both GitHub remotes; the second is a leftover from the retired `.ca` Hostinger account and is harmless. There is no Vercel involved in production. There are no feature branches; work goes directly to `main`.
 
