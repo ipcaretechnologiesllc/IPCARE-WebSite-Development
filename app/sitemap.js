@@ -192,9 +192,9 @@ const RENTAL_DATES = {
   'servers':                           '2026-10-12',
   'servers/dell-r740':                 '2026-10-12',
   'macbooks':                          '2026-10-12',
-  'laptops-desktops':                  '2026-10-12',
+  'laptops-desktops':                  '2026-11-15',
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',
-  'tablets-ipads':                     '2026-10-12',
+  'tablets-ipads':                     '2026-11-15',
   'printers':                          '2026-10-12',
   // Testing instruments and the testing-kit bundle repriced 2026-10-12.
   'testing-equipment':                          '2026-10-12',
