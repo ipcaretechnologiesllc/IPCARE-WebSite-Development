@@ -200,7 +200,7 @@ const RENTAL_DATES = {
   'testing-equipment':                          '2026-11-15',
   'testing-equipment/fluke-dsx-5000':           '2026-11-15',
   'testing-equipment/afl-noyes-m210-otdr':      '2026-10-12',
-  'testing-equipment/fiber-splicing-machine':   '2026-10-12',
+  'testing-equipment/fiber-splicing-machine':   '2026-11-15',
   'bundles':                                    '2026-10-12',
   'bundles/network-testing-kit':                '2026-10-12',
   // Product write-ups added 2026-10-13 (laptops, event WiFi, networking, bundles).
