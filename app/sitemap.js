@@ -58,7 +58,7 @@ const HUB_DATES = {
   '/rental':                               '2026-10-12',  // Abu Dhabi/Dubai computer rental section
   '/event-it':                             '2026-10-07',
   '/event-it/portfolio':                   '2026-10-26',
-  '/cybersecurity-advisory':               '2026-10-12',  // lists the newest KB articles
+  '/cybersecurity-advisory':               '2026-11-15',  // FAQ and managed-services links added
   '/cybersecurity-advisory/knowledge-base':'2026-10-12',  // Harmony SASE guide added
   '/blog':                                 '2026-10-08',
   '/industries':                           '2026-09-23',  // description rewritten
@@ -195,6 +195,7 @@ const RENTAL_DATES = {
   'laptops-desktops':                  '2026-11-15',
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',
   'tablets-ipads':                     '2026-11-15',
+  'tablets-ipads/ipad-pro-13-m4':      '2026-11-15',
   'printers':                          '2026-11-15',
   // Testing instruments and the testing-kit bundle repriced 2026-10-12.
   'testing-equipment':                          '2026-11-15',
