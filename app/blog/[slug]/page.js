@@ -125,6 +125,18 @@ export default async function ArticlePage(props) {
     ],
   }
 
+  // Optional per-article FAQ. The schema is built from the same a.faqs array the page
+  // renders below, so it can never describe content that isn't visible.
+  const faqSchema = a.faqs?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: a.faqs.map(({ q, a: answer }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  } : null
+
   const shareUrl = `${BASE}/blog/${params.slug}`
 
   return (
@@ -134,6 +146,7 @@ export default async function ArticlePage(props) {
           rides in Next's link-prefetch payload, so every page linking here downloaded it. */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Header />
       <main>
 
@@ -231,6 +244,22 @@ export default async function ArticlePage(props) {
                 return <p key={i} className="text-base md:text-lg leading-[1.75]" style={{ color: '#374151' }}>{b.p}</p>
               })}
             </article>
+
+            {/* FAQ — rendered open (not collapsed) so the answers are visible to readers and
+                answer engines; matches faqSchema above. */}
+            {a.faqs?.length > 0 && (
+              <section className="mt-12" aria-labelledby="article-faq">
+                <h2 id="article-faq" className="font-bold mb-6" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>Frequently asked questions</h2>
+                <div className="space-y-4">
+                  {a.faqs.map(({ q, a: answer }) => (
+                    <div key={q} className="rounded-xl p-5" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>
+                      <h3 className="font-semibold text-base md:text-lg mb-2" style={{ color: '#0B1A46' }}>{q}</h3>
+                      <p className="text-base leading-[1.7]" style={{ color: '#374151' }}>{answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Dubai / Abu Dhabi service links for posts whose topic maps to a city service
                 (lib/uae-locations.js). Contextual links into the city pages, which had
