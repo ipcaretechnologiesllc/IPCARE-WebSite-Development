@@ -188,16 +188,16 @@ const INDUSTRY_DATES = {
 // rental page's visible content changes: a date that never moves tells Google nothing.
 const RENTAL_LASTMOD = '2026-10-08'
 const RENTAL_DATES = {
-  'event-wifi':                        '2026-10-14',
+  'event-wifi':                        '2026-11-15',
   'servers':                           '2026-10-12',
   'servers/dell-r740':                 '2026-10-12',
   'macbooks':                          '2026-10-12',
   'laptops-desktops':                  '2026-11-15',
   'laptops-desktops/apple-imac-24-m4': '2026-10-12',
   'tablets-ipads':                     '2026-11-15',
-  'printers':                          '2026-10-12',
+  'printers':                          '2026-11-15',
   // Testing instruments and the testing-kit bundle repriced 2026-10-12.
-  'testing-equipment':                          '2026-10-12',
+  'testing-equipment':                          '2026-11-15',
   'testing-equipment/fluke-dsx-5000':           '2026-10-12',
   'testing-equipment/afl-noyes-m210-otdr':      '2026-10-12',
   'testing-equipment/fiber-splicing-machine':   '2026-10-12',
