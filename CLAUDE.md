@@ -157,6 +157,18 @@ A local `google-seo-mcp` MCP server (community, GSC+GA4+CrUX+Lighthouse+schema+m
 - The classic GSC **Index Coverage report** (Valid/Excluded/Error page counts, the "Why pages aren't indexed" UI panel) is **not exposed by the Search Console API** — no MCP tool can return it. For that data, ask the user to export/screenshot the Search Console UI, or check individual URLs one at a time with `gsc_inspect_url`.
 - `history_save_snapshot`/`history_diff` exist for saving named snapshots and diffing them later, but no snapshots have been saved yet — week-over-week comparisons currently rely on `gsc_site_snapshot`'s built-in prior-period math.
 
+## Weekly search performance review
+
+**Every Monday (or whenever the user says "weekly review"), check the pages and queries in [`docs/seo/weekly-rank-watchlist.md`](docs/seo/weekly-rank-watchlist.md) and act on what the data shows.** That file lists every page reworked on 2026-11-15/16, the queries each was changed for, their baseline positions, the "must hold" queries, the control pages, and the decision rules. Keep it current: it is the source of truth, not memory notes.
+
+How to run it:
+1. **Pull the data** with `gsc_search_analytics` (`sc-domain:ipcare.ae`, dimensions `["query","page"]`, `row_limit` 25000) for the latest complete 28 days, then compare with the baseline in the watchlist. The tool's output is far too large to read inline: it is saved to a file, so read that with a small Node script. In Git Bash, set `MSYS_NO_PATHCONV=1` before passing an argument that starts with `/`, or the path is rewritten to `C:/Program Files/Git/...`. GSC data lags 2-3 days, and a rework needs about 3 weeks to read, so the **first meaningful comparison is 2026-12-06**. Before that, weekly runs only record the trend and check indexing with `gsc_inspect_url` (notably the `ipad-pro-13-m4`, `ipad-air-11-m3` and `ipad-10th-gen` pages, which Google lists as "Crawled - currently not indexed").
+2. **Judge each page** by the rules in the watchlist: improved, flat, worse, still not indexed, or authority-limited. Ignore queries under 10 impressions, judge by impression-weighted position, and compare against the control pages so a site-wide or Google-wide shift is not mistaken for the effect of an edit.
+3. **Check the built page before writing copy.** Read what words the page actually uses (`npm run build`, then `.next/server/app/<route>.html` with scripts stripped) against the queries. The gaps found so far were missing phrases, not missing length. Do not add copy to a page stuck over position 50: it is limited by outside signals, which is an off-page task for the user.
+4. **Report first, change second.** Give the user a short before/after table per page, a decision per page and the exact edits proposed, and append a row to the watchlist's results log. **Apply nothing until the user approves**, then follow the Safety Rules below (no commit or push without approval). Change one thing per page at a time and leave three weeks before editing the same page again.
+5. **After an approved deploy:** wait for the new build (poll with a `?cb=` query), Purge Everything in Cloudflare, check the page twice, send the URL to IndexNow, bump the page's sitemap date (`RENTAL_DATES` / `SERVICE_DATES` in `app/sitemap.js`, or the blog post's `updatedDate`), and request indexing in Search Console.
+
+**Manual "Request indexing" has a quota** of roughly 12 per rolling 24 hours (not a midnight reset); the 12th request shows "Quota Exceeded". Spend it on the pages that most need it, and confirm success only by the green "Indexing requested" dialog (a lone "Indexing requested" label also appears on failure). Details are in the private memory notes on indexing requests.
 
 ## Project Skill Usage Policy
 
