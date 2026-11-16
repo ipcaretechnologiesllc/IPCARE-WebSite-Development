@@ -120,7 +120,7 @@ const SERVICE_DATES = {
   'digital-marketing/sem-ppc':                               '2026-07-01',
   'digital-marketing/seo-services':                          '2026-09-29',
   'digital-marketing/social-media-marketing':                '2026-07-01',
-  'elv':                                                     '2026-06-26',
+  'elv':                                                     '2026-11-16',
   'elv/abu-dhabi':                                           '2026-10-15',
   'elv/access-control':                                      '2026-10-12',
   'elv/cctv-installation-abu-dhabi':                         '2026-09-23',
