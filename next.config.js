@@ -407,6 +407,12 @@ const nextConfig = {
       { source: '/services/cybersecurity-advisory/:path*', destination: '/cybersecurity-advisory/:path*', permanent: true },
       { source: '/cdn-cgi/l/email-protection', destination: '/contact', permanent: true },
 
+      // 2026-11-16: Dubai / Abu Dhabi pages for the four non-core categories merged into their
+      // category page. None was ever indexed (33 impressions, 0 clicks Aug-Nov 2026) and their
+      // copy was 50-72% shared with each other. Core categories keep their city pages.
+      { source: '/services/:category(web-development|software-development|ai-solutions|digital-marketing)/:city(dubai|abu-dhabi)',
+        destination: '/services/:category', permanent: true },
+
       // Dead event slugs — redirect to portfolio
       { source: '/event-it/ufc-fight-night', destination: '/event-it/ufc-uae', permanent: true },
       { source: '/event-it/corporate-summit', destination: '/event-it/portfolio', permanent: true },
