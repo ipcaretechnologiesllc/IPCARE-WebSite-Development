@@ -350,6 +350,9 @@ const nextConfig = {
       { source: '/rental/printers/brother-hl-l3295cdw',        destination: '/rental/printers',            permanent: true },
       { source: '/rental/event-wifi/peplink-balance-two',      destination: '/rental/event-wifi',          permanent: true },
       { source: '/rental/cctv/hanwha-xno-c9083r',               destination: '/rental/cctv',                permanent: true },
+      // 2026-11-16: dropped with the CCTV / printer lineup changes; Search Console still crawls them (404).
+      { source: '/rental/cctv/dahua-nvr5864-4ks2',             destination: '/rental/cctv',                permanent: true },
+      { source: '/rental/printers/canon-imagerunner-c5860i',   destination: '/rental/printers',            permanent: true },
       // Networking switches renamed 2026-10-14: the old slugs named models we never stocked.
       { source: '/rental/networking/aruba-cx-6300m-48g',       destination: '/rental/networking/aruba-1930-48g', permanent: true },
       { source: '/rental/networking/cisco-c9300-48',           destination: '/rental/networking/aruba-1930-24g', permanent: true },
