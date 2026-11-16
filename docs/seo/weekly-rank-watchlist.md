@@ -62,10 +62,15 @@ re-check in December and only push on-page if it stalls near 16).
 
 ## Google indexing requests still owed (as of 2026-11-16)
 
-Manual "Request indexing" is capped at roughly 12 per rolling 24 hours; the quota was used up on
-2026-11-15. In priority order: `/cybersecurity-advisory`, `/rental/tablets-ipads/ipad-pro-13-m4`,
-`/services/elv`, `/rental/testing-equipment/afl-noyes-m210-otdr`. Lower priority, only with a spare
-slot: `/blog/network-segmentation-enterprise-event`, `/services/managed-it/dubai`. All were sent to
+Manual "Request indexing" is capped at 11 per rolling 24 hours (the 12th gets "Quota Exceeded";
+seen 2026-11-15 and 11-16). On 2026-11-16, 18:21-18:32 UTC, 11 requests went to the pages that
+dropped the most impressions: digital-transformation, ipad-pro-13-m4, fortianalyzer-fortisiem-integration,
+ipad-air-11-m3, ipad-10th-gen, elv/access-control, data-centre-management, dell-latitude-5450,
+macbook-pro-14-m4, managed-it/network-management, cybersecurity-advisory/zero-trust.
+Next window opens about 2026-11-17 18:35 UTC (22:35 UAE). Still owed, in priority order:
+`/services/cloud/backup-recovery`, `/cybersecurity-advisory`, `/services/elv`,
+`/rental/testing-equipment/afl-noyes-m210-otdr`. Lower priority, only with a spare slot:
+`/blog/network-segmentation-enterprise-event`, `/services/managed-it/dubai`. All were sent to
 IndexNow (Bing) and have bumped sitemap dates, so Google will recrawl them regardless.
 
 ## How to read the results
