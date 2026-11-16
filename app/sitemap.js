@@ -150,7 +150,7 @@ const SERVICE_DATES = {
   'it-consulting/technology-strategy':                       '2026-08-24',
   'managed-it':                                              '2026-06-26',
   'managed-it/abu-dhabi':                                    '2026-09-23',
-  'managed-it/dubai':                                        '2026-09-23',
+  'managed-it/dubai':                                        '2026-11-16',
   'managed-it/it-support-helpdesk':                          '2026-06-26',
   'managed-it/network-management':                           '2026-06-26',
   'managed-it/server-management':                            '2026-06-26',
