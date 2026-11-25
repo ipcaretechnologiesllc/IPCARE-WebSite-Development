@@ -110,7 +110,7 @@ const SERVICE_DATES = {
   'cybersecurity/pam':                                       '2026-06-26',
   'cybersecurity/security-assessment':                       '2026-06-26',
   'digital-marketing':                                       '2026-07-01',
-  'digital-marketing/email-marketing':                       '2026-07-01',
+  'digital-marketing/email-marketing':                       '2026-11-25',
   'digital-marketing/sem-ppc':                               '2026-07-01',
   'digital-marketing/seo-services':                          '2026-09-29',
   'digital-marketing/social-media-marketing':                '2026-07-01',
