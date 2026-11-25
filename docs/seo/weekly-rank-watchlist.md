@@ -60,6 +60,25 @@ services dubai"; already reworked 2026-10-25 with no movement, so authority-limi
 `/services/managed-it/abu-dhabi` (rising on its own: "managed it services abu dhabi" 33.1 -> 16.3;
 re-check in December and only push on-page if it stalls near 16).
 
+## Indexing rework (live 2026-11-25)
+
+| Page | What changed | Metric and re-check |
+|---|---|---|
+| `/services/digital-marketing/email-marketing` | Commit `2c95e0c`: UAE guide (PDPL consent, SPF/DKIM/DMARC and the Gmail/Yahoo bulk-sender rules, Arabic RTL templates, UAE sending calendar, clicks over opens), a deliverability paragraph, two FAQs and related links to email security and email hosting. 738 -> 1,252 words. Sitemap date bumped, IndexNow sent, Google "Request indexing" confirmed 2026-11-25 ~15:16 UTC | **Indexing is the metric**, not rank. Before: "Crawled - currently not indexed" (last crawl 2026-11-16). Check `coverageState` with `gsc_inspect_url` each week; the first real verdict is due **2026-12-16** (three weeks after the change) |
+
+**Decision on 2026-12-16:** if it is indexed, record it and leave the page alone. If it is still
+"Crawled - currently not indexed", stop adding copy and propose consolidating it into
+`/services/digital-marketing` (rule 2 below). Decide that together with its siblings
+`/services/digital-marketing/seo-services`, `/sem-ppc` and `/social-media-marketing`: all three
+were also "Crawled - currently not indexed" on 2026-11-25 (last crawled in September) and were not
+changed, so they serve as the controls. If they get indexed too without edits, the cause was not
+this rework.
+
+**Not to re-validate:** the 2026-11-16/17 Search Console validations that "failed" for
+`/index.html` (apex and www, "Page with redirect"; both correctly redirect to `/`),
+`/services/elv/toronto` ("Excluded by noindex"; deliberate on the .ae build) and `/products`
+(indexed since its 2026-11-18 crawl). Those reports can only fail for URLs that behave as designed.
+
 ## Google indexing requests still owed (as of 2026-11-16)
 
 Manual "Request indexing" is capped at 11 per rolling 24 hours (the 12th gets "Quota Exceeded";
