@@ -7,6 +7,7 @@ import { caseStudyProjects, portfolioStats } from '@/lib/portfolio-data'
 import { narrativeCaseStudies, caseStudyPath } from '@/lib/case-studies-data'
 import { getEventSubpage } from '@/lib/event-it-data'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 // Master proof index. This page LISTS case studies and links out to wherever
 // each one already lives — it never duplicates their content.
@@ -141,7 +142,7 @@ export default function CaseStudiesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <Header />
 
-      <main>
+      <main id="main-content">
         <section className="relative overflow-hidden" style={{ background: NAVY }}>
           <div
             className="absolute inset-0 opacity-[0.07]"
@@ -202,7 +203,7 @@ export default function CaseStudiesPage() {
           <div className="max-w-[1140px] mx-auto space-y-14">
             {groups.map((group) => (
               <div key={group}>
-                <h2
+                <h2 id={headingId(group)}
                   className="font-extrabold"
                   style={{ color: NAVY, fontSize: 'clamp(1.35rem, 2.4vw, 1.75rem)', letterSpacing: '-0.02em' }}
                 >
@@ -246,7 +247,7 @@ export default function CaseStudiesPage() {
             ))}
 
             <div className="rounded-2xl p-8 lg:p-11" style={{ background: NAVY }}>
-              <h2 className="font-extrabold text-white" style={{ fontSize: 'clamp(1.3rem, 2.4vw, 1.7rem)', lineHeight: 1.25 }}>
+              <h2 id="more-delivery-proof" className="font-extrabold text-white" style={{ fontSize: 'clamp(1.3rem, 2.4vw, 1.7rem)', lineHeight: 1.25 }}>
                 More delivery proof
               </h2>
               <p className="mt-3 max-w-[62ch] text-[#C6D6E6]" style={{ lineHeight: 1.7 }}>

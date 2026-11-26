@@ -106,7 +106,7 @@ export default function ExecutiveAdvisoryPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <ServicePageTemplate
           data={pageData}
           related={advisoryServices.filter((s) => s.slug !== 'executive-advisory').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, href: `/cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}

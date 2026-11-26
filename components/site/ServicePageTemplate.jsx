@@ -10,6 +10,7 @@ import CertificationsBand from './CertificationsBand'
 import QuickEnquiry, { serviceForPath } from './QuickEnquiry'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
+import { headingId, nodeText } from '@/lib/heading-id'
 
 /* ── Icon helper ─────────────────────────────────────────────────────────── */
 const Ic = ({ name, ...rest }) => {
@@ -53,10 +54,11 @@ function Eyebrow({ children }) {
 }
 
 /* ── Light H2 with orange accent bar ────────────────────────────────────── */
-function SectionHeading({ children, centered = true }) {
+function SectionHeading({ children, centered = true, idSuffix }) {
+  const id = headingId(nodeText(children)) + (idSuffix ? `-${idSuffix}` : '')
   return (
     <div className={centered ? 'text-center' : ''}>
-      <h2 style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+      <h2 id={id} style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
         {children}
       </h2>
       <div
@@ -540,7 +542,11 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
               {/* Text — driven by sectionContent field in subpage data */}
               <div className="flex-1 min-w-0 reveal" style={{ transitionDelay: '80ms' }}>
                 <Eyebrow>{sectionContent?.eyebrow || 'What We Include'}</Eyebrow>
-                <SectionHeading centered={false}>
+                <SectionHeading
+                  centered={false}
+                  // Some subpages reuse the overview title here; keep the id unique on the page
+                  idSuffix={sectionContent?.heading && sectionContent.heading === overviewTitle ? 'details' : undefined}
+                >
                   {sectionContent?.heading || 'Service Details'}
                 </SectionHeading>
                 <div
@@ -1047,7 +1053,7 @@ export default function ServicePageTemplate({ data, related, breadcrumb, spokeGr
       >
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center reveal">
-            <h2
+            <h2 id={headingId(ctaHeading || 'Ready to Get Started?')}
               className="text-white font-bold mb-4"
               style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}
             >

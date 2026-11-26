@@ -10,6 +10,7 @@ import { KB_LINKS, rotateFrom } from '@/lib/related-links'
 import { kbArticles, getKbArticle, getKbSlugs } from '@/lib/cyber-advisory-data'
 import { ORG_REF } from '@/lib/schema'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -94,7 +95,7 @@ export default async function KnowledgeBaseArticlePage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
-      <main style={{ background: '#F4F6FA' }}>
+      <main id="main-content" style={{ background: '#F4F6FA' }}>
         {/* ── HERO — navy + grid + orange border (site article convention) ── */}
         <section style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
           <div className="premium-grid" style={{ position: 'absolute', inset: 0, opacity: 0.35 }} />
@@ -132,7 +133,7 @@ export default async function KnowledgeBaseArticlePage(props) {
                 style={{ background: '#F4F6FA', border: '1px solid #E1E8F0', borderLeft: '4px solid #E87722' }}
                 aria-label="Key takeaways"
               >
-                <h2 className="mono text-[13px] uppercase tracking-widest mb-4" style={{ color: '#E87722' }}>Key Takeaways</h2>
+                <h2 id="key-takeaways" className="mono text-[13px] uppercase tracking-widest mb-4" style={{ color: '#E87722' }}>Key Takeaways</h2>
                 <ul className="space-y-3">
                   {a.keyTakeaways.map((t, i) => (
                     <li key={i} className="flex gap-3 text-base leading-relaxed" style={{ color: '#374151' }}>
@@ -148,7 +149,7 @@ export default async function KnowledgeBaseArticlePage(props) {
             <article className="space-y-5">
               {a.body.map((b, i) => {
                 if (b.h2) return (
-                  <h2 key={i} className="font-bold mt-10 mb-2" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>{b.h2}</h2>
+                  <h2 id={headingId(b.h2)} key={i} className="font-bold mt-10 mb-2" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>{b.h2}</h2>
                 )
                 if (b.cta) return (
                   <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.06)', border: '1px solid rgba(232,119,34,0.28)' }}>
@@ -217,7 +218,7 @@ export default async function KnowledgeBaseArticlePage(props) {
         <section className="px-6 py-16" style={{ background: '#fff' }}>
           <div className="max-w-[880px] mx-auto rounded-2xl p-8 md:p-12 text-center" style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', border: '1px solid rgba(255,255,255,0.08)' }}>
             <div className="mono text-[13px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>Consultation</div>
-            <h2 className="text-white text-2xl md:text-4xl font-bold mb-4">Need a direct answer?</h2>
+            <h2 id="need-a-direct-answer" className="text-white text-2xl md:text-4xl font-bold mb-4">Need a direct answer?</h2>
             <p className="mb-8 mx-auto max-w-2xl" style={{ color: 'rgba(255,255,255,0.75)' }}>
               The knowledge base is a starting point. For a specific architecture, upgrade or migration decision, 30 minutes with a senior advisor is often faster — and free.
             </p>

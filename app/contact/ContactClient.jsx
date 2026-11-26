@@ -82,7 +82,7 @@ export default function ContactClient() {
   }
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ backgroundImage: `url("${HERO_LQIP}"), linear-gradient(135deg, #0B1A46 0%, #0F245F 50%, #1E3A8A 100%)`, backgroundSize: 'cover, cover', backgroundPosition: 'center, center', backgroundRepeat: 'no-repeat, no-repeat', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '560px', display: 'flex', alignItems: 'center' }}>
         {/* Background image */}
@@ -150,31 +150,41 @@ export default function ContactClient() {
                 {tab === 'general' ? 'Get Immediate Support' : 'Request a Rental Quote'}
               </h2>
 
-              <form onSubmit={submit} className="space-y-4">
+              {/* WebMCP declarative tool: an in-browser AI agent can fill this form for the user. No
+                  toolautosubmit and the consent box has no name, so the person ticks consent and
+                  presses send themselves; reCAPTCHA still applies. */}
+              <form
+                onSubmit={submit} className="space-y-4"
+                toolname={tab === 'rental' ? 'request_rental_quote' : 'contact_ip_care'}
+                tooldescription={tab === 'rental'
+                  ? 'Fill in a rental quote request to IP Care Technologies for IT equipment in the UAE. Needs a name, email and phone number.'
+                  : 'Fill in an enquiry to IP Care Technologies about IT services, cybersecurity, ELV, event IT or cloud in the UAE. Needs a name, email and phone number.'}
+              >
                   <div className="grid md:grid-cols-2 gap-4">
-                    <F label="Name *"    v={form.name}    on={v => setForm(f => ({...f, name:v}))}/>
-                    <F label="Company"   v={form.company} on={v => setForm(f => ({...f, company:v}))}/>
-                    <F label="Email *"   type="email" v={form.email} on={v => setForm(f => ({...f, email:v}))}/>
-                    <F label="Phone *"   v={form.phone}   on={v => setForm(f => ({...f, phone:v}))}/>
+                    <F label="Name *"    name="name" hint="Full name of the person enquiring" v={form.name}    on={v => setForm(f => ({...f, name:v}))}/>
+                    <F label="Company"   name="company" hint="Company or organisation name" v={form.company} on={v => setForm(f => ({...f, company:v}))}/>
+                    <F label="Email *"   name="email" hint="Email address for the reply" type="email" v={form.email} on={v => setForm(f => ({...f, email:v}))}/>
+                    <F label="Phone *"   name="phone" hint="Phone number with country code, e.g. +971 50 123 4567" type="tel" v={form.phone}   on={v => setForm(f => ({...f, phone:v}))}/>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <L>Country</L>
-                      <select value={form.country} onChange={e => setForm(f => ({...f, country:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none" style={iS}>
+                      <L htmlFor="ct-country">Country</L>
+                      <select id="ct-country" name="country" toolparamdescription="Country the enquiry is from" value={form.country} onChange={e => setForm(f => ({...f, country:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none" style={iS}>
                         <option>UAE</option><option>Canada</option><option>KSA</option><option>Qatar</option><option>Other</option>
                       </select>
                     </div>
                     <div>
-                      <L>{tab === 'rental' ? 'Equipment Needed' : 'Service Interest'}</L>
-                      <select value={form.service} onChange={e => setForm(f => ({...f, service:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none" style={iS}>
+                      <L htmlFor="ct-service">{tab === 'rental' ? 'Equipment Needed' : 'Service Interest'}</L>
+                      <select id="ct-service" name="service" toolparamdescription={tab === 'rental' ? 'Type of equipment to rent' : 'Service the enquiry is about'} value={form.service} onChange={e => setForm(f => ({...f, service:e.target.value}))} className="w-full px-3 py-2.5 rounded-lg text-sm focus:outline-none" style={iS}>
                         <option value="">, Select ,</option>
                         {SERVICES.map(s => <option key={s}>{s}</option>)}
                       </select>
                     </div>
                   </div>
                   <div>
-                    <L>Message</L>
+                    <L htmlFor="ct-message">Message</L>
                     <textarea
+                      id="ct-message" name="message" toolparamdescription="Details of the request: quantities, dates, location or the problem to solve"
                       value={form.message}
                       onChange={e => setForm(f => ({...f, message:e.target.value}))}
                       rows={4}
@@ -304,18 +314,22 @@ export default function ContactClient() {
 const iS = { background: '#fff', border: '1.5px solid #D8DEE9', color: '#0B1A46' }
 
 // ── Field label ───────────────────────────────────────────────────────────────
-const L = ({ children }) => (
-  <label className="mono text-[11px] uppercase tracking-widest block mb-1.5" style={{ color: '#0B1A46' }}>
+const L = ({ children, htmlFor }) => (
+  <label htmlFor={htmlFor} className="mono text-[11px] uppercase tracking-widest block mb-1.5" style={{ color: '#0B1A46' }}>
     {children}
   </label>
 )
 
 // ── Text / email / tel input ──────────────────────────────────────────────────
-function F({ label, v, on, type = 'text' }) {
+function F({ label, name, hint, v, on, type = 'text' }) {
+  const id = name ? `ct-${name}` : undefined
   return (
     <div>
-      <L>{label}</L>
+      <L htmlFor={id}>{label}</L>
       <input
+        id={id}
+        name={name}
+        toolparamdescription={hint}
         type={type}
         value={v}
         onChange={e => on(e.target.value)}

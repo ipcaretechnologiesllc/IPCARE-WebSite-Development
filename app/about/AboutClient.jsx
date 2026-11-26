@@ -136,7 +136,7 @@ function Story() {
         {/* Text — left column */}
         <div className="reveal">
           <Eyebrow>Powering Business Since 2003</Eyebrow>
-          <h2 className="section-title" style={{
+          <h2 id="we-started-with-a-simple-promise" className="section-title" style={{
             fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
             fontWeight: 800,
             color: '#0B1A46',
@@ -283,7 +283,7 @@ function Timeline() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '64px' }}>
           <Eyebrow>Our Journey</Eyebrow>
-          <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 id="from-2003-to-today" className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             From 2003 to Today
           </h2>
         </div>
@@ -398,7 +398,7 @@ function MissionVision() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>What Drives Us</Eyebrow>
-          <h2 className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 id="mission-and-vision" className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Mission &amp; Vision
           </h2>
         </div>
@@ -555,7 +555,7 @@ function TwoRegions() {
     <section style={{ background: '#FFFFFF', padding: '96px 24px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
+          <h2 id="two-regions-one-standard" className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
             Two Regions. One Standard.
           </h2>
           <p style={{ color: '#4B5563', fontSize: '17px', lineHeight: 1.75, maxWidth: '640px', margin: '0 auto' }}>
@@ -699,7 +699,7 @@ function Team() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>The People Behind the Work</Eyebrow>
-          <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 id="the-team" className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             The Team
           </h2>
         </div>
@@ -807,7 +807,7 @@ function Certifications() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
           <Eyebrow>Industry Recognised</Eyebrow>
-          <h2 className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
+          <h2 id="certified-across-the-industry" className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
             Certified Across the Industry
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '16px', lineHeight: 1.75, maxWidth: '580px', margin: '0 auto' }}>
@@ -869,7 +869,7 @@ function OurValues() {
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>How We Work</Eyebrow>
-          <h2 className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+          <h2 id="our-values" className="section-title" style={{ color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
             Our Values
           </h2>
         </div>
@@ -920,7 +920,7 @@ function CTAStrip() {
         className="reveal"
         style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
-        <h2 className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
+        <h2 id="ready-to-work-with-us" className="section-title section-title-white" style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px' }}>
           Ready to Work with Us?
         </h2>
         <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: '17px', lineHeight: 1.75, marginBottom: '36px', maxWidth: '640px', marginLeft: 'auto', marginRight: 'auto' }}>
@@ -940,7 +940,7 @@ function CTAStrip() {
 export default function AboutClient() {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <Story />
       <StatsBand />

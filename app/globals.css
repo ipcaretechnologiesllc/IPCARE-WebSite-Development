@@ -520,6 +520,24 @@ body {
    !important beats the components' inline display:flex. */
 body:has([data-hides-floating]) .floating-btn { display: none !important; }
 
+/* Skip link: off-screen until focused with the keyboard, then shown above the fixed header. */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 10000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #0B1A46;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  outline: 3px solid #E87722;
+  outline-offset: 2px;
+}
+.skip-link:focus { top: 16px; }
+
 /* ===== Mobile-only: enlarge small service-card sub-links to ~44px tap height ===== */
 @media (max-width: 640px) {
   .service-subitem-link {

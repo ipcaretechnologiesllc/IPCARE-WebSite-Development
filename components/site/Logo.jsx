@@ -22,6 +22,9 @@ export default function Logo({ size = 36, variant = 'color', tile = false, class
     <img
       src={LOGO_URL}
       srcSet={LOGO_SRCSET}
+      // Intrinsic size of ipcare-logo.png: CSS sets the height, so this only fixes the aspect ratio
+      width={1448}
+      height={556}
       sizes={`${Math.round(size * LOGO_RATIO)}px`}
       loading={loading}
       alt="IP Care Technologies"

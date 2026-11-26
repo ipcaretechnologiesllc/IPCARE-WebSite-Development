@@ -164,7 +164,7 @@ export default async function EventSubPage(props) {
       {/* Preload the hero image so the browser fetches it before parsing body */}
       {event?.img && <link rel="preload" as="image" href={event.img} fetchPriority="high" />}
       <Header />
-      <main>
+      <main id="main-content">
         <ServicePageTemplate
           data={event?.img ? { ...sub, heroImage: event.img, heroImageAlt: sub.heroImageAlt || `${sub.h1}, event IT delivery by IP Care` } : sub}
           related={related}

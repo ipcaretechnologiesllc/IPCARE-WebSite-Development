@@ -33,7 +33,7 @@ const manifest = {}
 let made = 0
 for (const file of files) {
   if (statSync(file).size < MIN_BYTES) continue
-  const { width } = await sharp(file).metadata()
+  const { width, height } = await sharp(file).metadata()
   const widths = WIDTHS.filter((w) => width >= w * HEADROOM)
   if (!widths.length) continue
   for (const w of widths) {
@@ -42,7 +42,7 @@ for (const file of files) {
     await sharp(file).resize({ width: w }).webp({ quality: QUALITY }).toFile(out)
     made++
   }
-  manifest['/' + path.posix.relative('public', file)] = { w: width, v: widths }
+  manifest['/' + path.posix.relative('public', file)] = { w: width, h: height, v: widths }
 }
 
 const sorted = Object.fromEntries(Object.keys(manifest).sort().map((k) => [k, manifest[k]]))

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { headingId, nodeText } from '@/lib/heading-id'
 
 /* ── Scroll-reveal hook (same pattern as ServicePageTemplate) ───────────── */
 function useReveal() {
@@ -39,7 +40,7 @@ function Eyebrow({ children }) {
 function SectionHeading({ children, centered = true }) {
   return (
     <div className={centered ? 'text-center' : ''}>
-      <h2 style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+      <h2 id={headingId(nodeText(children))} style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
         {children}
       </h2>
       <div
@@ -322,7 +323,7 @@ export default function ProductPageTemplate({ data }) {
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(8px)' }}
             >
               <Eyebrow>{whyEyebrow || `WHY ${(h1Accent || '').toUpperCase()}`}</Eyebrow>
-              <h2 className="text-white font-bold mb-6" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', letterSpacing: '-0.02em' }}>
+              <h2 id={headingId(whyTitle)} className="text-white font-bold mb-6" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', letterSpacing: '-0.02em' }}>
                 {whyTitle}
               </h2>
               <div className="space-y-4" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem', lineHeight: 1.75 }}>
@@ -357,7 +358,7 @@ export default function ProductPageTemplate({ data }) {
             className="text-center reveal rounded-2xl p-10 md:p-14"
             style={{ background: 'rgba(232,119,34,0.10)', border: '1px solid rgba(232,119,34,0.30)' }}
           >
-            <h2 className="text-white font-bold mb-4" style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}>
+            <h2 id={headingId(ctaTitle || `See ${h1Accent} in Action`)} className="text-white font-bold mb-4" style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}>
               {ctaTitle || `See ${h1Accent} in Action`}
             </h2>
             <p className="max-w-xl mx-auto mb-8" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}>

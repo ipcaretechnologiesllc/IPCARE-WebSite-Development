@@ -9,6 +9,7 @@ import { getCategory, getAllCategorySlugs, getCrossListedProducts } from '@/lib/
 import { RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 
@@ -103,7 +104,7 @@ export default async function CategoryPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Header />
-      <main>
+      <main id="main-content">
         <div className="max-w-[1400px] mx-auto px-6 pt-6">
           <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white">Home</Link>
@@ -171,7 +172,7 @@ export default async function CategoryPage(props) {
 
               {cat.content.sections?.map((s) => (
                 <div key={s.h2} className="mb-10">
-                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{s.h2}</h2>
+                  <h2 id={headingId(s.h2)} className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{s.h2}</h2>
                   {s.body.map((p, i) => (
                     <p key={i} className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{p}</p>
                   ))}
@@ -201,7 +202,7 @@ export default async function CategoryPage(props) {
 
               {cat.content.caseStudy && (
                 <div className="mb-10 rounded-xl p-6 md:p-8" style={{ background: '#F4F6FA', borderLeft: '3px solid #E87722' }}>
-                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{cat.content.caseStudy.h2}</h2>
+                  <h2 id={headingId(cat.content.caseStudy.h2)} className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>{cat.content.caseStudy.h2}</h2>
                   <p className="leading-relaxed mb-4" style={{ color: '#58595B' }}>{cat.content.caseStudy.body}</p>
                   {cat.content.caseStudy.links?.length > 0 && (
                     <ul className="flex flex-wrap gap-2 mb-5">
@@ -222,7 +223,7 @@ export default async function CategoryPage(props) {
 
               {cat.content.faqs?.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
+                  <h2 id="frequently-asked-questions" className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
                   {cat.content.faqs.map(({ q, a }) => (
                     <details key={q} className="mb-3 rounded-lg p-4" style={{ background: '#F4F6FA' }}>
                       <summary className="font-semibold cursor-pointer" style={{ color: '#0B1A46' }}>{q}</summary>
@@ -238,7 +239,7 @@ export default async function CategoryPage(props) {
         {/* Related categories */}
         <section className="py-12 px-6" style={{ background: '#F4F6FA' }}>
           <div className="max-w-[1300px] mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Explore Other Categories</h2>
+            <h2 id="explore-other-categories" className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Explore Other Categories</h2>
             <div className="flex flex-wrap justify-center gap-2">
               {getAllCategorySlugs().filter(s => s !== params.category).map(s => {
                 const c = getCategory(s)

@@ -361,7 +361,7 @@ function CTAStrip() {
         className="reveal"
         style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
-        <h2 style={{
+        <h2 id="not-sure-where-to-start" style={{
           color: '#FFFFFF',
           fontWeight: 800,
           fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -394,7 +394,7 @@ function CTAStrip() {
 export default function ServicesClient({ categories }) {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <ServicesGrid cats={categories} />
       <QuickEnquiry source="services-hub" context="Services hub" />

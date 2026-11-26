@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronRight, ArrowRight, ShieldAlert, Monitor, KeyRound, ServerCog, Check } from 'lucide-react'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { headingId, nodeText } from '@/lib/heading-id'
 
 // Presentation layer for narrative (non-physical) case studies — see
 // lib/case-studies-data.js for the data contract.
@@ -43,7 +44,7 @@ function Eyebrow({ children, onDark = false }) {
 function Heading({ children }) {
   return (
     <>
-      <h2
+      <h2 id={headingId(nodeText(children))}
         className="font-extrabold"
         style={{
           color: NAVY,
@@ -468,7 +469,7 @@ export default function CaseStudyNarrative({ study, breadcrumb }) {
             style={{ background: ORANGE }}
           >
             <div>
-              <h2 className="font-extrabold text-white" style={{ fontSize: 'clamp(1.4rem, 2.6vw, 1.9rem)', lineHeight: 1.25 }}>
+              <h2 id={headingId(cta.heading)} className="font-extrabold text-white" style={{ fontSize: 'clamp(1.4rem, 2.6vw, 1.9rem)', lineHeight: 1.25 }}>
                 {cta.heading}
               </h2>
               <p className="mt-2 max-w-[52ch] text-[#FFE3D9]" style={{ lineHeight: 1.65 }}>{cta.text}</p>

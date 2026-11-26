@@ -82,7 +82,7 @@ export default function RFQModal({ onClose, onSuccess, items }) {
         <header className="flex items-center justify-between px-6 py-5 border-b border-white/10">
           <div>
             <div className="mono text-[#E87722] text-[13px] uppercase tracking-[0.25em] mb-1">Request a Quote</div>
-            <h2 className="text-white text-xl font-bold">Tell us about your project</h2>
+            <h2 id="tell-us-about-your-project" className="text-white text-xl font-bold">Tell us about your project</h2>
           </div>
           <button onClick={onClose} className="text-white/60 hover:text-white" aria-label="Close"><Icons.X size={22}/></button>
         </header>

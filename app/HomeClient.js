@@ -15,7 +15,8 @@ import CertificationsBand from '@/components/site/CertificationsBand'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
 import RentalCircularGallery from '@/components/rental/RentalCircularGallery'
 import { UAEFlag, CanadaFlag } from '@/components/site/Logo'
-import { responsive, SIZES } from '@/lib/responsive-image'
+import { responsive, imgDims, SIZES } from '@/lib/responsive-image'
+import { headingId } from '@/lib/heading-id'
 
 /* ---------------- IntersectionObserver reveal hook ---------------- */
 function useReveal() {
@@ -63,6 +64,9 @@ const HERO_SLIDES = [
     id: 0,
     service: "Trusted by the World's Biggest Events",
     icon: ShieldCheck,
+    // Small keyword line rendered inside the H1, above the tagline: the tagline alone
+    // carries none of the words people search for (IT, system integrator, Abu Dhabi, UAE).
+    kicker: 'IT Solutions & System Integrator in Abu Dhabi, UAE',
     headline: 'The Technology Force Behind ',
     headlineAccent: 'High Stakes Events & Growth Driven Enterprises',
     description: 'Managed IT, Cybersecurity, Cloud, Event Infrastructure & Equipment Rental trusted by leading organisations since 2003.',
@@ -283,6 +287,7 @@ function HeroCarousel() {
         <div className="hero-bg-desktop absolute inset-0">
           <img
             src="/images/hero-poster.webp"
+            {...imgDims("/images/hero-poster.webp")}
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -319,6 +324,7 @@ function HeroCarousel() {
               <img
                 key={slide.id}
                 src={slide.mobileBg}
+                {...imgDims(slide.mobileBg)}
                 alt=""
                 aria-hidden="true"
                 // Slide 0 is the mobile LCP image: eager + high priority so it paints
@@ -405,6 +411,14 @@ function HeroCarousel() {
                       style={{ fontSize: 'clamp(28px, 4.6vw, 58px)', lineHeight: 1.14 }}
                       aria-live={active ? 'polite' : undefined}
                     >
+                      {slide.kicker && (
+                        <span
+                          className="block text-white/80 font-semibold mb-3"
+                          style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', lineHeight: 1.4, letterSpacing: '0.01em', textWrap: 'balance' }}
+                        >
+                          {slide.kicker}
+                        </span>
+                      )}
                       {slide.headlineAccent ? (
                         <>{slide.headline}{slide.headlineSuffix === undefined ? ' ' : ''}<span style={{ color: '#E87722' }}>{slide.headlineAccent}</span>{slide.headlineSuffix || ''}</>
                       ) : (
@@ -606,7 +620,7 @@ function Services() {
     <section id="services" className="relative overflow-hidden py-24 md:py-28 px-6">
       {/* Background image */}
       <img
-        src="/images/pages/services-bg.webp" {...responsive("/images/pages/services-bg.webp", SIZES.full)}
+        src="/images/pages/services-bg.webp" {...responsive("/images/pages/services-bg.webp", SIZES.full)} {...imgDims("/images/pages/services-bg.webp")}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover object-center"
@@ -618,7 +632,7 @@ function Services() {
       {/* Section content */}
       <div className="relative max-w-[1400px] mx-auto" style={{ zIndex: 20 }}>
         <div className="text-center mb-14 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">Our Core Services</h2>
+          <h2 id="our-core-services" className="text-white text-4xl md:text-5xl font-bold heading-accent">Our Core Services</h2>
           <p className="body-text mt-5 max-w-2xl mx-auto text-base md:text-lg">Full-stack IT capability delivered across enterprise, government and event clients in UAE & Canada.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -664,7 +678,7 @@ function DeliveryProofStrip({ projects }) {
                 <CheckCircle2 size={15} />
                 Delivery Proof
               </div>
-              <h2 className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
+              <h2 id="trusted-across-enterprise-facilities-and-elv-projects" className="text-2xl md:text-3xl font-extrabold leading-tight" style={{ color: '#0B1A46' }}>
                 Trusted Across Enterprise Facilities &amp; ELV Projects
               </h2>
               <span className="proof-accent" aria-hidden="true" />
@@ -738,7 +752,7 @@ function Stats() {
     >
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="text-center mb-14 reveal">
-          <h2 className="text-white text-3xl md:text-4xl font-bold">20 Years of Enterprise Delivery, By the Numbers</h2>
+          <h2 id="20-years-of-enterprise-delivery-by-the-numbers" className="text-white text-3xl md:text-4xl font-bold">20 Years of Enterprise Delivery, By the Numbers</h2>
           <p className="mt-3" style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)' }}>
             Real numbers from two decades of live enterprise delivery.
           </p>
@@ -821,7 +835,7 @@ function CyberAdvisory() {
             <div className="flex items-center gap-2 text-[#E87722] font-semibold text-sm uppercase tracking-[0.2em] mb-4">
               <Lock size={16}/> Powered by The Cyber Adviser
             </div>
-            <h2 className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
+            <h2 id="cybersecurity-practice-the-cyber-adviser" className="text-white text-3xl md:text-[42px] font-bold leading-tight mb-4">
               15+ Years of Cybersecurity Practice, <span className="text-[#E87722]">The Cyber Adviser</span>
             </h2>
             <p className="body-text md:text-lg mb-8">We&apos;ve spent 15+ years building security programs that hold. Zero Trust rollouts, SOC maturity, firewall architecture, across banks, government entities and enterprises that can&apos;t afford to get it wrong.</p>
@@ -864,7 +878,7 @@ function RentalTeaser() {
     <section id="rental" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>IT Equipment Rental, UAE & Canada</h2>
+          <h2 id="it-equipment-rental-uae-and-canada" className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>IT Equipment Rental, UAE & Canada</h2>
           <p className="mt-5 max-w-2xl mx-auto" style={{ color: '#58595B' }}>Short-term or long-term, UAE and Canada, delivered, configured and collected. No procurement headaches, no hidden costs.</p>
         </div>
         <div className="reveal">
@@ -912,7 +926,7 @@ function EventsPortfolio() {
     <section id="events" className="py-24 px-6">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">Major Events Powered</h2>
+          <h2 id="major-events-powered" className="text-white text-4xl md:text-5xl font-bold heading-accent">Major Events Powered</h2>
           <p className="body-text mt-5 max-w-2xl mx-auto">From world finals to global tours. We deliver the IT backbone that keeps the show on.</p>
         </div>
         <div className="flex justify-center gap-2.5 mb-10 flex-wrap reveal">
@@ -923,7 +937,7 @@ function EventsPortfolio() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
           {filtered.map((ev, i) => (
             <Link key={ev.slug} href={ev.href || `/event-it/${ev.slug}`} data-category={categoryFor(ev.region)} className="group relative rounded-xl overflow-hidden aspect-[3/4] block" style={{ transition: 'opacity 0.3s ease' }}>
-              <img src={ev.img} {...responsive(ev.img, SIZES.card)} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <img src={ev.img} {...responsive(ev.img, SIZES.card)} {...imgDims(ev.img)} alt={`${ev.name}, event IT infrastructure by IP Care`} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(7,16,42,0.0) 0%, rgba(7,16,42,0.15) 45%, rgba(7,16,42,0.75) 100%)' }}/>
               <div className="absolute bottom-0 left-0 right-0 p-5">
                 <span className="inline-block px-2.5 py-1 rounded text-[13px] uppercase tracking-wider font-semibold mb-2" style={{ background: '#C2570C', color: '#fff' }}>{ev.region}</span>
@@ -950,7 +964,7 @@ function About() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5" style={{ background: 'rgba(232,119,34,0.1)', color: '#E87722' }}>
             <Building2 size={14}/> ABOUT IP CARE TECHNOLOGIES
           </div>
-          <h2 className="text-[32px] md:text-[44px] font-bold leading-tight" style={{ color: '#0B1A46' }}>
+          <h2 id="two-decades-of-enterprise-it-excellence" className="text-[32px] md:text-[44px] font-bold leading-tight" style={{ color: '#0B1A46' }}>
             Two Decades of Enterprise IT Excellence
           </h2>
           <p className="mt-5 text-base md:text-lg" style={{ color: '#333F50' }}>
@@ -983,7 +997,7 @@ function About() {
             style={{ borderRadius: '16px', boxShadow: '0 20px 60px rgba(10, 26, 70, 0.15)', aspectRatio: '4 / 5' }}
           >
             <img
-              src="/images/about/about-feature.webp" {...responsive("/images/about/about-feature.webp", SIZES.half)}
+              src="/images/about/about-feature.webp" {...responsive("/images/about/about-feature.webp", SIZES.half)} {...imgDims("/images/about/about-feature.webp")}
               alt="Enterprise IT infrastructure, IP Care Technologies"
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
@@ -1053,7 +1067,7 @@ function Testimonials() {
     <section className="py-24 px-6" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-white text-4xl md:text-5xl font-bold heading-accent">What Clients Say</h2>
+          <h2 id="what-clients-say" className="text-white text-4xl md:text-5xl font-bold heading-accent">What Clients Say</h2>
         </div>
 
         <div
@@ -1142,7 +1156,7 @@ function BlogTeaser({ posts }) {
     <section id="blog" className="py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>From the Knowledge Base</h2>
+          <h2 id="from-the-knowledge-base" className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>From the Knowledge Base</h2>
           <p className="mt-5" style={{ color: '#58595B' }}>Insights from our engineers and advisors.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-5">
@@ -1177,7 +1191,7 @@ function BlogTeaser({ posts }) {
 const FAQS = [
   {
     q: 'What does IP Care Technologies do?',
-    a: "IP Care Technologies is an enterprise IT company founded in 2003, providing managed IT services, cybersecurity, ELV & physical security, cloud services (AWS, Azure), event IT infrastructure, and IT equipment rental across the UAE and Canada.",
+    a: 'IP Care Technologies is an Abu Dhabi-based IT solutions provider and system integrator, founded in 2003. We deliver managed IT services, cybersecurity, ELV and physical security, cloud services on AWS and Azure, event IT infrastructure, and IT equipment rental for enterprises, government entities and event organisers across the UAE and Canada.',
   },
   {
     q: 'Where does IP Care Technologies operate?',
@@ -1185,15 +1199,15 @@ const FAQS = [
   },
   {
     q: 'Does IP Care Technologies provide event IT infrastructure?',
-    a: 'Yes. IP Care has delivered high-density WiFi, temporary networks, and on-site IT infrastructure for major events including the FIFA Club World Cup, UFC, NBA Abu Dhabi Games, EuroLeague Final Four, and Coldplay world tour stops.',
+    a: 'Yes. IP Care has delivered high-density WiFi, temporary networks, and on-site IT infrastructure for major events including the FIFA Club World Cup, UFC, NBA Abu Dhabi Games, EuroLeague Final Four, and Coldplay world tour stops. Our team designs, installs, supports and removes the full event network, with engineers on site throughout the event.',
   },
   {
     q: 'Can I rent IT equipment from IP Care Technologies?',
-    a: 'Yes. IP Care offers short and long-term rental of laptops, tablets, networking gear, event WiFi equipment, CCTV, printers, servers, and testing equipment, delivered, configured, and collected in the UAE and Canada.',
+    a: 'Yes. IP Care offers short and long-term rental of laptops, tablets, networking gear, event WiFi equipment, CCTV, printers, servers, and testing equipment. Every order is delivered, configured, and collected by our team in the UAE and Canada. You can browse the rental catalogue online and request a quote for daily, weekly or monthly hire.',
   },
   {
     q: 'Is IP Care Technologies experienced in cybersecurity compliance?',
-    a: 'Yes. IP Care has 15+ years of dedicated cybersecurity practice, delivering SOC monitoring, Zero Trust architecture, and compliance advisory aligned to NESA, PCI DSS, and ISO 27001.',
+    a: 'Yes. IP Care has run a dedicated cybersecurity practice for more than 15 years. Our certified security engineers deliver SOC monitoring, Zero Trust architecture, and compliance advisory aligned to NESA, PCI DSS, and ISO 27001. We help UAE enterprises and government entities find security gaps, meet audit requirements, and keep their systems protected.',
   },
 ]
 
@@ -1212,13 +1226,13 @@ function FAQ() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="max-w-[900px] mx-auto">
         <div className="text-center mb-12 reveal">
-          <h2 className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>Frequently Asked Questions</h2>
+          <h2 id="frequently-asked-questions" className="text-4xl md:text-5xl font-bold heading-accent" style={{ color: '#0B1A46' }}>Frequently Asked Questions</h2>
         </div>
         <div className="space-y-5 reveal">
           {FAQS.map((f) => (
             <div key={f.q} className="p-6 rounded-2xl" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>
-              <h3 className="font-semibold text-lg mb-2" style={{ color: '#0B1A46' }}>{f.q}</h3>
-              <p className="text-sm md:text-base leading-relaxed" style={{ color: '#374151' }}>{f.a}</p>
+              <h3 id={`faq-${headingId(f.q)}`} className="font-semibold text-lg mb-2" style={{ color: '#0B1A46' }}>{f.q}</h3>
+              <p className="faq-answer text-sm md:text-base leading-relaxed" style={{ color: '#374151' }}>{f.a}</p>
             </div>
           ))}
         </div>
@@ -1268,7 +1282,7 @@ function OfficesCTA() {
 const App = ({ latestPosts, featuredProjects }) => {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <HeroCarousel />
       <TrustMarquee />

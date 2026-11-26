@@ -74,7 +74,7 @@ export default function RentalHubClient({ localSection = null }) {
   useReveal()
 
   return (
-    <main>
+    <main id="main-content">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
@@ -138,7 +138,7 @@ export default function RentalHubClient({ localSection = null }) {
             <div className="section-eyebrow">
               Equipment Categories
             </div>
-            <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="browse-equipment-categories" className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
               Browse Equipment Categories
             </h2>
           </div>
@@ -210,7 +210,7 @@ export default function RentalHubClient({ localSection = null }) {
             <div className="section-eyebrow">
               Popular Rentals
             </div>
-            <h2 className="font-bold text-2xl md:text-3xl" style={{ color: '#FFFFFF' }}>
+            <h2 id="most-requested-items" className="font-bold text-2xl md:text-3xl" style={{ color: '#FFFFFF' }}>
               Most-Requested Items
             </h2>
             <p className="mt-2 text-sm max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.8)' }}>
@@ -246,7 +246,7 @@ export default function RentalHubClient({ localSection = null }) {
             <div className="section-eyebrow">
               Pre-Built Packages
             </div>
-            <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="bundle-packages" className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
               Bundle Packages
             </h2>
             <p className="mt-4 text-base max-w-2xl mx-auto" style={{ color: '#4A5568' }}>
@@ -304,7 +304,7 @@ export default function RentalHubClient({ localSection = null }) {
             <div className="section-eyebrow">
               The IP Care Advantage
             </div>
-            <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="why-ip-care-vs-other-rental-vendors" className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>
               Why IP Care vs. Other Rental Vendors
             </h2>
           </div>
@@ -345,7 +345,7 @@ export default function RentalHubClient({ localSection = null }) {
       >
         <div className="max-w-[1000px] mx-auto reveal">
           <div className="section-eyebrow">Get a Quote Today</div>
-          <h2
+          <h2 id="cant-find-what-you-need"
             className="text-white font-bold leading-tight mb-5"
             style={{ fontSize: 'clamp(1.8rem,3.5vw,2.6rem)' }}
           >

@@ -79,7 +79,7 @@ export default function CertificationsBand({ region, menuGroup }) {
             >
               Why Build With Us
             </p>
-            <h2
+            <h2 id="why-teams-build-with-us"
               className="section-title section-title-white"
               style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}
             >
@@ -121,7 +121,7 @@ export default function CertificationsBand({ region, menuGroup }) {
           >
             Certifications &amp; Compliance
           </p>
-          <h2
+          <h2 id="credentials-behind-every-engagement"
             className="section-title section-title-white"
             style={{ color: '#FFFFFF', fontWeight: 800, fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em', lineHeight: 1.15 }}
           >

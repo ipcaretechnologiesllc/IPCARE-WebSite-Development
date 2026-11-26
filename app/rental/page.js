@@ -84,7 +84,7 @@ function LocalRentalSection() {
     <section className="py-16 md:py-20 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[900px] mx-auto text-center">
         <div className="section-eyebrow">Abu Dhabi &amp; Dubai</div>
-        <h2 className="font-bold text-3xl md:text-4xl mb-6" style={{ color: '#0B1A46' }}>
+        <h2 id="computer-rental-in-abu-dhabi-and-dubai" className="font-bold text-3xl md:text-4xl mb-6" style={{ color: '#0B1A46' }}>
           Computer Rental in Abu Dhabi and Dubai
         </h2>
         <p className="text-base md:text-lg leading-relaxed mb-4" style={{ color: '#4A5568' }}>

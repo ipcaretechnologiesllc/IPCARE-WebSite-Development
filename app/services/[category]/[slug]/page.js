@@ -113,7 +113,7 @@ export default async function SubPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <ServicePageTemplate
           data={{ ...sub, ...(caseStudies.length ? { caseStudies } : {}), ...(localProof ? { localProof } : {}) }}
           related={related}

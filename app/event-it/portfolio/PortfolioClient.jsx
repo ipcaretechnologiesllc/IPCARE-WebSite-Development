@@ -31,7 +31,7 @@ export default function PortfolioClient() {
 
   return (
     <>
-    <main>
+    <main id="main-content">
       {/* Breadcrumb */}
       <div className="max-w-[1400px] mx-auto px-6 pt-6">
         <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
@@ -138,7 +138,7 @@ export default function PortfolioClient() {
       {/* Bottom CTA */}
       <section className="py-16 px-6">
         <div className="max-w-[1100px] mx-auto rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
-          <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Your Event Could Be Next.</h2>
+          <h2 id="your-event-could-be-next" className="text-white text-3xl md:text-4xl font-bold mb-4">Your Event Could Be Next.</h2>
           <p className="body-text max-w-xl mx-auto mb-8">Tell us the dates, venue and scope. We&apos;ll get you a costed event IT proposal in 48 hours.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/#contact" className="btn-primary">Get an Event Quote <Icons.ArrowRight size={16}/></Link>

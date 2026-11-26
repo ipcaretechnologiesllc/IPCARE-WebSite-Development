@@ -82,7 +82,7 @@ function SaseGuides() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-12">
           <div className="section-eyebrow">Further Reading</div>
-          <h2 className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>SASE Guides from Our Advisory Team</h2>
+          <h2 id="sase-guides-from-our-advisory-team" className="font-bold text-3xl md:text-4xl" style={{ color: '#0B1A46' }}>SASE Guides from Our Advisory Team</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {sasePillarGuides.map((a) => (
@@ -149,7 +149,7 @@ export default function SASEPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <ServicePageTemplate
           data={pageData}
           related={advisoryServices.filter((s) => s.slug !== 'sase').map((s) => ({ slug: `cybersecurity-advisory/${s.slug}`, href: `/cybersecurity-advisory/${s.slug}`, name: s.name, short: s.short, icon: s.icon }))}

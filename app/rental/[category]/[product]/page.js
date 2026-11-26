@@ -10,6 +10,7 @@ import { getProduct, getAllProductParams, getRelatedProducts, resolveProductRefs
 import { isCaSite, RENTAL_REGION } from '@/lib/seo-region'
 import { ORG_REF, schemaImage } from '@/lib/schema'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 
@@ -179,7 +180,7 @@ export default async function ProductDetailPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <div className="px-6 pt-6" style={{ background: '#F4F6FA' }}>
           <nav className="max-w-[1400px] mx-auto text-xs flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb" style={{ color: '#58595B' }}>
             <Link href="/" className="hover:text-[#E87722]">Home</Link>
@@ -203,7 +204,7 @@ export default async function ProductDetailPage(props) {
           <div className="max-w-[820px] mx-auto">
             {product.content && (
               <>
-                <h2 className="text-2xl font-bold mb-5" style={{ color: '#0B1A46' }}>
+                <h2 id={headingId(`Renting the ${product.brand} ${product.model}`)} className="text-2xl font-bold mb-5" style={{ color: '#0B1A46' }}>
                   Renting the {product.brand} {product.model}
                 </h2>
                 {product.content.body?.map((p, i) => (
@@ -212,7 +213,7 @@ export default async function ProductDetailPage(props) {
 
                 {product.content.usedFor?.length > 0 && (
                   <div className="mt-8 mb-6">
-                    <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Typical deployments</h2>
+                    <h2 id="typical-deployments" className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Typical deployments</h2>
                     <ul className="space-y-2">
                       {product.content.usedFor.map((u) => (
                         <li key={u} className="flex items-start gap-2.5" style={{ color: '#58595B' }}>
@@ -239,7 +240,7 @@ export default async function ProductDetailPage(props) {
               </>
             )}
 
-            <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
+            <h2 id="frequently-asked-questions" className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Frequently asked questions</h2>
             {faqs.map(({ q, a }) => (
               <details key={q} className="mb-3 rounded-lg p-4" style={{ background: '#F4F6FA' }}>
                 <summary className="font-semibold cursor-pointer" style={{ color: '#0B1A46' }}>{q}</summary>
@@ -249,7 +250,7 @@ export default async function ProductDetailPage(props) {
 
             {pairs.length > 0 && (
               <div className="mt-10">
-                <h2 className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Pairs well with</h2>
+                <h2 id="pairs-well-with" className="text-2xl font-bold mb-4" style={{ color: '#0B1A46' }}>Pairs well with</h2>
                 <ul className="space-y-3">
                   {pairs.map(({ category, slug, note, item }) => (
                     <li key={slug} className="leading-relaxed" style={{ color: '#58595B' }}>
@@ -280,7 +281,7 @@ export default async function ProductDetailPage(props) {
           <div className="max-w-[1400px] mx-auto">
             <div className="mb-10">
               <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Frequently Rented Together</div>
-              <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>Related Products</h2>
+              <h2 id="related-products" className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>Related Products</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {related.map((r) => (

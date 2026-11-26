@@ -45,7 +45,7 @@ export default function BlogClient({ articles }) {
   })
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── HERO ───────────────────────────────────────────────────── */}
       <section style={{ background: '#0B1A46', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
         {/* Hero photo — subject RIGHT, dark zone LEFT carries H1 */}
@@ -141,7 +141,7 @@ export default function BlogClient({ articles }) {
         padding:      '96px 24px',
       }}>
         <div className="reveal" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{
+          <h2 id="have-a-project-in-mind" style={{
             color:         '#FFFFFF',
             fontWeight:    800,
             fontSize:      'clamp(2rem, 4vw, 3rem)',

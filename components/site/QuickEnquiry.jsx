@@ -228,12 +228,20 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
 
         {/* ── Right: form ─────────────────────────────────────────────── */}
         <div className="bg-white p-5 sm:p-8 lg:p-10 flex flex-col justify-center">
-            <form onSubmit={submit} noValidate className="space-y-4">
+            {/* WebMCP declarative tool: lets an in-browser AI agent fill this form for the user.
+                No toolautosubmit, so a person still presses the button; reCAPTCHA still applies. */}
+            <form
+              onSubmit={submit} noValidate className="space-y-4"
+              toolname={rental ? 'request_rental_callback' : 'request_callback'}
+              tooldescription={rental
+                ? 'Ask IP Care Technologies to call back with a quote for renting IT equipment in the UAE. Needs a name and a phone number.'
+                : 'Ask IP Care Technologies to call back about IT services in the UAE (managed IT, cybersecurity, ELV, event IT, cloud or rental). Needs a name and a phone number.'}
+            >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="qe-name">Your Name *</Label>
                   <input
-                    id="qe-name" type="text" name="name" autoComplete="name" placeholder="Full name" required maxLength={120}
+                    id="qe-name" type="text" name="name" toolparamdescription="Full name of the person to call back" autoComplete="name" placeholder="Full name" required maxLength={120}
                     value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     className={inputClass} style={inputStyle}
                   />
@@ -241,7 +249,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                 <div>
                   <Label htmlFor="qe-phone">Phone / WhatsApp *</Label>
                   <input
-                    id="qe-phone" type="tel" name="phone" autoComplete="tel" inputMode="tel" placeholder="+971 50 123 4567" required maxLength={40}
+                    id="qe-phone" type="tel" name="phone" toolparamdescription="Phone or WhatsApp number with country code, e.g. +971 50 123 4567" autoComplete="tel" inputMode="tel" placeholder="+971 50 123 4567" required maxLength={40}
                     value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                     className={inputClass} style={inputStyle}
                   />
@@ -258,7 +266,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                     <div>
                       <Label htmlFor="qe-item">Equipment</Label>
                       <select
-                        id="qe-item" name="item" value={form.item} onChange={e => pick('item')(e.target.value)}
+                        id="qe-item" name="item" toolparamdescription="Equipment the quote is for" value={form.item} onChange={e => pick('item')(e.target.value)}
                         className={inputClass} style={{ ...inputStyle, color: form.item ? '#0B1A46' : '#6B7280' }}
                       >
                         <option value="">Select equipment</option>
@@ -273,7 +281,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                   <div>
                     <Label htmlFor="qe-need">Anything Else? (Optional)</Label>
                     <input
-                      id="qe-need" type="text" name="need" maxLength={300}
+                      id="qe-need" type="text" name="need" toolparamdescription="Optional details: delivery location, specifications or exact dates" maxLength={300}
                       placeholder="e.g. delivery location, specs, exact dates"
                       value={form.need} onChange={e => pick('need')(e.target.value)}
                       className={inputClass} style={inputStyle}
@@ -284,7 +292,7 @@ export default function QuickEnquiry({ source = 'homepage', variant = 'general',
                 <div>
                   <Label htmlFor="qe-service">What Do You Need?</Label>
                   <select
-                    id="qe-service" name="service" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                    id="qe-service" name="service" toolparamdescription="The service the person needs help with" value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
                     className={inputClass} style={{ ...inputStyle, color: form.service ? '#0B1A46' : '#6B7280' }}
                   >
                     <option value="">Select a service</option>

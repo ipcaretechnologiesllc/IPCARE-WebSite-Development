@@ -46,7 +46,7 @@ export default function EventPortfolioPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         {/* Breadcrumb */}
         <div className="max-w-[1400px] mx-auto px-6 pt-6">
           <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
@@ -189,7 +189,7 @@ export default function EventPortfolioPage() {
           padding: '96px 24px',
         }}>
           <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-            <h2 style={{
+            <h2 id="plan-your-event-it-infrastructure" style={{
               color: '#FFFFFF',
               fontWeight: 800,
               fontSize: 'clamp(2rem, 4vw, 3rem)',

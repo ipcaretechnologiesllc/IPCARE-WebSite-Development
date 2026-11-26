@@ -77,7 +77,7 @@ function NewsletterStripInner() {
         <div className="section-eyebrow">
           Stay Informed
         </div>
-        <h2 className="font-bold mb-4" style={{ color: '#0B1A46', fontSize: '28px', lineHeight: 1.25 }}>
+        <h2 id="monthly-insights-from-ip-care-engineers" className="font-bold mb-4" style={{ color: '#0B1A46', fontSize: '28px', lineHeight: 1.25 }}>
           Monthly Insights from IP Care Engineers
         </h2>
         <p className="mb-8" style={{ color: '#4B5C7E', fontSize: '15px', lineHeight: 1.6 }}>

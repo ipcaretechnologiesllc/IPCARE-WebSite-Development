@@ -348,7 +348,7 @@ function CTAStrip() {
         className="reveal"
         style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
-        <h2 style={{
+        <h2 id="other-sectors-we-work-in" style={{
           color:         '#FFFFFF',
           fontWeight:    800,
           fontSize:      'clamp(2rem, 4vw, 3rem)',
@@ -383,7 +383,7 @@ function CTAStrip() {
 export default function IndustriesClient() {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <IndustriesGrid />
       <QuickEnquiry source="industries-hub" context="Industries hub" />

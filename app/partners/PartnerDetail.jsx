@@ -81,7 +81,7 @@ export default function PartnerDetail() {
   return (
     <section className="pb-20 px-6">
       <div className="max-w-[1100px] mx-auto">
-        <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">How we work with each vendor</h2>
+        <h2 id="how-we-work-with-each-vendor" className="text-white text-3xl md:text-4xl font-bold mb-4">How we work with each vendor</h2>
         <p className="body-text max-w-3xl mb-10 leading-relaxed">
           IP Care is a systems integrator, not a reseller of a single brand. We choose the platform that fits the requirement, then design, deploy and support it. Where a project is temporary, such as an event or a migration window, the same vendors&rsquo; equipment is also available from our rental fleet. These are the vendors we work with most and what we deliver with each.
         </p>

@@ -1,13 +1,15 @@
+import { headingId } from '@/lib/heading-id'
+
 export function LegalPage({ title, sections }) {
   return (
-    <main className="py-20 md:py-24 px-6">
+    <main id="main-content" className="py-20 md:py-24 px-6">
       <div className="max-w-[820px] mx-auto">
         <h1 className="text-white text-4xl md:text-5xl font-bold mb-3">{title}</h1>
         <p className="mono text-xs text-white/50 uppercase tracking-widest mb-12">Last Updated: January 2026</p>
         <div className="glass-card p-8 md:p-10 space-y-8">
           {sections.map((s, i) => (
             <section key={i}>
-              <h2 className="text-white text-xl md:text-2xl font-bold mb-3">{s.h}</h2>
+              <h2 id={headingId(s.h)} className="text-white text-xl md:text-2xl font-bold mb-3">{s.h}</h2>
               {s.p.map((p, j) => <p key={j} className="body-text text-base leading-relaxed mb-3">{p}</p>)}
             </section>
           ))}

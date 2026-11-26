@@ -8,6 +8,7 @@ import { serviceCategories, getAllCategorySlugs, getCategory, getRelatedServices
 import { getCaseStudiesForCategory, toCaseStudyCard } from '@/lib/case-studies-data'
 import { ORG_REF, serviceCountries } from '@/lib/schema'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 
@@ -100,7 +101,7 @@ export default async function CategoryPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <ServicePageTemplate
           data={caseStudies.length ? { ...cat, caseStudies } : cat}
           related={related}
@@ -114,7 +115,7 @@ export default async function CategoryPage(props) {
                   <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#B25409', marginBottom: '12px' }}>
                     Explore
                   </p>
-                  <h2 style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+                  <h2 id={headingId(`${cat.name}, Explore Specific Services`)} style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
                     {cat.name}, Explore Specific Services
                   </h2>
                   <div style={{ width: '56px', height: '3px', background: '#E87722', borderRadius: '3px', margin: '14px auto 0' }} aria-hidden="true" />
@@ -145,7 +146,7 @@ export default async function CategoryPage(props) {
                   <p style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '4px', textTransform: 'uppercase', color: '#B25409', marginBottom: '12px' }}>
                     Service Areas
                   </p>
-                  <h2 style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+                  <h2 id={headingId(`${cat.name} Across the UAE`)} style={{ color: '#0B1A46', fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
                     {cat.name} Across the UAE
                   </h2>
                   <div style={{ width: '56px', height: '3px', background: '#E87722', borderRadius: '3px', margin: '14px auto 0' }} aria-hidden="true" />

@@ -29,7 +29,7 @@ export default function KBClient() {
   })
 
   return (
-    <main style={{ background: '#F4F6FA' }}>
+    <main id="main-content" style={{ background: '#F4F6FA' }}>
       {/* Breadcrumb */}
       <div className="max-w-[1400px] mx-auto px-6 pt-6">
         <nav className="text-xs flex items-center gap-1.5 flex-wrap" style={{ color: '#8A93A6' }} aria-label="Breadcrumb">
@@ -128,7 +128,7 @@ export default function KBClient() {
           {/* Consultation CTA — navy band, consistent with article pages */}
           <div className="reveal mt-16 rounded-2xl p-8 md:p-12 text-center max-w-3xl mx-auto" style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)' }}>
             <div className="mono text-[13px] uppercase tracking-[0.25em] mb-3" style={{ color: '#E87722' }}>Consultation</div>
-            <h2 className="text-white text-2xl md:text-4xl font-bold mb-4">Need a direct answer?</h2>
+            <h2 id="need-a-direct-answer" className="text-white text-2xl md:text-4xl font-bold mb-4">Need a direct answer?</h2>
             <p className="mb-8 mx-auto max-w-xl" style={{ color: 'rgba(255,255,255,0.75)' }}>The knowledge base is a starting point. For a specific architecture, upgrade or migration decision, 30 minutes with a senior advisor is often faster — and free.</p>
             <div className="flex justify-center">
               <CTAPhoneButtons />

@@ -308,7 +308,7 @@ function Platforms() {
       <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>Platform Expertise</Eyebrow>
-          <h2 style={{
+          <h2 id="advisory-depth-across-enterprise-platforms" style={{
             color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
           }}>
@@ -387,7 +387,7 @@ function ServicesGrid() {
       <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>Strategic Practice</Eyebrow>
-          <h2 style={{
+          <h2 id="strategic-security-expertise" style={{
             color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15,
           }}>
@@ -503,7 +503,7 @@ function Philosophy() {
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
           <Eyebrow>Philosophy</Eyebrow>
-          <h2 style={{
+          <h2 id="security-as-a-strategic-enabler" style={{
             color: '#FFFFFF', fontWeight: 800,
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15,
@@ -561,7 +561,7 @@ function Tools() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '56px' }}>
           <Eyebrow>Interactive Tools</Eyebrow>
-          <h2 style={{
+          <h2 id="engineering-grade-calculators" style={{
             color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
           }}>
@@ -635,7 +635,7 @@ function KnowledgeBase() {
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Eyebrow>Knowledge Base</Eyebrow>
-          <h2 style={{
+          <h2 id="field-tested-insights" style={{
             color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15,
           }}>
@@ -740,7 +740,7 @@ function CaseStudies() {
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div className="reveal" style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Eyebrow>Case Studies</Eyebrow>
-          <h2 style={{
+          <h2 id="proven-at-enterprise-scale" style={{
             color: '#0B1A46', fontWeight: 800, fontSize: 'clamp(2rem, 4vw, 3rem)',
             letterSpacing: '-0.02em', lineHeight: 1.15,
           }}>
@@ -863,7 +863,7 @@ function BottomCTA() {
     }}>
       <div className="reveal" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
         <Eyebrow>Next Step</Eyebrow>
-        <h2 style={{
+        <h2 id="schedule-a-confidential-consultation" style={{
           color: '#FFFFFF', fontWeight: 800,
           fontSize: 'clamp(2rem, 4vw, 3rem)',
           letterSpacing: '-0.02em', lineHeight: 1.15, marginBottom: '16px',
@@ -937,7 +937,7 @@ function BottomCTA() {
 export default function AdvisoryClient() {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <Platforms />
       <ServicesGrid />

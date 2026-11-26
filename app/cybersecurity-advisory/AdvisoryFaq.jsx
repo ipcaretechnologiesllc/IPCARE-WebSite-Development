@@ -48,7 +48,7 @@ export default function AdvisoryFaq() {
     <section className="px-6 py-14 md:py-16" style={{ background: '#FFFFFF' }} aria-labelledby="advisory-faq">
       <div className="max-w-[900px] mx-auto">
         <div className="mb-12 p-6 md:p-7 rounded-2xl" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0', borderLeft: '4px solid #E87722' }}>
-          <h2 className="font-bold mb-2" style={{ color: '#0B1A46', fontSize: '1.4rem', lineHeight: 1.3 }}>
+          <h2 id="looking-for-cyber-security-services-in-dubai-or-abu-dhabi" className="font-bold mb-2" style={{ color: '#0B1A46', fontSize: '1.4rem', lineHeight: 1.3 }}>
             Looking for cyber security services in Dubai or Abu Dhabi?
           </h2>
           <p className="mb-5 leading-relaxed" style={{ color: '#374151' }}>

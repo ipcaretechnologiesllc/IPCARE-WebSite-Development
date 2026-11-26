@@ -20,7 +20,7 @@ export default function PartnersClient({ detail }) {
   const cats = ['All', 'Cybersecurity', 'Networking', 'Cloud']
   const filtered = filter === 'All' ? partners : partners.filter(p => p.category === filter)
   return (
-    <main>
+    <main id="main-content">
       <section className="py-20 md:py-24 px-6">
         <div className="max-w-[1200px] mx-auto text-center">
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-4 reveal">Partnerships</div>
@@ -54,7 +54,7 @@ export default function PartnersClient({ detail }) {
       <section className="py-16 px-6">
         <div className="max-w-[1100px] mx-auto rounded-2xl p-10 md:p-14 text-center reveal" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
           <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Partnership Opportunities</div>
-          <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Partner with IP Care Technologies</h2>
+          <h2 id="partner-with-ip-care-technologies" className="text-white text-3xl md:text-4xl font-bold mb-4">Partner with IP Care Technologies</h2>
           <p className="body-text max-w-xl mx-auto mb-8">We are always open to conversations with technology vendors, channel partners and systems integrators looking to serve UAE and Canadian enterprise markets.</p>
           <Link href="/contact" className="btn-primary">Discuss a Partnership <Icons.ArrowRight size={16}/></Link>
         </div>

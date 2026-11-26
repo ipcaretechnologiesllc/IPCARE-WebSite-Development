@@ -115,7 +115,7 @@ export default async function CaseStudyPage(props) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
       <Header />
-      <main>
+      <main id="main-content">
         <CaseStudyNarrative
           study={study}
           breadcrumb={[

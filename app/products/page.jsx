@@ -77,7 +77,7 @@ export default function ProductsHubPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         {/* Breadcrumb */}
         <div style={{ background: '#1E3A8A' }}>
           <div className="max-w-[1400px] mx-auto px-6 pt-5">
@@ -174,7 +174,7 @@ export default function ProductsHubPage() {
         <section className="bg-white">
           <div className="max-w-[1100px] mx-auto px-6 py-16 space-y-16">
             <div className="max-w-[760px]">
-              <h2 className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>
+              <h2 id="software-built-in-house-used-on-real-operations" className="text-2xl md:text-3xl font-bold" style={{ color: '#0B1A46' }}>
                 Software built in-house, used on real operations
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate-600">

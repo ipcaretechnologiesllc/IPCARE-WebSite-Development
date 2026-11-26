@@ -48,10 +48,30 @@ const rentalOfferSchema = dayRates.length ? {
   },
 } : null
 
+// WebPage node with `speakable`: points voice assistants and answer engines at the parts
+// of the homepage written to be read aloud: the H1 and the FAQ answers (.faq-answer in
+// HomeClient). Google only uses speakable for news publishers today, so this is a low-cost
+// signal for other assistants rather than a Google feature.
+const homeWebPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://www.ipcare.ae/#webpage',
+  url: 'https://www.ipcare.ae/',
+  name: 'IP Care: IT Solutions & System Integrator in Abu Dhabi, UAE',
+  isPartOf: { '@id': 'https://www.ipcare.ae#website' },
+  about: ORG_REF,
+  inLanguage: 'en-AE',
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.faq-answer'],
+  },
+}
+
 export default function Home() {
   return (
     <>
-      {rentalOfferSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rentalOfferSchema) }} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeWebPageSchema) }} />
+      {rentalOfferSchema &&<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rentalOfferSchema) }} />}
       {/* Preload the LCP hero background for each breakpoint. Rendered from this
           Server Component so the hints land in the initial HTML <head> that the
           CDN caches (React hoists <link> automatically). The media guards ensure

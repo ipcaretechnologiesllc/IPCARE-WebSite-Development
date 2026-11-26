@@ -7,6 +7,7 @@ import CaseStudyWork from './CaseStudyWork'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { getCaseStudy, getCaseStudySlugs } from '@/lib/portfolio-data'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -115,7 +116,7 @@ export default async function CaseStudyPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }} />
       <Header />
 
-      <main>
+      <main id="main-content">
         {/* Hero */}
         <section className="relative overflow-hidden bg-[#0B1A46]">
           {/* Ambient blurred backdrop — blur hides source resolution and adds depth */}
@@ -221,7 +222,7 @@ export default async function CaseStudyPage(props) {
           <section className="border-b border-[#E5EAF3] bg-white">
             <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
               <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#B95812]">By the numbers</div>
-              <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
+              <h2 id="the-scale-of-the-delivery" className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
                 The scale of the delivery
               </h2>
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
@@ -271,7 +272,7 @@ export default async function CaseStudyPage(props) {
             <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
               <div className="mb-12 max-w-2xl">
                 <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#B95812]">On site with our team</div>
-                <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
+                <h2 id="real-delivery-real-engineers" className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
                   Real delivery, real engineers
                 </h2>
                 <p className="mt-3 text-[15px] leading-7 text-[#475467]">
@@ -292,7 +293,7 @@ export default async function CaseStudyPage(props) {
                 <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#B95812]">
                   {project.techStackEyebrow || 'Technical summary'}
                 </div>
-                <h2 className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
+                <h2 id={headingId(project.techStackTitle || 'What was installed')} className="mt-2 text-2xl font-extrabold leading-tight text-[#0B1A46] sm:text-3xl">
                   {project.techStackTitle || 'What was installed'}
                 </h2>
                 <p className="mt-3 text-[15px] leading-7 text-[#475467]">
@@ -359,7 +360,7 @@ export default async function CaseStudyPage(props) {
               <>
                 <div className="max-w-2xl">
                   <div className="text-xs font-bold uppercase tracking-[0.16em] text-[#F5A96A]">At handover</div>
-                  <h2 className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                  <h2 id="finished-means-documented" className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
                     Finished means documented
                   </h2>
                 </div>
@@ -381,7 +382,7 @@ export default async function CaseStudyPage(props) {
               }`}
             >
               <div className="max-w-xl">
-                <h2 className="text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                <h2 id="planning-a-similar-project" className="text-2xl font-extrabold leading-tight text-white sm:text-3xl">
                   Planning a similar project?
                 </h2>
                 <p className="mt-3 text-[15px] leading-7 text-white/80">

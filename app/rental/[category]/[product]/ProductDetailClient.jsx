@@ -125,7 +125,7 @@ export default function ProductDetailClient({ product, categorySlug }) {
       {/* Specs table */}
       <div className="max-w-[1300px] mx-auto mt-14">
         <div className="p-7 md:p-9 rounded-2xl" style={{ background: '#FFFFFF', border: '1px solid rgba(11,26,70,0.06)', boxShadow: '0 8px 32px rgba(10,26,70,0.10)' }}>
-          <h2 className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Full Specifications</h2>
+          <h2 id="full-specifications" className="text-2xl font-bold mb-6" style={{ color: '#0B1A46' }}>Full Specifications</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
             {Object.entries(product.fullSpecs).map(([k, v]) => (
               <div key={k} className="flex items-start justify-between py-2 border-b gap-4" style={{ borderColor: 'rgba(11,26,70,0.08)' }}>

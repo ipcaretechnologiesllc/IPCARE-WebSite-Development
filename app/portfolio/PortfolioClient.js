@@ -21,6 +21,7 @@ import {
   portfolioStats,
 } from '@/lib/portfolio-data'
 import { responsive, SIZES } from '@/lib/responsive-image'
+import { headingId } from '@/lib/heading-id'
 
 const categoryParamMap = {
   enterprise: { type: 'Enterprise Facilities' },
@@ -304,7 +305,7 @@ export default function PortfolioClient() {
   }
 
   return (
-    <main className="bg-[#F4F6FA]">
+    <main id="main-content" className="bg-[#F4F6FA]">
       <section
         className="relative flex min-h-[560px] items-center overflow-hidden px-6 py-[120px] text-white md:py-[140px]"
         style={{
@@ -379,7 +380,7 @@ export default function PortfolioClient() {
         <div className="mx-auto max-w-[1400px]">
           <div className="mx-auto mb-10 max-w-[820px] text-center">
             <div className="section-eyebrow">What We Deliver</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="enterprise-facilities-and-elv-infrastructure" className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
               Enterprise Facilities &amp; ELV Infrastructure
             </h2>
           </div>
@@ -389,7 +390,7 @@ export default function PortfolioClient() {
                 <div className="service-card__icon mb-5 flex h-12 w-12 items-center justify-center text-[#E87722]">
                   {pillar.title === 'Enterprise Facilities' ? <Building2 size={22} /> : <ShieldCheck size={22} />}
                 </div>
-                <h2 className="service-card__title text-xl">{pillar.title}</h2>
+                <h2 id={headingId(pillar.title)} className="service-card__title text-xl">{pillar.title}</h2>
                 <p className="service-card__desc mt-3 text-sm leading-6">{pillar.text}</p>
                 <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-[#E87722]">{pillar.proof}</p>
               </div>
@@ -402,7 +403,7 @@ export default function PortfolioClient() {
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-12 text-center">
             <div className="section-eyebrow">Featured Proof</div>
-            <h2 className="heading-accent mx-auto max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl" style={{ color: '#0B1A46' }}>
+            <h2 id="facility-and-infrastructure-delivery-that-reduces-buyer" className="heading-accent mx-auto max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl" style={{ color: '#0B1A46' }}>
               Facility and infrastructure delivery that reduces buyer doubt.
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[#4B5563]">
@@ -422,7 +423,7 @@ export default function PortfolioClient() {
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-8 text-center">
             <div className="section-eyebrow">Filter Portfolio</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="find-relevant-project-proof" className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
               Find Relevant Project Proof
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#667085]">
@@ -492,7 +493,7 @@ export default function PortfolioClient() {
         <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <div className="section-eyebrow">Next Project</div>
-            <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
+            <h2 id="planning-cctv-elv-structured-cabling-access-control-or" className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
               Planning CCTV, ELV, structured cabling, access control or network infrastructure?
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">

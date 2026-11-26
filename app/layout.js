@@ -222,8 +222,12 @@ export default function RootLayout({ children }) {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${BRAND_URL}#website`,
     name: SITE_NAME,
     url: BRAND_URL,
+    description: SITE_DESC,
+    inLanguage: isCaSite() ? 'en-CA' : 'en-AE',
+    publisher: { '@id': `${BRAND_URL}#org` },
   }
 
   return (
@@ -239,6 +243,9 @@ export default function RootLayout({ children }) {
         <HreflangLinks />
       </head>
       <body className={inter.className}>
+        {/* First focusable element: keyboard and screen-reader users jump past the header.
+            Every page's <main> carries id="main-content". */}
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessAbuDhabi) }} />
         {/* Toronto LocalBusiness only on the .ca build. On ipcare.ae it put a Canadian storefront

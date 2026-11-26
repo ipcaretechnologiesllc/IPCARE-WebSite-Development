@@ -8,6 +8,7 @@ import { postWithRetry } from '@/lib/post-with-retry'
 import { trackEvent } from '@/lib/analytics'
 import { responsive, SIZES } from '@/lib/responsive-image'
 import { ICONS } from '@/lib/icon-map'
+import { headingId, nodeText } from '@/lib/heading-id'
 
 const MAX_CV_BYTES = 5 * 1024 * 1024
 
@@ -41,7 +42,7 @@ function Eyebrow({ children }) {
 function SectionHeading({ children }) {
   return (
     <div className="text-center">
-      <h2 style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>{children}</h2>
+      <h2 id={headingId(nodeText(children))} style={{ color: T_NAV, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.02em' }}>{children}</h2>
       <div style={{ width: '56px', height: '3px', background: '#E87722', borderRadius: '3px', margin: '14px auto 0' }} aria-hidden="true" />
     </div>
   )
@@ -116,7 +117,7 @@ export default function CareersClient() {
   }
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── HERO, navy, full-bleed photo ─────────────────────────────────── */}
       <section style={{ background: '#1E3A8A', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden', padding: '140px 24px 100px', minHeight: '480px', display: 'flex', alignItems: 'center' }}>
         <img
@@ -226,7 +227,7 @@ export default function CareersClient() {
       {/* ── BOTTOM CTA, navy ─────────────────────────────────────────────── */}
       <section style={{ background: '#1E3A8A', borderTop: '3px solid #E87722', padding: '64px 24px' }}>
         <div className="max-w-[1000px] mx-auto text-center reveal">
-          <h2 className="text-white font-bold mb-4" style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}>Don't See Your Role?</h2>
+          <h2 id="dont-see-your-role" className="text-white font-bold mb-4" style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.5rem)', letterSpacing: '-0.02em' }}>Don't See Your Role?</h2>
           <p className="max-w-xl mx-auto mb-8" style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', lineHeight: 1.7 }}>Send a general application and tell us where you'd add the most value, we're always looking for senior talent.</p>
           <a href="#apply" onClick={() => setForm(f => ({ ...f, role: 'General Application' }))} className="btn-primary">General Application <Icons.ArrowRight size={16}/></a>
         </div>

@@ -306,7 +306,7 @@ function CTAStrip() {
         className="reveal"
         style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}
       >
-        <h2 style={{
+        <h2 id="have-an-idea-you-want-to-build" style={{
           color: '#FFFFFF',
           fontWeight: 800,
           fontSize: 'clamp(2rem, 4vw, 3rem)',
@@ -335,7 +335,7 @@ function CTAStrip() {
 export default function DigitalSolutionsClient({ categories }) {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <DigitalSolutionsGrid cats={categories} />
       <CTAStrip />

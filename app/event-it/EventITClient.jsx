@@ -121,7 +121,7 @@ function EventsPortfolio({ events }) {
     <section className="py-20 md:py-24 px-6" style={{ background: '#F4F6FA' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10 reveal">
-          <h2 className="text-[#0B1A46] text-4xl md:text-5xl font-bold heading-accent">
+          <h2 id="major-events-powered" className="text-[#0B1A46] text-4xl md:text-5xl font-bold heading-accent">
             Major Events Powered
           </h2>
           <p className="mt-5 max-w-2xl mx-auto" style={{ color: '#58595B' }}>
@@ -212,7 +212,7 @@ function Services({ eventServices }) {
       <div className="max-w-[1300px] mx-auto">
         <div className="text-center mb-12 reveal">
           <div className="section-eyebrow">Services</div>
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">
+          <h2 id="end-to-end-event-it-services" className="text-white text-3xl md:text-5xl font-bold leading-tight">
             End-to-End Event IT Services
           </h2>
           <p className="body-text mt-4 max-w-2xl mx-auto">
@@ -283,7 +283,7 @@ function HowItWorks() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-14 reveal">
           <div className="section-eyebrow">Process</div>
-          <h2 className="text-[#0B1A46] text-3xl md:text-5xl font-bold leading-tight">How It Works</h2>
+          <h2 id="how-it-works" className="text-[#0B1A46] text-3xl md:text-5xl font-bold leading-tight">How It Works</h2>
           <p className="text-[#4B5563] mt-4 max-w-xl mx-auto">Four steps from kick-off to encore.</p>
         </div>
 
@@ -357,7 +357,7 @@ function CapabilityStats({ capabilityStats }) {
       <div className="max-w-[1200px] mx-auto relative">
         <div className="text-center mb-10 reveal">
           <div className="section-eyebrow">Capability</div>
-          <h2 className="text-white text-3xl md:text-4xl font-bold">Engineered at Event Scale</h2>
+          <h2 id="engineered-at-event-scale" className="text-white text-3xl md:text-4xl font-bold">Engineered at Event Scale</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {capabilityStats.map((t, i) => (
@@ -390,7 +390,7 @@ function Technology({ partners }) {
           <div className="section-eyebrow">
             Technology Partners
           </div>
-          <h2 className="text-white text-2xl md:text-3xl font-bold">Technology We Deploy</h2>
+          <h2 id="technology-we-deploy" className="text-white text-2xl md:text-3xl font-bold">Technology We Deploy</h2>
           <p className="body-text mt-3 max-w-xl mx-auto text-sm">
             Certified across the platforms that power modern events.
           </p>
@@ -443,7 +443,7 @@ function CTAStrip() {
             <div className="section-eyebrow">
               Book Your Event
             </div>
-            <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
+            <h2 id="ready-to-power-your-next-event" className="text-white text-3xl md:text-4xl font-bold leading-tight mb-4">
               Ready to Power Your Next Event?
             </h2>
             <p className="body-text mb-8">
@@ -464,7 +464,7 @@ function CTAStrip() {
 export default function EventITClient({ events, eventServices, partners, capabilityStats }) {
   useReveal()
   return (
-    <main>
+    <main id="main-content">
       <Hero />
       <EventsPortfolio events={events} />
       <Services eventServices={eventServices} />

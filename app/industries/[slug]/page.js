@@ -6,6 +6,7 @@ import Footer from '@/components/site/Footer'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
 import { industries, getAllIndustrySlugs, getIndustry } from '@/lib/industries-data'
 import { OG_IMAGES } from '@/lib/og'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 
@@ -65,7 +66,7 @@ export default async function IndustryDetailPage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Header />
-      <main>
+      <main id="main-content">
         <div className="max-w-[1400px] mx-auto px-6 pt-6">
           <nav className="text-xs text-white/50 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white">Home</Link>
@@ -106,7 +107,7 @@ export default async function IndustryDetailPage(props) {
             <div className="space-y-5">
               {ind.overview.map((p, i) => {
                 if (p.startsWith('— ')) {
-                  return <h2 key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{p.replace(/^—\s*/, '').replace(/\s*—\s*$/, '')}</h2>;
+                  return <h2 id={headingId(p.replace(/^—\s*/, '').replace(/\s*—\s*$/, ''))} key={i} className="text-white text-2xl md:text-3xl font-bold mt-10 mb-2">{p.replace(/^—\s*/, '').replace(/\s*—\s*$/, '')}</h2>;
                 }
                 return <p key={i} className="body-text text-base md:text-lg leading-[1.75]">{p}</p>
               })}
@@ -120,7 +121,7 @@ export default async function IndustryDetailPage(props) {
             <div className="max-w-[1100px] mx-auto">
               <div className="text-center mb-10">
                 <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Regulatory framework</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold">What actually applies in this sector</h2>
+                <h2 id="what-actually-applies-in-this-sector" className="text-white text-2xl md:text-3xl font-bold">What actually applies in this sector</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {ind.regulatoryFramework.map((r, i) => (
@@ -140,7 +141,7 @@ export default async function IndustryDetailPage(props) {
             <div className="max-w-[1200px] mx-auto">
               <div className="text-center mb-10">
                 <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">What we deliver</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold">Services tailored to {ind.name}</h2>
+                <h2 id={headingId(`Services tailored to ${ind.name}`)} className="text-white text-2xl md:text-3xl font-bold">Services tailored to {ind.name}</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {ind.serviceHooks.map((s, i) => {
@@ -166,7 +167,7 @@ export default async function IndustryDetailPage(props) {
             <div className="max-w-[900px] mx-auto">
               <div className="text-center mb-10">
                 <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Frequently asked</div>
-                <h2 className="text-white text-2xl md:text-3xl font-bold">Questions we get from {ind.name} clients</h2>
+                <h2 id={headingId(`Questions we get from ${ind.name} clients`)} className="text-white text-2xl md:text-3xl font-bold">Questions we get from {ind.name} clients</h2>
               </div>
               <div className="space-y-3">
                 {ind.faqs.map((f, i) => (
@@ -189,7 +190,7 @@ export default async function IndustryDetailPage(props) {
         <section className="py-16 px-6">
           <div className="max-w-[900px] mx-auto rounded-2xl p-10 text-center" style={{ background: 'rgba(232,119,34,0.07)', border: '1px solid rgba(232,119,34,0.28)' }}>
             <div className="mono text-[#E87722] text-xs uppercase tracking-[0.25em] mb-3">Get started</div>
-            <h2 className="text-white text-2xl md:text-3xl font-bold mb-3">Bring your {ind.name.toLowerCase()} estate to a team that has been here before</h2>
+            <h2 id={headingId(`Bring your ${ind.name.toLowerCase()} estate to a team that has been here before`)} className="text-white text-2xl md:text-3xl font-bold mb-3">Bring your {ind.name.toLowerCase()} estate to a team that has been here before</h2>
             <p className="body-text mb-6">A focused assessment first, then a phased engagement against the sector framework. No hourly meter. No generic templates pulled from another industry.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/contact" className="btn-primary">Talk to us <Icons.ArrowRight size={16} /></Link>
@@ -202,7 +203,7 @@ export default async function IndustryDetailPage(props) {
         {others.length > 0 && (
           <section className="py-16 px-6">
             <div className="max-w-[1100px] mx-auto">
-              <h2 className="text-white text-2xl md:text-3xl font-bold mb-8">Other industries we work in</h2>
+              <h2 id="other-industries-we-work-in" className="text-white text-2xl md:text-3xl font-bold mb-8">Other industries we work in</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {others.map((o) => {
                   const OIcon = Icons[o.icon] || Icons.Building2

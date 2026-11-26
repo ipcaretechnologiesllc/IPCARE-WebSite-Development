@@ -188,7 +188,7 @@ export default function TrackRecordClient() {
   }
 
   return (
-    <main className="bg-[#F4F6FA]">
+    <main id="main-content" className="bg-[#F4F6FA]">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
         className="relative flex min-h-[540px] items-center overflow-hidden px-6 py-[120px] text-white md:py-[140px]"
@@ -298,7 +298,7 @@ export default function TrackRecordClient() {
         <div className="relative z-10 mx-auto max-w-[1180px]">
           <div className="mx-auto mb-12 max-w-[820px] text-center">
             <div className="section-eyebrow">Featured Engagements</div>
-            <h2 className="text-3xl font-extrabold leading-tight text-white md:text-4xl">
+            <h2 id="three-deployments-in-depth" className="text-3xl font-extrabold leading-tight text-white md:text-4xl">
               Three Deployments in <span className="text-[#E87722]">Depth</span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70">
@@ -319,7 +319,7 @@ export default function TrackRecordClient() {
         <div className="mx-auto max-w-[1100px]">
           <div className="mx-auto mb-10 max-w-[820px] text-center">
             <div className="section-eyebrow">Who Delivers This</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="led-by-a-canada-based-palo-alto-specialist" className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
               Led by a Canada-Based Palo Alto Specialist
             </h2>
           </div>
@@ -363,7 +363,7 @@ export default function TrackRecordClient() {
         <div className="mx-auto max-w-[1400px]">
           <div className="mb-8 text-center">
             <div className="section-eyebrow">Filter by Capability</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="anonymized-delivery-proof" className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
               Anonymized Delivery Proof
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#667085]">
@@ -450,7 +450,7 @@ export default function TrackRecordClient() {
           <div className="service-card__icon mx-auto mb-5 flex h-12 w-12 items-center justify-center text-[#E87722]">
             <ShieldCheck size={22} />
           </div>
-          <h2 className="text-2xl font-extrabold leading-tight text-[#0B1A46] md:text-3xl">
+          <h2 id="why-these-projects-are-anonymized" className="text-2xl font-extrabold leading-tight text-[#0B1A46] md:text-3xl">
             Why these projects are anonymized
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-8 text-[#4B5563]">
@@ -474,7 +474,7 @@ export default function TrackRecordClient() {
         <div className="mx-auto max-w-[860px]">
           <div className="mb-10 text-center">
             <div className="section-eyebrow">FAQ</div>
-            <h2 className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
+            <h2 id="common-questions" className="heading-accent text-3xl font-extrabold leading-tight md:text-4xl" style={{ color: '#0B1A46' }}>
               Common Questions
             </h2>
           </div>
@@ -509,7 +509,7 @@ export default function TrackRecordClient() {
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-8 text-center">
             <div className="section-eyebrow">Related Capabilities</div>
-            <h2 className="text-2xl font-extrabold leading-tight text-[#0B1A46] md:text-3xl">
+            <h2 id="explore-the-advisory-practice" className="text-2xl font-extrabold leading-tight text-[#0B1A46] md:text-3xl">
               Explore the Advisory Practice
             </h2>
           </div>
@@ -539,7 +539,7 @@ export default function TrackRecordClient() {
         <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <div className="section-eyebrow">Your Deployment</div>
-            <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
+            <h2 id="planning-a-palo-alto-prisma-access-or-strata-cloud-manager" className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
               Planning a Palo Alto, Prisma Access or Strata Cloud Manager project?
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">

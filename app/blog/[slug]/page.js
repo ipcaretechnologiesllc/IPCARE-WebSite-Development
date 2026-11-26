@@ -15,6 +15,7 @@ import { ORG_REF, schemaImage } from '@/lib/schema'
 // The article hero column is max-w-[720px] inside px-6 padding.
 const HERO_SIZES = '(min-width: 768px) 720px, calc(100vw - 48px)'
 import { BLOG_CATEGORY_TO_SERVICE, CITY_SERVICE_LABELS, UAE_CITIES, cityServiceHref } from '@/lib/uae-locations'
+import { headingId } from '@/lib/heading-id'
 
 export const revalidate = 3600
 
@@ -148,7 +149,7 @@ export default async function ArticlePage(props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       <Header />
-      <main>
+      <main id="main-content">
 
         {/* ── HERO — navy + grid + orange border ─────────────────────── */}
         <section style={{ background: 'linear-gradient(160deg, #0B1A46 0%, #1E3A8A 100%)', borderBottom: '3px solid #E87722', position: 'relative', overflow: 'hidden' }}>
@@ -217,7 +218,7 @@ export default async function ArticlePage(props) {
                 style={{ background: '#F4F6FA', border: '1px solid #E1E8F0', borderLeft: '4px solid #E87722' }}
                 aria-label="Key takeaways"
               >
-                <h2 className="mono text-[13px] uppercase tracking-widest mb-4" style={{ color: '#E87722' }}>Key Takeaways</h2>
+                <h2 id="key-takeaways" className="mono text-[13px] uppercase tracking-widest mb-4" style={{ color: '#E87722' }}>Key Takeaways</h2>
                 <ul className="space-y-3">
                   {keyTakeaways.map((t, i) => (
                     <li key={i} className="flex gap-3 text-base leading-relaxed" style={{ color: '#374151' }}>
@@ -233,7 +234,7 @@ export default async function ArticlePage(props) {
             <article className="space-y-5">
               {a.body.map((b, i) => {
                 if (b.h2) return (
-                  <h2 key={i} className="font-bold mt-10 mb-2" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>{b.h2}</h2>
+                  <h2 id={headingId(b.h2)} key={i} className="font-bold mt-10 mb-2" style={{ color: '#0B1A46', fontSize: '1.5rem', lineHeight: 1.3 }}>{b.h2}</h2>
                 )
                 if (b.cta) return (
                   <Link key={i} href={b.cta.href} className="block mt-8 p-5 rounded-xl group" style={{ background: 'rgba(232,119,34,0.06)', border: '1px solid rgba(232,119,34,0.28)' }}>
@@ -253,7 +254,7 @@ export default async function ArticlePage(props) {
                 <div className="space-y-4">
                   {a.faqs.map(({ q, a: answer }) => (
                     <div key={q} className="rounded-xl p-5" style={{ background: '#F4F6FA', border: '1px solid #E1E8F0' }}>
-                      <h3 className="font-semibold text-base md:text-lg mb-2" style={{ color: '#0B1A46' }}>{q}</h3>
+                      <h3 id={`faq-${headingId(q)}`} className="font-semibold text-base md:text-lg mb-2" style={{ color: '#0B1A46' }}>{q}</h3>
                       <p className="text-base leading-[1.7]" style={{ color: '#374151' }}>{answer}</p>
                     </div>
                   ))}
@@ -328,7 +329,7 @@ export default async function ArticlePage(props) {
         {related.length > 0 && (
           <section className="px-6 py-16" style={{ background: '#F4F6FA' }}>
             <div className="max-w-[1100px] mx-auto">
-              <h2 className="font-bold text-2xl md:text-3xl mb-8" style={{ color: '#0B1A46' }}>
+              <h2 id={headingId(sameCat.length > 0 ? `More on ${a.category}` : 'Related Articles')} className="font-bold text-2xl md:text-3xl mb-8" style={{ color: '#0B1A46' }}>
                 {sameCat.length > 0 ? `More on ${a.category}` : 'Related Articles'}
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
