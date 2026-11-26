@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { SAME_AS, SAME_AS_SOCIAL_ONLY } from '@/lib/social-links'
 import { SITE_URL, isCaSite, uaeFocus } from '@/lib/seo-region'
@@ -8,7 +8,12 @@ import CookieBanner from '@/components/global/CookieBanner'
 import Analytics from '@/components/global/Analytics'
 import WebMcp from '@/components/global/WebMcp'
 
-const inter = Inter({ subsets: ['latin'], weight: ['400','500','600','700','800'], display: 'swap', variable: '--font-inter' })
+// Inter is self-hosted (variable font, latin subset, SIL OFL) rather than loaded through
+// next/font/google: that fetches from fonts.googleapis.com during `next build`, and on
+// 2026-11-26 Hostinger's build failed there ("Cannot read properties of null (reading '1')"),
+// so a Google Fonts outage or block could stop every deploy. The file is the same one
+// next/font/google served, so the rendered font is unchanged.
+const inter = localFont({ src: './fonts/inter-latin-var.woff2', weight: '400 800', display: 'swap', variable: '--font-inter' })
 
 // ─── Canonical domain strategy ────────────────────────────────────────────────
 // metadataBase is fixed per deployment at BUILD time (SITE_URL, from
