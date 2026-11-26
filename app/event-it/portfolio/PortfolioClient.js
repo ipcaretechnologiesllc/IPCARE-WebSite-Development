@@ -1,17 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { preload } from 'react-dom'
 import Link from 'next/link'
 import Header from '@/components/site/Header'
 import Footer from '@/components/site/Footer'
 import CTAPhoneButtons from '@/components/site/CTAPhoneButtons'
 import QuickEnquiry from '@/components/site/QuickEnquiry'
 import * as Icons from 'lucide-react'
-import { responsive, SIZES, srcSetFor } from '@/lib/responsive-image'
+import { responsive, SIZES } from '@/lib/responsive-image'
 
+// No react-dom preload() for the hero: Next sends those hints in the link-prefetch
+// payload, so every page linking here would download it. The hero <img> below has
+// fetchPriority="high" and is not lazy, so React preloads it (with its srcset) in this
+// page's own HTML only.
 export default function EventPortfolioPage() {
-  preload('/images/event-it/portfolio-hero.webp', { as: 'image', fetchPriority: 'high', imageSrcSet: srcSetFor('/images/event-it/portfolio-hero.webp'), imageSizes: '100vw' })
   const [activeFilter, setActiveFilter] = useState('All')
   const [videoModal, setVideoModal] = useState(null)
 
